@@ -103,5 +103,95 @@
       { "name": "Anthony Hopkins", "year": 1937, "role": "Actor" },
       { "name": "Psy",             "year": 1977, "role": "Singer known for Gangnam Style" }
     ]
+  },
+  "january-20": {
+    "events": [
+      { "year": 1961, "event": "John F. Kennedy was inaugurated as the 35th US President" },
+      { "year": 1981, "event": "Iran hostage crisis ended as 52 Americans were released" },
+      { "year": 2009, "event": "Barack Obama was inaugurated as the first Black US President" },
+      { "year": 2021, "event": "Joe Biden was inaugurated as the 46th US President" }
+    ],
+    "birthdays": [
+      { "name": "Edwin Buzz Aldrin", "year": 1930, "role": "Astronaut, second man on the moon" },
+      { "name": "Bill Maher",        "year": 1956, "role": "Comedian and TV Host" }
+    ]
+  },
+  "february-2": {
+    "events": [
+      { "year": 1876, "event": "The National League of baseball was formed" },
+      { "year": 1943, "event": "German forces surrendered at Stalingrad ending a key WW2 battle" },
+      { "year": 1990, "event": "Nelson Mandela was released from prison after 27 years" }
+    ],
+    "birthdays": [
+      { "name": "James Joyce", "year": 1882, "role": "Author of Ulysses" },
+      { "name": "Shakira",     "year": 1977, "role": "Singer and Songwriter" }
+    ]
+  },
+  "march-14": {
+    "events": [
+      { "year": 1879, "event": "Albert Einstein was born in Ulm, Germany" },
+      { "year": 1883, "event": "Karl Marx died in London" },
+      { "year": 1995, "event": "First American to serve on Russian space station Mir" }
+    ],
+    "birthdays": [
+      { "name": "Albert Einstein", "year": 1879, "role": "Theoretical Physicist" },
+      { "name": "Stephen Curry",   "year": 1988, "role": "NBA Basketball Player" }
+    ]
+  },
+  "april-15": {
+    "events": [
+      { "year": 1452, "event": "Leonardo da Vinci was born in Tuscany, Italy" },
+      { "year": 1912, "event": "RMS Titanic sank in the North Atlantic Ocean" },
+      { "year": 1947, "event": "Jackie Robinson broke baseball color barrier with Brooklyn Dodgers" },
+      { "year": 2013, "event": "Boston Marathon bombing killed 3 and injured hundreds" }
+    ],
+    "birthdays": [
+      { "name": "Leonardo da Vinci", "year": 1452, "role": "Artist, Inventor and Polymath" },
+      { "name": "Emma Watson",       "year": 1990, "role": "Actress and Activist" }
+    ]
+  },
+  "june-6": {
+    "events": [
+      { "year": 1944, "event": "D-Day: Allied forces landed on the beaches of Normandy" },
+      { "year": 1968, "event": "Robert F. Kennedy was assassinated in Los Angeles" },
+      { "year": 2012, "event": "Venus made its last transit across the sun until 2117" }
+    ],
+    "birthdays": [
+      { "name": "Nathan Hale",      "year": 1755, "role": "American Revolutionary War Hero" },
+      { "name": "Billie Whitelaw",  "year": 1932, "role": "Actress" }
+    ]
+  },
+  "august-6": {
+    "events": [
+      { "year": 1945, "event": "US dropped atomic bomb on Hiroshima, Japan" },
+      { "year": 1991, "event": "Tim Berners-Lee published the first website on the internet" },
+      { "year": 2012, "event": "NASA Curiosity rover successfully landed on Mars" }
+    ],
+    "birthdays": [
+      { "name": "Andy Warhol",         "year": 1928, "role": "Artist and Pop Art Pioneer" },
+      { "name": "M. Night Shyamalan",  "year": 1970, "role": "Film Director" }
+    ]
+  },
+  "september-11": {
+    "events": [
+      { "year": 1609, "event": "Henry Hudson discovered Manhattan Island" },
+      { "year": 1941, "event": "Ground was broken for construction of the Pentagon" },
+      { "year": 2001, "event": "Terrorist attacks destroyed the World Trade Center in New York" }
+    ],
+    "birthdays": [
+      { "name": "O. Henry",          "year": 1862, "role": "Short Story Writer" },
+      { "name": "Harry Connick Jr.", "year": 1967, "role": "Singer and Actor" }
+    ]
+  },
+  "november-22": {
+    "events": [
+      { "year": 1963, "event": "President John F. Kennedy was assassinated in Dallas, Texas" },
+      { "year": 1986, "event": "Mike Tyson became youngest heavyweight boxing champion" },
+      { "year": 1995, "event": "Toy Story became the first fully computer-animated feature film" }
+    ],
+    "birthdays": [
+      { "name": "Mark Ruffalo",       "year": 1967, "role": "Actor" },
+      { "name": "Scarlett Johansson", "year": 1984, "role": "Actress" }
+    ]
   }
 }
