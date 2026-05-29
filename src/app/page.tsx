@@ -4,6 +4,19 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+// ── WebSite JSON-LD schema ─────────────────────────────────────────────────
+const WEBSITE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Dayblip",
+  "url": "https://dayblip.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://dayblip.com/days-until/{search_term}",
+    "query-input": "required name=search_term",
+  },
+};
+
 // ── Easter: Anonymous Gregorian algorithm ──────────────────────────────────
 function getEaster(year: number): Date {
   const a = year % 19;
@@ -116,6 +129,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }} />
 
       {/* ════════════════════════════════════════════════════════════════
           SECTION 1 — HERO

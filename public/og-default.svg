@@ -1,0 +1,10 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#1a1a2e"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#e94560"/>
+  <rect x="0" y="624" width="1200" height="6" fill="#e94560"/>
+  <text x="600" y="270" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="bold" fill="white" text-anchor="middle">
+    <tspan fill="white">day</tspan><tspan fill="#e94560">blip</tspan>
+  </text>
+  <text x="600" y="370" font-family="Arial, Helvetica, sans-serif" font-size="40" fill="#a8a8b3" text-anchor="middle">Countdown &amp; Date Tools</text>
+  <text x="600" y="450" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#e94560" text-anchor="middle">dayblip.com</text>
+</svg>
