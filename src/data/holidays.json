@@ -1,1 +1,196 @@
-[]
+[
+  {
+    "slug": "christmas",
+    "name": "Christmas",
+    "emoji": "🎄",
+    "date": "12-25",
+    "description": "Christmas is celebrated annually on December 25th. It is a cultural and religious holiday commemorating the birth of Jesus Christ.",
+    "color": "#c41e3a",
+    "facts": [
+      "Christmas trees became popular in the 19th century",
+      "The first Christmas cards were sent in 1843",
+      "Santa Claus is based on Saint Nicholas of Myra",
+      "Rudolph the Red-Nosed Reindeer was created in 1939",
+      "The 12 Days of Christmas refers to Dec 25 to Jan 5"
+    ],
+    "faqs": [
+      { "q": "When is Christmas?", "a": "Christmas is always on December 25th every year." },
+      { "q": "How many days until Christmas?", "a": "Use the live countdown above to see the exact number of days until Christmas." },
+      { "q": "What day of the week is Christmas this year?", "a": "Check the countdown above for the exact date and day of the week." },
+      { "q": "How many weeks until Christmas?", "a": "Divide the days shown above by 7 to get the number of weeks." },
+      { "q": "How many sleeps until Christmas?", "a": "The number of sleeps is the same as the number of days shown above." }
+    ]
+  },
+  {
+    "slug": "halloween",
+    "name": "Halloween",
+    "emoji": "🎃",
+    "date": "10-31",
+    "description": "Halloween is celebrated annually on October 31st. It originated from the ancient Celtic festival of Samhain.",
+    "color": "#ff6600",
+    "facts": [
+      "Halloween originated from the Celtic festival Samhain",
+      "The word Halloween means All Hallows Eve",
+      "Trick-or-treating became popular in the 1950s",
+      "Pumpkin carving originated in Ireland with turnips",
+      "Halloween is the second largest commercial holiday in the US"
+    ],
+    "faqs": [
+      { "q": "When is Halloween?", "a": "Halloween is always on October 31st every year." },
+      { "q": "How many days until Halloween?", "a": "Use the live countdown above to see the exact number of days." },
+      { "q": "What day of the week is Halloween this year?", "a": "Check the countdown above for the exact day of the week." }
+    ]
+  },
+  {
+    "slug": "new-years",
+    "name": "New Year's Day",
+    "emoji": "🎆",
+    "date": "01-01",
+    "description": "New Year's Day is celebrated on January 1st, marking the start of a new calendar year.",
+    "color": "#ffd700",
+    "facts": [
+      "The Times Square ball drop started in 1907",
+      "Auld Lang Syne is traditionally sung at midnight",
+      "Ancient Babylonians celebrated New Year 4000 years ago",
+      "January is named after the Roman god Janus",
+      "About 1 billion people watch the Times Square ball drop"
+    ],
+    "faqs": [
+      { "q": "When is New Year's Day?", "a": "New Year's Day is always January 1st." },
+      { "q": "How many days until New Year's?", "a": "Use the live countdown above for the exact count." }
+    ]
+  },
+  {
+    "slug": "valentines-day",
+    "name": "Valentine's Day",
+    "emoji": "💝",
+    "date": "02-14",
+    "description": "Valentine's Day is celebrated on February 14th as a day of love and romance.",
+    "color": "#ff69b4",
+    "facts": [
+      "About 1 billion Valentine cards are sent each year",
+      "Valentine's Day dates back to the 3rd century",
+      "The heart symbol became associated with love in the Middle Ages",
+      "Red roses are the most popular Valentine's Day flower",
+      "About $24 billion is spent on Valentine's Day in the US annually"
+    ],
+    "faqs": [
+      { "q": "When is Valentine's Day?", "a": "Valentine's Day is always February 14th." },
+      { "q": "How many days until Valentine's Day?", "a": "Use the live countdown above for the exact count." }
+    ]
+  },
+  {
+    "slug": "thanksgiving",
+    "name": "Thanksgiving",
+    "emoji": "🦃",
+    "date": "dynamic-thanksgiving",
+    "description": "Thanksgiving is celebrated on the fourth Thursday of November in the United States.",
+    "color": "#d2691e",
+    "facts": [
+      "The first Thanksgiving was in 1621",
+      "Americans eat about 46 million turkeys on Thanksgiving",
+      "The Macy's Thanksgiving Day Parade started in 1924",
+      "Black Friday follows Thanksgiving every year",
+      "Canada celebrates Thanksgiving on the second Monday of October"
+    ],
+    "faqs": [
+      { "q": "When is Thanksgiving?", "a": "Thanksgiving falls on the fourth Thursday of November each year." },
+      { "q": "How many days until Thanksgiving?", "a": "Use the live countdown above for the exact count." }
+    ]
+  },
+  {
+    "slug": "independence-day",
+    "name": "Independence Day",
+    "emoji": "🇺🇸",
+    "date": "07-04",
+    "description": "Independence Day is celebrated on July 4th, commemorating the Declaration of Independence in 1776.",
+    "color": "#b22234",
+    "facts": [
+      "The Declaration of Independence was signed on August 2, 1776",
+      "About 14,000 fireworks displays happen on July 4th",
+      "Hot dogs are the most popular July 4th food",
+      "The Liberty Bell is tapped 13 times on July 4th",
+      "Three US presidents died on July 4th"
+    ],
+    "faqs": [
+      { "q": "When is Independence Day?", "a": "Independence Day is always July 4th." },
+      { "q": "How many days until July 4th?", "a": "Use the live countdown above for the exact count." }
+    ]
+  },
+  {
+    "slug": "st-patricks-day",
+    "name": "St. Patrick's Day",
+    "emoji": "☘️",
+    "date": "03-17",
+    "description": "St. Patrick's Day is celebrated on March 17th, honoring the patron saint of Ireland.",
+    "color": "#009a44",
+    "facts": [
+      "St. Patrick was actually born in Britain, not Ireland",
+      "The shamrock became a symbol because Patrick used it to explain the Trinity",
+      "Chicago dyes its river green every St. Patrick's Day",
+      "About 13 million pints of Guinness are consumed on this day",
+      "Blue was originally associated with St. Patrick, not green"
+    ],
+    "faqs": [
+      { "q": "When is St. Patrick's Day?", "a": "St. Patrick's Day is always March 17th." },
+      { "q": "How many days until St. Patrick's Day?", "a": "Use the live countdown above for the exact count." }
+    ]
+  },
+  {
+    "slug": "easter",
+    "name": "Easter",
+    "emoji": "🐣",
+    "date": "dynamic-easter",
+    "description": "Easter is a Christian holiday celebrating the resurrection of Jesus Christ. The date changes each year.",
+    "color": "#9b59b6",
+    "facts": [
+      "Easter date is calculated based on the lunar calendar",
+      "The Easter Bunny tradition originated in Germany",
+      "About 16 billion jelly beans are made for Easter annually",
+      "Easter eggs symbolize new life and rebirth",
+      "The word Easter may come from the Anglo-Saxon goddess Eostre"
+    ],
+    "faqs": [
+      { "q": "When is Easter?", "a": "Easter falls on the first Sunday after the first full moon after March 21st." },
+      { "q": "How many days until Easter?", "a": "Use the live countdown above for the exact count." }
+    ]
+  },
+  {
+    "slug": "black-friday",
+    "name": "Black Friday",
+    "emoji": "🛍️",
+    "date": "dynamic-blackfriday",
+    "description": "Black Friday is the day after Thanksgiving, known as one of the biggest shopping days of the year.",
+    "color": "#1a1a1a",
+    "facts": [
+      "The term Black Friday originated in Philadelphia in the 1960s",
+      "Over 196 million Americans shop during Black Friday weekend",
+      "Online Black Friday sales exceeded $9 billion in recent years",
+      "Black Friday marks the start of the holiday shopping season",
+      "Some stores now open on Thanksgiving evening"
+    ],
+    "faqs": [
+      { "q": "When is Black Friday?", "a": "Black Friday falls the day after Thanksgiving, the fourth Thursday of November." },
+      { "q": "How many days until Black Friday?", "a": "Use the live countdown above for the exact count." }
+    ]
+  },
+  {
+    "slug": "mothers-day",
+    "name": "Mother's Day",
+    "emoji": "💐",
+    "date": "dynamic-mothersday",
+    "description": "Mother's Day is celebrated on the second Sunday of May, honoring mothers and motherhood.",
+    "color": "#ff85a2",
+    "facts": [
+      "Mother's Day was officially established in the US in 1914",
+      "Anna Jarvis founded Mother's Day but later opposed its commercialization",
+      "About 122 million phone calls are made to mothers on Mother's Day",
+      "Mother's Day is the third largest card-sending holiday",
+      "Carnations are the traditional Mother's Day flower"
+    ],
+    "faqs": [
+      { "q": "When is Mother's Day?", "a": "Mother's Day falls on the second Sunday of May each year." },
+      { "q": "How many days until Mother's Day?", "a": "Use the live countdown above for the exact count." }
+    ]
+  }
+]
