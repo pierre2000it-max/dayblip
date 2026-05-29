@@ -27,7 +27,7 @@ export default function Footer() {
     <footer className="bg-[#0f3460]">
       <div className="mx-auto max-w-[1200px] px-6 pt-12 pb-6">
         {/* Three-column grid */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           {/* Column 1 — Brand */}
           <div className="flex flex-col gap-3">
             <Link href="/" className="text-2xl font-bold">
@@ -64,6 +64,30 @@ export default function Footer() {
             <h3 className="text-white font-bold text-base">Date Tools</h3>
             <ul className="flex flex-col gap-2">
               {toolLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-[#a8a8b3] text-sm transition-colors duration-200 hover:text-[#e94560]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4 — More Tools */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-white font-bold text-base">More Tools</h3>
+            <ul className="flex flex-col gap-2">
+              {[
+                { label: "Life Progress Bar",    href: "/life-progress" },
+                { label: "Days Alive",           href: "/days-alive" },
+                { label: "Birthday Twins",       href: "/birthday-twins" },
+                { label: "#1 Song on Birthday",  href: "/number-one-song" },
+                { label: "Couples Countdown",    href: "/couples-countdown" },
+                { label: "World Countdowns",     href: "/world-countdowns" },
+              ].map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}

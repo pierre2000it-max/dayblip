@@ -346,6 +346,37 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ════════════════════════════════════════════════════════════════
+          MORE FUN TOOLS
+      ════════════════════════════════════════════════════════════════ */}
+      <section className="bg-[#1a1a2e] px-6 py-16">
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="mb-3 text-center text-3xl font-bold text-white">More Fun Tools</h2>
+          <p className="mb-10 text-center text-[#a8a8b3]">
+            Explore more ways to discover your connection to time
+          </p>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {[
+              { emoji: "📊", title: "Life Progress Bar",     desc: "See what % of your life you've lived",         href: "/life-progress" },
+              { emoji: "🎯", title: "Days Alive Milestones", desc: "Find out how many days old you are",            href: "/days-alive" },
+              { emoji: "🎂", title: "Birthday Twin Finder",  desc: "Find famous people who share your birthday",   href: "/birthday-twins" },
+              { emoji: "🎵", title: "#1 Song on Birthday",   desc: "Discover the #1 hit when you were born",       href: "/number-one-song" },
+              { emoji: "💕", title: "Couples Countdown",     desc: "How many days have you been together?",        href: "/couples-countdown" },
+              { emoji: "📅", title: "Day of Year Counter",   desc: "What day number is today?",                    href: "/day-of-year" },
+              { emoji: "🌍", title: "World Countdowns",      desc: "Live timers to every major world event",       href: "/world-countdowns" },
+              { emoji: "⏳", title: "This Day in My Life",   desc: "Your personal life timeline",                  href: "/this-day-in-my-life" },
+            ].map(tool => (
+              <Link key={tool.href} href={tool.href}
+                className="flex flex-col gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all duration-200 hover:border-[#e94560]">
+                <span className="text-3xl">{tool.emoji}</span>
+                <span className="text-sm font-bold text-white">{tool.title}</span>
+                <span className="text-xs text-[#a8a8b3] leading-snug">{tool.desc}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
