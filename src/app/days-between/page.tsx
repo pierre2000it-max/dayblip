@@ -1,9 +1,17 @@
+import type { Metadata } from "next";
+import DaysBetweenTool from "./DaysBetweenTool";
+
+export const metadata: Metadata = {
+  title: "Days Between Dates Calculator",
+  description:
+    "Calculate the exact number of days between any two dates. Find weekdays, weekends, weeks and months between dates instantly.",
+  keywords: [
+    "days between dates",
+    "days between two dates calculator",
+    "how many days between dates",
+  ],
+};
+
 export default function DaysBetweenPage() {
-  return (
-    <main style={{ background: '#1a1a2e', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <h1 style={{ color: '#ffffff', fontFamily: 'sans-serif', fontSize: '2rem' }}>
-        Days Between Dates
-      </h1>
-    </main>
-  );
+  return <DaysBetweenTool />;
 }

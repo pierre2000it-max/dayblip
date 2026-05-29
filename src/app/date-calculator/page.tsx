@@ -1,9 +1,18 @@
+import type { Metadata } from "next";
+import DateCalculatorTool from "./DateCalculatorTool";
+
+export const metadata: Metadata = {
+  title: "Date Calculator — Add or Subtract Days",
+  description:
+    "Free date calculator. Add or subtract days, weeks, months or years from any date. Find the difference between two dates instantly.",
+  keywords: [
+    "date calculator",
+    "add days to date",
+    "days between dates",
+    "what date is 90 days from today",
+  ],
+};
+
 export default function DateCalculatorPage() {
-  return (
-    <main style={{ background: '#1a1a2e', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <h1 style={{ color: '#ffffff', fontFamily: 'sans-serif', fontSize: '2rem' }}>
-        Date Calculator
-      </h1>
-    </main>
-  );
+  return <DateCalculatorTool />;
 }
