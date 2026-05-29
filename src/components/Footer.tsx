@@ -94,6 +94,13 @@ export default function Footer() {
                 { label: "Price History",        href: "/price-history" },
                 { label: "Tech Nostalgia",       href: "/tech-nostalgia" },
                 { label: "Celebrity Ages",       href: "/celebrity-age" },
+                { label: "Guess the Year",       href: "/guess-the-year" },
+                { label: "History Slider",        href: "/how-long-ago" },
+                { label: "Famous or Fictional",   href: "/famous-or-fictional" },
+                { label: "What Generation",       href: "/what-generation" },
+                { label: "Weekends Left",         href: "/weekends-left" },
+                { label: "Days Since Events",     href: "/days-since" },
+                { label: "Earth Orbits",          href: "/earth-orbits" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link
