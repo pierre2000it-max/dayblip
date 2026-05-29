@@ -7,6 +7,7 @@ import {
   generateBreadcrumbSchema,
   generateWebPageSchema,
 } from "@/lib/seo";
+import AdUnit from "@/components/AdUnit";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -134,6 +135,9 @@ export default function CountdownPage({
               Live countdown to {holiday.name} {year}
             </p>
             <CountdownDisplay date={holiday.date} color={holiday.color} />
+            <div className="mx-auto mt-4 max-w-[900px]">
+              <AdUnit slot="1234567890" format="rectangle" />
+            </div>
           </div>
         </section>
 
@@ -154,6 +158,13 @@ export default function CountdownPage({
           </div>
         </section>
 
+        {/* Ad — between facts and FAQ */}
+        <div className="bg-[#16213e] px-6 pb-4">
+          <div className="mx-auto max-w-[900px]">
+            <AdUnit slot="1234567890" format="rectangle" />
+          </div>
+        </div>
+
         {/* ── FAQ ───────────────────────────────────────────────────── */}
         <section className="bg-[#1a1a2e] px-6 py-14">
           <div className="mx-auto max-w-[900px]">
@@ -172,6 +183,13 @@ export default function CountdownPage({
             </div>
           </div>
         </section>
+
+        {/* Ad — below FAQ */}
+        <div className="bg-[#1a1a2e] px-6 pb-4">
+          <div className="mx-auto max-w-[900px]">
+            <AdUnit slot="1234567890" format="leaderboard" />
+          </div>
+        </div>
 
         {/* ── RELATED ───────────────────────────────────────────────── */}
         <section className="bg-[#16213e] px-6 py-14">

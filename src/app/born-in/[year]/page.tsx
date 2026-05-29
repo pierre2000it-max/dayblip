@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import bornInRaw from "@/data/bornIn.json";
 import { generateBornInSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import AdUnit from "@/components/AdUnit";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -174,6 +175,15 @@ export default function BornInPage({
           </section>
         )}
 
+        {/* Ad — below stats grid */}
+        {data && (
+          <div className="bg-[#16213e] px-6 pb-4">
+            <div className="mx-auto max-w-[1200px]">
+              <AdUnit slot="1234567890" format="rectangle" />
+            </div>
+          </div>
+        )}
+
         {/* ── WORLD EVENT ───────────────────────────────────────────── */}
         {data && (
           <section className="bg-[#1a1a2e] px-6 py-14">
@@ -189,6 +199,13 @@ export default function BornInPage({
             </div>
           </section>
         )}
+
+        {/* Ad — between world events and milestones */}
+        <div className="bg-[#1a1a2e] px-6 pb-4">
+          <div className="mx-auto max-w-[900px]">
+            <AdUnit slot="1234567890" format="rectangle" />
+          </div>
+        </div>
 
         {/* ── MILESTONES ────────────────────────────────────────────── */}
         <section className="bg-[#16213e] px-6 py-14">
@@ -212,6 +229,13 @@ export default function BornInPage({
             </div>
           </div>
         </section>
+
+        {/* Ad — above share section */}
+        <div className="bg-[#16213e] px-6 pb-4">
+          <div className="mx-auto max-w-[900px]">
+            <AdUnit slot="1234567890" format="leaderboard" />
+          </div>
+        </div>
 
         {/* ── SHARE ─────────────────────────────────────────────────── */}
         <section className="bg-[#1a1a2e] px-6 py-14">

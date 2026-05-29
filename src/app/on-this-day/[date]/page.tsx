@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import onThisDayRaw from "@/data/onThisDay.json";
 import { generateOnThisDaySchema, generateBreadcrumbSchema } from "@/lib/seo";
+import AdUnit from "@/components/AdUnit";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -204,6 +205,13 @@ export default function OnThisDayPage({
               </div>
             </section>
 
+            {/* Ad — between events and birthdays */}
+            <div className="bg-[#16213e] px-6 pb-4">
+              <div className="mx-auto max-w-[900px]">
+                <AdUnit slot="1234567890" format="rectangle" />
+              </div>
+            </div>
+
             {/* ── BIRTHDAYS ────────────────────────────────────────── */}
             <section className="bg-[#1a1a2e] px-6 py-14">
               <div className="mx-auto max-w-[900px]">
@@ -245,6 +253,13 @@ export default function OnThisDayPage({
             </div>
           </section>
         )}
+
+        {/* Ad — below birthdays / coming-soon section */}
+        <div className="bg-[#1a1a2e] px-6 pb-4">
+          <div className="mx-auto max-w-[900px]">
+            <AdUnit slot="1234567890" format="rectangle" />
+          </div>
+        </div>
 
         {/* ── EXPLORE ───────────────────────────────────────────────── */}
         <section className="bg-[#16213e] px-6 py-12">

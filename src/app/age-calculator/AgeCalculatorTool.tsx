@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import AdUnit from "@/components/AdUnit";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -247,6 +248,9 @@ export default function AgeCalculatorTool() {
               </div>
             </div>
           )}
+
+          {/* Ad — below results box */}
+          <AdUnit slot="1234567890" format="rectangle" />
         </div>
       </section>
 
@@ -266,6 +270,8 @@ export default function AgeCalculatorTool() {
               </details>
             ))}
           </div>
+          {/* Ad — below FAQ */}
+          <AdUnit slot="1234567890" format="leaderboard" />
         </div>
       </section>
     </div>

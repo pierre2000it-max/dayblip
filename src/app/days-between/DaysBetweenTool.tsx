@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import AdUnit from "@/components/AdUnit";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -205,6 +206,13 @@ export default function DaysBetweenTool() {
         </div>
       </section>
 
+      {/* Ad — below results box */}
+      <div className="bg-[#16213e] px-6 pb-4">
+        <div className="mx-auto max-w-[700px]">
+          <AdUnit slot="1234567890" format="rectangle" />
+        </div>
+      </div>
+
       {/* ── Popular Calculations ────────────────────────────────────── */}
       <section className="bg-[#1a1a2e] px-6 py-14">
         <div className="mx-auto max-w-[700px]">
@@ -237,6 +245,8 @@ export default function DaysBetweenTool() {
               </details>
             ))}
           </div>
+          {/* Ad — below FAQ */}
+          <AdUnit slot="1234567890" format="leaderboard" />
         </div>
       </section>
     </div>

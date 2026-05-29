@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import AdUnit from "@/components/AdUnit";
 
 // ── WebSite JSON-LD schema ─────────────────────────────────────────────────
 const WEBSITE_SCHEMA = {
@@ -215,6 +216,13 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Ad — between Popular Countdowns and Born In */}
+      <div className="bg-[#1a1a2e] px-6">
+        <div className="mx-auto max-w-[1200px]">
+          <AdUnit slot="1234567890" format="leaderboard" />
+        </div>
+      </div>
+
       {/* ════════════════════════════════════════════════════════════════
           SECTION 3 — BORN IN
       ════════════════════════════════════════════════════════════════ */}
@@ -301,6 +309,13 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      {/* Ad — between On This Day and Tools */}
+      <div className="bg-[#1a1a2e] px-6">
+        <div className="mx-auto max-w-[1200px]">
+          <AdUnit slot="1234567890" format="leaderboard" />
+        </div>
+      </div>
 
       {/* ════════════════════════════════════════════════════════════════
           SECTION 5 — TOOLS GRID
