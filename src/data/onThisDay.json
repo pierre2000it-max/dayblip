@@ -1,1 +1,107 @@
-[]
+{
+  "january-1": {
+    "events": [
+      { "year": 1863, "event": "Emancipation Proclamation took effect, freeing slaves in Confederate states" },
+      { "year": 1892, "event": "Ellis Island opened as the main US immigration station" },
+      { "year": 1959, "event": "Fidel Castro took power in Cuba after the revolution" },
+      { "year": 1993, "event": "Czechoslovakia peacefully split into Czech Republic and Slovakia" },
+      { "year": 2002, "event": "Euro coins and banknotes entered circulation across Europe" }
+    ],
+    "birthdays": [
+      { "name": "J. Edgar Hoover",  "year": 1895, "role": "First FBI Director" },
+      { "name": "J.D. Salinger",    "year": 1919, "role": "Author of The Catcher in the Rye" },
+      { "name": "Frank Langella",   "year": 1938, "role": "Actor" },
+      { "name": "Verne Troyer",     "year": 1969, "role": "Actor" }
+    ]
+  },
+  "january-15": {
+    "events": [
+      { "year": 1929, "event": "Martin Luther King Jr. was born in Atlanta, Georgia" },
+      { "year": 1967, "event": "First Super Bowl was played, Green Bay Packers defeated Kansas City Chiefs" },
+      { "year": 2001, "event": "Wikipedia was launched by Jimmy Wales and Larry Sanger" },
+      { "year": 2009, "event": "Miracle on the Hudson: US Airways Flight 1549 landed on the Hudson River" }
+    ],
+    "birthdays": [
+      { "name": "Martin Luther King Jr.", "year": 1929, "role": "Civil Rights Leader" },
+      { "name": "Chad Lowe",              "year": 1968, "role": "Actor" }
+    ]
+  },
+  "february-14": {
+    "events": [
+      { "year": 1849, "event": "James Polk became first US president photographed while in office" },
+      { "year": 1876, "event": "Alexander Graham Bell applied for a patent for the telephone" },
+      { "year": 1929, "event": "Saint Valentine Day Massacre occurred in Chicago" },
+      { "year": 2005, "event": "YouTube was founded by Chad Hurley, Steve Chen and Jawed Karim" }
+    ],
+    "birthdays": [
+      { "name": "Frederick Douglass",   "year": 1818, "role": "Abolitionist and Statesman" },
+      { "name": "Jimmy Hoffa",          "year": 1913, "role": "Labor Union Leader" },
+      { "name": "Michael Bloomberg",    "year": 1942, "role": "Businessman and Politician" }
+    ]
+  },
+  "march-17": {
+    "events": [
+      { "year": 1845, "event": "The rubber band was patented by Stephen Perry" },
+      { "year": 1950, "event": "Californium was first synthesized at UC Berkeley" },
+      { "year": 1959, "event": "Dalai Lama fled Tibet after Chinese crackdown" },
+      { "year": 1992, "event": "South Africa voted to end apartheid in a referendum" }
+    ],
+    "birthdays": [
+      { "name": "Nat King Cole", "year": 1919, "role": "Musician and Singer" },
+      { "name": "Kurt Russell",  "year": 1951, "role": "Actor" },
+      { "name": "Rob Lowe",      "year": 1964, "role": "Actor" }
+    ]
+  },
+  "july-4": {
+    "events": [
+      { "year": 1776, "event": "The United States Declaration of Independence was adopted" },
+      { "year": 1826, "event": "Both John Adams and Thomas Jefferson died on the same day" },
+      { "year": 1960, "event": "The 50-star US flag debuted after Hawaii became a state" },
+      { "year": 1997, "event": "Mars Pathfinder spacecraft landed successfully on Mars" }
+    ],
+    "birthdays": [
+      { "name": "Abigail Adams",   "year": 1744, "role": "First Lady" },
+      { "name": "Calvin Coolidge", "year": 1872, "role": "30th US President" },
+      { "name": "Post Malone",     "year": 1995, "role": "Rapper and Singer" }
+    ]
+  },
+  "october-31": {
+    "events": [
+      { "year": 1517, "event": "Martin Luther posted his 95 Theses sparking the Protestant Reformation" },
+      { "year": 1864, "event": "Nevada became the 36th US state" },
+      { "year": 1926, "event": "Harry Houdini died from peritonitis after punches to his abdomen" },
+      { "year": 1984, "event": "Indian Prime Minister Indira Gandhi was assassinated" }
+    ],
+    "birthdays": [
+      { "name": "John Keats",   "year": 1795, "role": "Poet" },
+      { "name": "Vanilla Ice",  "year": 1967, "role": "Rapper" },
+      { "name": "Willow Smith", "year": 2000, "role": "Singer and Actress" }
+    ]
+  },
+  "december-25": {
+    "events": [
+      { "year": 800,  "event": "Charlemagne was crowned Holy Roman Emperor by Pope Leo III" },
+      { "year": 1066, "event": "William the Conqueror was crowned King of England" },
+      { "year": 1776, "event": "George Washington crossed the Delaware River" },
+      { "year": 1990, "event": "Tim Berners-Lee made the first successful HTTP communication" }
+    ],
+    "birthdays": [
+      { "name": "Isaac Newton",     "year": 1643, "role": "Mathematician and Physicist" },
+      { "name": "Clara Barton",     "year": 1821, "role": "Founder of the American Red Cross" },
+      { "name": "Justin Trudeau",   "year": 1971, "role": "Canadian Prime Minister" }
+    ]
+  },
+  "december-31": {
+    "events": [
+      { "year": 1879, "event": "Thomas Edison demonstrated incandescent light publicly for first time" },
+      { "year": 1907, "event": "First Times Square New Years Eve ball drop in New York City" },
+      { "year": 1999, "event": "The world celebrated the new millennium with global parties" },
+      { "year": 2004, "event": "The Freedom Tower groundbreaking ceremony was held in NYC" }
+    ],
+    "birthdays": [
+      { "name": "Henri Matisse",   "year": 1869, "role": "Artist" },
+      { "name": "Anthony Hopkins", "year": 1937, "role": "Actor" },
+      { "name": "Psy",             "year": 1977, "role": "Singer known for Gangnam Style" }
+    ]
+  }
+}
