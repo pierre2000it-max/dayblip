@@ -87,6 +87,12 @@ export default function Footer() {
                 { label: "#1 Song on Birthday",  href: "/number-one-song" },
                 { label: "Couples Countdown",    href: "/couples-countdown" },
                 { label: "World Countdowns",     href: "/world-countdowns" },
+                { label: "Fact Spinner",         href: "/fact-spinner" },
+                { label: "History Quiz",         href: "/history-quiz" },
+                { label: "Decade Quiz",          href: "/decade-quiz" },
+                { label: "Daily Trivia",         href: "/daily-trivia" },
+                { label: "Price History",        href: "/price-history" },
+                { label: "Tech Nostalgia",       href: "/tech-nostalgia" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link

@@ -365,6 +365,21 @@ export default function HomePage() {
               { emoji: "📅", title: "Day of Year Counter",   desc: "What day number is today?",                    href: "/day-of-year" },
               { emoji: "🌍", title: "World Countdowns",      desc: "Live timers to every major world event",       href: "/world-countdowns" },
               { emoji: "⏳", title: "This Day in My Life",   desc: "Your personal life timeline",                  href: "/this-day-in-my-life" },
+              { emoji: "🎰", title: "Fact Spinner",           desc: "Spin for a random historical fact",             href: "/fact-spinner" },
+              { emoji: "📱", title: "Older Than Calculator",  desc: "Are you older than the iPhone?",               href: "/older-than" },
+              { emoji: "🎂", title: "Birthday Countdown",     desc: "Create your personal birthday countdown",       href: "/birthday-countdown" },
+              { emoji: "🤯", title: "Fun Age Facts",          desc: "How many times has your heart beaten?",         href: "/age-facts" },
+              { emoji: "⚡", title: "History Quiz",           desc: "Before or After? Test your knowledge",          href: "/history-quiz" },
+              { emoji: "💰", title: "Price History",          desc: "What did things cost in 1990?",                 href: "/price-history" },
+              { emoji: "♈", title: "Star Sign",              desc: "Your zodiac + birthday countdown",              href: "/star-sign" },
+              { emoji: "🌕", title: "Full Moons",             desc: "How many full moons have you lived?",           href: "/full-moons" },
+              { emoji: "⏰", title: "Time Spent",             desc: "How much life have you spent sleeping?",        href: "/time-spent" },
+              { emoji: "🧠", title: "Daily Trivia",           desc: "New history question every day",                href: "/daily-trivia" },
+              { emoji: "🌍", title: "Oldest Things",          desc: "How old are you vs the oldest things?",         href: "/oldest-things" },
+              { emoji: "🕺", title: "Decade Quiz",            desc: "Which decade were you born for?",               href: "/decade-quiz" },
+              { emoji: "💻", title: "Tech Nostalgia",         desc: "Tech invented in your lifetime",                href: "/tech-nostalgia" },
+              { emoji: "👶", title: "World Population",       desc: "Population when you were born",                 href: "/world-population" },
+              { emoji: "📰", title: "This Week in History",   desc: "Major events from this week in history",        href: "/this-week-in-history" },
             ].map(tool => (
               <Link key={tool.href} href={tool.href}
                 className="flex flex-col gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all duration-200 hover:border-[#e94560]">
