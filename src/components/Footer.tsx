@@ -93,6 +93,7 @@ export default function Footer() {
                 { label: "Daily Trivia",         href: "/daily-trivia" },
                 { label: "Price History",        href: "/price-history" },
                 { label: "Tech Nostalgia",       href: "/tech-nostalgia" },
+                { label: "Celebrity Ages",       href: "/celebrity-age" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link

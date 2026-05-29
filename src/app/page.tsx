@@ -380,6 +380,7 @@ export default function HomePage() {
               { emoji: "💻", title: "Tech Nostalgia",         desc: "Tech invented in your lifetime",                href: "/tech-nostalgia" },
               { emoji: "👶", title: "World Population",       desc: "Population when you were born",                 href: "/world-population" },
               { emoji: "📰", title: "This Week in History",   desc: "Major events from this week in history",        href: "/this-week-in-history" },
+              { emoji: "⭐", title: "Celebrity Ages",         desc: "How old is Taylor Swift today?",                href: "/celebrity-age" },
             ].map(tool => (
               <Link key={tool.href} href={tool.href}
                 className="flex flex-col gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all duration-200 hover:border-[#e94560]">
