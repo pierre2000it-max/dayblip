@@ -3,6 +3,7 @@ import Link from "next/link";
 import bornInRaw from "@/data/bornIn.json";
 import { generateBornInSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import AdUnit from "@/components/AdUnit";
+import ShareCard from "@/components/ShareCard";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -253,6 +254,21 @@ export default function BornInPage({
             </div>
           </div>
         </section>
+
+        {/* ── SHARE CARD ────────────────────────────────────────────── */}
+        {data && (
+          <section className="bg-[#16213e] px-6 py-14">
+            <div className="mx-auto max-w-[900px]">
+              <ShareCard
+                year={yearNum}
+                number1Song={data.number1Song}
+                number1Movie={data.number1Movie}
+                gasPrice={data.gasPrice}
+                population={data.population}
+              />
+            </div>
+          </section>
+        )}
 
         {/* ── NAVIGATION ────────────────────────────────────────────── */}
         <section className="bg-[#16213e] px-6 py-12">
