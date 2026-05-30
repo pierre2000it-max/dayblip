@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const navLinks = [
   { label: "Countdowns", href: "/days-until/christmas" },
-  { label: "Born In", href: "/born-in/1990" },
+  { label: "Born In", href: "/born-in" },
   { label: "On This Day", href: "/on-this-day/january-1" },
   { label: "Tools", href: "/age-calculator" },
 ];

@@ -14,6 +14,9 @@ export default function TimeCapsuleTool() {
   const [capsule,  setCapsule]  = useState<Capsule|null>(null);
   const [error,    setError]    = useState("");
   const [timeLeft, setTimeLeft] = useState({d:0,h:0,m:0,s:0});
+  const [saving,   setSaving]   = useState(false);
+  const [shareUrl, setShareUrl] = useState("");
+  const [copied,   setCopied]   = useState(false);
 
   useEffect(() => {
     try {
@@ -35,18 +38,56 @@ export default function TimeCapsuleTool() {
     return () => clearInterval(id);
   },[capsule]);
 
-  const seal = () => {
+  const seal = async () => {
     if (!name.trim()) { setError("Please enter your name."); return; }
     if (!message.trim()) { setError("Please enter a message."); return; }
     if (!openDate) { setError("Please set an open date."); return; }
     if (new Date(openDate+"T00:00:00") <= new Date()) { setError("Open date must be in the future."); return; }
     setError("");
+    setSaving(true);
+
+    const uniqueId = `${Date.now()}${Math.floor(1000 + Math.random() * 9000)}`;
     const c: Capsule = { name, message, hopes, openDate, createdAt: new Date().toISOString() };
-    setCapsule(c);
+
+    // Always save locally as backup
     try { localStorage.setItem("tc_capsule", JSON.stringify(c)); } catch { /* ignore */ }
+
+    // Persist to JSONBin.io so the capsule survives after the browser closes
+    try {
+      const response = await fetch("https://api.jsonbin.io/v3/b", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Bin-Name": "dayblip-capsule-" + uniqueId,
+        },
+        body: JSON.stringify({
+          name,
+          message,
+          openDate,
+          hopes,
+          createdAt: c.createdAt,
+        }),
+      });
+      const data = await response.json();
+      const binId = data?.metadata?.id;
+      if (binId) {
+        setShareUrl(`https://dayblip.com/time-capsule/${binId}`);
+      }
+    } catch { /* offline / blocked — local backup still works */ }
+
+    setCapsule(c);
+    setSaving(false);
   };
 
-  const clear = () => { setCapsule(null); try { localStorage.removeItem("tc_capsule"); } catch { /* ignore */ } };
+  const copyUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* ignore */ }
+  };
+
+  const clear = () => { setCapsule(null); setShareUrl(""); try { localStorage.removeItem("tc_capsule"); } catch { /* ignore */ } };
 
   const isOpen = capsule && new Date(capsule.openDate+"T00:00:00") <= new Date();
   const daysAgo = capsule ? Math.floor((Date.now()-new Date(capsule.createdAt).getTime())/86400000) : 0;
@@ -88,7 +129,7 @@ export default function TimeCapsuleTool() {
                 <input type="date" value={openDate} onChange={e=>setOpenDate(e.target.value)}
                   className="w-full rounded-lg border border-[#0f3460] bg-[#16213e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none" />
               </div>
-              <button onClick={seal} className="w-full rounded-lg bg-[#e94560] py-3 font-semibold text-white transition-opacity hover:opacity-90">Seal My Time Capsule →</button>
+              <button onClick={seal} disabled={saving} className="w-full rounded-lg bg-[#e94560] py-3 font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60">{saving ? "Saving…" : "Seal My Time Capsule →"}</button>
               {error && <p className="text-sm text-[#e94560]">{error}</p>}
             </div>
           ) : isOpen ? (
@@ -124,7 +165,19 @@ export default function TimeCapsuleTool() {
                 </div>
                 <p className="text-[#a8a8b3] text-sm mt-4">Message: 🔒 Hidden until opening day</p>
               </div>
-              <p className="text-xs text-[#a8a8b3] text-center">Note: Capsule is stored in your browser. Clearing browser data may remove it.</p>
+              {shareUrl ? (
+                <div className="rounded-xl border border-green-500/30 bg-green-900/20 p-5 text-center">
+                  <p className="text-white font-semibold mb-1">🎉 Your capsule is saved online!</p>
+                  <div className="flex flex-col sm:flex-row gap-2 mt-3">
+                    <input readOnly value={shareUrl} onClick={e=>e.currentTarget.select()}
+                      className="flex-1 rounded-lg border border-[#0f3460] bg-[#16213e] px-3 py-2 text-sm text-white" />
+                    <button onClick={copyUrl} className="rounded-lg bg-[#e94560] px-4 py-2 font-semibold text-white transition-opacity hover:opacity-90 whitespace-nowrap">{copied ? "Copied!" : "Copy link"}</button>
+                  </div>
+                  <p className="text-[#a8a8b3] text-xs mt-3">This link works even after closing your browser — bookmark it!</p>
+                </div>
+              ) : (
+                <p className="text-xs text-[#a8a8b3] text-center">Note: Capsule is stored in your browser. Clearing browser data may remove it.</p>
+              )}
               <button onClick={clear} className="rounded-lg border border-[#0f3460] px-4 py-2 text-[#a8a8b3] hover:text-white text-sm">Create New Capsule</button>
             </div>
           )}

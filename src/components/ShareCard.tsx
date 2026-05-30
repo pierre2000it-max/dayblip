@@ -12,12 +12,6 @@ interface ShareCardProps {
   population: string;
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-function trunc(str: string, n: number): string {
-  return str.length > n ? str.slice(0, n - 1) + "…" : str;
-}
-
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function ShareCard({
@@ -47,78 +41,75 @@ export default function ShareCard({
   };
 
   const stats = [
-    { emoji: "🎵", label: "Song",  value: trunc(number1Song,  38) },
-    { emoji: "🎬", label: "Movie", value: trunc(number1Movie, 38) },
-    { emoji: "⛽", label: "Gas",   value: gasPrice },
-    { emoji: "🌍", label: "Pop",   value: population },
+    { emoji: "🎵", label: "Song",       value: number1Song },
+    { emoji: "🎬", label: "Movie",      value: number1Movie },
+    { emoji: "⛽", label: "Gas",        value: gasPrice },
+    { emoji: "🌍", label: "Population", value: population },
   ];
 
   return (
     <div>
       <h2 className="mb-6 text-2xl font-bold text-white">Your Birth Year Card</h2>
 
-      {/* Scroll wrapper so card doesn't break mobile layout */}
-      <div className="overflow-x-auto">
-        {/* ── THE CARD (fixed 600×400, captured by html2canvas) ─────── */}
-        <div
-          ref={cardRef}
-          style={{
-            width: "600px",
-            height: "400px",
-            background: "#1a1a2e",
-            padding: "40px 40px 36px",
-            boxSizing: "border-box",
-            fontFamily: "Arial, Helvetica, sans-serif",
-            color: "#ffffff",
-            position: "relative",
-            overflow: "hidden",
-            flexShrink: 0,
-          }}
-        >
-          {/* Top accent bar */}
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "6px", background: "#e94560" }} />
+      {/* ── THE CARD (full content, captured by html2canvas) ─────── */}
+      <div
+        ref={cardRef}
+        style={{
+          width: "100%",
+          maxWidth: "600px",
+          minHeight: "400px",
+          background: "#1a1a2e",
+          padding: "32px",
+          boxSizing: "border-box",
+          fontFamily: "Arial, Helvetica, sans-serif",
+          color: "#ffffff",
+          position: "relative",
+          overflow: "visible",
+        }}
+      >
+        {/* Top accent bar */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "6px", background: "#e94560" }} />
 
-          {/* Headline */}
-          <div style={{ fontSize: "52px", fontWeight: 900, lineHeight: 1.1, marginBottom: "6px" }}>
-            Born in{" "}
-            <span style={{ color: "#e94560" }}>{year}</span>
-          </div>
-          <div style={{ fontSize: "15px", color: "#a8a8b3", marginBottom: "28px" }}>
-            Here&apos;s what the world looked like
-          </div>
-
-          {/* Stats grid — 2 columns using flex */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", marginBottom: "24px" }}>
-            {stats.map(({ emoji, label, value }) => (
-              <div
-                key={label}
-                style={{
-                  width: "258px",
-                  background: "#16213e",
-                  padding: "12px 14px",
-                  borderRadius: "8px",
-                  borderLeft: "3px solid #e94560",
-                  boxSizing: "border-box",
-                }}
-              >
-                <div style={{ fontSize: "11px", color: "#a8a8b3", marginBottom: "4px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                  {emoji} {label}
-                </div>
-                <div style={{ fontSize: "13px", fontWeight: 700, color: "#ffffff", lineHeight: 1.4 }}>
-                  {value}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Branding */}
-          <div style={{ position: "absolute", bottom: "18px", right: "24px", fontSize: "13px", color: "#a8a8b3", letterSpacing: "0.02em" }}>
-            dayblip.com
-          </div>
-
-          {/* Bottom accent bar */}
-          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "4px", background: "#e94560" }} />
+        {/* Headline */}
+        <div style={{ fontSize: "44px", fontWeight: 900, lineHeight: 1.1, marginTop: "8px", marginBottom: "6px" }}>
+          Born in{" "}
+          <span style={{ color: "#e94560" }}>{year}</span>
         </div>
+        <div style={{ fontSize: "15px", color: "#a8a8b3", marginBottom: "24px" }}>
+          Here&apos;s what the world looked like
+        </div>
+
+        {/* Stats — each on its own full-width row */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
+          {stats.map(({ emoji, label, value }) => (
+            <div
+              key={label}
+              style={{
+                width: "100%",
+                background: "#16213e",
+                padding: "14px 16px",
+                borderRadius: "8px",
+                borderLeft: "3px solid #e94560",
+                boxSizing: "border-box",
+              }}
+            >
+              <div style={{ fontSize: "11px", color: "#a8a8b3", marginBottom: "4px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                {emoji} {label}
+              </div>
+              <div style={{ fontSize: "16px", fontWeight: 700, color: "#ffffff", lineHeight: 1.4, wordBreak: "break-word" }}>
+                {value}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Branding — always visible at bottom */}
+        <div style={{ fontSize: "13px", color: "#a8a8b3", letterSpacing: "0.02em", textAlign: "right", paddingTop: "4px" }}>
+          dayblip.com
+        </div>
+
+        {/* Bottom accent bar */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "4px", background: "#e94560" }} />
       </div>
 
       {/* ── Buttons ─────────────────────────────────────────────────── */}

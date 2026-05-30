@@ -13,7 +13,31 @@ const toolLinks = [
   { label: "Date Calculator", href: "/date-calculator" },
   { label: "Days Between Dates", href: "/days-between" },
   { label: "On This Day", href: "/on-this-day/january-1" },
-  { label: "Born In Year", href: "/born-in/1990" },
+  { label: "Born In Year", href: "/born-in" },
+];
+
+const funViralLinks = [
+  { label: "Life Progress Bar", href: "/life-progress" },
+  { label: "Birthday Twins", href: "/birthday-twins" },
+  { label: "Celebrity Ages", href: "/celebrity-age" },
+  { label: "Couples Countdown", href: "/couples-countdown" },
+  { label: "Weekends Left", href: "/weekends-left" },
+  { label: "Baby Age", href: "/baby-age" },
+  { label: "Star Sign", href: "/star-sign" },
+  { label: "Retirement Countdown", href: "/retirement-countdown" },
+  { label: "Birthday Countdown", href: "/birthday-countdown" },
+];
+
+const gamesHistoryLinks = [
+  { label: "History Quiz", href: "/history-quiz" },
+  { label: "Decade Quiz", href: "/decade-quiz" },
+  { label: "Daily Trivia", href: "/daily-trivia" },
+  { label: "Guess the Year", href: "/guess-the-year" },
+  { label: "Famous or Fictional", href: "/famous-or-fictional" },
+  { label: "Fact Spinner", href: "/fact-spinner" },
+  { label: "Days Since Events", href: "/days-since" },
+  { label: "Price History", href: "/price-history" },
+  { label: "What Generation", href: "/what-generation" },
 ];
 
 const bottomLinks = [
@@ -26,8 +50,8 @@ export default function Footer() {
   return (
     <footer className="bg-[#0f3460]">
       <div className="mx-auto max-w-[1200px] px-6 pt-12 pb-6">
-        {/* Three-column grid */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
+        {/* Responsive column grid: 1 (mobile) · 3 (tablet) · 5 (desktop) */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 lg:grid-cols-5">
           {/* Column 1 — Brand */}
           <div className="flex flex-col gap-3">
             <Link href="/" className="text-2xl font-bold">
@@ -76,32 +100,28 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4 — More Tools */}
+          {/* Column 4 — Fun & Viral */}
           <div className="flex flex-col gap-3">
-            <h3 className="text-white font-bold text-base">More Tools</h3>
+            <h3 className="text-white font-bold text-base">Fun &amp; Viral</h3>
             <ul className="flex flex-col gap-2">
-              {[
-                { label: "Life Progress Bar",    href: "/life-progress" },
-                { label: "Days Alive",           href: "/days-alive" },
-                { label: "Birthday Twins",       href: "/birthday-twins" },
-                { label: "#1 Song on Birthday",  href: "/number-one-song" },
-                { label: "Couples Countdown",    href: "/couples-countdown" },
-                { label: "World Countdowns",     href: "/world-countdowns" },
-                { label: "Fact Spinner",         href: "/fact-spinner" },
-                { label: "History Quiz",         href: "/history-quiz" },
-                { label: "Decade Quiz",          href: "/decade-quiz" },
-                { label: "Daily Trivia",         href: "/daily-trivia" },
-                { label: "Price History",        href: "/price-history" },
-                { label: "Tech Nostalgia",       href: "/tech-nostalgia" },
-                { label: "Celebrity Ages",       href: "/celebrity-age" },
-                { label: "Guess the Year",       href: "/guess-the-year" },
-                { label: "History Slider",        href: "/how-long-ago" },
-                { label: "Famous or Fictional",   href: "/famous-or-fictional" },
-                { label: "What Generation",       href: "/what-generation" },
-                { label: "Weekends Left",         href: "/weekends-left" },
-                { label: "Days Since Events",     href: "/days-since" },
-                { label: "Earth Orbits",          href: "/earth-orbits" },
-              ].map((link) => (
+              {funViralLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-[#a8a8b3] text-sm transition-colors duration-200 hover:text-[#e94560]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 5 — Games & History */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-white font-bold text-base">Games &amp; History</h3>
+            <ul className="flex flex-col gap-2">
+              {gamesHistoryLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
