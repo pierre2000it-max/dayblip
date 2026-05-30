@@ -1,5 +1,6 @@
 "use client";
 import { useState, useCallback } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 type Decade = "50s"|"60s"|"70s"|"80s"|"90s"|"00s";
 
@@ -45,7 +46,6 @@ export default function DecadeQuizTool() {
       ).sort((a, b) => b[1] - a[1])[0]?.[0] as Decade) ?? null
     : null;
 
-  const shareText = result ? encodeURIComponent(`I was born for the ${result}! 🕺\nTake the quiz → dayblip.com/decade-quiz`) : "";
   const q = QUESTIONS[qIndex];
 
   return (
@@ -88,9 +88,14 @@ export default function DecadeQuizTool() {
               <p className="text-[#a8a8b3] leading-relaxed">{DESCRIPTIONS[result]}</p>
               <div className="flex flex-wrap justify-center gap-3 pt-2">
                 <button onClick={restart} className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Take Again</button>
-                <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                  className="rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Share on X →</a>
               </div>
+              {result && (
+                <ShareButtons
+                  text={`I was born for the ${result}! 🕺 Take the quiz!`}
+                  url="https://dayblip.com/decade-quiz"
+                  title="Decade Quiz"
+                />
+              )}
             </div>
           )}
         </div>

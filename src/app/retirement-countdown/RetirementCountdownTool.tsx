@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 function pad(n: number) { return String(n).padStart(2,"0"); }
 function fmtDate(d: Date) { return d.toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"}); }
@@ -48,7 +49,6 @@ export default function RetirementCountdownTool() {
     ? Math.round((retDate.getTime()-birthDate.getTime())/86400000)
     : null;
 
-  const shareText = retDate ? encodeURIComponent(`I retire in ${timeLeft.d} days! Counting down every day 🎉\ndayblip.com/retirement-countdown`) : "";
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -117,8 +117,13 @@ export default function RetirementCountdownTool() {
                   )}
 
                   {daysOldAtRetirement && <p className="text-center text-[#a8a8b3] text-sm">You will be {daysOldAtRetirement.toLocaleString()} days old when you retire</p>}
-                  <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                    className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Share on X →</a>
+                  {retDate && (
+                    <ShareButtons
+                      text={`I retire in ${timeLeft.d} days! Counting down every day 🎉`}
+                      url="https://dayblip.com/retirement-countdown"
+                      title="Retirement Countdown"
+                    />
+                  )}
                 </>
               )}
             </div>

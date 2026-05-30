@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Date helpers ────────────────────────────────────────────────────────────
 
@@ -174,6 +175,14 @@ export default function CountdownDisplay({ date, color, name }: Props) {
             🗓️ {name} falls on a <strong className="text-white">{dayOfWeek}</strong> this year
           </p>
         )}
+      </div>
+
+      <div className="mt-6">
+        <ShareButtons
+          text={`${name ? name : "My countdown"} is ${daysUntil} days away! Check the countdown!`}
+          url={typeof window !== "undefined" ? window.location.href : "https://dayblip.com/days-until"}
+          title={name ? `Days Until ${name}` : "Days Until Countdown"}
+        />
       </div>
     </div>
   );

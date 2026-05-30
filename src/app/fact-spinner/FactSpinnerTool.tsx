@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const FACTS = [
   "In 1969, Neil Armstrong walked on the moon while 600 million people watched on TV",
@@ -89,9 +90,6 @@ export default function FactSpinnerTool() {
     }, 1500);
   };
 
-  const shareText = fact
-    ? encodeURIComponent(`${fact} 🤯\nDiscover more at dayblip.com/fact-spinner`)
-    : "";
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -137,12 +135,14 @@ export default function FactSpinnerTool() {
                   className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
                   Spin Again
                 </button>
-                <a href={`https://twitter.com/intent/tweet?text=${shareText}`}
-                  target="_blank" rel="noopener noreferrer"
-                  className="rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                  Share on X →
-                </a>
               </div>
+              {fact && (
+                <ShareButtons
+                  text={`${fact} 🤯 Discover more facts!`}
+                  url="https://dayblip.com/fact-spinner"
+                  title="Fact Spinner"
+                />
+              )}
             </div>
           )}
         </div>

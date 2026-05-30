@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 type PriceKey = "gas" | "bread" | "milk" | "movieTicket" | "house" | "car" | "stamp" | "coffee";
 
@@ -90,6 +91,12 @@ export default function PriceHistoryTool() {
               );
             })}
           </div>
+
+          <ShareButtons
+            text="Check out how prices have changed since the 1950s! Free price history calculator."
+            url="https://dayblip.com/price-history"
+            title="Price History Calculator"
+          />
 
           {/* Inflation calculator */}
           <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6">

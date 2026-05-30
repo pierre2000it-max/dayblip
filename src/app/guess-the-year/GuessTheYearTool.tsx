@@ -1,5 +1,6 @@
 "use client";
 import { useState, useCallback } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const ALL_EVENTS = [
   { event:"Neil Armstrong walked on the moon", year:1969 },
@@ -87,7 +88,6 @@ export default function GuessTheYearTool() {
     setQIndex(0); setGuess("1990"); setFeedback(null); setScore(0); setDone(false);
   }, []);
 
-  const shareText = encodeURIComponent(`I scored ${score}/1000 on the Guess the Year quiz!\nCan you beat me? dayblip.com/guess-the-year`);
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -151,9 +151,12 @@ export default function GuessTheYearTool() {
               <p className="text-xl text-white">{getGrade(score)}</p>
               <div className="flex flex-wrap justify-center gap-3 pt-2">
                 <button onClick={restart} className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Play Again</button>
-                <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                  className="rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Share on X →</a>
               </div>
+              <ShareButtons
+                text={`I scored ${score}/1000 on Guess the Year! Can you beat me?`}
+                url="https://dayblip.com/guess-the-year"
+                title="Guess the Year Quiz"
+              />
             </div>
           )}
         </div>

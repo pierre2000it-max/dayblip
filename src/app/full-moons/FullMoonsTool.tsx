@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const REF_FULL_MOON = new Date(2025, 0, 13); // Jan 13, 2025
 const LUNAR_CYCLE   = 29.53059; // days
@@ -53,9 +54,6 @@ export default function FullMoonsTool() {
     setResult({ moons, daysAgo, phase: getPhase(birth) });
   };
 
-  const shareText = result
-    ? encodeURIComponent(`I have lived through ${result.moons} full moons! 🌕\nHow many have you seen? dayblip.com/full-moons`)
-    : "";
 
   const FACTS = [
     "A full moon cycle is called a lunation",
@@ -99,10 +97,13 @@ export default function FullMoonsTool() {
               <p className="text-[#a8a8b3] mt-3 text-sm">
                 You were born approximately <strong className="text-white">{result.daysAgo} days</strong> into a lunar cycle
               </p>
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                className="mt-4 inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share on X →
-              </a>
+              {result && (
+                <ShareButtons
+                  text={`I have lived through ${result.moons} full moons! 🌕 Calculate yours!`}
+                  url="https://dayblip.com/full-moons"
+                  title="Full Moons Calculator"
+                />
+              )}
             </div>
           )}
 

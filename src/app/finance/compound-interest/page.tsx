@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -8,7 +9,6 @@ export default function CompoundInterestPage() {
   const [monthly, setMonthly] = useState("500")
   const [rate, setRate] = useState("7")
   const [years, setYears] = useState(20)
-  const [copied, setCopied] = useState(false)
 
   const calc = useMemo(() => {
     const p = parseFloat(initial) || 0
@@ -31,14 +31,6 @@ export default function CompoundInterestPage() {
     })
     return { finalBalance, totalContributions, totalInterest, multiplier, rule72, rows }
   }, [initial, monthly, rate, years])
-
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
 
@@ -108,9 +100,11 @@ export default function CompoundInterestPage() {
             </table>
           </div>
 
-          <button onClick={share} className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Link copied! ✓" : "Share Calculator →"}
-          </button>
+          <ShareButtons
+            text={`Starting with $${initial} and adding $${monthly}/month at ${rate}% for ${years} years could grow to ${fmt(calc.finalBalance)}! Calculate yours. (Educational only)`}
+            url="https://dayblip.com/finance/compound-interest"
+            title="Compound Interest Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Results assume constant rate and do not account for taxes or fees.</p>
         </div>
       </section>

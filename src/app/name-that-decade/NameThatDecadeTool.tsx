@@ -1,5 +1,6 @@
 "use client";
 import { useState, useCallback } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 type Decade = "50s"|"60s"|"70s"|"80s"|"90s"|"00s";
 
@@ -67,7 +68,6 @@ export default function NameThatDecadeTool() {
     setQIndex(0); setScore(0); setFeedback(null); setDone(false);
   },[]);
 
-  const shareText = encodeURIComponent(`I scored ${score}/10 on the Name That Decade music quiz!\ndayblip.com/name-that-decade`);
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -120,9 +120,12 @@ export default function NameThatDecadeTool() {
               <p className="text-6xl font-black text-[#e94560]">{score}<span className="text-2xl text-[#a8a8b3]">/10</span></p>
               <div className="flex flex-wrap justify-center gap-3 pt-2">
                 <button onClick={restart} className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Play Again</button>
-                <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                  className="rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Share on X →</a>
               </div>
+              <ShareButtons
+                text={`I scored ${score}/10 on the Name That Decade music quiz! Can you beat me?`}
+                url="https://dayblip.com/name-that-decade"
+                title="Name That Decade Quiz"
+              />
             </div>
           )}
         </div>

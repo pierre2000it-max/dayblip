@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import ShareButtons from "@/components/ShareButtons";
 
 const DAYS_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -47,8 +48,6 @@ export default function BirthdayCountdownClient({ slug }: { slug: string }) {
 
   const name     = toDisplayName(slug);
   const pageUrl  = typeof window !== "undefined" ? window.location.href : `https://dayblip.com/birthday-countdown/${slug}?bd=${bd}`;
-  const waText   = encodeURIComponent(`Hey! Check out my birthday countdown! ${timeLeft.days} days to go! 🎂\n${pageUrl}`);
-  const xText    = encodeURIComponent(`${timeLeft.days} days until my birthday! 🎂 ${pageUrl}`);
 
   const copyLink = async () => {
     try { await navigator.clipboard.writeText(pageUrl); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch { /* ignore */ }
@@ -116,14 +115,11 @@ export default function BirthdayCountdownClient({ slug }: { slug: string }) {
                 {copied ? "Copied!" : "Copy Link"}
               </button>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <a href={`https://wa.me/?text=${waText}`} target="_blank" rel="noopener noreferrer"
-                className="rounded-lg bg-[#25D366] px-4 py-2 font-semibold text-white text-sm transition-opacity hover:opacity-90">Share on WhatsApp</a>
-              <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener noreferrer"
-                className="rounded-lg bg-[#1877f2] px-4 py-2 font-semibold text-white text-sm transition-opacity hover:opacity-90">Share on Facebook</a>
-              <a href={`https://twitter.com/intent/tweet?text=${xText}`} target="_blank" rel="noopener noreferrer"
-                className="rounded-lg border border-[#333] bg-black px-4 py-2 font-semibold text-white text-sm transition-opacity hover:opacity-90">Share on X</a>
-            </div>
+            <ShareButtons
+              text={`${timeLeft.days} days until ${name}'s birthday! 🎂`}
+              url={pageUrl}
+              title={`${name}'s Birthday Countdown`}
+            />
           </div>
 
           {/* Fun facts */}

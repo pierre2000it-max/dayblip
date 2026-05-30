@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import AdUnit from "@/components/AdUnit";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -247,6 +248,14 @@ export default function AgeCalculatorTool() {
                 </ul>
               </div>
             </div>
+          )}
+
+          {result && (
+            <ShareButtons
+              text={`I am ${result.years} years, ${result.months} months and ${result.days} days old! That is ${result.totalDays.toLocaleString()} total days alive!`}
+              url="https://dayblip.com/age-calculator"
+              title="Age Calculator"
+            />
           )}
 
           {/* Ad — below results box */}

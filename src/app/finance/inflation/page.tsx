@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 const CPI: Record<number, number> = {
   1913: 9.9, 1920: 20.0, 1930: 16.7, 1940: 14.0, 1950: 24.1,
@@ -136,6 +137,11 @@ export default function InflationPage() {
             </div>
           </div>
 
+          <ShareButtons
+            text="Check out this inflation calculator — see how prices have changed over decades! (Educational only)"
+            url="https://dayblip.com/finance/inflation"
+            title="Inflation Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">CPI data based on US Bureau of Labor Statistics. For educational purposes only.</p>
         </div>
       </section>

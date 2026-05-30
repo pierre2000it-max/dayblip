@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 import bornInRaw from "@/data/bornIn.json";
 import onThisDayRaw from "@/data/onThisDay.json";
 
@@ -56,6 +57,14 @@ export default function NewspaperTool() {
               className="flex-1 rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none" />
             <button onClick={show} className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Show Headlines →</button>
           </div>
+
+          {paper && (
+            <ShareButtons
+              text={`Check out the headlines from ${MONTH_LONG[paper.date.getMonth()]} ${paper.date.getDate()}, ${paper.date.getFullYear()}! Historical newspaper generator.`}
+              url="https://dayblip.com/newspaper"
+              title="Historical Newspaper Generator"
+            />
+          )}
 
           {paper && (
             /* Newspaper styled card */

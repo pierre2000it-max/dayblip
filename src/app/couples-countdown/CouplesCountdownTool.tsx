@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -84,9 +85,6 @@ export default function CouplesCountdownTool() {
   };
 
   const couple = name1 && name2 ? `${name1} & ${name2}` : name1 ? name1 : "You two";
-  const shareText = result
-    ? encodeURIComponent(`${couple} have been together ${commas(result.totalDays)} days! 💕\ndayblip.com/couples-countdown`)
-    : "";
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -185,19 +183,13 @@ export default function CouplesCountdownTool() {
                 </div>
               </div>
 
-              {/* Share */}
-              <div className="flex flex-wrap gap-3">
-                <a href={`https://twitter.com/intent/tweet?text=${shareText}`}
-                  target="_blank" rel="noopener noreferrer"
-                  className="rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                  Share on X →
-                </a>
-                <a href={`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdayblip.com%2Fcouples-countdown`}
-                  target="_blank" rel="noopener noreferrer"
-                  className="rounded-lg bg-[#1877f2] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                  Share on Facebook →
-                </a>
-              </div>
+              {result && (
+                <ShareButtons
+                  text={`We have been together ${result.totalDays.toLocaleString()} days! 💕 Calculate yours!`}
+                  url="https://dayblip.com/couples-countdown"
+                  title="Couples Countdown"
+                />
+              )}
             </div>
           )}
         </div>

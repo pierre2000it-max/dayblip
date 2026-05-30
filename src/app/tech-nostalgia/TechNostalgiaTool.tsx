@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const TECH_TIMELINE = [
   { year:1971, item:"First email sent", emoji:"📧" },
@@ -58,9 +59,6 @@ export default function TechNostalgiaTool() {
   const beforeIphone = birthYear && birthYear < iphone ? iphone - birthYear : null;
   const afterIphone  = birthYear && birthYear >= iphone ? birthYear - iphone : null;
 
-  const shareText = birthYear
-    ? encodeURIComponent(`I was born ${beforeIphone ? `${beforeIphone} years before` : `${afterIphone} years after`} the iPhone and have seen ${items.length} major tech inventions!\ndayblip.com/tech-nostalgia`)
-    : "";
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -119,10 +117,13 @@ export default function TechNostalgiaTool() {
                 </div>
               </div>
 
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share on X →
-              </a>
+              {birthYear && (
+                <ShareButtons
+                  text={`I was born ${beforeIphone ? `${beforeIphone} years before` : `${afterIphone} years after`} the iPhone and have seen ${items.length} major tech milestones! See yours at dayblip.com/tech-nostalgia`}
+                  url="https://dayblip.com/tech-nostalgia"
+                  title="Tech Nostalgia"
+                />
+              )}
             </div>
           )}
         </div>

@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const EVENTS = [
   { name:"September 11 Attacks",emoji:"🗽",date:"2001-09-11",description:"Terrorist attacks on the United States" },
@@ -113,6 +114,11 @@ export default function DaysSinceTool() {
               );
             })}
           </div>
+          <ShareButtons
+            text="Check out this live days-since counter for major historical events!"
+            url="https://dayblip.com/days-since"
+            title="Days Since Historical Events"
+          />
         </div>
       </section>
     </div>

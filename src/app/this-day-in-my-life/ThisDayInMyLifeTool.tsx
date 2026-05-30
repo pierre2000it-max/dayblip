@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import ShareButtons from "@/components/ShareButtons";
 import bornInRaw from "@/data/bornIn.json";
 import onThisDayRaw from "@/data/onThisDay.json";
 
@@ -117,9 +118,6 @@ export default function ThisDayInMyLifeTool() {
   };
 
   const day10k = timeline?.find(m => m.days === 10000);
-  const shareText = day10k
-    ? encodeURIComponent(`On my 10,000th day alive it was ${fmtDate(day10k.date)}!\nFind out what was happening on your milestone days → dayblip.com/this-day-in-my-life`)
-    : encodeURIComponent("Find out what was happening in the world on your milestone days → dayblip.com/this-day-in-my-life");
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -190,12 +188,13 @@ export default function ThisDayInMyLifeTool() {
                 </div>
               </div>
 
-              {/* Share */}
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`}
-                target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share on X →
-              </a>
+              {day10k && (
+                <ShareButtons
+                  text={`On my 10,000th day alive it was ${fmtDate(day10k.date)}! Find yours at dayblip.com/this-day-in-my-life`}
+                  url="https://dayblip.com/this-day-in-my-life"
+                  title="This Day in My Life"
+                />
+              )}
             </div>
           )}
         </div>

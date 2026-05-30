@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo } from "react"
 import Link from "next/link"
+import ShareButtons from "@/components/ShareButtons"
 
 interface Factor { key: string; label: string; options: { label: string; value: number }[] }
 
@@ -96,6 +97,12 @@ export default function LifeExpectancyPage() {
               <div><div className="text-2xl font-black text-white">{calc.daysRemaining.toLocaleString()}</div><div className="text-[#a8a8b3]">Days Remaining</div></div>
             </div>
           </div>
+
+          <ShareButtons
+            text="I just calculated my estimated life expectancy! See yours at dayblip.com/health/life-expectancy (Educational only — not medical advice)"
+            url="https://dayblip.com/health/life-expectancy"
+            title="Life Expectancy Calculator"
+          />
 
           {calc.improvements.length > 0 && (
             <div className="rounded-xl border border-green-500/20 bg-green-900/10 p-5">

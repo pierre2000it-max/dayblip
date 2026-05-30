@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 function fmtK(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -268,6 +269,11 @@ export default function TakeHomePayPage() {
             <p className="text-xs text-[#a8a8b3] mt-2">Your marginal rate is your highest bracket. Your effective rate is what you actually pay on average — always lower than marginal.</p>
           </div>
 
+          <ShareButtons
+            text="Check out this take-home pay calculator — see exactly how much you keep after taxes! (Educational only)"
+            url="https://dayblip.com/finance/take-home-pay"
+            title="Take Home Pay Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">Tax calculations are estimates for educational purposes. Does not include all deductions or credits. Use IRS.gov or a tax professional for exact figures.</p>
         </div>
       </section>

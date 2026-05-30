@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -427,9 +428,6 @@ export default function BirthdayTwinsTool() {
   const currentYear = new Date().getFullYear();
   const sign      = getStarSign(month, safeDay);
 
-  const shareText = people.length >= 2
-    ? encodeURIComponent(`My birthday twins are ${people[0].name} and ${people[1].name}! 🎂\nFind yours → dayblip.com/birthday-twins`)
-    : encodeURIComponent("Find your celebrity birthday twins → dayblip.com/birthday-twins");
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -522,13 +520,13 @@ export default function BirthdayTwinsTool() {
                     ))}
                   </div>
 
-                  {people.length >= 2 && (
-                    <a href={`https://twitter.com/intent/tweet?text=${shareText}`}
-                      target="_blank" rel="noopener noreferrer"
-                      className="mt-6 inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                      Share on X →
-                    </a>
-                  )}
+                  <ShareButtons
+                    text={people.length >= 2
+                      ? `My birthday twins are famous people who share my birthday! Find yours!`
+                      : "Find famous people who share your birthday!"}
+                    url="https://dayblip.com/birthday-twins"
+                    title="Birthday Twin Finder"
+                  />
                 </>
               )}
             </div>

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const MILESTONES = [
   { weeks:0,   label:"Newborn stage",              detail:"Welcome to the world! Sleeps 16-18 hours" },
@@ -41,9 +42,6 @@ export default function BabyAgeTool() {
   const future = MILESTONES.filter(m => m.weeks > currentWeeks);
   const next   = future[0];
 
-  const shareText = result
-    ? encodeURIComponent(`My baby is ${result.weeks} weeks and ${result.days} days old today!\nTrack yours → dayblip.com/baby-age`)
-    : "";
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -93,8 +91,13 @@ export default function BabyAgeTool() {
                 </div>
               )}
 
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Share on X →</a>
+              {result && (
+                <ShareButtons
+                  text={`My baby is ${result.weeks} weeks and ${result.days} days old today! Track yours!`}
+                  url="https://dayblip.com/baby-age"
+                  title="Baby Age Calculator"
+                />
+              )}
             </div>
           )}
         </div>

@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtDec(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
@@ -101,14 +102,6 @@ export default function FreelancerRatePage() {
   }, [targetIncome, vacationWeeks, billableHours, bizExpenses, healthIns, retirement, stateIdx])
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
-
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(
-        `I calculated I need to charge ${fmtDec(calc.baseRate)}/hr as a freelancer to hit my income goals! dayblip.com/finance/freelancer-rate`
-      )
-    }
-  }
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -256,9 +249,11 @@ export default function FreelancerRatePage() {
             </div>
           </div>
 
-          <button onClick={share} className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white hover:opacity-90">
-            Share My Rate →
-          </button>
+          <ShareButtons
+            text={`Freelancers need to charge at least $${calc.baseRate.toFixed(2)}/hr to hit their income goals! Calculate yours. (Educational only)`}
+            url="https://dayblip.com/finance/freelancer-rate"
+            title="Freelancer Rate Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Tax calculations are approximate and do not account for all deductions. Consult a CPA for accurate figures.</p>
         </div>
       </section>

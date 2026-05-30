@@ -1,5 +1,6 @@
 "use client";
 import { useState, useCallback } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const ALL_PEOPLE = [
   { name:"Amelia Earhart", real:true, fact:"First woman to fly solo across the Atlantic Ocean" },
@@ -70,7 +71,6 @@ export default function FamousOrFictionalTool() {
     setQIndex(0); setScore(0); setFeedback(null); setDone(false);
   },[]);
 
-  const shareText = encodeURIComponent(`I scored ${score}/15 on Famous or Fictional!\ndayblip.com/famous-or-fictional`);
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -121,9 +121,12 @@ export default function FamousOrFictionalTool() {
               <p className="text-lg text-white">{getGrade(score,15)}</p>
               <div className="flex flex-wrap justify-center gap-3 pt-2">
                 <button onClick={restart} className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Play Again</button>
-                <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                  className="rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Share on X →</a>
               </div>
+              <ShareButtons
+                text={`I scored ${score}/15 on Famous or Fictional! Can you beat me?`}
+                url="https://dayblip.com/famous-or-fictional"
+                title="Famous or Fictional Quiz"
+              />
             </div>
           )}
         </div>

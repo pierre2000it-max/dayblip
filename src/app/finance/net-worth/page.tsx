@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -106,6 +107,11 @@ export default function NetWorthPage() {
             </table>
           </div>
 
+          <ShareButtons
+            text="I just calculated my net worth! Track yours at dayblip.com/finance/net-worth (Educational only)"
+            url="https://dayblip.com/finance/net-worth"
+            title="Net Worth Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">Source: Federal Reserve Survey of Consumer Finances. For educational purposes only. Medians vary by location, occupation and many other factors.</p>
         </div>
       </section>

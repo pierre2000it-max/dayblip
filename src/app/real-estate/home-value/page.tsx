@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -17,7 +18,6 @@ export default function HomeValuePage() {
   const [currentValue, setCurrentValue] = useState("420000")
   const [annualRate, setAnnualRate] = useState("3")
   const [futureYears, setFutureYears] = useState("10")
-  const [copied, setCopied] = useState(false)
 
   const calc = useMemo(() => {
     if (mode === "past") {
@@ -37,14 +37,6 @@ export default function HomeValuePage() {
       return { result: fv, label: `Estimated value in ${futureYears} years`, gain, gainPct: `+${gainPct}%` }
     }
   }, [mode, pricePaid, purchaseYear, currentValue, annualRate, futureYears])
-
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   const sel = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
   const inp = sel
@@ -118,9 +110,11 @@ export default function HomeValuePage() {
             </div>
           </div>
 
-          <button onClick={share} className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : "Share →"}
-          </button>
+          <ShareButtons
+            text={`${mode === 'past' ? `A home bought in ${purchaseYear} for $${pricePaid} is worth approximately ${fmt(calc.result)} today!` : `A home worth $${currentValue} today at ${annualRate}% growth will be worth ${fmt(calc.result)} in ${futureYears} years!`} See yours at dayblip.com/real-estate/home-value`}
+            url="https://dayblip.com/real-estate/home-value"
+            title="Historical Home Value Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">Estimates based on US median home price trends. Individual property values vary significantly. Not real estate advice.</p>
         </div>
       </section>

@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -41,14 +42,6 @@ export default function HabitCostPage() {
     const investValue = fv(annualCost, yrs, 0.07)
     return { totalSpent, totalUnits, totalDays, totalHours, investValue }
   }, [costStr, freq, years, tab])
-
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.share) {
-      navigator.share({ title: "My Habit Cost", text: `My ${tab} habit has cost me ${fmt(calc.totalSpent)} over ${years} years!`, url: window.location.href })
-    } else if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`My ${tab} habit has cost me ${fmt(calc.totalSpent)}! Calculate yours: ${window.location.href}`)
-    }
-  }
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -113,9 +106,11 @@ export default function HabitCostPage() {
             ))}
           </div>
 
-          <button onClick={share} className="w-full rounded-lg bg-[#e94560] py-3 font-semibold text-white hover:opacity-90">
-            😱 Share This Shocking Total →
-          </button>
+          <ShareButtons
+            text={`My ${tab} habit has cost me ${fmt(calc.totalSpent)} over ${years} years! Calculate yours. (Educational only)`}
+            url="https://dayblip.com/health/habit-cost"
+            title="Habit Cost Calculator"
+          />
         </div>
       </section>
     </div>

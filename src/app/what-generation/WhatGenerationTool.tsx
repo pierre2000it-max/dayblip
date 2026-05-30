@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const GENERATIONS = [
   { name:"The Greatest Generation", start:1901, end:1927, emoji:"🎖️",
@@ -46,7 +47,6 @@ export default function WhatGenerationTool() {
     if (!gen) setError("No matching generation found.");
   };
 
-  const shareText = result ? encodeURIComponent(`I am a ${result.name}! ${result.emoji}\nFind out yours → dayblip.com/what-generation`) : "";
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -87,10 +87,13 @@ export default function WhatGenerationTool() {
                 </div>
               </div>
 
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share on X →
-              </a>
+              {result && (
+                <ShareButtons
+                  text={`I am a ${result.name}! ${result.emoji} Find yours!`}
+                  url="https://dayblip.com/what-generation"
+                  title="What Generation Am I?"
+                />
+              )}
             </div>
           )}
         </div>

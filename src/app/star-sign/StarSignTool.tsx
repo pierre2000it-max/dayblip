@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const SIGNS = [
   { name:"Aries",       sym:"♈", start:[3,21], end:[4,19], el:"Fire",  icon:"🐏", traits:["Bold","Ambitious","Confident","Passionate"],       compat:["Leo","Sagittarius"], famous:["Lady Gaga","Mariah Carey","Emma Watson","Elton John"] },
@@ -57,7 +58,6 @@ export default function StarSignTool() {
 
   const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const maxDay = [31,29,31,30,31,30,31,31,30,31,30,31][month - 1];
-  const shareText = sign && time ? encodeURIComponent(`I am a ${sign.name}! ${sign.sym}\nMy birthday is in ${time.d} days 🎂\nFind yours → dayblip.com/star-sign`) : "";
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -126,10 +126,13 @@ export default function StarSignTool() {
                 </div>
               </div>
 
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share on X →
-              </a>
+              {sign && time && (
+                <ShareButtons
+                  text={`I am a ${sign.name}! ${sign.sym} My birthday is in ${time.d} days 🎂 Find yours!`}
+                  url="https://dayblip.com/star-sign"
+                  title="Star Sign Calculator"
+                />
+              )}
             </div>
           )}
         </div>

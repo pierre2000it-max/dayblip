@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -143,6 +144,11 @@ export default function RentVsBuyPage() {
             </div>
           </div>
 
+          <ShareButtons
+            text="Check out this rent vs buy calculator — see which makes more financial sense in your situation! (Educational only)"
+            url="https://dayblip.com/real-estate/rent-vs-buy"
+            title="Rent vs Buy Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Many factors affect the rent vs buy decision beyond financial costs. Consult a real estate professional.</p>
         </div>
       </section>

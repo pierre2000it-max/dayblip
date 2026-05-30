@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import DateNav from "./DateNav";
+import ShareButtons from "@/components/ShareButtons";
 import onThisDayRaw from "@/data/onThisDay.json";
 import { generateOnThisDaySchema, generateBreadcrumbSchema } from "@/lib/seo";
 import AdUnit from "@/components/AdUnit";
@@ -257,6 +258,16 @@ export default function OnThisDayPage({
             </div>
           </section>
         )}
+
+        <section className="bg-[#1a1a2e] px-6 py-10">
+          <div className="mx-auto max-w-[900px]">
+            <ShareButtons
+              text={data?.events?.[0] ? `On this day: ${data.events[0].event} Discover more history!` : `Discover what happened on ${formattedDate} in history!`}
+              url={pageUrl}
+              title={`On This Day: ${formattedDate}`}
+            />
+          </div>
+        </section>
 
         {/* Ad — below birthdays / coming-soon section */}
         <div className="bg-[#1a1a2e] px-6 pb-4">

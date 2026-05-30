@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 function pad(n: number) { return String(Math.floor(n)).padStart(2, "0") }
@@ -35,12 +36,6 @@ export default function MeetingCostPage() {
   const coffees = Math.round(manualCost / 6)
   const gas = Math.round(manualCost / 60)
   const netflix = Math.round(manualCost / 16)
-
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`Our ${manualMins}-min meeting cost ${fmt(manualCost)}! ${window.location.href}`)
-    }
-  }
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
 
@@ -123,9 +118,11 @@ export default function MeetingCostPage() {
                 </div>
               </div>
 
-              <button onClick={share} className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white hover:opacity-90">
-                Share This Cost →
-              </button>
+              <ShareButtons
+                text={`Our ${manualAttendees}-person meeting cost $${manualCost.toFixed(2)} in salary time! 😱`}
+                url="https://dayblip.com/productivity/meeting-cost"
+                title="Meeting Cost Calculator"
+              />
             </div>
           )}
 

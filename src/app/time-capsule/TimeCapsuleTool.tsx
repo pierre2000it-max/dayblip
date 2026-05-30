@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 interface Capsule { name:string; message:string; hopes:string; createdAt:string; openDate:string }
 
@@ -92,7 +93,6 @@ export default function TimeCapsuleTool() {
 
   const isOpen = capsule && new Date(capsule.openDate+"T00:00:00") <= new Date();
   const daysAgo = capsule ? Math.floor((Date.now()-new Date(capsule.createdAt).getTime())/86400000) : 0;
-  const shareText = capsule ? encodeURIComponent(`I just ${isOpen?"opened":"created"} my time capsule from ${fmtDate(new Date(capsule.createdAt))}!\nCreate yours → dayblip.com/time-capsule`) : "";
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -146,9 +146,14 @@ export default function TimeCapsuleTool() {
               {capsule.hopes && <div className="rounded-xl border border-[#e94560]/20 bg-[#16213e] p-4"><p className="text-[#a8a8b3] text-sm italic">&ldquo;{capsule.hopes}&rdquo;</p></div>}
               <div className="flex gap-3">
                 <button onClick={clear} className="rounded-lg border border-[#0f3460] px-4 py-3 text-[#a8a8b3] hover:text-white">Create New Capsule</button>
-                <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                  className="rounded-lg border border-[#333] bg-black px-4 py-3 font-semibold text-white transition-opacity hover:opacity-90">Share on X →</a>
               </div>
+              {capsule && (
+                <ShareButtons
+                  text={`I just created a personal time capsule that opens on ${capsule.openDate}! Create yours!`}
+                  url="https://dayblip.com/time-capsule"
+                  title="Personal Time Capsule"
+                />
+              )}
             </div>
           ) : (
             <div className="space-y-5">
@@ -180,6 +185,13 @@ export default function TimeCapsuleTool() {
                 <p className="text-xs text-[#a8a8b3] text-center">Note: Capsule is stored in your browser. Clearing browser data may remove it.</p>
               )}
               <button onClick={clear} className="rounded-lg border border-[#0f3460] px-4 py-2 text-[#a8a8b3] hover:text-white text-sm">Create New Capsule</button>
+              {capsule && (
+                <ShareButtons
+                  text={`I just created a personal time capsule that opens on ${capsule.openDate}! Create yours!`}
+                  url="https://dayblip.com/time-capsule"
+                  title="Personal Time Capsule"
+                />
+              )}
             </div>
           )}
         </div>

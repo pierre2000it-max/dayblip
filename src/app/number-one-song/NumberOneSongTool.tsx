@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import ShareButtons from "@/components/ShareButtons";
 import bornInRaw from "@/data/bornIn.json";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -87,9 +88,6 @@ export default function NumberOneSongTool() {
     setResult({ data, song: parseSong(data.number1Song) });
   };
 
-  const shareText = result
-    ? encodeURIComponent(`The #1 song the week I was born was "${result.song.title}" by ${result.song.artist} 🎵\nWhat was yours? dayblip.com/number-one-song`)
-    : "";
 
   // Nearest year in data
   const nearestYear = year && !result
@@ -164,12 +162,14 @@ export default function NumberOneSongTool() {
                   className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
                   See everything from {result.data.year} →
                 </Link>
-                <a href={`https://twitter.com/intent/tweet?text=${shareText}`}
-                  target="_blank" rel="noopener noreferrer"
-                  className="rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                  Share on X →
-                </a>
               </div>
+              {result && (
+                <ShareButtons
+                  text={`The #1 song the week I was born was "${result.song.title}" by ${result.song.artist}! Find yours!`}
+                  url="https://dayblip.com/number-one-song"
+                  title="Number One Song on My Birthday"
+                />
+              )}
             </div>
           )}
 
