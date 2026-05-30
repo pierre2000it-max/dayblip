@@ -8,7 +8,7 @@ const navLinks = [
   { label: "Born In", href: "/born-in" },
   { label: "Finance", href: "/finance" },
   { label: "Health", href: "/health" },
-  { label: "On This Day", href: "/on-this-day/january-1" },
+  { label: "On This Day", href: "/on-this-day" },
   { label: "Tools", href: "/age-calculator" },
 ];
 

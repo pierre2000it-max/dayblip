@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import DateNav from "./DateNav";
 import onThisDayRaw from "@/data/onThisDay.json";
 import { generateOnThisDaySchema, generateBreadcrumbSchema } from "@/lib/seo";
 import AdUnit from "@/components/AdUnit";
@@ -163,6 +164,9 @@ export default function OnThisDayPage({
       )}
 
       <div className="min-h-screen bg-[#1a1a2e]">
+
+        {/* ── DATE NAV BAR ──────────────────────────────────────────── */}
+        <DateNav currentMonth={month} currentDay={day} currentLabel={formattedDate} />
 
         {/* ── HERO ──────────────────────────────────────────────────── */}
         <section className="px-6 py-16 text-center"
