@@ -1,0 +1,158 @@
+"use client"
+import { useState, useMemo } from "react"
+
+function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
+
+const NEEDS_CATS = [
+  { key: "housing", label: "Housing (rent/mortgage)", pct: 0.30 },
+  { key: "food", label: "Food & Groceries", pct: 0.10 },
+  { key: "utilities", label: "Utilities", pct: 0.05 },
+  { key: "transport", label: "Transportation", pct: 0.08 },
+  { key: "insurance", label: "Insurance", pct: 0.05 },
+  { key: "debtMin", label: "Minimum Debt Payments", pct: 0.05 },
+]
+const WANTS_CATS = [
+  { key: "dining", label: "Dining Out", pct: 0.08 },
+  { key: "entertainment", label: "Entertainment", pct: 0.05 },
+  { key: "shopping", label: "Shopping", pct: 0.07 },
+  { key: "subscriptions", label: "Subscriptions", pct: 0.03 },
+  { key: "hobbies", label: "Hobbies", pct: 0.07 },
+]
+const SAVINGS_CATS = [
+  { key: "emergency", label: "Emergency Fund", pct: 0.05 },
+  { key: "retirement", label: "Retirement / 401(k)", pct: 0.08 },
+  { key: "debtExtra", label: "Extra Debt Payments", pct: 0.04 },
+  { key: "investments", label: "Investments", pct: 0.03 },
+]
+
+export default function BudgetCalculatorPage() {
+  const [income, setIncome] = useState("5000")
+  const [actuals, setActuals] = useState<Record<string, string>>({})
+
+  const setActual = (k: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
+    setActuals(a => ({ ...a, [k]: e.target.value }))
+
+  const calc = useMemo(() => {
+    const inc = parseFloat(income) || 0
+    const needs = inc * 0.50
+    const wants = inc * 0.30
+    const savings = inc * 0.20
+
+    const totalActualNeeds = NEEDS_CATS.reduce((s, c) => s + (parseFloat(actuals[c.key] || "") || 0), 0)
+    const totalActualWants = WANTS_CATS.reduce((s, c) => s + (parseFloat(actuals[c.key] || "") || 0), 0)
+    const totalActualSavings = SAVINGS_CATS.reduce((s, c) => s + (parseFloat(actuals[c.key] || "") || 0), 0)
+
+    const needsPct = inc > 0 ? (totalActualNeeds / inc * 100).toFixed(0) : "0"
+    const wantsPct = inc > 0 ? (totalActualWants / inc * 100).toFixed(0) : "0"
+    const savingsPct = inc > 0 ? (totalActualSavings / inc * 100).toFixed(0) : "0"
+
+    return { inc, needs, wants, savings, totalActualNeeds, totalActualWants, totalActualSavings, needsPct, wantsPct, savingsPct }
+  }, [income, actuals])
+
+  const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-3 py-2 text-white text-sm focus:border-[#e94560] focus:outline-none w-32"
+
+  const Section = ({ title, emoji, target, actual, cats, color }: {
+    title: string; emoji: string; target: number; actual: number; cats: typeof NEEDS_CATS; color: string
+  }) => (
+    <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="font-bold text-white">{emoji} {title}</h2>
+        <div className="text-right">
+          <div className="font-black text-lg" style={{ color }}>{fmt(target)}/mo</div>
+          <div className="text-xs text-[#a8a8b3]">recommended</div>
+        </div>
+      </div>
+      <div className="space-y-2">
+        {cats.map(c => {
+          const rec = calc.inc * c.pct
+          const act = parseFloat(actuals[c.key] || "") || 0
+          const hasActual = actuals[c.key] !== undefined && actuals[c.key] !== ""
+          const over = hasActual && act > rec
+          return (
+            <div key={c.key} className="flex items-center gap-3">
+              <span className="text-sm text-[#a8a8b3] flex-1">{c.label}</span>
+              <span className="text-xs text-[#a8a8b3] w-20 text-right">{fmt(rec)} rec</span>
+              <input type="number" placeholder="Actual" value={actuals[c.key] || ""} onChange={setActual(c.key)}
+                className={`${inp} ${hasActual ? (over ? "border-[#e94560]" : "border-green-500") : ""}`} />
+              {hasActual && <span className={`text-xs w-4 ${over ? "text-[#e94560]" : "text-green-400"}`}>{over ? "↑" : "✓"}</span>}
+            </div>
+          )
+        })}
+      </div>
+      {Object.keys(actuals).some(k => cats.map(c => c.key).includes(k) && actuals[k]) && (
+        <div className={`mt-3 text-sm rounded-lg p-2 ${actual > target ? "bg-red-900/20 text-[#e94560]" : "bg-green-900/20 text-green-400"}`}>
+          Actual: {fmt(actual)} {actual > target ? `⚠️ ${fmt(actual - target)} over budget` : `✅ ${fmt(target - actual)} under budget`}
+        </div>
+      )}
+    </div>
+  )
+
+  return (
+    <div className="min-h-screen bg-[#1a1a2e]">
+      <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
+        <div className="mx-auto max-w-[700px]">
+          <h1 className="mb-3 text-4xl font-bold text-white">Budget Calculator</h1>
+          <p className="text-[#a8a8b3]">Build your budget using the proven 50/30/20 rule</p>
+        </div>
+      </section>
+
+      <section className="bg-[#16213e] px-6 py-12">
+        <div className="mx-auto max-w-[800px] space-y-8">
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-semibold text-white">Monthly Take-Home Pay ($)</span>
+            <input type="number" value={income} onChange={e => setIncome(e.target.value)}
+              className="rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none max-w-xs" />
+          </label>
+
+          {/* 50/30/20 summary */}
+          <div className="grid gap-3 md:grid-cols-3">
+            {[
+              { label: "50% Needs", value: calc.needs, color: "#4FC3F7", actual: calc.totalActualNeeds, pct: calc.needsPct },
+              { label: "30% Wants", value: calc.wants, color: "#F9A825", actual: calc.totalActualWants, pct: calc.wantsPct },
+              { label: "20% Savings", value: calc.savings, color: "#4ade80", actual: calc.totalActualSavings, pct: calc.savingsPct },
+            ].map(r => (
+              <div key={r.label} className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-4 text-center">
+                <div className="text-xl font-black" style={{ color: r.color }}>{fmt(r.value)}</div>
+                <div className="text-sm text-[#a8a8b3]">{r.label}</div>
+                {r.actual > 0 && <div className="text-xs text-[#a8a8b3] mt-1">Actual: {r.pct}% ({fmt(r.actual)})</div>}
+              </div>
+            ))}
+          </div>
+
+          {/* Visual bar */}
+          <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-4">
+            <div className="flex h-6 rounded-full overflow-hidden">
+              <div className="transition-all" style={{ width: "50%", background: "#4FC3F7" }} />
+              <div className="transition-all" style={{ width: "30%", background: "#F9A825" }} />
+              <div className="transition-all" style={{ width: "20%", background: "#4ade80" }} />
+            </div>
+            <div className="flex text-xs text-[#a8a8b3] mt-1">
+              <span style={{ width: "50%" }}>50% Needs</span>
+              <span style={{ width: "30%" }}>30% Wants</span>
+              <span style={{ width: "20%" }}>20% Savings</span>
+            </div>
+          </div>
+
+          <p className="text-sm text-[#a8a8b3]">Enter your actual spending in each category below to see how you compare to the 50/30/20 target:</p>
+
+          <Section title="Needs — Essential Expenses" emoji="🏠" target={calc.needs} actual={calc.totalActualNeeds} cats={NEEDS_CATS} color="#4FC3F7" />
+          <Section title="Wants — Lifestyle Expenses" emoji="🎉" target={calc.wants} actual={calc.totalActualWants} cats={WANTS_CATS} color="#F9A825" />
+          <Section title="Savings & Debt Payoff" emoji="💰" target={calc.savings} actual={calc.totalActualSavings} cats={SAVINGS_CATS} color="#4ade80" />
+
+          {/* Advice */}
+          <div className="rounded-xl border border-[#4FC3F7]/20 bg-[#1a1a2e] p-5">
+            <h2 className="mb-2 font-bold text-white">💡 Personalized Insights</h2>
+            <div className="space-y-1 text-sm text-[#a8a8b3]">
+              {parseInt(calc.needsPct) > 50 && <p>⚠️ You are spending {calc.needsPct}% on needs — above the 50% target. Look for ways to reduce fixed expenses.</p>}
+              {parseInt(calc.wantsPct) > 30 && <p>⚠️ You are spending {calc.wantsPct}% on wants — above the 30% target. Consider cutting discretionary spending.</p>}
+              {parseInt(calc.savingsPct) < 20 && parseInt(calc.savingsPct) > 0 && <p>⚠️ You are saving {calc.savingsPct}% — below the 20% target. Automate savings to close the gap.</p>}
+              {parseInt(calc.needsPct) <= 50 && parseInt(calc.wantsPct) <= 30 && parseInt(calc.savingsPct) >= 20 && parseInt(calc.savingsPct) > 0 && <p className="text-green-400">✅ You are within the 50/30/20 guidelines. Great work!</p>}
+            </div>
+          </div>
+
+          <p className="text-xs text-[#a8a8b3]">The 50/30/20 rule is a guideline, not a rigid rule. Adjust based on your income, debt, and goals. For educational purposes only.</p>
+        </div>
+      </section>
+    </div>
+  )
+}

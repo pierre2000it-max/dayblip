@@ -365,6 +365,19 @@ export default function HomePage() {
               { emoji: "🛡️", title: "Emergency Fund", desc: "How much do you need?", href: "/finance/emergency-fund" },
               { emoji: "👴", title: "Social Security", desc: "Best age to claim", href: "/finance/social-security" },
               { emoji: "🎓", title: "Student Loans", desc: "Payoff timeline", href: "/finance/student-loan" },
+              { emoji: "💼", title: "Freelancer Rate", desc: "What should you charge?", href: "/finance/freelancer-rate" },
+              { emoji: "💵", title: "Take Home Pay", desc: "Paycheck after deductions", href: "/finance/take-home-pay" },
+              { emoji: "📊", title: "Tax Bracket", desc: "Your 2026 federal bracket", href: "/finance/tax-bracket" },
+              { emoji: "🧾", title: "SE Tax Calculator", desc: "Self-employment tax estimate", href: "/finance/self-employment-tax" },
+              { emoji: "💰", title: "Savings Goal", desc: "Time to reach your goal", href: "/finance/savings-goal" },
+              { emoji: "📋", title: "Budget Planner", desc: "50/30/20 rule budget", href: "/finance/budget-calculator" },
+              { emoji: "🚗", title: "Car Affordability", desc: "How much car can you afford?", href: "/finance/car-affordability" },
+              { emoji: "🎓", title: "College Savings", desc: "529 plan calculator", href: "/finance/college-savings" },
+              { emoji: "📈", title: "Break Even", desc: "When does your business profit?", href: "/finance/break-even" },
+              { emoji: "📊", title: "Profit Margin", desc: "Gross & net margins", href: "/finance/profit-margin" },
+              { emoji: "💹", title: "Capital Gains Tax", desc: "Tax on investments", href: "/finance/capital-gains" },
+              { emoji: "📈", title: "Stock Return", desc: "Investment return calculator", href: "/finance/stock-return" },
+              { emoji: "🏙️", title: "Cost of Living", desc: "Compare cities", href: "/finance/cost-of-living" },
             ].map(tool => (
               <Link key={tool.href} href={tool.href}
                 className="flex flex-col gap-2 rounded-xl border border-[#1a3a6e] bg-[#16213e] p-5 text-center transition-all duration-200 hover:border-[#e94560]">

@@ -1,0 +1,135 @@
+"use client"
+import { useState, useMemo } from "react"
+
+function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
+
+const COLLEGE_TYPES: [string, number][] = [
+  ["Public in-state ($27,000/yr avg)", 27000],
+  ["Public out-of-state ($45,000/yr avg)", 45000],
+  ["Private university ($58,000/yr avg)", 58000],
+  ["Community college ($12,000/yr avg)", 12000],
+]
+
+export default function CollegeSavingsPage() {
+  const [childAge, setChildAge] = useState(5)
+  const [collegeAge, setCollegeAge] = useState("18")
+  const [currentSavings, setCurrentSavings] = useState("0")
+  const [monthly, setMonthly] = useState("200")
+  const [returnPct, setReturnPct] = useState("6")
+  const [collegeTypeIdx, setCollegeTypeIdx] = useState(0)
+  const [years, setYears] = useState("4")
+
+  const calc = useMemo(() => {
+    const startAge = parseInt(String(collegeAge)) || 18
+    const yearsToSave = Math.max(0, startAge - childAge)
+    const months = yearsToSave * 12
+    const r = (parseFloat(returnPct) || 0) / 100 / 12
+    const cs = parseFloat(currentSavings) || 0
+    const m = parseFloat(monthly) || 0
+    const baseAnnualCost = COLLEGE_TYPES[collegeTypeIdx][1]
+    const numYears = parseInt(years) || 4
+
+    // Project tuition with 5% annual inflation
+    const startYear = 2025 + yearsToSave
+    let projectedTotalCost = 0
+    for (let i = 0; i < numYears; i++) {
+      projectedTotalCost += baseAnnualCost * Math.pow(1.05, yearsToSave + i)
+    }
+
+    // Project savings
+    const projectedSavings = r === 0
+      ? cs + m * months
+      : cs * Math.pow(1 + r, months) + m * ((Math.pow(1 + r, months) - 1) / r)
+
+    const gap = projectedTotalCost - projectedSavings
+    const funded = projectedSavings >= projectedTotalCost
+
+    // Monthly needed to fully fund
+    const needed = projectedTotalCost
+    const fromCurrent = r === 0 ? cs : cs * Math.pow(1 + r, months)
+    const remainingNeeded = Math.max(0, needed - fromCurrent)
+    const monthlyNeeded = months > 0 && r === 0
+      ? remainingNeeded / months
+      : months > 0 ? remainingNeeded * r / (Math.pow(1 + r, months) - 1) : 0
+
+    return { projectedTotalCost, projectedSavings, gap, funded, monthlyNeeded, startYear, yearsToSave }
+  }, [childAge, collegeAge, currentSavings, monthly, returnPct, collegeTypeIdx, years])
+
+  const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
+
+  return (
+    <div className="min-h-screen bg-[#1a1a2e]">
+      <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
+        <div className="mx-auto max-w-[700px]">
+          <h1 className="mb-3 text-4xl font-bold text-white">College Savings Calculator (529 Plan)</h1>
+          <p className="text-[#a8a8b3]">Calculate how much to save for your child&apos;s college education</p>
+        </div>
+      </section>
+
+      <section className="bg-[#16213e] px-6 py-12">
+        <div className="mx-auto max-w-[800px] space-y-8">
+          <div className="grid gap-4 md:grid-cols-2">
+            <label className="flex flex-col gap-1">
+              <span className="text-sm font-semibold text-white">Child&apos;s Current Age: {childAge}</span>
+              <input type="range" min={0} max={17} value={childAge} onChange={e => setChildAge(Number(e.target.value))} className="mt-2 accent-[#e94560]" />
+            </label>
+            <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Expected College Start Age</span>
+              <input type="number" value={collegeAge} onChange={e => setCollegeAge(e.target.value)} className={inp} /></label>
+            <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Current 529 Savings ($)</span>
+              <input type="number" value={currentSavings} onChange={e => setCurrentSavings(e.target.value)} className={inp} /></label>
+            <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Monthly Contribution ($)</span>
+              <input type="number" value={monthly} onChange={e => setMonthly(e.target.value)} className={inp} /></label>
+            <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Expected Annual Return (%)</span>
+              <input type="number" step="0.1" value={returnPct} onChange={e => setReturnPct(e.target.value)} className={inp} /></label>
+            <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Years of College</span>
+              <input type="number" value={years} onChange={e => setYears(e.target.value)} className={inp} /></label>
+            <label className="flex flex-col gap-1 md:col-span-2"><span className="text-sm font-semibold text-white">College Type</span>
+              <select value={collegeTypeIdx} onChange={e => setCollegeTypeIdx(Number(e.target.value))}
+                className="rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none">
+                {COLLEGE_TYPES.map(([label], i) => <option key={i} value={i}>{label}</option>)}
+              </select></label>
+          </div>
+
+          {/* Cost projection */}
+          <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5 text-center">
+            <p className="text-[#a8a8b3] text-sm mb-1">Projected total cost by {calc.startYear} (with 5% annual tuition inflation)</p>
+            <div className="text-4xl font-black text-[#e94560]">{fmt(calc.projectedTotalCost)}</div>
+          </div>
+
+          {/* Gap analysis */}
+          <div className={`rounded-xl p-6 text-center ${calc.funded ? "border border-green-500/30 bg-green-900/20" : "border border-yellow-500/30 bg-yellow-900/20"}`}>
+            <div className="text-3xl font-black" style={{ color: calc.funded ? "#4ade80" : "#F9A825" }}>
+              {calc.funded ? "✅ Fully Funded" : "⚠️ Gap"}
+            </div>
+            <div className="grid grid-cols-2 gap-4 mt-4 text-sm">
+              <div><div className="font-bold text-white">{fmt(calc.projectedSavings)}</div><div className="text-[#a8a8b3]">Projected savings</div></div>
+              <div><div className={`font-bold ${calc.funded ? "text-green-400" : "text-[#e94560]"}`}>{calc.funded ? "Surplus: " : "Gap: "}{fmt(Math.abs(calc.projectedTotalCost - calc.projectedSavings))}</div><div className="text-[#a8a8b3]">vs cost</div></div>
+            </div>
+          </div>
+
+          {!calc.funded && (
+            <div className="rounded-xl border border-[#4FC3F7]/20 bg-[#1a1a2e] p-4 text-center">
+              <p className="text-[#a8a8b3] text-sm">To fully fund {years} years of college, save:</p>
+              <div className="text-3xl font-black text-[#4FC3F7]">{fmt(calc.monthlyNeeded)}/month</div>
+            </div>
+          )}
+
+          {/* 529 benefits */}
+          <div className="rounded-xl border border-[#4FC3F7]/20 bg-[#1a1a2e] p-5">
+            <h2 className="mb-3 font-bold text-white">🏦 529 Plan Benefits</h2>
+            <ul className="text-sm text-[#a8a8b3] space-y-1.5">
+              <li>✅ <span className="text-white">Tax-free growth</span> — investments grow without federal taxes</li>
+              <li>✅ <span className="text-white">Tax-free withdrawals</span> for qualified education expenses</li>
+              <li>✅ <span className="text-white">State tax deduction</span> in many states for contributions</li>
+              <li>✅ <span className="text-white">Transfer to siblings</span> if one child doesn&apos;t need it</li>
+              <li>✅ <span className="text-white">Roth IRA rollover</span> — up to $35,000 unused funds can roll to Roth IRA (new 2024 rule)</li>
+              <li>✅ Covers tuition, room & board, books, and other qualified expenses</li>
+            </ul>
+          </div>
+
+          <p className="text-xs text-[#a8a8b3]">Educational estimate only. Tuition projections are estimates using 5% annual inflation. Actual costs vary by institution. Consult a financial advisor. 529 rules vary by state.</p>
+        </div>
+      </section>
+    </div>
+  )
+}

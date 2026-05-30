@@ -113,6 +113,12 @@ export default function Footer() {
                 { label: "Inflation Calculator", href: "/finance/inflation" },
                 { label: "Rent vs Buy", href: "/real-estate/rent-vs-buy" },
                 { label: "Student Loans", href: "/finance/student-loan" },
+                { label: "Freelancer Rate", href: "/finance/freelancer-rate" },
+                { label: "Take Home Pay", href: "/finance/take-home-pay" },
+                { label: "Tax Bracket", href: "/finance/tax-bracket" },
+                { label: "Budget Calculator", href: "/finance/budget-calculator" },
+                { label: "Capital Gains Tax", href: "/finance/capital-gains" },
+                { label: "Cost of Living", href: "/finance/cost-of-living" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-[#a8a8b3] text-sm transition-colors duration-200 hover:text-[#e94560]">
