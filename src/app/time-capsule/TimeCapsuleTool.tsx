@@ -58,6 +58,7 @@ export default function TimeCapsuleTool() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-Master-Key": "$2a$10$23nI2wOtQiKWs7A7lW06tOP3gCbXoRHyvUYeO/VrZFXEX3TDYhrTe",
           "X-Bin-Name": "dayblip-capsule-" + uniqueId,
         },
         body: JSON.stringify({

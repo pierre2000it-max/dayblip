@@ -16,7 +16,11 @@ export default function CapsuleView({ id }: { id: string }) {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch(`https://api.jsonbin.io/v3/b/${id}/latest`);
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${id}/latest`, {
+          headers: {
+            "X-Master-Key": "$2a$10$23nI2wOtQiKWs7A7lW06tOP3gCbXoRHyvUYeO/VrZFXEX3TDYhrTe",
+          },
+        });
         if (!res.ok) throw new Error("not found");
         const data = await res.json();
         const record = data?.record;
