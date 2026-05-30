@@ -5,7 +5,11 @@
  * Run: node scripts/indexnow-submit.js
  */
 
-const HOST        = "dayblip.com";
+// dayblip.com redirects (307) to www.dayblip.com, so IndexNow must use www
+// as the host so it can verify the key file without following redirects.
+// The urlList still uses the non-www canonical URLs as seen by users.
+const HOST        = "www.dayblip.com";          // where key file is reachable (no redirect)
+const URL_BASE    = "https://dayblip.com";      // canonical user-facing URLs
 const KEY         = "272eea5409654b49b404dee73c5f0bfb";
 const KEY_LOC     = `https://${HOST}/${KEY}.txt`;
 const ENDPOINT    = "https://api.indexnow.org/indexnow";
@@ -14,7 +18,7 @@ const BATCH_DELAY = 1000; // ms between batches
 
 // ── URL list ─────────────────────────────────────────────────────────────────
 
-const base = `https://${HOST}`;
+const base = URL_BASE;
 
 // Core landing pages
 const core = [
