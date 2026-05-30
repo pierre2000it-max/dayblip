@@ -6,6 +6,8 @@ import { useState } from "react";
 const navLinks = [
   { label: "Countdowns", href: "/days-until/christmas" },
   { label: "Born In", href: "/born-in" },
+  { label: "Finance", href: "/finance" },
+  { label: "Health", href: "/health" },
   { label: "On This Day", href: "/on-this-day/january-1" },
   { label: "Tools", href: "/age-calculator" },
 ];

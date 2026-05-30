@@ -50,8 +50,8 @@ export default function Footer() {
   return (
     <footer className="bg-[#0f3460]">
       <div className="mx-auto max-w-[1200px] px-6 pt-12 pb-6">
-        {/* Responsive column grid: 1 (mobile) · 3 (tablet) · 5 (desktop) */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 lg:grid-cols-5">
+        {/* Responsive column grid: 1 (mobile) · 3 (tablet) · 6 (desktop) */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 lg:grid-cols-6">
           {/* Column 1 — Brand */}
           <div className="flex flex-col gap-3">
             <Link href="/" className="text-2xl font-bold">
@@ -100,7 +100,30 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4 — Fun & Viral */}
+          {/* Column 4 — Finance Tools */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-white font-bold text-base">Finance Tools</h3>
+            <ul className="flex flex-col gap-2">
+              {[
+                { label: "Compound Interest", href: "/finance/compound-interest" },
+                { label: "Mortgage Calculator", href: "/finance/mortgage-calculator" },
+                { label: "Retirement Savings", href: "/finance/retirement-savings" },
+                { label: "Debt Payoff", href: "/finance/debt-payoff" },
+                { label: "Net Worth Calculator", href: "/finance/net-worth" },
+                { label: "Inflation Calculator", href: "/finance/inflation" },
+                { label: "Rent vs Buy", href: "/real-estate/rent-vs-buy" },
+                { label: "Student Loans", href: "/finance/student-loan" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-[#a8a8b3] text-sm transition-colors duration-200 hover:text-[#e94560]">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 5 — Fun & Viral */}
           <div className="flex flex-col gap-3">
             <h3 className="text-white font-bold text-base">Fun &amp; Viral</h3>
             <ul className="flex flex-col gap-2">

@@ -1,0 +1,36 @@
+"use client"
+import Link from "next/link"
+
+const tools = [
+  { emoji: "🏠", title: "Rent vs Buy", desc: "Which is the smarter financial choice for you?", href: "/real-estate/rent-vs-buy" },
+  { emoji: "📈", title: "Home Value Growth", desc: "What is your home worth today?", href: "/real-estate/home-value" },
+  { emoji: "💰", title: "Affordability Calculator", desc: "How much home can you afford?", href: "/real-estate/affordability" },
+]
+
+export default function RealEstatePage() {
+  return (
+    <div className="min-h-screen bg-[#1a1a2e]">
+      <section className="px-6 py-20 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
+        <div className="mx-auto max-w-[700px]">
+          <div className="mb-4 text-5xl">🏠</div>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Real Estate Calculators</h1>
+          <p className="text-lg text-[#a8a8b3]">Make smarter decisions about buying, selling, and renting</p>
+        </div>
+      </section>
+      <section className="bg-[#16213e] px-6 py-16">
+        <div className="mx-auto max-w-[800px]">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+            {tools.map(t => (
+              <Link key={t.href} href={t.href} className="flex flex-col gap-2 rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6 text-center transition-all hover:border-[#e94560]">
+                <span className="text-4xl">{t.emoji}</span>
+                <span className="font-bold text-white">{t.title}</span>
+                <span className="text-sm text-[#a8a8b3]">{t.desc}</span>
+              </Link>
+            ))}
+          </div>
+          <p className="mt-8 text-center text-xs text-[#a8a8b3]">Real estate calculators are for educational purposes only. Consult a licensed real estate agent and mortgage professional.</p>
+        </div>
+      </section>
+    </div>
+  )
+}

@@ -347,6 +347,110 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
+          FINANCE & MONEY CALCULATORS
+      ════════════════════════════════════════════════════════════════ */}
+      <section className="px-6 py-16" style={{ background: "#0d1f3c" }}>
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="mb-3 text-center text-3xl font-bold text-white">💰 Finance &amp; Money Calculators</h2>
+          <p className="mb-10 text-center text-[#a8a8b3]">High-value tools to plan your financial future</p>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+            {[
+              { emoji: "💹", title: "Compound Interest", desc: "Watch your money grow", href: "/finance/compound-interest" },
+              { emoji: "🏦", title: "Retirement Savings", desc: "Are you on track?", href: "/finance/retirement-savings" },
+              { emoji: "🏠", title: "Mortgage Calculator", desc: "Monthly payment breakdown", href: "/finance/mortgage-calculator" },
+              { emoji: "💳", title: "Debt Payoff", desc: "Avalanche or snowball", href: "/finance/debt-payoff" },
+              { emoji: "📊", title: "Net Worth", desc: "Know where you stand", href: "/finance/net-worth" },
+              { emoji: "📉", title: "Inflation Calculator", desc: "Buying power over time", href: "/finance/inflation" },
+              { emoji: "💼", title: "401(k) Calculator", desc: "Maximize employer match", href: "/finance/401k-calculator" },
+              { emoji: "🛡️", title: "Emergency Fund", desc: "How much do you need?", href: "/finance/emergency-fund" },
+              { emoji: "👴", title: "Social Security", desc: "Best age to claim", href: "/finance/social-security" },
+              { emoji: "🎓", title: "Student Loans", desc: "Payoff timeline", href: "/finance/student-loan" },
+            ].map(tool => (
+              <Link key={tool.href} href={tool.href}
+                className="flex flex-col gap-2 rounded-xl border border-[#1a3a6e] bg-[#16213e] p-5 text-center transition-all duration-200 hover:border-[#e94560]">
+                <span className="text-3xl">{tool.emoji}</span>
+                <span className="text-sm font-bold text-white">{tool.title}</span>
+                <span className="text-xs text-[#a8a8b3] leading-snug">{tool.desc}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════
+          HEALTH & LIFESTYLE
+      ════════════════════════════════════════════════════════════════ */}
+      <section className="bg-[#1a1a2e] px-6 py-16">
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="mb-3 text-center text-3xl font-bold text-white">❤️ Health &amp; Lifestyle</h2>
+          <p className="mb-10 text-center text-[#a8a8b3]">Understand your health numbers and make informed decisions</p>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {[
+              { emoji: "🧬", title: "Life Expectancy", desc: "Statistical estimate", href: "/health/life-expectancy" },
+              { emoji: "⚖️", title: "BMI Calculator", desc: "Body mass index", href: "/health/bmi-calculator" },
+              { emoji: "🚬", title: "Habit Cost", desc: "True cost of habits", href: "/health/habit-cost" },
+              { emoji: "🛡️", title: "Life Insurance", desc: "Coverage needs", href: "/health/life-insurance" },
+            ].map(tool => (
+              <Link key={tool.href} href={tool.href}
+                className="flex flex-col gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all duration-200 hover:border-[#e94560]">
+                <span className="text-3xl">{tool.emoji}</span>
+                <span className="text-sm font-bold text-white">{tool.title}</span>
+                <span className="text-xs text-[#a8a8b3] leading-snug">{tool.desc}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════
+          REAL ESTATE
+      ════════════════════════════════════════════════════════════════ */}
+      <section className="px-6 py-16" style={{ background: "#0d1f3c" }}>
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="mb-3 text-center text-3xl font-bold text-white">🏠 Real Estate</h2>
+          <p className="mb-10 text-center text-[#a8a8b3]">Smarter decisions about buying, selling, and renting</p>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {[
+              { emoji: "🏠", title: "Rent vs Buy", desc: "Which is smarter for you?", href: "/real-estate/rent-vs-buy" },
+              { emoji: "📈", title: "Home Value Growth", desc: "What is your home worth?", href: "/real-estate/home-value" },
+              { emoji: "💰", title: "Affordability", desc: "How much can you afford?", href: "/real-estate/affordability" },
+            ].map(tool => (
+              <Link key={tool.href} href={tool.href}
+                className="flex flex-col gap-2 rounded-xl border border-[#1a3a6e] bg-[#16213e] p-5 text-center transition-all duration-200 hover:border-[#e94560]">
+                <span className="text-3xl">{tool.emoji}</span>
+                <span className="text-sm font-bold text-white">{tool.title}</span>
+                <span className="text-xs text-[#a8a8b3] leading-snug">{tool.desc}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════
+          PRODUCTIVITY
+      ════════════════════════════════════════════════════════════════ */}
+      <section className="bg-[#1a1a2e] px-6 py-16">
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="mb-3 text-center text-3xl font-bold text-white">⚡ Productivity</h2>
+          <p className="mb-10 text-center text-[#a8a8b3]">Understand the real value of your time and work</p>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {[
+              { emoji: "⏰", title: "Work Hours Calculator", desc: "Hours worked in your career", href: "/productivity/work-hours" },
+              { emoji: "💸", title: "Meeting Cost Calculator", desc: "Live cost of your meeting", href: "/productivity/meeting-cost" },
+              { emoji: "💰", title: "Salary Calculator", desc: "Convert between pay periods", href: "/productivity/salary-calculator" },
+            ].map(tool => (
+              <Link key={tool.href} href={tool.href}
+                className="flex flex-col gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all duration-200 hover:border-[#e94560]">
+                <span className="text-3xl">{tool.emoji}</span>
+                <span className="text-sm font-bold text-white">{tool.title}</span>
+                <span className="text-xs text-[#a8a8b3] leading-snug">{tool.desc}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════
           MORE FUN TOOLS
       ════════════════════════════════════════════════════════════════ */}
       <section className="bg-[#1a1a2e] px-6 py-16">
