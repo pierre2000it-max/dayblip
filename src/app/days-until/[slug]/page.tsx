@@ -6,6 +6,7 @@ import {
   generateCountdownSchema,
   generateBreadcrumbSchema,
   generateWebPageSchema,
+  getNextHolidayDate,
 } from "@/lib/seo";
 import AdUnit from "@/components/AdUnit";
 
@@ -96,11 +97,50 @@ export default function CountdownPage({
   const title   = `Days Until ${holiday.name} ${year}`;
   const desc    = `How many days until ${holiday.name}? Live countdown to ${holiday.name} ${year}. Updated in real time.`;
 
-  // JSON-LD schemas
+  // ── Compute next holiday date for FAQ enrichment ─────────────────────────
+  const DAY_NAMES_S   = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const MONTH_NAMES_S = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+  const nextDate      = getNextHolidayDate(holiday.date);
+  const nextYear      = nextDate.getFullYear();
+  const dayOfWeek     = DAY_NAMES_S[nextDate.getDay()];
+  const monthName     = MONTH_NAMES_S[nextDate.getMonth()];
+  const dayNum        = nextDate.getDate();
+  const dateStr       = `${dayOfWeek}, ${monthName} ${dayNum}, ${nextYear}`;
+
+  const todayMs       = new Date().setHours(0, 0, 0, 0);
+  const daysUntil     = Math.ceil((nextDate.getTime() - todayMs) / 86400000);
+  const weeksAway     = Math.floor(daysUntil / 7);
+  const daysRemainder = daysUntil % 7;
+  const weeksStr      = weeksAway > 0
+    ? `${weeksAway} week${weeksAway !== 1 ? "s" : ""} and ${daysRemainder} day${daysRemainder !== 1 ? "s" : ""}`
+    : `${daysRemainder} day${daysRemainder !== 1 ? "s" : ""}`;
+
+  // Replace generic "check above" answers with actual dates
+  const enrichedFaqs = holiday.faqs.map((faq) => {
+    const a = faq.a;
+    const aL = a.toLowerCase();
+    if (aL.includes("check the countdown above for the exact date and day of the week") ||
+        aL.includes("check the countdown above for the exact day of the week")) {
+      return { ...faq, a: `${holiday.name} ${nextYear} falls on ${dateStr}.` };
+    }
+    if (aL.includes("use the live countdown above") || aL.includes("use the countdown above")) {
+      return { ...faq, a: `There are currently ${daysUntil.toLocaleString()} days until ${holiday.name}. It falls on ${dateStr}.` };
+    }
+    if (aL.includes("divide the days shown above by 7")) {
+      return { ...faq, a: `${holiday.name} ${nextYear} is ${weeksStr} away — it falls on ${dateStr}.` };
+    }
+    if (aL.includes("the number of sleeps is the same as the number of days shown above")) {
+      return { ...faq, a: `There are ${daysUntil.toLocaleString()} sleeps until ${holiday.name} ${nextYear} on ${dateStr}.` };
+    }
+    return faq;
+  });
+
+  // JSON-LD schemas (use enriched FAQs)
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: holiday.faqs.map((faq) => ({
+    mainEntity: enrichedFaqs.map((faq) => ({
       "@type": "Question",
       name: faq.q,
       acceptedAnswer: { "@type": "Answer", text: faq.a },
@@ -134,7 +174,7 @@ export default function CountdownPage({
             <p className="mb-10 text-lg text-[#a8a8b3]">
               Live countdown to {holiday.name} {year}
             </p>
-            <CountdownDisplay date={holiday.date} color={holiday.color} />
+            <CountdownDisplay date={holiday.date} color={holiday.color} name={holiday.name} />
             <div className="mx-auto mt-4 max-w-[900px]">
               <AdUnit slot="1234567890" format="rectangle" />
             </div>
@@ -170,7 +210,7 @@ export default function CountdownPage({
           <div className="mx-auto max-w-[900px]">
             <h2 className="mb-8 text-2xl font-bold text-white">Frequently Asked Questions</h2>
             <div className="flex flex-col gap-3">
-              {holiday.faqs.map((faq, i) => (
+              {enrichedFaqs.map((faq, i) => (
                 <details key={i}
                   className="group rounded-xl border border-[#16213e] bg-[#16213e] open:border-[#e94560]/40">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-white">

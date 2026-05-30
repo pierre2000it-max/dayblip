@@ -84,39 +84,43 @@ function calcTimeLeft(date: string): TimeLeft {
   };
 }
 
+// ── Constants ─────────────────────────────────────────────────────────────────
+
+const DAY_NAMES   = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const MONTH_NAMES = ["January","February","March","April","May","June",
+  "July","August","September","October","November","December"];
+
 // ── Component ───────────────────────────────────────────────────────────────
 
 interface Props {
-  date: string;
+  date:  string;
   color: string;
+  name?: string; // holiday name for "falls on" display
 }
 
 const UNIT_LABELS = ["Days", "Hours", "Minutes", "Seconds"] as const;
 
-export default function CountdownDisplay({ date, color }: Props) {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
+export default function CountdownDisplay({ date, color, name }: Props) {
+  const [timeLeft,   setTimeLeft]   = useState<TimeLeft | null>(null);
+  const [targetDate, setTargetDate] = useState<Date | null>(null);
 
   useEffect(() => {
+    const target = getNextOccurrence(date);
+    setTargetDate(target);
     setTimeLeft(calcTimeLeft(date));
     const id = setInterval(() => setTimeLeft(calcTimeLeft(date)), 1000);
     return () => clearInterval(id);
   }, [date]);
 
-  // Pre-hydration: show placeholder boxes to avoid layout shift
-  if (!timeLeft) {
+  // Pre-hydration placeholder
+  if (!timeLeft || !targetDate) {
     return (
       <div className="flex flex-wrap justify-center gap-4">
         {UNIT_LABELS.map((label) => (
-          <div
-            key={label}
-            className="flex min-w-[110px] flex-col items-center rounded-xl border border-[#0f3460] bg-[#0f3460]/40 px-6 py-5"
-          >
-            <span className="text-6xl font-bold leading-none text-white/20 tabular-nums">
-              --
-            </span>
-            <span className="mt-2 text-sm uppercase tracking-wider text-[#a8a8b3]">
-              {label}
-            </span>
+          <div key={label}
+            className="flex min-w-[110px] flex-col items-center rounded-xl border border-[#0f3460] bg-[#0f3460]/40 px-6 py-5">
+            <span className="text-6xl font-bold leading-none text-white/20 tabular-nums">--</span>
+            <span className="mt-2 text-sm uppercase tracking-wider text-[#a8a8b3]">{label}</span>
           </div>
         ))}
       </div>
@@ -130,22 +134,47 @@ export default function CountdownDisplay({ date, color }: Props) {
     { label: "Seconds", value: timeLeft.seconds },
   ];
 
+  // Compute date display info
+  const dayOfWeek     = DAY_NAMES[targetDate.getDay()];
+  const monthName     = MONTH_NAMES[targetDate.getMonth()];
+  const dayNum        = targetDate.getDate();
+  const targetYear    = targetDate.getFullYear();
+  const dateStr       = `${dayOfWeek}, ${monthName} ${dayNum}, ${targetYear}`;
+
+  const todayMs       = new Date().setHours(0, 0, 0, 0);
+  const daysUntil     = Math.ceil((targetDate.getTime() - todayMs) / 86400000);
+  const weeksAway     = Math.floor(daysUntil / 7);
+  const daysRemainder = daysUntil % 7;
+  const weeksStr      = weeksAway > 0
+    ? `${weeksAway} week${weeksAway !== 1 ? "s" : ""} and ${daysRemainder} day${daysRemainder !== 1 ? "s" : ""} away`
+    : `${daysRemainder} day${daysRemainder !== 1 ? "s" : ""} away`;
+
   return (
-    <div className="flex flex-wrap justify-center gap-4">
-      {units.map((u) => (
-        <div
-          key={u.label}
-          className="flex min-w-[110px] flex-col items-center rounded-xl border border-[#0f3460] bg-[#0f3460]/60 px-6 py-5 transition-all duration-300"
-          style={{ boxShadow: `0 0 24px ${color}33` }}
-        >
-          <span className="text-6xl font-bold leading-none text-white tabular-nums">
-            {String(u.value).padStart(2, "0")}
-          </span>
-          <span className="mt-2 text-sm uppercase tracking-wider text-[#a8a8b3]">
-            {u.label}
-          </span>
-        </div>
-      ))}
+    <div>
+      {/* Countdown boxes */}
+      <div className="flex flex-wrap justify-center gap-4">
+        {units.map((u) => (
+          <div key={u.label}
+            className="flex min-w-[110px] flex-col items-center rounded-xl border border-[#0f3460] bg-[#0f3460]/60 px-6 py-5 transition-all duration-300"
+            style={{ boxShadow: `0 0 24px ${color}33` }}>
+            <span className="text-6xl font-bold leading-none text-white tabular-nums">
+              {String(u.value).padStart(2, "0")}
+            </span>
+            <span className="mt-2 text-sm uppercase tracking-wider text-[#a8a8b3]">{u.label}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Date info below countdown */}
+      <div className="mt-6 border-t border-white/10 pt-5 space-y-2 text-center">
+        <p className="text-white text-lg font-semibold">📅 {dateStr}</p>
+        <p className="text-[#a8a8b3] text-sm">📆 That is {weeksStr}</p>
+        {name && (
+          <p className="text-[#a8a8b3] text-sm">
+            🗓️ {name} falls on a <strong className="text-white">{dayOfWeek}</strong> this year
+          </p>
+        )}
+      </div>
     </div>
   );
 }
