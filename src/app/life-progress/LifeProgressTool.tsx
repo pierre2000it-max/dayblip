@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -84,9 +85,6 @@ export default function LifeProgressTool() {
     });
   };
 
-  const shareText = result
-    ? encodeURIComponent(`I am ${result.pct}% through my life 😮\n${commas(result.daysLived)} days lived, ${commas(result.daysRemaining)} days to go\nCheck yours → dayblip.com/life-progress`)
-    : "";
 
   const STATS = result ? [
     { icon: "✅", label: "Days lived",         val: commas(result.daysLived) },
@@ -184,11 +182,13 @@ export default function LifeProgressTool() {
               </div>
 
               {/* Share */}
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`}
-                target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share My Life Progress on X →
-              </a>
+              {result && (
+                <ShareButtons
+                  text={`I am ${result.pct}% through my life 😮 ${result.daysLived.toLocaleString()} days lived, ${result.daysRemaining.toLocaleString()} days to go`}
+                  url="https://dayblip.com/life-progress"
+                  title="Life Progress Bar"
+                />
+              )}
             </div>
           )}
         </div>

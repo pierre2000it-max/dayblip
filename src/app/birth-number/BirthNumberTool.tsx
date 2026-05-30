@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const BIRTHS: Record<number,number> = {
   1900:12e9,1910:12.6e9,1920:13.3e9,1930:14.1e9,1940:15e9,
@@ -36,9 +37,6 @@ export default function BirthNumberTool() {
     setResult({ n, pct, rank });
   };
 
-  const shareText = result
-    ? encodeURIComponent(`I am approximately the ${result.rank}th human ever born!\nOut of 108 billion people in history 🌍\ndayblip.com/birth-number`)
-    : "";
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -85,8 +83,13 @@ export default function BirthNumberTool() {
                 <div className="flex gap-2"><span className="text-[#e94560]">→</span><span className="text-[#a8a8b3] text-sm">The current world population is a record high</span></div>
               </div>
 
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Share on X →</a>
+              {result && (
+                <ShareButtons
+                  text={`I am approximately the ${result.rank}th human ever born! Out of 108 billion people in history 🌍`}
+                  url="https://dayblip.com/birth-number"
+                  title="Your Birth Number Calculator"
+                />
+              )}
             </div>
           )}
         </div>

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const COMPARISONS = [
   { item: "the iPhone",                   emoji: "📱", year: 2007, description: "Apple released the first iPhone" },
@@ -53,9 +54,6 @@ export default function OlderThanTool() {
 
   const shareItems = result ? COMPARISONS.filter(c => birthYear < c.year).slice(0, 1) : [];
   const shareOlder = result ? COMPARISONS.filter(c => birthYear > c.year).slice(-1) : [];
-  const shareText = shareItems[0] && shareOlder[0]
-    ? encodeURIComponent(`I am older than ${shareItems[0].item} but younger than ${shareOlder[0].item}! 😮\nFind out yours → dayblip.com/older-than`)
-    : encodeURIComponent("Find out if you are older than the iPhone → dayblip.com/older-than");
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -113,13 +111,13 @@ export default function OlderThanTool() {
                 })}
               </div>
 
-              <div className="text-center pt-4">
-                <a href={`https://twitter.com/intent/tweet?text=${shareText}`}
-                  target="_blank" rel="noopener noreferrer"
-                  className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                  Share on X →
-                </a>
-              </div>
+              <ShareButtons
+                text={shareItems[0] && shareOlder[0]
+                  ? `I am older than ${shareItems[0].item} but younger than ${shareOlder[0].item}! 😮 Find out yours!`
+                  : "Find out if you are older than the iPhone! 😮"}
+                url="https://dayblip.com/older-than"
+                title="Older Than Calculator"
+              />
             </div>
           )}
         </div>

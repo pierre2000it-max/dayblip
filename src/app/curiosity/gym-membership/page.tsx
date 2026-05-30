@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -20,8 +21,6 @@ export default function GymMembershipPage() {
   const [yearsHad,       setYearsHad]    = useState(3)
   const [investYears,    setInvestYears] = useState(20)
   const [rate,           setRate]        = useState(10.5)
-  const [copied,         setCopied]      = useState(false)
-
   const monthly = parseFloat(monthlyCostStr) || 0
   const r       = rate / 100
 
@@ -39,12 +38,6 @@ export default function GymMembershipPage() {
     return { costPerVisit, totalSpent, totalVisits, trueCostPerVisit, invested, goMoreCostPerVisit, runningShoesCost, shoesWorkouts }
   }, [monthlyCostStr, visitsPerMonth, yearsHad, investYears, r])
 
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`My gym membership costs me $${calc.costPerVisit.toFixed(2)} per actual visit 😅 dayblip.com/curiosity/gym-membership`)
-      setCopied(true); setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -148,9 +141,11 @@ export default function GymMembershipPage() {
             A pair of running shoes costs ~${calc.runningShoesCost} and lasts {calc.shoesWorkouts}+ workouts — that is ${(calc.runningShoesCost / calc.shoesWorkouts).toFixed(2)}/workout.
           </div>
 
-          <button onClick={share} className="w-full rounded-xl bg-[#e94560] py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : `😅 Share — My gym costs $${calc.costPerVisit.toFixed(2)}/visit`}
-          </button>
+          <ShareButtons
+            text={`My gym membership costs $${calc.costPerVisit.toFixed(2)} per actual visit! Invested instead = ${fmt(calc.invested)} in ${investYears} years. (Educational purposes only)`}
+            url="https://dayblip.com/curiosity/gym-membership"
+            title="Gym Membership Cost Calculator"
+          />
           {DISCLAIMER}
         </div>
       </section>

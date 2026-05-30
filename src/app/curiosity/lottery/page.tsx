@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -18,8 +19,6 @@ export default function LotteryPage() {
   const [weeklyStr, setWeekly] = useState("20")
   const [years, setYears]      = useState(20)
   const [rate, setRate]        = useState(10.5)
-  const [copied, setCopied]    = useState(false)
-
   const weekly  = parseFloat(weeklyStr) || 0
   const monthly = (weekly * 52) / 12
   const r       = rate / 100
@@ -32,12 +31,6 @@ export default function LotteryPage() {
     return { perYear, totalSpent, lotteryReturn, invested }
   }, [weekly, monthly, years, r])
 
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`My $${weekly}/week lottery habit could be ${fmt(calc.invested)} if invested instead 🎰📈 dayblip.com/curiosity/lottery`)
-      setCopied(true); setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -127,9 +120,11 @@ export default function LotteryPage() {
             </div>
           </div>
 
-          <button onClick={share} className="w-full rounded-xl bg-[#e94560] py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : `🎰 Share My Numbers`}
-          </button>
+          <ShareButtons
+            text={`My $${weekly.toFixed(2)}/week lottery habit could be ${fmt(calc.invested)} if invested instead! (Educational purposes only)`}
+            url="https://dayblip.com/curiosity/lottery"
+            title="Lottery vs Investing Calculator"
+          />
           {DISCLAIMER}
         </div>
       </section>

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 function commas(n: number) { return Math.round(n).toLocaleString(); }
 
@@ -41,9 +42,6 @@ export default function AgeFactsTool() {
     });
   };
 
-  const shareText = result
-    ? encodeURIComponent(`My heart has beaten ${commas(result.heartbeats)} times! 😮\nFind out yours → dayblip.com/age-facts`)
-    : "";
 
   const BODY = result ? [
     { icon: "❤️", label: "Heartbeats",             val: `${commas(result.heartbeats)} times` },
@@ -125,10 +123,13 @@ export default function AgeFactsTool() {
                   </div>
                 </div>
               ))}
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share on X →
-              </a>
+              {result && (
+                <ShareButtons
+                  text={`My heart has beaten ${Math.round(result.heartbeats).toLocaleString()} times! 😮 Find out yours!`}
+                  url="https://dayblip.com/age-facts"
+                  title="Fun Age Facts"
+                />
+              )}
             </div>
           )}
         </div>

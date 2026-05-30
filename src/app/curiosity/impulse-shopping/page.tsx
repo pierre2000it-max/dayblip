@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -33,8 +34,6 @@ export default function ImpulseShoppingPage() {
   const [cats,  setCats]  = useState<Category[]>(DEFAULTS)
   const [years, setYears] = useState(25)
   const [rate,  setRate]  = useState(10.5)
-  const [copied, setCopied] = useState(false)
-
   const toggle = (id: string) => setCats(c => c.map(x => x.id === id ? { ...x, on: !x.on } : x))
   const setAmt = (id: string, v: string) => setCats(c => c.map(x => x.id === id ? { ...x, amount: v } : x))
 
@@ -54,12 +53,6 @@ export default function ImpulseShoppingPage() {
     return { monthly, annual, scenarios, highlight }
   }, [cats, years, r])
 
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`My impulse shopping could cost me ${fmt(calc.highlight.value)} in future wealth 🛒😱 dayblip.com/curiosity/impulse-shopping`)
-      setCopied(true); setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -143,9 +136,11 @@ export default function ImpulseShoppingPage() {
             </div>
           </div>
 
-          <button onClick={share} className="w-full rounded-xl bg-[#e94560] py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : "🛒 Share My Numbers"}
-          </button>
+          <ShareButtons
+            text={`My impulse shopping could cost me ${fmt(calc.highlight.value)} in future wealth! (Educational purposes only)`}
+            url="https://dayblip.com/curiosity/impulse-shopping"
+            title="Impulse Shopping Investment Calculator"
+          />
           {DISCLAIMER}
         </div>
       </section>

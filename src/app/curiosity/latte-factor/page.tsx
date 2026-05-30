@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -19,8 +20,6 @@ export default function LatteFactorPage() {
   const [daysPerWeek, setDaysPerWeek] = useState(5)
   const [years, setYears] = useState(30)
   const [rate, setRate] = useState(10.5)
-  const [copied, setCopied] = useState(false)
-
   const cost = parseFloat(costStr) || 0
   const r    = rate / 100
 
@@ -36,12 +35,6 @@ export default function LatteFactorPage() {
     return { perDay, perMonth, perYear, totalSpent, invested, oppCost, multiplier, retYears }
   }, [cost, daysPerWeek, years, r])
 
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`My daily $${cost} coffee could be worth ${fmt(calc.invested)} if invested instead ☕📈 dayblip.com/curiosity/latte-factor`)
-      setCopied(true); setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -145,9 +138,11 @@ export default function LatteFactorPage() {
             The idea: small daily expenses add up to large lifetime opportunity costs. The choice is yours — this calculator just shows the math.
           </div>
 
-          <button onClick={share} className="w-full rounded-xl bg-[#e94560] py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : `☕ Share — My coffee could be ${fmt(calc.invested)}`}
-          </button>
+          <ShareButtons
+            text={`My daily $${cost.toFixed(2)} coffee habit could be worth ${fmt(calc.invested)} if invested for ${years} years! (Educational purposes only)`}
+            url="https://dayblip.com/curiosity/latte-factor"
+            title="Latte Factor Calculator"
+          />
           {DISCLAIMER}
         </div>
       </section>

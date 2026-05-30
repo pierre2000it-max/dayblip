@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fvLump(pv: number, r: number, years: number): number {
@@ -26,8 +27,6 @@ export default function PhoneUpgradePage() {
   const [tradeInStr, setTradeIn] = useState("300")
   const [calcYears, setCalcYrs]  = useState(30)
   const [rate,      setRate]     = useState(10.5)
-  const [copied,    setCopied]   = useState(false)
-
   const r = rate / 100
 
   const calc = useMemo(() => {
@@ -53,12 +52,6 @@ export default function PhoneUpgradePage() {
     return { netCost, timesFrequent, timesBaseline, totalFrequent, totalBaseline, investedValue, freqLabel, savings: totalFrequent - totalBaseline }
   }, [priceStr, upgradeFreq, tradeInStr, calcYears, r])
 
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`Upgrading my phone ${calc.freqLabel.toLowerCase()} costs ${fmt(calc.investedValue)} in opportunity over ${calcYears} years 📱 dayblip.com/curiosity/phone-upgrade`)
-      setCopied(true); setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
 
@@ -149,9 +142,11 @@ export default function PhoneUpgradePage() {
             <p className="text-xs text-[#a8a8b3] mt-3">Most people cannot notice the difference between a 1-year-old and 3-year-old phone in daily use.</p>
           </div>
 
-          <button onClick={share} className="w-full rounded-xl bg-[#e94560] py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : "📱 Share My Numbers"}
-          </button>
+          <ShareButtons
+            text={`Upgrading my phone ${calc.freqLabel.toLowerCase()} costs ${fmt(calc.investedValue)} in opportunity over ${calcYears} years! (Educational purposes only)`}
+            url="https://dayblip.com/curiosity/phone-upgrade"
+            title="Phone Upgrade Cycle Calculator"
+          />
           {DISCLAIMER}
         </div>
       </section>

@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -20,8 +21,6 @@ export default function SmokingInvestmentPage() {
   const [ageStarted, setAgeStart] = useState("20")
   const [currentAge, setCurrentAge] = useState("35")
   const [rate, setRate]           = useState(10.5)
-  const [copied, setCopied]       = useState(false)
-
   const price = parseFloat(priceStr) || 0
   const r     = rate / 100
 
@@ -41,12 +40,6 @@ export default function SmokingInvestmentPage() {
     return { perDay, perMonth, perYear, totalSpent, totalPacks, totalCigs, pastInvested, futureToAge65, yrs, lifetimeCost }
   }, [packsDay, priceStr, ageStarted, currentAge, r])
 
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`Smoking has cost me ${fmt(calc.totalSpent)} so far. Invested instead it would be worth ${fmt(calc.pastInvested)} 😮 dayblip.com/curiosity/smoking-investment`)
-      setCopied(true); setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
 
@@ -119,9 +112,11 @@ export default function SmokingInvestmentPage() {
             This calculator addresses only the financial impact and is for educational purposes only.
           </div>
 
-          <button onClick={share} className="w-full rounded-xl bg-[#e94560] py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : `😮 Share My Numbers`}
-          </button>
+          <ShareButtons
+            text={`Smoking has cost me ${fmt(calc.totalSpent)} so far. Invested instead it would be ${fmt(calc.pastInvested)}! (Educational purposes only)`}
+            url="https://dayblip.com/curiosity/smoking-investment"
+            title="Smoking Investment Calculator"
+          />
           {DISCLAIMER}
         </div>
       </section>

@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -20,8 +21,6 @@ export default function DiningOutPage() {
   const [homeCostStr, setHomeCost]      = useState("8")
   const [years, setYears]               = useState(25)
   const [rate, setRate]                 = useState(10.5)
-  const [copied, setCopied]             = useState(false)
-
   const r = rate / 100
 
   const calc = useMemo(() => {
@@ -36,12 +35,6 @@ export default function DiningOutPage() {
     return { diningMonthly, homeMonthly, diffMonthly, diffAnnual, invested }
   }, [timesPerWeek, mealCostStr, homeCostStr, years, r])
 
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`Dining out is costing me ${fmt(calc.diffAnnual)}/year. Invested instead = ${fmt(calc.invested)} in ${years} years 🍽️ dayblip.com/curiosity/dining-out`)
-      setCopied(true); setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
 
@@ -123,9 +116,11 @@ export default function DiningOutPage() {
             <p className="text-xs text-[#a8a8b3] mt-3">The math just shows the tradeoff. There is nothing wrong with dining out — it is about awareness.</p>
           </div>
 
-          <button onClick={share} className="w-full rounded-xl bg-[#e94560] py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : `🍽️ Share My Numbers`}
-          </button>
+          <ShareButtons
+            text={`Dining out is costing me ${fmt(calc.diffAnnual)}/year. Invested for ${years} years = ${fmt(calc.invested)}! (Educational purposes only)`}
+            url="https://dayblip.com/curiosity/dining-out"
+            title="Dining Out Opportunity Cost Calculator"
+          />
           {DISCLAIMER}
         </div>
       </section>

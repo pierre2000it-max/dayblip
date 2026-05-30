@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, annualRate: number, years: number): number {
@@ -44,7 +45,6 @@ export default function SubscriptionsPage() {
   const [subs, setSubs]     = useState<Sub[]>(DEFAULTS)
   const [rate, setRate]     = useState(10.5)
   const [years, setYears]   = useState(20)
-  const [copied, setCopied] = useState(false)
 
   const toggle = (id: string) => setSubs(s => s.map(x => x.id === id ? { ...x, on: !x.on } : x))
   const setPrice = (id: string, v: string) => setSubs(s => s.map(x => x.id === id ? { ...x, price: parseFloat(v) || 0 } : x))
@@ -72,12 +72,7 @@ export default function SubscriptionsPage() {
     return { label: cut === 0 ? "Cut nothing" : `Cut ${(cut * 100).toFixed(0)}%`, monthly, value: fv(monthly, r, years) }
   })
 
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`My subscriptions could be worth ${fmt(bigNumber)} if invested instead 😱 dayblip.com/curiosity/subscriptions`)
-      setCopied(true); setTimeout(() => setCopied(false), 2000)
-    }
-  }
+  const shareText = `My streaming subscriptions could be worth ${fmt(bigNumber)} if invested instead! Calculate yours (educational only) 👇`
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -197,9 +192,11 @@ export default function SubscriptionsPage() {
             </div>
           </div>
 
-          <button onClick={share} className="w-full rounded-xl bg-[#e94560] py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : `😱 Share — My subs could be ${fmt(bigNumber)}`}
-          </button>
+          <ShareButtons
+            text={shareText}
+            url="https://dayblip.com/curiosity/subscriptions"
+            title="Subscription Opportunity Cost Calculator"
+          />
           {DISCLAIMER}
         </div>
       </section>

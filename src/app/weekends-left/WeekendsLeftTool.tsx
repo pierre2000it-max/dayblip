@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 function commas(n: number) { return Math.round(n).toLocaleString(); }
 
@@ -26,9 +27,6 @@ export default function WeekendsLeftTool() {
   const today = new Date();
   const daysToWeekend = today.getDay()===6?0:today.getDay()===0?6:6-today.getDay();
 
-  const shareText = result
-    ? encodeURIComponent(`I have approximately ${commas(result.remaining)} weekends left. Making every one count!\ndayblip.com/weekends-left`)
-    : "";
 
   const MOTIVATIONAL = [
     "Each weekend is a gift. What will you do with yours?",
@@ -88,8 +86,13 @@ export default function WeekendsLeftTool() {
                 </p>
               </div>
 
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Share on X →</a>
+              {result && (
+                <ShareButtons
+                  text={`I have approximately ${Math.round(result.remaining).toLocaleString()} weekends left. Making every one count!`}
+                  url="https://dayblip.com/weekends-left"
+                  title="Weekends Left Calculator"
+                />
+              )}
             </div>
           )}
         </div>

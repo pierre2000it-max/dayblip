@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 function commas(n: number) { return n.toLocaleString(); }
 
@@ -26,9 +27,6 @@ export default function EarthOrbitsTool() {
     setResult({ days, years:years.toFixed(4), orbits:orbits.toFixed(4), miles, moonCycles, sunrises, lightYrs });
   };
 
-  const shareText = result
-    ? encodeURIComponent(`Since I was born Earth has orbited the sun ${result.orbits} times and traveled ${Number(result.miles).toLocaleString()} miles! 🌍\ndayblip.com/earth-orbits`)
-    : "";
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -73,8 +71,13 @@ export default function EarthOrbitsTool() {
                 <div className="flex gap-2"><span className="text-[#e94560]">→</span><span className="text-[#a8a8b3] text-sm">Light from your birth date has traveled approximately <strong className="text-white">{String(result.lightYrs)} km</strong> away</span></div>
               </div>
 
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">Share on X →</a>
+              {result && (
+                <ShareButtons
+                  text={`Since I was born Earth has orbited the sun ${result.orbits} times and traveled ${Number(result.miles).toLocaleString()} miles! 🌍`}
+                  url="https://dayblip.com/earth-orbits"
+                  title="Earth Orbits Calculator"
+                />
+              )}
             </div>
           )}
         </div>

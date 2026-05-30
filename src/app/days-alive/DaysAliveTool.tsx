@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -54,9 +55,6 @@ export default function DaysAliveTool() {
   const future = results?.filter(m => !m.isPast) ?? [];
   const next   = future[0];
 
-  const shareText = encodeURIComponent(
-    `I am ${commas(daysOld)} days old today! 🎉\nFind out how many days old you are → dayblip.com/days-alive`
-  );
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -139,11 +137,11 @@ export default function DaysAliveTool() {
               )}
 
               {/* Share */}
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`}
-                target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share on X →
-              </a>
+              <ShareButtons
+                text={`I am ${daysOld.toLocaleString()} days old today! 🎉 Find out how many days old you are!`}
+                url="https://dayblip.com/days-alive"
+                title="Days Alive Calculator"
+              />
             </div>
           )}
         </div>

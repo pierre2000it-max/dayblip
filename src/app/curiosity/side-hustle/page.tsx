@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -27,8 +28,6 @@ export default function SideHustlePage() {
   const [investPct,    setInvestPct]    = useState(100)
   const [years,        setYears]        = useState(20)
   const [rate,         setRate]         = useState(10.5)
-  const [copied,       setCopied]       = useState(false)
-
   const hourly  = parseFloat(hourlyStr) || 0
   const r       = rate / 100
 
@@ -51,12 +50,6 @@ export default function SideHustlePage() {
     return { weeklyEarn, monthlyEarn, annualEarn, monthlyInv, totalEarned, totalInvested, bigNumber, growth, multiplier, milestones }
   }, [hoursPerWeek, hourlyStr, investPct, years, r])
 
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`A ${hoursPerWeek}hr/week side hustle invested for ${years} years could build ${fmt(calc.bigNumber)}! 💪 dayblip.com/curiosity/side-hustle`)
-      setCopied(true); setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -158,9 +151,11 @@ export default function SideHustlePage() {
             </div>
           </div>
 
-          <button onClick={share} className="w-full rounded-xl bg-[#e94560] py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : `💪 Share — ${hoursPerWeek}hrs/week could build ${fmt(calc.bigNumber)}`}
-          </button>
+          <ShareButtons
+            text={`A ${hoursPerWeek}hr/week side hustle invested for ${years} years could build ${fmt(calc.bigNumber)}! (Educational purposes only)`}
+            url="https://dayblip.com/curiosity/side-hustle"
+            title="Side Hustle Investment Calculator"
+          />
           {DISCLAIMER}
         </div>
       </section>

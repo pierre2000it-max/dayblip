@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const POP_DATA: Record<number, number> = {
   1950:2.5,1955:2.8,1960:3.0,1965:3.3,1970:3.7,1975:4.1,
@@ -47,9 +48,6 @@ export default function WorldPopulationTool() {
   const pct        = popAtBirth ? ((CURRENT - popAtBirth) / popAtBirth * 100).toFixed(1) : null;
   const maxPop     = CURRENT;
 
-  const shareText = popAtBirth
-    ? encodeURIComponent(`When I was born there were ${popAtBirth.toFixed(1)} billion people on Earth. Now there are 8.2 billion!\ndayblip.com/world-population`)
-    : "";
 
   const currentYear = new Date().getFullYear();
 
@@ -129,10 +127,13 @@ export default function WorldPopulationTool() {
                 </div>
               </div>
 
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share on X →
-              </a>
+              {popAtBirth && (
+                <ShareButtons
+                  text={`When I was born there were ${popAtBirth.toFixed(1)} billion people on Earth. Now there are 8.2 billion! 🌍`}
+                  url="https://dayblip.com/world-population"
+                  title="World Population Calculator"
+                />
+              )}
             </div>
           )}
         </div>

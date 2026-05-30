@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fvLump(pv: number, r: number, years: number): number {
@@ -18,8 +19,6 @@ export default function CarUpgradePage() {
   const [buyEvery,  setBuyEvery] = useState(5)
   const [calcYears, setCalcYrs] = useState(30)
   const [rate,      setRate]    = useState(10.5)
-  const [copied,    setCopied]  = useState(false)
-
   const r = rate / 100
 
   const calc = useMemo(() => {
@@ -43,12 +42,6 @@ export default function CarUpgradePage() {
     return { diff, numCars, totalExtra, totalInvestValue, trueCost: totalExtra + totalInvestValue, purchases }
   }, [wantStr, practStr, buyEvery, calcYears, r])
 
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(`My car upgrades over ${calcYears} years cost ${fmt(calc.totalInvestValue)} in opportunity cost 🚗💸 dayblip.com/curiosity/car-upgrade`)
-      setCopied(true); setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
 
@@ -142,9 +135,11 @@ export default function CarUpgradePage() {
             </div>
           </div>
 
-          <button onClick={share} className="w-full rounded-xl bg-[#e94560] py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : `🚗 Share My Numbers`}
-          </button>
+          <ShareButtons
+            text={`Car upgrades over ${calcYears} years cost ${fmt(calc.totalInvestValue)} in opportunity cost! (Educational purposes only)`}
+            url="https://dayblip.com/curiosity/car-upgrade"
+            title="Car Upgrade Opportunity Cost Calculator"
+          />
           {DISCLAIMER}
         </div>
       </section>

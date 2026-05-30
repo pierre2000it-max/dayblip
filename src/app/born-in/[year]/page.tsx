@@ -4,6 +4,7 @@ import bornInRaw from "@/data/bornIn.json";
 import { generateBornInSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import AdUnit from "@/components/AdUnit";
 import ShareCard from "@/components/ShareCard";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -103,11 +104,6 @@ export default function BornInPage({
   const daysAlive = Math.floor((Date.now() - new Date(yearNum, 6, 1).getTime()) / 86400000);
 
   const pageUrl   = `${BASE}/born-in/${yearNum}`;
-  const tweetText = encodeURIComponent(
-    `I was born in ${yearNum}! Check out what the world looked like when I arrived 👶 dayblip.com/born-in/${yearNum}`,
-  );
-  const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
-  const xShareUrl  = `https://twitter.com/intent/tweet?text=${tweetText}`;
 
   // JSON-LD schemas
   const articleSchema    = generateBornInSchema(yearNum);
@@ -241,17 +237,11 @@ export default function BornInPage({
         {/* ── SHARE ─────────────────────────────────────────────────── */}
         <section className="bg-[#1a1a2e] px-6 py-14">
           <div className="mx-auto max-w-[900px]">
-            <h2 className="mb-6 text-2xl font-bold text-white">Share Your Birth Year</h2>
-            <div className="flex flex-wrap gap-4">
-              <a href={fbShareUrl} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-[#1877f2] px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share on Facebook →
-              </a>
-              <a href={xShareUrl} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-[#333] bg-[#000000] px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share on X →
-              </a>
-            </div>
+            <ShareButtons
+              text={`I was born in ${yearNum}! Check out what the world looked like when I arrived 👶`}
+              url={pageUrl}
+              title={`Born in ${yearNum} — What Happened That Year`}
+            />
           </div>
         </section>
 
