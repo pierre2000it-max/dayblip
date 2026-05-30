@@ -2,27 +2,27 @@ import type { MetadataRoute } from "next";
 import holidaysData from "@/data/holidays.json";
 import onThisDayData from "@/data/onThisDay.json";
 
-const BASE = "https://dayblip.com";
-
+const BASE     = "https://dayblip.com";
 const holidays = holidaysData as Array<{ slug: string }>;
 const otdKeys  = Object.keys(onThisDayData as Record<string, unknown>);
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-const MONTHLY = "monthly" as const;
 const DAILY   = "daily"   as const;
 const WEEKLY  = "weekly"  as const;
+const MONTHLY = "monthly" as const;
 
-function page(
+type SitemapEntry = MetadataRoute.Sitemap[number];
+
+function p(
   path: string,
   priority: number,
-  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = MONTHLY,
-): MetadataRoute.Sitemap[number] {
+  changeFrequency: SitemapEntry["changeFrequency"] = MONTHLY,
+): SitemapEntry {
   return { url: `${BASE}${path}`, lastModified: new Date(), changeFrequency, priority };
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
 
-  // ── Dynamic: countdowns ────────────────────────────────────────────────────
+  // ── Dynamic: all holiday countdowns (from holidays.json) ──────────────────
   const countdownUrls: MetadataRoute.Sitemap = holidays.map((h) => ({
     url:             `${BASE}/days-until/${h.slug}`,
     lastModified:    new Date(),
@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:        0.9,
   }));
 
-  // ── Dynamic: born-in 1940–2020 ────────────────────────────────────────────
+  // ── Dynamic: born-in 1940–2020 (81 pages) ────────────────────────────────
   const bornInUrls: MetadataRoute.Sitemap = Array.from({ length: 81 }, (_, i) => ({
     url:             `${BASE}/born-in/${1940 + i}`,
     lastModified:    new Date(),
@@ -38,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:        0.8,
   }));
 
-  // ── Dynamic: on-this-day ──────────────────────────────────────────────────
+  // ── Dynamic: all on-this-day pages (from onThisDay.json) ─────────────────
   const otdUrls: MetadataRoute.Sitemap = otdKeys.map((key) => ({
     url:             `${BASE}/on-this-day/${key}`,
     lastModified:    new Date(),
@@ -46,149 +46,209 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:        0.8,
   }));
 
+  // ── Static on-this-day spotlight dates (ensures indexed even if not in JSON)
+  const OTD_SPOTLIGHT = [
+    "january-1","january-15","january-20","february-2","february-14",
+    "march-14","march-17","april-15","june-6","july-4",
+    "august-6","september-11","october-31","november-22",
+    "december-25","december-31",
+  ];
+  // de-dupe against dynamic set
+  const otdDynSet = new Set(otdKeys);
+  const otdSpotlight: MetadataRoute.Sitemap = OTD_SPOTLIGHT
+    .filter((d) => !otdDynSet.has(d))
+    .map((d) => ({
+      url:             `${BASE}/on-this-day/${d}`,
+      lastModified:    new Date(),
+      changeFrequency: WEEKLY,
+      priority:        0.8,
+    }));
+
   return [
-    // ── Core / homepage ──────────────────────────────────────────────────────
-    page("/",                    1.0, DAILY),
 
-    // ── Date & age tools ─────────────────────────────────────────────────────
-    page("/age-calculator",      0.9),
-    page("/date-calculator",     0.9),
-    page("/days-between",        0.9),
-    page("/days-alive",          0.8),
-    page("/days-since",          0.8),
-    page("/days-until",          0.8),
-    page("/day-of-year",         0.7),
-    page("/week-number",         0.7),
+    // ═══════════════════════════════════════════════════════════════════════
+    // CORE LANDING PAGES  (priority 1.0, daily)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/",             1.0, DAILY),
+    p("/born-in",      1.0, DAILY),
+    p("/on-this-day",  1.0, WEEKLY),
+    p("/finance",      1.0, MONTHLY),
+    p("/health",       1.0, MONTHLY),
+    p("/real-estate",  1.0, MONTHLY),
+    p("/productivity", 1.0, MONTHLY),
+    p("/curiosity",    1.0, MONTHLY),
 
-    // ── Born In landing ───────────────────────────────────────────────────────
-    page("/born-in",             0.9),
+    // ═══════════════════════════════════════════════════════════════════════
+    // CORE DATE & AGE TOOLS  (priority 0.9, weekly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/age-calculator",   0.9, WEEKLY),
+    p("/date-calculator",  0.9, WEEKLY),
+    p("/days-between",     0.9, WEEKLY),
+    p("/celebrity-age",    0.9, WEEKLY),
+    p("/birthday-countdown", 0.9, WEEKLY),
 
-    // ── On This Day landing ───────────────────────────────────────────────────
-    page("/on-this-day/january-1", 0.8, WEEKLY),
+    // ═══════════════════════════════════════════════════════════════════════
+    // HARDCODED COUNTDOWN SPOTLIGHT PAGES  (priority 0.9, daily)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/days-until/christmas",       0.9, DAILY),
+    p("/days-until/halloween",       0.9, DAILY),
+    p("/days-until/thanksgiving",    0.9, DAILY),
+    p("/days-until/new-years",       0.9, DAILY),
+    p("/days-until/valentines-day",  0.9, DAILY),
+    p("/days-until/st-patricks-day", 0.9, DAILY),
+    p("/days-until/easter",          0.9, DAILY),
+    p("/days-until/independence-day",0.9, DAILY),
+    p("/days-until/black-friday",    0.9, DAILY),
+    p("/days-until/mothers-day",     0.9, DAILY),
 
-    // ── Finance landing & calculators ─────────────────────────────────────────
-    page("/finance",                        0.9),
-    page("/finance/compound-interest",      0.9),
-    page("/finance/retirement-savings",     0.9),
-    page("/finance/mortgage-calculator",    0.9),
-    page("/finance/debt-payoff",            0.9),
-    page("/finance/net-worth",              0.9),
-    page("/finance/inflation",              0.9),
-    page("/finance/401k-calculator",        0.9),
-    page("/finance/emergency-fund",         0.9),
-    page("/finance/social-security",        0.9),
-    page("/finance/student-loan",           0.9),
-    page("/finance/freelancer-rate",        0.9),
-    page("/finance/take-home-pay",          0.9),
-    page("/finance/tax-bracket",            0.9),
-    page("/finance/self-employment-tax",    0.9),
-    page("/finance/savings-goal",           0.9),
-    page("/finance/budget-calculator",      0.9),
-    page("/finance/car-affordability",      0.9),
-    page("/finance/college-savings",        0.9),
-    page("/finance/break-even",             0.9),
-    page("/finance/profit-margin",          0.9),
-    page("/finance/capital-gains",          0.9),
-    page("/finance/stock-return",           0.9),
-    page("/finance/cost-of-living",         0.9),
+    // ═══════════════════════════════════════════════════════════════════════
+    // FINANCE CALCULATORS  (priority 0.9, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/finance/compound-interest",   0.9),
+    p("/finance/retirement-savings",  0.9),
+    p("/finance/mortgage-calculator", 0.9),
+    p("/finance/debt-payoff",         0.9),
+    p("/finance/net-worth",           0.9),
+    p("/finance/inflation",           0.9),
+    p("/finance/401k-calculator",     0.9),
+    p("/finance/emergency-fund",      0.9),
+    p("/finance/social-security",     0.9),
+    p("/finance/student-loan",        0.9),
+    p("/finance/freelancer-rate",     0.9),
+    p("/finance/take-home-pay",       0.9),
+    p("/finance/tax-bracket",         0.9),
+    p("/finance/self-employment-tax", 0.9),
+    p("/finance/savings-goal",        0.9),
+    p("/finance/budget-calculator",   0.9),
+    p("/finance/car-affordability",   0.9),
+    p("/finance/college-savings",     0.9),
+    p("/finance/break-even",          0.9),
+    p("/finance/profit-margin",       0.9),
+    p("/finance/capital-gains",       0.9),
+    p("/finance/stock-return",        0.9),
+    p("/finance/cost-of-living",      0.9),
 
-    // ── Curiosity / opportunity-cost calculators ──────────────────────────────
-    page("/curiosity",                       0.85),
-    page("/curiosity/subscriptions",         0.85),
-    page("/curiosity/latte-factor",          0.85),
-    page("/curiosity/smoking-investment",    0.85),
-    page("/curiosity/dining-out",            0.85),
-    page("/curiosity/lottery",               0.85),
-    page("/curiosity/car-upgrade",           0.85),
-    page("/curiosity/impulse-shopping",      0.85),
-    page("/curiosity/phone-upgrade",         0.85),
-    page("/curiosity/side-hustle",           0.85),
-    page("/curiosity/gym-membership",        0.85),
+    // ═══════════════════════════════════════════════════════════════════════
+    // HEALTH CALCULATORS  (priority 0.9, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/health/life-expectancy", 0.9),
+    p("/health/bmi-calculator",  0.9),
+    p("/health/habit-cost",      0.9),
+    p("/health/life-insurance",  0.9),
 
-    // ── Health landing & calculators ──────────────────────────────────────────
-    page("/health",                         0.9),
-    page("/health/life-expectancy",         0.9),
-    page("/health/bmi-calculator",          0.9),
-    page("/health/habit-cost",              0.9),
-    page("/health/life-insurance",          0.9),
+    // ═══════════════════════════════════════════════════════════════════════
+    // REAL ESTATE CALCULATORS  (priority 0.9, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/real-estate/rent-vs-buy",   0.9),
+    p("/real-estate/home-value",    0.9),
+    p("/real-estate/affordability", 0.9),
 
-    // ── Real estate landing & calculators ─────────────────────────────────────
-    page("/real-estate",                    0.9),
-    page("/real-estate/rent-vs-buy",        0.9),
-    page("/real-estate/home-value",         0.9),
-    page("/real-estate/affordability",      0.9),
+    // ═══════════════════════════════════════════════════════════════════════
+    // PRODUCTIVITY TOOLS  (priority 0.8, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/productivity/work-hours",        0.8),
+    p("/productivity/meeting-cost",      0.8),
+    p("/productivity/salary-calculator", 0.8),
 
-    // ── Productivity landing & calculators ────────────────────────────────────
-    page("/productivity",                   0.9),
-    page("/productivity/work-hours",        0.9),
-    page("/productivity/meeting-cost",      0.9),
-    page("/productivity/salary-calculator", 0.9),
+    // ═══════════════════════════════════════════════════════════════════════
+    // CURIOSITY / OPPORTUNITY-COST CALCULATORS  (priority 0.85, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/curiosity/subscriptions",      0.85),
+    p("/curiosity/latte-factor",       0.85),
+    p("/curiosity/smoking-investment", 0.85),
+    p("/curiosity/dining-out",         0.85),
+    p("/curiosity/lottery",            0.85),
+    p("/curiosity/car-upgrade",        0.85),
+    p("/curiosity/impulse-shopping",   0.85),
+    p("/curiosity/phone-upgrade",      0.85),
+    p("/curiosity/side-hustle",        0.85),
+    p("/curiosity/gym-membership",     0.85),
 
-    // ── Birthday & personal tools ─────────────────────────────────────────────
-    page("/birthday-countdown",  0.8),
-    page("/birthday-twins",      0.8),
-    page("/birthday-weather",    0.7),
-    page("/birthday-now",        0.7),
-    page("/age-facts",           0.7),
-    page("/older-than",          0.7),
-    page("/baby-age",            0.7),
-    page("/birth-number",        0.7),
-    page("/star-sign",           0.7),
-    page("/full-moons",          0.7),
+    // ═══════════════════════════════════════════════════════════════════════
+    // LIFE & PERSONAL TOOLS  (priority 0.8, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/life-progress",        0.8),
+    p("/days-alive",           0.8),
+    p("/baby-age",             0.8),
+    p("/retirement-countdown", 0.8),
+    p("/weekends-left",        0.8),
+    p("/couples-countdown",    0.8),
+    p("/anniversary",          0.8),
+    p("/school-countdown",     0.8),
+    p("/resolution-tracker",   0.8),
+    p("/time-capsule",         0.8),
+    p("/star-sign",            0.8),
+    p("/full-moons",           0.8),
+    p("/birthday-now",         0.8),
+    p("/birthday-twins",       0.8),
+    p("/number-one-song",      0.8),
+    p("/birthday-weather",     0.8),
 
-    // ── Life & personal calculators ───────────────────────────────────────────
-    page("/life-progress",       0.8),
-    page("/time-spent",          0.7),
-    page("/this-day-in-my-life", 0.7),
-    page("/time-capsule",        0.7),
-    page("/resolution-tracker",  0.7),
-    page("/school-countdown",    0.7),
-    page("/retirement-countdown",0.7),
-    page("/anniversary",         0.7),
-    page("/couples-countdown",   0.7),
-    page("/weekends-left",       0.7),
+    // ═══════════════════════════════════════════════════════════════════════
+    // GAMES & QUIZZES  (priority 0.8, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/history-quiz",       0.8),
+    p("/decade-quiz",        0.8),
+    p("/daily-trivia",       0.8, DAILY),
+    p("/guess-the-year",     0.8),
+    p("/how-long-ago",       0.8),
+    p("/famous-or-fictional",0.8),
+    p("/timeline-builder",   0.8),
+    p("/name-that-decade",   0.8),
+    p("/fact-spinner",       0.8),
+    p("/older-than",         0.8),
 
-    // ── History & world ───────────────────────────────────────────────────────
-    page("/on-this-day/january-1", 0.8, WEEKLY),
-    page("/this-week-in-history",  0.8, WEEKLY),
-    page("/days-since",            0.8),
-    page("/country-history",       0.7),
-    page("/science-today",         0.7, DAILY),
-    page("/presidents",            0.7),
-    page("/how-long-to-build",     0.7),
-    page("/world-records",         0.7),
-    page("/price-history",         0.7),
-    page("/tech-nostalgia",        0.7),
-    page("/newspaper",             0.7),
-    page("/oldest-things",         0.7),
-    page("/world-countdowns",      0.7, DAILY),
-    page("/world-population",      0.7),
+    // ═══════════════════════════════════════════════════════════════════════
+    // FUN & VIRAL TOOLS  (priority 0.8, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/age-facts",           0.8),
+    p("/world-countdowns",    0.8, DAILY),
+    p("/this-day-in-my-life", 0.8),
+    p("/earth-orbits",        0.8),
+    p("/world-population",    0.8),
+    p("/birth-number",        0.8),
+    p("/time-spent",          0.8),
+    p("/day-of-year",         0.8),
+    p("/week-number",         0.8),
+    p("/what-generation",     0.8),
 
-    // ── Games & quizzes ───────────────────────────────────────────────────────
-    page("/history-quiz",          0.8),
-    page("/decade-quiz",           0.8),
-    page("/daily-trivia",          0.8, DAILY),
-    page("/guess-the-year",        0.8),
-    page("/how-long-ago",          0.7),
-    page("/famous-or-fictional",   0.7),
-    page("/timeline-builder",      0.7),
-    page("/name-that-decade",      0.7),
+    // ═══════════════════════════════════════════════════════════════════════
+    // HISTORY & WORLD  (priority 0.8, monthly/weekly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/days-since",          0.8),
+    p("/country-history",     0.8),
+    p("/science-today",       0.8, DAILY),
+    p("/presidents",          0.8),
+    p("/how-long-to-build",   0.8),
+    p("/world-records",       0.8),
+    p("/price-history",       0.8),
+    p("/tech-nostalgia",      0.8),
+    p("/newspaper",           0.8),
+    p("/this-week-in-history",0.8, WEEKLY),
+    p("/oldest-things",       0.8),
 
-    // ── Fun & viral ───────────────────────────────────────────────────────────
-    page("/fact-spinner",          0.8),
-    page("/celebrity-age",         0.8),
-    page("/number-one-song",       0.8),
-    page("/earth-orbits",          0.7),
-    page("/what-generation",       0.7),
+    // ═══════════════════════════════════════════════════════════════════════
+    // ADDITIONAL DATE TOOLS
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/days-until",          0.8, DAILY),
+    p("/days-between",        0.9, WEEKLY),  // also in core, deduplicated by Next.js
+    p("/days-since",          0.8),          // appears in multiple sections — fine
+    p("/day-of-year",         0.8),
+    p("/week-number",         0.8),
 
-    // ── Utility ───────────────────────────────────────────────────────────────
-    page("/privacy",  0.3),
-    page("/terms",    0.3),
-    page("/contact",  0.3),
+    // ═══════════════════════════════════════════════════════════════════════
+    // LEGAL PAGES  (priority 0.3, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/privacy", 0.3),
+    p("/terms",   0.3),
+    p("/contact", 0.3),
 
-    // ── Dynamic URL sets ──────────────────────────────────────────────────────
-    ...countdownUrls,
-    ...bornInUrls,
-    ...otdUrls,
+    // ═══════════════════════════════════════════════════════════════════════
+    // DYNAMIC URL SETS
+    // ═══════════════════════════════════════════════════════════════════════
+    ...countdownUrls,   // all holidays from holidays.json  (daily, 0.9)
+    ...bornInUrls,      // born-in/1940 through born-in/2020 (monthly, 0.8)
+    ...otdUrls,         // all on-this-day dates from onThisDay.json (weekly, 0.8)
+    ...otdSpotlight,    // spotlight dates not already in JSON (weekly, 0.8)
   ];
 }
