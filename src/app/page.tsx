@@ -391,6 +391,38 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
+          CURIOSITY CALCULATORS
+      ════════════════════════════════════════════════════════════════ */}
+      <section className="bg-[#1a1a2e] px-6 py-16">
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="mb-1 text-center text-3xl font-bold text-white">🤔 Curiosity Calculators</h2>
+          <p className="mb-2 text-center text-[#a8a8b3]">What could your spending be worth if invested instead?</p>
+          <p className="mb-8 text-center text-xs text-yellow-300">Educational only — not investment advice</p>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+            {[
+              { emoji: "📺", title: "Subscriptions", desc: "Netflix + Spotify opportunity cost", href: "/curiosity/subscriptions" },
+              { emoji: "☕", title: "Latte Factor", desc: "Your daily coffee's hidden cost", href: "/curiosity/latte-factor" },
+              { emoji: "🚬", title: "Smoking Cost", desc: "Financial cost of smoking", href: "/curiosity/smoking-investment" },
+              { emoji: "🍽️", title: "Dining Out", desc: "Cook more, invest the difference", href: "/curiosity/dining-out" },
+              { emoji: "🎰", title: "Lottery Tickets", desc: "What $20/week could build", href: "/curiosity/lottery" },
+              { emoji: "🚗", title: "Car Upgrades", desc: "True cost of a nicer car", href: "/curiosity/car-upgrade" },
+              { emoji: "🛒", title: "Impulse Shopping", desc: "What impulse buys cost your future", href: "/curiosity/impulse-shopping" },
+              { emoji: "📱", title: "Phone Upgrades", desc: "Annual upgrade habit cost", href: "/curiosity/phone-upgrade" },
+              { emoji: "💪", title: "Side Hustle", desc: "What extra income could build", href: "/curiosity/side-hustle" },
+              { emoji: "🏋️", title: "Gym Membership", desc: "Your real cost per visit", href: "/curiosity/gym-membership" },
+            ].map(tool => (
+              <Link key={tool.href} href={tool.href}
+                className="flex flex-col gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all duration-200 hover:border-[#e94560]">
+                <span className="text-3xl">{tool.emoji}</span>
+                <span className="text-sm font-bold text-white">{tool.title}</span>
+                <span className="text-xs text-[#a8a8b3] leading-snug">{tool.desc}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════
           HEALTH & LIFESTYLE
       ════════════════════════════════════════════════════════════════ */}
       <section className="bg-[#1a1a2e] px-6 py-16">

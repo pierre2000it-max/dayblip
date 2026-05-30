@@ -92,6 +92,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/finance/stock-return",           0.9),
     page("/finance/cost-of-living",         0.9),
 
+    // ── Curiosity / opportunity-cost calculators ──────────────────────────────
+    page("/curiosity",                       0.85),
+    page("/curiosity/subscriptions",         0.85),
+    page("/curiosity/latte-factor",          0.85),
+    page("/curiosity/smoking-investment",    0.85),
+    page("/curiosity/dining-out",            0.85),
+    page("/curiosity/lottery",               0.85),
+    page("/curiosity/car-upgrade",           0.85),
+    page("/curiosity/impulse-shopping",      0.85),
+    page("/curiosity/phone-upgrade",         0.85),
+    page("/curiosity/side-hustle",           0.85),
+    page("/curiosity/gym-membership",        0.85),
+
     // ── Health landing & calculators ──────────────────────────────────────────
     page("/health",                         0.9),
     page("/health/life-expectancy",         0.9),

@@ -50,8 +50,8 @@ export default function Footer() {
   return (
     <footer className="bg-[#0f3460]">
       <div className="mx-auto max-w-[1200px] px-6 pt-12 pb-6">
-        {/* Responsive column grid: 1 (mobile) · 3 (tablet) · 6 (desktop) */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 lg:grid-cols-6">
+        {/* Responsive column grid: 1 (mobile) · 3 (tablet) · 7 (desktop) */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 lg:grid-cols-7">
           {/* Column 1 — Brand */}
           <div className="flex flex-col gap-3">
             <Link href="/" className="text-2xl font-bold">
@@ -129,7 +129,28 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 5 — Fun & Viral */}
+          {/* Column 5 — Curiosity */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-white font-bold text-base">Curiosity</h3>
+            <ul className="flex flex-col gap-2">
+              {[
+                { label: "Subscription Cost", href: "/curiosity/subscriptions" },
+                { label: "Latte Factor", href: "/curiosity/latte-factor" },
+                { label: "Lottery Calculator", href: "/curiosity/lottery" },
+                { label: "Side Hustle", href: "/curiosity/side-hustle" },
+                { label: "Dining Out Cost", href: "/curiosity/dining-out" },
+                { label: "Car Upgrade Cost", href: "/curiosity/car-upgrade" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-[#a8a8b3] text-sm transition-colors duration-200 hover:text-[#e94560]">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 6 — Fun & Viral */}
           <div className="flex flex-col gap-3">
             <h3 className="text-white font-bold text-base">Fun &amp; Viral</h3>
             <ul className="flex flex-col gap-2">
