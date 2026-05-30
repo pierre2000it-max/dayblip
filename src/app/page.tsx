@@ -393,7 +393,7 @@ export default function HomePage() {
               { emoji: "👶", title: "What Generation?",      desc: "Boomer, Millennial or Gen Z?",                 href: "/what-generation" },
               { emoji: "🏖️", title: "Weekends Left",        desc: "How many weekends do you have left?",           href: "/weekends-left" },
               { emoji: "👶", title: "Baby Age",              desc: "Track your baby's age in weeks",                href: "/baby-age" },
-              { emoji: "💼", title: "Retirement Countdown",  desc: "Count down to retirement day",                  href: "/retirement-countdown" },
+              { emoji: "💼", title: "Retirement Countdown",  desc: "Count down to your retirement day",             href: "/retirement-countdown" },
               { emoji: "📰", title: "Days Since Events",     desc: "Live counters for history's moments",           href: "/days-since" },
               { emoji: "⏳", title: "Time Capsule",          desc: "Write to your future self",                     href: "/time-capsule" },
               { emoji: "🎯", title: "Resolution Tracker",    desc: "Track your New Year resolutions",               href: "/resolution-tracker" },

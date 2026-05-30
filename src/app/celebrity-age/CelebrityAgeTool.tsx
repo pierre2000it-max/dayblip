@@ -4,17 +4,22 @@ import { useState, useEffect, useRef } from "react";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-interface SearchResult {
-  id:           string;
-  name:         string;
-  description:  string;
-  birthDateStr: string;
+interface QuickResult {
+  id:          string;
+  name:        string;
+  description: string;
 }
 
 interface Celebrity {
   name:        string;
   description: string;
   birthDate:   Date;
+}
+
+interface RecentCelebrity {
+  name:        string;
+  description: string;
+  birthDate:   string; // "YYYY-MM-DD"
 }
 
 interface SameBdayPerson {
@@ -25,13 +30,24 @@ interface SameBdayPerson {
 
 interface TimeLeft { days: number; h: number; m: number; s: number }
 
-// ── Constants ─────────────────────────────────────────────────────────────────
+// ── Hardcoded popular celebrities (instant — no API needed) ───────────────────
 
-const POPULAR = [
-  "Taylor Swift","Elon Musk","LeBron James","Beyoncé","Tom Hanks",
-  "Oprah Winfrey","Dwayne Johnson","Cristiano Ronaldo","Billie Eilish",
-  "Barack Obama","Kim Kardashian","Drake",
+const POPULAR_DATA: { name: string; birthDate: string; description: string }[] = [
+  { name:"Taylor Swift",     birthDate:"1989-12-13", description:"Singer and songwriter" },
+  { name:"Elon Musk",        birthDate:"1971-06-28", description:"Entrepreneur and businessman" },
+  { name:"LeBron James",     birthDate:"1984-12-30", description:"Professional basketball player" },
+  { name:"Beyoncé",          birthDate:"1981-09-04", description:"Singer and entertainer" },
+  { name:"Tom Hanks",        birthDate:"1956-07-09", description:"Actor and filmmaker" },
+  { name:"Oprah Winfrey",    birthDate:"1954-01-29", description:"TV host and media executive" },
+  { name:"Dwayne Johnson",   birthDate:"1972-05-02", description:"Actor and former wrestler" },
+  { name:"Cristiano Ronaldo",birthDate:"1985-02-05", description:"Professional footballer" },
+  { name:"Billie Eilish",    birthDate:"2001-12-18", description:"Singer and songwriter" },
+  { name:"Barack Obama",     birthDate:"1961-08-04", description:"44th US President" },
+  { name:"Kim Kardashian",   birthDate:"1980-10-21", description:"Media personality and businesswoman" },
+  { name:"Drake",            birthDate:"1986-10-24", description:"Rapper and singer" },
 ];
+
+// ── Constants ─────────────────────────────────────────────────────────────────
 
 const MONTHS = ["January","February","March","April","May","June",
   "July","August","September","October","November","December"];
@@ -39,10 +55,19 @@ const DAYS   = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Sat
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-function parseBirthDate(s: string): Date | null {
+function parseSimpleDate(s: string): Date | null {
   const m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
   if (!m) return null;
   return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+}
+
+function parseWikidataTime(s: string): Date | null {
+  // Format: "+1989-12-13T00:00:00Z" or "-0044-..."
+  const m = s.match(/^[+-](\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return null;
+  const yr = parseInt(m[1], 10), mo = parseInt(m[2], 10), dy = parseInt(m[3], 10);
+  if (yr < 1 || mo < 1 || dy < 1) return null;
+  return new Date(yr, mo - 1, dy);
 }
 
 function fmtDate(d: Date): string {
@@ -64,22 +89,20 @@ function getStarSign(month: number, day: number): string {
   return "♓ Pisces";
 }
 
-function calcAge(birth: Date): { years:number; months:number; days:number; totalDays:number; totalMonths:number; totalWeeks:number; totalHours:number } {
+function calcAge(birth: Date) {
   const now      = new Date();
   const totalMs  = now.getTime() - birth.getTime();
   const totalDays = Math.floor(totalMs / 86400000);
-
   let years  = now.getFullYear() - birth.getFullYear();
   let months = now.getMonth()    - birth.getMonth();
   let days   = now.getDate()     - birth.getDate();
   if (days < 0)   { months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
   if (months < 0) { years--; months += 12; }
-
-  return { years, months, days, totalDays, totalMonths: years*12+months, totalWeeks: Math.floor(totalDays/7), totalHours: totalDays*24 };
+  return { years, months, days, totalDays, totalMonths:years*12+months, totalWeeks:Math.floor(totalDays/7), totalHours:totalDays*24 };
 }
 
 function getNextBirthday(birth: Date): Date {
-  const now  = new Date(); now.setHours(0,0,0,0);
+  const now = new Date(); now.setHours(0,0,0,0);
   let next = new Date(now.getFullYear(), birth.getMonth(), birth.getDate());
   if (next <= now) next = new Date(now.getFullYear()+1, birth.getMonth(), birth.getDate());
   return next;
@@ -92,50 +115,53 @@ function calcTimeLeft(target: Date): TimeLeft {
 }
 
 function countPresidents(birthYear: number): number {
-  // Inauguration years of US presidents since modern era
-  const inaugs = [1933,1945,1953,1961,1963,1969,1974,1977,1981,1989,1993,2001,2009,2017,2021];
-  return inaugs.filter(y => y >= birthYear).length;
+  return [1933,1945,1953,1961,1963,1969,1974,1977,1981,1989,1993,2001,2009,2017,2021,2025]
+    .filter(y => y >= birthYear).length;
 }
 
 function commas(n: number) { return n.toLocaleString(); }
 
-// ── API calls ─────────────────────────────────────────────────────────────────
+// ── API helpers ───────────────────────────────────────────────────────────────
 
-async function apiSearch(term: string): Promise<SearchResult[]> {
-  const safe  = term.replace(/"/g, "");
-  const query = `
-    SELECT ?person ?personLabel ?birthDate ?description WHERE {
-      ?person wdt:P31 wd:Q5 .
-      ?person wdt:P569 ?birthDate .
-      ?person rdfs:label ?label .
-      FILTER(LANG(?label) = "en")
-      FILTER(CONTAINS(LCASE(?label), LCASE("${safe}")))
-      OPTIONAL { ?person schema:description ?description . FILTER(LANG(?description) = "en") }
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
-    }
-    ORDER BY ?personLabel
-    LIMIT 8
-  `;
-  const res = await fetch(
-    `https://query.wikidata.org/sparql?query=${encodeURIComponent(query)}&format=json`,
-    { headers: { Accept: "application/sparql-results+json" } }
-  );
-  if (!res.ok) throw new Error("API error");
-  const json = await res.json();
-  type B = { person:{value:string}; personLabel:{value:string}; birthDate?:{value:string}; description?:{value:string} };
-  const seen = new Set<string>();
-  return (json.results.bindings as B[])
-    .filter(b => b.birthDate?.value && b.personLabel?.value && !b.personLabel.value.startsWith("Q"))
-    .map(b => ({
-      id:           b.person.value.split("/").pop() ?? "",
-      name:         b.personLabel.value,
-      description:  b.description?.value ?? "",
-      birthDateStr: b.birthDate!.value,
-    }))
-    .filter(r => { if (seen.has(r.name)) return false; seen.add(r.name); return true; });
+async function fetchWithTimeout(url: string, ms = 15000): Promise<Response> {
+  const controller = new AbortController();
+  const timeout    = setTimeout(() => controller.abort(), ms);
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeout);
+    return res;
+  } catch (e) {
+    clearTimeout(timeout);
+    throw e;
+  }
 }
 
-async function apiSameBday(month: number, day: number, excludeName: string): Promise<SameBdayPerson[]> {
+/** Fast Wikidata search — returns results in ~1s */
+async function searchCelebs(term: string): Promise<QuickResult[]> {
+  const url = `https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${encodeURIComponent(term)}&language=en&type=item&format=json&origin=*&limit=8`;
+  const res = await fetchWithTimeout(url);
+  if (!res.ok) throw new Error("search API error");
+  const json = await res.json();
+  return ((json.search ?? []) as { id:string; label:string; description?:string }[]).map(r => ({
+    id:          r.id,
+    name:        r.label,
+    description: r.description ?? "",
+  }));
+}
+
+/** Get birth date for a specific Wikidata entity */
+async function fetchBirthDate(entityId: string): Promise<Date | null> {
+  const url = `https://www.wikidata.org/w/api.php?action=wbgetentities&ids=${entityId}&props=claims&format=json&origin=*`;
+  const res = await fetchWithTimeout(url);
+  if (!res.ok) throw new Error("entity API error");
+  const json = await res.json();
+  const entity = json.entities?.[entityId];
+  const timeStr = entity?.claims?.P569?.[0]?.mainsnak?.datavalue?.value?.time as string | undefined;
+  return timeStr ? parseWikidataTime(timeStr) : null;
+}
+
+/** SPARQL for same-birthday celebrities — non-blocking, slower */
+async function fetchSameBirthday(month: number, day: number, excludeName: string): Promise<SameBdayPerson[]> {
   const query = `
     SELECT ?person ?personLabel ?description ?birthYear WHERE {
       ?person wdt:P31 wd:Q5 .
@@ -146,18 +172,17 @@ async function apiSameBday(month: number, day: number, excludeName: string): Pro
       BIND(YEAR(?birthDate) AS ?birthYear)
       SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
     }
-    ORDER BY ?birthYear
-    LIMIT 10
+    ORDER BY ?birthYear LIMIT 10
   `;
-  const res = await fetch(
+  const res = await fetchWithTimeout(
     `https://query.wikidata.org/sparql?query=${encodeURIComponent(query)}&format=json`,
-    { headers: { Accept: "application/sparql-results+json" } }
+    15000
   );
-  if (!res.ok) throw new Error("API error");
+  if (!res.ok) throw new Error("sparql error");
   const json = await res.json();
-  type B2 = { personLabel:{value:string}; description?:{value:string}; birthYear?:{value:string} };
+  type B = { personLabel:{value:string}; description?:{value:string}; birthYear?:{value:string} };
   const seen = new Set<string>();
-  return (json.results.bindings as B2[])
+  return (json.results.bindings as B[])
     .filter(b => b.personLabel?.value && !b.personLabel.value.startsWith("Q") && b.personLabel.value !== excludeName)
     .map(b => ({ name:b.personLabel.value, description:b.description?.value??"", birthYear:parseInt(b.birthYear?.value??"0",10) }))
     .filter(r => { if (seen.has(r.name)) return false; seen.add(r.name); return true; })
@@ -167,40 +192,38 @@ async function apiSameBday(month: number, day: number, excludeName: string): Pro
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function CelebrityAgeTool() {
-  const [searchTerm,     setSearchTerm]     = useState("");
-  const [isLoading,      setIsLoading]      = useState(false);
-  const [searchResults,  setSearchResults]  = useState<SearchResult[]>([]);
+  const [query,          setQuery]          = useState("");
+  const [isSearching,    setIsSearching]    = useState(false);
+  const [isLoadingBirth, setIsLoadingBirth] = useState(false);
+  const [quickResults,   setQuickResults]   = useState<QuickResult[]>([]);
   const [showDropdown,   setShowDropdown]   = useState(false);
   const [celebrity,      setCelebrity]      = useState<Celebrity | null>(null);
   const [timeLeft,       setTimeLeft]       = useState<TimeLeft>({ days:0, h:0, m:0, s:0 });
   const [sameBday,       setSameBday]       = useState<SameBdayPerson[]>([]);
+  const [loadingSameBday,setLoadingSameBday]= useState(false);
   const [error,          setError]          = useState("");
+  const [retryTerm,      setRetryTerm]      = useState("");
   const [myDob,          setMyDob]          = useState("");
   const [showCompare,    setShowCompare]    = useState(false);
-  const [recentSearches, setRecentSearches] = useState<SearchResult[]>([]);
-  const [loadingSameBday,setLoadingSameBday]= useState(false);
+  const [recentSearches, setRecentSearches] = useState<RecentCelebrity[]>([]);
 
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const wrapperRef  = useRef<HTMLDivElement>(null);
+  const debounceRef  = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const wrapperRef   = useRef<HTMLDivElement>(null);
+  const skipSearchRef = useRef(false); // prevent debounce when query set programmatically
 
   // Load recents
   useEffect(() => {
-    try {
-      const s = localStorage.getItem("ca_recent");
-      if (s) setRecentSearches(JSON.parse(s));
-    } catch { /* ignore */ }
+    try { const s=localStorage.getItem("ca_recent2"); if(s) setRecentSearches(JSON.parse(s)); } catch { /* ignore */ }
   }, []);
 
   // Close dropdown on outside click
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) setShowDropdown(false);
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    const h = (e: MouseEvent) => { if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) setShowDropdown(false); };
+    document.addEventListener("mousedown", h);
+    return () => document.removeEventListener("mousedown", h);
   }, []);
 
-  // Countdown
+  // Live countdown
   useEffect(() => {
     if (!celebrity) return;
     const next = getNextBirthday(celebrity.birthDate);
@@ -209,85 +232,132 @@ export default function CelebrityAgeTool() {
     return () => clearInterval(id);
   }, [celebrity]);
 
-  // Debounced search
+  // Debounced search → fast wbsearchentities
   useEffect(() => {
-    if (searchTerm.length < 3) { setSearchResults([]); setShowDropdown(false); return; }
+    if (skipSearchRef.current) { skipSearchRef.current = false; return; }
+    if (query.length < 3) { setQuickResults([]); setShowDropdown(false); return; }
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(async () => {
-      setIsLoading(true); setError("");
+      setIsSearching(true); setError("");
       try {
-        const results = await apiSearch(searchTerm);
-        setSearchResults(results);
+        const results = await searchCelebs(query);
+        setQuickResults(results);
         setShowDropdown(results.length > 0);
-        if (results.length === 0) setError(`No results found for '${searchTerm}'. Try a different spelling.`);
+        if (results.length === 0) setError(`No results for "${query}". Try a different spelling.`);
       } catch {
-        setError("Could not connect to search database. Please try again in a moment.");
+        setError("Search is taking longer than usual. Please try again.");
+        setRetryTerm(query);
         setShowDropdown(false);
       }
-      setIsLoading(false);
+      setIsSearching(false);
     }, 500);
     return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
-  }, [searchTerm]);
+  }, [query]);
 
-  // ── Handlers ────────────────────────────────────────────────────────────────
+  // ── Load celebrity from hardcoded or API ─────────────────────────────────────
 
-  const selectResult = async (r: SearchResult) => {
-    const birth = parseBirthDate(r.birthDateStr);
-    if (!birth) return;
-    setCelebrity({ name:r.name, description:r.description, birthDate:birth });
-    setSearchTerm(r.name);
+  const showCeleb = (name: string, description: string, birth: Date) => {
+    setCelebrity({ name, description, birthDate: birth });
     setShowDropdown(false);
-    setSearchResults([]);
+    setQuickResults([]);
+    setError("");
     setSameBday([]);
-    setError("");
 
-    // Save recent
-    const next = [r, ...recentSearches.filter(x => x.name !== r.name)].slice(0,5);
-    setRecentSearches(next);
-    try { localStorage.setItem("ca_recent", JSON.stringify(next)); } catch { /* ignore */ }
+    const rec: RecentCelebrity = { name, description, birthDate: `${birth.getFullYear()}-${String(birth.getMonth()+1).padStart(2,"0")}-${String(birth.getDate()).padStart(2,"0")}` };
+    setRecentSearches(prev => {
+      const next = [rec, ...prev.filter(r => r.name !== name)].slice(0, 5);
+      try { localStorage.setItem("ca_recent2", JSON.stringify(next)); } catch { /* ignore */ }
+      return next;
+    });
 
-    // Same birthday fetch
+    // Async same-birthday (non-blocking)
     setLoadingSameBday(true);
-    try {
-      const same = await apiSameBday(birth.getMonth()+1, birth.getDate(), r.name);
-      setSameBday(same);
-    } catch { /* ignore */ }
-    setLoadingSameBday(false);
+    fetchSameBirthday(birth.getMonth()+1, birth.getDate(), name)
+      .then(same => setSameBday(same))
+      .catch(() => { /* silently ignore */ })
+      .finally(() => setLoadingSameBday(false));
   };
 
-  const triggerPopular = async (name: string) => {
-    setSearchTerm(name);
-    setIsLoading(true);
-    setError("");
+  const selectQuickResult = async (r: QuickResult) => {
+    setQuery(r.name);
     setShowDropdown(false);
+    setIsLoadingBirth(true);
+    setError("");
     try {
-      const results = await apiSearch(name);
-      if (results.length > 0) await selectResult(results[0]);
-      else setError(`No results found for '${name}'.`);
+      const birth = await fetchBirthDate(r.id);
+      if (!birth) { setError(`Could not find birth date for ${r.name}.`); }
+      else         { showCeleb(r.name, r.description, birth); }
     } catch {
-      setError("Could not connect to search database.");
+      setError("Search is taking longer than usual. Please try again.");
+      setRetryTerm(r.name);
     }
-    setIsLoading(false);
+    setIsLoadingBirth(false);
   };
 
-  // ── Derived data ─────────────────────────────────────────────────────────────
+  const handlePopularPill = (data: typeof POPULAR_DATA[0]) => {
+    const birth = parseSimpleDate(data.birthDate);
+    if (!birth) return;
+    skipSearchRef.current = true; // don't trigger debounce
+    setQuery(data.name);
+    setQuickResults([]);
+    setShowDropdown(false);
+    showCeleb(data.name, data.description, birth);
+  };
+
+  const handleRecentPill = (r: RecentCelebrity) => {
+    const birth = parseSimpleDate(r.birthDate);
+    if (!birth) return;
+    skipSearchRef.current = true;
+    setQuery(r.name);
+    setQuickResults([]);
+    setShowDropdown(false);
+    showCeleb(r.name, r.description, birth);
+  };
+
+  const handleRetry = async () => {
+    setError(""); setIsSearching(true);
+    try {
+      const results = await searchCelebs(retryTerm);
+      setQuickResults(results);
+      setShowDropdown(results.length > 0);
+    } catch {
+      setError("Still having trouble. Please check your connection.");
+    }
+    setIsSearching(false);
+  };
+
+  const handleSearchButton = async () => {
+    if (query.length < 2) return;
+    setIsSearching(true); setError(""); setShowDropdown(false);
+    try {
+      const results = await searchCelebs(query);
+      if (results.length > 0) await selectQuickResult(results[0]);
+      else setError(`No results for "${query}".`);
+    } catch {
+      setError("Search is taking longer than usual. Please try again.");
+      setRetryTerm(query);
+    }
+    setIsSearching(false);
+  };
+
+  // ── Derived data ──────────────────────────────────────────────────────────────
 
   const age        = celebrity ? calcAge(celebrity.birthDate) : null;
   const nextBday   = celebrity ? getNextBirthday(celebrity.birthDate) : null;
   const turningAge = celebrity && nextBday ? nextBday.getFullYear() - celebrity.birthDate.getFullYear() : null;
   const sign       = celebrity ? getStarSign(celebrity.birthDate.getMonth()+1, celebrity.birthDate.getDate()) : null;
   const presidents = celebrity ? countPresidents(celebrity.birthDate.getFullYear()) : null;
-
-  const myBirth  = myDob ? parseBirthDate(myDob) : null;
-  const myAge    = myBirth ? calcAge(myBirth) : null;
-  const ageDiff  = (age && myAge) ? Math.abs(age.years - myAge.years) : null;
-  const celebOlderThanMe = (celebrity && myBirth) ? celebrity.birthDate < myBirth : null;
-
-  const shareText = celebrity && age
+  const myBirth    = myDob ? parseSimpleDate(myDob) : null;
+  const myAge      = myBirth ? calcAge(myBirth) : null;
+  const ageDiff    = (age && myAge) ? Math.abs(age.years - myAge.years) : null;
+  const celebOlder = (celebrity && myBirth) ? celebrity.birthDate < myBirth : null;
+  const shareText  = celebrity && age
     ? encodeURIComponent(`${celebrity.name} is ${age.years} years old today!\nThey turn ${turningAge} in ${timeLeft.days} days 🎂\nCheck any celebrity → dayblip.com/celebrity-age`)
     : "";
 
-  // ── Render ───────────────────────────────────────────────────────────────────
+  const isWorking = isSearching || isLoadingBirth;
+
+  // ── Render ────────────────────────────────────────────────────────────────────
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -310,58 +380,69 @@ export default function CelebrityAgeTool() {
       <section className="bg-[#16213e] px-6 py-14">
         <div className="mx-auto max-w-[700px] space-y-6">
 
-          {/* Search input */}
+          {/* Search input + dropdown */}
           <div ref={wrapperRef} className="relative">
             <div className="flex gap-2">
               <input
                 type="text"
-                value={searchTerm}
-                onChange={e => { setSearchTerm(e.target.value); setCelebrity(null); }}
-                onFocus={() => searchResults.length > 0 && setShowDropdown(true)}
-                placeholder="Type a celebrity name... e.g. Taylor Swift, Elon Musk, LeBron James"
+                value={query}
+                onChange={e => { setQuery(e.target.value); setCelebrity(null); }}
+                onFocus={() => quickResults.length > 0 && setShowDropdown(true)}
+                onKeyDown={e => e.key === "Enter" && handleSearchButton()}
+                placeholder="Type a celebrity name... e.g. Taylor Swift, Elon Musk"
                 className="flex-1 rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white placeholder:text-[#a8a8b3] focus:border-[#e94560] focus:outline-none"
               />
               <button
-                onClick={() => searchTerm.length >= 3 && triggerPopular(searchTerm)}
-                disabled={searchTerm.length < 3 || isLoading}
+                onClick={handleSearchButton}
+                disabled={query.length < 2 || isWorking}
                 className="whitespace-nowrap rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-40"
               >
-                {isLoading ? "…" : "Search →"}
+                {isSearching ? "Searching…" : isLoadingBirth ? "Loading…" : "Search →"}
               </button>
             </div>
 
-            {/* Results dropdown */}
-            {showDropdown && searchResults.length > 0 && (
+            {/* Loading indicator */}
+            {isSearching && query.length >= 3 && (
+              <p className="mt-1 text-xs text-[#a8a8b3]">Searching for {query}...</p>
+            )}
+            {isLoadingBirth && (
+              <p className="mt-1 text-xs text-[#a8a8b3]">Loading birthday data...</p>
+            )}
+
+            {/* Dropdown */}
+            {showDropdown && quickResults.length > 0 && (
               <div className="absolute left-0 right-0 top-full z-50 mt-1 rounded-xl border border-[#0f3460] bg-[#1a1a2e] shadow-xl overflow-hidden">
-                {searchResults.map((r, i) => {
-                  const birth = parseBirthDate(r.birthDateStr);
-                  return (
-                    <button key={i} onClick={() => selectResult(r)}
-                      className="w-full px-4 py-3 text-left hover:bg-[#16213e] border-b border-[#0f3460] last:border-0 transition-colors">
-                      <p className="font-semibold text-white">{r.name}</p>
-                      <p className="text-xs text-[#a8a8b3]">
-                        {r.description}{birth ? ` · Born ${birth.getFullYear()}` : ""}
-                      </p>
-                    </button>
-                  );
-                })}
+                {quickResults.map((r, i) => (
+                  <button key={i} onClick={() => selectQuickResult(r)}
+                    className="w-full px-4 py-3 text-left hover:bg-[#16213e] border-b border-[#0f3460] last:border-0 transition-colors">
+                    <p className="font-semibold text-white">{r.name}</p>
+                    {r.description && <p className="text-xs text-[#a8a8b3]">{r.description}</p>}
+                  </button>
+                ))}
               </div>
             )}
           </div>
 
-          {/* Error */}
+          {/* Error + retry */}
           {error && !celebrity && (
-            <p className="text-sm text-[#e94560]">{error}</p>
+            <div className="flex items-center gap-3">
+              <p className="text-sm text-[#e94560] flex-1">{error}</p>
+              {retryTerm && (
+                <button onClick={handleRetry} className="shrink-0 rounded-lg border border-[#e94560] px-3 py-1.5 text-xs font-semibold text-[#e94560] hover:bg-[#e94560]/10 transition-colors">
+                  Retry
+                </button>
+              )}
+            </div>
           )}
 
-          {/* Popular searches */}
+          {/* Popular searches — instant hardcoded */}
           <div>
             <p className="mb-2 text-xs uppercase tracking-wider text-[#a8a8b3]">Popular Searches</p>
             <div className="flex flex-wrap gap-2">
-              {POPULAR.map(name => (
-                <button key={name} onClick={() => triggerPopular(name)}
+              {POPULAR_DATA.map(p => (
+                <button key={p.name} onClick={() => handlePopularPill(p)}
                   className="rounded-full border border-[#0f3460] bg-[#1a1a2e] px-3 py-1.5 text-sm text-[#a8a8b3] transition-colors hover:border-[#e94560] hover:text-white">
-                  {name}
+                  {p.name}
                 </button>
               ))}
             </div>
@@ -373,7 +454,7 @@ export default function CelebrityAgeTool() {
               <p className="mb-2 text-xs uppercase tracking-wider text-[#a8a8b3]">Recent Searches</p>
               <div className="flex flex-wrap gap-2">
                 {recentSearches.map(r => (
-                  <button key={r.name} onClick={() => selectResult(r)}
+                  <button key={r.name} onClick={() => handleRecentPill(r)}
                     className="rounded-full border border-[#e94560]/30 bg-[#e94560]/10 px-3 py-1.5 text-sm text-[#e94560] transition-colors hover:bg-[#e94560]/20">
                     {r.name}
                   </button>
@@ -405,24 +486,18 @@ export default function CelebrityAgeTool() {
         <section className="bg-[#1a1a2e] px-6 py-14">
           <div className="mx-auto max-w-[700px] space-y-6">
 
-            {/* Name + description + sign */}
+            {/* Name + badges */}
             <div className="rounded-xl border border-[#e94560]/30 bg-[#16213e] p-6">
               <h2 className="text-3xl font-black text-white">{celebrity.name}</h2>
               {celebrity.description && <p className="text-[#a8a8b3] mt-1 capitalize">{celebrity.description}</p>}
               <div className="mt-3 flex flex-wrap gap-3 text-sm">
-                <span className="rounded-full bg-[#e94560]/10 border border-[#e94560]/30 px-3 py-1 text-[#e94560]">
-                  {sign}
-                </span>
-                <span className="rounded-full bg-[#0f3460] px-3 py-1 text-[#a8a8b3]">
-                  Born {fmtDate(celebrity.birthDate)}
-                </span>
-                <span className="rounded-full bg-[#0f3460] px-3 py-1 text-[#a8a8b3]">
-                  Born on a {DAYS[celebrity.birthDate.getDay()]}
-                </span>
+                <span className="rounded-full bg-[#e94560]/10 border border-[#e94560]/30 px-3 py-1 text-[#e94560]">{sign}</span>
+                <span className="rounded-full bg-[#0f3460] px-3 py-1 text-[#a8a8b3]">Born {fmtDate(celebrity.birthDate)}</span>
+                <span className="rounded-full bg-[#0f3460] px-3 py-1 text-[#a8a8b3]">Born on a {DAYS[celebrity.birthDate.getDay()]}</span>
               </div>
             </div>
 
-            {/* Age breakdown cards */}
+            {/* Age breakdown */}
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               {[
                 { label:"Years old",    val:commas(age.years) },
@@ -453,7 +528,7 @@ export default function CelebrityAgeTool() {
               {nextBday && turningAge && (
                 <div className="text-center text-sm text-[#a8a8b3]">
                   <p>{celebrity.name} turns <strong className="text-white">{turningAge}</strong> on {MONTHS[nextBday.getMonth()]} {nextBday.getDate()}, {nextBday.getFullYear()}</p>
-                  <p className="mt-1">Their birthday falls on a <strong className="text-white">{DAYS[nextBday.getDay()]}</strong> this year</p>
+                  <p className="mt-1">Birthday falls on a <strong className="text-white">{DAYS[nextBday.getDay()]}</strong> this year</p>
                 </div>
               )}
             </div>
@@ -463,78 +538,59 @@ export default function CelebrityAgeTool() {
               <h3 className="mb-4 font-bold text-white">🔢 Fun Comparisons</h3>
               <div className="space-y-3">
                 <div className="flex gap-2"><span className="text-[#e94560]">→</span>
-                  <span className="text-[#a8a8b3] text-sm">
-                    They were born <strong className="text-white">{Math.abs(celebrity.birthDate.getFullYear() - 2007)} years</strong>{" "}
-                    {celebrity.birthDate.getFullYear() < 2007 ? "before" : "after"} the first iPhone (2007)
-                  </span>
+                  <span className="text-[#a8a8b3] text-sm">Born <strong className="text-white">{Math.abs(celebrity.birthDate.getFullYear()-2007)} years</strong> {celebrity.birthDate.getFullYear()<2007?"before":"after"} the first iPhone (2007)</span>
                 </div>
                 <div className="flex gap-2"><span className="text-[#e94560]">→</span>
-                  <span className="text-[#a8a8b3] text-sm">
-                    They were born <strong className="text-white">{Math.abs(celebrity.birthDate.getFullYear() - 1991)} years</strong>{" "}
-                    {celebrity.birthDate.getFullYear() < 1991 ? "before" : "after"} the public internet (1991)
-                  </span>
+                  <span className="text-[#a8a8b3] text-sm">Born <strong className="text-white">{Math.abs(celebrity.birthDate.getFullYear()-1991)} years</strong> {celebrity.birthDate.getFullYear()<1991?"before":"after"} the public internet (1991)</span>
                 </div>
                 <div className="flex gap-2"><span className="text-[#e94560]">→</span>
-                  <span className="text-[#a8a8b3] text-sm">
-                    They have lived through approximately <strong className="text-white">{presidents}</strong> US presidential terms
-                  </span>
+                  <span className="text-[#a8a8b3] text-sm">Lived through approximately <strong className="text-white">{presidents}</strong> US presidential terms</span>
                 </div>
-                {ageDiff !== null && celebOlderThanMe !== null && (
+                {ageDiff !== null && celebOlder !== null && (
                   <div className="flex gap-2"><span className="text-[#e94560]">→</span>
-                    <span className="text-[#a8a8b3] text-sm">
-                      {celebrity.name} is <strong className="text-white">{ageDiff} years {celebOlderThanMe ? "older" : "younger"}</strong> than you
-                    </span>
+                    <span className="text-[#a8a8b3] text-sm">{celebrity.name} is <strong className="text-white">{ageDiff} years {celebOlder?"older":"younger"}</strong> than you</span>
                   </div>
                 )}
                 {myAge && celebrity && (
-                  <>
-                    <div className="flex gap-2"><span className="text-[#e94560]">→</span>
-                      <span className="text-[#a8a8b3] text-sm">
-                        When {celebrity.name} was your age ({myAge.years}), it was <strong className="text-white">{celebrity.birthDate.getFullYear() + myAge.years}</strong>
-                      </span>
-                    </div>
-                    {myBirth && (
-                      <div className="flex gap-2"><span className="text-[#e94560]">→</span>
-                        <span className="text-[#a8a8b3] text-sm">
-                          When you reach {celebrity.name}&apos;s current age ({age.years}), it will be <strong className="text-white">{myBirth.getFullYear() + age.years}</strong>
-                        </span>
-                      </div>
-                    )}
-                  </>
+                  <div className="flex gap-2"><span className="text-[#e94560]">→</span>
+                    <span className="text-[#a8a8b3] text-sm">When {celebrity.name} was your age ({myAge.years}), it was <strong className="text-white">{celebrity.birthDate.getFullYear()+myAge.years}</strong></span>
+                  </div>
+                )}
+                {myBirth && age && (
+                  <div className="flex gap-2"><span className="text-[#e94560]">→</span>
+                    <span className="text-[#a8a8b3] text-sm">When you reach {celebrity.name}&apos;s age ({age.years}), it will be <strong className="text-white">{myBirth.getFullYear()+age.years}</strong></span>
+                  </div>
                 )}
               </div>
             </div>
 
             {/* Share */}
             <div className="flex flex-wrap gap-3">
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`}
-                target="_blank" rel="noopener noreferrer"
+              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
                 className="rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
                 Share {celebrity.name}&apos;s Age on X →
               </a>
-              <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent("https://dayblip.com/celebrity-age")}`}
-                target="_blank" rel="noopener noreferrer"
+              <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent("https://dayblip.com/celebrity-age")}`} target="_blank" rel="noopener noreferrer"
                 className="rounded-lg bg-[#1877f2] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
                 Share on Facebook →
               </a>
             </div>
 
-            {/* Same birthday celebrities */}
+            {/* Same birthday */}
             <div className="rounded-xl border border-[#0f3460] bg-[#16213e] p-6">
               <h3 className="mb-4 font-bold text-white">
                 🎂 Other Celebrities Born on {MONTHS[celebrity.birthDate.getMonth()]} {celebrity.birthDate.getDate()}:
               </h3>
-              {loadingSameBday && <p className="text-[#a8a8b3] text-sm">Loading...</p>}
+              {loadingSameBday && <p className="text-[#a8a8b3] text-sm animate-pulse">Loading birthday twins…</p>}
               {!loadingSameBday && sameBday.length === 0 && <p className="text-[#a8a8b3] text-sm">No additional results found.</p>}
               {sameBday.length > 0 && (
                 <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                   {sameBday.map((p, i) => (
-                    <button key={i} onClick={() => triggerPopular(p.name)}
-                      className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-4 text-left transition-all hover:border-[#e94560]">
+                    <div key={i} className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-4">
                       <p className="font-semibold text-white text-sm">{p.name}</p>
                       {p.description && <p className="text-xs text-[#a8a8b3] mt-1">{p.description}</p>}
                       {p.birthYear > 0 && <p className="text-xs text-[#e94560] mt-1">Born {p.birthYear}</p>}
-                    </button>
+                    </div>
                   ))}
                 </div>
               )}
