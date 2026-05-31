@@ -2,19 +2,41 @@
 import { useState } from "react"
 
 interface ShareButtonsProps {
-  text: string   // plain (not encoded) share message
-  url: string    // full https:// URL
-  title?: string // optional title for LinkedIn/Reddit
+  text: string            // plain share message
+  url: string             // full https:// URL
+  title?: string          // for LinkedIn/Reddit title
+  instagramText?: string  // custom text for Instagram copy
+  tiktokText?: string     // custom text for TikTok caption
 }
 
-export default function ShareButtons({ text, url, title }: ShareButtonsProps) {
-  const [copied, setCopied] = useState(false)
+type CopyState = "idle" | "link" | "instagram" | "tiktok"
+
+export default function ShareButtons({ text, url, title, instagramText, tiktokText }: ShareButtonsProps) {
+  const [copyState, setCopyState] = useState<CopyState>("idle")
 
   const et  = encodeURIComponent(text)
   const eu  = encodeURIComponent(url)
   const ett = encodeURIComponent(title ?? text)
 
-  const buttons = [
+  const igText  = instagramText ?? `${text}\n\nLink in bio → dayblip.com`
+  const ttText  = tiktokText    ?? `${text}\n\nTry it free → dayblip.com`
+
+  const doCopy = async (value: string, kind: CopyState) => {
+    try {
+      await navigator.clipboard.writeText(value)
+    } catch {
+      const el = document.createElement("textarea")
+      el.value = value
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand("copy")
+      document.body.removeChild(el)
+    }
+    setCopyState(kind)
+    setTimeout(() => setCopyState("idle"), 3000)
+  }
+
+  const linkButtons = [
     {
       label: "Facebook",
       bg: "#1877F2",
@@ -67,57 +89,119 @@ export default function ShareButtons({ text, url, title }: ShareButtonsProps) {
     },
   ]
 
-  const copyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(url)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch {
-      // fallback — create temp input
-      const el = document.createElement("input")
-      el.value = url
-      document.body.appendChild(el)
-      el.select()
-      document.execCommand("copy")
-      document.body.removeChild(el)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
-  }
+  // Camera icon (Instagram)
+  const cameraIcon = (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-4 w-4 shrink-0">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.776 48.776 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
+    </svg>
+  )
+
+  // Music note icon (TikTok)
+  const musicIcon = (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-4 w-4 shrink-0">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z" />
+    </svg>
+  )
+
+  // Check icon
+  const checkIcon = (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} className="h-4 w-4 shrink-0">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+    </svg>
+  )
+
+  // Link icon
+  const linkIcon = (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4 shrink-0">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+    </svg>
+  )
 
   return (
     <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6">
       <h3 className="mb-1 font-bold text-white">Share Your Result</h3>
       <p className="mb-4 text-sm text-[#a8a8b3]">Surprised by this number? Share it with friends and family</p>
-      <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
-        {buttons.map(btn => (
+
+      {/* 4-column grid on desktop, 2 on mobile */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+
+        {/* Row 1: Facebook | X | WhatsApp | Instagram */}
+        {linkButtons.slice(0, 3).map(btn => (
           <a
             key={btn.label}
             href={btn.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-[13px] font-medium text-white transition-opacity hover:opacity-85"
+            className="flex min-h-[44px] items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-[13px] font-medium text-white transition-opacity hover:opacity-85"
+            style={{ backgroundColor: btn.bg }}
+          >
+            {btn.icon}
+            <span className="hidden sm:inline">{btn.label}</span>
+            <span className="sm:hidden">{btn.label}</span>
+          </a>
+        ))}
+
+        {/* Instagram — copy button */}
+        <div className="relative">
+          <button
+            onClick={() => doCopy(igText, "instagram")}
+            className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-[13px] font-medium text-white transition-colors"
+            style={{ backgroundColor: copyState === "instagram" ? "#22c55e" : "#E1306C" }}
+          >
+            {copyState === "instagram" ? checkIcon : cameraIcon}
+            <span>{copyState === "instagram" ? "Copied!" : "Instagram"}</span>
+          </button>
+          {copyState === "instagram" && (
+            <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 z-10 w-52 rounded-lg border border-[#0f3460] bg-[#16213e] px-3 py-2 text-center text-xs text-white shadow-lg">
+              ✅ Copied!<br />Open Instagram → paste in Story or bio 📸
+            </div>
+          )}
+        </div>
+
+        {/* Row 2: LinkedIn | Reddit | TikTok | Copy Link */}
+        {linkButtons.slice(3).map(btn => (
+          <a
+            key={btn.label}
+            href={btn.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex min-h-[44px] items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-[13px] font-medium text-white transition-opacity hover:opacity-85"
             style={{ backgroundColor: btn.bg }}
           >
             {btn.icon}
             <span>{btn.label}</span>
           </a>
         ))}
-        <button
-          onClick={copyLink}
-          className="flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-[13px] font-medium text-white transition-opacity hover:opacity-85"
-          style={{ backgroundColor: copied ? "#22c55e" : "#4b5563" }}
-        >
-          {copied ? (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} className="h-4 w-4 shrink-0">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4 shrink-0">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-            </svg>
+
+        {/* TikTok — copy button */}
+        <div className="relative">
+          <button
+            onClick={() => doCopy(ttText, "tiktok")}
+            className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg border px-3 py-2.5 text-[13px] font-medium text-white transition-colors"
+            style={{
+              backgroundColor: copyState === "tiktok" ? "#22c55e" : "#010101",
+              borderColor: copyState === "tiktok" ? "#22c55e" : "#69C9D0",
+            }}
+          >
+            {copyState === "tiktok" ? checkIcon : musicIcon}
+            <span>{copyState === "tiktok" ? "Copied!" : "TikTok"}</span>
+          </button>
+          {copyState === "tiktok" && (
+            <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 z-10 w-52 rounded-lg border border-[#0f3460] bg-[#16213e] px-3 py-2 text-center text-xs text-white shadow-lg">
+              ✅ Copied!<br />Open TikTok → paste as video caption 🎵
+            </div>
           )}
-          <span>{copied ? "Copied!" : "Copy Link"}</span>
+        </div>
+
+        {/* Copy Link */}
+        <button
+          onClick={() => doCopy(url, "link")}
+          className="flex min-h-[44px] items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-[13px] font-medium text-white transition-colors"
+          style={{ backgroundColor: copyState === "link" ? "#22c55e" : "#4b5563" }}
+        >
+          {copyState === "link" ? checkIcon : linkIcon}
+          <span>{copyState === "link" ? "Copied!" : "Copy Link"}</span>
         </button>
       </div>
     </div>
