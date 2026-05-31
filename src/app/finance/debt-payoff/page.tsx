@@ -1,5 +1,6 @@
 "use client"
 import { useState, useMemo, useCallback } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 interface Debt { id: number; name: string; balance: string; rate: string; minPayment: string }
 
@@ -171,6 +172,13 @@ export default function DebtPayoffPage() {
                 ))}
               </div>
             </div>
+          )}
+          {calc && (
+            <ShareButtons
+              text={`Using ${strategy} strategy I'll be debt free in ${calc.months} months and save ${fmt(calc.interestSaved)} in interest! (Educational only)`}
+              url="https://www.dayblip.com/finance/debt-payoff"
+              title="Debt Payoff Calculator"
+            />
           )}
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Results are estimates.</p>
         </div>

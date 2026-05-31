@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -11,6 +12,17 @@ export default function CarAffordabilityPage() {
   const [tradeIn, setTradeIn] = useState("0")
   const [loanTerm, setLoanTerm] = useState(60)
   const [interestRate, setInterestRate] = useState("7")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("income")) setAnnualIncome(p.get("income")!)
+    if (p.get("takehome")) setMonthlyTakeHome(p.get("takehome")!)
+    if (p.get("debts")) setMonthlyDebts(p.get("debts")!)
+    if (p.get("down")) setDownPayment(p.get("down")!)
+    if (p.get("term")) setLoanTerm(Number(p.get("term")))
+    if (p.get("rate")) setInterestRate(p.get("rate")!)
+  }, [])
 
   const calc = useMemo(() => {
     const annInc = parseFloat(annualIncome) || 0
@@ -154,6 +166,11 @@ export default function CarAffordabilityPage() {
             </p>
           </div>
 
+          <ShareButtons
+            text={`Based on my income I can afford a car up to ${fmt(calc.recommendedMax)} (15% rule). (Educational only)`}
+            url={`https://www.dayblip.com/finance/car-affordability?income=${annualIncome}&takehome=${monthlyTakeHome}&debts=${monthlyDebts}&down=${downPayment}&term=${loanTerm}&rate=${interestRate}`}
+            title="Car Affordability Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Interest rates vary by credit score and lender. Actual insurance and fuel costs vary by location and driving habits.</p>
         </div>
       </section>

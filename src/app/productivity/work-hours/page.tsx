@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtNum(n: number) { return Math.round(n).toLocaleString() }
@@ -11,7 +12,16 @@ export default function WorkHoursPage() {
   const [vacationWeeks, setVacationWeeks] = useState("2")
   const [wageType, setWageType] = useState<"hourly" | "annual">("annual")
   const [wage, setWage] = useState("65000")
-  const [copied, setCopied] = useState(false)
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("started")) setAgeStarted(p.get("started")!)
+    if (p.get("current")) setCurrentAge(p.get("current")!)
+    if (p.get("hours")) setHoursPerWeek(p.get("hours")!)
+    if (p.get("vacation")) setVacationWeeks(p.get("vacation")!)
+    if (p.get("type")) setWageType(p.get("type") as "hourly" | "annual")
+    if (p.get("wage")) setWage(p.get("wage")!)
+  }, [])
 
   const calc = useMemo(() => {
     const as = parseFloat(ageStarted) || 0
@@ -38,14 +48,6 @@ export default function WorkHoursPage() {
 
     return { totalHours, yearsWorked, totalEarned, hoursLeft, lifetimeTotal, hoursPerYear }
   }, [ageStarted, currentAge, hoursPerWeek, vacationWeeks, wageType, wage])
-
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
 
@@ -103,9 +105,11 @@ export default function WorkHoursPage() {
             <div className="text-3xl font-black text-[#4ade80]">{fmt(calc.lifetimeTotal)}</div>
           </div>
 
-          <button onClick={share} className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : "Share →"}
-          </button>
+          <ShareButtons
+            text={`I have worked ${fmtNum(calc.totalHours)} hours in my career and earned ${fmt(calc.totalEarned)}! Projected lifetime earnings: ${fmt(calc.lifetimeTotal)}.`}
+            url={`https://www.dayblip.com/productivity/work-hours?started=${ageStarted}&current=${currentAge}&hours=${hoursPerWeek}&vacation=${vacationWeeks}&type=${wageType}&wage=${wage}`}
+            title="Work Hours Calculator"
+          />
         </div>
       </section>
     </div>

@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -18,6 +18,16 @@ export default function HomeValuePage() {
   const [currentValue, setCurrentValue] = useState("420000")
   const [annualRate, setAnnualRate] = useState("3")
   const [futureYears, setFutureYears] = useState("10")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("paid")) { setMode("past"); setPricePaid(p.get("paid")!) }
+    if (p.get("year")) setPurchaseYear(Number(p.get("year")))
+    if (p.get("current")) { setMode("future"); setCurrentValue(p.get("current")!) }
+    if (p.get("rate")) setAnnualRate(p.get("rate")!)
+    if (p.get("futureYears")) setFutureYears(p.get("futureYears")!)
+  }, [])
 
   const calc = useMemo(() => {
     if (mode === "past") {

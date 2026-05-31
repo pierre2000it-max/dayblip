@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtPct(n: number) { return (n >= 0 ? "+" : "") + n.toFixed(2) + "%" }
@@ -12,6 +13,15 @@ export default function StockReturnPage() {
   const [years, setYears] = useState("10")
   const [dividends, setDividends] = useState("500")
   const [additionalInv, setAdditionalInv] = useState("0")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("initial")) setInitialInv(p.get("initial")!)
+    if (p.get("current")) setCurrentValue(p.get("current")!)
+    if (p.get("years")) setYears(p.get("years")!)
+    if (p.get("dividends")) setDividends(p.get("dividends")!)
+  }, [])
 
   const calc = useMemo(() => {
     const inv = parseFloat(initialInv) || 0
@@ -110,6 +120,11 @@ export default function StockReturnPage() {
             </div>
           )}
 
+          <ShareButtons
+            text={`${fmtPct(calc.totalReturn)} total return (${fmtPct(calc.annualizedReturn)}/yr annualized). ${calc.vsSP500 >= 0 ? "Beat" : "Behind"} S&P 500 by ${Math.abs(calc.vsSP500).toFixed(2)}%. (Educational only)`}
+            url={`https://www.dayblip.com/finance/stock-return?initial=${initialInv}&current=${currentValue}&years=${years}&dividends=${dividends}`}
+            title="Stock Return Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Past returns do not guarantee future results. S&P 500 historical average is approximate. Not investment advice.</p>
         </div>
       </section>

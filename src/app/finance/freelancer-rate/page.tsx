@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -50,6 +50,18 @@ export default function FreelancerRatePage() {
   const [healthIns, setHealthIns] = useState("400")
   const [retirement, setRetirement] = useState("500")
   const [stateIdx, setStateIdx] = useState(0)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("income")) setTargetIncome(p.get("income")!)
+    if (p.get("vacation")) setVacationWeeks(p.get("vacation")!)
+    if (p.get("billable")) setBillableHours(p.get("billable")!)
+    if (p.get("expenses")) setBizExpenses(p.get("expenses")!)
+    if (p.get("health")) setHealthIns(p.get("health")!)
+    if (p.get("retirement")) setRetirement(p.get("retirement")!)
+    if (p.get("state")) setStateIdx(Number(p.get("state")))
+  }, [])
 
   const calc = useMemo(() => {
     const income = parseFloat(targetIncome) || 0
@@ -250,8 +262,8 @@ export default function FreelancerRatePage() {
           </div>
 
           <ShareButtons
-            text={`Freelancers need to charge at least $${calc.baseRate.toFixed(2)}/hr to hit their income goals! Calculate yours. (Educational only)`}
-            url="https://dayblip.com/finance/freelancer-rate"
+            text={`To earn $${targetIncome}/year freelancing I need to charge at least ${fmtDec(calc.baseRate)}/hour! (Educational only)`}
+            url={`https://www.dayblip.com/finance/freelancer-rate?income=${targetIncome}&vacation=${vacationWeeks}&billable=${billableHours}&expenses=${bizExpenses}&health=${healthIns}&retirement=${retirement}&state=${stateIdx}`}
             title="Freelancer Rate Calculator"
           />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Tax calculations are approximate and do not account for all deductions. Consult a CPA for accurate figures.</p>

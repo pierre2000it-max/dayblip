@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -20,6 +20,16 @@ export default function CarUpgradePage() {
   const [calcYears, setCalcYrs] = useState(30)
   const [rate,      setRate]    = useState(10.5)
   const r = rate / 100
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("expensive")) setWant(p.get("expensive")!)
+    if (p.get("practical")) setPract(p.get("practical")!)
+    if (p.get("buyevery")) setBuyEvery(Number(p.get("buyevery")))
+    if (p.get("years")) setCalcYrs(Number(p.get("years")))
+    if (p.get("rate")) setRate(Number(p.get("rate")))
+  }, [])
 
   const calc = useMemo(() => {
     const want  = parseFloat(wantStr)  || 0
@@ -137,7 +147,7 @@ export default function CarUpgradePage() {
 
           <ShareButtons
             text={`Car upgrades over ${calcYears} years cost ${fmt(calc.totalInvestValue)} in opportunity cost! (Educational purposes only)`}
-            url="https://dayblip.com/curiosity/car-upgrade"
+            url={`https://www.dayblip.com/curiosity/car-upgrade?expensive=${wantStr}&practical=${practStr}&buyevery=${buyEvery}&years=${calcYears}&rate=${rate}`}
             title="Car Upgrade Opportunity Cost Calculator"
           />
           {DISCLAIMER}

@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -22,6 +22,14 @@ export default function LotteryPage() {
   const weekly  = parseFloat(weeklyStr) || 0
   const monthly = (weekly * 52) / 12
   const r       = rate / 100
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("weekly")) setWeekly(p.get("weekly")!)
+    if (p.get("years")) setYears(Number(p.get("years")))
+    if (p.get("rate")) setRate(Number(p.get("rate")))
+  }, [])
 
   const calc = useMemo(() => {
     const perYear    = weekly * 52
@@ -122,7 +130,7 @@ export default function LotteryPage() {
 
           <ShareButtons
             text={`My $${weekly.toFixed(2)}/week lottery habit could be ${fmt(calc.invested)} if invested instead! (Educational purposes only)`}
-            url="https://dayblip.com/curiosity/lottery"
+            url={`https://www.dayblip.com/curiosity/lottery?weekly=${weeklyStr}&years=${years}&rate=${rate}`}
             title="Lottery vs Investing Calculator"
           />
           {DISCLAIMER}

@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -28,6 +28,16 @@ export default function PhoneUpgradePage() {
   const [calcYears, setCalcYrs]  = useState(30)
   const [rate,      setRate]     = useState(10.5)
   const r = rate / 100
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("price")) setPrice(p.get("price")!)
+    if (p.get("tradein")) setTradeIn(p.get("tradein")!)
+    if (p.get("freq")) setFreq(Number(p.get("freq")))
+    if (p.get("years")) setCalcYrs(Number(p.get("years")))
+    if (p.get("rate")) setRate(Number(p.get("rate")))
+  }, [])
 
   const calc = useMemo(() => {
     const price   = parseFloat(priceStr)   || 0
@@ -144,7 +154,7 @@ export default function PhoneUpgradePage() {
 
           <ShareButtons
             text={`Upgrading my phone ${calc.freqLabel.toLowerCase()} costs ${fmt(calc.investedValue)} in opportunity over ${calcYears} years! (Educational purposes only)`}
-            url="https://dayblip.com/curiosity/phone-upgrade"
+            url={`https://www.dayblip.com/curiosity/phone-upgrade?price=${priceStr}&tradein=${tradeInStr}&freq=${upgradeFreq}&years=${calcYears}&rate=${rate}`}
             title="Phone Upgrade Cycle Calculator"
           />
           {DISCLAIMER}

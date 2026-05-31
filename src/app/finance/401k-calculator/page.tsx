@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -11,6 +12,18 @@ export default function FourOhOneKPage() {
   const [yourPct, setYourPct] = useState("6")
   const [matchPct, setMatchPct] = useState("3")
   const [returnPct, setReturnPct] = useState("7")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("age")) setCurrentAge(p.get("age")!)
+    if (p.get("retireage")) setRetirementAge(p.get("retireage")!)
+    if (p.get("balance")) setBalance(p.get("balance")!)
+    if (p.get("salary")) setSalary(p.get("salary")!)
+    if (p.get("contrib")) setYourPct(p.get("contrib")!)
+    if (p.get("match")) setMatchPct(p.get("match")!)
+    if (p.get("return")) setReturnPct(p.get("return")!)
+  }, [])
 
   const calc = useMemo(() => {
     const ca = parseFloat(currentAge) || 0
@@ -106,6 +119,11 @@ export default function FourOhOneKPage() {
             </table>
           </div>
 
+          <ShareButtons
+            text={`Investing ${yourPct}% of my $${salary} salary in 401k = ${fmt(calc.projected)} at retirement! (Educational only)`}
+            url={`https://www.dayblip.com/finance/401k-calculator?age=${currentAge}&retireage=${retirementAge}&balance=${balance}&salary=${salary}&contrib=${yourPct}&match=${matchPct}&return=${returnPct}`}
+            title="401(k) Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">401(k) contribution limits and employer match rules vary. Consult your plan documents and a financial advisor. For educational purposes only.</p>
         </div>
       </section>

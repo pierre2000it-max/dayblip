@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtDec(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
@@ -8,6 +9,14 @@ export default function BreakEvenPage() {
   const [fixedCosts, setFixedCosts] = useState("5000")
   const [variableCost, setVariableCost] = useState("25")
   const [sellingPrice, setSellingPrice] = useState("75")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("fixed")) setFixedCosts(p.get("fixed")!)
+    if (p.get("variable")) setVariableCost(p.get("variable")!)
+    if (p.get("price")) setSellingPrice(p.get("price")!)
+  }, [])
 
   const calc = useMemo(() => {
     const fc = parseFloat(fixedCosts) || 0
@@ -126,6 +135,13 @@ export default function BreakEvenPage() {
             </>
           )}
 
+          {calc && (
+            <ShareButtons
+              text={`Break-even at ${calc.beUnits} units/month = ${fmt(calc.beRevenue)} in monthly revenue. (Educational only)`}
+              url={`https://www.dayblip.com/finance/break-even?fixed=${fixedCosts}&variable=${variableCost}&price=${sellingPrice}`}
+              title="Break Even Calculator"
+            />
+          )}
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Break-even analysis is a simplification. Actual business results vary based on many factors.</p>
         </div>
       </section>

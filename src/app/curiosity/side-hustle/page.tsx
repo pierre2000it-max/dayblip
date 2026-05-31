@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -30,6 +30,16 @@ export default function SideHustlePage() {
   const [rate,         setRate]         = useState(10.5)
   const hourly  = parseFloat(hourlyStr) || 0
   const r       = rate / 100
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("hours")) setHoursPerWeek(Number(p.get("hours")))
+    if (p.get("hourly")) setHourly(p.get("hourly")!)
+    if (p.get("invest")) setInvestPct(Number(p.get("invest")))
+    if (p.get("years")) setYears(Number(p.get("years")))
+    if (p.get("rate")) setRate(Number(p.get("rate")))
+  }, [])
 
   const calc = useMemo(() => {
     const weeklyEarn  = hoursPerWeek * hourly
@@ -153,7 +163,7 @@ export default function SideHustlePage() {
 
           <ShareButtons
             text={`A ${hoursPerWeek}hr/week side hustle invested for ${years} years could build ${fmt(calc.bigNumber)}! (Educational purposes only)`}
-            url="https://dayblip.com/curiosity/side-hustle"
+            url={`https://www.dayblip.com/curiosity/side-hustle?hours=${hoursPerWeek}&hourly=${hourlyStr}&invest=${investPct}&years=${years}&rate=${rate}`}
             title="Side Hustle Investment Calculator"
           />
           {DISCLAIMER}

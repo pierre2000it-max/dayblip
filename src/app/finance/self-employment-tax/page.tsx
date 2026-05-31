@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -21,6 +22,15 @@ export default function SelfEmploymentTaxPage() {
   const [w2Income, setW2Income] = useState("0")
   const [filing, setFiling] = useState("single")
   const [bizExpenses, setBizExpenses] = useState("5000")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("income")) setNetIncome(p.get("income")!)
+    if (p.get("other")) setW2Income(p.get("other")!)
+    if (p.get("filing")) setFiling(p.get("filing")!)
+    if (p.get("expenses")) setBizExpenses(p.get("expenses")!)
+  }, [])
 
   const calc = useMemo(() => {
     const net = (parseFloat(netIncome) || 0) - (parseFloat(bizExpenses) || 0)
@@ -132,6 +142,11 @@ export default function SelfEmploymentTaxPage() {
             </div>
           </div>
 
+          <ShareButtons
+            text={`Self-employment tax on $${netIncome}: ${fmt(calc.seTax)}. Set aside ${calc.setAsidePct}% of every payment. (Educational only)`}
+            url={`https://www.dayblip.com/finance/self-employment-tax?income=${netIncome}&other=${w2Income}&filing=${filing}&expenses=${bizExpenses}`}
+            title="Self-Employment Tax Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Does not include all deductions, credits, or state taxes. Consult a CPA for accurate tax advice.</p>
         </div>
       </section>

@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -14,6 +15,13 @@ export default function EmergencyFundPage() {
   const [expenses, setExpenses] = useState({ rent: "", utilities: "", groceries: "", transportation: "", insurance: "", other: "" })
   const [security, setSecurity] = useState(0)
   const [currentSavings, setCurrentSavings] = useState("")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("rent")) setExpenses(ex => ({ ...ex, rent: p.get("rent")! }))
+    if (p.get("security")) setSecurity(Number(p.get("security")))
+  }, [])
 
   const setE = (k: keyof typeof expenses) => (e: React.ChangeEvent<HTMLInputElement>) => setExpenses(ex => ({ ...ex, [k]: e.target.value }))
 
@@ -120,6 +128,11 @@ export default function EmergencyFundPage() {
             </div>
           )}
 
+          <ShareButtons
+            text={`I need ${fmt(calc.goal)} in my emergency fund — ${calc.multiplier} months of expenses. (Educational only)`}
+            url="https://www.dayblip.com/finance/emergency-fund"
+            title="Emergency Fund Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Emergency fund needs vary by individual circumstances.</p>
         </div>
       </section>

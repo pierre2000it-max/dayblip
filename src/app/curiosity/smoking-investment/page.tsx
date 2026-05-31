@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -23,6 +23,16 @@ export default function SmokingInvestmentPage() {
   const [rate, setRate]           = useState(10.5)
   const price = parseFloat(priceStr) || 0
   const r     = rate / 100
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("packs")) setPacksDay(Number(p.get("packs")))
+    if (p.get("price")) setPriceStr(p.get("price")!)
+    if (p.get("started")) setAgeStart(p.get("started")!)
+    if (p.get("current")) setCurrentAge(p.get("current")!)
+    if (p.get("rate")) setRate(Number(p.get("rate")))
+  }, [])
 
   const calc = useMemo(() => {
     const as  = parseInt(ageStarted) || 0
@@ -114,7 +124,7 @@ export default function SmokingInvestmentPage() {
 
           <ShareButtons
             text={`Smoking has cost me ${fmt(calc.totalSpent)} so far. Invested instead it would be ${fmt(calc.pastInvested)}! (Educational purposes only)`}
-            url="https://dayblip.com/curiosity/smoking-investment"
+            url={`https://www.dayblip.com/curiosity/smoking-investment?packs=${packsDay}&price=${priceStr}&started=${ageStarted}&current=${currentAge}&rate=${rate}`}
             title="Smoking Investment Calculator"
           />
           {DISCLAIMER}

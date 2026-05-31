@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 const CPI: Record<number, number> = {
@@ -18,6 +18,14 @@ export default function InflationPage() {
   const [amount, setAmount] = useState("100")
   const [fromYear, setFromYear] = useState(1980)
   const [toYear, setToYear] = useState(1980)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("amount")) setAmount(p.get("amount")!)
+    if (p.get("fromyear")) setFromYear(Number(p.get("fromyear")))
+    if (p.get("mode")) setMode(p.get("mode") as "past" | "present")
+  }, [])
 
   const result = useMemo(() => {
     const a = parseFloat(amount) || 0
@@ -138,8 +146,8 @@ export default function InflationPage() {
           </div>
 
           <ShareButtons
-            text="Check out this inflation calculator — see how prices have changed over decades! (Educational only)"
-            url="https://dayblip.com/finance/inflation"
+            text={`$${amount} in ${fromYear} = ${fmt(result.value)} today! That's ${result.pct} inflation. (Educational only)`}
+            url={`https://www.dayblip.com/finance/inflation?amount=${amount}&fromyear=${fromYear}&mode=${mode}`}
             title="Inflation Calculator"
           />
           <p className="text-xs text-[#a8a8b3]">CPI data based on US Bureau of Labor Statistics. For educational purposes only.</p>

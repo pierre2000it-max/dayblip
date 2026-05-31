@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
@@ -69,6 +69,16 @@ export default function TakeHomePayPage() {
   const [fourOhOneK, setFourOhOneK] = useState("6")
   const [healthIns, setHealthIns] = useState("0")
   const [otherDeductions, setOtherDeductions] = useState("0")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("salary")) setAmount(p.get("salary")!)
+    if (p.get("state")) setStateIdx(Number(p.get("state")))
+    if (p.get("filing")) setFiling(p.get("filing")!)
+    if (p.get("type")) setWageType(p.get("type") as "salary" | "hourly")
+    if (p.get("retirement")) setFourOhOneK(p.get("retirement")!)
+  }, [])
 
   const calc = useMemo(() => {
     const freq = PAY_FREQS.find(f => f[0] === payFreq)![2]
@@ -270,8 +280,8 @@ export default function TakeHomePayPage() {
           </div>
 
           <ShareButtons
-            text="Check out this take-home pay calculator — see exactly how much you keep after taxes! (Educational only)"
-            url="https://dayblip.com/finance/take-home-pay"
+            text={`My salary take-home is ${fmtK(calc.annualTakeHome)}/year after taxes. Effective rate: ${calc.effectiveRate}% (Educational only)`}
+            url={`https://www.dayblip.com/finance/take-home-pay?salary=${amount}&state=${stateIdx}&filing=${filing}&type=${wageType}&retirement=${fourOhOneK}`}
             title="Take Home Pay Calculator"
           />
           <p className="text-xs text-[#a8a8b3]">Tax calculations are estimates for educational purposes. Does not include all deductions or credits. Use IRS.gov or a tax professional for exact figures.</p>

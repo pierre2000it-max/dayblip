@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -18,6 +18,15 @@ export default function RentVsBuyPage() {
   const [years, setYears] = useState("7")
   const [investReturn, setInvestReturn] = useState("7")
   const [homeAppreciation, setHomeAppreciation] = useState("3")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("rent")) setRent(p.get("rent")!)
+    if (p.get("price")) setHomePrice(p.get("price")!)
+    if (p.get("years")) setYears(p.get("years")!)
+    if (p.get("rate")) setMortgageRate(p.get("rate")!)
+  }, [])
 
   const calc = useMemo(() => {
     const yr = Math.max(1, parseInt(years) || 7)

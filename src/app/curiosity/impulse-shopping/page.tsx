@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -34,6 +34,14 @@ export default function ImpulseShoppingPage() {
   const [cats,  setCats]  = useState<Category[]>(DEFAULTS)
   const [years, setYears] = useState(25)
   const [rate,  setRate]  = useState(10.5)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("years")) setYears(Number(p.get("years")))
+    if (p.get("rate")) setRate(Number(p.get("rate")))
+  }, [])
+
   const toggle = (id: string) => setCats(c => c.map(x => x.id === id ? { ...x, on: !x.on } : x))
   const setAmt = (id: string, v: string) => setCats(c => c.map(x => x.id === id ? { ...x, amount: v } : x))
 
@@ -138,7 +146,7 @@ export default function ImpulseShoppingPage() {
 
           <ShareButtons
             text={`My impulse shopping could cost me ${fmt(calc.highlight.value)} in future wealth! (Educational purposes only)`}
-            url="https://dayblip.com/curiosity/impulse-shopping"
+            url={`https://www.dayblip.com/curiosity/impulse-shopping?monthly=200&years=${years}&rate=${rate}`}
             title="Impulse Shopping Investment Calculator"
           />
           {DISCLAIMER}

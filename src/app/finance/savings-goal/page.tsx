@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -23,6 +24,15 @@ export default function SavingsGoalPage() {
   const [current, setCurrent] = useState("0")
   const [monthly, setMonthly] = useState("500")
   const [rate, setRate] = useState("4")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("goal")) setGoal(p.get("goal")!)
+    if (p.get("current")) setCurrent(p.get("current")!)
+    if (p.get("monthly")) setMonthly(p.get("monthly")!)
+    if (p.get("rate")) setRate(p.get("rate")!)
+  }, [])
 
   const calc = useMemo(() => {
     const g = parseFloat(goal) || 0
@@ -111,6 +121,12 @@ export default function SavingsGoalPage() {
             <span className="text-[#a8a8b3]">To reach your goal in half the time, save approximately </span>
             <span className="text-white font-bold">{fmt(calc.halfMonthly)}/month</span>
           </div>
+
+          <ShareButtons
+            text={`I'll reach my $${goal} savings goal in ${calc.years > 0 ? calc.years + "y " : ""}${calc.remMonths} months! (Educational only)`}
+            url={`https://www.dayblip.com/finance/savings-goal?goal=${goal}&current=${current}&monthly=${monthly}&rate=${rate}`}
+            title="Savings Goal Calculator"
+          />
 
           {/* Month by month */}
           {calc.rows.length > 0 && (

@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -18,6 +19,16 @@ export default function CollegeSavingsPage() {
   const [returnPct, setReturnPct] = useState("6")
   const [collegeTypeIdx, setCollegeTypeIdx] = useState(0)
   const [years, setYears] = useState("4")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("childage")) setChildAge(Number(p.get("childage")))
+    if (p.get("current")) setCurrentSavings(p.get("current")!)
+    if (p.get("monthly")) setMonthly(p.get("monthly")!)
+    if (p.get("return")) setReturnPct(p.get("return")!)
+    if (p.get("type")) setCollegeTypeIdx(Number(p.get("type")))
+  }, [])
 
   const calc = useMemo(() => {
     const startAge = parseInt(String(collegeAge)) || 18
@@ -127,6 +138,11 @@ export default function CollegeSavingsPage() {
             </ul>
           </div>
 
+          <ShareButtons
+            text={`Saving $${monthly}/month in a 529 plan — ${calc.funded ? "✅ on track" : "⚠️ gap of " + fmt(Math.abs(calc.projectedTotalCost - calc.projectedSavings))} for college. (Educational only)`}
+            url={`https://www.dayblip.com/finance/college-savings?childage=${childAge}&current=${currentSavings}&monthly=${monthly}&return=${returnPct}&type=${collegeTypeIdx}`}
+            title="College Savings Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Tuition projections are estimates using 5% annual inflation. Actual costs vary by institution. Consult a financial advisor. 529 rules vary by state.</p>
         </div>
       </section>

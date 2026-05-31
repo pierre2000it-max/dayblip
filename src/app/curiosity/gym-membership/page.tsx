@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -23,6 +23,16 @@ export default function GymMembershipPage() {
   const [rate,           setRate]        = useState(10.5)
   const monthly = parseFloat(monthlyCostStr) || 0
   const r       = rate / 100
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("monthly")) setMonthlyCost(p.get("monthly")!)
+    if (p.get("visits")) setVisits(Number(p.get("visits")))
+    if (p.get("had")) setYearsHad(Number(p.get("had")))
+    if (p.get("investyears")) setInvestYears(Number(p.get("investyears")))
+    if (p.get("rate")) setRate(Number(p.get("rate")))
+  }, [])
 
   const calc = useMemo(() => {
     const costPerVisit = visitsPerMonth > 0 ? monthly / visitsPerMonth : monthly
@@ -143,7 +153,7 @@ export default function GymMembershipPage() {
 
           <ShareButtons
             text={`My gym membership costs $${calc.costPerVisit.toFixed(2)} per actual visit! Invested instead = ${fmt(calc.invested)} in ${investYears} years. (Educational purposes only)`}
-            url="https://dayblip.com/curiosity/gym-membership"
+            url={`https://www.dayblip.com/curiosity/gym-membership?monthly=${monthlyCostStr}&visits=${visitsPerMonth}&had=${yearsHad}&investyears=${investYears}&rate=${rate}`}
             title="Gym Membership Cost Calculator"
           />
           {DISCLAIMER}

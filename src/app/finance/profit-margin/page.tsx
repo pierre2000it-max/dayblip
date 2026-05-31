@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -19,6 +20,15 @@ export default function ProfitMarginPage() {
   const [taxes, setTaxes] = useState("30000")
   const [desiredMargin, setDesiredMargin] = useState("20")
   const [units, setUnits] = useState("1000")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("revenue")) setRevenue(p.get("revenue")!)
+    if (p.get("cogs")) setCogs(p.get("cogs")!)
+    if (p.get("opex")) setOpex(p.get("opex")!)
+    if (p.get("taxes")) setTaxes(p.get("taxes")!)
+  }, [])
 
   const calc = useMemo(() => {
     const rev = parseFloat(revenue) || 0
@@ -124,6 +134,11 @@ export default function ProfitMarginPage() {
             </div>
           </div>
 
+          <ShareButtons
+            text={`Gross margin: ${calc.grossMarginPct}% | Operating: ${calc.operatingMarginPct}% | Net: ${calc.netMarginPct}%. (Educational only)`}
+            url={`https://www.dayblip.com/finance/profit-margin?revenue=${revenue}&cogs=${cogs}&opex=${opex}&taxes=${taxes}`}
+            title="Profit Margin Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Benchmarks are approximate industry averages and vary by company size, geography and business model.</p>
         </div>
       </section>

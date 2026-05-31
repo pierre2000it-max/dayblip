@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -22,6 +22,15 @@ export default function LatteFactorPage() {
   const [rate, setRate] = useState(10.5)
   const cost = parseFloat(costStr) || 0
   const r    = rate / 100
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("cost")) setCostStr(p.get("cost")!)
+    if (p.get("days")) setDaysPerWeek(Number(p.get("days")))
+    if (p.get("years")) setYears(Number(p.get("years")))
+    if (p.get("rate")) setRate(Number(p.get("rate")))
+  }, [])
 
   const calc = useMemo(() => {
     const perDay     = cost
@@ -140,7 +149,7 @@ export default function LatteFactorPage() {
 
           <ShareButtons
             text={`My daily $${cost.toFixed(2)} coffee habit could be worth ${fmt(calc.invested)} if invested for ${years} years! (Educational purposes only)`}
-            url="https://dayblip.com/curiosity/latte-factor"
+            url={`https://www.dayblip.com/curiosity/latte-factor?cost=${costStr}&days=${daysPerWeek}&years=${years}&rate=${rate}`}
             title="Latte Factor Calculator"
           />
           {DISCLAIMER}

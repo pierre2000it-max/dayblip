@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -28,6 +29,12 @@ const SAVINGS_CATS = [
 export default function BudgetCalculatorPage() {
   const [income, setIncome] = useState("5000")
   const [actuals, setActuals] = useState<Record<string, string>>({})
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("income")) setIncome(p.get("income")!)
+  }, [])
 
   const setActual = (k: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setActuals(a => ({ ...a, [k]: e.target.value }))
@@ -150,6 +157,11 @@ export default function BudgetCalculatorPage() {
             </div>
           </div>
 
+          <ShareButtons
+            text={`50/30/20 budget breakdown for $${income}/month income — free budget planner!`}
+            url={`https://www.dayblip.com/finance/budget-calculator?income=${income}`}
+            title="Budget Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">The 50/30/20 rule is a guideline, not a rigid rule. Adjust based on your income, debt, and goals. For educational purposes only.</p>
         </div>
       </section>

@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -9,6 +10,15 @@ export default function AffordabilityPage() {
   const [downPayment, setDownPayment] = useState("40000")
   const [creditScore, setCreditScore] = useState("760+")
   const [mortgageRate, setMortgageRate] = useState("7")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("income")) setIncome(p.get("income")!)
+    if (p.get("debts")) setMonthlyDebts(p.get("debts")!)
+    if (p.get("down")) setDownPayment(p.get("down")!)
+    if (p.get("rate")) setMortgageRate(p.get("rate")!)
+  }, [])
 
   const calc = useMemo(() => {
     const annInc = parseFloat(income) || 0
@@ -104,6 +114,11 @@ export default function AffordabilityPage() {
             <p className="text-sm text-[#a8a8b3]">In 1990, the median home was <span className="text-white">$149,800</span> and median income was <span className="text-white">$29,943</span> — a ratio of <span className="text-[#F9A825]">5x</span>. Today the median home is <span className="text-white">$420,000</span> with median income ~<span className="text-white">$58,000</span> — a ratio of <span className="text-[#e94560]">7.2x</span>. Affordability has declined significantly.</p>
           </div>
 
+          <ShareButtons
+            text={`Based on my income I can afford a home up to ${fmt(calc.maxHome)} (28/36 rule). (Educational only)`}
+            url={`https://www.dayblip.com/real-estate/affordability?income=${income}&debts=${monthlyDebts}&down=${downPayment}&rate=${mortgageRate}`}
+            title="Home Affordability Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. The 28/36 rule is a guideline; lenders use various criteria. Consult a mortgage professional.</p>
         </div>
       </section>

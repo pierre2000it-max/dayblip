@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -10,6 +11,17 @@ export default function RetirementSavingsPage() {
   const [monthlySavings, setMonthlySavings] = useState("500")
   const [expectedReturn, setExpectedReturn] = useState("7")
   const [desiredIncome, setDesiredIncome] = useState("5000")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("age")) setCurrentAge(p.get("age")!)
+    if (p.get("retireage")) setRetirementAge(p.get("retireage")!)
+    if (p.get("savings")) setCurrentSavings(p.get("savings")!)
+    if (p.get("monthly")) setMonthlySavings(p.get("monthly")!)
+    if (p.get("return")) setExpectedReturn(p.get("return")!)
+    if (p.get("income")) setDesiredIncome(p.get("income")!)
+  }, [])
 
   const calc = useMemo(() => {
     const ca = parseFloat(currentAge) || 0
@@ -98,6 +110,11 @@ export default function RetirementSavingsPage() {
             </div>
           )}
 
+          <ShareButtons
+            text={`${calc.onTrack ? "✅ On track" : "⚠️ Shortfall"} for retirement! Projected savings: ${fmt(calc.projected)} vs ${fmt(calc.needed)} needed. (Educational only)`}
+            url={`https://www.dayblip.com/finance/retirement-savings?age=${currentAge}&retireage=${retirementAge}&savings=${currentSavings}&monthly=${monthlySavings}&return=${expectedReturn}&income=${desiredIncome}`}
+            title="Retirement Savings Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Uses 25x rule (4% withdrawal rate). Actual retirement needs vary by individual.</p>
         </div>
       </section>

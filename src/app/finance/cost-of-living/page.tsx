@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -50,7 +51,13 @@ export default function CostOfLivingPage() {
   const [city1, setCity1] = useState("New York, NY")
   const [city2, setCity2] = useState("Austin, TX")
   const [salary, setSalary] = useState("100000")
-  const [copied, setCopied] = useState(false)
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("city1") && CITY_INDEX[decodeURIComponent(p.get("city1")!)]) setCity1(decodeURIComponent(p.get("city1")!))
+    if (p.get("city2") && CITY_INDEX[decodeURIComponent(p.get("city2")!)]) setCity2(decodeURIComponent(p.get("city2")!))
+    if (p.get("salary")) setSalary(p.get("salary")!)
+  }, [])
 
   const calc = useMemo(() => {
     const idx1 = CITY_INDEX[city1] || 100
@@ -72,16 +79,6 @@ export default function CostOfLivingPage() {
 
     return { equivalentSalary, diff, pctMore, moreOrLess, categories, annualSavings, idx1, idx2 }
   }, [city1, city2, salary])
-
-  const share = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(
-        `Moving from ${city1} to ${city2} ${calc.annualSavings > 0 ? "saves" : "costs"} me ${fmt(Math.abs(calc.annualSavings))}/year! dayblip.com/finance/cost-of-living`
-      )
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
-  }
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
   const sel = inp
@@ -160,9 +157,11 @@ export default function CostOfLivingPage() {
             <p className="text-xs text-[#a8a8b3] mt-2">Estimates based on proportional CoL index (national avg = 100). Actual category costs vary.</p>
           </div>
 
-          <button onClick={share} className="rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white hover:opacity-90">
-            {copied ? "Copied! ✓" : "Share Comparison →"}
-          </button>
+          <ShareButtons
+            text={`${city2} is ${calc.pctMore}% ${calc.moreOrLess} than ${city1}. Equivalent salary: ${fmt(calc.equivalentSalary)}.`}
+            url={`https://www.dayblip.com/finance/cost-of-living?city1=${encodeURIComponent(city1)}&city2=${encodeURIComponent(city2)}&salary=${salary}`}
+            title="Cost of Living Comparison"
+          />
           <p className="text-xs text-[#a8a8b3]">Cost of living index data is approximate. Actual costs vary significantly by neighborhood, lifestyle and personal choices. For educational purposes only.</p>
         </div>
       </section>

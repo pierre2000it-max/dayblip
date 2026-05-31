@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -22,6 +22,16 @@ export default function DiningOutPage() {
   const [years, setYears]               = useState(25)
   const [rate, setRate]                 = useState(10.5)
   const r = rate / 100
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("meals")) setTimesPerWeek(Number(p.get("meals")))
+    if (p.get("cost")) setMealCost(p.get("cost")!)
+    if (p.get("homecost")) setHomeCost(p.get("homecost")!)
+    if (p.get("years")) setYears(Number(p.get("years")))
+    if (p.get("rate")) setRate(Number(p.get("rate")))
+  }, [])
 
   const calc = useMemo(() => {
     const meal = parseFloat(mealCostStr) || 0
@@ -118,7 +128,7 @@ export default function DiningOutPage() {
 
           <ShareButtons
             text={`Dining out is costing me ${fmt(calc.diffAnnual)}/year. Invested for ${years} years = ${fmt(calc.invested)}! (Educational purposes only)`}
-            url="https://dayblip.com/curiosity/dining-out"
+            url={`https://www.dayblip.com/curiosity/dining-out?meals=${timesPerWeek}&cost=${mealCostStr}&homecost=${homeCostStr}&years=${years}&rate=${rate}`}
             title="Dining Out Opportunity Cost Calculator"
           />
           {DISCLAIMER}

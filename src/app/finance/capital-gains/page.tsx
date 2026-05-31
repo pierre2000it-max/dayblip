@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -40,6 +41,16 @@ export default function CapitalGainsPage() {
   const [holding, setHolding] = useState<"short" | "long">("long")
   const [annualIncome, setAnnualIncome] = useState("75000")
   const [filing, setFiling] = useState("single")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("purchase")) setPurchasePrice(p.get("purchase")!)
+    if (p.get("sale")) setSalePrice(p.get("sale")!)
+    if (p.get("holding")) setHolding(p.get("holding") as "short" | "long")
+    if (p.get("income")) setAnnualIncome(p.get("income")!)
+    if (p.get("filing")) setFiling(p.get("filing")!)
+  }, [])
 
   const calc = useMemo(() => {
     const pp = parseFloat(purchasePrice) || 0
@@ -181,6 +192,11 @@ export default function CapitalGainsPage() {
             </table>
           </div>
 
+          <ShareButtons
+            text={`Capital gain of ${fmt(calc.gain)} with ${calc.rateLabel} tax rate = ${fmt(calc.taxOwed)} owed. (Educational only)`}
+            url={`https://www.dayblip.com/finance/capital-gains?purchase=${purchasePrice}&sale=${salePrice}&holding=${holding}&income=${annualIncome}&filing=${filing}`}
+            title="Capital Gains Tax Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Does not include state capital gains taxes or all adjustments. Consult a CPA for accurate tax advice.</p>
         </div>
       </section>

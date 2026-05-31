@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 interface Category { label: string; min: number; max: number; color: string; bg: string }
 
@@ -24,6 +25,23 @@ export default function BMIPage() {
   const [kg, setKg] = useState("77")
   const [age, setAge] = useState("35")
   const [gender, setGender] = useState("male")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("unit")) setUnit(p.get("unit") as "imperial" | "metric")
+    if (p.get("age")) setAge(p.get("age")!)
+    if (p.get("gender")) setGender(p.get("gender")!)
+    const u = p.get("unit") || "imperial"
+    if (u === "imperial") {
+      if (p.get("height")) setFt(p.get("height")!)
+      if (p.get("inches")) setInches(p.get("inches")!)
+      if (p.get("weight")) setLbs(p.get("weight")!)
+    } else {
+      if (p.get("height")) setCm(p.get("height")!)
+      if (p.get("weight")) setKg(p.get("weight")!)
+    }
+  }, [])
 
   const calc = useMemo(() => {
     let heightM: number
@@ -124,6 +142,13 @@ export default function BMIPage() {
             </div>
           )}
 
+          {calc && (
+            <ShareButtons
+              text={`My BMI is ${calc.bmi} — ${calc.cat.label}. Healthy range for my height: ${calc.minHealthy}–${calc.maxHealthy}. (Not medical advice)`}
+              url={`https://www.dayblip.com/health/bmi-calculator?height=${unit === "imperial" ? ft : cm}&inches=${inches}&weight=${unit === "imperial" ? lbs : kg}&unit=${unit}&age=${age}&gender=${gender}`}
+              title="BMI Calculator"
+            />
+          )}
           <p className="text-xs text-[#a8a8b3]">⚠️ BMI is a screening tool only and does not directly measure body fat or account for muscle mass. Not medical advice. Consult a healthcare provider for personalized guidance.</p>
         </div>
       </section>

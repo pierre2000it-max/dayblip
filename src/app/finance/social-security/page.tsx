@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -30,6 +31,15 @@ export default function SocialSecurityPage() {
   const [benefitAt62, setBenefitAt62] = useState("1500")
   const [health, setHealth] = useState("Good")
   const [marital, setMarital] = useState("Single")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("birthyear")) setBirthYear(p.get("birthyear")!)
+    if (p.get("benefit")) setBenefitAt62(p.get("benefit")!)
+    if (p.get("health")) setHealth(p.get("health")!)
+    if (p.get("marital")) setMarital(p.get("marital")!)
+  }, [])
 
   const calc = useMemo(() => {
     const by = parseInt(birthYear) || 1965
@@ -136,6 +146,11 @@ export default function SocialSecurityPage() {
             </ul>
           </div>
 
+          <ShareButtons
+            text={`Best age to claim Social Security: ${calc.best.age} for max lifetime benefit of ${fmt(calc.best.lifetime)}! (Educational — visit ssa.gov for actual amounts)`}
+            url={`https://www.dayblip.com/finance/social-security?birthyear=${birthYear}&benefit=${benefitAt62}&health=${health}&marital=${marital}`}
+            title="Social Security Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">⚠️ This is an estimate. Visit ssa.gov for your actual Social Security benefit statement. Not financial advice.</p>
         </div>
       </section>

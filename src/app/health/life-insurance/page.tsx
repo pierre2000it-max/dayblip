@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -12,6 +13,14 @@ export default function LifeInsurancePage() {
   const [finalExpenses, setFinalExpenses] = useState("15000")
   const [existingCoverage, setExistingCoverage] = useState("0")
   const [savings, setSavings] = useState("10000")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("income")) setIncome(p.get("income")!)
+    if (p.get("years")) setYearsReplace(p.get("years")!)
+    if (p.get("mortgage")) setMortgage(p.get("mortgage")!)
+  }, [])
 
   const calc = useMemo(() => {
     const inc = parseFloat(income) || 0
@@ -88,6 +97,11 @@ export default function LifeInsurancePage() {
             </div>
           </div>
 
+          <ShareButtons
+            text={`Life insurance coverage needed: ${fmt(calc.needed)}. Gap vs existing coverage: ${fmt(calc.gap)}. (Consult a licensed professional)`}
+            url={`https://www.dayblip.com/health/life-insurance?income=${income}&years=${yearsReplace}&mortgage=${mortgage}`}
+            title="Life Insurance Needs Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">⚠️ This is a rough estimate. Consult a licensed insurance professional for accurate quotes and advice tailored to your situation. Not financial advice.</p>
         </div>
       </section>

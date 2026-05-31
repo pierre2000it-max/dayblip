@@ -194,7 +194,7 @@ export default function SubscriptionsPage() {
 
           <ShareButtons
             text={shareText}
-            url="https://dayblip.com/curiosity/subscriptions"
+            url={`https://www.dayblip.com/curiosity/subscriptions?years=${years}&rate=${rate}`}
             title="Subscription Opportunity Cost Calculator"
           />
           {DISCLAIMER}

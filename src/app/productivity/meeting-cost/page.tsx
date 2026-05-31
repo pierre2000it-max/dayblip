@@ -18,6 +18,14 @@ export default function MeetingCostPage() {
   const [manualRate, setManualRate] = useState("75")
 
   useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("attendees")) { setManualAttendees(p.get("attendees")!); setMode("manual") }
+    if (p.get("rate")) { setManualRate(p.get("rate")!); setMode("manual") }
+    if (p.get("duration")) { setManualMins(p.get("duration")!); setMode("manual") }
+  }, [])
+
+  useEffect(() => {
     if (running) {
       intervalRef.current = setInterval(() => setElapsed(e => e + 1), 1000)
     } else {
@@ -119,8 +127,8 @@ export default function MeetingCostPage() {
               </div>
 
               <ShareButtons
-                text={`Our ${manualAttendees}-person meeting cost $${manualCost.toFixed(2)} in salary time! 😱`}
-                url="https://dayblip.com/productivity/meeting-cost"
+                text={`Our ${manualAttendees}-person ${manualMins}-min meeting cost ${fmt(manualCost)} in salary time! Annual if weekly: ${fmt(annualWeekly)}.`}
+                url={`https://www.dayblip.com/productivity/meeting-cost?attendees=${manualAttendees}&rate=${manualRate}&duration=${manualMins}`}
                 title="Meeting Cost Calculator"
               />
             </div>

@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -11,6 +12,21 @@ export default function MortgagePage() {
   const [taxRate, setTaxRate] = useState("1.2")
   const [insurance, setInsurance] = useState("150")
   const [income, setIncome] = useState("")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("price")) setHomePrice(p.get("price")!)
+    if (p.get("down")) setDownPayment(p.get("down")!)
+    if (p.get("rate")) setRate(p.get("rate")!)
+    if (p.get("term")) setTerm(Number(p.get("term")))
+  }, [])
+
+  const pushUrl = () => {
+    if (typeof window === "undefined") return
+    const url = `${window.location.pathname}?price=${homePrice}&down=${downPayment}&rate=${rate}&term=${term}`
+    window.history.replaceState(null, "", url)
+  }
 
   const calc = useMemo(() => {
     const hp = parseFloat(homePrice) || 0
@@ -124,6 +140,12 @@ export default function MortgagePage() {
             </table>
           </div>
 
+          <button onClick={pushUrl} className="rounded-lg bg-[#e94560] px-5 py-2 text-sm font-semibold text-white hover:opacity-90">Share / Copy Link</button>
+          <ShareButtons
+            text={`My $${homePrice} mortgage at ${rate}% will cost ${fmt(calc.totalPaid)} total — ${fmt(calc.totalInterest)} in interest alone! Calculate yours (educational only):`}
+            url={`https://www.dayblip.com/finance/mortgage-calculator?price=${homePrice}&down=${downPayment}&rate=${rate}&term=${term}`}
+            title="Mortgage Payment Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Actual rates and costs may vary. Consult a mortgage professional.</p>
         </div>
       </section>

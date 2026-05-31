@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -51,6 +52,13 @@ export default function TaxBracketPage() {
   const [filing, setFiling] = useState<Filing>("single")
   const [otherDeductions, setOtherDeductions] = useState("0")
   const [useStandard, setUseStandard] = useState(true)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("income")) setIncome(p.get("income")!)
+    if (p.get("filing")) setFiling(p.get("filing") as Filing)
+  }, [])
 
   const calc = useMemo(() => {
     const gross = parseFloat(income) || 0
@@ -191,6 +199,11 @@ export default function TaxBracketPage() {
             </div>
           )}
 
+          <ShareButtons
+            text={`My marginal bracket is ${calc.marginalPct.toFixed(0)}% but effective rate is only ${calc.effectiveRate}%! (Educational only)`}
+            url={`https://www.dayblip.com/finance/tax-bracket?income=${income}&filing=${filing}`}
+            title="Tax Bracket Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Does not include credits, AMT, or other adjustments. Consult a tax professional or use IRS.gov for accurate calculations.</p>
         </div>
       </section>

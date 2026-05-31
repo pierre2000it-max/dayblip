@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -26,6 +26,15 @@ export default function HabitCostPage() {
   const [freq, setFreq] = useState<"daily" | "weekly">("daily")
   const [years, setYears] = useState("10")
   const [ageStarted, setAgeStarted] = useState("20")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("habit") && TABS.includes(p.get("habit")!)) setTab(p.get("habit")!)
+    if (p.get("cost")) setCostStr(p.get("cost")!)
+    if (p.get("freq") && (p.get("freq") === "daily" || p.get("freq") === "weekly")) setFreq(p.get("freq") as "daily" | "weekly")
+    if (p.get("years")) setYears(p.get("years")!)
+  }, [])
 
   const calc = useMemo(() => {
     const cost = parseFloat(costStr) || 0
@@ -108,7 +117,7 @@ export default function HabitCostPage() {
 
           <ShareButtons
             text={`My ${tab} habit has cost me ${fmt(calc.totalSpent)} over ${years} years! Calculate yours. (Educational only)`}
-            url="https://dayblip.com/health/habit-cost"
+            url={`https://www.dayblip.com/health/habit-cost?habit=${tab}&cost=${costStr}&freq=${freq}&years=${years}`}
             title="Habit Cost Calculator"
           />
         </div>

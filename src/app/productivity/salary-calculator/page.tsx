@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 
@@ -35,6 +36,14 @@ export default function SalaryCalculatorPage() {
   const [weeksPerYear, setWeeksPerYear] = useState("52")
   const [filing, setFiling] = useState("single")
   const [raisePct, setRaisePct] = useState("5")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("amount")) setAmount(p.get("amount")!)
+    if (p.get("per")) setPer(p.get("per")!)
+    if (p.get("filing")) setFiling(p.get("filing")!)
+  }, [])
 
   const calc = useMemo(() => {
     const a = parseFloat(amount) || 0
@@ -144,6 +153,11 @@ export default function SalaryCalculatorPage() {
             </div>
           </div>
 
+          <ShareButtons
+            text={`My ${per}-based ${amount} salary = ${fmt(calc.hourly)}/hour or ${fmt(calc.monthly)}/month. Take-home: ${fmt(calc.afterTaxAnnual)}/year. (Educational only)`}
+            url={`https://www.dayblip.com/productivity/salary-calculator?amount=${amount}&per=${per}&filing=${filing}`}
+            title="Salary Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">Tax estimates are approximate federal only and do not include state taxes, FICA, deductions or credits. Consult a tax professional for your actual tax liability.</p>
         </div>
       </section>

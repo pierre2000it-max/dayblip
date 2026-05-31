@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
 
@@ -22,6 +22,13 @@ const FACTORS: Factor[] = [
 export default function LifeExpectancyPage() {
   const [gender, setGender] = useState<"male" | "female">("male")
   const [currentAge, setCurrentAge] = useState("40")
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("gender")) setGender(p.get("gender") as "male" | "female")
+    if (p.get("age")) setCurrentAge(p.get("age")!)
+  }, [])
+
   const [selections, setSelections] = useState<Record<string, number>>({
     smoking: 0, exercise: 2, diet: 1, bmi: 0, alcohol: 0, stress: 0,
     sleep: 1, checkups: 1, family: 0, education: 2, social: 0,
@@ -99,8 +106,8 @@ export default function LifeExpectancyPage() {
           </div>
 
           <ShareButtons
-            text="I just calculated my estimated life expectancy! See yours at dayblip.com/health/life-expectancy (Educational only — not medical advice)"
-            url="https://dayblip.com/health/life-expectancy"
+            text={`My estimated life expectancy is ${calc.estimate} years — ${calc.yearsRemaining} years remaining! (Educational estimate only — not medical advice)`}
+            url={`https://www.dayblip.com/health/life-expectancy?gender=${gender}&age=${currentAge}`}
             title="Life Expectancy Calculator"
           />
 

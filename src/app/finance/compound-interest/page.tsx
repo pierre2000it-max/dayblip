@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -9,6 +9,17 @@ export default function CompoundInterestPage() {
   const [monthly, setMonthly] = useState("500")
   const [rate, setRate] = useState("7")
   const [years, setYears] = useState(20)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("principal")) setInitial(p.get("principal")!)
+    if (p.get("monthly")) setMonthly(p.get("monthly")!)
+    if (p.get("rate")) setRate(p.get("rate")!)
+    if (p.get("years")) setYears(Number(p.get("years")))
+  }, [])
+
+
 
   const calc = useMemo(() => {
     const p = parseFloat(initial) || 0
@@ -101,8 +112,8 @@ export default function CompoundInterestPage() {
           </div>
 
           <ShareButtons
-            text={`Starting with $${initial} and adding $${monthly}/month at ${rate}% for ${years} years could grow to ${fmt(calc.finalBalance)}! Calculate yours. (Educational only)`}
-            url="https://dayblip.com/finance/compound-interest"
+            text={`$${monthly}/month invested for ${years} years = ${fmt(calc.finalBalance)}! Only ${fmt(calc.totalContributions)} is my money, the rest is compound interest 📈 (Educational only)`}
+            url={`https://www.dayblip.com/finance/compound-interest?principal=${initial}&monthly=${monthly}&rate=${rate}&years=${years}`}
             title="Compound Interest Calculator"
           />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Results assume constant rate and do not account for taxes or fees.</p>

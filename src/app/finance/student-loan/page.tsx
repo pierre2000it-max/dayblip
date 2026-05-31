@@ -1,5 +1,6 @@
 "use client"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function addMonths(months: number) {
@@ -27,6 +28,15 @@ export default function StudentLoanPage() {
   const [rate, setRate] = useState("6.5")
   const [payment, setPayment] = useState("400")
   const [extra, setExtra] = useState("100")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("balance")) setBalance(p.get("balance")!)
+    if (p.get("rate")) setRate(p.get("rate")!)
+    if (p.get("payment")) setPayment(p.get("payment")!)
+    if (p.get("extra")) setExtra(p.get("extra")!)
+  }, [])
 
   const calc = useMemo(() => {
     const b = parseFloat(balance) || 0
@@ -101,6 +111,11 @@ export default function StudentLoanPage() {
             </ul>
           </div>
 
+          <ShareButtons
+            text={`Extra $${extra}/month on student loans saves ${fmt(calc.interestSaved)} and ${calc.monthsSaved} months! (Educational only)`}
+            url={`https://www.dayblip.com/finance/student-loan?balance=${balance}&rate=${rate}&payment=${payment}&extra=${extra}`}
+            title="Student Loan Payoff Calculator"
+          />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Loan terms vary. Visit studentaid.gov for official information.</p>
         </div>
       </section>

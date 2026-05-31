@@ -108,8 +108,8 @@ export default function NetWorthPage() {
           </div>
 
           <ShareButtons
-            text="I just calculated my net worth! Track yours at dayblip.com/finance/net-worth (Educational only)"
-            url="https://dayblip.com/finance/net-worth"
+            text="Free net worth calculator with Federal Reserve age benchmarks. (Educational only)"
+            url="https://www.dayblip.com/finance/net-worth"
             title="Net Worth Calculator"
           />
           <p className="text-xs text-[#a8a8b3]">Source: Federal Reserve Survey of Consumer Finances. For educational purposes only. Medians vary by location, occupation and many other factors.</p>
