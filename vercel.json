@@ -2,5 +2,21 @@
   "framework": "nextjs",
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "headers": [
+    {
+      "source": "/272eea5409654b49b404dee73c5f0bfb.txt",
+      "headers": [
+        { "key": "Content-Type",  "value": "text/plain; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=86400" },
+        { "key": "X-Robots-Tag",  "value": "noindex" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/272eea5409654b49b404dee73c5f0bfb.txt",
+      "destination": "/272eea5409654b49b404dee73c5f0bfb.txt"
+    }
+  ]
 }
