@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 function commas(n: number) { return Math.round(n).toLocaleString(); }
@@ -11,6 +11,13 @@ export default function AgeFactsTool() {
   const [meals,   setMeals]   = useState(3);
   const [result,  setResult]  = useState<Record<string, number> | null>(null);
   const [error,   setError]   = useState("");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const d = p.get("dob");
+    if (d) { setDob(d); }
+  }, []);
 
   const calculate = () => {
     if (!dob) { setError("Please enter your date of birth."); return; }
@@ -24,6 +31,9 @@ export default function AgeFactsTool() {
     const years   = days / 365.25;
     const minutes = days * 24 * 60;
 
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/age-facts?dob=" + dob);
+    }
     setResult({
       heartbeats:    minutes * 72,
       breaths:       minutes * 16,
@@ -126,7 +136,7 @@ export default function AgeFactsTool() {
               {result && (
                 <ShareButtons
                   text={`My heart has beaten ${Math.round(result.heartbeats).toLocaleString()} times! 😮 Find out yours!`}
-                  url="https://dayblip.com/age-facts"
+                  url={"https://www.dayblip.com/age-facts?dob=" + dob}
                   title="Fun Age Facts"
                 />
               )}

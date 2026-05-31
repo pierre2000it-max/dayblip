@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -43,6 +43,13 @@ export default function LifeProgressTool() {
   const [result,   setResult]   = useState<LifeResult | null>(null);
   const [error,    setError]    = useState("");
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const d = p.get("dob");
+    if (d) { setDob(d); }
+  }, []);
+
   const calculate = () => {
     if (!dob) { setError("Please enter your date of birth."); return; }
     const birth = new Date(dob + "T00:00:00");
@@ -70,6 +77,9 @@ export default function LifeProgressTool() {
       },
     ].sort((a, b) => a.date.getTime() - b.date.getTime());
 
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/life-progress?dob=" + dob);
+    }
     setResult({
       daysLived,
       daysRemaining:  Math.max(0, totalDays - daysLived),
@@ -185,7 +195,7 @@ export default function LifeProgressTool() {
               {result && (
                 <ShareButtons
                   text={`I am ${result.pct}% through my life 😮 ${result.daysLived.toLocaleString()} days lived, ${result.daysRemaining.toLocaleString()} days to go`}
-                  url="https://dayblip.com/life-progress"
+                  url={"https://www.dayblip.com/life-progress?dob=" + dob}
                   title="Life Progress Bar"
                 />
               )}

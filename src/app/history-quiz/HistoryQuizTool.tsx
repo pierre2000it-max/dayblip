@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 const ALL_QUESTIONS = [
@@ -50,6 +50,14 @@ export default function HistoryQuizTool() {
   const [score,    setScore]    = useState(0);
   const [feedback, setFeedback] = useState<{ correct: boolean; msg: string } | null>(null);
   const [done,     setDone]     = useState(false);
+  const [sharedResult, setSharedResult] = useState<{ score: number; total: number } | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const sc = p.get("score"), tot = p.get("total");
+    if (sc && tot) { setSharedResult({ score: parseInt(sc || "0"), total: parseInt(tot || "0") }); }
+  }, []);
 
   const q = questions[qIndex];
 
@@ -66,7 +74,12 @@ export default function HistoryQuizTool() {
   };
 
   const next = () => {
-    if (qIndex + 1 >= questions.length) { setDone(true); }
+    if (qIndex + 1 >= questions.length) {
+      setDone(true);
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", "/history-quiz?score=" + (score + (feedback?.correct ? 1 : 0)) + "&total=" + questions.length);
+      }
+    }
     else { setQIndex(i => i + 1); setFeedback(null); }
   };
 
@@ -76,6 +89,27 @@ export default function HistoryQuizTool() {
   }, []);
 
   const rating = done ? RATINGS.find(([min, max]) => score >= min && score <= max)?.[2] ?? "" : "";
+
+  if (sharedResult && !done && qIndex === 0 && !feedback) {
+    return (
+      <div className="min-h-screen bg-[#1a1a2e]">
+        <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
+          <div className="mx-auto max-w-[700px]">
+            <div className="mb-4 text-5xl">⚡</div>
+            <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Before or After? History Quiz</h1>
+          </div>
+        </section>
+        <section className="bg-[#16213e] px-6 py-14">
+          <div className="mx-auto max-w-[600px] rounded-xl border border-[#e94560]/30 bg-[#1a1a2e] p-8 text-center space-y-4">
+            <p className="text-2xl font-bold text-white">Someone scored</p>
+            <p className="text-6xl font-black text-[#e94560]">{sharedResult.score}/{sharedResult.total}</p>
+            <p className="text-xl text-white">Can you beat them?</p>
+            <button onClick={() => setSharedResult(null)} className="rounded-lg bg-[#e94560] px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90">Play Now →</button>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -142,7 +176,7 @@ export default function HistoryQuizTool() {
               {done && (
                 <ShareButtons
                   text={`I scored ${score}/10 on the history quiz! Can you beat me?`}
-                  url="https://dayblip.com/history-quiz"
+                  url={"https://www.dayblip.com/history-quiz?score=" + score + "&total=" + questions.length}
                   title="History Quiz"
                 />
               )}

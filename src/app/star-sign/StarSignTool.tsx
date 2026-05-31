@@ -36,9 +36,23 @@ export default function StarSignTool() {
   const [sign,   setSign]   = useState<typeof SIGNS[0] | null>(null);
   const [time,   setTime]   = useState<{d:number;h:number;m:number;s:number}|null>(null);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const m = p.get("month"), d = p.get("day");
+    if (m && d) {
+      const mo = parseInt(m, 10), da = parseInt(d, 10);
+      setMonth(mo); setDay(da);
+      setSign(getSign(mo, da));
+    }
+  }, []);
+
   const find = () => {
     const s = getSign(month, day);
     setSign(s);
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/star-sign?month=" + month + "&day=" + day);
+    }
   };
 
   useEffect(() => {
@@ -129,7 +143,7 @@ export default function StarSignTool() {
               {sign && time && (
                 <ShareButtons
                   text={`I am a ${sign.name}! ${sign.sym} My birthday is in ${time.d} days 🎂 Find yours!`}
-                  url="https://dayblip.com/star-sign"
+                  url={"https://www.dayblip.com/star-sign?month=" + month + "&day=" + day}
                   title="Star Sign Calculator"
                 />
               )}

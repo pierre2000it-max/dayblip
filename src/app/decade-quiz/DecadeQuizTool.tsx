@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 type Decade = "50s"|"60s"|"70s"|"80s"|"90s"|"00s";
@@ -30,11 +30,29 @@ export default function DecadeQuizTool() {
   const [answers, setAnswers]   = useState<Decade[]>([]);
   const [qIndex,  setQIndex]    = useState(0);
   const [done,    setDone]      = useState(false);
+  const [sharedResult, setSharedResult] = useState<Decade | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const r = p.get("result") as Decade | null;
+    if (r && (["50s","60s","70s","80s","90s","00s"] as Decade[]).includes(r)) {
+      setSharedResult(r);
+    }
+  }, []);
 
   const pick = useCallback((decade: Decade) => {
     const next = [...answers, decade];
     setAnswers(next);
-    if (next.length >= QUESTIONS.length) setDone(true);
+    if (next.length >= QUESTIONS.length) {
+      setDone(true);
+      const topResult = (Object.entries(
+        next.reduce((acc, d) => ({ ...acc, [d]: (acc[d as Decade] ?? 0) + 1 }), {} as Record<Decade, number>)
+      ).sort((a, b) => b[1] - a[1])[0]?.[0] as Decade) ?? null;
+      if (topResult && typeof window !== "undefined") {
+        window.history.pushState({}, "", "/decade-quiz?result=" + topResult);
+      }
+    }
     else setQIndex(i => i + 1);
   }, [answers]);
 
@@ -47,6 +65,28 @@ export default function DecadeQuizTool() {
     : null;
 
   const q = QUESTIONS[qIndex];
+
+  if (sharedResult && !done && answers.length === 0) {
+    return (
+      <div className="min-h-screen bg-[#1a1a2e]">
+        <section className="px-6 py-16 text-center" style={{ background:"linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
+          <div className="mx-auto max-w-[700px]">
+            <div className="mb-4 text-5xl">🕺</div>
+            <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Which Decade Were You Born For?</h1>
+          </div>
+        </section>
+        <section className="bg-[#16213e] px-6 py-14">
+          <div className="mx-auto max-w-[600px] rounded-xl border border-[#e94560]/30 bg-[#1a1a2e] p-8 text-center space-y-4">
+            <p className="text-xl text-white">Someone got</p>
+            <p className="text-6xl font-black text-[#e94560]">{sharedResult}</p>
+            <p className="text-white">{DESCRIPTIONS[sharedResult]}</p>
+            <p className="text-[#a8a8b3]">Can you beat them? Take the quiz!</p>
+            <button onClick={() => setSharedResult(null)} className="rounded-lg bg-[#e94560] px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90">Take the Quiz →</button>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -92,7 +132,7 @@ export default function DecadeQuizTool() {
               {result && (
                 <ShareButtons
                   text={`I was born for the ${result}! 🕺 Take the quiz!`}
-                  url="https://dayblip.com/decade-quiz"
+                  url={"https://www.dayblip.com/decade-quiz?result=" + (result ?? "")}
                   title="Decade Quiz"
                 />
               )}

@@ -38,12 +38,16 @@ export default function CouplesCountdownTool() {
   const [result,    setResult]    = useState<CouplesResult | null>(null);
   const [error,     setError]     = useState("");
 
-  // Restore names from localStorage
+  // Restore names from localStorage + URL param
   useEffect(() => {
     try {
       setName1(localStorage.getItem("cc_name1") ?? "");
       setName2(localStorage.getItem("cc_name2") ?? "");
     } catch { /* ignore */ }
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const s = p.get("since");
+    if (s) { setStartDate(s); }
   }, []);
 
   const saveName1 = (v: string) => {
@@ -81,6 +85,9 @@ export default function CouplesCountdownTool() {
       return { label: d === 365 ? "1 Year (365 days)" : `${commas(d)} days`, date, isPast, daysAway };
     });
 
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/couples-countdown?since=" + startDate);
+    }
     setResult({ years, months, days, totalDays, totalHours: totalDays * 24, totalMinutes: totalDays * 24 * 60, nextAnniversary: nextAnn, daysToAnniversary: daysToAnn, milestones });
   };
 
@@ -186,7 +193,7 @@ export default function CouplesCountdownTool() {
               {result && (
                 <ShareButtons
                   text={`We have been together ${result.totalDays.toLocaleString()} days! 💕 Calculate yours!`}
-                  url="https://dayblip.com/couples-countdown"
+                  url={"https://www.dayblip.com/couples-countdown?since=" + startDate}
                   title="Couples Countdown"
                 />
               )}

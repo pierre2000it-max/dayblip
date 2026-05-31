@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AdUnit from "@/components/AdUnit";
 import ShareButtons from "@/components/ShareButtons";
 
@@ -122,11 +122,21 @@ export default function AgeCalculatorTool() {
   const [result,    setResult]    = useState<AgeResult | null>(null);
   const [error,     setError]     = useState("");
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const d = p.get("dob");
+    if (d) { setDateInput(d); }
+  }, []);
+
   const handleCalculate = () => {
     if (!dateInput) { setError("Please enter your date of birth."); return; }
     const res = calcAge(dateInput);
     if (typeof res === "string") { setError(res); setResult(null); return; }
     setError("");
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/age-calculator?dob=" + dateInput);
+    }
     setResult(res);
   };
 
@@ -253,7 +263,7 @@ export default function AgeCalculatorTool() {
           {result && (
             <ShareButtons
               text={`I am ${result.years} years, ${result.months} months and ${result.days} days old! That is ${result.totalDays.toLocaleString()} total days alive!`}
-              url="https://dayblip.com/age-calculator"
+              url={"https://www.dayblip.com/age-calculator?dob=" + dateInput}
               title="Age Calculator"
             />
           )}

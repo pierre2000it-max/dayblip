@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 function commas(n: number) { return Math.round(n).toLocaleString(); }
@@ -9,6 +9,13 @@ export default function WeekendsLeftTool() {
   const [lifespan, setLifespan] = useState(80);
   const [result,   setResult]   = useState<{lived:number;remaining:number;totalYrs:number}|null>(null);
   const [error,    setError]    = useState("");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const d = p.get("dob");
+    if (d) { setDob(d); }
+  }, []);
 
   const calculate = () => {
     if (!dob) { setError("Please enter your date of birth."); return; }
@@ -20,6 +27,9 @@ export default function WeekendsLeftTool() {
     const weekendsLived = Math.floor(daysLived/7);
     const weekendsTotal = Math.round(lifespan*52);
     const weekendsRemaining = Math.max(0, weekendsTotal-weekendsLived);
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/weekends-left?dob=" + dob);
+    }
     setResult({ lived:weekendsLived, remaining:weekendsRemaining, totalYrs:lifespan });
   };
 
@@ -89,7 +99,7 @@ export default function WeekendsLeftTool() {
               {result && (
                 <ShareButtons
                   text={`I have approximately ${Math.round(result.remaining).toLocaleString()} weekends left. Making every one count!`}
-                  url="https://dayblip.com/weekends-left"
+                  url={"https://www.dayblip.com/weekends-left?dob=" + dob}
                   title="Weekends Left Calculator"
                 />
               )}

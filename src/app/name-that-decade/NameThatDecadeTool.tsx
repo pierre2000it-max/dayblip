@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 type Decade = "50s"|"60s"|"70s"|"80s"|"90s"|"00s";
@@ -48,6 +48,14 @@ export default function NameThatDecadeTool() {
   const [score,    setScore]     = useState(0);
   const [feedback, setFeedback]  = useState<{correct:boolean}|null>(null);
   const [done,     setDone]      = useState(false);
+  const [sharedResult, setSharedResult] = useState<{score:number;total:number}|null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const sc = p.get("score"), tot = p.get("total");
+    if (sc && tot) { setSharedResult({ score: parseInt(sc || "0"), total: parseInt(tot || "0") }); }
+  }, []);
 
   const q = questions[qIndex];
 
@@ -59,7 +67,12 @@ export default function NameThatDecadeTool() {
   };
 
   const next = () => {
-    if (qIndex+1>=10) setDone(true);
+    if (qIndex+1>=10) {
+      setDone(true);
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", "/name-that-decade?score=" + score + "&total=10");
+      }
+    }
     else { setQIndex(i=>i+1); setFeedback(null); }
   };
 
@@ -81,7 +94,14 @@ export default function NameThatDecadeTool() {
 
       <section className="bg-[#16213e] px-6 py-14">
         <div className="mx-auto max-w-[600px]">
-          {!done ? (
+          {sharedResult && !done && qIndex === 0 && !feedback ? (
+            <div className="rounded-xl border border-[#e94560]/30 bg-[#1a1a2e] p-8 text-center space-y-4">
+              <p className="text-2xl font-bold text-white">Someone scored</p>
+              <p className="text-6xl font-black text-[#e94560]">{sharedResult.score}<span className="text-2xl text-[#a8a8b3]">/{sharedResult.total}</span></p>
+              <p className="text-xl text-white">Can you beat them?</p>
+              <button onClick={() => setSharedResult(null)} className="rounded-lg bg-[#e94560] px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90">Play Now →</button>
+            </div>
+          ) : !done ? (
             <div className="space-y-6">
               <div className="flex justify-between text-sm text-[#a8a8b3]">
                 <span>Song {qIndex+1} of 10</span><span>Score: {score}/{qIndex}</span>
@@ -123,7 +143,7 @@ export default function NameThatDecadeTool() {
               </div>
               <ShareButtons
                 text={`I scored ${score}/10 on the Name That Decade music quiz! Can you beat me?`}
-                url="https://dayblip.com/name-that-decade"
+                url={"https://www.dayblip.com/name-that-decade?score=" + score + "&total=10"}
                 title="Name That Decade Quiz"
               />
             </div>

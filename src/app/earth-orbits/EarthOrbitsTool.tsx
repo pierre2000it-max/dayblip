@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 function commas(n: number) { return n.toLocaleString(); }
@@ -8,6 +8,13 @@ export default function EarthOrbitsTool() {
   const [dob,    setDob]    = useState("");
   const [result, setResult] = useState<Record<string,number|string>|null>(null);
   const [error,  setError]  = useState("");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const d = p.get("dob");
+    if (d) { setDob(d); }
+  }, []);
 
   const calculate = () => {
     if (!dob) { setError("Please enter your date of birth."); return; }
@@ -24,6 +31,9 @@ export default function EarthOrbitsTool() {
     const sunrises  = days;
     const lightYrs  = (years * 9.461e12).toExponential(2);
 
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/earth-orbits?dob=" + dob);
+    }
     setResult({ days, years:years.toFixed(4), orbits:orbits.toFixed(4), miles, moonCycles, sunrises, lightYrs });
   };
 
@@ -74,7 +84,7 @@ export default function EarthOrbitsTool() {
               {result && (
                 <ShareButtons
                   text={`Since I was born Earth has orbited the sun ${result.orbits} times and traveled ${Number(result.miles).toLocaleString()} miles! 🌍`}
-                  url="https://dayblip.com/earth-orbits"
+                  url={"https://www.dayblip.com/earth-orbits?dob=" + dob}
                   title="Earth Orbits Calculator"
                 />
               )}

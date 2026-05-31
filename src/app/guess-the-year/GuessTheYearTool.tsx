@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 const ALL_EVENTS = [
@@ -66,6 +66,14 @@ export default function GuessTheYearTool() {
   const [feedback, setFeedback] = useState<{pts:number;diff:number}|null>(null);
   const [score,    setScore]    = useState(0);
   const [done,     setDone]     = useState(false);
+  const [sharedResult, setSharedResult] = useState<{score:number}|null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const sc = p.get("score");
+    if (sc) { setSharedResult({ score: parseInt(sc || "0") }); }
+  }, []);
 
   const q = questions[qIndex];
 
@@ -79,7 +87,12 @@ export default function GuessTheYearTool() {
   };
 
   const next = () => {
-    if (qIndex+1 >= 10) setDone(true);
+    if (qIndex+1 >= 10) {
+      setDone(true);
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", "/guess-the-year?score=" + score);
+      }
+    }
     else { setQIndex(i=>i+1); setFeedback(null); setGuess("1990"); }
   };
 
@@ -101,7 +114,14 @@ export default function GuessTheYearTool() {
 
       <section className="bg-[#16213e] px-6 py-14">
         <div className="mx-auto max-w-[600px]">
-          {!done ? (
+          {sharedResult && !done && qIndex === 0 && !feedback ? (
+            <div className="rounded-xl border border-[#e94560]/30 bg-[#1a1a2e] p-8 text-center space-y-4">
+              <p className="text-2xl font-bold text-white">Someone scored</p>
+              <p className="text-6xl font-black text-[#e94560]">{sharedResult.score}<span className="text-2xl text-[#a8a8b3]">/1000</span></p>
+              <p className="text-xl text-white">Can you beat them?</p>
+              <button onClick={() => setSharedResult(null)} className="rounded-lg bg-[#e94560] px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90">Play Now →</button>
+            </div>
+          ) : !done ? (
             <div className="space-y-6">
               <div className="flex justify-between text-sm text-[#a8a8b3]">
                 <span>Question {qIndex+1} of 10</span>
@@ -154,7 +174,7 @@ export default function GuessTheYearTool() {
               </div>
               <ShareButtons
                 text={`I scored ${score}/1000 on Guess the Year! Can you beat me?`}
-                url="https://dayblip.com/guess-the-year"
+                url={"https://www.dayblip.com/guess-the-year?score=" + score}
                 title="Guess the Year Quiz"
               />
             </div>

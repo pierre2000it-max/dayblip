@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -32,6 +32,13 @@ export default function DaysAliveTool() {
   const [daysOld, setDaysOld] = useState(0);
   const [error,   setError]   = useState("");
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const d = p.get("dob");
+    if (d) { setDob(d); }
+  }, []);
+
   const calculate = () => {
     if (!dob) { setError("Please enter your date of birth."); return; }
     const birth = new Date(dob + "T00:00:00");
@@ -40,6 +47,9 @@ export default function DaysAliveTool() {
     setError("");
 
     const daysAlive = Math.floor((today.getTime() - birth.getTime()) / 86400000);
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/days-alive?dob=" + dob);
+    }
     setDaysOld(daysAlive);
 
     const ms: MilestoneResult[] = MILESTONE_DAYS.map(d => {
@@ -139,7 +149,7 @@ export default function DaysAliveTool() {
               {/* Share */}
               <ShareButtons
                 text={`I am ${daysOld.toLocaleString()} days old today! 🎉 Find out how many days old you are!`}
-                url="https://dayblip.com/days-alive"
+                url={"https://www.dayblip.com/days-alive?dob=" + dob}
                 title="Days Alive Calculator"
               />
             </div>

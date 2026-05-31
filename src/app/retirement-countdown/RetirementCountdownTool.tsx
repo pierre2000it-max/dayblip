@@ -15,6 +15,14 @@ export default function RetirementCountdownTool() {
   const [retired,  setRetired]  = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const d = p.get("dob"), a = p.get("age");
+    if (d) { setDob(d); }
+    if (a) { setRetAge(parseInt(a, 10)); }
+  }, []);
+
+  useEffect(() => {
     if (!retDate) return;
     const tick = () => {
       const now = Date.now();
@@ -33,6 +41,9 @@ export default function RetirementCountdownTool() {
     const ret   = new Date(birth.getFullYear()+retAge, birth.getMonth(), birth.getDate());
     const today = new Date(); today.setHours(0,0,0,0);
     setError("");
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/retirement-countdown?dob=" + dob + "&age=" + retAge);
+    }
     setRetDate(ret);
     setRetired(ret<=today);
   };
@@ -120,7 +131,7 @@ export default function RetirementCountdownTool() {
                   {retDate && (
                     <ShareButtons
                       text={`I retire in ${timeLeft.d} days! Counting down every day 🎉`}
-                      url="https://dayblip.com/retirement-countdown"
+                      url={"https://www.dayblip.com/retirement-countdown?dob=" + dob + "&age=" + retAge}
                       title="Retirement Countdown"
                     />
                   )}

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 const ALL_PEOPLE = [
@@ -51,6 +51,14 @@ export default function FamousOrFictionalTool() {
   const [score,    setScore]     = useState(0);
   const [feedback, setFeedback]  = useState<{correct:boolean}|null>(null);
   const [done,     setDone]      = useState(false);
+  const [sharedResult, setSharedResult] = useState<{score:number;total:number}|null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const sc = p.get("score"), tot = p.get("total");
+    if (sc && tot) { setSharedResult({ score: parseInt(sc || "0"), total: parseInt(tot || "0") }); }
+  }, []);
 
   const q = questions[qIndex];
 
@@ -62,7 +70,12 @@ export default function FamousOrFictionalTool() {
   };
 
   const next = () => {
-    if (qIndex+1>=15) setDone(true);
+    if (qIndex+1>=15) {
+      setDone(true);
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", "/famous-or-fictional?score=" + score + "&total=15");
+      }
+    }
     else { setQIndex(i=>i+1); setFeedback(null); }
   };
 
@@ -84,7 +97,14 @@ export default function FamousOrFictionalTool() {
 
       <section className="bg-[#16213e] px-6 py-14">
         <div className="mx-auto max-w-[500px]">
-          {!done ? (
+          {sharedResult && !done && qIndex === 0 && !feedback ? (
+            <div className="rounded-xl border border-[#e94560]/30 bg-[#1a1a2e] p-8 text-center space-y-4">
+              <p className="text-2xl font-bold text-white">Someone scored</p>
+              <p className="text-6xl font-black text-[#e94560]">{sharedResult.score}<span className="text-2xl text-[#a8a8b3]">/{sharedResult.total}</span></p>
+              <p className="text-xl text-white">Can you beat them?</p>
+              <button onClick={() => setSharedResult(null)} className="rounded-lg bg-[#e94560] px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90">Play Now →</button>
+            </div>
+          ) : !done ? (
             <div className="space-y-6">
               <div className="flex justify-between text-sm text-[#a8a8b3]">
                 <span>Question {qIndex+1} of 15</span><span>Score: {score}/{qIndex}</span>
@@ -124,7 +144,7 @@ export default function FamousOrFictionalTool() {
               </div>
               <ShareButtons
                 text={`I scored ${score}/15 on Famous or Fictional! Can you beat me?`}
-                url="https://dayblip.com/famous-or-fictional"
+                url={"https://www.dayblip.com/famous-or-fictional?score=" + score + "&total=15"}
                 title="Famous or Fictional Quiz"
               />
             </div>

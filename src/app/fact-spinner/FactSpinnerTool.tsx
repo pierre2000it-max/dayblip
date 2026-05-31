@@ -67,6 +67,16 @@ export default function FactSpinnerTool() {
       const saved = localStorage.getItem("fs_seen");
       if (saved) setSeenFacts(new Set(JSON.parse(saved)));
     } catch { /* ignore */ }
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const fi = p.get("fact");
+    if (fi !== null) {
+      const idx = parseInt(fi || "0", 10);
+      if (idx >= 0 && idx < FACTS.length) {
+        setFact(FACTS[idx]);
+        setFactIndex(idx);
+      }
+    }
   }, []);
 
   const spin = () => {
@@ -83,6 +93,9 @@ export default function FactSpinnerTool() {
     setTimeout(() => {
       setFact(FACTS[chosen]);
       setFactIndex(chosen);
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", "/fact-spinner?fact=" + chosen);
+      }
       const next = new Set(seenFacts).add(chosen);
       setSeenFacts(next);
       try { localStorage.setItem("fs_seen", JSON.stringify(Array.from(next))); } catch { /* ignore */ }
@@ -139,7 +152,7 @@ export default function FactSpinnerTool() {
               {fact && (
                 <ShareButtons
                   text={`${fact} 🤯 Discover more facts!`}
-                  url="https://dayblip.com/fact-spinner"
+                  url={"https://www.dayblip.com/fact-spinner?fact=" + factIndex}
                   title="Fact Spinner"
                 />
               )}

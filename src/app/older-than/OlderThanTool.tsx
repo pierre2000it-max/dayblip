@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 const COMPARISONS = [
@@ -35,11 +35,21 @@ export default function OlderThanTool() {
   const [result, setResult] = useState<{ birthYear: number; results: typeof COMPARISONS[0][] } | null>(null);
   const [error,  setError]  = useState("");
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const d = p.get("dob");
+    if (d) { setDob(d); }
+  }, []);
+
   const compare = () => {
     if (!dob) { setError("Please enter your date of birth."); return; }
     const birth = new Date(dob + "T00:00:00");
     if (isNaN(birth.getTime())) { setError("Invalid date."); return; }
     setError("");
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/older-than?dob=" + dob);
+    }
     setResult({ birthYear: birth.getFullYear(), results: COMPARISONS });
   };
 
@@ -115,7 +125,7 @@ export default function OlderThanTool() {
                 text={shareItems[0] && shareOlder[0]
                   ? `I am older than ${shareItems[0].item} but younger than ${shareOlder[0].item}! 😮 Find out yours!`
                   : "Find out if you are older than the iPhone! 😮"}
-                url="https://dayblip.com/older-than"
+                url={"https://www.dayblip.com/older-than?dob=" + dob}
                 title="Older Than Calculator"
               />
             </div>

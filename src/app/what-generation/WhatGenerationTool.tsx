@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 const GENERATIONS = [
@@ -38,13 +38,23 @@ export default function WhatGenerationTool() {
   const [result,  setResult]  = useState<typeof GENERATIONS[0]|null>(null);
   const [error,   setError]   = useState("");
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search);
+    const y = p.get("year");
+    if (y) { setYearStr(y); }
+  }, []);
+
   const find = () => {
     const y = parseInt(yearStr, 10);
     if (isNaN(y)||y<1900||y>2025) { setError("Please enter a year between 1900 and 2025."); return; }
     setError("");
     const gen = GENERATIONS.find(g => y>=g.start && y<=g.end);
     setResult(gen ?? null);
-    if (!gen) setError("No matching generation found.");
+    if (!gen) { setError("No matching generation found."); }
+    else if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/what-generation?year=" + y);
+    }
   };
 
 
@@ -90,7 +100,7 @@ export default function WhatGenerationTool() {
               {result && (
                 <ShareButtons
                   text={`I am a ${result.name}! ${result.emoji} Find yours!`}
-                  url="https://dayblip.com/what-generation"
+                  url={"https://www.dayblip.com/what-generation?year=" + yearStr}
                   title="What Generation Am I?"
                 />
               )}
