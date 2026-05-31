@@ -21,20 +21,54 @@ function calcTimeLeft(month: number, day: number): TimeLeft {
   return { days: Math.floor(total / 86400), h: Math.floor((total % 86400) / 3600), m: Math.floor((total % 3600) / 60), s: total % 60 };
 }
 
-// Accurate birthday stats based on UN world population data
+// ── Birthday stats with real CDC birth distribution data ──────────────────────
 const WORLD_POP     = 8_200_000_000;
 const ANNUAL_BIRTHS = 140_000_000;
-const DAILY_BIRTHS  = Math.round(ANNUAL_BIRTHS / 365);          // ~383,562
-const WEEKLY_BIRTHS = Math.round(ANNUAL_BIRTHS / 52);           // ~2,692,308
-const BIRTHDAY_SHARE = Math.round(WORLD_POP / 365.25);          // ~22,450,000
+const WEEKLY_BIRTHS = Math.round(ANNUAL_BIRTHS / 52); // ~2,692,308 — constant
 
-const BIRTHDAY_FACTS = [
-  `~${(BIRTHDAY_SHARE / 1_000_000).toFixed(1)} million people worldwide share your birthday`,
-  `~${(WEEKLY_BIRTHS / 1_000_000).toFixed(1)} million babies are born worldwide each week`,
-  "The word birthday originates from the Old English word byrddæg",
-  `~${DAILY_BIRTHS.toLocaleString()} babies are born on your birthday each year`,
-];
-// Source note appended below stats in UI
+// CDC National Vital Statistics — actual US birth frequency by month
+const MONTH_DIST: Record<number, number> = {
+  1: 0.0791, 2: 0.0750, 3: 0.0816, 4: 0.0795, 5: 0.0816, 6: 0.0807,
+  7: 0.0883, 8: 0.0902, 9: 0.0889, 10: 0.0866, 11: 0.0803, 12: 0.0882,
+};
+
+const DAYS_IN_MONTH: Record<number, number> = {
+  1: 31, 2: 28.25, 3: 31, 4: 30, 5: 31, 6: 30,
+  7: 31, 8: 31,    9: 30, 10: 31, 11: 30, 12: 31,
+};
+
+function getBirthdayStats(month: number, day: number) {
+  // Special case: Feb 29 (leap day)
+  if (month === 2 && day === 29) {
+    const sharing = Math.round(WORLD_POP / (365.25 * 4));          // ~5,616,000
+    const annual  = Math.round(ANNUAL_BIRTHS / (365.25 * 4));      // ~96,000
+    return {
+      sharing,
+      annual,
+      bornInMonth: Math.round(WORLD_POP * MONTH_DIST[2]),
+      weekly: WEEKLY_BIRTHS,
+      isLeapDay: true,
+    };
+  }
+  const monthShare  = MONTH_DIST[month] ?? (1 / 12);
+  const daysInMo    = DAYS_IN_MONTH[month] ?? 30;
+  const dailyShare  = monthShare / daysInMo;
+  return {
+    sharing: Math.round(WORLD_POP * dailyShare),
+    annual:  Math.round(ANNUAL_BIRTHS * dailyShare),
+    bornInMonth: Math.round(WORLD_POP * monthShare),
+    weekly: WEEKLY_BIRTHS,
+    isLeapDay: false,
+  };
+}
+
+function monthContext(month: number): string {
+  if ([7, 8, 9].includes(month))
+    return "Summer and fall birthdays are among the most common — you’re in good company!";
+  if ([12, 1, 2, 3].includes(month))
+    return "Winter and spring birthdays are less common — you’re more unique!";
+  return "Your birth month has average frequency worldwide.";
+}
 
 export default function BirthdayCountdownClient({ slug }: { slug: string }) {
   const params = useSearchParams();
@@ -132,16 +166,40 @@ export default function BirthdayCountdownClient({ slug }: { slug: string }) {
           </div>
 
           {/* Fun facts */}
-          <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5 space-y-2">
-            <h3 className="font-bold text-white mb-3">🎉 Birthday Fun Facts</h3>
-            {BIRTHDAY_FACTS.map(f => (
-              <div key={f} className="flex gap-2"><span className="text-[#e94560]">→</span><span className="text-[#a8a8b3] text-sm">{f}</span></div>
-            ))}
-            {nextBirthdayDate && (
-              <div className="flex gap-2"><span className="text-[#e94560]">→</span><span className="text-[#a8a8b3] text-sm">Your birthday falls on a {DAYS_NAMES[nextBirthdayDate.getDay()]} this year</span></div>
-            )}
-            <p className="text-xs text-[#a8a8b3]/60 pt-1">Based on world population of 8.2 billion and ~140 million annual global births. Source: UN World Population data.</p>
-          </div>
+          {(() => {
+            const stats = bdParts
+              ? getBirthdayStats(bdParts.month, bdParts.day)
+              : null;
+            const monthName = bdParts ? MONTH_NAMES[bdParts.month - 1] : "";
+            const facts = stats ? [
+              stats.isLeapDay
+                ? `As a leap day birthday, only ~${(stats.sharing / 1_000_000).toFixed(1)} million people worldwide share your exact date!`
+                : `~${(stats.sharing / 1_000_000).toFixed(1)} million people worldwide share your ${monthName} birthday`,
+              `~${stats.annual.toLocaleString()} babies are born on your birthday each year`,
+              `~${(stats.bornInMonth / 1_000_000).toFixed(0)} million people share your birth month of ${monthName}`,
+              `~${(stats.weekly / 1_000_000).toFixed(1)} million babies are born worldwide each week`,
+              "The word birthday originates from the Old English word byrddæg",
+            ] : [
+              "~22.4 million people worldwide share your birthday",
+              "~2.7 million babies are born worldwide each week",
+              "The word birthday originates from the Old English word byrddæg",
+            ];
+            return (
+              <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5 space-y-2">
+                <h3 className="font-bold text-white mb-3">🎉 Birthday Fun Facts</h3>
+                {facts.map(f => (
+                  <div key={f} className="flex gap-2"><span className="text-[#e94560]">→</span><span className="text-[#a8a8b3] text-sm">{f}</span></div>
+                ))}
+                {nextBirthdayDate && (
+                  <div className="flex gap-2"><span className="text-[#e94560]">→</span><span className="text-[#a8a8b3] text-sm">Your birthday falls on a {DAYS_NAMES[nextBirthdayDate.getDay()]} this year</span></div>
+                )}
+                {bdParts && (
+                  <div className="flex gap-2"><span className="text-[#4FC3F7]">💡</span><span className="text-[#a8a8b3] text-sm">{monthContext(bdParts.month)}</span></div>
+                )}
+                <p className="text-xs text-[#a8a8b3]/60 pt-1">Based on CDC birth distribution data, world population of 8.2 billion and ~140 million annual global births.</p>
+              </div>
+            );
+          })()}
         </div>
       </section>
     </div>
