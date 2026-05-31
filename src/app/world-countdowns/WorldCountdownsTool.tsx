@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 // ── Date helpers ──────────────────────────────────────────────────────────────
 
@@ -167,6 +168,14 @@ export default function WorldCountdownsTool() {
                 <div className="text-xl font-bold text-white tabular-nums">{times[i]}</div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-10 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center">
+            <p className="text-[#a8a8b3] text-sm mb-2">Want more real-time world stats?</p>
+            <Link href="/world-counters"
+              className="inline-block rounded-lg bg-[#e94560] px-6 py-3 font-semibold text-white hover:opacity-90 transition-opacity">
+              🌍 World Live Counters — Births, Debt &amp; More →
+            </Link>
           </div>
         </div>
       </section>

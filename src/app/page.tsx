@@ -551,6 +551,7 @@ export default function HomePage() {
               "/world-records":        { emoji: "🏆", title: "World Records",         desc: "How records changed over time" },
               "/birthday-now":         { emoji: "🌍", title: "Birthday Time Zones",   desc: "Is it your birthday anywhere?" },
               "/earth-orbits":         { emoji: "🌌", title: "Earth Orbits",          desc: "Cosmic facts about your lifetime" },
+              "/world-counters":       { emoji: "🌍", title: "World Live Counters",   desc: "Watch births, debt, emails tick live" },
               "/newspaper":            { emoji: "📰", title: "Newspaper Generator",   desc: "Headlines from any date in history" },
               "/week-number":          { emoji: "📅", title: "Week Number",           desc: "What week number is it today?" },
               "/birth-number":         { emoji: "🔢", title: "Your Birth Number",     desc: "What number human are you?" },
@@ -561,7 +562,7 @@ export default function HomePage() {
               { heading: "🎮 Games & Quizzes", hrefs: ["/history-quiz","/decade-quiz","/daily-trivia","/guess-the-year","/how-long-ago","/famous-or-fictional","/timeline-builder","/name-that-decade"] },
               { heading: "🌟 Fun & Viral", hrefs: ["/fact-spinner","/celebrity-age","/birthday-twins","/older-than","/age-facts","/star-sign","/full-moons","/world-countdowns","/this-day-in-my-life","/number-one-song"] },
               { heading: "📚 History & World", hrefs: ["/days-since","/country-history","/science-today","/presidents","/how-long-to-build","/world-records","/price-history","/tech-nostalgia","/newspaper","/this-week-in-history"] },
-              { heading: "🌍 Cosmic & Curiosity", hrefs: ["/earth-orbits","/world-population","/birth-number","/time-capsule","/birthday-weather","/time-spent","/day-of-year","/week-number","/what-generation","/birthday-now","/oldest-things"] },
+              { heading: "🌍 Cosmic & Curiosity", hrefs: ["/world-counters","/earth-orbits","/world-population","/birth-number","/time-capsule","/birthday-weather","/time-spent","/day-of-year","/week-number","/what-generation","/birthday-now","/oldest-things"] },
             ];
             return SUBSECTIONS.map((section) => (
               <div key={section.heading} className="mb-12 border-t border-[#0f3460] pt-8">

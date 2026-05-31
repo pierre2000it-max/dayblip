@@ -151,6 +151,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/productivity/salary-calculator", 0.8),
 
     // ═══════════════════════════════════════════════════════════════════════
+    // WORLD LIVE COUNTERS  (priority 0.85, daily)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/world-counters",               0.85, DAILY),
+    p("/world-counters/population",    0.85, DAILY),
+    p("/world-counters/us-debt",       0.85, DAILY),
+    p("/world-counters/births-today",  0.85, DAILY),
+
+    // ═══════════════════════════════════════════════════════════════════════
     // CURIOSITY / OPPORTUNITY-COST CALCULATORS  (priority 0.85, monthly)
     // ═══════════════════════════════════════════════════════════════════════
     p("/curiosity/subscriptions",      0.85),

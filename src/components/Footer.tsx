@@ -17,14 +17,15 @@ const toolLinks = [
 ];
 
 const funViralLinks = [
+  { label: "World Live Counters", href: "/world-counters" },
+  { label: "US Debt Live", href: "/world-counters/us-debt" },
+  { label: "Population Live", href: "/world-counters/population" },
   { label: "Life Progress Bar", href: "/life-progress" },
   { label: "Birthday Twins", href: "/birthday-twins" },
   { label: "Celebrity Ages", href: "/celebrity-age" },
   { label: "Couples Countdown", href: "/couples-countdown" },
   { label: "Weekends Left", href: "/weekends-left" },
-  { label: "Baby Age", href: "/baby-age" },
   { label: "Star Sign", href: "/star-sign" },
-  { label: "Retirement Countdown", href: "/retirement-countdown" },
   { label: "Birthday Countdown", href: "/birthday-countdown" },
 ];
 
