@@ -21,11 +21,20 @@ function calcTimeLeft(month: number, day: number): TimeLeft {
   return { days: Math.floor(total / 86400), h: Math.floor((total % 86400) / 3600), m: Math.floor((total % 3600) / 60), s: total % 60 };
 }
 
+// Accurate birthday stats based on UN world population data
+const WORLD_POP     = 8_200_000_000;
+const ANNUAL_BIRTHS = 140_000_000;
+const DAILY_BIRTHS  = Math.round(ANNUAL_BIRTHS / 365);          // ~383,562
+const WEEKLY_BIRTHS = Math.round(ANNUAL_BIRTHS / 52);           // ~2,692,308
+const BIRTHDAY_SHARE = Math.round(WORLD_POP / 365.25);          // ~22,450,000
+
 const BIRTHDAY_FACTS = [
-  "About 18 million people share your birthday worldwide",
-  "More than 19 million people are born each week on Earth",
+  `~${(BIRTHDAY_SHARE / 1_000_000).toFixed(1)} million people worldwide share your birthday`,
+  `~${(WEEKLY_BIRTHS / 1_000_000).toFixed(1)} million babies are born worldwide each week`,
   "The word birthday originates from the Old English word byrddæg",
+  `~${DAILY_BIRTHS.toLocaleString()} babies are born on your birthday each year`,
 ];
+// Source note appended below stats in UI
 
 export default function BirthdayCountdownClient({ slug }: { slug: string }) {
   const params = useSearchParams();
@@ -131,6 +140,7 @@ export default function BirthdayCountdownClient({ slug }: { slug: string }) {
             {nextBirthdayDate && (
               <div className="flex gap-2"><span className="text-[#e94560]">→</span><span className="text-[#a8a8b3] text-sm">Your birthday falls on a {DAYS_NAMES[nextBirthdayDate.getDay()]} this year</span></div>
             )}
+            <p className="text-xs text-[#a8a8b3]/60 pt-1">Based on world population of 8.2 billion and ~140 million annual global births. Source: UN World Population data.</p>
           </div>
         </div>
       </section>

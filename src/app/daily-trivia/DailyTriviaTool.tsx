@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const QUESTIONS = [
   { q:"In what year did the Berlin Wall fall?", opts:["1987","1989","1991","1993"], ans:"1989", exp:"The Berlin Wall fell on November 9, 1989, marking the end of the Cold War division of Germany." },
@@ -89,9 +90,6 @@ export default function DailyTriviaTool() {
     } catch { /* ignore */ }
   };
 
-  const shareText = answered
-    ? encodeURIComponent(`I got today's history trivia ${answered === q.ans ? "correct" : "wrong"}! 🧠\nTry it yourself → dayblip.com/daily-trivia`)
-    : "";
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -148,10 +146,14 @@ export default function DailyTriviaTool() {
           </div>
 
           {answered && (
-            <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-              className="inline-block rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-              Share on X →
-            </a>
+            <div className="space-y-2">
+              <p className="text-sm font-semibold text-white">Share Today&apos;s Trivia</p>
+              <ShareButtons
+                text={`I just answered today's daily trivia on Dayblip! Test your knowledge 👇`}
+                url="https://dayblip.com/daily-trivia"
+                title="Daily Trivia — Dayblip"
+              />
+            </div>
           )}
         </div>
       </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -351,9 +352,9 @@ export default function CelebrityAgeTool() {
   const myAge      = myBirth ? calcAge(myBirth) : null;
   const ageDiff    = (age && myAge) ? Math.abs(age.years - myAge.years) : null;
   const celebOlder = (celebrity && myBirth) ? celebrity.birthDate < myBirth : null;
-  const shareText  = celebrity && age
-    ? encodeURIComponent(`${celebrity.name} is ${age.years} years old today!\nThey turn ${turningAge} in ${timeLeft.days} days 🎂\nCheck any celebrity → dayblip.com/celebrity-age`)
-    : "";
+  const shareTextPlain = celebrity && age
+    ? `${celebrity.name} is ${age.years} years old! Calculate any celebrity age at dayblip.com/celebrity-age`
+    : "Free celebrity age calculator — find out how old any famous person is! dayblip.com/celebrity-age";
 
   const isWorking = isSearching || isLoadingBirth;
 
@@ -565,16 +566,11 @@ export default function CelebrityAgeTool() {
             </div>
 
             {/* Share */}
-            <div className="flex flex-wrap gap-3">
-              <a href={`https://twitter.com/intent/tweet?text=${shareText}`} target="_blank" rel="noopener noreferrer"
-                className="rounded-lg border border-[#333] bg-black px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share {celebrity.name}&apos;s Age on X →
-              </a>
-              <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent("https://dayblip.com/celebrity-age")}`} target="_blank" rel="noopener noreferrer"
-                className="rounded-lg bg-[#1877f2] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
-                Share on Facebook →
-              </a>
-            </div>
+            <ShareButtons
+              text={shareTextPlain}
+              url="https://dayblip.com/celebrity-age"
+              title="Celebrity Age Calculator"
+            />
 
             {/* Same birthday */}
             <div className="rounded-xl border border-[#0f3460] bg-[#16213e] p-6">

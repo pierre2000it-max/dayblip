@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -420,6 +420,28 @@ export default function BirthdayTwinsTool() {
   const [month,   setMonth]   = useState(1);
   const [day,     setDay]     = useState(1);
   const [searched,setSearched]= useState(false);
+  const [urlDateParam, setUrlDateParam] = useState<string | null>(null);
+
+  // On mount, check for ?date=YYYY-MM-DD and auto-load
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const dateParam = params.get("date");
+    if (dateParam) {
+      // Parse YYYY-MM-DD
+      const parts = dateParam.split("-");
+      if (parts.length >= 3) {
+        const m = parseInt(parts[1], 10);
+        const d = parseInt(parts[2], 10);
+        if (m >= 1 && m <= 12 && d >= 1 && d <= 31) {
+          setMonth(m);
+          setDay(d);
+          setSearched(true);
+          setUrlDateParam(dateParam);
+        }
+      }
+    }
+  }, []);
 
   const safeDay   = Math.min(day, MAX_DAYS[month - 1]);
   const key       = `${MONTH_SLUG[month - 1]}-${safeDay}`;
@@ -427,6 +449,24 @@ export default function BirthdayTwinsTool() {
   const dateLabel = `${MONTHS[month - 1]} ${safeDay}`;
   const currentYear = new Date().getFullYear();
   const sign      = getStarSign(month, safeDay);
+
+  // Build share URL with encoded date
+  const shareDateParam = `${new Date().getFullYear()}-${String(month).padStart(2,"0")}-${String(safeDay).padStart(2,"0")}`;
+  const shareUrl = `https://dayblip.com/birthday-twins?date=${shareDateParam}`;
+
+  // Update browser URL when user searches (without full navigation)
+  const pushAndSearch = (m: number, d: number) => {
+    const safe = Math.min(d, MAX_DAYS[m - 1]);
+    if (typeof window !== "undefined") {
+      const dateStr = `${new Date().getFullYear()}-${String(m).padStart(2,"0")}-${String(safe).padStart(2,"0")}`;
+      window.history.pushState({}, "", `/birthday-twins?date=${dateStr}`);
+    }
+    setMonth(m);
+    setDay(d);
+    setSearched(true);
+  };
+
+  const handleSearch = () => pushAndSearch(month, safeDay);
 
 
   return (
@@ -467,20 +507,25 @@ export default function BirthdayTwinsTool() {
             <div className="mb-4 flex flex-wrap gap-2">
               {POPULAR_DATES.map(pd => (
                 <button key={pd.label}
-                  onClick={() => { setMonth(pd.month); setDay(pd.day); setSearched(true); }}
+                  onClick={() => pushAndSearch(pd.month, pd.day)}
                   className="rounded-full border border-[#0f3460] bg-[#16213e] px-3 py-1 text-xs text-[#a8a8b3] transition-colors hover:border-[#e94560] hover:text-white">
                   {pd.label}
                 </button>
               ))}
             </div>
 
-            <button onClick={() => setSearched(true)}
+            <button onClick={handleSearch}
               className="w-full rounded-lg bg-[#e94560] py-3 font-semibold text-white transition-opacity hover:opacity-90">
               Find My Birthday Twins →
             </button>
           </div>
 
           {/* Results — instant from database */}
+          {searched && urlDateParam && (
+            <div className="mt-4 rounded-lg border border-[#4FC3F7]/30 bg-[#4FC3F7]/10 px-4 py-2 text-sm text-[#4FC3F7]">
+              Showing birthday twins for <strong>{dateLabel}</strong> — enter your own birthday below to find yours!
+            </div>
+          )}
           {searched && (
             <div className="mt-8">
               <div className="flex items-center gap-3 mb-2">
@@ -498,7 +543,7 @@ export default function BirthdayTwinsTool() {
                   <div className="flex flex-wrap justify-center gap-2">
                     {POPULAR_DATES.map(pd => (
                       <button key={pd.label}
-                        onClick={() => { setMonth(pd.month); setDay(pd.day); }}
+                        onClick={() => pushAndSearch(pd.month, pd.day)}
                         className="rounded-full border border-[#0f3460] px-4 py-1.5 text-sm text-[#a8a8b3] hover:border-[#e94560] hover:text-white transition-colors">
                         {pd.label}
                       </button>
@@ -522,9 +567,9 @@ export default function BirthdayTwinsTool() {
 
                   <ShareButtons
                     text={people.length >= 2
-                      ? `My birthday twins are famous people who share my birthday! Find yours!`
-                      : "Find famous people who share your birthday!"}
-                    url="https://dayblip.com/birthday-twins"
+                      ? `My birthday twins are ${people.slice(0,3).map(p=>p.name).join(", ")}! We all share ${dateLabel} as our birthday! Find yours!`
+                      : `Find famous people who share your ${dateLabel} birthday!`}
+                    url={shareUrl}
                     title="Birthday Twin Finder"
                   />
                 </>
