@@ -36,6 +36,15 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
+
+          {/* Live — pulsing dot */}
+          <Link
+            href="/world-counters"
+            className="flex items-center gap-1.5 text-white transition-colors duration-200 hover:text-[#e94560]"
+          >
+            <span className="h-2 w-2 rounded-full bg-[#e94560] animate-pulse shrink-0" />
+            Live
+          </Link>
         </nav>
 
         {/* Hamburger */}
@@ -63,6 +72,16 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
+
+          {/* Live — mobile */}
+          <Link
+            href="/world-counters"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center gap-2 px-6 py-3 text-white transition-colors duration-200 hover:text-[#e94560]"
+          >
+            <span className="h-2 w-2 rounded-full bg-[#e94560] animate-pulse shrink-0" />
+            Live
+          </Link>
         </nav>
       )}
     </header>

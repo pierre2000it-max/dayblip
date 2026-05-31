@@ -155,6 +155,15 @@ export default function HomePage() {
           Countdowns, date tools &amp; curious facts — all in one place
         </p>
 
+        {/* Live counters pill */}
+        <Link
+          href="/world-counters"
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#e94560]/40 bg-[#e94560]/10 px-4 py-2 text-sm text-white transition-colors hover:bg-[#e94560]/20"
+        >
+          <span className="h-2 w-2 rounded-full bg-[#e94560] animate-pulse shrink-0" />
+          Live: Watch world births, deaths and US debt tick in real time →
+        </Link>
+
         {/* Date input + Calculate button */}
         <div className="flex w-full max-w-md gap-2 mb-6">
           <input
