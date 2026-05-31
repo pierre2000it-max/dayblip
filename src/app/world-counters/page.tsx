@@ -3,44 +3,67 @@ import { useState, useEffect, useMemo } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import Link from "next/link"
 
-// ── Constants & baselines ─────────────────────────────────────────────────────
-
+// ── Annual baselines ──────────────────────────────────────────────────────────
 const WORLD_POP        = 8_200_000_000
-const ANNUAL_BIRTHS    = 140_000_000
-const ANNUAL_DEATHS    = 58_000_000
-const ANNUAL_NET       = ANNUAL_BIRTHS - ANNUAL_DEATHS          // 82M
+const ANNUAL_BIRTHS    = 140_000_000       // UN 2024
+const ANNUAL_DEATHS    = 58_000_000        // WHO
+const ANNUAL_NET       = ANNUAL_BIRTHS - ANNUAL_DEATHS   // 82M
 const DEBT_JAN1_2026   = 36_400_000_000_000
-const DEBT_PER_SEC     = 72_920
+const DEBT_PER_SEC     = 72_920            // ~$2.3T / yr
 const WORLD_GDP_ANNUAL = 105_000_000_000_000
-const EMAILS_PER_DAY   = 347_000_000_000
+const EMAILS_PER_DAY   = 347_000_000_000  // Statista — per DAY not per year
 const GOOGLE_ANNUAL    = 8_500_000_000_000
 const TREES_CUT_ANNUAL = 15_000_000_000
 const TREES_PLANT_ANN  = 1_800_000_000
 const LIGHTNING_ANNUAL = 1_400_000_000
-const COFFEE_PER_DAY   = 2_250_000_000          // cups/day estimate
+const COFFEE_PER_DAY   = 2_250_000_000    // cups/day (ICO 2024)
 const MCDONALDS_ANNUAL = 9_000_000_000
 const CIGS_ANNUAL      = 5_600_000_000_000
-const HEARTBEATS_PER_SEC_WORLD = WORLD_POP * (70 / 60)  // bpm
-const STEPS_PER_SEC    = 8000 / 86400
 
-const SECS_YEAR = 31_557_600  // 365.25 days
+// Derived per-second rates
+const SECS_YEAR        = 365.25 * 86_400  // 31,557,600
+const SECS_DAY         = 86_400
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+const BIRTHS_PER_SEC   = ANNUAL_BIRTHS  / SECS_YEAR   // ~4.434
+const DEATHS_PER_SEC   = ANNUAL_DEATHS  / SECS_YEAR   // ~1.838
+const NET_PER_SEC      = ANNUAL_NET     / SECS_YEAR   // ~2.597
+const GDP_PER_SEC      = WORLD_GDP_ANNUAL / SECS_YEAR
+const GOOGLE_PER_SEC   = GOOGLE_ANNUAL  / SECS_YEAR
+const TREES_CUT_PER_SEC = TREES_CUT_ANNUAL / SECS_YEAR
+const TREES_PLANT_PER_SEC = TREES_PLANT_ANN / SECS_YEAR
+const LIGHTNING_PER_SEC = LIGHTNING_ANNUAL / SECS_YEAR
+const MCDONALDS_PER_SEC = MCDONALDS_ANNUAL / SECS_YEAR
+const CIGS_PER_SEC     = CIGS_ANNUAL    / SECS_YEAR
+const EMAILS_PER_SEC   = EMAILS_PER_DAY / SECS_DAY    // per-day baseline ÷ 86400
+const COFFEE_PER_SEC   = COFFEE_PER_DAY / SECS_DAY
+const YOUTUBE_PER_SEC  = 500 / 60                     // 500 hrs/min uploaded
+const HEARTBEATS_PER_SEC_WORLD = WORLD_POP * (70 / 60)
 
-function secondsToday(now: Date): number {
-  const sod = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+const STEPS_PER_SEC    = 8_000 / SECS_DAY
+
+// ── Time helpers ──────────────────────────────────────────────────────────────
+
+function getSecToday(now: Date): number {
+  const sod = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
   return (now.getTime() - sod.getTime()) / 1000
 }
 
-function secondsSinceJan1(now: Date): number {
-  const jan1 = new Date(now.getFullYear(), 0, 1)
+function getSecThisYear(now: Date): number {
+  const jan1 = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
   return (now.getTime() - jan1.getTime()) / 1000
 }
 
+function getSecCurrentHour(now: Date): number {
+  return now.getMinutes() * 60 + now.getSeconds()
+}
+
+// ── Formatters ────────────────────────────────────────────────────────────────
+
 function fmtBig(n: number, prefix = ""): string {
-  if (n >= 1e12) return `${prefix}${(n / 1e12).toFixed(2)} trillion`
-  if (n >= 1e9)  return `${prefix}${(n / 1e9).toFixed(2)} billion`
-  if (n >= 1e6)  return `${prefix}${(n / 1e6).toFixed(2)} million`
+  const abs = Math.abs(n)
+  if (abs >= 1e12) return `${prefix}${(n / 1e12).toFixed(2)} trillion`
+  if (abs >= 1e9)  return `${prefix}${(n / 1e9).toFixed(2)} billion`
+  if (abs >= 1e6)  return `${prefix}${(n / 1e6).toFixed(2)} million`
   return `${prefix}${Math.floor(n).toLocaleString()}`
 }
 
@@ -84,21 +107,23 @@ export default function WorldCountersPage() {
     return () => clearInterval(t)
   }, [])
 
-  const secToday   = secondsToday(now)
-  const secThisYr  = secondsSinceJan1(now)
-  const currentDebt = DEBT_JAN1_2026 + secThisYr * DEBT_PER_SEC
+  // Time buckets — recalculate each tick
+  const secToday      = getSecToday(now)
+  const secThisYear   = getSecThisYear(now)
+  const secThisHour   = getSecCurrentHour(now)
+  const currentDebt   = DEBT_JAN1_2026 + secThisYear * DEBT_PER_SEC
 
   const secSinceBirth = dobDate ? (now.getTime() - dobDate.getTime()) / 1000 : null
 
   const birthStats = useMemo(() => {
     if (!secSinceBirth || secSinceBirth <= 0) return null
     return {
-      heartbeats:    Math.floor(secSinceBirth * (70 / 60)),
-      steps:         Math.floor(secSinceBirth * STEPS_PER_SEC),
-      babiesBorn:    Math.floor(secSinceBirth * (ANNUAL_BIRTHS / SECS_YEAR)),
-      debtGrowth:    secSinceBirth * DEBT_PER_SEC,
-      popGrowth:     Math.floor(secSinceBirth * (ANNUAL_NET / SECS_YEAR)),
-      coffeeCups:    Math.floor(secSinceBirth * (COFFEE_PER_DAY / 86400)),
+      heartbeats: Math.floor(secSinceBirth * (70 / 60)),
+      steps:      Math.floor(secSinceBirth * STEPS_PER_SEC),
+      babiesBorn: Math.floor(secSinceBirth * BIRTHS_PER_SEC),
+      debtGrowth: secSinceBirth * DEBT_PER_SEC,
+      popGrowth:  Math.floor(secSinceBirth * NET_PER_SEC),
+      coffeeCups: Math.floor(secSinceBirth * COFFEE_PER_SEC),
     }
   }, [secSinceBirth])
 
@@ -121,8 +146,8 @@ export default function WorldCountersPage() {
           <div className="flex flex-wrap justify-center gap-3 mt-6">
             {[
               { href: "/world-counters/population", label: "🌱 Population Counter" },
-              { href: "/world-counters/us-debt", label: "💸 US Debt Live" },
-              { href: "/world-counters/births-today", label: "👶 Births Today" },
+              { href: "/world-counters/us-debt",    label: "💸 US Debt Live"       },
+              { href: "/world-counters/births-today",label: "👶 Births Today"      },
             ].map(l => (
               <Link key={l.href} href={l.href}
                 className="rounded-full border border-[#0f3460] bg-[#16213e] px-5 py-2 text-sm text-[#a8a8b3] hover:border-[#e94560] hover:text-white transition-colors">
@@ -136,7 +161,7 @@ export default function WorldCountersPage() {
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[1100px] space-y-14">
 
-          {/* ── PERSONAL SECTION ─────────────────────────────────────────── */}
+          {/* ── PERSONAL SECTION ───────────────────────────────────────────── */}
           <div>
             <h2 className="text-2xl font-bold text-white mb-2">⏳ Since You Were Born</h2>
             <p className="text-[#a8a8b3] text-sm mb-6">Enter your birthday to see what happened in the world since your first breath.</p>
@@ -152,12 +177,12 @@ export default function WorldCountersPage() {
 
             {birthStats ? (
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-                <CounterCard emoji="❤️" label="Times your heart has beaten" value={fmtWhole(birthStats.heartbeats)} color="#f87171" />
-                <CounterCard emoji="👟" label="Steps you have taken (est.)" value={fmtWhole(birthStats.steps)} color="#4ade80" sublabel="Based on 8,000 avg steps/day" />
-                <CounterCard emoji="👶" label="Babies born since you" value={fmtBig(birthStats.babiesBorn)} color="#4ade80" />
-                <CounterCard emoji="📈" label="US debt growth since you" value={fmtDebt(birthStats.debtGrowth)} color="#fbbf24" sublabel="$72,920 per second" />
-                <CounterCard emoji="🌏" label="World population grew by" value={fmtBig(birthStats.popGrowth)} color="#2dd4bf" sublabel="Net births minus deaths" />
-                <CounterCard emoji="☕" label="Cups of coffee consumed since you" value={fmtBig(birthStats.coffeeCups)} color="#fb923c" sublabel="Worldwide" />
+                <CounterCard emoji="❤️" label="Times your heart has beaten"    value={fmtWhole(birthStats.heartbeats)} color="#f87171" />
+                <CounterCard emoji="👟" label="Steps you have taken (est.)"    value={fmtWhole(birthStats.steps)}     color="#4ade80" sublabel="Based on 8,000 avg steps/day" />
+                <CounterCard emoji="👶" label="Babies born since you"          value={fmtBig(birthStats.babiesBorn)}  color="#4ade80" />
+                <CounterCard emoji="📈" label="US debt growth since you"       value={fmtDebt(birthStats.debtGrowth)} color="#fbbf24" sublabel="$72,920 per second" />
+                <CounterCard emoji="🌏" label="World population grew by"       value={fmtBig(birthStats.popGrowth)}   color="#2dd4bf" sublabel="Net births minus deaths" />
+                <CounterCard emoji="☕" label="Cups of coffee consumed worldwide" value={fmtBig(birthStats.coffeeCups)} color="#fb923c" />
               </div>
             ) : (
               <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-8 text-center text-[#a8a8b3]">
@@ -166,18 +191,29 @@ export default function WorldCountersPage() {
             )}
           </div>
 
-          {/* ── TODAY COUNTERS ────────────────────────────────────────────── */}
+          {/* ── TODAY COUNTERS ─────────────────────────────────────────────── */}
           <div>
             <h2 className="text-2xl font-bold text-white mb-6">📅 Today So Far</h2>
 
-            {/* Life */}
+            {/* Life & Population */}
             <div className="mb-8">
               <SectionHead title="🌱 Life & Population" color="#4ade80" />
               <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-                <CounterCard emoji="👶" label="Births today" value={fmtBig(secToday * (ANNUAL_BIRTHS / 86400))} color="#4ade80" />
-                <CounterCard emoji="💀" label="Deaths today" value={fmtBig(secToday * (ANNUAL_DEATHS / 86400))} color="#f87171" />
-                <CounterCard emoji="📊" label="Net population gain today" value={fmtBig(secToday * (ANNUAL_NET / 86400))} color="#4ade80" />
-                <CounterCard emoji="⏰" label="Births this hour" value={fmtWhole(Math.min(secToday, 3600) * (ANNUAL_BIRTHS / 86400))} color="#86efac" sublabel="Last 3,600 seconds" />
+                <CounterCard emoji="👶" label="Births today"
+                  value={fmtWhole(secToday * BIRTHS_PER_SEC)}
+                  color="#4ade80"
+                  sublabel={`~${(BIRTHS_PER_SEC * 60).toFixed(0)} per minute`} />
+                <CounterCard emoji="💀" label="Deaths today"
+                  value={fmtWhole(secToday * DEATHS_PER_SEC)}
+                  color="#f87171"
+                  sublabel={`~${(DEATHS_PER_SEC * 60).toFixed(0)} per minute`} />
+                <CounterCard emoji="📊" label="Net population gain today"
+                  value={fmtWhole(secToday * NET_PER_SEC)}
+                  color="#4ade80" />
+                <CounterCard emoji="⏰" label="Births this hour"
+                  value={fmtWhole(secThisHour * BIRTHS_PER_SEC)}
+                  color="#86efac"
+                  sublabel="Since the hour started" />
               </div>
             </div>
 
@@ -185,8 +221,13 @@ export default function WorldCountersPage() {
             <div className="mb-8">
               <SectionHead title="🫀 Health" color="#f87171" />
               <div className="grid grid-cols-2 gap-4 md:grid-cols-2">
-                <CounterCard emoji="🚬" label="Cigarettes smoked worldwide today" value={fmtBig(secToday * (CIGS_ANNUAL / SECS_YEAR))} color="#f87171" />
-                <CounterCard emoji="❤️" label="Heartbeats worldwide today" value={fmtBig(secToday * HEARTBEATS_PER_SEC_WORLD)} color="#fca5a5" sublabel="8.2B people × 70 bpm" />
+                <CounterCard emoji="🚬" label="Cigarettes smoked worldwide today"
+                  value={fmtBig(secToday * CIGS_PER_SEC)}
+                  color="#f87171" />
+                <CounterCard emoji="❤️" label="Heartbeats worldwide today"
+                  value={fmtBig(secToday * HEARTBEATS_PER_SEC_WORLD)}
+                  color="#fca5a5"
+                  sublabel="8.2B people × 70 bpm" />
               </div>
             </div>
 
@@ -200,8 +241,12 @@ export default function WorldCountersPage() {
                   <div className="text-sm text-[#a8a8b3] mt-1">US National Debt right now</div>
                   <div className="text-xs text-[#a8a8b3]/70 mt-0.5">Growing at $72,920 per second</div>
                 </div>
-                <CounterCard emoji="💹" label="World GDP generated today" value={fmtBig(secToday * (WORLD_GDP_ANNUAL / SECS_YEAR), "$")} color="#fbbf24" />
-                <CounterCard emoji="📉" label="US debt increase today" value={fmtBig(secToday * DEBT_PER_SEC, "$")} color="#f87171" />
+                <CounterCard emoji="💹" label="World GDP generated today"
+                  value={fmtBig(secToday * GDP_PER_SEC, "$")}
+                  color="#fbbf24" />
+                <CounterCard emoji="📉" label="US debt increase today"
+                  value={fmtBig(secToday * DEBT_PER_SEC, "$")}
+                  color="#f87171" />
               </div>
             </div>
 
@@ -209,9 +254,17 @@ export default function WorldCountersPage() {
             <div className="mb-8">
               <SectionHead title="💻 Technology" color="#a78bfa" />
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-                <CounterCard emoji="📧" label="Emails sent today" value={fmtBig(secToday * (EMAILS_PER_DAY / 86400))} color="#a78bfa" />
-                <CounterCard emoji="🔍" label="Google searches today" value={fmtBig(secToday * (GOOGLE_ANNUAL / SECS_YEAR))} color="#c4b5fd" />
-                <CounterCard emoji="▶️" label="YouTube hours uploaded today" value={fmtBig(secToday * (500 * 60 / 3600))} color="#a78bfa" sublabel="500 hrs/min uploaded" />
+                <CounterCard emoji="📧" label="Emails sent today"
+                  value={fmtBig(secToday * EMAILS_PER_SEC)}
+                  color="#a78bfa"
+                  sublabel="347B sent each day" />
+                <CounterCard emoji="🔍" label="Google searches today"
+                  value={fmtBig(secToday * GOOGLE_PER_SEC)}
+                  color="#c4b5fd" />
+                <CounterCard emoji="▶️" label="YouTube hours uploaded today"
+                  value={fmtBig(secToday * YOUTUBE_PER_SEC)}
+                  color="#a78bfa"
+                  sublabel="500 hrs/min uploaded" />
               </div>
             </div>
 
@@ -219,9 +272,15 @@ export default function WorldCountersPage() {
             <div className="mb-8">
               <SectionHead title="🌳 Nature" color="#2dd4bf" />
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-                <CounterCard emoji="🪓" label="Trees cut down today" value={fmtBig(secToday * (TREES_CUT_ANNUAL / SECS_YEAR))} color="#f87171" />
-                <CounterCard emoji="🌱" label="Trees planted today" value={fmtBig(secToday * (TREES_PLANT_ANN / SECS_YEAR))} color="#2dd4bf" />
-                <CounterCard emoji="⚡" label="Lightning strikes today" value={fmtBig(secToday * (LIGHTNING_ANNUAL / SECS_YEAR))} color="#fbbf24" />
+                <CounterCard emoji="🪓" label="Trees cut down today"
+                  value={fmtBig(secToday * TREES_CUT_PER_SEC)}
+                  color="#f87171" />
+                <CounterCard emoji="🌱" label="Trees planted today"
+                  value={fmtBig(secToday * TREES_PLANT_PER_SEC)}
+                  color="#2dd4bf" />
+                <CounterCard emoji="⚡" label="Lightning strikes today"
+                  value={fmtBig(secToday * LIGHTNING_PER_SEC)}
+                  color="#fbbf24" />
               </div>
             </div>
 
@@ -229,35 +288,40 @@ export default function WorldCountersPage() {
             <div className="mb-8">
               <SectionHead title="🍔 Food & Drink" color="#fb923c" />
               <div className="grid grid-cols-2 gap-4 md:grid-cols-2">
-                <CounterCard emoji="☕" label="Cups of coffee consumed today" value={fmtBig(secToday * (COFFEE_PER_DAY / 86400))} color="#fb923c" />
-                <CounterCard emoji="🍟" label="McDonald's meals today" value={fmtBig(secToday * (MCDONALDS_ANNUAL / SECS_YEAR))} color="#fbbf24" />
+                <CounterCard emoji="☕" label="Cups of coffee consumed today"
+                  value={fmtBig(secToday * COFFEE_PER_SEC)}
+                  color="#fb923c"
+                  sublabel="~2.25B cups per day worldwide" />
+                <CounterCard emoji="🍟" label="McDonald's meals today"
+                  value={fmtBig(secToday * MCDONALDS_PER_SEC)}
+                  color="#fbbf24" />
               </div>
             </div>
           </div>
 
-          {/* ── THIS YEAR ─────────────────────────────────────────────────── */}
+          {/* ── THIS YEAR ──────────────────────────────────────────────────── */}
           <div>
             <h2 className="text-2xl font-bold text-white mb-6">📆 This Year So Far ({now.getFullYear()})</h2>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-              <CounterCard emoji="👶" label="Babies born this year" value={fmtBig(secThisYr * (ANNUAL_BIRTHS / SECS_YEAR))} color="#4ade80" />
-              <CounterCard emoji="💀" label="People died this year" value={fmtBig(secThisYr * (ANNUAL_DEATHS / SECS_YEAR))} color="#f87171" />
-              <CounterCard emoji="📊" label="Population growth this year" value={fmtBig(secThisYr * (ANNUAL_NET / SECS_YEAR))} color="#2dd4bf" />
-              <CounterCard emoji="📈" label="US debt added this year" value={fmtDebt(secThisYr * DEBT_PER_SEC)} color="#fbbf24" />
-              <CounterCard emoji="🪓" label="Trees cut down this year" value={fmtBig(secThisYr * (TREES_CUT_ANNUAL / SECS_YEAR))} color="#f87171" />
-              <CounterCard emoji="📧" label="Emails sent this year" value={fmtBig(secThisYr * (EMAILS_PER_DAY * 365 / SECS_YEAR))} color="#a78bfa" />
-              <CounterCard emoji="🔍" label="Google searches this year" value={fmtBig(secThisYr * (GOOGLE_ANNUAL / SECS_YEAR))} color="#c4b5fd" />
-              <CounterCard emoji="☕" label="Cups of coffee this year" value={fmtBig(secThisYr * (COFFEE_PER_DAY / 86400))} color="#fb923c" />
+              <CounterCard emoji="👶" label="Babies born this year"        value={fmtBig(secThisYear * BIRTHS_PER_SEC)}    color="#4ade80" />
+              <CounterCard emoji="💀" label="People died this year"        value={fmtBig(secThisYear * DEATHS_PER_SEC)}    color="#f87171" />
+              <CounterCard emoji="📊" label="Population growth this year"  value={fmtBig(secThisYear * NET_PER_SEC)}       color="#2dd4bf" />
+              <CounterCard emoji="📈" label="US debt added this year"      value={fmtDebt(secThisYear * DEBT_PER_SEC)}     color="#fbbf24" />
+              <CounterCard emoji="🪓" label="Trees cut down this year"     value={fmtBig(secThisYear * TREES_CUT_PER_SEC)} color="#f87171" />
+              <CounterCard emoji="📧" label="Emails sent this year"        value={fmtBig(secThisYear * EMAILS_PER_SEC)}    color="#a78bfa" />
+              <CounterCard emoji="🔍" label="Google searches this year"    value={fmtBig(secThisYear * GOOGLE_PER_SEC)}    color="#c4b5fd" />
+              <CounterCard emoji="☕" label="Cups of coffee this year"     value={fmtBig(secThisYear * COFFEE_PER_SEC)}    color="#fb923c" />
             </div>
           </div>
 
-          {/* ── SHARE ────────────────────────────────────────────────────── */}
+          {/* ── SHARE ──────────────────────────────────────────────────────── */}
           <ShareButtons
             text={shareText}
             url="https://dayblip.com/world-counters"
             title="World Live Counters"
           />
 
-          {/* ── SOURCES ──────────────────────────────────────────────────── */}
+          {/* ── SOURCES ────────────────────────────────────────────────────── */}
           <div className="rounded-xl border border-[#0f3460] bg-[#0d1b2a] overflow-hidden">
             <button
               onClick={() => setSourcesOpen(o => !o)}
@@ -269,31 +333,35 @@ export default function WorldCountersPage() {
               <div className="px-6 pb-6 text-sm text-[#a8a8b3] space-y-1.5 border-t border-[#0f3460]">
                 <p className="pt-4 font-semibold text-white">Annual baselines used for calculations:</p>
                 {[
-                  ["World births", "140 million/year", "UN World Population Prospects 2024"],
-                  ["World deaths", "58 million/year", "WHO Global Health Estimates"],
-                  ["US National Debt growth", "~$2.3 trillion/year ($72,920/sec)", "US Treasury, Congressional Budget Office"],
-                  ["World GDP", "$105 trillion/year", "World Bank 2024"],
-                  ["Global email volume", "347 billion/day", "Statista 2024"],
-                  ["Google searches", "8.5 trillion/year", "Google, Statista 2024"],
-                  ["Trees cut down", "15 billion/year", "Nature journal, 2015 study"],
-                  ["Trees planted", "1.8 billion/year", "Plant-for-the-Planet, FAO"],
-                  ["Global coffee consumption", "~2.25 billion cups/day", "ICO 2024"],
-                  ["Cigarettes smoked", "~5.6 trillion/year", "WHO"],
-                  ["Lightning strikes", "1.4 billion/year", "NOAA"],
-                  ["McDonald's meals", "9 billion/year", "McDonald's annual reports"],
-                  ["YouTube uploads", "500 hours per minute", "YouTube press statistics"],
-                  ["Average heart rate", "70 bpm", "Medical standard"],
-                  ["Average daily steps", "8,000/day", "CDC guidelines"],
+                  ["World births",          "140 million/year (→ 4.43/sec)",               "UN World Population Prospects 2024"],
+                  ["World deaths",          "58 million/year (→ 1.84/sec)",                "WHO Global Health Estimates"],
+                  ["US National Debt growth","~$2.3 trillion/year ($72,920/sec)",            "US Treasury, Congressional Budget Office"],
+                  ["World GDP",             "$105 trillion/year",                           "World Bank 2024"],
+                  ["Global email volume",   "347 billion/day (→ 4.01M/sec)",               "Statista 2024"],
+                  ["Google searches",       "8.5 trillion/year (→ 269K/sec)",              "Google, Statista 2024"],
+                  ["Trees cut down",        "15 billion/year",                              "Nature journal, 2015 study"],
+                  ["Trees planted",         "1.8 billion/year",                             "Plant-for-the-Planet, FAO"],
+                  ["Global coffee",         "~2.25 billion cups/day",                       "ICO 2024"],
+                  ["Cigarettes smoked",     "~5.6 trillion/year",                           "WHO"],
+                  ["Lightning strikes",     "1.4 billion/year",                             "NOAA"],
+                  ["McDonald's meals",      "9 billion/year",                               "McDonald's annual reports"],
+                  ["YouTube uploads",       "500 hours per minute",                         "YouTube press statistics"],
+                  ["Average heart rate",    "70 bpm",                                       "Medical standard"],
+                  ["Average daily steps",   "8,000/day",                                    "CDC guidelines"],
                 ].map(([item, val, src]) => (
                   <div key={item} className="flex gap-2">
                     <span className="text-[#e94560] shrink-0">•</span>
                     <span><strong className="text-white">{item}:</strong> {val} ({src})</span>
                   </div>
                 ))}
-                <p className="text-xs text-[#a8a8b3]/60 pt-2">All figures are estimates based on published global statistics. Actual values vary. Updated annually.</p>
+                <p className="text-xs text-[#a8a8b3]/60 pt-2">
+                  All figures are estimates based on published global statistics. Actual values vary. Updated annually.
+                  Emails use a per-day baseline (347B/day ÷ 86,400 sec). All other annual figures use 365.25-day year (31,557,600 sec).
+                </p>
               </div>
             )}
           </div>
+
         </div>
       </section>
     </div>
