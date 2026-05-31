@@ -6,17 +6,9 @@ import Link from "next/link"
 const ANNUAL_BIRTHS = 140_000_000
 const ANNUAL_DEATHS = 58_000_000
 const ANNUAL_NET    = ANNUAL_BIRTHS - ANNUAL_DEATHS
-const SECS_YEAR     = 31_557_600
+const SECS_YEAR     = 365.25 * 86_400   // 31,557,600
 const WORLD_POP_NOW = 8_200_000_000
 
-function secondsToday(now: Date): number {
-  const sod = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  return (now.getTime() - sod.getTime()) / 1000
-}
-function secondsSinceJan1(now: Date): number {
-  const jan1 = new Date(now.getFullYear(), 0, 1)
-  return (now.getTime() - jan1.getTime()) / 1000
-}
 function fmtWhole(n: number) { return Math.floor(n).toLocaleString() }
 function fmtBig(n: number) {
   if (n >= 1e9) return `${(n / 1e9).toFixed(3)} billion`
@@ -24,21 +16,30 @@ function fmtBig(n: number) {
   return fmtWhole(n)
 }
 
+const BIRTHS_PER_SEC = ANNUAL_BIRTHS / SECS_YEAR
+const DEATHS_PER_SEC = ANNUAL_DEATHS / SECS_YEAR
+const NET_PER_SEC    = ANNUAL_NET    / SECS_YEAR
+
 export default function PopulationCounterPage() {
-  const [now, setNow] = useState(() => new Date())
+  const [tick, setTick] = useState(0)
 
   useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000)
+    const t = setInterval(() => setTick(n => n + 1), 1000)
     return () => clearInterval(t)
   }, [])
 
-  const secToday  = secondsToday(now)
-  const secThisYr = secondsSinceJan1(now)
-  const currentPop = Math.floor(WORLD_POP_NOW + secThisYr * (ANNUAL_NET / SECS_YEAR))
-  const birthsToday  = secToday * (ANNUAL_BIRTHS / 86400)
-  const deathsToday  = secToday * (ANNUAL_DEATHS / 86400)
-  const birthsPerSec = ANNUAL_BIRTHS / SECS_YEAR
-  const deathsPerSec = ANNUAL_DEATHS / SECS_YEAR
+  // Always use fresh new Date() — never store Date in state (avoids SSR mismatch)
+  const now       = new Date()
+  const sod       = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
+  const jan1      = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
+  const secToday  = Math.floor((now.getTime() - sod.getTime())  / 1000)
+  const secThisYr = Math.floor((now.getTime() - jan1.getTime()) / 1000)
+
+  void tick  // consumed to force re-render each second
+
+  const currentPop  = Math.floor(WORLD_POP_NOW + secThisYr * NET_PER_SEC)
+  const birthsToday = secToday * BIRTHS_PER_SEC
+  const deathsToday = secToday * DEATHS_PER_SEC
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -64,9 +65,9 @@ export default function PopulationCounterPage() {
           {/* Rates */}
           <div className="grid grid-cols-3 gap-4 text-center">
             {[
-              { emoji: "👶", label: "Births per second", value: birthsPerSec.toFixed(2), color: "#4ade80" },
-              { emoji: "💀", label: "Deaths per second", value: deathsPerSec.toFixed(2), color: "#f87171" },
-              { emoji: "📈", label: "Net gain per second", value: (birthsPerSec - deathsPerSec).toFixed(2), color: "#2dd4bf" },
+              { emoji: "👶", label: "Births per second", value: BIRTHS_PER_SEC.toFixed(2), color: "#4ade80" },
+              { emoji: "💀", label: "Deaths per second", value: DEATHS_PER_SEC.toFixed(2), color: "#f87171" },
+              { emoji: "📈", label: "Net gain per second", value: NET_PER_SEC.toFixed(2), color: "#2dd4bf" },
             ].map(s => (
               <div key={s.label} className="rounded-xl border border-[#0f3460] bg-[#0d1b2a] p-5">
                 <div className="text-2xl mb-1">{s.emoji}</div>

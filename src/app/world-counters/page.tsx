@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import Link from "next/link"
 
@@ -41,21 +41,6 @@ const HEARTBEATS_PER_SEC_WORLD = WORLD_POP * (70 / 60)
 
 const STEPS_PER_SEC    = 8_000 / SECS_DAY
 
-// ── Time helpers ──────────────────────────────────────────────────────────────
-
-function getSecToday(now: Date): number {
-  const sod = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
-  return (now.getTime() - sod.getTime()) / 1000
-}
-
-function getSecThisYear(now: Date): number {
-  const jan1 = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
-  return (now.getTime() - jan1.getTime()) / 1000
-}
-
-function getSecCurrentHour(now: Date): number {
-  return now.getMinutes() * 60 + now.getSeconds()
-}
 
 // ── Formatters ────────────────────────────────────────────────────────────────
 
@@ -97,35 +82,42 @@ function SectionHead({ title, color }: { title: string; color: string }) {
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export default function WorldCountersPage() {
-  const [now, setNow] = useState(() => new Date())
+  // Use a tick counter instead of storing the Date in state.
+  // getSecToday() is always computed from a fresh new Date() to avoid
+  // SSR/hydration mismatches that cause it to equal secThisYear.
+  const [redraw, setRedraw] = useState(false)
   const [dob, setDob] = useState("")
   const [dobDate, setDobDate] = useState<Date | null>(null)
   const [sourcesOpen, setSourcesOpen] = useState(false)
 
   useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000)
+    const t = setInterval(() => setRedraw(r => !r), 1000)
     return () => clearInterval(t)
   }, [])
+  void redraw  // read here so ESLint sees it as used; the toggle triggers re-render
+
+  // Always derive time from a live new Date() — never from stale state
+  const now = new Date()
 
   // Time buckets — recalculate each tick
-  const secToday      = getSecToday(now)
-  const secThisYear   = getSecThisYear(now)
-  const secThisHour   = getSecCurrentHour(now)
+  const startOfDay    = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
+  const secToday      = Math.floor((now.getTime() - startOfDay.getTime()) / 1000)
+  const startOfYear   = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
+  const secThisYear   = Math.floor((now.getTime() - startOfYear.getTime()) / 1000)
+  const secThisHour   = now.getMinutes() * 60 + now.getSeconds()
   const currentDebt   = DEBT_JAN1_2026 + secThisYear * DEBT_PER_SEC
 
   const secSinceBirth = dobDate ? (now.getTime() - dobDate.getTime()) / 1000 : null
 
-  const birthStats = useMemo(() => {
-    if (!secSinceBirth || secSinceBirth <= 0) return null
-    return {
-      heartbeats: Math.floor(secSinceBirth * (70 / 60)),
-      steps:      Math.floor(secSinceBirth * STEPS_PER_SEC),
-      babiesBorn: Math.floor(secSinceBirth * BIRTHS_PER_SEC),
-      debtGrowth: secSinceBirth * DEBT_PER_SEC,
-      popGrowth:  Math.floor(secSinceBirth * NET_PER_SEC),
-      coffeeCups: Math.floor(secSinceBirth * COFFEE_PER_SEC),
-    }
-  }, [secSinceBirth])
+  // birthStats computed inline (now is a local var, so useMemo on it is pointless)
+  const birthStats = secSinceBirth && secSinceBirth > 0 ? {
+    heartbeats: Math.floor(secSinceBirth * (70 / 60)),
+    steps:      Math.floor(secSinceBirth * STEPS_PER_SEC),
+    babiesBorn: Math.floor(secSinceBirth * BIRTHS_PER_SEC),
+    debtGrowth: secSinceBirth * DEBT_PER_SEC,
+    popGrowth:  Math.floor(secSinceBirth * NET_PER_SEC),
+    coffeeCups: Math.floor(secSinceBirth * COFFEE_PER_SEC),
+  } : null
 
   const shareText = birthStats
     ? `Since I was born, ${fmtBig(birthStats.babiesBorn)} babies have been born and the US debt grew by ${fmtDebt(birthStats.debtGrowth)}! Watch the world change live:`

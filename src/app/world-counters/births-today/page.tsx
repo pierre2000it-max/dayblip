@@ -10,10 +10,8 @@ const BIRTHS_PER_MIN  = BIRTHS_PER_SEC * 60
 const BIRTHS_PER_HOUR = BIRTHS_PER_SEC * 3600
 const BIRTHS_PER_DAY  = ANNUAL_BIRTHS / 365
 
-function secondsToday(now: Date): number {
-  const sod = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  return (now.getTime() - sod.getTime()) / 1000
-}
+const DEATHS_PER_SEC = ANNUAL_DEATHS / 31_557_600
+
 function fmtWhole(n: number) { return Math.floor(n).toLocaleString() }
 function fmtBig(n: number) {
   if (n >= 1e6) return `${(n / 1e6).toFixed(2)} million`
@@ -21,16 +19,22 @@ function fmtBig(n: number) {
 }
 
 export default function BirthdaysTodayPage() {
-  const [now, setNow] = useState(() => new Date())
+  const [tick, setTick] = useState(0)
 
   useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000)
+    const t = setInterval(() => setTick(n => n + 1), 1000)
     return () => clearInterval(t)
   }, [])
 
-  const secToday   = secondsToday(now)
+  // Always use fresh new Date() to avoid SSR/hydration mismatch
+  const now     = new Date()
+  const sod     = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
+  const secToday = Math.floor((now.getTime() - sod.getTime()) / 1000)
+
+  void tick  // consumed to force re-render each second
+
   const birthsToday = secToday * BIRTHS_PER_SEC
-  const deathsToday = secToday * (ANNUAL_DEATHS / 31_557_600)
+  const deathsToday = secToday * DEATHS_PER_SEC
 
   // Progress toward next 1000 births milestone
   const nextMilestone = Math.ceil(birthsToday / 1000) * 1000
