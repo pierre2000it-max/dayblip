@@ -6,9 +6,15 @@
  */
 
 const KEY      = "272eea5409654b49b404dee73c5f0bfb";
+const BING_API = "d9e517040548463db99d17518a78476a"; // Bing Webmaster API key
 const HOST    = "dayblip.com";
 const KEY_LOC = `https://dayblip.com/${KEY}.txt`;
 const BATCH    = 100;
+
+const BING_ENDPOINTS = new Set([
+  "https://api.indexnow.org/indexnow",
+  "https://www.bing.com/indexnow",
+]);
 const DELAY_MS = 2000;
 
 const ENDPOINTS = [
@@ -154,12 +160,10 @@ async function submitBatch(endpoint, batch, batchIdx, totalBatches) {
     keyLocation: KEY_LOC,
     urlList: batch,
   });
+  const headers = { "Content-Type": "application/json; charset=utf-8" };
+  if (BING_ENDPOINTS.has(endpoint)) headers["API-Key"] = BING_API;
   try {
-    const res  = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json; charset=utf-8" },
-      body,
-    });
+    const res  = await fetch(endpoint, { method: "POST", headers, body });
     const text = await res.text().catch(() => "");
     const ok   = res.status === 200 || res.status === 202;
     console.log(`  ${ok ? "✅" : "❌"}  [${endpoint.replace("https://","").split("/")[0]}] batch ${batchIdx}/${totalBatches} — HTTP ${res.status}${ok ? "" : ": " + text.slice(0,80)}`);
