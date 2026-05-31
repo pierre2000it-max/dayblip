@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import DateCalculatorTool from "./DateCalculatorTool";
 import { generateToolSchema, generateBreadcrumbSchema } from "@/lib/seo";
 
-const BASE  = "https://dayblip.com";
+const BASE  = "https://www.dayblip.com";
 const URL   = "/date-calculator";
 const TITLE = "Date Calculator — Add or Subtract Days";
 const DESC  = "Free date calculator. Add or subtract days, weeks, months or years from any date. Find the difference between two dates instantly.";

@@ -29,7 +29,7 @@ interface Holiday {
 }
 
 const holidays = holidaysData as Holiday[];
-const BASE = "https://dayblip.com";
+const BASE = "https://www.dayblip.com";
 
 // ── Metadata ─────────────────────────────────────────────────────────────────
 

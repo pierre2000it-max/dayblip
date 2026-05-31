@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import DaysBetweenTool from "./DaysBetweenTool";
 import { generateToolSchema, generateBreadcrumbSchema } from "@/lib/seo";
 
-const BASE  = "https://dayblip.com";
+const BASE  = "https://www.dayblip.com";
 const URL   = "/days-between";
 const TITLE = "Days Between Dates Calculator";
 const DESC  = "Calculate the exact number of days between any two dates. Find weekdays, weekends, weeks and months between dates instantly.";

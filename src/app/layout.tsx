@@ -8,12 +8,13 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
-const BASE = "https://dayblip.com";
+const BASE = "https://www.dayblip.com";
 const DEFAULT_DESCRIPTION =
   "Free countdown timers, date calculators and curiosity tools. Find out how many days until any event, what happened on your birthday, and more.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE),
+  alternates: { canonical: "/" },
   title: {
     template: "%s | Dayblip",
     default: "Dayblip | Countdown & Date Tools",

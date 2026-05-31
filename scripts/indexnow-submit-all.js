@@ -7,8 +7,8 @@
 
 const KEY      = "272eea5409654b49b404dee73c5f0bfb";
 const BING_API = "d9e517040548463db99d17518a78476a"; // Bing Webmaster API key
-const HOST    = "dayblip.com";
-const KEY_LOC = `https://dayblip.com/${KEY}.txt`;
+const HOST    = "www.dayblip.com";
+const KEY_LOC = `https://www.dayblip.com/${KEY}.txt`;
 const BATCH    = 100;
 
 const BING_ENDPOINTS = new Set([
@@ -24,7 +24,7 @@ const ENDPOINTS = [
   "https://yandex.com/indexnow",
 ];
 
-const BASE = "https://dayblip.com";
+const BASE = "https://www.dayblip.com";
 
 // ── Core landing pages ────────────────────────────────────────────────────────
 const core = [

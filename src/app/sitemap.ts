@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import holidaysData from "@/data/holidays.json";
 import onThisDayData from "@/data/onThisDay.json";
 
-const BASE     = "https://dayblip.com";
+const BASE     = "https://www.dayblip.com";
 const holidays = holidaysData as Array<{ slug: string }>;
 const otdKeys  = Object.keys(onThisDayData as Record<string, unknown>);
 

@@ -13,7 +13,7 @@ interface Birthday  { name: string; year: number; role: string }
 interface DayData   { events: DayEvent[]; birthdays: Birthday[] }
 
 const onThisDayData = onThisDayRaw as Record<string, DayData>;
-const BASE = "https://dayblip.com";
+const BASE = "https://www.dayblip.com";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 

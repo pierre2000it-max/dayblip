@@ -25,7 +25,7 @@ interface BornInData {
 }
 
 const bornInData = bornInRaw as BornInData[];
-const BASE       = "https://dayblip.com";
+const BASE       = "https://www.dayblip.com";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 

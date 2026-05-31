@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import AgeCalculatorTool from "./AgeCalculatorTool";
 import { generateToolSchema, generateBreadcrumbSchema } from "@/lib/seo";
 
-const BASE = "https://dayblip.com";
+const BASE = "https://www.dayblip.com";
 const URL  = "/age-calculator";
 const TITLE = "Age Calculator — How Old Am I?";
 const DESC  = "Free age calculator. Find out exactly how old you are in years, months, weeks, days and hours. Also shows your next birthday countdown.";
