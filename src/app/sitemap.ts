@@ -132,6 +132,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     // LIFE & MONEY INSIGHT TOOLS  (priority 0.9, monthly)
     // ═══════════════════════════════════════════════════════════════════════
+    p("/tools/ai-job-score",          0.9),
+    p("/tools/fi-date",               0.9),
+    p("/tools/salary-negotiation",    0.9),
+    p("/tools/side-hustle",           0.9),
     p("/tools/salary-checker",      0.9),
     p("/tools/stock-calculator",    0.9),
     p("/tools/tax-migration",       0.9),

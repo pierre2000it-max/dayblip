@@ -408,6 +408,10 @@ export default function HomePage() {
           <p className="mb-10 text-center text-[#a8a8b3]">Tools that reveal what you might not know about your finances</p>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {[
+              { emoji: "🤖", title: "Will AI Replace My Job?", desc: "Get your personalized AI risk score", href: "/tools/ai-job-score" },
+              { emoji: "🆓", title: "Financial Independence Date", desc: "Find the exact date you could stop working", href: "/tools/fi-date" },
+              { emoji: "💰", title: "Salary Negotiation Guide", desc: "How much to ask for + ready-to-use script", href: "/tools/salary-negotiation" },
+              { emoji: "💼", title: "Side Hustle Potential", desc: "What could you earn with your skills?", href: "/tools/side-hustle" },
               { emoji: "💼", title: "Am I Underpaid?", desc: "Check market rate for your role", href: "/tools/salary-checker" },
               { emoji: "📈", title: "Historical Stock Calculator", desc: "What if you had invested in Apple in 2001?", href: "/tools/stock-calculator" },
               { emoji: "🗺️", title: "State Tax Savings", desc: "How much would moving states save?", href: "/tools/tax-migration" },

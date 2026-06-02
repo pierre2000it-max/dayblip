@@ -135,6 +135,10 @@ export default function Footer() {
             <h3 className="text-white font-bold text-base">Life &amp; Money</h3>
             <ul className="flex flex-col gap-2">
               {[
+                { label: "AI Job Score", href: "/tools/ai-job-score" },
+                { label: "FI Date Calculator", href: "/tools/fi-date" },
+                { label: "Salary Negotiation", href: "/tools/salary-negotiation" },
+                { label: "Side Hustle Calculator", href: "/tools/side-hustle" },
                 { label: "Am I Underpaid?", href: "/tools/salary-checker" },
                 { label: "Historical Stocks", href: "/tools/stock-calculator" },
                 { label: "State Tax Savings", href: "/tools/tax-migration" },
