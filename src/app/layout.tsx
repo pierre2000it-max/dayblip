@@ -10,35 +10,40 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 const BASE = "https://www.dayblip.com";
 const DEFAULT_DESCRIPTION =
-  "Free countdown timers, date calculators and curiosity tools. Find out how many days until any event, what happened on your birthday, and more.";
+  "120+ free tools for life, money, history and more. Finance calculators, countdown timers, birthday tools, live world counters and much more. No signup. No email. Ever.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE),
   alternates: { canonical: "/" },
   title: {
     template: "%s | Dayblip",
-    default: "Dayblip | Countdown & Date Tools",
+    default: "Dayblip — Free Tools for Curious Minds",
   },
   description: DEFAULT_DESCRIPTION,
   keywords: [
+    "free tools",
+    "finance calculator",
     "countdown timer",
-    "days until christmas",
-    "age calculator",
+    "birthday calculator",
+    "salary calculator",
+    "mortgage calculator",
+    "life tools",
+    "history facts",
     "date calculator",
-    "how many days until",
+    "curiosity tools",
   ],
   openGraph: {
     type: "website",
     siteName: "Dayblip",
-    title: "Dayblip | Countdown & Date Tools",
-    description: DEFAULT_DESCRIPTION,
-    images: [{ url: "/og-default.svg", width: 1200, height: 630, alt: "Dayblip — Countdown & Date Tools" }],
+    title: "Dayblip — Free Tools for Curious Minds",
+    description: "120+ free tools for life, money, history and more. No signup ever.",
+    images: [{ url: "/og-default.svg", width: 1200, height: 630, alt: "Dayblip — Free Tools for Curious Minds" }],
   },
   twitter: {
     card: "summary_large_image",
     site: "@dayblip",
-    title: "Dayblip | Countdown & Date Tools",
-    description: "Free countdown timers and date calculators",
+    title: "Dayblip — Free Tools for Curious Minds",
+    description: "120+ free tools for life, money, history and more. No signup ever.",
   },
   robots: {
     index: true,

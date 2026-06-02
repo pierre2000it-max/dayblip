@@ -144,7 +144,7 @@ export default function HomePage() {
             heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
         >
-          How Many Days Until...?
+          Free Tools for Curious Minds
         </h1>
 
         <p
@@ -152,7 +152,7 @@ export default function HomePage() {
             heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Countdowns, date tools &amp; curious facts — all in one place
+          120+ free tools for life, money, history and more. No signup. No email. Ever.
         </p>
 
         {/* Live counters pill */}

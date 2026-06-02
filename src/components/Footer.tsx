@@ -60,7 +60,7 @@ export default function Footer() {
               <span className="text-[#e94560]">blip</span>
             </Link>
             <p className="text-[#a8a8b3] text-sm">
-              Countdowns, curiosity &amp; date tools
+              Free tools for curious minds
             </p>
             <p className="text-[#a8a8b3] text-sm">
               © 2026 Dayblip. All rights reserved.

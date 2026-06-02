@@ -132,7 +132,7 @@ export function generateOrganizationSchema() {
     "@type": "Organization",
     "name": "Dayblip",
     "url": "https://dayblip.com",
-    "description": "Free countdown timers, date calculators and curiosity tools",
+    "description": "120+ free tools for life, money, history and more. No signup. No email. Ever.",
     "sameAs": [],
   };
 }
