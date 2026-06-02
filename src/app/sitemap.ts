@@ -129,6 +129,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/finance/cost-of-living",      0.9),
 
     // ═══════════════════════════════════════════════════════════════════════
+    // LIFE & MONEY INSIGHT TOOLS  (priority 0.9, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/tools/salary-checker",      0.9),
+    p("/tools/stock-calculator",    0.9),
+    p("/tools/tax-migration",       0.9),
+    p("/tools/true-hourly-wage",    0.9),
+    p("/tools/career-timeline",     0.9),
+    p("/tools/mortgage-by-year",    0.9),
+    p("/tools/debt-freedom",        0.9),
+    p("/tools/generational-wealth", 0.9),
+    p("/tools/car-true-cost",       0.9),
+    p("/tools/procrastination-cost",0.9),
+
+    // ═══════════════════════════════════════════════════════════════════════
     // HEALTH CALCULATORS  (priority 0.9, monthly)
     // ═══════════════════════════════════════════════════════════════════════
     p("/health/life-expectancy", 0.9),

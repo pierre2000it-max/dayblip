@@ -52,7 +52,7 @@ export default function Footer() {
     <footer className="bg-[#0f3460]">
       <div className="mx-auto max-w-[1200px] px-6 pt-12 pb-6">
         {/* Responsive column grid: 1 (mobile) · 3 (tablet) · 7 (desktop) */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 lg:grid-cols-7">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 lg:grid-cols-8">
           {/* Column 1 — Brand */}
           <div className="flex flex-col gap-3">
             <Link href="/" className="text-2xl font-bold">
@@ -120,6 +120,29 @@ export default function Footer() {
                 { label: "Budget Calculator", href: "/finance/budget-calculator" },
                 { label: "Capital Gains Tax", href: "/finance/capital-gains" },
                 { label: "Cost of Living", href: "/finance/cost-of-living" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-[#a8a8b3] text-sm transition-colors duration-200 hover:text-[#e94560]">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column — Life & Money */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-white font-bold text-base">Life &amp; Money</h3>
+            <ul className="flex flex-col gap-2">
+              {[
+                { label: "Am I Underpaid?", href: "/tools/salary-checker" },
+                { label: "Historical Stocks", href: "/tools/stock-calculator" },
+                { label: "State Tax Savings", href: "/tools/tax-migration" },
+                { label: "True Hourly Wage", href: "/tools/true-hourly-wage" },
+                { label: "Career Timeline", href: "/tools/career-timeline" },
+                { label: "Home by Year", href: "/tools/mortgage-by-year" },
+                { label: "Debt Freedom Date", href: "/tools/debt-freedom" },
+                { label: "Car True Cost", href: "/tools/car-true-cost" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-[#a8a8b3] text-sm transition-colors duration-200 hover:text-[#e94560]">

@@ -1,0 +1,178 @@
+"use client"
+import { useState, useEffect } from "react"
+import ShareButtons from "@/components/ShareButtons"
+
+function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
+function fmt2(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }) }
+
+const DISCLAIMER = (
+  <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
+    ⚠️ <strong>Educational calculation for perspective.</strong> Not all work expenses are deductible.
+  </div>
+)
+
+interface Result {
+  salary: number; officialHourly: number; trueHourly: number; diff: number; pctLess: number
+  officialHours: number; extraHours: number; totalHours: number; extraDays: number
+  commute: number; clothes: number; lunches: number; other: number; totalCosts: number
+  netSalary: number
+}
+
+export default function TrueHourlyWagePage() {
+  const [salary, setSalary] = useState("75000")
+  const [hours, setHours] = useState("40")
+  const [weeks, setWeeks] = useState("50")
+  const [commuteMin, setCommuteMin] = useState("30")
+  const [prepMin, setPrepMin] = useState("30")
+  const [lunchMin, setLunchMin] = useState("0")
+  const [decompMin, setDecompMin] = useState("20")
+  const [commuteCost, setCommuteCost] = useState("2400")
+  const [clothesCost, setClothesCost] = useState("800")
+  const [lunchCost, setLunchCost] = useState("1200")
+  const [devCost, setDevCost] = useState("0")
+  const [otherCost, setOtherCost] = useState("0")
+  const [result, setResult] = useState<Result | null>(null)
+
+  function compute(): Result {
+    const sal = parseFloat(salary) || 0
+    const hpw = parseFloat(hours) || 0
+    const wks = parseFloat(weeks) || 0
+    const officialHours = wks * hpw
+    const officialHourly = officialHours > 0 ? sal / officialHours : 0
+    const extraHoursPerDay = ((parseFloat(commuteMin) || 0) * 2 + (parseFloat(prepMin) || 0) + (parseFloat(lunchMin) || 0) + (parseFloat(decompMin) || 0)) / 60
+    const extraHours = extraHoursPerDay * (wks * 5)
+    const totalHours = officialHours + extraHours
+    const commute = parseFloat(commuteCost) || 0
+    const clothes = parseFloat(clothesCost) || 0
+    const lunches = parseFloat(lunchCost) || 0
+    const other = (parseFloat(devCost) || 0) + (parseFloat(otherCost) || 0)
+    const totalCosts = commute + clothes + lunches + other
+    const netSalary = sal - totalCosts
+    const trueHourly = totalHours > 0 ? netSalary / totalHours : 0
+    return {
+      salary: sal, officialHourly, trueHourly, diff: officialHourly - trueHourly,
+      pctLess: officialHourly > 0 ? ((officialHourly - trueHourly) / officialHourly) * 100 : 0,
+      officialHours, extraHours, totalHours, extraDays: extraHours / 8,
+      commute, clothes, lunches, other, totalCosts, netSalary,
+    }
+  }
+
+  function runCalc(push = true) {
+    const res = compute()
+    setResult(res)
+    if (push && typeof window !== "undefined") {
+      const totalCosts = (parseFloat(commuteCost) || 0) + (parseFloat(clothesCost) || 0) + (parseFloat(lunchCost) || 0) + (parseFloat(devCost) || 0) + (parseFloat(otherCost) || 0)
+      window.history.pushState({}, "", `?salary=${parseFloat(salary) || 0}&hours=${parseFloat(hours) || 0}&commute=${parseFloat(commuteMin) || 0}&prep=${parseFloat(prepMin) || 0}&costs=${totalCosts}`)
+    }
+  }
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const p = new URLSearchParams(window.location.search)
+    if (p.get("salary")) {
+      if (p.get("salary")) setSalary(p.get("salary")!)
+      if (p.get("hours")) setHours(p.get("hours")!)
+      if (p.get("commute")) setCommuteMin(p.get("commute")!)
+      if (p.get("prep")) setPrepMin(p.get("prep")!)
+      setTimeout(() => runCalc(false), 0)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const shareUrl = result ? `https://www.dayblip.com/tools/true-hourly-wage?salary=${result.salary}&hours=${parseFloat(hours) || 0}` : ""
+  const shareText = result ? `My ${fmt(result.salary)} salary actually pays ${fmt2(result.trueHourly)}/hour after commute and work costs! That is ${fmt2(result.diff)} less per hour than I thought 😮 (Educational only)` : ""
+
+  const numField = (label: string, value: string, set: (v: string) => void, prefix?: string) => (
+    <label className="block">
+      <span className="mb-1 block text-xs font-semibold text-white">{label}</span>
+      <div className="flex items-center gap-1">{prefix && <span className="text-[#a8a8b3]">{prefix}</span>}
+        <input type="number" value={value} onChange={e => set(e.target.value)}
+          className="w-full rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-3 py-2 text-sm text-white focus:border-[#e94560] focus:outline-none" /></div>
+    </label>
+  )
+
+  return (
+    <div className="min-h-screen bg-[#1a1a2e]">
+      <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
+        <div className="mx-auto max-w-[700px]">
+          <h1 className="mb-3 text-4xl font-bold text-white">What Is Your Job Really Paying You?</h1>
+          <p className="text-[#a8a8b3]">Calculate your true hourly wage after commute time, prep time and work costs</p>
+        </div>
+      </section>
+
+      <section className="bg-[#16213e] px-6 py-12">
+        <div className="mx-auto max-w-[700px] space-y-8">
+          {DISCLAIMER}
+
+          <div className="space-y-4">
+            <h3 className="font-bold text-white">Your salary</h3>
+            <div className="grid grid-cols-3 gap-3">
+              {numField("Annual salary", salary, setSalary, "$")}
+              {numField("Hours / week", hours, setHours)}
+              {numField("Weeks / year", weeks, setWeeks)}
+            </div>
+            <h3 className="font-bold text-white">Unpaid work-related time (per workday, minutes)</h3>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+              {numField("Commute (each way)", commuteMin, setCommuteMin)}
+              {numField("Getting ready", prepMin, setPrepMin)}
+              {numField("Unpaid lunch", lunchMin, setLunchMin)}
+              {numField("Decompression", decompMin, setDecompMin)}
+            </div>
+            <h3 className="font-bold text-white">Work-related annual costs</h3>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+              {numField("Commute cost", commuteCost, setCommuteCost, "$")}
+              {numField("Work clothes", clothesCost, setClothesCost, "$")}
+              {numField("Work lunches", lunchCost, setLunchCost, "$")}
+              {numField("Pro development", devCost, setDevCost, "$")}
+              {numField("Other expenses", otherCost, setOtherCost, "$")}
+            </div>
+            <button onClick={() => runCalc()}
+              className="w-full rounded-lg bg-[#e94560] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90">
+              Calculate My True Wage
+            </button>
+          </div>
+
+          {result && (
+            <div className="space-y-6">
+              <div className="rounded-xl border border-[#e94560]/40 bg-[#1a1a2e] p-6">
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div><div className="text-2xl font-black text-white">{fmt2(result.officialHourly)}</div><div className="text-xs text-[#a8a8b3]">Official rate</div></div>
+                  <div><div className="text-2xl font-black text-[#e94560]">{fmt2(result.trueHourly)}</div><div className="text-xs text-[#a8a8b3]">True rate</div></div>
+                  <div><div className="text-2xl font-black text-[#FF6B6B]">{fmt2(result.diff)}</div><div className="text-xs text-[#a8a8b3]">Difference</div></div>
+                </div>
+                <p className="mt-3 text-center font-bold text-[#FF6B6B]">You earn {result.pctLess.toFixed(0)}% less than you think</p>
+              </div>
+
+              <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6 text-sm">
+                <h3 className="mb-2 font-bold text-white">Breakdown</h3>
+                <ul className="space-y-1.5 text-[#a8a8b3]">
+                  <li className="flex justify-between"><span>Official hours/year</span><span className="text-white">{Math.round(result.officialHours).toLocaleString()}</span></li>
+                  <li className="flex justify-between"><span>Extra unpaid hours</span><span className="text-white">{Math.round(result.extraHours).toLocaleString()}</span></li>
+                  <li className="flex justify-between"><span>Total hours committed</span><span className="text-white">{Math.round(result.totalHours).toLocaleString()}</span></li>
+                  <li className="flex justify-between"><span>Extra days/year for job</span><span className="text-white">{result.extraDays.toFixed(1)}</span></li>
+                </ul>
+                <h3 className="mb-2 mt-4 font-bold text-white">Annual costs</h3>
+                <ul className="space-y-1.5 text-[#a8a8b3]">
+                  <li className="flex justify-between"><span>Commute</span><span className="text-white">{fmt(result.commute)}</span></li>
+                  <li className="flex justify-between"><span>Clothes</span><span className="text-white">{fmt(result.clothes)}</span></li>
+                  <li className="flex justify-between"><span>Lunches</span><span className="text-white">{fmt(result.lunches)}</span></li>
+                  <li className="flex justify-between"><span>Other</span><span className="text-white">{fmt(result.other)}</span></li>
+                  <li className="flex justify-between border-t border-[#0f3460] pt-1.5 font-bold"><span className="text-white">Total costs</span><span className="text-[#FF6B6B]">{fmt(result.totalCosts)}</span></li>
+                  <li className="flex justify-between"><span>Net salary after costs</span><span className="text-white">{fmt(result.netSalary)}</span></li>
+                </ul>
+              </div>
+
+              <div className="rounded-xl border border-[#F9A825]/40 bg-[#1a1a2e] p-6 text-sm text-white">
+                <p>Over a 40-year career this gap costs you <span className="font-bold text-[#FF6B6B]">{fmt(result.diff * result.totalHours * 40)}</span> in real compensation compared to your official rate.</p>
+                <p className="mt-2">At your true hourly rate of {fmt2(result.trueHourly)}: your job pays like <span className="font-bold text-[#e94560]">{fmt(result.trueHourly * result.officialHours)}</span> not {fmt(result.salary)}.</p>
+              </div>
+
+              <ShareButtons text={shareText} url={shareUrl} title="True Hourly Wage Calculator" />
+              {DISCLAIMER}
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  )
+}

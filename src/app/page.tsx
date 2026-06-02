@@ -400,6 +400,37 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
+          LIFE & MONEY INSIGHTS
+      ════════════════════════════════════════════════════════════════ */}
+      <section className="bg-[#1a1a2e] px-6 py-16">
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="mb-3 text-center text-3xl font-bold text-white">💡 Life &amp; Money Insights</h2>
+          <p className="mb-10 text-center text-[#a8a8b3]">Tools that reveal what you might not know about your finances</p>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {[
+              { emoji: "💼", title: "Am I Underpaid?", desc: "Check market rate for your role", href: "/tools/salary-checker" },
+              { emoji: "📈", title: "Historical Stock Calculator", desc: "What if you had invested in Apple in 2001?", href: "/tools/stock-calculator" },
+              { emoji: "🗺️", title: "State Tax Savings", desc: "How much would moving states save?", href: "/tools/tax-migration" },
+              { emoji: "⏰", title: "True Hourly Wage", desc: "What does your job really pay per hour?", href: "/tools/true-hourly-wage" },
+              { emoji: "📊", title: "Career Timeline", desc: "Project your salary and savings over time", href: "/tools/career-timeline" },
+              { emoji: "🏠", title: "Home Affordability History", desc: "Could you afford a home in 1990?", href: "/tools/mortgage-by-year" },
+              { emoji: "🗓️", title: "Debt Freedom Date", desc: "When will you be completely debt free?", href: "/tools/debt-freedom" },
+              { emoji: "👨‍👩‍👧", title: "Generational Wealth Gap", desc: "Compare finances to your parents at your age", href: "/tools/generational-wealth" },
+              { emoji: "🚗", title: "True Car Cost", desc: "The real total cost of owning your car", href: "/tools/car-true-cost" },
+              { emoji: "😴", title: "Procrastination Cost", desc: "What is waiting really costing you?", href: "/tools/procrastination-cost" },
+            ].map(tool => (
+              <Link key={tool.href} href={tool.href}
+                className="flex flex-col gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all duration-200 hover:border-[#e94560]">
+                <span className="text-3xl">{tool.emoji}</span>
+                <span className="text-sm font-bold text-white">{tool.title}</span>
+                <span className="text-xs text-[#a8a8b3] leading-snug">{tool.desc}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════
           CURIOSITY CALCULATORS
       ════════════════════════════════════════════════════════════════ */}
       <section className="bg-[#1a1a2e] px-6 py-16">
