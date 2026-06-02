@@ -4,7 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 
 const CURRENT_YEAR = 2026
 const FINNHUB_KEY = "d8f2su9r01qub7kfkojgd8f2su9r01qub7kfkok0"
-const CORS_PROXY = "https://corsproxy.io/?"
+const AV_KEY = "UQQ69O01UTWQEZIF"
 
 const stockMultipliers: Record<string, Record<number, number>> = {
   "Apple": { 2001: 780, 2003: 420, 2005: 120, 2008: 48, 2010: 35, 2012: 18, 2015: 8.5, 2017: 5.2, 2019: 3.8, 2020: 3.2, 2022: 1.4 },
@@ -45,7 +45,7 @@ function fmt2(n: number) { return n.toLocaleString("en-US", { style: "currency",
 
 const DISCLAIMER = (
   <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
-    ⚠️ <strong>Featured examples use historical approximations for illustration.</strong> Custom stock searches use real price data from Yahoo Finance. Past returns do not predict future results. Educational purposes only. Not investment advice.
+    ⚠️ <strong>Featured examples use historical approximations for illustration.</strong> Custom stock searches use real monthly adjusted closing prices from Alpha Vantage (alphavantage.co). Past returns do not predict future results. Educational purposes only. Not investment advice.
   </div>
 )
 
@@ -72,42 +72,61 @@ interface CacheEntry {
 // module-level cache: keyed by "TICKER-YEAR"
 const priceCache = new Map<string, CacheEntry>()
 
-// Fetch historical prices via Yahoo Finance (through CORS proxy) + Finnhub for company name
+// Fetch historical prices via Alpha Vantage (free, 25 calls/day) + Finnhub for company name
 async function fetchStockData(sym: string, year: number, signal: AbortSignal): Promise<CacheEntry> {
   const cacheKey = `${sym}-${year}`
   const cached = priceCache.get(cacheKey)
   if (cached) return cached
 
-  // Parallel: company name from Finnhub profile + price history from Yahoo Finance
-  const period1 = Math.floor(new Date(year, 0, 1).getTime() / 1000)
-  const period2 = Math.floor(Date.now() / 1000)
+  // Parallel: company name from Finnhub profile (free tier) + price history from Alpha Vantage
+  const avUrl =
+    `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED` +
+    `&symbol=${encodeURIComponent(sym)}&apikey=${AV_KEY}`
 
-  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1mo&period1=${period1}&period2=${period2}`
-  const [profileRes, yahooRes] = await Promise.all([
+  const [profileRes, avRes] = await Promise.all([
     fetch(`https://finnhub.io/api/v1/stock/profile2?symbol=${sym}&token=${FINNHUB_KEY}`, { signal }),
-    fetch(CORS_PROXY + encodeURIComponent(yahooUrl), { signal }),
+    fetch(avUrl, { signal }),
   ])
 
-  const [profile, yahooData] = await Promise.all([profileRes.json(), yahooRes.json()])
+  const [profile, data] = await Promise.all([profileRes.json(), avRes.json()])
 
   const companyName: string = profile.name || sym
-  const result = yahooData.chart?.result?.[0]
-  const closes: number[] | undefined = result?.indicators?.quote?.[0]?.close
-  const timestamps: number[] | undefined = result?.timestamp
 
-  if (!closes || closes.length < 2 || !timestamps) {
+  // Handle Alpha Vantage rate-limit responses (they return HTTP 200 with a Note/Information field)
+  if (data["Note"]) {
+    throw new Error("rate_limit_minute")
+  }
+  if (data["Information"]) {
+    throw new Error("rate_limit_day")
+  }
+
+  const monthlyData = data["Monthly Adjusted Time Series"] as
+    | Record<string, Record<string, string>>
+    | undefined
+
+  if (!monthlyData || Object.keys(monthlyData).length === 0) {
     throw new Error("no_data")
   }
 
-  // Filter out null closes (Yahoo sometimes returns nulls mid-series)
-  const validPairs = timestamps
-    .map((ts: number, i: number) => ({ ts, close: closes[i] }))
-    .filter((p: { ts: number; close: number }) => p.close != null && !isNaN(p.close))
+  // Sort dates chronologically oldest → newest
+  const dates = Object.keys(monthlyData).sort(
+    (a, b) => new Date(a).getTime() - new Date(b).getTime()
+  )
 
-  if (validPairs.length < 2) throw new Error("no_data")
+  // Find first date in or after the selected year
+  const startDate = dates.find(d => new Date(d).getFullYear() >= year)
+  if (!startDate) {
+    throw new Error("year_too_old")
+  }
 
-  const firstPrice = validPairs[0].close
-  const lastPrice = validPairs[validPairs.length - 1].close
+  const firstPrice = parseFloat(monthlyData[startDate]["5. adjusted close"])
+  const lastDate = dates[dates.length - 1]
+  const lastPrice = parseFloat(monthlyData[lastDate]["5. adjusted close"])
+
+  if (isNaN(firstPrice) || isNaN(lastPrice) || firstPrice <= 0) {
+    throw new Error("no_data")
+  }
+
   const multiplier = lastPrice / firstPrice
 
   const entry: CacheEntry = { multiplier, firstPrice, lastPrice, companyName }
@@ -197,8 +216,14 @@ export default function StockCalculatorPage() {
     } catch (err: unknown) {
       if (err instanceof Error && err.name === "AbortError") return
       const msg = err instanceof Error ? err.message : ""
-      if (msg === "no_data") {
-        setLiveError(`No historical data for ${sym} from ${yr}. Try a more recent year.`)
+      if (msg === "rate_limit_minute") {
+        setLiveError("API rate limit reached. Please try again in a minute.")
+      } else if (msg === "rate_limit_day") {
+        setLiveError("API limit reached for today. Please try again tomorrow or use our featured examples below.")
+      } else if (msg === "year_too_old") {
+        setLiveError(`No data available for ${sym} from ${yr}. Try a more recent start year.`)
+      } else if (msg === "no_data") {
+        setLiveError(`No data found for ${sym}. Please check the ticker symbol.`)
       } else if (msg.toLowerCase().includes("not found") || msg.toLowerCase().includes("invalid")) {
         setLiveError(`${sym} not found. Please check the symbol and try again.`)
       } else {
@@ -300,7 +325,7 @@ export default function StockCalculatorPage() {
 
             <button onClick={handleLiveCalc} disabled={!ticker.trim() || loading}
               className="mt-3 w-full rounded-lg bg-[#e94560] px-5 py-2.5 font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50">
-              {loading ? `Fetching ${ticker.trim() || "…"} data from Yahoo Finance…` : "Calculate Return"}
+              {loading ? `Fetching ${ticker.trim() || "…"} historical data…` : "Calculate Return"}
             </button>
 
             {liveError && (
