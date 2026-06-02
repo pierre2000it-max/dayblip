@@ -141,6 +141,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/tools/generational-wealth", 0.9),
     p("/tools/car-true-cost",       0.9),
     p("/tools/procrastination-cost",0.9),
+    p("/tools/life-in-weeks",         0.85),
+    p("/tools/life-in-numbers",       0.85),
+    p("/tools/birthday-personality",  0.85),
+    p("/tools/generation-quiz",       0.85),
+    p("/tools/regret-minimization",   0.85),
+    p("/tools/time-wasted",           0.85),
+    p("/tools/privilege-calculator",  0.85),
+    p("/tools/compound-kindness",     0.85),
+    p("/tools/music-of-your-year",    0.85),
+    p("/tools/learning-calculator",   0.85),
 
     // ═══════════════════════════════════════════════════════════════════════
     // HEALTH CALCULATORS  (priority 0.9, monthly)

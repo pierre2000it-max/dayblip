@@ -18,6 +18,16 @@ const tools = [
   { emoji: "👨‍👩‍👧", title: "Generational Wealth Gap", desc: "Compare finances to parents at your age", href: "/tools/generational-wealth" },
   { emoji: "🚗", title: "True Car Cost", desc: "The real total cost of owning your car", href: "/tools/car-true-cost" },
   { emoji: "😴", title: "Procrastination Cost", desc: "What is waiting really costing you?", href: "/tools/procrastination-cost" },
+  { emoji: "📅", title: "Life in Weeks", desc: "See your whole life as a grid of weeks", href: "/tools/life-in-weeks" },
+  { emoji: "🔢", title: "Life in Numbers", desc: "Your heartbeats, breaths and more, live", href: "/tools/life-in-numbers" },
+  { emoji: "🎂", title: "Birthday Personality", desc: "Everything your birthday says about you", href: "/tools/birthday-personality" },
+  { emoji: "🧬", title: "Generation Quiz", desc: "What generation are you really?", href: "/tools/generation-quiz" },
+  { emoji: "🤔", title: "Regret Minimization", desc: "Will you regret this decision?", href: "/tools/regret-minimization" },
+  { emoji: "📱", title: "Screen Time Cost", desc: "What could you learn with that time?", href: "/tools/time-wasted" },
+  { emoji: "🌍", title: "Global Perspective", desc: "Where do you stand worldwide?", href: "/tools/privilege-calculator" },
+  { emoji: "💝", title: "Compound Kindness", desc: "The ripple effect of daily kindness", href: "/tools/compound-kindness" },
+  { emoji: "🎵", title: "Music of Your Year", desc: "The songs that defined your birth year", href: "/tools/music-of-your-year" },
+  { emoji: "📚", title: "Learning Calculator", desc: "What could you achieve with your time?", href: "/tools/learning-calculator" },
 ]
 
 export default function ToolsPage() {

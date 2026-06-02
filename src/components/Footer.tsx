@@ -143,6 +143,11 @@ export default function Footer() {
                 { label: "Home by Year", href: "/tools/mortgage-by-year" },
                 { label: "Debt Freedom Date", href: "/tools/debt-freedom" },
                 { label: "Car True Cost", href: "/tools/car-true-cost" },
+                { label: "Life in Weeks", href: "/tools/life-in-weeks" },
+                { label: "Birthday Personality", href: "/tools/birthday-personality" },
+                { label: "Generation Quiz", href: "/tools/generation-quiz" },
+                { label: "Music of Your Year", href: "/tools/music-of-your-year" },
+                { label: "Learning Calculator", href: "/tools/learning-calculator" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-[#a8a8b3] text-sm transition-colors duration-200 hover:text-[#e94560]">
