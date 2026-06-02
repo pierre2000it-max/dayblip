@@ -77,6 +77,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/real-estate",  1.0, MONTHLY),
     p("/productivity", 1.0, MONTHLY),
     p("/curiosity",    1.0, MONTHLY),
+    p("/tools",        1.0, MONTHLY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // CORE DATE & AGE TOOLS  (priority 0.9, weekly)
