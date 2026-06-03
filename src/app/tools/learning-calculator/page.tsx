@@ -39,6 +39,23 @@ const SKILLS: Skill[] = [
 
 const CATEGORIES = ["All", "Technology", "Business", "Languages", "Creative", "Health", "Music"]
 
+function SkillList({ title, list, color, suffix }: { title: string; list: Skill[]; color: string; suffix?: (s: Skill) => string }) {
+  if (list.length === 0) return null
+  return (
+    <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6">
+      <h3 className="mb-3 font-bold" style={{ color }}>{title}</h3>
+      <ul className="space-y-2 text-sm">
+        {list.map(s => (
+          <li key={s.name} className="border-b border-[#0f3460] pb-2">
+            <div className="flex justify-between"><span className="font-medium text-white">{s.name}</span><span className="text-[#a8a8b3]">{suffix ? suffix(s) : `${s.hours}h`}</span></div>
+            <div className="text-xs text-[#a8a8b3]">{s.description}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 export default function LearningCalculatorPage() {
   const [minutes, setMinutes] = useState(30)
   const [weeks, setWeeks] = useState(50)
@@ -76,22 +93,6 @@ export default function LearningCalculatorPage() {
   const shareText = result
     ? `${result.minutes} minutes per day for ${result.years} years = ${Math.round(result.totalHours).toLocaleString()} hours of learning!\nI could ${topSkill} in that time!\nWhat would you learn?`
     : ""
-
-  const SkillList = ({ title, list, color, suffix }: { title: string; list: Skill[]; color: string; suffix?: (s: Skill) => string }) => (
-    list.length > 0 ? (
-      <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6">
-        <h3 className="mb-3 font-bold" style={{ color }}>{title}</h3>
-        <ul className="space-y-2 text-sm">
-          {list.map(s => (
-            <li key={s.name} className="border-b border-[#0f3460] pb-2">
-              <div className="flex justify-between"><span className="font-medium text-white">{s.name}</span><span className="text-[#a8a8b3]">{suffix ? suffix(s) : `${s.hours}h`}</span></div>
-              <div className="text-xs text-[#a8a8b3]">{s.description}</div>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ) : null
-  )
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">

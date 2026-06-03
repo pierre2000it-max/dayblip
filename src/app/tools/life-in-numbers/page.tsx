@@ -4,6 +4,24 @@ import ShareButtons from "@/components/ShareButtons"
 
 interface Stat { label: string; value: number; color?: string; prefix?: string }
 
+const f = (n: number) => Math.floor(n).toLocaleString()
+
+function Section({ title, stats }: { title: string; stats: Stat[] }) {
+  return (
+    <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6">
+      <h3 className="mb-4 font-bold text-white">{title}</h3>
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+        {stats.map(s => (
+          <div key={s.label} className="rounded-lg border border-[#0f3460] bg-[#16213e] p-3 text-center">
+            <div className="font-black tabular-nums" style={{ color: s.color ?? "#ffffff" }}>{s.prefix ?? ""}{f(s.value)}</div>
+            <div className="mt-1 text-xs text-[#a8a8b3]">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function LifeInNumbersPage() {
   const [dob, setDob] = useState("1990-01-01")
   const [time, setTime] = useState("")
@@ -40,8 +58,6 @@ export default function LifeInNumbersPage() {
     return () => clearInterval(id)
   }, [active, dob, time])
 
-  const f = (n: number) => Math.floor(n).toLocaleString()
-
   const timeLived: Stat[] = [
     { label: "Days alive", value: secBorn / 86400 },
     { label: "Hours", value: secBorn / 3600 },
@@ -72,20 +88,6 @@ export default function LifeInNumbersPage() {
 
   const shareUrl = `https://www.dayblip.com/tools/life-in-numbers?dob=${dob}`
   const shareText = `My heart has beaten ${heartbeats} times!\nI have taken ${breaths} breaths!\nI have slept ${daysSlept} days of my life!`
-
-  const Section = ({ title, stats }: { title: string; stats: Stat[] }) => (
-    <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6">
-      <h3 className="mb-4 font-bold text-white">{title}</h3>
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-        {stats.map(s => (
-          <div key={s.label} className="rounded-lg border border-[#0f3460] bg-[#16213e] p-3 text-center">
-            <div className="font-black tabular-nums" style={{ color: s.color ?? "#ffffff" }}>{s.prefix ?? ""}{f(s.value)}</div>
-            <div className="mt-1 text-xs text-[#a8a8b3]">{s.label}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">

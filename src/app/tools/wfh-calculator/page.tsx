@@ -70,6 +70,26 @@ function situationLabel(net: number) {
   return { text: "🔴 Office work may have financial advantages in your situation", color: "#dc2626" }
 }
 
+function NumField({ label, value, set, prefix, step }: { label: string; value: string; set: (v: string) => void; prefix?: string; step?: string }) {
+  return (
+    <label className="block">
+      <span className="mb-1 block text-sm font-semibold text-white">{label}</span>
+      <div className="flex items-center gap-2">
+        {prefix && <span className="text-[#a8a8b3]">{prefix}</span>}
+        <input type="number" step={step ?? "1"} value={value} onChange={e => set(e.target.value)} className="w-full rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-3 py-2.5 text-white focus:border-[#e94560] focus:outline-none" />
+      </div>
+    </label>
+  )
+}
+
+function SituationBtn({ val, label, current, onChange }: { val: Situation; label: string; current: Situation; onChange: (v: Situation) => void }) {
+  return (
+    <button onClick={() => onChange(val)} className={`flex-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${current === val ? "bg-[#e94560] text-white" : "border border-[#0f3460] text-[#a8a8b3] hover:text-white"}`}>
+      {label}
+    </button>
+  )
+}
+
 export default function WFHCalculatorPage() {
   const [situation, setSituation] = useState<Situation>("remote")
   const [daysInOffice, setDaysInOffice] = useState(3)
@@ -131,22 +151,6 @@ export default function WFHCalculatorPage() {
     ? `Working from home saves me ${fmt(Math.abs(result.netSavings))}/year!\nThat is equivalent to a ${fmt(result.pretaxEquivalent)}/year salary raise!\nCalculate your WFH value:`
     : ""
 
-  const SituationBtn = ({ val, label }: { val: Situation; label: string }) => (
-    <button onClick={() => setSituation(val)} className={`flex-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${situation === val ? "bg-[#e94560] text-white" : "border border-[#0f3460] text-[#a8a8b3] hover:text-white"}`}>
-      {label}
-    </button>
-  )
-
-  const NumField = ({ label, value, set, prefix, step }: { label: string; value: string; set: (v: string) => void; prefix?: string; step?: string }) => (
-    <label className="block">
-      <span className="mb-1 block text-sm font-semibold text-white">{label}</span>
-      <div className="flex items-center gap-2">
-        {prefix && <span className="text-[#a8a8b3]">{prefix}</span>}
-        <input type="number" step={step ?? "1"} value={value} onChange={e => set(e.target.value)} className="w-full rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-3 py-2.5 text-white focus:border-[#e94560] focus:outline-none" />
-      </div>
-    </label>
-  )
-
   const showCommute = situation !== "remote"
 
   return (
@@ -164,9 +168,9 @@ export default function WFHCalculatorPage() {
           <div>
             <div className="mb-2 text-sm font-semibold text-white">Your work situation</div>
             <div className="flex gap-2">
-              <SituationBtn val="remote" label="Fully Remote" />
-              <SituationBtn val="hybrid" label="Hybrid" />
-              <SituationBtn val="office" label="In Office" />
+              <SituationBtn val="remote" label="Fully Remote" current={situation} onChange={setSituation} />
+              <SituationBtn val="hybrid" label="Hybrid" current={situation} onChange={setSituation} />
+              <SituationBtn val="office" label="In Office" current={situation} onChange={setSituation} />
             </div>
           </div>
 

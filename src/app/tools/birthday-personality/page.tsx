@@ -125,6 +125,17 @@ function compute(dobStr: string): Profile | null {
   }
 }
 
+function Item({ icon, label, value, sub }: { icon: string; label: string; value: string; sub?: string }) {
+  return (
+    <div className="rounded-xl border border-[#0f3460] bg-[#16213e] p-5">
+      <div className="mb-1 text-2xl">{icon}</div>
+      <div className="text-xs uppercase tracking-wide text-[#a8a8b3]">{label}</div>
+      <div className="mt-1 font-bold text-white">{value}</div>
+      {sub && <div className="mt-1 text-sm text-[#a8a8b3]">{sub}</div>}
+    </div>
+  )
+}
+
 export default function BirthdayPersonalityPage() {
   const [dob, setDob] = useState("1990-06-15")
   const [profile, setProfile] = useState<Profile | null>(null)
@@ -160,15 +171,6 @@ export default function BirthdayPersonalityPage() {
   const shareText = profile
     ? `My birthday profile:\n${profile.sign} born on a ${profile.weekday} under a ${profile.moon} moon 🌙\nLife Path Number: ${profile.lifePath}\nBirth Flower: ${profile.flower}`
     : ""
-
-  const Item = ({ icon, label, value, sub }: { icon: string; label: string; value: string; sub?: string }) => (
-    <div className="rounded-xl border border-[#0f3460] bg-[#16213e] p-5">
-      <div className="mb-1 text-2xl">{icon}</div>
-      <div className="text-xs uppercase tracking-wide text-[#a8a8b3]">{label}</div>
-      <div className="mt-1 font-bold text-white">{value}</div>
-      {sub && <div className="mt-1 text-sm text-[#a8a8b3]">{sub}</div>}
-    </div>
-  )
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
