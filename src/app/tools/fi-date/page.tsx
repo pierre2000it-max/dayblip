@@ -72,6 +72,24 @@ function compute(
 function fmtDate(d: Date) { return d.toLocaleDateString("en-US", { month: "long", year: "numeric" }) }
 function fmtShortDate(d: Date) { return d.toLocaleDateString("en-US", { month: "short", year: "numeric" }) }
 
+// ─── Defined at module scope so React never remounts it on re-render ──────────
+function NumField({ label, value, set, prefix }: { label: string; value: string; set: (v: string) => void; prefix?: string }) {
+  return (
+    <label className="block">
+      <span className="mb-1 block text-sm font-semibold text-white">{label}</span>
+      <div className="flex items-center gap-2">
+        {prefix && <span className="text-[#a8a8b3]">{prefix}</span>}
+        <input
+          type="number"
+          value={value}
+          onChange={e => set(e.target.value)}
+          className="w-full rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-2.5 text-white focus:border-[#e94560] focus:outline-none"
+        />
+      </div>
+    </label>
+  )
+}
+
 function Countdown({ target }: { target: Date }) {
   const [tick, setTick] = useState(0)
   useEffect(() => {
@@ -140,16 +158,6 @@ export default function FIDatePage() {
   const shareText = result
     ? `I could stop working on ${fmtDate(result.fiDate)}!\n${Math.round((result.fiDate.getTime() - Date.now()) / 86400000).toLocaleString()} days from today 🎯\nFI Number needed: ${fmt(result.fiNumber)}\nSavings rate: ${result.savingsRate.toFixed(1)}%\nCalculate yours:\n(Educational only — not financial advice)`
     : ""
-
-  const NumField = ({ label, value, set, prefix }: { label: string; value: string; set: (v: string) => void; prefix?: string }) => (
-    <label className="block">
-      <span className="mb-1 block text-sm font-semibold text-white">{label}</span>
-      <div className="flex items-center gap-2">
-        {prefix && <span className="text-[#a8a8b3]">{prefix}</span>}
-        <input type="number" value={value} onChange={e => set(e.target.value)} className="w-full rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-2.5 text-white focus:border-[#e94560] focus:outline-none" />
-      </div>
-    </label>
-  )
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
