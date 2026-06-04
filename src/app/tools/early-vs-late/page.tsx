@@ -18,33 +18,61 @@ const DISCLAIMER = (
   </div>
 )
 
+// ─── Input validation ─────────────────────────────────────────────────────────
+function validateInputs(
+  earlyStart: number, earlyStop: number,
+  lateStart: number, retireAge: number
+): string | null {
+  if (isNaN(earlyStart) || isNaN(earlyStop) || isNaN(lateStart) || isNaN(retireAge)) return "Please fill in all fields."
+  if (earlyStart >= earlyStop)    return "Early saver must contribute for at least 1 year (start age < stop age)."
+  if (earlyStop >= retireAge)     return "Early saver stop age must be before retirement age."
+  if (lateStart >= retireAge)     return "Late saver start age must be before retirement age."
+  if (earlyStart < 10 || earlyStart > 70)   return "Start ages must be between 10 and 70."
+  if (retireAge > 80)             return "Retirement age must be 80 or under."
+  return null
+}
+
 interface Result {
   earlyStart: number; earlyMonthly: number; earlyStop: number
   lateStart: number; lateMonthly: number; retireAge: number; rate: number
-  earlyFV: number; earlyTotal: number; earlyYears: number
+  earlyFV: number; earlyTotal: number; earlyYears: number; earlyCoastYears: number
   lateFV: number; lateTotal: number; lateYears: number
   earlyWins: boolean; diff: number
+  contribRatio: number; outcomeRatio: number
 }
 
 function compute(
   earlyStart: number, earlyMonthly: number, earlyStop: number,
   lateStart: number, lateMonthly: number, retireAge: number, rate: number
 ): Result {
-  const earlyYears = Math.max(0, earlyStop - earlyStart)
-  const earlyPhase1 = fvAnnuity(0, earlyMonthly, rate, earlyYears * 12)
+  // Phase 1: early saver contributes
+  const earlyYears    = Math.max(0, earlyStop - earlyStart)
+  const earlyPhase1   = fvAnnuity(0, earlyMonthly, rate, earlyYears * 12)
+  // Phase 2: early saver coasts (no new money, just compounding)
   const earlyCoastYears = Math.max(0, retireAge - earlyStop)
-  const earlyFV = fvAnnuity(earlyPhase1, 0, rate, earlyCoastYears * 12)
-  const earlyTotal = earlyMonthly * earlyYears * 12
+  const earlyFV       = fvAnnuity(earlyPhase1, 0, rate, earlyCoastYears * 12)
+  const earlyTotal    = earlyMonthly * earlyYears * 12
 
+  // Late saver contributes straight through to retirement
   const lateYears = Math.max(0, retireAge - lateStart)
-  const lateFV = fvAnnuity(0, lateMonthly, rate, lateYears * 12)
+  const lateFV    = fvAnnuity(0, lateMonthly, rate, lateYears * 12)
   const lateTotal = lateMonthly * lateYears * 12
+
+  // How much MORE did the winner contribute vs loser, and by what % did they win
+  const winnerTotal = earlyFV >= lateFV ? earlyTotal : lateTotal
+  const loserTotal  = earlyFV >= lateFV ? lateTotal  : earlyTotal
+  const winnerFV    = Math.max(earlyFV, lateFV)
+  const loserFV     = Math.min(earlyFV, lateFV)
+  const contribRatio = loserTotal > 0 ? winnerTotal / loserTotal : 1
+  const outcomeRatio = loserFV    > 0 ? winnerFV    / loserFV    : 1
 
   return {
     earlyStart, earlyMonthly, earlyStop, lateStart, lateMonthly, retireAge, rate,
-    earlyFV: Math.round(earlyFV), earlyTotal: Math.round(earlyTotal), earlyYears,
+    earlyFV: Math.round(earlyFV), earlyTotal: Math.round(earlyTotal),
+    earlyYears, earlyCoastYears,
     lateFV: Math.round(lateFV), lateTotal: Math.round(lateTotal), lateYears,
     earlyWins: earlyFV >= lateFV, diff: Math.round(Math.abs(earlyFV - lateFV)),
+    contribRatio, outcomeRatio,
   }
 }
 
@@ -65,9 +93,13 @@ export default function EarlyVsLatePage() {
   const [lateMonthly,  setLateMonthly]  = useState("500")
   const [retireAge,    setRetireAge]    = useState("65")
   const [rate,         setRate]         = useState("7")
-  const [result,       setResult]       = useState<Result | null>(null)
+  const [result,         setResult]         = useState<Result | null>(null)
+  const [validationError, setValidationError] = useState<string | null>(null)
 
   function runCalc(push = true, es = earlyStart, em = earlyMonthly, ep = earlyStop, ls = lateStart, lm = lateMonthly, ra = retireAge, r = rate) {
+    const err = validateInputs(+es, +ep, +ls, +ra)
+    if (err) { setValidationError(err); setResult(null); return }
+    setValidationError(null)
     const res = compute(+es||25, +em||200, +ep||35, +ls||35, +lm||500, +ra||65, +r||7)
     setResult(res)
     if (push && typeof window !== "undefined") {
@@ -90,7 +122,9 @@ export default function EarlyVsLatePage() {
 
   const shareUrl  = result ? `https://www.dayblip.com/tools/early-vs-late?earlystart=${earlyStart}&earlymonthly=${earlyMonthly}&earlystop=${earlyStop}&latestart=${lateStart}&latemonthly=${lateMonthly}` : ""
   const shareText = result
-    ? `Mind blown. Starting to save ${fmt(result.earlyMonthly)}/month at age ${result.earlyStart} and stopping at ${result.earlyStop} ${result.earlyWins ? "BEATS" : "vs"} saving ${fmt(result.lateMonthly)}/month from ${result.lateStart} to retirement!\nEarly: ${fmt(result.earlyFV)} vs Late: ${fmt(result.lateFV)}\n(Educational only — not financial advice)`
+    ? result.earlyWins
+      ? `Mind blown 🤯 Saving ${fmt(result.earlyMonthly)}/month for just ${result.earlyYears} years (age ${result.earlyStart}–${result.earlyStop}) BEATS saving ${fmt(result.lateMonthly)}/month for ${result.lateYears} years!\nEarly: ${fmt(result.earlyFV)} vs Late: ${fmt(result.lateFV)} — Early wins by ${fmt(result.diff)}!\nContributed ${((1 - result.earlyTotal / result.lateTotal) * 100).toFixed(0)}% less, ended up with ${((result.earlyFV / result.lateFV - 1) * 100).toFixed(0)}% more. That's compound interest.\n(Educational only — not financial advice)`
+      : `Comparing early vs late saving: ${fmt(result.earlyMonthly)}/month age ${result.earlyStart}–${result.earlyStop} vs ${fmt(result.lateMonthly)}/month age ${result.lateStart}–${result.retireAge}.\nEarly: ${fmt(result.earlyFV)} vs Late: ${fmt(result.lateFV)} — ${result.earlyWins ? "Early" : "Late"} wins by ${fmt(result.diff)}.\nTry equal contributions to see the power of starting early!\n(Educational only — not financial advice)`
     : ""
 
   return (
@@ -143,6 +177,12 @@ export default function EarlyVsLatePage() {
             Compare Savers
           </button>
 
+          {validationError && (
+            <div className="rounded-xl border border-[#FF6B6B]/40 bg-[#FF6B6B]/10 px-4 py-3 text-sm text-[#FF6B6B]">
+              ⚠️ {validationError}
+            </div>
+          )}
+
           {result && (
             <div className="space-y-6">
               {/* Winner banner */}
@@ -179,13 +219,37 @@ export default function EarlyVsLatePage() {
                 ))}
               </div>
 
-              {/* Insight */}
+              {/* Timeline */}
+              <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5 text-sm">
+                <div className="font-bold text-white mb-3">📅 Timeline</div>
+                <div className="space-y-2 text-[#a8a8b3]">
+                  <p>Age {result.earlyStart}: ⏰ Early Saver starts {fmt(result.earlyMonthly)}/mo</p>
+                  <p>Age {result.earlyStop}: ⏰ Early Saver <strong className="text-white">stops</strong> contributing — {fmt(result.earlyMonthly)}/mo for {result.earlyYears} yrs</p>
+                  {result.lateStart !== result.earlyStop && <p>Age {result.lateStart}: 📅 Late Saver starts {fmt(result.lateMonthly)}/mo</p>}
+                  {result.lateStart === result.earlyStop && <p>Age {result.lateStart}: 📅 Late Saver starts {fmt(result.lateMonthly)}/mo (same month early saver stops)</p>}
+                  <p>Age {result.retireAge}: 🏁 Both retire — early saver&apos;s money coasted for <strong className="text-white">{result.earlyCoastYears} years</strong></p>
+                </div>
+              </div>
+
+              {/* Key insight */}
               <div className="rounded-xl border border-[#F9A825]/40 bg-[#F9A825]/10 p-5 text-sm text-white">
-                <div className="font-bold text-[#F9A825] mb-1">💡 The insight</div>
-                {result.earlyWins
-                  ? <p>The early saver contributed {fmt(result.earlyTotal)} for just {result.earlyYears} years and walked away. The late saver contributed {fmt(result.lateTotal)} for {result.lateYears} years and still {result.diff > 0 ? "lost" : "tied"}. <strong>Time in market beats amount invested.</strong></p>
-                  : <p>In this scenario the late saver wins — but notice the early saver contributed only {fmt(result.earlyTotal)} vs {fmt(result.lateTotal)} from the late saver. Time still does incredible work even when contributions stop.</p>
-                }
+                <div className="font-bold text-[#F9A825] mb-2">💡 What this tells us</div>
+                {result.earlyWins ? (
+                  <>
+                    <p>The early saver contributed <strong>{fmt(result.earlyTotal)}</strong> — that is <strong>{((1 - result.earlyTotal / result.lateTotal) * 100).toFixed(0)}% less</strong> than the late saver&apos;s {fmt(result.lateTotal)}.</p>
+                    <p className="mt-1">Yet the early saver ends up with <strong className="text-[#4ade80]">{((result.earlyFV / result.lateFV - 1) * 100).toFixed(0)}% more money</strong> at retirement.</p>
+                    <p className="mt-2 font-bold text-[#F9A825]">Time in market beats amount invested.</p>
+                    <p className="mt-1 text-[#a8a8b3]">The early saver&apos;s {fmt(result.earlyTotal)} had {result.earlyCoastYears} extra years of compounding. Those {result.earlyCoastYears} years of growth are worth more than all of the late saver&apos;s extra contributions.</p>
+                  </>
+                ) : (
+                  <>
+                    <p>The late saver wins here because they contributed <strong>{fmt(result.lateTotal)}</strong> vs the early saver&apos;s <strong>{fmt(result.earlyTotal)}</strong> — that is <strong className="text-[#e94560]">{result.lateTotal > 0 ? ((result.lateTotal / result.earlyTotal)).toFixed(1) : "—"}× more money</strong> invested.</p>
+                    <p className="mt-1">Even so, the early saver&apos;s {fmt(result.earlyTotal)} grew to {fmt(result.earlyFV)} — <strong>{result.earlyTotal > 0 ? (result.earlyFV / result.earlyTotal).toFixed(1) : "—"}×</strong> their investment thanks to {result.earlyCoastYears} years of compounding.</p>
+                    <p className="mt-2 p-3 rounded-lg bg-[#16213e] text-[#4FC3F7]">
+                      💡 <strong>Try the classic scenario:</strong> Set both monthly contributions to the same amount (e.g. {fmt(result.earlyMonthly)}) to see the early saver win despite contributing for only {result.earlyYears} years vs {result.lateYears} years.
+                    </p>
+                  </>
+                )}
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="Early vs Late Saver Calculator" />
