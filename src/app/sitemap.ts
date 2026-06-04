@@ -101,6 +101,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/days-until/independence-day",0.9, DAILY),
     p("/days-until/black-friday",    0.9, DAILY),
     p("/days-until/mothers-day",     0.9, DAILY),
+    p("/days-until/fathers-day",     0.85, WEEKLY),
+    p("/days-until/labor-day",       0.85, WEEKLY),
+    p("/days-until/memorial-day",    0.85, WEEKLY),
+    p("/days-until/new-years-eve",   0.85, WEEKLY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // FINANCE CALCULATORS  (priority 0.9, monthly)
