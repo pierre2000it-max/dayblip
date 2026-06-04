@@ -136,6 +136,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     // LIFE & MONEY INSIGHT TOOLS  (priority 0.9, monthly)
     // ═══════════════════════════════════════════════════════════════════════
+    p("/tools/minimum-payment",         0.9),
+    p("/tools/early-vs-late",           0.9),
+    p("/tools/market-timing",           0.9),
+    p("/tools/sleep-debt",              0.9),
+    p("/tools/smoking-cost",            0.9),
     p("/tools/college-roi",            0.9),
     p("/tools/wfh-calculator",         0.9),
     p("/tools/recession-score",        0.9),

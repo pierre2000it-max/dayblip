@@ -135,6 +135,11 @@ export default function Footer() {
             <h3 className="text-white font-bold text-base">Life &amp; Money</h3>
             <ul className="flex flex-col gap-2">
               {[
+                { label: "Min Payment Cost", href: "/tools/minimum-payment" },
+                { label: "Early vs Late Saver", href: "/tools/early-vs-late" },
+                { label: "Market Timing", href: "/tools/market-timing" },
+                { label: "Sleep Debt", href: "/tools/sleep-debt" },
+                { label: "Smoking Cost", href: "/tools/smoking-cost" },
                 { label: "College ROI", href: "/tools/college-roi" },
                 { label: "WFH Calculator", href: "/tools/wfh-calculator" },
                 { label: "Recession Score", href: "/tools/recession-score" },

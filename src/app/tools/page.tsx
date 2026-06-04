@@ -8,6 +8,11 @@ export const metadata: Metadata = {
 }
 
 const tools = [
+  { emoji: "💳", title: "Minimum Payment True Cost", desc: "See the shocking cost of paying minimums", href: "/tools/minimum-payment" },
+  { emoji: "⏰", title: "Early vs Late Saver", desc: "Why starting earlier beats saving more", href: "/tools/early-vs-late" },
+  { emoji: "📈", title: "Market Timing Cost", desc: "What missing 10 best days costs you", href: "/tools/market-timing" },
+  { emoji: "😴", title: "Sleep Debt Calculator", desc: "How much sleep have you really lost?", href: "/tools/sleep-debt" },
+  { emoji: "🚬", title: "True Cost of Smoking", desc: "Full financial and health cost revealed", href: "/tools/smoking-cost" },
   { emoji: "🎓", title: "College Degree ROI", desc: "Was your college investment worth it?", href: "/tools/college-roi" },
   { emoji: "🏠", title: "WFH Savings Calculator", desc: "What is remote work really worth?", href: "/tools/wfh-calculator" },
   { emoji: "📉", title: "Recession Readiness Score", desc: "How prepared are you for a downturn?", href: "/tools/recession-score" },
