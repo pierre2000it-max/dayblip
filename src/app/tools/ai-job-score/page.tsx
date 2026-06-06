@@ -12,6 +12,21 @@ const synonyms: Record<string, string> = {
   "therapist": "Psychologist", "cop": "Police Officer",
   "officer": "Police Officer", "cook": "Chef", "hr": "HR Manager",
   "bookkeeper": "Bookkeeper", "data entry": "Data Entry Clerk",
+  "vet": "Veterinarian", "vet tech": "Veterinary Technician",
+  "dental hygienist": "Dental Hygienist", "eye doctor": "Optometrist",
+  "ot": "Occupational Therapist", "slp": "Speech Language Pathologist",
+  "speech therapist": "Speech Language Pathologist", "dietitian": "Nutritionist",
+  "radiographer": "Radiographer", "ml engineer": "Machine Learning Engineer",
+  "qa": "QA Engineer", "sysadmin": "Systems Administrator",
+  "tech writer": "Technical Writer", "web dev": "Mobile Developer",
+  "blockchain": "Blockchain Developer", "tax lawyer": "Tax Attorney",
+  "compliance": "Compliance Officer", "animator": "Animator",
+  "music producer": "Music Producer", "interior designer": "Interior Designer",
+  "fashion designer": "Fashion Designer", "game designer": "Game Designer",
+  "pilot": "Pilot", "chiropractor": "Chiropractor", "geologist": "Geologist",
+  "archaeologist": "Archaeologist", "diplomat": "Diplomat",
+  "sommelier": "Sommelier", "mediator": "Mediator",
+  "urban planner": "Urban Planner",
 }
 
 // ─── Risk database ────────────────────────────────────────────────────────────
@@ -19,6 +34,7 @@ interface RiskEntry {
   score: number; label: string; color: string
   automatedTasks: string[]; safeTasks: string[]
   timeline: string; pivotSkills: string[]; insight: string
+  source?: string; code?: string
 }
 
 const aiRiskData: Record<string, RiskEntry> = {
@@ -238,6 +254,398 @@ const aiRiskData: Record<string, RiskEntry> = {
     pivotSkills: ["Cybercrime investigation", "Community policing specialist", "Forensic technology"],
     insight: "Physical presence, community trust and complex judgment keep policing largely human-dependent.",
   },
+  "Dental Hygienist": {
+    score: 45, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Appointment scheduling", "Basic patient records", "Insurance claim processing", "Treatment reminders"],
+    safeTasks: ["Physical teeth cleaning", "Patient education and coaching", "Detecting oral health issues", "Building patient relationships"],
+    timeline: "5-10 years",
+    pivotSkills: ["Periodontal specialization", "Oral cancer screening", "Pediatric dental hygiene"],
+    insight: "Physical cleaning and patient relationships keep hygienists safe. Administrative tasks are at risk.",
+  },
+  "Optometrist": {
+    score: 35, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Basic vision screening", "Prescription records", "Appointment scheduling"],
+    safeTasks: ["Complex eye health diagnosis", "Patient consultation", "Contact lens fitting", "Detecting systemic diseases"],
+    timeline: "AI assists — 10+ years before significant impact",
+    pivotSkills: ["Specialty contact lenses", "Low vision rehabilitation", "Ocular disease management"],
+    insight: "Eye exams require physical examination and clinical judgment that AI cannot replicate safely.",
+  },
+  "Occupational Therapist": {
+    score: 18, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Progress documentation", "Scheduling", "Basic exercise tracking"],
+    safeTasks: ["Physical patient assessment", "Adaptive equipment training", "Home modification planning", "Emotional support and motivation"],
+    timeline: "AI assists with documentation only",
+    pivotSkills: ["Hand therapy specialization", "Pediatric OT", "Assistive technology"],
+    insight: "Human touch, creativity and empathy in therapy are irreplaceable by AI.",
+  },
+  "Speech Therapist": {
+    score: 20, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Progress notes", "Exercise tracking apps", "Scheduling"],
+    safeTasks: ["Complex communication assessment", "Swallowing disorder treatment", "Patient motivation and coaching", "Family education"],
+    timeline: "AI supplements — not replacing",
+    pivotSkills: ["AAC device specialization", "Dysphagia treatment", "Pediatric speech"],
+    insight: "Human communication therapy requires genuine connection and real-time adaptation.",
+  },
+  "Nutritionist": {
+    score: 55, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Basic meal plan generation", "Calorie tracking", "Standard dietary guidelines", "Recipe suggestions"],
+    safeTasks: ["Complex medical nutrition therapy", "Eating disorder support", "Behavioral change coaching", "Cultural food adaptation"],
+    timeline: "3-7 years for routine work",
+    pivotSkills: ["Medical nutrition therapy", "Sports nutrition", "Eating disorder specialization"],
+    insight: "AI handles basic meal planning well. Complex behavioral and medical nutrition requires humans.",
+  },
+  "Radiographer": {
+    score: 48, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Standard image positioning guides", "Basic image quality checks", "Scheduling and documentation"],
+    safeTasks: ["Patient positioning and care", "Emergency adaptations", "Patient communication", "Complex imaging scenarios"],
+    timeline: "4-8 years",
+    pivotSkills: ["MRI specialization", "Interventional radiology", "Nuclear medicine"],
+    insight: "Physical patient care and real-time adaptation keep radiographers relevant alongside AI image analysis.",
+  },
+  "School Psychologist": {
+    score: 15, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Scheduling", "Basic report templates", "Data tracking"],
+    safeTasks: ["Psychological assessment", "Crisis intervention", "Student counseling", "Family consultation", "Learning disability evaluation"],
+    timeline: "AI assists with admin only",
+    pivotSkills: ["Trauma-informed practice", "Behavioral intervention", "Special education consultation"],
+    insight: "Child mental health and learning assessment require profound human judgment and empathy.",
+  },
+  "Corporate Trainer": {
+    score: 52, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["eLearning content creation", "Quiz and assessment generation", "Training material updates", "Scheduling"],
+    safeTasks: ["Live facilitation and coaching", "Culture change programs", "Leadership development", "Difficult conversation training"],
+    timeline: "3-7 years",
+    pivotSkills: ["AI learning tools facilitation", "Executive coaching", "Change management"],
+    insight: "AI handles content creation well. Human facilitation and culture work remain essential.",
+  },
+  "Instructional Designer": {
+    score: 60, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Basic course structure generation", "Quiz creation", "Content formatting", "Standard eLearning templates"],
+    safeTasks: ["Complex learning strategy", "Novel curriculum design", "Stakeholder collaboration", "Learner experience research"],
+    timeline: "3-6 years",
+    pivotSkills: ["AI-enhanced learning design", "Learning analytics", "Performance consulting"],
+    insight: "AI generates content rapidly. Strategic learning design and human-centered curriculum remain human work.",
+  },
+  "Machine Learning Engineer": {
+    score: 38, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Routine model training", "Standard hyperparameter tuning", "Basic data preprocessing", "Model documentation"],
+    safeTasks: ["Novel architecture design", "Research and experimentation", "Ethical AI decisions", "Complex problem framing"],
+    timeline: "5-10 years",
+    pivotSkills: ["AI safety research", "Multi-modal AI systems", "AI product strategy"],
+    insight: "Ironically ML engineers face moderate risk from the very systems they build. Novel research stays safe.",
+  },
+  "QA Engineer": {
+    score: 65, label: "High Risk", color: "#ea580c",
+    automatedTasks: ["Repetitive test execution", "Regression testing", "Bug report generation", "Test case documentation"],
+    safeTasks: ["Exploratory testing strategy", "User experience evaluation", "Security penetration testing", "Novel edge case discovery"],
+    timeline: "2-5 years",
+    pivotSkills: ["AI testing oversight", "Security testing", "Performance engineering"],
+    insight: "Automated testing tools already handle routine QA. Strategic and exploratory testing remains human.",
+  },
+  "Systems Administrator": {
+    score: 55, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Routine server maintenance", "Standard patch management", "Performance monitoring alerts", "User account provisioning"],
+    safeTasks: ["Complex troubleshooting", "Security incident response", "Architecture decisions", "Vendor negotiations"],
+    timeline: "4-8 years",
+    pivotSkills: ["Cloud architecture", "DevSecOps", "AI infrastructure management"],
+    insight: "Cloud automation handles routine tasks. Complex infrastructure decisions and security remain human.",
+  },
+  "Technical Writer": {
+    score: 72, label: "High Risk", color: "#ea580c",
+    automatedTasks: ["Standard documentation generation", "API documentation from code", "Basic user guide creation", "Release note generation"],
+    safeTasks: ["Complex user experience writing", "Strategic content architecture", "Subject matter expert interviews", "Novel documentation design"],
+    timeline: "2-5 years",
+    pivotSkills: ["AI documentation oversight", "Content strategy", "UX writing specialization"],
+    insight: "AI generates standard documentation well. Strategic content design and UX writing remain valuable.",
+  },
+  "Web Designer": {
+    score: 62, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Basic layout generation", "Color scheme suggestions", "Stock image selection", "Template customization"],
+    safeTasks: ["Brand identity creation", "Client relationship management", "Complex UX problem solving", "Creative direction"],
+    timeline: "3-7 years",
+    pivotSkills: ["Brand strategy", "Motion design", "AI design direction"],
+    insight: "AI generates decent designs quickly. Original creative direction and brand strategy stay human.",
+  },
+  "Mobile Developer": {
+    score: 42, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Boilerplate code generation", "Standard UI components", "Basic bug fixes", "Unit test generation"],
+    safeTasks: ["Complex app architecture", "Performance optimization", "Novel feature design", "Platform-specific expertise"],
+    timeline: "5-10 years",
+    pivotSkills: ["AR/VR development", "AI-powered app features", "Cross-platform architecture"],
+    insight: "AI handles routine code. Complex mobile architecture and novel features require human expertise.",
+  },
+  "Blockchain Developer": {
+    score: 35, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Standard smart contract templates", "Basic token creation", "Documentation"],
+    safeTasks: ["Complex protocol design", "Security auditing", "Novel consensus mechanisms", "DeFi architecture"],
+    timeline: "5-10 years",
+    pivotSkills: ["Zero knowledge proofs", "Layer 2 solutions", "Web3 security auditing"],
+    insight: "Specialized blockchain expertise is still scarce and complex enough to resist automation.",
+  },
+  "Tax Attorney": {
+    score: 48, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Standard tax research", "Document review", "Basic compliance work", "Form preparation"],
+    safeTasks: ["Complex tax litigation", "International tax strategy", "Novel legal arguments", "Client advisory relationships"],
+    timeline: "4-8 years",
+    pivotSkills: ["International tax specialization", "Tax controversy litigation", "Mergers and acquisitions tax"],
+    insight: "Routine tax work is automating. Complex strategy and litigation require experienced human judgment.",
+  },
+  "Compliance Officer": {
+    score: 58, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Regulatory monitoring", "Standard report generation", "Basic policy documentation", "Routine audits"],
+    safeTasks: ["Complex regulatory interpretation", "Ethics program leadership", "Investigation management", "Board advisory work"],
+    timeline: "3-7 years",
+    pivotSkills: ["AI governance and compliance", "ESG compliance", "International regulatory expertise"],
+    insight: "AI monitors compliance well. Judgment calls in grey areas and ethics leadership remain human.",
+  },
+  "Risk Manager": {
+    score: 52, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Standard risk reporting", "Data analysis and modeling", "Routine risk assessments", "Compliance tracking"],
+    safeTasks: ["Novel risk identification", "Strategic risk decisions", "Board communication", "Crisis management"],
+    timeline: "4-8 years",
+    pivotSkills: ["AI risk governance", "Cyber risk management", "Enterprise risk strategy"],
+    insight: "AI identifies known risks well. Novel risks and strategic decisions require experienced humans.",
+  },
+  "Economist": {
+    score: 45, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Data collection and processing", "Standard econometric modeling", "Routine market analysis", "Report generation"],
+    safeTasks: ["Novel economic theory", "Policy recommendation", "Expert testimony", "Complex forecasting judgment"],
+    timeline: "5-10 years",
+    pivotSkills: ["Behavioral economics", "AI and automation economics", "Climate economics"],
+    insight: "Data analysis automates well. Novel economic insights and policy judgment remain human.",
+  },
+  "Budget Analyst": {
+    score: 68, label: "High Risk", color: "#ea580c",
+    automatedTasks: ["Budget report generation", "Variance analysis", "Forecast modeling", "Data consolidation"],
+    safeTasks: ["Strategic budget recommendations", "Stakeholder negotiation", "Novel financial planning", "Political budget navigation"],
+    timeline: "3-6 years",
+    pivotSkills: ["Strategic financial planning", "AI financial tools management", "Government finance specialization"],
+    insight: "Routine budget analysis automates easily. Strategic influence and negotiation stay human.",
+  },
+  "Investment Analyst": {
+    score: 62, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Financial data processing", "Standard valuation models", "Earnings analysis", "Market screening"],
+    safeTasks: ["Novel investment thesis", "Management quality assessment", "Relationship-based deal flow", "Macro judgment calls"],
+    timeline: "4-8 years",
+    pivotSkills: ["Alternative investments", "ESG investing", "Private equity analysis"],
+    insight: "Quantitative analysis automates. Qualitative judgment and relationship-driven investing stay human.",
+  },
+  "Mortgage Broker": {
+    score: 58, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Basic loan comparison", "Application processing", "Document collection", "Rate monitoring"],
+    safeTasks: ["Complex financial situations", "Client relationship guidance", "Non-standard loan scenarios", "Emotional support in process"],
+    timeline: "3-7 years",
+    pivotSkills: ["Commercial lending", "Construction loans", "Complex borrower specialization"],
+    insight: "Standard mortgages will automate. Complex situations and human guidance remain valuable.",
+  },
+  "Animator": {
+    score: 65, label: "High Risk", color: "#ea580c",
+    automatedTasks: ["Basic motion generation", "In-between frame creation", "Standard character rigging", "Simple visual effects"],
+    safeTasks: ["Creative direction and storytelling", "Character personality development", "Art direction", "Complex emotional scenes"],
+    timeline: "2-5 years",
+    pivotSkills: ["AI animation direction", "Character acting specialization", "Virtual production"],
+    insight: "AI generates basic animation rapidly. Creative storytelling and character soul remain human.",
+  },
+  "Music Producer": {
+    score: 55, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Basic beat generation", "Standard mixing templates", "Royalty-free music creation", "Automated mastering"],
+    safeTasks: ["Artist development and direction", "Unique sonic identity creation", "Live recording production", "Artist relationship building"],
+    timeline: "3-7 years",
+    pivotSkills: ["AI music direction", "Live performance production", "Artist development"],
+    insight: "AI generates functional music. Unique artistic vision and artist relationships stay human.",
+  },
+  "Interior Designer": {
+    score: 45, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Basic room layout generation", "Color palette suggestions", "Furniture placement visualization", "Standard mood boards"],
+    safeTasks: ["Client relationship and vision", "Complex spatial problem solving", "Custom furniture specification", "Construction coordination"],
+    timeline: "4-8 years",
+    pivotSkills: ["Sustainable design specialization", "Healthcare design", "Luxury residential design"],
+    insight: "AI visualizes designs well. Understanding client lifestyle and coordinating complex projects stays human.",
+  },
+  "Fashion Designer": {
+    score: 48, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Pattern generation", "Trend analysis", "Basic sketch rendering", "Fabric recommendations"],
+    safeTasks: ["Brand identity and story", "Cultural and social context", "Handcraft and technique", "Artistic vision"],
+    timeline: "4-8 years",
+    pivotSkills: ["Sustainable fashion", "Technical fashion design", "Fashion technology"],
+    insight: "AI assists with trends and patterns. Original artistic vision and cultural storytelling stay human.",
+  },
+  "Architect": {
+    score: 35, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Standard drafting and documentation", "Code compliance checking", "Basic structural calculations", "3D visualization"],
+    safeTasks: ["Creative design vision", "Client relationship", "Complex site challenges", "Regulatory negotiation", "Construction oversight"],
+    timeline: "5-10 years",
+    pivotSkills: ["Sustainable architecture", "Urban design", "Healthcare architecture"],
+    insight: "AI handles documentation and visualization. Creative design, client work and site complexity stay human.",
+  },
+  "Game Designer": {
+    score: 40, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Procedural content generation", "Basic level templates", "NPC behavior scripting", "Balance testing"],
+    safeTasks: ["Core creative vision", "Player psychology understanding", "Novel game mechanics", "Narrative design"],
+    timeline: "5-10 years",
+    pivotSkills: ["AI game systems design", "VR game design", "Player experience research"],
+    insight: "AI generates content and levels. Core creative vision and player psychology understanding stay human.",
+  },
+  "Dental Technician": {
+    score: 55, label: "Moderate Risk", color: "#d97706",
+    automatedTasks: ["Standard crown and bridge work", "Digital denture design", "Basic orthodontic appliances"],
+    safeTasks: ["Complex prosthetic cases", "Artistic shade matching", "Custom implant work", "Quality control judgment"],
+    timeline: "3-7 years",
+    pivotSkills: ["Digital dentistry specialization", "Implant prosthetics", "CAD/CAM technology"],
+    insight: "3D printing and digital design are transforming dental labs. Complex artistic work stays human.",
+  },
+  "HVAC Engineer": {
+    score: 28, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Standard load calculations", "Energy modeling", "Documentation"],
+    safeTasks: ["Complex system design", "Troubleshooting on site", "Custom installation", "Building integration"],
+    timeline: "Physical work keeps this safe long term",
+    pivotSkills: ["Geothermal systems", "Smart building integration", "Energy efficiency consulting"],
+    insight: "Physical installation and complex system design require skilled human presence.",
+  },
+  "Locksmith": {
+    score: 15, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Key duplication for standard keys", "Scheduling"],
+    safeTasks: ["Emergency lockout response", "Complex lock installation", "Security system assessment", "Safe cracking"],
+    timeline: "Physical skills — very safe long term",
+    pivotSkills: ["Electronic access systems", "Smart lock installation", "Commercial security"],
+    insight: "Physical security work requiring hands-on expertise is highly resistant to AI replacement.",
+  },
+  "Aircraft Mechanic": {
+    score: 12, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Maintenance scheduling", "Parts ordering", "Documentation"],
+    safeTasks: ["Physical inspection and repair", "Safety judgment calls", "Complex troubleshooting", "Certification compliance"],
+    timeline: "Safety regulations require human sign-off — very safe",
+    pivotSkills: ["Electric aircraft systems", "Drone maintenance", "Avionics specialization"],
+    insight: "Aviation safety regulations require human sign-off on all maintenance. Extremely safe career.",
+  },
+  "Marine Biologist": {
+    score: 22, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Data collection processing", "Species identification from images", "Standard report writing"],
+    safeTasks: ["Field research and diving", "Novel research design", "Conservation advocacy", "Complex ecosystem analysis"],
+    timeline: "AI assists research — not replacing",
+    pivotSkills: ["Climate change research", "Marine conservation policy", "Underwater robotics"],
+    insight: "Physical fieldwork, novel research and conservation advocacy require human expertise and passion.",
+  },
+  "Urban Planner": {
+    score: 32, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Traffic flow modeling", "Zoning data analysis", "Standard report generation"],
+    safeTasks: ["Community engagement", "Political negotiation", "Complex land use decisions", "Vision and strategy"],
+    timeline: "AI assists with data — not replacing",
+    pivotSkills: ["Smart city planning", "Climate resilience planning", "Transportation planning"],
+    insight: "Community engagement, political navigation and creative vision keep urban planners essential.",
+  },
+  "Military Officer": {
+    score: 18, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Logistics optimization", "Intelligence data processing", "Standard reporting"],
+    safeTasks: ["Leadership and command", "Ethical decision making", "Complex tactical judgment", "Troop morale and welfare"],
+    timeline: "Leadership and ethics — very safe",
+    pivotSkills: ["Cyber warfare", "AI systems oversight", "Special operations"],
+    insight: "Military leadership, ethical command decisions and troop welfare require human officers.",
+  },
+  "Diplomat": {
+    score: 8, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Translation assistance", "Standard correspondence", "Data briefings"],
+    safeTasks: ["Relationship building with foreign governments", "Cultural intelligence", "Crisis negotiation", "Treaty negotiations"],
+    timeline: "Human relationships are the job — AI cannot replace",
+    pivotSkills: ["Digital diplomacy", "Cyber policy", "Climate negotiations"],
+    insight: "Diplomacy is fundamentally about human trust and relationships between nations. Cannot be automated.",
+  },
+  "Judge": {
+    score: 12, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Legal research assistance", "Case scheduling", "Standard document review"],
+    safeTasks: ["Legal interpretation and ruling", "Weighing evidence", "Sentencing decisions", "Constitutional interpretation"],
+    timeline: "Constitutional and ethical reasons prevent AI judges",
+    pivotSkills: ["Technology law specialization", "AI governance courts", "International arbitration"],
+    insight: "Legal systems require human accountability for judgments. AI cannot and should not replace judges.",
+  },
+  "Sommelier": {
+    score: 30, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Wine database management", "Standard pairing recommendations", "Inventory tracking"],
+    safeTasks: ["Sensory evaluation and tasting", "Guest experience creation", "Cellar curation", "Education and storytelling"],
+    timeline: "Sensory and hospitality work — safe long term",
+    pivotSkills: ["Master Sommelier certification", "Wine education", "Beverage program direction"],
+    insight: "Physical tasting, guest experience and storytelling cannot be replicated by AI.",
+  },
+  "Pilot": {
+    score: 20, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Autopilot cruise management", "Standard checklists", "Routine flight documentation"],
+    safeTasks: ["Emergency decision making", "Complex weather navigation", "Passenger safety responsibility", "Irregular operations"],
+    timeline: "Regulations and passenger trust keep pilots essential",
+    pivotSkills: ["Drone fleet management", "Electric aircraft transition", "Aviation safety consulting"],
+    insight: "Passenger trust and emergency judgment keep human pilots essential despite heavy automation.",
+  },
+  "Veterinary Technician": {
+    score: 22, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Basic lab processing", "Scheduling", "Standard record keeping"],
+    safeTasks: ["Animal handling and restraint", "Patient monitoring", "Owner education and support", "Surgical assistance"],
+    timeline: "Physical animal care — safe long term",
+    pivotSkills: ["Emergency and critical care", "Exotic animal specialization", "Veterinary dentistry"],
+    insight: "Physical animal care and handling requires skilled human presence and genuine animal connection.",
+  },
+  "Chiropractor": {
+    score: 15, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Appointment scheduling", "Basic exercise recommendations", "Insurance documentation"],
+    safeTasks: ["Physical spinal manipulation", "Patient assessment", "Treatment planning", "Therapeutic relationship"],
+    timeline: "Physical treatment — very safe long term",
+    pivotSkills: ["Sports chiropractic", "Pediatric chiropractic", "Rehabilitation specialization"],
+    insight: "Hands-on physical treatment and therapeutic relationships are irreplaceable by AI or machines.",
+  },
+  "Geologist": {
+    score: 28, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Satellite data processing", "Standard sample analysis", "Report generation"],
+    safeTasks: ["Field investigation", "Novel geological interpretation", "Environmental impact assessment", "Mining and energy consulting"],
+    timeline: "Field work and expert interpretation — safe",
+    pivotSkills: ["Climate change geology", "Geothermal energy", "Critical mineral exploration"],
+    insight: "Field geology, novel interpretation and environmental consulting require experienced human experts.",
+  },
+  "Archaeologist": {
+    score: 18, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Image analysis of artifacts", "Database management", "Standard documentation"],
+    safeTasks: ["Physical excavation", "Artifact interpretation", "Cultural context analysis", "Community engagement"],
+    timeline: "Physical fieldwork — very safe",
+    pivotSkills: ["Digital archaeology", "Underwater archaeology", "Cultural heritage management"],
+    insight: "Physical excavation, cultural interpretation and community engagement require skilled human archaeologists.",
+  },
+  "Epidemiologist": {
+    score: 30, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Disease surveillance data processing", "Standard statistical analysis", "Report generation"],
+    safeTasks: ["Novel outbreak investigation", "Public health communication", "Policy recommendation", "Field investigation"],
+    timeline: "Public health judgment — safe",
+    pivotSkills: ["AI-enhanced disease surveillance", "Global health security", "Climate health research"],
+    insight: "Outbreak investigation, public health judgment and policy guidance require experienced human expertise.",
+  },
+  "Speech Language Pathologist": {
+    score: 15, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Progress tracking apps", "Scheduling", "Standard exercise programs"],
+    safeTasks: ["Complex communication assessment", "Swallowing disorder treatment", "Augmentative communication", "Patient motivation"],
+    timeline: "Human therapy relationship — very safe",
+    pivotSkills: ["Pediatric speech pathology", "Acquired brain injury", "AAC specialization"],
+    insight: "Human connection in communication therapy is fundamental and irreplaceable by technology.",
+  },
+  "Mediator": {
+    score: 10, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Scheduling", "Standard agreement templates", "Basic case documentation"],
+    safeTasks: ["Conflict de-escalation", "Trust building between parties", "Creative agreement design", "Emotional intelligence"],
+    timeline: "Human conflict resolution — very safe",
+    pivotSkills: ["Online dispute resolution", "International mediation", "Workplace conflict specialization"],
+    insight: "Conflict resolution requires profound human empathy, trust and creative problem solving.",
+  },
+  "Biomedical Engineer": {
+    score: 25, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Standard CAD design", "Data analysis", "Regulatory documentation"],
+    safeTasks: ["Novel device innovation", "Clinical collaboration", "Complex regulatory navigation", "Patient outcome research"],
+    timeline: "Innovation and clinical work — safe",
+    pivotSkills: ["AI medical device development", "Wearable health technology", "Neural interfaces"],
+    insight: "Medical device innovation and clinical collaboration require creative human expertise.",
+  },
+  "Environmental Engineer": {
+    score: 22, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Standard environmental modeling", "Data collection and processing", "Compliance reporting"],
+    safeTasks: ["Novel remediation solutions", "Regulatory negotiation", "Community communication", "Complex site assessment"],
+    timeline: "Field work and innovation — safe",
+    pivotSkills: ["Climate resilience engineering", "Carbon capture technology", "Water resource management"],
+    insight: "Environmental problem-solving, community engagement and novel remediation require human engineers.",
+  },
   "Other": {
     score: 48, label: "Moderate Risk", color: "#d97706",
     automatedTasks: ["Routine and repetitive tasks", "Data processing and entry", "Report and document generation", "Scheduling and calendar management"],
@@ -274,11 +682,77 @@ function resolveJob(q: string): string {
 const riskEmoji = (score: number) =>
   score >= 81 ? "🚨" : score >= 61 ? "🔴" : score >= 41 ? "🟠" : score >= 21 ? "🟡" : "🟢"
 
+// ─── O*NET API fallback ───────────────────────────────────────────────────────
+// O*NET is a free US Department of Labor API. client=demo for testing; register
+// free at services.onetcenter.org for a production client ID.
+async function fetchOnetData(jobTitle: string): Promise<RiskEntry & { title: string } | null> {
+  try {
+    const searchUrl =
+      `https://services.onetcenter.org/ws/mnm/search?keyword=${encodeURIComponent(jobTitle)}&client=demo`
+
+    const searchRes = await fetch(searchUrl, { headers: { Accept: "application/json" } })
+    if (!searchRes.ok) return null
+
+    const searchData = await searchRes.json()
+    if (!searchData.occupation || searchData.occupation.length === 0) return null
+
+    const occupation = searchData.occupation[0]
+    const code: string = occupation.code
+    const title: string = occupation.title
+
+    const tasksUrl =
+      `https://services.onetcenter.org/ws/online/occupations/${code}/summary/tasks?client=demo`
+
+    const tasksRes = await fetch(tasksUrl, { headers: { Accept: "application/json" } })
+    const tasksData = tasksRes.ok ? await tasksRes.json() : null
+
+    const tasks: string[] = (tasksData?.task?.slice(0, 6) || [])
+      .map((t: { name?: string; statement?: string }) => t.name || t.statement || "")
+      .filter(Boolean)
+
+    // Approximate risk score from O*NET major group (first 2 digits of SOC code)
+    const majorGroup = parseInt(code.split("-")[0], 10)
+    const groupRisk: Record<number, number> = {
+      11: 45, 13: 60, 15: 42, 17: 28, 19: 25, 21: 15, 23: 55, 25: 22,
+      27: 52, 29: 18, 31: 20, 33: 18, 35: 38, 37: 20, 39: 25, 41: 58,
+      43: 72, 45: 15, 47: 12, 49: 15, 51: 65, 53: 35,
+    }
+    const score = groupRisk[majorGroup] ?? 48
+
+    let label: string, color: string
+    if (score >= 81) { label = "Critical Risk"; color = "#dc2626" }
+    else if (score >= 61) { label = "High Risk"; color = "#ea580c" }
+    else if (score >= 41) { label = "Moderate Risk"; color = "#d97706" }
+    else if (score >= 21) { label = "Mostly Safe"; color = "#16a34a" }
+    else { label = "Very Safe"; color = "#15803d" }
+
+    return {
+      score, label, color, title, code,
+      automatedTasks: tasks.slice(0, 4),
+      safeTasks: tasks.slice(4, 8),
+      timeline: "3-10 years depending on specialization",
+      pivotSkills: [
+        "AI tools proficiency in your field",
+        "Specialized expertise",
+        "Human-centered skills",
+      ],
+      insight: `${title} involves tasks that are ${score > 60 ? "significantly" : score > 40 ? "moderately" : "minimally"} exposed to AI automation based on US Department of Labor occupational data. Specialized and human-facing aspects of this role remain the safest.`,
+      source: "O*NET",
+    }
+  } catch (error) {
+    console.error("O*NET API error:", error)
+    return null
+  }
+}
+
 export default function AIJobScorePage() {
   const [jobInput, setJobInput] = useState("")
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [showSug, setShowSug] = useState(false)
   const [result, setResult] = useState<{ jobTitle: string; entry: RiskEntry } | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [loadingTitle, setLoadingTitle] = useState("")
+  const [notice, setNotice] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
   const sugRef = useRef<HTMLDivElement>(null)
 
@@ -295,15 +769,39 @@ export default function AIJobScorePage() {
     setShowSug(false)
   }
 
-  function runCalc(input = jobInput, push = true) {
+  async function runCalc(input = jobInput, push = true) {
     if (!input.trim()) return
-    const jobTitle = resolveJob(input)
-    const entry = aiRiskData[jobTitle]
-    setResult({ jobTitle, entry })
     setShowSug(false)
+    setNotice("")
     if (push && typeof window !== "undefined") {
       window.history.pushState({}, "", `?job=${encodeURIComponent(input.trim())}`)
     }
+
+    const jobTitle = resolveJob(input)
+
+    // 1. Found in hardcoded database — show immediately
+    if (jobTitle !== "Other") {
+      setResult({ jobTitle, entry: aiRiskData[jobTitle] })
+      return
+    }
+
+    // 2. Not found — try O*NET API fallback
+    const cleanInput = input.trim()
+    setResult(null)
+    setLoading(true)
+    setLoadingTitle(cleanInput)
+    const onet = await fetchOnetData(cleanInput)
+    setLoading(false)
+
+    if (onet && (onet.automatedTasks.length > 0 || onet.safeTasks.length > 0)) {
+      const { title, ...entry } = onet
+      setResult({ jobTitle: title, entry })
+      return
+    }
+
+    // 3. O*NET also failed — generic "Other" fallback
+    setNotice(`No specific data found for "${cleanInput}". Showing a general estimate. Try a more common job title for better results.`)
+    setResult({ jobTitle: cleanInput, entry: aiRiskData["Other"] })
   }
 
   useEffect(() => {
@@ -367,7 +865,22 @@ export default function AIJobScorePage() {
             </button>
           </div>
 
-          {result && (
+          {loading && (
+            <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-8 text-center">
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#e94560] border-t-transparent" />
+              <div className="animate-pulse text-sm text-[#a8a8b3]">
+                Searching O*NET database for <span className="font-semibold text-white">{loadingTitle}</span>…
+              </div>
+            </div>
+          )}
+
+          {notice && !loading && (
+            <div className="rounded-xl border border-[#F9A825]/40 bg-[#F9A825]/10 p-4 text-sm text-white">
+              {notice}
+            </div>
+          )}
+
+          {result && !loading && (
             <div className="space-y-6">
               {/* Score gauge */}
               <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6 text-center">
@@ -429,6 +942,13 @@ export default function AIJobScorePage() {
               <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-4 text-xs text-[#a8a8b3]">
                 AI risk scores are estimates based on current technology trajectories and research. Individual roles vary by company, specialization and location. Focus on developing skills that complement AI rather than compete with it.
               </div>
+
+              {result.entry.source === "O*NET" && (
+                <div className="rounded-xl border border-[#0f3460] bg-[#16213e] p-4 text-xs text-[#a8a8b3]">
+                  <div>Source: O*NET OnLine (US Department of Labor){result.entry.code ? ` — SOC ${result.entry.code}` : ""}</div>
+                  <div className="mt-1">Score is an estimate based on occupation category data.</div>
+                </div>
+              )}
 
               <ShareButtons text={shareText} url={shareUrl} title="Will AI Replace My Job?" />
             </div>
