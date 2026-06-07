@@ -49,8 +49,18 @@ export default function LatteFactorPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">The Latte Factor Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Latte Factor Calculator — Your Daily Coffee&apos;s Hidden Long-Term Cost</h1>
           <p className="text-[#a8a8b3]">What would your daily coffee be worth if invested instead?</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Spending $5.50 on a daily coffee costs $2,007 per year. Over 30 years that same money invested at 7% annual return grows to $227,000. The latte factor concept shows how small daily spending habits compound dramatically over decades. Cutting one $5 daily habit and investing it from age 25 adds approximately $150,000 by retirement.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The latte factor is a personal finance concept popularized by David Bach that illustrates how small recurring daily expenses compound into significant sums over decades. This calculator shows the exact opportunity cost of any daily spending habit over your chosen time period.</p>
         </div>
       </section>
 

@@ -62,8 +62,17 @@ export default function LifeExpectancyPage() {
       </div>
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Life Expectancy Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Life Expectancy Calculator — Your Statistical Life Estimate</h1>
           <p className="text-[#a8a8b3]">A statistical estimate based on lifestyle factors</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Average US life expectancy is 76.4 years (74.0 for men, 79.3 for women). A 40-year-old American today has a life expectancy of approximately 79 years. Non-smokers live 10 years longer on average than smokers. Regular exercise adds 3-7 years. Maintaining a healthy weight adds 2-4 years compared to obesity.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Life expectancy calculators use actuarial data and health factors to estimate statistical lifespan. Factors including current age, gender, smoking status, weight, exercise habits and family history all influence the estimate. This tool provides a statistical estimate for educational purposes only — not a medical prediction. Consult a doctor for personalized health guidance.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

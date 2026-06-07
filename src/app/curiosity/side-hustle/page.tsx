@@ -65,8 +65,18 @@ export default function SideHustlePage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Side Hustle Investment Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Side Hustle Investment Calculator — What Extra Income Could Build</h1>
           <p className="text-[#a8a8b3]">What could a side hustle build for your future if you invested everything?</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Earning $500 per month from a side hustle and investing it entirely at 7% annual return for 20 years builds $262,000. The same $500 invested for 30 years builds $607,000. Side hustle income invested from age 25 to 65 can add $1 million or more to retirement savings depending on the amount and consistency.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">This curiosity calculator shows the long-term wealth-building potential of investing side hustle income rather than spending it. By treating side income as investment capital instead of spending money the compounding effect over decades creates significant additional retirement wealth.</p>
         </div>
       </section>
 

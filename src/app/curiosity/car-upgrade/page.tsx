@@ -59,8 +59,18 @@ export default function CarUpgradePage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Car Upgrade Opportunity Cost</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Car Upgrade Calculator — True Cost of a Nicer Car</h1>
           <p className="text-[#a8a8b3]">What does driving a nicer car actually cost you in the long run?</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Upgrading from a $25,000 car to a $45,000 car costs $20,000 more upfront. With financing at 7% over 5 years the total extra cost is $23,760. If that $20,000 was invested instead at 7% annual return it would be worth $55,676 in 15 years. The true cost of a car upgrade is almost always 2-3 times the price difference.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Car upgrade cost calculators show the true financial impact of choosing a more expensive vehicle by including higher loan payments, increased insurance premiums, higher fuel costs and the opportunity cost of the additional down payment. The real cost of upgrading cars is typically far higher than buyers realize.</p>
         </div>
       </section>
 

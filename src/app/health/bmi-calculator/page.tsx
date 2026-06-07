@@ -71,8 +71,17 @@ export default function BMIPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">BMI Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">BMI Calculator — Body Mass Index and What It Means</h1>
           <p className="text-[#a8a8b3]">Calculate your Body Mass Index</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">BMI is calculated by dividing weight in kilograms by height in meters squared. BMI ranges: under 18.5 is underweight, 18.5-24.9 is normal, 25-29.9 is overweight, 30 and above is obese. BMI does not measure body fat directly and does not account for muscle mass — athletes often show high BMI despite low body fat.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Body Mass Index (BMI) is a screening tool that uses height and weight to categorize weight status. While widely used in medical settings BMI has significant limitations — it does not distinguish between muscle and fat, does not account for age, sex or ethnicity differences, and is not a direct measure of health. A doctor can provide proper health assessment.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

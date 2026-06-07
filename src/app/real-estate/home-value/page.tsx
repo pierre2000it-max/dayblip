@@ -55,8 +55,17 @@ export default function HomeValuePage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Historical Home Value Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Home Value Calculator — How Much Has Your Home Appreciated?</h1>
           <p className="text-[#a8a8b3]">See how home values have changed over the decades</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">US home values have appreciated an average of 4.3% annually since 1991. A $200,000 home purchased in 2010 would be worth approximately $390,000 today at the national average appreciation rate. However real estate appreciation varies dramatically by location — some markets have tripled while others have barely kept pace with inflation.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Home value appreciation calculators project how much a property has grown in value based on historical appreciation rates for the purchase year and location. Home price growth varies significantly by city, neighborhood and economic conditions. Past appreciation rates do not guarantee future returns and individual property values depend on local market conditions.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

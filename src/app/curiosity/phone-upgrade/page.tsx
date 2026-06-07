@@ -69,8 +69,18 @@ export default function PhoneUpgradePage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Phone Upgrade Cycle Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Phone Upgrade Calculator — True Cost of Your Annual Upgrade Habit</h1>
           <p className="text-[#a8a8b3]">How much does upgrading your phone every year actually cost you?</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average iPhone costs $999. Upgrading every year costs $8,991 over 9 years after trade-in credits. Upgrading every 3 years costs $2,997 — saving $5,994. If that $666 annual savings was invested at 7% return over 20 years it would grow to $32,000. The average American upgrades their phone every 2.7 years.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Smartphone upgrade costs are calculated by comparing the actual out-of-pocket cost over time for different upgrade cycles after accounting for trade-in value. This calculator shows the real annual cost of your current upgrade habit and compares it to less frequent upgrade cycles and the investment alternative.</p>
         </div>
       </section>
 

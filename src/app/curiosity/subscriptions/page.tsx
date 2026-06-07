@@ -78,8 +78,18 @@ export default function SubscriptionsPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">What Could Your Subscriptions Be Worth?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Subscription Cost Calculator — What Could Your Subscriptions Be Worth?</h1>
           <p className="text-[#a8a8b3]">See what your monthly subscriptions would grow to if invested in the S&P 500 instead</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average American spends $273 per month on subscription services including streaming, apps, gym and software. Invested at 7% annual return over 20 years that is $170,000 in lost investment opportunity. Netflix, Spotify, Hulu, Disney Plus and a gym membership alone total $85-120 per month for most households.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Subscription costs are easy to underestimate because each individual charge seems small. This calculator adds up all your subscriptions and shows the true monthly total alongside what that money would be worth over time if invested instead. Educational only — not financial advice.</p>
         </div>
       </section>
 

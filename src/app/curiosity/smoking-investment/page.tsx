@@ -57,8 +57,18 @@ export default function SmokingInvestmentPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Smoking Investment Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Smoking Investment Calculator — Financial Cost of Smoking Over Time</h1>
           <p className="text-[#a8a8b3]">See what smoking costs you financially and what investing instead could build</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A pack-a-day smoker spending $9.50 per pack spends $3,468 per year on cigarettes. Over 20 years that is $69,360 spent. If invested at 7% annual return instead that same money grows to $179,000 over 20 years and $468,000 over 30 years. Quitting and investing the savings is one of the highest-return financial decisions a smoker can make.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The smoking investment calculator shows the opportunity cost of tobacco spending by projecting what the same money would be worth if invested in a stock market index fund over time. It also calculates total lifetime spending on cigarettes from your starting age to any target age.</p>
         </div>
       </section>
 

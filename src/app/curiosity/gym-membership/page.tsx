@@ -53,8 +53,18 @@ export default function GymMembershipPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Gym Membership Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Gym Membership Calculator — Your Real Cost Per Visit</h1>
           <p className="text-[#a8a8b3]">How much does your gym membership actually cost per visit?</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average gym membership costs $58 per month. The average member visits only 2 times per week — making the real cost $7.25 per visit. Members who go once a week pay $14.50 per visit. 67% of gym memberships are never or rarely used. People who cancel unused memberships and invest the savings often save $500-700 per year.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Gym membership cost per visit depends on how frequently you actually attend. This calculator divides your real monthly membership cost by your honest weekly visit frequency to show the true price per workout. It also shows what cancelling an unused membership and investing the savings would be worth over time.</p>
         </div>
       </section>
 

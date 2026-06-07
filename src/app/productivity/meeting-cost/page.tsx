@@ -51,8 +51,17 @@ export default function MeetingCostPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Meeting Cost Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Meeting Cost Calculator — Live Cost of Your Meeting Right Now</h1>
           <p className="text-[#a8a8b3]">Find out what your meetings are really costing</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Unnecessary meetings cost US companies an estimated $37 billion per year. A one-hour meeting with 10 employees earning an average of $75,000 costs the company $360 in salary alone. Research shows 71% of senior managers consider most meetings unproductive. The average employee attends 62 meetings per month — roughly half are considered unnecessary.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Meeting cost calculators show the real-time salary cost of a meeting by multiplying the number of attendees by their average hourly rate for the duration of the meeting. This helps teams evaluate whether a meeting provides enough value to justify its cost and encourages more efficient use of collective time.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

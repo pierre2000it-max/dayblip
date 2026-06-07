@@ -66,8 +66,18 @@ export default function ImpulseShoppingPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Impulse Shopping Investment Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Impulse Shopping Calculator — What Impulse Buys Cost Your Future</h1>
           <p className="text-[#a8a8b3]">What is your impulse spending really costing your future self?</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average American makes 3 impulse purchases per week totaling $151 monthly or $1,812 per year. Online shopping has increased impulse buying by 40% since 2020. $150 per month in impulse spending invested at 7% annual return over 25 years grows to $120,000. Most impulse purchases are forgotten within 90 days.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Impulse purchases are unplanned buying decisions made in the moment without prior intention. Research shows that 40-80% of all purchases have an impulse component. This calculator shows the cumulative annual cost of impulse buying habits and the investment opportunity cost of that spending over time.</p>
         </div>
       </section>
 

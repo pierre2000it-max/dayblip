@@ -93,8 +93,17 @@ export default function RentVsBuyPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Rent vs Buy Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Rent vs Buy Calculator — Which Is the Smarter Financial Choice?</h1>
           <p className="text-[#a8a8b3]">Find out which is the smarter financial choice for you</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Buying is not always better than renting financially. The break-even point — when buying becomes cheaper than renting — is typically 5-7 years in most US markets. In expensive cities like San Francisco and New York renting can be cheaper than buying for 10+ years. The true cost of homeownership includes mortgage interest, property taxes, insurance and maintenance which typically add 2-4% of home value annually beyond the mortgage payment.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The rent versus buy decision depends on local home prices, rent rates, mortgage rates, how long you plan to stay and investment return assumptions. This calculator compares the total cost of renting versus buying over your planned time horizon to show which option builds more wealth given your specific situation.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

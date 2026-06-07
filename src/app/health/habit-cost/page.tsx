@@ -56,8 +56,17 @@ export default function HabitCostPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">How Much Has Your Habit Cost You?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Habit Cost Calculator — True Financial Cost of Daily Habits</h1>
           <p className="text-[#a8a8b3]">The shocking true cost of everyday habits</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Daily habits compound dramatically over time. A $10 daily habit costs $3,650 per year and $109,500 over 30 years in direct spending alone. Invested at 7% annual return that same $10 per day grows to $369,000 over 30 years. The most expensive common daily habits are cigarettes, alcohol, premium coffee and food delivery services.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Habit cost calculators show both the direct annual cost of a daily spending habit and the opportunity cost — what that money would be worth if invested instead. Small daily amounts become surprisingly large sums over decades due to compound interest. This tool works for any recurring daily, weekly or monthly habit or expense.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

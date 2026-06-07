@@ -55,8 +55,17 @@ export default function WorkHoursPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Work Hours Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Work Hours Calculator — Total Hours Worked in Your Career</h1>
           <p className="text-[#a8a8b3]">How much of your life have you spent working?</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average American works 1,767 hours per year — more than workers in Germany (1,349), France (1,402) or the UK (1,532). Over a 40-year career that is approximately 70,680 total hours spent working. If you started working at 22 and retire at 62 you will have spent roughly 8 full years of 24-hour days at work.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A work hours calculator tallies the total hours spent working across a career based on weekly hours, weeks worked per year and career length. It converts this into meaningful comparisons — equivalent years of 24-hour days, percentage of waking life spent working and comparison to average hours in different countries and industries.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

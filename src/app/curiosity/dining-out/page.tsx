@@ -52,8 +52,18 @@ export default function DiningOutPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Dining Out Opportunity Cost</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Dining Out Calculator — Cook More, Invest the Difference</h1>
           <p className="text-[#a8a8b3]">What would you have if you cooked more and invested the difference?</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average American household spends $3,639 per year dining out. Cooking at home costs approximately 60-75% less per meal than restaurant dining. If a household reduced dining out by half and invested the $1,800 savings at 7% annual return over 20 years it would accumulate approximately $87,000.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Restaurant meals cost 3-5 times more than equivalent home-cooked meals when accounting for the full cost including tip, drinks and transportation. This curiosity calculator shows the long-term investment opportunity cost of dining out habits and compares different cooking and dining scenarios.</p>
         </div>
       </section>
 

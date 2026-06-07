@@ -66,8 +66,17 @@ export default function AffordabilityPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Home Affordability Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Home Affordability Calculator — How Much House Can You Really Afford?</h1>
           <p className="text-[#a8a8b3]">Find out how much home you can afford using the 28/36 rule</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The standard rule is to spend no more than 28% of gross monthly income on housing costs. On a $6,000 monthly gross income the maximum monthly mortgage payment is $1,680. With a 20% down payment and 7% interest rate that payment supports a home price of approximately $245,000. Most financial advisors recommend a more conservative 25% of take-home pay for housing.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Home affordability is determined by income, existing debts, down payment size and current mortgage rates. Lenders use the debt-to-income ratio where total monthly debts including the mortgage should not exceed 43% of gross income. This calculator shows the maximum home price you can afford under both the standard 28% rule and the more conservative 25% of take-home guideline.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

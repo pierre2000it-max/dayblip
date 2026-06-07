@@ -44,8 +44,18 @@ export default function LotteryPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Lottery Ticket Investment Calculator</h1>
-          <p className="text-[#a8a8b3]">What if you invested your lottery money in the S&P 500 instead?</p>
+          <h1 className="mb-3 text-4xl font-bold text-white">Lottery Calculator — What $20 Per Week Could Build Instead</h1>
+          <p className="text-[#a8a8b3]">What if you invested your lottery money in the S&amp;P 500 instead?</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The odds of winning the Powerball jackpot are 1 in 292 million. You are 10 times more likely to be struck by lightning twice than win Powerball. Spending $20 per week on lottery tickets costs $1,040 per year. Invested at 7% annual return for 30 years that same $20 per week grows to $104,000.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Lottery calculators show the true expected value of lottery spending versus the opportunity cost of investing the same amount. The expected return on a lottery ticket is approximately 50 cents for every dollar spent — the worst investment available. This calculator compares your lottery spending to what the same money would build as an investment over time.</p>
         </div>
       </section>
 

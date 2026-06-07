@@ -86,8 +86,17 @@ export default function SalaryCalculatorPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Salary Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Salary Calculator — Convert Between Hourly Annual and Monthly Pay</h1>
           <p className="text-[#a8a8b3]">Convert your salary between any pay period</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A $75,000 annual salary equals $6,250 per month, $1,442 per week, $288 per day and $36.06 per hour based on a standard 40-hour work week and 52 weeks per year. A $20 hourly wage equals $41,600 per year. A $5,000 monthly salary equals $60,000 per year. These conversions assume full-time employment with no unpaid time off.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Salary conversion calculators help compare job offers expressed in different pay formats — hourly, weekly, biweekly, monthly or annually. They also help freelancers and contractors compare their rates to equivalent salaried positions. All conversions are gross figures before tax deductions.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

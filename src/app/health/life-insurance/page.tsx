@@ -43,8 +43,17 @@ export default function LifeInsurancePage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Life Insurance Needs Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Life Insurance Calculator — How Much Coverage Do You Need?</h1>
           <p className="text-[#a8a8b3]">Find out how much life insurance coverage you need</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A common life insurance guideline is 10-12 times your annual income. On a $75,000 salary that means $750,000 to $900,000 in coverage. A 30-year-old non-smoker can get $500,000 of 20-year term life insurance for approximately $20-25 per month. Life insurance needs are highest when you have dependents, a mortgage and limited savings.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Life insurance coverage needs depend on your income, debts, dependents and existing savings. The goal is to replace your income and cover debts so that dependents can maintain their lifestyle if you die unexpectedly. Term life insurance is the most cost-effective option for most people — whole life insurance is significantly more expensive for equivalent coverage.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">
