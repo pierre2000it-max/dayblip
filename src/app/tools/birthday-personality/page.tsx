@@ -176,8 +176,17 @@ export default function BirthdayPersonalityPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Everything About Your Birthday</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Birthday Personality — Everything Your Birthday Says About You</h1>
           <p className="text-[#a8a8b3]">A complete deep dive into what your birthday says about you</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Your birth date connects you to a rich tapestry of facts — your Chinese zodiac animal, Western star sign, birth number in numerology, and the historical events that shaped the world on your exact birthday. Statistically the most common birth month in the US is September — meaning more people were conceived in December than any other month.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Birthday personality tools combine multiple cultural and historical systems to reveal the symbolic meaning attached to your specific birth date. This includes Western astrology, Chinese zodiac, numerological birth numbers, historical events on your birthday and fun statistical facts about people born in your month and season.</p>
         </div>
       </section>
 

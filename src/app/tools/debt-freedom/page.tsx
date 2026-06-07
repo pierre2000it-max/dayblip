@@ -144,8 +144,17 @@ export default function DebtFreedomPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Your Debt Freedom Date</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Debt Freedom Date Calculator — When Will You Be Completely Debt Free?</h1>
           <p className="text-[#a8a8b3]">Find the exact date you will be completely debt free</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average American carries $104,215 in total debt including mortgage, auto loans, student loans and credit cards. Without a debt payoff strategy most people carry significant debt into retirement. Paying just 10-20% extra per month on the highest-interest debt first can eliminate it years sooner and save thousands in interest.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A debt freedom date calculator shows the exact date you will be completely debt free based on your current debts, interest rates and monthly payments. It uses the debt avalanche method — paying minimums on all debts while putting extra money toward the highest interest rate first — to minimize total interest paid across all debts.</p>
         </div>
       </section>
 

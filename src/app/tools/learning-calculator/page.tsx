@@ -98,8 +98,17 @@ export default function LearningCalculatorPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">What Could You Learn?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Learning Calculator — What Could You Achieve With Your Time?</h1>
           <p className="text-[#a8a8b3]">Calculate what you could achieve with your available daily time</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Dedicating 30 minutes per day to deliberate practice leads to approximately 182 hours per year of skill development. Research suggests 1,000 hours of deliberate practice can take a complete beginner to professional competency in most skills. At 30 minutes per day that is 5.5 years. At 2 hours per day the same journey takes just 1.4 years.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The learning calculator is based on deliberate practice research popularized by Anders Ericsson and Malcolm Gladwell&apos;s 10,000 hour rule. It shows how daily time investment compounds into skill mastery over months and years. Enter any skill and daily practice time to see realistic milestones on the path from beginner to expert.</p>
         </div>
       </section>
 

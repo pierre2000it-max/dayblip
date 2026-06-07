@@ -96,8 +96,17 @@ export default function MortgageByYearPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[800px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Could You Afford a Home in 1990?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Home Affordability by Year — Could You Afford a Home in 1990?</h1>
           <p className="text-[#a8a8b3]">See how home affordability has changed across the decades</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The median US home price in 1990 was $122,900. At 1990 mortgage rates of 10.1% the monthly payment was $1,085. The median household income in 1990 was $29,943 — making that payment 43% of monthly income. Today the median home costs $420,000 at 7% rate — a monthly payment of $2,796 on median household income of $80,610 which is also 42% of monthly income.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Home affordability measures the relationship between home prices, mortgage rates and household incomes across different historical periods. This calculator shows what it would have cost to buy a median home in any year from 1970 to today and compares that burden to household income at the time — revealing how affordability has changed across generations.</p>
         </div>
       </section>
 

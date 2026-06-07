@@ -249,8 +249,17 @@ export default function SalaryCheckerPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Am I Being Paid Fairly?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Salary Checker — Am I Being Paid Fairly for My Role?</h1>
           <p className="text-[#a8a8b3]">Check if your salary matches market rates for your role and experience</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">54% of employees are paid below the market median for their role and location according to compensation data. The pay gap between the 25th and 75th percentile for the same role in the same city can exceed 40%. Knowing your market rate is the first step — employees who negotiate earn an average of $5,000 more annually than those who accept initial offers.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A salary checker compares your current compensation against market rate data for your specific job title, experience level and geographic location. This tool uses BLS 2025 Occupational Employment and Wage Statistics covering 80+ job titles across all 50 US states to show whether your salary is below, at or above market rate.</p>
         </div>
       </section>
 

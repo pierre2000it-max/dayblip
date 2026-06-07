@@ -96,8 +96,17 @@ export default function GenerationalWealthPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Generational Wealth Gap Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Generational Wealth Gap Calculator — How Do You Compare to Your Parents at Your Age?</h1>
           <p className="text-[#a8a8b3]">Compare your finances to where your parents were at your exact age</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Baby Boomers at age 35 had a median net worth of $82,000 in today&apos;s dollars. Millennials at age 35 have a median net worth of $51,000 — 38% lower than their parents at the same age. Adjusted for inflation Boomers accumulated wealth 70% faster than Millennials due to lower housing costs, cheaper education and stronger wage growth relative to living expenses.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The generational wealth gap measures the difference in wealth accumulation between generations at the same life stages. Factors including rising housing costs, student loan debt, wage stagnation and the 2008 financial crisis have significantly impacted Millennial and Gen Z wealth building compared to previous generations at equivalent ages.</p>
         </div>
       </section>
 

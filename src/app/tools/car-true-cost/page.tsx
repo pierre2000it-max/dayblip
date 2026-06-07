@@ -115,8 +115,17 @@ export default function CarTrueCostPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">True Cost of Car Ownership</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">True Car Cost Calculator — The Real Total Cost of Owning Your Car</h1>
           <p className="text-[#a8a8b3]">The sticker price is just the beginning</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average American spends $12,182 per year on car ownership including loan payments, insurance, fuel, maintenance and depreciation. Over 10 years a $35,000 car costs approximately $85,000 in total ownership expenses. A new car loses 20% of its value in the first year and 50% within 5 years. The true monthly cost of car ownership is typically 40-60% more than the loan payment alone.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The true cost of car ownership goes far beyond the monthly loan payment. It includes insurance, fuel, regular maintenance, unexpected repairs, registration fees, and depreciation — the largest hidden cost most buyers ignore. This calculator shows the real monthly and annual cost of owning any vehicle based on your specific purchase price, loan terms and driving habits.</p>
         </div>
       </section>
 

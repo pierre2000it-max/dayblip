@@ -94,8 +94,17 @@ export default function GenerationQuizPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">What Generation Are You Really?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Generation Quiz — What Generation Are You Really?</h1>
           <p className="text-[#a8a8b3]">10 questions to find your true generational identity — you might be surprised</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Generation boundaries are defined by birth year: Silent Generation (1928-1945), Baby Boomers (1946-1964), Generation X (1965-1980), Millennials (1981-1996), Generation Z (1997-2012), Generation Alpha (2013-present). However cultural experiences often matter more than birth year — someone born in 1981 may identify more with Gen X than Millennials depending on their experiences.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Generational labels are sociological categories that group people who share similar formative cultural experiences shaped by major historical events, technology and economic conditions. This quiz goes beyond just your birth year to assess which generation you most closely identify with based on your actual attitudes, experiences and cultural touchstones.</p>
         </div>
       </section>
 

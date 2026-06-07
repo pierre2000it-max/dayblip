@@ -79,8 +79,17 @@ export default function PrivilegeCalculatorPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Your Global Perspective</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Global Perspective Calculator — Where Do You Stand Worldwide?</h1>
           <p className="text-[#a8a8b3]">See where you stand among the 8.2 billion people on Earth</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">If you earn $34,000 per year you are in the top 1% of global income earners. The global median income is approximately $2,920 per year. Over 700 million people live on under $2.15 per day. An American earning minimum wage of $7.25 per hour earns more per hour than the daily income of 85% of the world&apos;s population.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The global perspective calculator places your income, living standards and circumstances in the context of all 8 billion people on Earth. It shows your global income percentile, how your access to clean water, education, healthcare and internet compares globally, and puts everyday American experiences into worldwide context using World Bank and UN data.</p>
         </div>
       </section>
 

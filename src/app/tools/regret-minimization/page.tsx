@@ -58,8 +58,17 @@ export default function RegretMinimizationPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Will You Regret This Decision?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Regret Minimization Framework — Will You Regret This Decision?</h1>
           <p className="text-[#a8a8b3]">Use Jeff Bezos&apos;s framework to evaluate any major life decision</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Jeff Bezos used the regret minimization framework to decide to leave his Wall Street job and start Amazon. The question: imagine yourself at 80 looking back — will you regret not trying more than you will regret trying and failing? Research shows people regret inactions far more than actions over the long term. We regret the things we did not do more than the things we did.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The regret minimization framework is a decision-making tool popularized by Jeff Bezos for evaluating major life choices. It asks you to project yourself to age 80 and assess which choice would produce more regret — acting or not acting. Research by psychologist Tom Gilovich confirms that across a lifetime people consistently report more intense regret over missed opportunities than over mistakes made.</p>
         </div>
       </section>
 

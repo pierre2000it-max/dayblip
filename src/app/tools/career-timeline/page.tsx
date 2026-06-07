@@ -100,8 +100,17 @@ export default function CareerTimelinePage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[800px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Your Career Financial Timeline</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Career Timeline Calculator — Project Your Salary and Savings Over Time</h1>
           <p className="text-[#a8a8b3]">Project your earnings, savings and net worth over your entire career</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A 25-year-old starting at $55,000 with 3% annual raises earns $2.1 million in total lifetime income by age 65. The same person saving 15% throughout accumulates approximately $1.4 million in investments by retirement. Early career salary decisions compound dramatically — a $5,000 raise at 25 is worth over $150,000 in cumulative earnings by 65.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A career timeline calculator projects your total lifetime earnings and savings based on your current salary, annual raise rate and savings percentage. It shows how early salary decisions compound over a full career and helps visualize the long-term financial impact of career choices made today.</p>
         </div>
       </section>
 

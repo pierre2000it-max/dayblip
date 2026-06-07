@@ -91,8 +91,17 @@ export default function TimeWastedPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">What Could You Learn With Your Screen Time?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Screen Time Cost Calculator — What Could You Learn With That Time?</h1>
           <p className="text-[#a8a8b3]">Turn daily minutes into life-changing skills and achievements</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average American spends 7 hours per day on screens — 2,555 hours per year. That is equivalent to 106 full days of waking hours annually spent on devices. In that same time a person could learn a new language (600 hours), get a professional certification (200 hours) and read 100 books (250 hours) with time to spare.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Screen time cost calculators convert daily device usage into opportunity cost — the skills, books, languages and experiences that same time could produce. The average person will spend approximately 44 years of waking hours on screens across their lifetime. This tool shows what that time could be worth if redirected to deliberate learning and skill building.</p>
         </div>
       </section>
 

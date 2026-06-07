@@ -276,8 +276,17 @@ export default function StockCalculatorPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[800px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">What If You Had Invested Then?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Historical Stock Calculator — What If You Had Invested Then?</h1>
           <p className="text-[#a8a8b3]">See what a past investment in famous stocks would be worth today</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">$10,000 invested in Apple in January 2003 would be worth approximately $3.2 million today. The same amount in Amazon in 2001 would be worth $2.8 million. $10,000 in the S&amp;P 500 index fund in 2000 would be worth approximately $64,000 today — a 540% return. Individual stock selection produces dramatically different outcomes versus index fund investing.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A historical stock calculator shows what an investment in a specific company would be worth today if made at a past date. It helps illustrate the power of long-term investing and the dramatic difference between stock selection outcomes. All results are historical and past performance does not guarantee future returns.</p>
         </div>
       </section>
 

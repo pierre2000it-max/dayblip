@@ -97,8 +97,17 @@ export default function TaxMigrationPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">How Much Would You Save Moving States?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">State Tax Savings Calculator — How Much Would Moving States Save You?</h1>
           <p className="text-[#a8a8b3]">Calculate your annual tax savings from moving to a lower tax state</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Moving from California to Texas on a $150,000 salary saves approximately $11,565 per year in state income tax. California taxes at 9.3% while Texas has zero state income tax. Over 10 years that difference is $115,650 before investment growth. Nine US states have no income tax including Texas, Florida, Nevada and Washington.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">State income tax varies from 0% in nine states to over 13% in California. For high earners the state of residence can make a six-figure difference in lifetime tax burden. This calculator shows the exact annual and lifetime tax savings from relocating to a lower-tax state based on your income and current state.</p>
         </div>
       </section>
 

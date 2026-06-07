@@ -66,8 +66,17 @@ export default function CompoundKindnessPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">The Compound Effect of Kindness</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Compound Kindness Calculator — The Ripple Effect of Daily Acts</h1>
           <p className="text-[#a8a8b3]">What if one kind act per day could ripple across the world?</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">If you perform one act of kindness per day that inspires two others to do the same, and those two inspire two more — after just 33 days that single daily act has theoretically touched over 8 billion people. One genuine act of kindness has been shown in research to improve mood in the giver for up to 3 days and inspire an average of 3 subsequent kind acts in witnesses.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Compound kindness applies the mathematics of exponential growth to prosocial behavior. Research in positive psychology shows that witnessing kindness inspires kindness in others — creating a ripple effect that extends far beyond the original act. This calculator visualizes how small consistent acts of generosity compound into significant social impact over time.</p>
         </div>
       </section>
 

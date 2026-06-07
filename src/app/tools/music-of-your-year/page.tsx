@@ -68,8 +68,17 @@ export default function MusicOfYourYearPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">The Music of Your Birth Year</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Music of Your Year — Songs That Defined the Year You Were Born</h1>
           <p className="text-[#a8a8b3]">Discover the songs and sounds that defined the year you arrived</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Music from your adolescence (ages 12-25) is processed differently by the brain and forms stronger memories than music heard at any other life stage. This is called the reminiscence bump. The songs that topped the charts the year you were born reflect the cultural moment that shaped the world you arrived into — from technology and politics to fashion and values.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The music of your birth year captures a cultural snapshot of the world at the moment you arrived. Top songs, albums and artists from your birth year reflect the sounds, attitudes and events that shaped your parents and the society that would raise you. This tool shows the number one songs and defining music of any birth year from 1970 to 2020.</p>
         </div>
       </section>
 

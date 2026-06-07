@@ -93,8 +93,17 @@ export default function LifeInNumbersPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Your Life in Numbers</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Life in Numbers — Your Life as Fascinating Statistics</h1>
           <p className="text-[#a8a8b3]">Your entire life summarized in fascinating live statistics</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">In your lifetime your heart beats approximately 2.5 billion times. You breathe about 600 million breaths. You sleep roughly one third of your entire life. The average person walks 100,000 miles in a lifetime — equivalent to circling the Earth four times. You spend approximately 6 months of your life waiting at red traffic lights.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Life in numbers transforms your age into fascinating biological and behavioral statistics that reveal the extraordinary scale of ordinary human experience. By entering your birth date this tool shows live-updating counts of your heartbeats, breaths, steps and other measurable life events — giving a striking perspective on the scope of a single human life.</p>
         </div>
       </section>
 
