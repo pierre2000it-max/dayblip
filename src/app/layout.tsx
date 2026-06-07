@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import Header from "@/components/Header";
@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 const BASE = "https://www.dayblip.com";
 const DEFAULT_DESCRIPTION =
-  "120+ free tools for life, money, history and more. Finance calculators, countdown timers, birthday tools, live world counters and much more. No signup. No email. Ever.";
+  "146+ free tools for life, money, history and more. Finance calculators, countdown timers, birthday tools, live world counters and much more. No signup. No email. Ever.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE),
@@ -36,14 +36,16 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Dayblip",
     title: "Dayblip — Free Tools for Curious Minds",
-    description: "120+ free tools for life, money, history and more. No signup ever.",
-    images: [{ url: "/og-default.svg", width: 1200, height: 630, alt: "Dayblip — Free Tools for Curious Minds" }],
+    description: "146+ free tools for life, money, history and more. No signup. No email. Ever.",
+    url: "https://www.dayblip.com",
+    images: [{ url: "https://www.dayblip.com/og-default.svg", width: 1200, height: 630, alt: "Dayblip — Free Tools for Curious Minds" }],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@dayblip",
+    site: "@dayblip365",
     title: "Dayblip — Free Tools for Curious Minds",
-    description: "120+ free tools for life, money, history and more. No signup ever.",
+    description: "146+ free tools for life, money, history and more. No signup. No email. Ever.",
+    images: ["https://www.dayblip.com/og-default.svg"],
   },
   robots: {
     index: true,
@@ -55,6 +57,11 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#0d1b2a",
+  colorScheme: "dark",
+};
+
 const orgSchema = generateOrganizationSchema();
 
 export default function RootLayout({
@@ -62,6 +69,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Resource hints — reduce connection latency for external assets */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <script
           type="application/ld+json"
