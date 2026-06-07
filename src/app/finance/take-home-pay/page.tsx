@@ -322,6 +322,26 @@ export default function TakeHomePayPage() {
             <p className="text-xs text-[#a8a8b3] mt-2">Your marginal rate is your highest bracket. Your effective rate is what you actually pay on average — always lower than marginal.</p>
           </div>
 
+          {/* Embed this tool */}
+          <div style={{
+            textAlign: "center",
+            marginTop: "32px",
+            marginBottom: "16px",
+            padding: "16px",
+            background: "#1e2d4a",
+            borderRadius: "8px",
+            border: "1px solid #2a3a5a",
+          }}>
+            <p style={{ color: "#a8a8b3", fontSize: "14px", margin: "0 0 8px 0" }}>
+              Want to add this tool to your website?
+            </p>
+            <a
+              href="/embed"
+              style={{ color: "#e94560", fontSize: "14px", fontWeight: "600", textDecoration: "none" }}
+            >
+              Get the free embed code →
+            </a>
+          </div>
           <ShareButtons
             text={`My salary take-home is ${fmtK(calc.annualTakeHome)}/year after taxes. Effective rate: ${calc.effectiveRate}% (Educational only)`}
             url={`https://www.dayblip.com/finance/take-home-pay?salary=${amount}&state=${stateIdx}&filing=${filing}&type=${wageType}&retirement=${fourOhOneK}`}

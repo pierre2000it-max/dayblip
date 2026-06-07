@@ -186,6 +186,26 @@ export default function MortgagePage() {
           </div>
 
           <button onClick={pushUrl} className="rounded-lg bg-[#e94560] px-5 py-2 text-sm font-semibold text-white hover:opacity-90">Share / Copy Link</button>
+          {/* Embed this tool */}
+          <div style={{
+            textAlign: "center",
+            marginTop: "32px",
+            marginBottom: "16px",
+            padding: "16px",
+            background: "#1e2d4a",
+            borderRadius: "8px",
+            border: "1px solid #2a3a5a",
+          }}>
+            <p style={{ color: "#a8a8b3", fontSize: "14px", margin: "0 0 8px 0" }}>
+              Want to add this tool to your website?
+            </p>
+            <a
+              href="/embed"
+              style={{ color: "#e94560", fontSize: "14px", fontWeight: "600", textDecoration: "none" }}
+            >
+              Get the free embed code →
+            </a>
+          </div>
           <ShareButtons
             text={`My $${homePrice} mortgage at ${rate}% will cost ${fmt(calc.totalPaid)} total — ${fmt(calc.totalInterest)} in interest alone! Calculate yours (educational only):`}
             url={`https://www.dayblip.com/finance/mortgage-calculator?price=${homePrice}&down=${downPayment}&rate=${rate}&term=${term}`}

@@ -369,6 +369,26 @@ export default function SalaryCheckerPage() {
                 Salary ranges based on BLS Occupational Employment and Wage Statistics (OES) 2025 data. Educational estimates only.
               </div>
 
+              {/* Embed this tool */}
+              <div style={{
+                textAlign: "center",
+                marginTop: "32px",
+                marginBottom: "16px",
+                padding: "16px",
+                background: "#1e2d4a",
+                borderRadius: "8px",
+                border: "1px solid #2a3a5a",
+              }}>
+                <p style={{ color: "#a8a8b3", fontSize: "14px", margin: "0 0 8px 0" }}>
+                  Want to add this tool to your website?
+                </p>
+                <a
+                  href="/embed"
+                  style={{ color: "#e94560", fontSize: "14px", fontWeight: "600", textDecoration: "none" }}
+                >
+                  Get the free embed code →
+                </a>
+              </div>
               <ShareButtons text={shareText} url={shareUrl} title="Salary Checker — Am I Being Paid Fairly?" />
 
               {DISCLAIMER}

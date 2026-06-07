@@ -224,6 +224,25 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+
+          {/* Column — Resources */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-white font-bold text-base">Resources</h3>
+            <ul className="flex flex-col gap-2">
+              {[
+                { label: "Embed Our Tools", href: "/embed" },
+                { label: "For Educators", href: "/embed/for-educators" },
+                { label: "Finance Hub", href: "/tools/finance" },
+                { label: "Life & Money Hub", href: "/tools/life-money" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-[#a8a8b3] text-sm transition-colors duration-200 hover:text-[#e94560]">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* Bottom bar */}
