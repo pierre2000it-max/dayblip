@@ -123,6 +123,16 @@ export default function CollegeROIPage() {
         </div>
       </section>
 
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">College ROI varies dramatically by field and school type. STEM degrees from state universities typically show 200–400% ROI over a career. Liberal arts degrees from private universities can take 20+ years to break even financially. The average student loan debt of $37,000 costs approximately $50,000 total with interest over a standard 10-year repayment.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">College degree ROI compares your extra lifetime earnings above a high school diploma against total education costs, student loan interest, and the opportunity cost of investing that money in the stock market instead. This calculator uses national median salary data by degree field and school type to estimate your personal degree return on investment.</p>
+        </div>
+      </section>
+
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
           <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">

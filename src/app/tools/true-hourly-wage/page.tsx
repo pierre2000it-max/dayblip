@@ -95,8 +95,18 @@ export default function TrueHourlyWagePage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">What Is Your Job Really Paying You?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">True Hourly Wage Calculator — What Does Your Job Really Pay?</h1>
           <p className="text-[#a8a8b3]">Calculate your true hourly wage after commute time, prep time and work costs</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Your true hourly wage is significantly lower than your official rate. A $75,000 salary appears to pay $36/hour but after deducting unpaid commute time, work prep time, commute costs, work lunches and clothing the real rate drops to approximately $28/hour — 22% less. The longer your commute the lower your true hourly rate.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Your official salary divides your pay by contracted work hours only. But employment requires additional unpaid time — commuting, preparing for work, decompressing after work — and additional costs beyond what you would spend working from home. True hourly wage accounts for all of these to show your real compensation rate.</p>
         </div>
       </section>
 

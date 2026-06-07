@@ -187,8 +187,18 @@ export default function FIDatePage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Your Financial Independence Date</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Financial Independence Calculator — When Can You Stop Working?</h1>
           <p className="text-[#a8a8b3]">Find the exact date you could stop working forever</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Your financial independence date is when your invested portfolio generates enough passive income to cover all expenses without working. At a 4% safe withdrawal rate you need 25 times your annual expenses invested. A person spending $50,000 per year needs $1,250,000 invested to retire.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Financial independence (FI) means your investments generate enough income to cover your living expenses indefinitely. This calculator uses compound interest projections and the 4% safe withdrawal rule to find your exact FI date and generate a live countdown.</p>
         </div>
       </section>
 

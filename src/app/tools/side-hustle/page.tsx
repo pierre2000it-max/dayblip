@@ -142,6 +142,16 @@ export default function SideHustlePage() {
         </div>
       </section>
 
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Side hustle income potential varies by skill. Freelance software development earns $500–$15,000 per month. Writing $200–$6,000. Online tutoring $300–$7,000. Social media management $300–$7,000. Home services $300–$6,000. With 10 hours per week most people with marketable skills can earn $500–$2,000 per month within 4–8 weeks of starting.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Side hustle income depends on your existing skills, available hours per week and experience level. This calculator matches your skills against 19 proven income streams and estimates realistic monthly earnings based on current market rates on platforms like Upwork, Fiverr, Etsy and Teachable.</p>
+        </div>
+      </section>
+
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
           {/* Skills */}

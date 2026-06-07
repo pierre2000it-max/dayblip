@@ -233,8 +233,18 @@ export default function SalaryNegotiationPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Should You Negotiate Your Salary?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Salary Negotiation Calculator — How Much Should You Ask For?</h1>
           <p className="text-[#a8a8b3]">Calculate exactly how much to ask for and get a ready-to-use script</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">You should always negotiate your salary. 87% of employers expect negotiation and almost never rescind offers. Ask for 10–15% above the market median for your role and location. Not negotiating your starting salary costs an estimated $300,000–$500,000 over a 30-year career due to compounding annual raises.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">This calculator compares your current or offered salary against real market data for 80+ job titles across all 50 US states. It shows whether you are above, at, or below market rate and generates a copy-paste negotiation script based on your specific numbers.</p>
         </div>
       </section>
 

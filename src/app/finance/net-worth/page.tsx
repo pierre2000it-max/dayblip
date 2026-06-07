@@ -66,10 +66,21 @@ export default function NetWorthPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Net Worth Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Net Worth Calculator — What Are You Really Worth?</h1>
           <p className="text-[#a8a8b3]">Know exactly where you stand financially</p>
         </div>
       </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Net worth equals total assets minus total liabilities. The median US net worth is approximately $192,700. By age group: under 35 median is $39,000, ages 35–44 is $135,000, ages 45–54 is $247,000, ages 55–64 is $364,000. Home equity is the largest asset for most Americans, typically representing 40–60% of total net worth.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Net worth is the most comprehensive measure of financial health. It includes all assets — cash, investments, real estate and personal property — minus all debts including mortgages, car loans, student loans and credit card balances. Tracking net worth over time shows whether your financial position is improving or deteriorating.</p>
+        </div>
+      </section>
+
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
           <div className="rounded-xl border border-green-500/20 bg-[#1a1a2e] p-6">

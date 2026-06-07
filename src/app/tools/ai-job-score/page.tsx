@@ -860,6 +860,16 @@ export default function AIJobScorePage() {
         </div>
       </section>
 
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">AI job replacement risk varies significantly by role. Data entry clerks score 95/100 (critical risk), accountants 72/100 (high risk), software engineers 45/100 (moderate risk), and nurses 15/100 (very safe). Jobs requiring physical presence and human empathy score lowest.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The AI job replacement score rates any job from 0 to 100 based on the proportion of tasks AI can currently automate. Scores above 70 indicate high risk. Below 30 indicates strong safety. The score is based on O*NET US Department of Labor occupational data and current AI capabilities.</p>
+        </div>
+      </section>
+
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[700px] space-y-6">
           <div className="space-y-4">

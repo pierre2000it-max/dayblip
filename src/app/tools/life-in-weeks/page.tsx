@@ -90,8 +90,18 @@ export default function LifeInWeeksPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Your Life in Weeks</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Life in Weeks — Visualize Your Entire Life as a Grid</h1>
           <p className="text-[#a8a8b3]">See your entire life visualized in one grid — every week you have lived and every week you have remaining</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[900px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average American life expectancy is 78.6 years — approximately 4,087 weeks. A 35-year-old has lived roughly 1,820 weeks and has approximately 2,267 weeks remaining. Each row in the life in weeks grid represents one year. Each small square represents one week of your life.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The life in weeks visualization was popularized by author Tim Urban and shows your entire lifespan as a grid of squares. Filled squares represent weeks already lived. Empty squares represent weeks remaining at average life expectancy. Many people find this visualization powerfully motivating for making intentional choices about time.</p>
         </div>
       </section>
 

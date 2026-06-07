@@ -173,8 +173,18 @@ export default function TakeHomePayPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Take Home Pay Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Take Home Pay Calculator — What Is Your Actual Paycheck?</h1>
           <p className="text-[#a8a8b3]">Find out exactly how much you actually take home after all deductions</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A $100,000 salary in New York takes home approximately $64,650 after federal tax, state tax and FICA — 35% less than the stated salary. The same salary in Texas takes home $72,400 because Texas has no state income tax. State of residence can make a $7,750 annual difference on identical salaries.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Your take home pay is your salary after federal income tax, state income tax and FICA (Social Security and Medicare) deductions. Pre-tax contributions to 401k, health insurance and HSA further reduce your taxable income. This calculator shows your exact net pay for any salary in any US state.</p>
         </div>
       </section>
 

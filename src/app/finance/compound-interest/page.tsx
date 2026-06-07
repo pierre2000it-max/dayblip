@@ -81,10 +81,21 @@ export default function CompoundInterestPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Compound Interest Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Compound Interest Calculator — Watch Your Money Grow</h1>
           <p className="text-[#a8a8b3]">See how your money grows over time with the power of compounding</p>
         </div>
       </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Compound interest grows money exponentially by earning returns on previous returns. $10,000 invested at 7% annual return becomes $76,123 after 30 years without adding a dollar. With $500 monthly additions it grows to $605,000. Albert Einstein reportedly called compound interest the eighth wonder of the world.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Compound interest means your investment returns generate their own returns over time. Unlike simple interest which only earns on the principal, compound interest earns on the growing total — creating exponential growth that accelerates the longer money stays invested. Daily and monthly compounding grows faster than annual compounding.</p>
+        </div>
+      </section>
+
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
           <div className="grid gap-4 md:grid-cols-2">

@@ -271,6 +271,16 @@ export default function WFHCalculatorPage() {
         </div>
       </section>
 
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average remote worker saves $2,500–$7,000 per year compared to office workers. A typical commuter spends $3,000–$5,000 annually on transportation, work lunches, clothing and coffee. Working from home eliminates most of these costs and is equivalent to a $3,500–$9,000 pre-tax salary raise for the average American worker.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The true financial value of remote work goes beyond eliminating commute costs. It includes savings on work lunches, coffee, professional clothing and dry cleaning — offset by small increases in home utility and internet costs. This calculator gives you the exact net annual figure for your specific commute and spending patterns.</p>
+        </div>
+      </section>
+
       {/* ── Form ── */}
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">

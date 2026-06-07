@@ -112,6 +112,16 @@ export default function MinimumPaymentPage() {
         </div>
       </section>
 
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Paying only the minimum on $8,000 of credit card debt at 19.99% interest takes 27 years and costs $16,247 in interest — more than double the original balance. You pay back $24,247 total on an $8,000 debt. Adding just $100 per month extra reduces payoff time to 4 years and saves $13,400 in interest.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Minimum credit card payments are designed to maximize interest charged to the borrower. Most minimum payments cover only 1–3% of the balance, meaning the majority of each payment goes to interest rather than reducing principal. This calculator shows the true total cost and compares multiple payoff strategies side by side.</p>
+        </div>
+      </section>
+
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
           {DISCLAIMER}

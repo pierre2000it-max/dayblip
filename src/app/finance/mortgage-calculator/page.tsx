@@ -97,10 +97,21 @@ export default function MortgagePage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Mortgage Payment Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Mortgage Calculator — Total Interest Over the Life of Your Loan</h1>
           <p className="text-[#a8a8b3]">Calculate your monthly payment and total cost of homeownership</p>
         </div>
       </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A $300,000 mortgage at 7% interest over 30 years costs $418,527 in total interest — more than the original loan amount. Monthly payment is $1,996. Total amount paid is $718,527 on a $300,000 loan. Making one extra monthly payment per year saves approximately $64,000 in interest and pays off the loan 4 years early.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A mortgage calculator shows the true total cost of a home loan including all interest paid over the loan term. Most homebuyers focus on the monthly payment without realizing the total interest cost often exceeds the original purchase price over a 30-year term. Understanding this helps evaluate whether extra payments are worth making.</p>
+        </div>
+      </section>
+
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
           <div className="grid gap-4 md:grid-cols-2">

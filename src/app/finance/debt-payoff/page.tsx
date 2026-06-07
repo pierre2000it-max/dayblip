@@ -124,10 +124,21 @@ export default function DebtPayoffPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Debt Payoff Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Debt Payoff Calculator — Avalanche vs Snowball Method</h1>
           <p className="text-[#a8a8b3]">Choose your strategy and become debt free faster</p>
         </div>
       </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[900px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The debt avalanche method pays off highest-interest debt first and saves the most money in interest. The debt snowball method pays off smallest balances first and builds psychological momentum. On $20,000 of mixed debt the avalanche method typically saves $2,000–$5,000 more in interest than the snowball method over the payoff period.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Debt payoff calculators compare different repayment strategies to show total interest paid and payoff timeline for each approach. The right strategy depends on whether you prioritize saving maximum interest or building psychological wins through quick payoffs. Both methods beat making only minimum payments by thousands of dollars.</p>
+        </div>
+      </section>
+
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[900px] space-y-8">
           <div className="space-y-3">

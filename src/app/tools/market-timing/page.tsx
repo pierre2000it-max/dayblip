@@ -96,6 +96,16 @@ export default function MarketTimingPage() {
         </div>
       </section>
 
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Missing just 10 of the stock market&apos;s best trading days over 20 years reduces portfolio returns by approximately 35%. The S&amp;P 500 averaged 10% annually from 1993–2023. Missing the 10 best days drops that to 6.5%. Missing the 30 best days drops it to 1.5%. The best days often immediately follow the worst days.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Market timing — attempting to sell before market drops and buy before recoveries — is nearly impossible even for professional investors. Research consistently shows that investors who stay fully invested through volatility outperform those who move in and out of the market. This calculator shows the exact cost of missing the market&apos;s best trading days.</p>
+        </div>
+      </section>
+
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
           <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">

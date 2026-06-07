@@ -130,7 +130,7 @@ export default function WorldCountersPage() {
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[800px]">
           <div className="mb-4 text-5xl">🌍</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">World Live Counters</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Live World Counters — Real Time Global Statistics Updating Every Second</h1>
           <p className="text-lg text-[#a8a8b3]">Watch the world change in real time — updated every second</p>
           <p className="text-sm text-[#a8a8b3]/70 mt-2">All counters calculated from verified annual baselines. See sources below.</p>
 
@@ -147,6 +147,16 @@ export default function WorldCountersPage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A baby is born somewhere in the world every 0.23 seconds — approximately 140 million births per year. The world population grows by approximately 80 million people annually. The US national debt increases by roughly $72,920 every second. These counters update in real time based on current global statistical rates.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Live world counters show global statistics updating in real time every second based on current annual rates from organizations including the UN, World Health Organization and US Treasury. The counters show world births, deaths and net population change today alongside the US national debt counter and your personal birth statistics.</p>
         </div>
       </section>
 

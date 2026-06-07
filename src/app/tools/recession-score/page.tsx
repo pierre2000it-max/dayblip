@@ -210,6 +210,16 @@ export default function RecessionScorePage() {
         </div>
       </section>
 
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A recession-ready household has 6 months of expenses in emergency savings, no high-interest debt, diversified investments and at least one income source beyond a primary job. The average American has only 1.2 months of emergency savings and $6,400 in high-interest debt — leaving most households highly vulnerable to economic downturns.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Recession readiness measures your financial resilience across five key areas: emergency fund size, job security, high-interest debt levels, investment diversification and supplemental income. This score helps identify your weakest areas and shows exactly what to fix first to improve your financial safety net.</p>
+        </div>
+      </section>
+
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
           {/* Emergency fund */}

@@ -158,6 +158,16 @@ export default function EarlyVsLatePage() {
         </div>
       </section>
 
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Starting to invest earlier almost always wins. Saving $200 per month from age 25 to 35 then stopping completely typically outperforms saving $500 per month from age 35 to 65. The early saver contributes $24,000 total. The late saver contributes $180,000 total. Time in the market outperforms amount invested.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Compound interest grows exponentially over time — not linearly. Money invested at 25 has 40 years to compound versus money invested at 35 which only has 30 years. That 10-year head start creates a gap that often cannot be overcome by investing larger amounts later. This calculator shows the exact comparison for any input values.</p>
+        </div>
+      </section>
+
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
           {DISCLAIMER}

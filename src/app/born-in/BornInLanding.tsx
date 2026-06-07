@@ -26,7 +26,7 @@ export default function BornInLanding() {
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">🗓️</div>
           <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">
-            What Year Were You Born?
+            Born In Your Year — Facts, Events and History From When You Arrived
           </h1>
           <p className="mb-8 text-lg text-[#a8a8b3]">
             Enter your birth year to discover what the world looked like when you arrived
@@ -52,6 +52,16 @@ export default function BornInLanding() {
             </div>
             {error && <p className="text-sm text-[#e94560]">{error}</p>}
           </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Discover what the world looked like the year you were born. Find the number one song, top movie, gas price, world population, major events and who was president for any year from 1940 to 2020. Each year page includes dozens of historical facts about the world as it was when you arrived.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The Born In year tool shows a complete snapshot of the world for any birth year. Data includes music, film, sports, gas prices, minimum wage, notable events and world population — giving you a rich picture of the historical context of your birth year. Available for every year from 1940 to 2020.</p>
         </div>
       </section>
 
