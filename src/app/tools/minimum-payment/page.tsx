@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── module-scope simulation (no stale closures) ─────────────────────────────
@@ -124,6 +126,11 @@ export default function MinimumPaymentPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Minimum Payment True Cost" }
+          ]} />
           {DISCLAIMER}
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -229,6 +236,13 @@ export default function MinimumPaymentPage() {
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="Minimum Payment True Cost Calculator" />
+              <RelatedTools tools={[
+                { emoji: "💳", title: "Debt Payoff Calculator", desc: "Avalanche or snowball your debt", href: "/finance/debt-payoff" },
+                { emoji: "📋", title: "Budget Calculator", desc: "Build your 50/30/20 budget", href: "/finance/budget-calculator" },
+                { emoji: "🗓️", title: "Debt Freedom Date", desc: "When will you be completely debt free?", href: "/tools/debt-freedom" },
+                { emoji: "💹", title: "Compound Interest", desc: "Watch your money grow over time", href: "/finance/compound-interest" },
+                { emoji: "📊", title: "Net Worth Calculator", desc: "Know where you stand financially", href: "/finance/net-worth" },
+              ]} />
               {DISCLAIMER}
             </div>
           )}

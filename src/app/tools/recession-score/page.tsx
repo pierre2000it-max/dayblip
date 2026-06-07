@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── Scoring tables ───────────────────────────────────────────────────────────
@@ -222,6 +224,11 @@ export default function RecessionScorePage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Recession Readiness Score" }
+          ]} />
           {/* Emergency fund */}
           <label className="flex flex-col gap-1">
             <span className="text-sm font-semibold text-white">
@@ -357,6 +364,13 @@ export default function RecessionScorePage() {
                 </div>
 
                 <ShareButtons text={shareText} url={shareUrl} title="Recession Readiness Score" />
+                <RelatedTools tools={[
+                  { emoji: "📊", title: "Net Worth Calculator", desc: "Know where you stand financially", href: "/finance/net-worth" },
+                  { emoji: "💳", title: "Debt Payoff Calculator", desc: "Avalanche or snowball your debt", href: "/finance/debt-payoff" },
+                  { emoji: "🛡️", title: "Emergency Fund Calculator", desc: "How much should you save?", href: "/finance/emergency-fund" },
+                  { emoji: "📋", title: "Budget Calculator", desc: "Build your 50/30/20 budget", href: "/finance/budget-calculator" },
+                  { emoji: "🆓", title: "Financial Independence Date", desc: "Find the exact date you could stop working", href: "/tools/fi-date" },
+                ]} />
               </div>
             )
           })()}

@@ -3,6 +3,7 @@ import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
+import Breadcrumb from "@/components/Breadcrumb"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtPct(n: number) { return (n >= 0 ? "+" : "") + n.toFixed(2) + "%" }
@@ -90,6 +91,7 @@ export default function StockReturnPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[700px] space-y-8">
+          <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Stock Return Calculator" }]} />
           <div className="grid gap-4 md:grid-cols-2">
             <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Initial Investment ($)</span>
               <input type="number" value={initialInv} onChange={e => setInitialInv(e.target.value)} className={inp} /></label>

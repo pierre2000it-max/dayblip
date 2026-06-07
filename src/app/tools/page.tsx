@@ -52,6 +52,33 @@ export default function ToolsPage() {
           <p className="text-lg text-[#a8a8b3]">Tools that reveal what you might not know about your finances, career and life</p>
         </div>
       </section>
+      <section className="px-6 py-10 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[1100px]">
+          <h2 className="mb-5 text-lg font-bold text-white">Browse by Category</h2>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            <Link href="/tools/finance" className="flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all hover:border-[#e94560]">
+              <span className="text-3xl">💰</span>
+              <span className="font-semibold text-white text-sm">Finance Calculators</span>
+              <span className="text-xs text-[#a8a8b3]">23 tools</span>
+            </Link>
+            <Link href="/tools/life-money" className="flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all hover:border-[#e94560]">
+              <span className="text-3xl">💡</span>
+              <span className="font-semibold text-white text-sm">Life &amp; Money</span>
+              <span className="text-xs text-[#a8a8b3]">19 tools</span>
+            </Link>
+            <Link href="/tools/misconceptions" className="flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all hover:border-[#e94560]">
+              <span className="text-3xl">🔍</span>
+              <span className="font-semibold text-white text-sm">Misconceptions</span>
+              <span className="text-xs text-[#a8a8b3]">8 tools</span>
+            </Link>
+            <Link href="/tools/curiosity" className="flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all hover:border-[#e94560]">
+              <span className="text-3xl">🌟</span>
+              <span className="font-semibold text-white text-sm">Curiosity</span>
+              <span className="text-xs text-[#a8a8b3]">12 tools</span>
+            </Link>
+          </div>
+        </div>
+      </section>
       <section className="bg-[#16213e] px-6 py-16">
         <div className="mx-auto max-w-[1100px]">
           <div className="grid grid-cols-2 gap-5 md:grid-cols-3">

@@ -2,6 +2,7 @@
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -82,6 +83,7 @@ export default function EmergencyFundPage() {
       </section>
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
+          <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Emergency Fund Calculator" }]} />
           <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6">
             <h2 className="mb-4 font-bold text-white">💸 Monthly Essential Expenses</h2>
             <div className="grid gap-3 md:grid-cols-2">

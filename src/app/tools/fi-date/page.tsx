@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 const DISCLAIMER = (
@@ -204,6 +206,11 @@ export default function FIDatePage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Financial Independence Date" }
+          ]} />
           {DISCLAIMER}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <NumField label="Current age" value={age} set={setAge} />
@@ -273,6 +280,13 @@ export default function FIDatePage() {
                 </div>
 
                 <ShareButtons text={shareText} url={shareUrl} title="Financial Independence Date Calculator" />
+                <RelatedTools tools={[
+                  { emoji: "🏦", title: "Retirement Savings", desc: "Are you on track to retire?", href: "/finance/retirement-savings" },
+                  { emoji: "💹", title: "Compound Interest", desc: "Watch your money grow over time", href: "/finance/compound-interest" },
+                  { emoji: "💳", title: "Minimum Payment True Cost", desc: "See the shocking cost of paying minimums", href: "/tools/minimum-payment" },
+                  { emoji: "💳", title: "Debt Payoff", desc: "Avalanche or snowball your debt", href: "/finance/debt-payoff" },
+                  { emoji: "📊", title: "Net Worth Calculator", desc: "Know where you stand financially", href: "/finance/net-worth" },
+                ]} />
                 {DISCLAIMER}
               </div>
             )

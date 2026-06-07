@@ -3,6 +3,7 @@ import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
+import Breadcrumb from "@/components/Breadcrumb"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtDec(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
@@ -90,6 +91,7 @@ export default function BreakEvenPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[700px] space-y-8">
+          <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Break Even Calculator" }]} />
           <div className="grid gap-4 md:grid-cols-3">
             <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Fixed Costs/Month ($)</span>
               <input type="number" value={fixedCosts} onChange={e => setFixedCosts(e.target.value)} className={inp} />

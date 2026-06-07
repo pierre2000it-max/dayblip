@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 
 interface Result {
   dob: string
@@ -107,6 +109,11 @@ export default function LifeInWeeksPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[900px] space-y-8">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Life in Weeks" }
+          ]} />
           <div className="space-y-5">
             <label className="block">
               <span className="mb-2 block text-sm font-semibold text-white">Your birth date</span>
@@ -165,6 +172,13 @@ export default function LifeInWeeksPage() {
               <ShareButtons text={shareText} url={shareUrl} title="Your Life in Weeks" />
             </div>
           )}
+          <RelatedTools tools={[
+            { emoji: "🔢", title: "Life in Numbers", desc: "Your heartbeats, breaths and more, live", href: "/tools/life-in-numbers" },
+            { emoji: "😴", title: "Sleep Debt Calculator", desc: "How much sleep have you really lost?", href: "/tools/sleep-debt" },
+            { emoji: "😴", title: "Procrastination Cost", desc: "What is waiting really costing you?", href: "/tools/procrastination-cost" },
+            { emoji: "🎂", title: "Birthday Personality", desc: "Everything your birthday says about you", href: "/tools/birthday-personality" },
+            { emoji: "🤔", title: "Regret Minimization", desc: "Will you regret this decision?", href: "/tools/regret-minimization" },
+          ]} />
         </div>
       </section>
     </div>

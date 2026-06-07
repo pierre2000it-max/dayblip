@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── Pure helpers (module scope) ─────────────────────────────────────────────
@@ -170,6 +172,11 @@ export default function EarlyVsLatePage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Early vs Late Saver" }
+          ]} />
           {DISCLAIMER}
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -285,6 +292,13 @@ export default function EarlyVsLatePage() {
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="Early vs Late Saver Calculator" />
+              <RelatedTools tools={[
+                { emoji: "🏦", title: "Retirement Savings", desc: "Are you on track to retire?", href: "/finance/retirement-savings" },
+                { emoji: "💹", title: "Compound Interest", desc: "Watch your money grow over time", href: "/finance/compound-interest" },
+                { emoji: "🆓", title: "Financial Independence Date", desc: "Find the exact date you could stop working", href: "/tools/fi-date" },
+                { emoji: "💰", title: "Savings Goal Calculator", desc: "How long to reach your goal?", href: "/finance/savings-goal" },
+                { emoji: "💳", title: "Minimum Payment True Cost", desc: "See the shocking cost of paying minimums", href: "/tools/minimum-payment" },
+              ]} />
               {DISCLAIMER}
             </div>
           )}

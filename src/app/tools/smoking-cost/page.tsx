@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fvAnnuity(monthly: number, annualRate: number, months: number): number {
@@ -111,6 +113,11 @@ export default function SmokingCostPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "True Cost of Smoking" }
+          ]} />
           {DISCLAIMER}
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
@@ -186,6 +193,13 @@ export default function SmokingCostPage() {
               {DISCLAIMER}
             </div>
           )}
+          <RelatedTools tools={[
+            { emoji: "💹", title: "Compound Interest", desc: "Watch your money grow over time", href: "/finance/compound-interest" },
+            { emoji: "💰", title: "Savings Goal Calculator", desc: "How long to reach your goal?", href: "/finance/savings-goal" },
+            { emoji: "💳", title: "Debt Payoff Calculator", desc: "Avalanche or snowball your debt", href: "/finance/debt-payoff" },
+            { emoji: "📋", title: "Budget Calculator", desc: "Build your 50/30/20 budget", href: "/finance/budget-calculator" },
+            { emoji: "🆓", title: "Financial Independence Date", desc: "Find the exact date you could stop working", href: "/tools/fi-date" },
+          ]} />
         </div>
       </section>
     </div>

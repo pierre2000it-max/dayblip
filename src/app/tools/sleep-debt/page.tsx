@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function getRecommended(age: number): number {
@@ -92,6 +94,11 @@ export default function SleepDebtPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[700px] space-y-6">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Sleep Debt Calculator" }
+          ]} />
           <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
             ⚠️ <strong>Educational purposes only.</strong> Not medical advice. Consult a healthcare professional for sleep-related health concerns.
           </div>
@@ -178,6 +185,13 @@ export default function SleepDebtPage() {
               <ShareButtons text={shareText} url={shareUrl} title="Sleep Debt Calculator" />
             </div>
           )}
+          <RelatedTools tools={[
+            { emoji: "📅", title: "Life in Weeks", desc: "See your whole life as a grid of weeks", href: "/tools/life-in-weeks" },
+            { emoji: "🏠", title: "WFH Savings Calculator", desc: "What is remote work really worth?", href: "/tools/wfh-calculator" },
+            { emoji: "😴", title: "Procrastination Cost", desc: "What is waiting really costing you?", href: "/tools/procrastination-cost" },
+            { emoji: "📱", title: "Screen Time Cost", desc: "What could you learn with that time?", href: "/tools/time-wasted" },
+            { emoji: "🔢", title: "Life in Numbers", desc: "Your heartbeats, breaths and more, live", href: "/tools/life-in-numbers" },
+          ]} />
         </div>
       </section>
     </div>

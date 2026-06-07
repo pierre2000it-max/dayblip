@@ -2,6 +2,7 @@
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -136,6 +137,7 @@ export default function BudgetCalculatorPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
+          <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Budget Calculator" }]} />
           <label className="flex flex-col gap-1">
             <span className="text-sm font-semibold text-white">Monthly Take-Home Pay ($)</span>
             <input type="number" value={income} onChange={e => setIncome(e.target.value)}

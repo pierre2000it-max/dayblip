@@ -2,6 +2,7 @@
 import { useState, useMemo, useCallback } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 interface Debt { id: number; name: string; balance: string; rate: string; minPayment: string }
@@ -141,6 +142,7 @@ export default function DebtPayoffPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[900px] space-y-8">
+          <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Debt Payoff Calculator" }]} />
           <div className="space-y-3">
             {debts.map(d => (
               <div key={d.id} className="grid grid-cols-2 gap-2 md:grid-cols-5 items-end rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-4">

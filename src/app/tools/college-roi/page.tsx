@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -135,6 +137,11 @@ export default function CollegeROIPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "College Degree ROI" }
+          ]} />
           <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
             ⚠️ <strong>Educational estimates.</strong> Based on national median data. Individual results vary by career, employer, location and economic conditions. Not financial advice.
           </div>
@@ -232,6 +239,13 @@ export default function CollegeROIPage() {
                 </div>
 
                 <ShareButtons text={shareText} url={shareUrl} title="College Degree ROI Calculator" />
+                <RelatedTools tools={[
+                  { emoji: "🎓", title: "Student Loans", desc: "Calculate your payoff timeline", href: "/finance/student-loan" },
+                  { emoji: "💼", title: "Am I Underpaid?", desc: "Check market rate for your role", href: "/tools/salary-checker" },
+                  { emoji: "⏰", title: "True Hourly Wage", desc: "What does your job really pay per hour?", href: "/tools/true-hourly-wage" },
+                  { emoji: "🤖", title: "Will AI Replace My Job?", desc: "Get your personalized AI risk score", href: "/tools/ai-job-score" },
+                  { emoji: "📊", title: "Career Timeline", desc: "Project your salary and savings over time", href: "/tools/career-timeline" },
+                ]} />
               </div>
             )
           })()}

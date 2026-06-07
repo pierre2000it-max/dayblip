@@ -2,6 +2,7 @@
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 const CPI: Record<number, number> = {
@@ -96,6 +97,7 @@ export default function InflationPage() {
       </section>
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
+          <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Inflation Calculator" }]} />
           <div className="flex gap-2">
             {([["past", "📅 Past → Today"], ["present", "🕐 Today → Past"]] as const).map(([m, label]) => (
               <button key={m} onClick={() => setMode(m)}

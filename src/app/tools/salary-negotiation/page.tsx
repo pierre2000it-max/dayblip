@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── Salary data (source: BLS OES 2025, educational estimates) ───────────────
@@ -250,6 +252,11 @@ export default function SalaryNegotiationPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Salary Negotiation Guide" }
+          ]} />
           <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
             ⚠️ <strong>Educational estimates only.</strong> Market data based on BLS OES 2025 national data. Actual salaries vary by company, industry and individual performance. Not financial advice.
           </div>
@@ -368,6 +375,13 @@ export default function SalaryNegotiationPage() {
                   text={shareText} url={shareUrl}
                   title={`Salary Negotiation: ${result.role} in ${result.stateName}`}
                 />
+                <RelatedTools tools={[
+                  { emoji: "🤖", title: "Will AI Replace My Job?", desc: "Get your personalized AI risk score", href: "/tools/ai-job-score" },
+                  { emoji: "⏰", title: "True Hourly Wage", desc: "What does your job really pay per hour?", href: "/tools/true-hourly-wage" },
+                  { emoji: "💼", title: "Side Hustle Potential", desc: "What could you earn with your skills?", href: "/tools/side-hustle" },
+                  { emoji: "💼", title: "Am I Underpaid?", desc: "Check market rate for your role", href: "/tools/salary-checker" },
+                  { emoji: "🏠", title: "WFH Savings Calculator", desc: "What is remote work really worth?", href: "/tools/wfh-calculator" },
+                ]} />
               </div>
             )
           })()}

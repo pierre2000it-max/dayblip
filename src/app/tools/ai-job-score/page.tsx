@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── Synonym resolution ───────────────────────────────────────────────────────
@@ -872,6 +874,11 @@ export default function AIJobScorePage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[700px] space-y-6">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Will AI Replace My Job?" }
+          ]} />
           <div className="space-y-4">
             <div className="relative">
               <span className="mb-2 block text-sm font-semibold text-white">Your job title</span>
@@ -984,6 +991,13 @@ export default function AIJobScorePage() {
               )}
 
               <ShareButtons text={shareText} url={shareUrl} title="Will AI Replace My Job?" />
+              <RelatedTools tools={[
+                { emoji: "🆓", title: "Financial Independence Date", desc: "Find the exact date you could stop working", href: "/tools/fi-date" },
+                { emoji: "💰", title: "Salary Negotiation Guide", desc: "How much to ask for + ready-to-use script", href: "/tools/salary-negotiation" },
+                { emoji: "💼", title: "Side Hustle Potential", desc: "What could you earn with your skills?", href: "/tools/side-hustle" },
+                { emoji: "⏰", title: "True Hourly Wage", desc: "What does your job really pay per hour?", href: "/tools/true-hourly-wage" },
+                { emoji: "🏠", title: "WFH Savings Calculator", desc: "What is remote work really worth?", href: "/tools/wfh-calculator" },
+              ]} />
             </div>
           )}
         </div>

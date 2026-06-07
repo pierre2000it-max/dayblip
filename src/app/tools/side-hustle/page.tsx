@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 const SKILL_LIST = ["Writing","Design","Coding","Teaching","Marketing","Photography","Video Editing","Accounting","Handyman","Cooking","Social Media","Customer Service","Data Analysis","Music","Languages"] as const
@@ -154,6 +156,11 @@ export default function SideHustlePage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Side Hustle Potential" }
+          ]} />
           {/* Skills */}
           <div>
             <div className="mb-2 text-sm font-semibold text-white">Your skills (select all that apply)</div>
@@ -240,6 +247,13 @@ export default function SideHustlePage() {
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="Side Hustle Income Calculator" />
+              <RelatedTools tools={[
+                { emoji: "🤖", title: "Will AI Replace My Job?", desc: "Get your personalized AI risk score", href: "/tools/ai-job-score" },
+                { emoji: "💰", title: "Salary Negotiation Guide", desc: "How much to ask for + ready-to-use script", href: "/tools/salary-negotiation" },
+                { emoji: "⏰", title: "True Hourly Wage", desc: "What does your job really pay per hour?", href: "/tools/true-hourly-wage" },
+                { emoji: "📊", title: "Tax Bracket", desc: "Find your 2026 federal bracket", href: "/finance/tax-bracket" },
+                { emoji: "🧾", title: "Self-Employment Tax", desc: "SE tax + quarterly estimates", href: "/finance/self-employment-tax" },
+              ]} />
             </div>
           )}
         </div>

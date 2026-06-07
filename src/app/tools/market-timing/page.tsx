@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 const PENALTY: Record<number, number> = { 0: 0, 10: 3.5, 20: 5.5, 30: 7.0, 40: 8.2, 50: 9.1 }
@@ -108,6 +110,11 @@ export default function MarketTimingPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
+          <Breadcrumb crumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Market Timing Cost" }
+          ]} />
           <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
             ⚠️ <strong>Educational only.</strong> Based on S&P 500 historical patterns. Past performance does not guarantee future results. Not investment advice.
           </div>
@@ -205,6 +212,13 @@ export default function MarketTimingPage() {
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="Market Timing Cost Calculator" />
+              <RelatedTools tools={[
+                { emoji: "💹", title: "Compound Interest", desc: "Watch your money grow over time", href: "/finance/compound-interest" },
+                { emoji: "📈", title: "Stock Return Calculator", desc: "Calculate your investment return", href: "/finance/stock-return" },
+                { emoji: "🏦", title: "Retirement Savings", desc: "Are you on track to retire?", href: "/finance/retirement-savings" },
+                { emoji: "🆓", title: "Financial Independence Date", desc: "Find the exact date you could stop working", href: "/tools/fi-date" },
+                { emoji: "⏰", title: "Early vs Late Saver", desc: "Why starting earlier beats saving more", href: "/tools/early-vs-late" },
+              ]} />
             </div>
           )}
         </div>

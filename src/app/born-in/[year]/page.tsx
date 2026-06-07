@@ -4,6 +4,7 @@ import bornInRaw from "@/data/bornIn.json";
 import { generateBornInSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { faqSchema } from "@/lib/schema";
 import AdUnit from "@/components/AdUnit";
+import RelatedTools from "@/components/RelatedTools";
 import ShareCard from "@/components/ShareCard";
 import ShareButtons from "@/components/ShareButtons";
 
@@ -296,6 +297,19 @@ export default function BornInPage({
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ── RELATED TOOLS ─────────────────────────────────────────────────── */}
+        <section className="bg-[#1a1a2e] px-6 py-12">
+          <div className="mx-auto max-w-[900px]">
+            <RelatedTools title="Explore More" tools={[
+              { emoji: "📅", title: "Life in Weeks", desc: "See your entire life as a grid of weeks", href: "/tools/life-in-weeks" },
+              { emoji: "🔢", title: "Life in Numbers", desc: "Your heartbeats, breaths and more, live", href: "/tools/life-in-numbers" },
+              { emoji: "🎂", title: "Birthday Personality", desc: "Everything your birthday says about you", href: "/tools/birthday-personality" },
+              { emoji: "🧬", title: "Generation Quiz", desc: "What generation are you really?", href: "/tools/generation-quiz" },
+              { emoji: "🗓️", title: "Explore All Birth Years", desc: "Facts and history for every year 1940–2020", href: "/born-in" },
+            ]} />
           </div>
         </section>
 
