@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -75,6 +77,36 @@ export default function CarAffordabilityPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Car Affordability Calculator",
+          "Find out how much car you can afford based on your income, down payment and loan terms.",
+          "https://www.dayblip.com/finance/car-affordability",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How much car can I afford based on my income?", answer: "A common guideline is to keep the total price of your car at or below 15% of your annual income, and your monthly car payment within about 15% of your take-home pay. This calculator applies those rules along with your down payment, trade-in, and existing debts to recommend a maximum price." },
+          { question: "What is the true cost of owning a car?", answer: "Beyond the loan payment, ownership includes insurance, fuel, maintenance, and registration. This calculator estimates each of these and adds them to your monthly payment to show a more realistic total monthly cost of ownership." },
+          { question: "How does my down payment affect affordability?", answer: "A larger down payment plus any trade-in value reduces the loan amount you need to finance, which lowers your monthly payment and the total interest paid. The calculator factors both into your maximum affordable price." },
+          { question: "Is a used car a better deal than a new car?", answer: "New cars lose roughly 15 to 25% of their value in the first year. The calculator estimates the value of a comparable three-year-old used car and the depreciation you avoid by buying used instead of new." },
+        ]),
+        howToSchema(
+          "Car Affordability Calculator — How To Use",
+          "Estimate how much car you can afford from your income, down payment, and loan terms.",
+          [
+            "Enter your annual income and monthly take-home pay.",
+            "Enter your existing monthly debt payments.",
+            "Enter your down payment and any trade-in value.",
+            "Enter your interest rate and select a loan term.",
+            "Review your maximum affordable price and true monthly cost of ownership.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Car Affordability Calculator", url: "https://www.dayblip.com/finance/car-affordability" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Car Affordability Calculator</h1>

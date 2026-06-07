@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fvAnnuity(monthly: number, annualRate: number, months: number): number {
   const r = annualRate / 100 / 12
@@ -80,6 +82,26 @@ export default function SmokingCostPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("True Cost of Smoking Calculator", "Calculate the full financial cost of smoking including what your cigarette money could have been worth if invested instead.", "https://www.dayblip.com/tools/smoking-cost", "HealthApplication"),
+        faqSchema([
+          { question: "How much does smoking cost per year?", answer: "At $9.50 per pack and 10 cigarettes per day, smoking costs approximately $1,731 per year. Heavy smokers spending on a pack daily spend $3,468 or more annually." },
+          { question: "How much money would I save if I quit smoking?", answer: "A pack-a-day smoker quitting saves approximately $3,468 per year. Invested at 7% annual return, that becomes $47,000 after 10 years and $148,000 after 20 years." },
+          { question: "What is the lifetime cost of smoking?", answer: "A pack-a-day smoker from age 20 to 65 spends approximately $156,060 on cigarettes alone. If invested instead at 7% return that money would grow to over $1 million." },
+        ]),
+        howToSchema("How to Calculate True Cost of Smoking", "See the full lifetime cost of smoking", [
+          "Enter cigarettes smoked per day",
+          "Enter price per pack",
+          "Enter the age you started smoking",
+          "Enter your current age",
+          "Click Calculate My True Cost for full breakdown",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "Smoking Cost Calculator", url: "https://www.dayblip.com/tools/smoking-cost" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">The True Cost of Smoking</h1>

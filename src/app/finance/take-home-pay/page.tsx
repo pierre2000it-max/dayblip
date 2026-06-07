@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 function fmtK(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -140,6 +142,35 @@ export default function TakeHomePayPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Take-Home Pay Calculator",
+          "Calculate your net paycheck after federal, state and FICA taxes.",
+          "https://www.dayblip.com/finance/take-home-pay",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "What gets deducted from my paycheck?", answer: "The calculator subtracts federal income tax, state income tax, Social Security (6.2% up to the wage cap), Medicare (1.45%), and any pre-tax deductions like 401(k) contributions and health insurance to arrive at your net take-home pay." },
+          { question: "How does my state affect take-home pay?", answer: "State income tax varies a lot. Nine states have no income tax while California tops out near 13.3%. Select your state and the tool applies its rate to your taxable income, changing your net paycheck accordingly." },
+          { question: "How do 401(k) contributions change my paycheck?", answer: "Traditional 401(k) contributions come out before income tax, so they lower both your taxable income and your federal and state tax — your paycheck drops by less than the amount you contribute." },
+          { question: "What is the difference between marginal and effective tax rate?", answer: "Your marginal rate is the rate on your last dollar of income (your top bracket). Your effective rate is total tax divided by income, which is always lower because earlier dollars are taxed at lower bracket rates." },
+        ]),
+        howToSchema(
+          "Take-Home Pay Calculator — How To Use",
+          "Calculate your net paycheck after taxes and deductions.",
+          [
+            "Choose annual salary or hourly rate and enter the amount (and hours per week if hourly).",
+            "Select your pay frequency and filing status.",
+            "Select your state and enter your 401(k) percentage, health insurance and any other pre-tax deductions.",
+            "Review the per-paycheck breakdown, annual take-home, income breakdown chart and your marginal and effective tax rates.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Take-Home Pay Calculator", url: "https://www.dayblip.com/finance/take-home-pay" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Take Home Pay Calculator</h1>

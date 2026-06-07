@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const avgTotalCost: Record<string, number> = {
@@ -93,6 +95,27 @@ export default function CollegeROIPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("College Degree ROI Calculator", "Calculate the true return on investment of your college degree. Compare degree earnings vs student debt costs and opportunity cost.", "https://www.dayblip.com/tools/college-roi", "FinanceApplication"),
+        faqSchema([
+          { question: "Is college worth the cost?", answer: "It depends on your field, school type and career. STEM and healthcare degrees typically show strong ROI while some liberal arts degrees may take decades to break even financially." },
+          { question: "How do I calculate college ROI?", answer: "College ROI compares extra lifetime earnings from your degree against total education costs, student loan interest, and the opportunity cost of investing that money instead." },
+          { question: "What is the average student loan debt?", answer: "The average US student loan debt is approximately $37,000. With interest over a standard 10-year repayment, borrowers typically pay back 30-40% more than the original loan amount." },
+        ]),
+        howToSchema("How to Calculate Your College Degree ROI", "Find the true return on your degree", [
+          "Select your degree field",
+          "Select your school type",
+          "Enter total student loan debt",
+          "Enter years since graduation",
+          "Enter your current annual salary",
+          "Click Calculate My ROI for full breakdown",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "College Degree ROI", url: "https://www.dayblip.com/tools/college-roi" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Was Your College Degree Worth It?</h1>

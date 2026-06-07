@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function getRecommended(age: number): number {
   if (age <= 17) return 9
@@ -62,6 +64,25 @@ export default function SleepDebtPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("Sleep Debt Calculator", "Calculate your accumulated sleep debt and find out how many hours of sleep you have missed. See the impact of chronic sleep deprivation.", "https://www.dayblip.com/tools/sleep-debt", "HealthApplication"),
+        faqSchema([
+          { question: "What is sleep debt?", answer: "Sleep debt is the accumulated deficit between the sleep you need and the sleep you get. Sleeping 6.5 hours when you need 7 creates 3.5 hours of sleep debt per week." },
+          { question: "How much sleep do adults need?", answer: "Adults aged 26-64 need 7-9 hours of sleep per night according to the National Sleep Foundation. Consistently sleeping less creates cumulative sleep debt." },
+          { question: "Can you recover sleep debt?", answer: "Short-term sleep debt can be partially recovered. Chronic long-term sleep deprivation is harder to fully recover from. Consistent adequate sleep is more effective than catch-up sleep." },
+        ]),
+        howToSchema("How to Calculate Your Sleep Debt", "Find your accumulated sleep deficit", [
+          "Enter your current age",
+          "Set your average nightly sleep hours using the slider",
+          "Set how many years you have slept at this level",
+          "Click Calculate My Sleep Debt for full breakdown",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "Sleep Debt Calculator", url: "https://www.dayblip.com/tools/sleep-debt" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">How Much Sleep Debt Have You Accumulated?</h1>

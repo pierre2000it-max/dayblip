@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtDec(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
@@ -50,6 +52,35 @@ export default function BreakEvenPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Break-Even Point Calculator",
+          "Calculate how many units you must sell to cover fixed and variable costs and reach break-even.",
+          "https://www.dayblip.com/finance/break-even",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How do you calculate the break-even point in units?", answer: "Divide your total fixed costs by the contribution margin per unit, where contribution margin equals selling price minus variable cost per unit. The result is the number of units you must sell each month to cover all costs and make zero profit or loss." },
+          { question: "What is contribution margin?", answer: "Contribution margin is the selling price of one unit minus its variable cost. It represents how much each sale contributes toward covering fixed costs. This calculator also shows it as a percentage of the selling price (gross margin %)." },
+          { question: "Why must selling price be higher than variable cost?", answer: "If the selling price does not exceed the variable cost per unit, each sale loses money and you can never cover fixed costs, so no break-even point exists. The calculator flags this and asks you to raise your price or lower your variable cost." },
+          { question: "How does raising my price affect break-even?", answer: "A higher price increases the contribution margin per unit, so you need fewer units to break even. This calculator shows a price sensitivity example of a 10% price increase and how many fewer units that requires to reach break-even." },
+        ]),
+        howToSchema(
+          "Break-Even Point Calculator — How To Use",
+          "Find the number of units you must sell to cover your costs and reach break-even.",
+          [
+            "Enter your monthly fixed costs such as rent, salaries, and subscriptions.",
+            "Enter the variable cost per unit such as materials and shipping.",
+            "Enter the selling price per unit.",
+            "Review the break-even units, required revenue, and profit scenarios.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Break-Even Point Calculator", url: "https://www.dayblip.com/finance/break-even" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Break Even Calculator</h1>

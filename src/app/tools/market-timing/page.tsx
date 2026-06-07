@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 const PENALTY: Record<number, number> = { 0: 0, 10: 3.5, 20: 5.5, 30: 7.0, 40: 8.2, 50: 9.1 }
 const DAYS_OPTIONS = [0, 10, 20, 30, 40, 50]
@@ -67,6 +69,26 @@ export default function MarketTimingPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("Market Timing Cost Calculator", "Calculate the true cost of missing the stock market's best days. See why time in the market beats timing the market.", "https://www.dayblip.com/tools/market-timing", "FinanceApplication"),
+        faqSchema([
+          { question: "What happens if you miss the best days in the stock market?", answer: "Missing just 10 of the market's best trading days over 20 years can reduce your portfolio value by 35% or more. The best days often immediately follow the worst days." },
+          { question: "Is timing the stock market possible?", answer: "Research consistently shows that timing the market is nearly impossible even for professionals. Missing the 10 best days out of 5,000+ trading days dramatically reduces long-term returns." },
+          { question: "What is time in the market vs timing the market?", answer: "Time in the market means staying invested through ups and downs. Timing the market means trying to buy low and sell high. Research shows time in the market almost always wins." },
+        ]),
+        howToSchema("How to Calculate Market Timing Cost", "See the cost of missing the market's best days", [
+          "Enter your initial investment amount",
+          "Enter your investment time period in years",
+          "Set expected annual market return",
+          "Select how many best days you might miss",
+          "Click Calculate Cost of Timing to see full impact",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "Market Timing Calculator", url: "https://www.dayblip.com/tools/market-timing" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">What Does Missing the Market&apos;s Best Days Cost You?</h1>

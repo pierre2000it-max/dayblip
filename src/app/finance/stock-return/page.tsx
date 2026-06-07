@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtPct(n: number) { return (n >= 0 ? "+" : "") + n.toFixed(2) + "%" }
@@ -50,6 +52,35 @@ export default function StockReturnPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Stock Return Calculator",
+          "Calculate the total return on a stock investment including price gains and dividends.",
+          "https://www.dayblip.com/finance/stock-return",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How is total return on a stock calculated?", answer: "Total return is your gain divided by the total invested. The calculator takes your current or sale value minus everything you put in (initial plus additional investments), then divides by the total invested and expresses it as a percentage." },
+          { question: "What is annualized return and why does it matter?", answer: "Annualized return is the steady yearly rate that would produce your overall gain over the holding period. It lets you compare investments held for different lengths of time fairly — a 50% gain over 2 years is very different from 50% over 10." },
+          { question: "Are dividends included in the return?", answer: "Yes. Enter dividends received and the calculator adds them to your price gain to show total return including income, which is a more complete picture than price appreciation alone." },
+          { question: "How does my return compare to the S&P 500?", answer: "The tool benchmarks your annualized return against the S&P 500's long-run average of about 10.5% per year and shows whether you beat or trailed the index, plus a Rule of 72 estimate of how fast your money doubles." },
+        ]),
+        howToSchema(
+          "Stock Return Calculator — How To Use",
+          "Calculate total and annualized return on a stock investment.",
+          [
+            "Enter your initial investment and the current or sale value.",
+            "Enter the holding period in years.",
+            "Add any dividends received and additional investments made.",
+            "Review your total gain, total return, annualized return and the comparison against the S&P 500 benchmark.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Stock Return Calculator", url: "https://www.dayblip.com/finance/stock-return" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Stock Return Calculator</h1>

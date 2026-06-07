@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -47,6 +49,36 @@ export default function CompoundInterestPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Compound Interest Calculator",
+          "See how your money grows over time with compound interest and regular contributions.",
+          "https://www.dayblip.com/finance/compound-interest",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How does compound interest work?", answer: "Compound interest earns returns not only on your original investment but also on the interest already earned. Over time this snowball effect accelerates growth. This calculator compounds monthly using your initial investment, monthly contributions, rate, and time horizon." },
+          { question: "How much will my investment grow?", answer: "Enter your initial amount, monthly contribution, annual rate, and number of years. The calculator shows your final balance, total contributions, total interest earned, and the multiple by which your money grew, plus a year-by-year breakdown." },
+          { question: "What is the Rule of 72?", answer: "The Rule of 72 is a quick way to estimate how long it takes money to double: divide 72 by your annual interest rate. At 7%, money doubles roughly every 10.3 years. The calculator displays this for your chosen rate." },
+          { question: "Why are monthly contributions so powerful?", answer: "Regular monthly contributions add new money that itself compounds over time. Even modest amounts invested consistently can produce far more in interest than your total contributions, as the year-by-year table makes clear." },
+        ]),
+        howToSchema(
+          "Compound Interest Calculator — How To Use",
+          "Project how an investment grows with compound interest and monthly contributions.",
+          [
+            "Enter your initial investment amount.",
+            "Enter your monthly contribution.",
+            "Enter your expected annual interest rate.",
+            "Set the number of years to grow your money.",
+            "Review your final balance, total interest, and year-by-year growth.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Compound Interest Calculator", url: "https://www.dayblip.com/finance/compound-interest" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Compound Interest Calculator</h1>

@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -68,6 +70,35 @@ export default function SavingsGoalPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Savings Goal Calculator",
+          "Calculate how much to save each month to reach your savings goal by your target date.",
+          "https://www.dayblip.com/finance/savings-goal",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How long will it take to reach my savings goal?", answer: "The calculator simulates month by month: it adds your monthly contribution plus interest on the balance until you hit your goal, then reports the time in years and months and the calendar target date." },
+          { question: "Does it account for interest earned?", answer: "Yes. Enter an annual interest rate and the tool compounds it monthly on your growing balance, so interest shortens the time to your goal and is shown separately from your contributions." },
+          { question: "How can I reach my goal faster?", answer: "The Speed Up panel estimates the monthly amount needed to hit your goal in roughly half the time. Increasing your monthly contribution or starting with a larger current balance both shorten the timeline." },
+          { question: "Can I use it for specific goals like a down payment or emergency fund?", answer: "Yes. Preset buttons load common targets such as an emergency fund, down payment, new car, wedding or college fund, and you can edit any amount to match your own goal." },
+        ]),
+        howToSchema(
+          "Savings Goal Calculator — How To Use",
+          "Work out how long it takes to reach a savings goal.",
+          [
+            "Choose a preset goal or type your own savings goal amount.",
+            "Enter how much you have already saved.",
+            "Enter your planned monthly contribution and the annual interest rate.",
+            "Read the time to reach your goal, the target date and total interest earned, then check the Speed Up tip to finish faster.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Savings Goal Calculator", url: "https://www.dayblip.com/finance/savings-goal" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Savings Goal Calculator</h1>

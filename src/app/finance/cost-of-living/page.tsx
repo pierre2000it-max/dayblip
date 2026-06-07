@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -85,6 +87,35 @@ export default function CostOfLivingPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Cost of Living Calculator",
+          "Compare the cost of living between cities and see the salary you need to maintain your lifestyle.",
+          "https://www.dayblip.com/finance/cost-of-living",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How do I compare the cost of living between two cities?", answer: "Select your current city and a destination city, then enter your current salary. The calculator uses each city's cost-of-living index (where the national average is 100) to show the equivalent salary you would need to maintain the same lifestyle." },
+          { question: "What salary do I need to keep my lifestyle in a new city?", answer: "The calculator multiplies your current salary by the ratio of the destination city's index to your current city's index. If the destination is more expensive, you need a higher salary; if cheaper, you can maintain your lifestyle on less." },
+          { question: "Which expense categories does the comparison cover?", answer: "It breaks down the difference across housing, groceries, transportation, healthcare, and utilities, weighted by their typical share of a budget, so you can see where costs rise or fall the most between the two cities." },
+          { question: "How accurate are cost-of-living index numbers?", answer: "The indices are approximate and based on city averages. Actual costs vary by neighborhood, lifestyle, and personal choices, so treat the results as a directional estimate rather than an exact figure." },
+        ]),
+        howToSchema(
+          "Cost of Living Calculator — How To Use",
+          "Compare living costs between two cities and find the salary you need to keep your lifestyle.",
+          [
+            "Select your current city.",
+            "Select the destination city you want to compare.",
+            "Enter your current salary.",
+            "Review the equivalent salary needed and the category-by-category breakdown.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Cost of Living Calculator", url: "https://www.dayblip.com/finance/cost-of-living" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Cost of Living Comparison</h1>

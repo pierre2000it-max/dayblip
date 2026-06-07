@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtDec(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
@@ -117,6 +119,35 @@ export default function FreelancerRatePage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Freelancer Hourly Rate Calculator",
+          "Calculate the hourly rate you need to charge as a freelancer to hit your income goal.",
+          "https://www.dayblip.com/finance/freelancer-rate",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How do I calculate my freelance hourly rate?", answer: "Add your desired take-home income, business expenses, health insurance, retirement savings, and taxes, then divide by your actual billable hours per year. This calculator does that automatically, accounting for vacation weeks and non-billable time." },
+          { question: "Why do freelancers need to charge more than employees?", answer: "Freelancers pay both halves of self-employment tax (15.3%), cover their own health insurance and retirement, and only bill a fraction of the hours they work because admin, marketing, and business development are unpaid. The rate must cover all of that." },
+          { question: "How does self-employment tax affect my rate?", answer: "Self-employment tax is 15.3% on 92.35% of net earnings, covering Social Security and Medicare. The calculator builds this into your required rate along with estimated federal and state income tax for your selected state." },
+          { question: "How many billable hours should I assume?", answer: "Most freelancers bill far fewer hours than they work. Enter your realistic billable hours per week and vacation weeks; the calculator computes annual billable hours and shows why a lower billable count raises the rate you must charge." },
+        ]),
+        howToSchema(
+          "Freelancer Hourly Rate Calculator — How To Use",
+          "Find the hourly rate you need to charge as a freelancer to reach your income goal.",
+          [
+            "Enter your desired annual income, vacation weeks, and billable hours per week.",
+            "Enter your monthly business expenses, health insurance, and retirement savings.",
+            "Select your state for tax estimation.",
+            "Review your required hourly rate, rate breakdown, and project rate conversions.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Freelancer Hourly Rate Calculator", url: "https://www.dayblip.com/finance/freelancer-rate" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Freelancer Rate Calculator</h1>

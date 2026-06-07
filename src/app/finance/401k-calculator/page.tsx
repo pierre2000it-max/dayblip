@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -55,6 +57,36 @@ export default function FourOhOneKPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "401(k) Calculator",
+          "Project your 401(k) balance at retirement including employer match and compound growth.",
+          "https://www.dayblip.com/finance/401k-calculator",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How does employer 401(k) matching work?", answer: "An employer match adds money to your 401(k) based on what you contribute, up to a set percentage of your salary. If your employer matches 3% and you contribute at least 3%, you receive the full match. Contributing less than the match percentage leaves free money on the table." },
+          { question: "How much will my 401(k) be worth at retirement?", answer: "Your projected balance depends on your current balance, annual salary, your contribution percentage, the employer match, the years until retirement, and your expected annual return. This calculator compounds monthly contributions plus growth to estimate your balance at your chosen retirement age." },
+          { question: "What is the 4% rule for retirement income?", answer: "The 4% rule estimates that you can withdraw about 4% of your retirement balance per year with low risk of running out of money. This calculator divides that annual figure by twelve to show an approximate monthly retirement income from your projected balance." },
+          { question: "What contribution percentage should I choose?", answer: "At minimum, contribute enough to capture your full employer match. This calculator compares 3%, 6%, 10%, and 15% contribution scenarios so you can see how raising your contribution rate changes your retirement balance and monthly income." },
+        ]),
+        howToSchema(
+          "401(k) Calculator — How To Use",
+          "Estimate your 401(k) balance at retirement with employer match and compound growth.",
+          [
+            "Enter your current age and your planned retirement age.",
+            "Enter your current 401(k) balance and annual salary.",
+            "Enter your contribution percentage and your employer match percentage.",
+            "Enter your expected annual return.",
+            "Review your projected balance, employer match, and estimated monthly retirement income.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "401(k) Calculator", url: "https://www.dayblip.com/finance/401k-calculator" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">401(k) Calculator</h1>

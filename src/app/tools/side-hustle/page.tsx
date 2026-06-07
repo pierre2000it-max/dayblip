@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 const SKILL_LIST = ["Writing","Design","Coding","Teaching","Marketing","Photography","Video Editing","Accounting","Handyman","Cooking","Social Media","Customer Service","Data Analysis","Music","Languages"] as const
 type Skill = typeof SKILL_LIST[number]
@@ -113,6 +115,26 @@ export default function SideHustlePage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("Side Hustle Income Calculator", "Discover your side hustle income potential based on your skills and available time. Find the best side hustle for your situation.", "https://www.dayblip.com/tools/side-hustle", "FinanceApplication"),
+        faqSchema([
+          { question: "How much can I make from a side hustle?", answer: "Side hustle income varies widely by skill and time. Freelance coding can earn $1,500-$15,000 per month. Writing $200-$6,000. Teaching $300-$7,000. Home services $300-$6,000." },
+          { question: "What is the best side hustle for beginners?", answer: "Beginners often find success with freelance writing, virtual assistance, online tutoring, home services, or social media management — all require minimal startup costs." },
+          { question: "How many hours per week do I need for a side hustle?", answer: "Even 5-10 hours per week can generate meaningful income. Most successful side hustlers start with 10-15 hours weekly and scale based on demand and income goals." },
+        ]),
+        howToSchema("How to Calculate Your Side Hustle Potential", "Find your best-matched side hustle and income", [
+          "Select all skills you have from the checklist",
+          "Set your available hours per week using the slider",
+          "Select your experience level",
+          "Choose your income goal",
+          "Click Show My Hustle Potential for top matches",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "Side Hustle Calculator", url: "https://www.dayblip.com/tools/side-hustle" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">What Could You Earn on the Side?</h1>

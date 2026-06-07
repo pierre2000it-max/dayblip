@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -96,6 +98,35 @@ export default function BudgetCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Budget Calculator",
+          "Build a monthly budget with the 50/30/20 rule and see where your money goes.",
+          "https://www.dayblip.com/finance/budget-calculator",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "What is the 50/30/20 budget rule?", answer: "The 50/30/20 rule splits your monthly take-home pay into 50% for needs, 30% for wants, and 20% for savings and debt payoff. This calculator applies those percentages to your income and shows the recommended dollar amount for each category." },
+          { question: "What counts as a need versus a want?", answer: "Needs are essential expenses like housing, food, utilities, transportation, insurance, and minimum debt payments. Wants are lifestyle spending like dining out, entertainment, shopping, subscriptions, and hobbies. The calculator groups your categories accordingly." },
+          { question: "How do I know if I am overspending?", answer: "Enter your actual spending in each category and the calculator compares it to the recommended amount. It flags categories and groups that exceed the 50/30/20 targets and shows how many dollars you are over or under budget." },
+          { question: "Should I use gross or take-home income?", answer: "Use your monthly take-home pay, which is the amount you receive after taxes and deductions. The 50/30/20 rule is designed around the money you actually have available to spend and save each month." },
+        ]),
+        howToSchema(
+          "Budget Calculator — How To Use",
+          "Build a 50/30/20 monthly budget and compare it to your actual spending.",
+          [
+            "Enter your monthly take-home pay.",
+            "Review the recommended amounts for needs, wants, and savings.",
+            "Enter your actual spending in each needs, wants, and savings category.",
+            "Review the personalized insights to see where you are over or under the targets.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Budget Calculator", url: "https://www.dayblip.com/finance/budget-calculator" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Budget Calculator</h1>

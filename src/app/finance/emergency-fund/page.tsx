@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -43,6 +45,35 @@ export default function EmergencyFundPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Emergency Fund Calculator",
+          "Calculate how big your emergency fund should be based on your monthly expenses.",
+          "https://www.dayblip.com/finance/emergency-fund",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How many months of expenses should I keep in an emergency fund?", answer: "A common guideline is three to six months of essential expenses, but the right amount depends on job security. This calculator recommends three months for very secure jobs, four to six for less secure ones, and up to twelve months for the self-employed." },
+          { question: "What expenses should an emergency fund cover?", answer: "Focus on essential monthly costs: rent or mortgage, utilities, groceries, transportation, insurance, and other necessities. The calculator totals these to set your monthly expense baseline and multiplies it by your recommended number of months." },
+          { question: "How is my emergency fund goal calculated?", answer: "The calculator multiplies your total monthly essential expenses by a months-of-coverage factor based on your job security. It then compares your current savings to that goal and shows your funding progress as a percentage." },
+          { question: "How long will it take to build my emergency fund?", answer: "Based on the gap between your goal and current savings, the calculator shows how many months it takes to get there at several monthly savings amounts, so you can pick a contribution pace that fits your budget." },
+        ]),
+        howToSchema(
+          "Emergency Fund Calculator — How To Use",
+          "Estimate the right size for your emergency fund based on expenses and job security.",
+          [
+            "Enter your essential monthly expenses in each category.",
+            "Select your job security level.",
+            "Enter your current emergency savings.",
+            "Review your recommended fund size, funding progress, and savings timeline.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Emergency Fund Calculator", url: "https://www.dayblip.com/finance/emergency-fund" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Emergency Fund Calculator</h1>

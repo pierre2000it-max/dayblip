@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -59,6 +61,35 @@ export default function SelfEmploymentTaxPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Self-Employment Tax Calculator",
+          "Estimate the self-employment tax you owe on freelance and 1099 income.",
+          "https://www.dayblip.com/finance/self-employment-tax",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "What is the self-employment tax rate?", answer: "Self-employment tax is 15.3% — 12.4% for Social Security and 2.9% for Medicare. It is applied to 92.35% of your net self-employment earnings, since that deductible portion mirrors the employer share employees do not pay." },
+          { question: "Can I deduct part of my self-employment tax?", answer: "Yes. You can deduct half of your self-employment tax from your taxable income for income-tax purposes, which the calculator applies before estimating your federal income tax." },
+          { question: "Why do I need to pay quarterly estimated taxes?", answer: "Freelancers have no employer withholding, so the IRS expects estimated payments four times a year — around April 15, June 15, September 15 and January 15 — to avoid underpayment penalties. The calculator splits your total tax into those four payments." },
+          { question: "How much should I set aside for taxes as a freelancer?", answer: "The tool computes a set-aside percentage from your total tax over your total income so you know roughly what share of every payment to reserve. It typically lands in the 20–35% range depending on income and filing status." },
+        ]),
+        howToSchema(
+          "Self-Employment Tax Calculator — How To Use",
+          "Estimate self-employment tax on freelance and 1099 income.",
+          [
+            "Enter your net self-employment income and deductible business expenses.",
+            "Enter any other W-2 income and choose your filing status.",
+            "Review the SE tax breakdown, including the Social Security and Medicare portions and the deductible half.",
+            "Check your quarterly estimated payments and the percentage to set aside from each payment for taxes.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Self-Employment Tax Calculator", url: "https://www.dayblip.com/finance/self-employment-tax" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Self-Employment Tax Calculator</h1>

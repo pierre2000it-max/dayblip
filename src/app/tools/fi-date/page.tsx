@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 const DISCLAIMER = (
   <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
@@ -161,6 +163,28 @@ export default function FIDatePage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("Financial Independence Date Calculator", "Calculate the exact date you could achieve financial independence and stop working. Includes live countdown to your FI date and FIRE calculator.", "https://www.dayblip.com/tools/fi-date", "FinanceApplication"),
+        faqSchema([
+          { question: "What is financial independence?", answer: "Financial independence means having enough invested savings to cover your living expenses indefinitely using a safe withdrawal rate, typically 4%, without needing to work." },
+          { question: "How much do I need to retire early?", answer: "Your FI number equals your annual expenses divided by your safe withdrawal rate. At 4% withdrawal rate, you need 25 times your annual expenses invested." },
+          { question: "What is the 4% rule?", answer: "The 4% rule states that you can withdraw 4% of your portfolio annually in retirement with a high probability of your money lasting 30+ years, based on historical market data." },
+          { question: "How can I reach financial independence faster?", answer: "Increase your savings rate, reduce expenses, and invest the difference. Saving an extra $200 per month can move your FI date forward by 12-18 months." },
+        ]),
+        howToSchema("How to Calculate Your Financial Independence Date", "Find your exact financial independence date in seconds", [
+          "Enter your current age",
+          "Enter your annual income and annual expenses",
+          "Enter your current portfolio value",
+          "Enter your monthly investment contribution",
+          "Set expected annual return and safe withdrawal rate",
+          "Click Find My FI Date to see your exact independence date",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "Financial Independence Date", url: "https://www.dayblip.com/tools/fi-date" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Your Financial Independence Date</h1>

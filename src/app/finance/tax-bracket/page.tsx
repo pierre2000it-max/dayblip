@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -99,6 +101,35 @@ export default function TaxBracketPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Tax Bracket Calculator",
+          "Find your marginal and effective federal income tax rate based on your taxable income.",
+          "https://www.dayblip.com/finance/tax-bracket",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How do federal tax brackets work?", answer: "Brackets are marginal: only the income within each bracket is taxed at that bracket's rate. You do not pay your top rate on all your income, so the calculator breaks your tax down bracket by bracket to show what each layer contributes." },
+          { question: "What is the difference between marginal and effective tax rate?", answer: "Your marginal rate is the rate on your highest dollar of taxable income. Your effective rate is your total tax divided by taxable income, which is lower because lower brackets tax your earlier dollars at 10%, 12% and so on." },
+          { question: "How does the standard deduction affect my tax?", answer: "The standard deduction is subtracted from your income before tax is calculated, lowering your taxable income. The calculator applies the amount for your filing status, or you can switch to itemized deductions and enter your own total." },
+          { question: "How does filing status change my taxes?", answer: "Each filing status — single, married filing jointly, married filing separately, head of household — has its own bracket thresholds and standard deduction. The tool also estimates how much a single filer might save by filing jointly at the same income." },
+        ]),
+        howToSchema(
+          "Tax Bracket Calculator — How To Use",
+          "Find your federal marginal and effective tax rate.",
+          [
+            "Enter your annual income.",
+            "Select your filing status.",
+            "Choose the standard deduction or switch to itemized and enter your total deductions.",
+            "Read your estimated federal tax, marginal bracket, effective rate and the bracket-by-bracket breakdown.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Tax Bracket Calculator", url: "https://www.dayblip.com/finance/tax-bracket" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Tax Bracket Calculator 2026</h1>

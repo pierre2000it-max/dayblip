@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -77,6 +79,35 @@ export default function SocialSecurityPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Social Security Calculator",
+          "Estimate your Social Security retirement benefit and the impact of claiming early or late.",
+          "https://www.dayblip.com/finance/social-security",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "When can I claim Social Security and how does timing affect my benefit?", answer: "You can start as early as 62 or as late as 70. Claiming before your full retirement age permanently reduces your monthly benefit by up to about 30%, while delaying past full retirement age adds roughly 8% per year up to age 70." },
+          { question: "What is my full retirement age?", answer: "It depends on your birth year. People born in 1960 or later have a full retirement age of 67; those born 1955–1959 fall between 66 and 67; those born 1954 or earlier reach it at 66. The calculator computes yours from your birth year." },
+          { question: "What is the break-even age for delaying Social Security?", answer: "The break-even age is when the larger checks from delaying overtake the total you would have collected by claiming at 62. The calculator shows the break-even age for each claiming age so you can weigh it against your health and life expectancy." },
+          { question: "Which claiming age gives the most lifetime benefit?", answer: "The tool projects total lifetime benefits through age 85 for each claiming age from 62 to 70 and stars the one with the highest lifetime total, though your own longevity and income needs should guide the decision." },
+        ]),
+        howToSchema(
+          "Social Security Calculator — How To Use",
+          "Compare Social Security claiming ages to find the best one for you.",
+          [
+            "Enter your birth year to determine your full retirement age.",
+            "Enter your estimated monthly benefit at age 62 (from your ssa.gov statement).",
+            "Select your health and marital status.",
+            "Review the table of monthly, annual and lifetime benefits by claiming age and the break-even comparison versus claiming at 62.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Social Security Calculator", url: "https://www.dayblip.com/finance/social-security" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Social Security Calculator</h1>

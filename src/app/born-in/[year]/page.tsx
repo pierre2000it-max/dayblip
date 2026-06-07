@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import bornInRaw from "@/data/bornIn.json";
 import { generateBornInSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { faqSchema } from "@/lib/schema";
 import AdUnit from "@/components/AdUnit";
 import ShareCard from "@/components/ShareCard";
 import ShareButtons from "@/components/ShareButtons";
@@ -113,10 +114,19 @@ export default function BornInPage({
     { name: String(yearNum), url: pageUrl },
   ]);
 
+  const bornInFaqSchema = data ? faqSchema([
+    { question: `What was the #1 song in ${yearNum}?`, answer: `The number one song of ${yearNum} was ${data.number1Song}. Find more facts about ${yearNum} at dayblip.com/born-in/${yearNum}` },
+    { question: `What was the top movie in ${yearNum}?`, answer: `The top movie of ${yearNum} was ${data.number1Movie}. Discover more about what happened in ${yearNum} at dayblip.com.` },
+    { question: `How much did gas cost in ${yearNum}?`, answer: `Gas cost approximately ${data.gasPrice} per gallon in ${yearNum}.` },
+    { question: `What was the world population in ${yearNum}?`, answer: `The world population in ${yearNum} was approximately ${data.population}.` },
+    { question: `What major events happened in ${yearNum}?`, answer: `Major events of ${yearNum} included: ${data.worldEvent}.` },
+  ]) : null;
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      {bornInFaqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bornInFaqSchema) }} />}
 
       <div className="min-h-screen bg-[#1a1a2e]">
 

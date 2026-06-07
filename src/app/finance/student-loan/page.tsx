@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function addMonths(months: number) {
@@ -57,6 +59,35 @@ export default function StudentLoanPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Student Loan Calculator",
+          "Calculate your student loan monthly payment, total interest and payoff timeline.",
+          "https://www.dayblip.com/finance/student-loan",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How long will it take to pay off my student loans?", answer: "The calculator simulates your balance month by month: interest accrues on the remaining balance, your payment reduces it, and it counts the months until the balance reaches zero. It then shows both the number of months and the payoff date." },
+          { question: "How much can extra payments save on student loans?", answer: "Extra payments go straight to principal, cutting both the payoff time and total interest. The tool compares your standard payment to a plan with an extra monthly amount and shows the dollars and months saved side by side." },
+          { question: "How is total interest on a student loan calculated?", answer: "Each month interest equals the balance times the monthly rate (annual rate divided by 12). Summing that interest across every month until payoff gives your total interest paid — which extra payments reduce." },
+          { question: "What income-driven repayment plans exist?", answer: "Federal options include SAVE, PAYE, IBR and ICR, which cap payments at a share of discretionary income and offer forgiveness after 10–25 years. Visit studentaid.gov for official estimates and to apply." },
+        ]),
+        howToSchema(
+          "Student Loan Calculator — How To Use",
+          "Estimate your student loan payoff time and interest savings.",
+          [
+            "Enter your total loan balance and interest rate.",
+            "Enter your current monthly payment.",
+            "Enter an extra monthly payment amount to test.",
+            "Compare the standard and with-extra payoff dates, total interest and the interest and months you save.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Student Loan Calculator", url: "https://www.dayblip.com/finance/student-loan" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Student Loan Payoff Calculator</h1>

@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── module-scope simulation (no stale closures) ─────────────────────────────
 function simulateDebt(balance: number, annualRate: number, minPct: number, extra: number) {
@@ -83,6 +85,26 @@ export default function MinimumPaymentPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("Minimum Payment True Cost Calculator", "See the shocking true cost of only paying credit card minimums. Calculate exactly how long it takes and how much interest you pay.", "https://www.dayblip.com/tools/minimum-payment", "FinanceApplication"),
+        faqSchema([
+          { question: "How long does it take to pay off credit card debt paying minimums only?", answer: "On $8,000 of credit card debt at 19.99% interest paying minimums only, it takes approximately 27 years and costs over $16,000 in interest — more than double the original debt." },
+          { question: "How much interest do I pay on minimum payments?", answer: "On a typical credit card balance paying minimums only, total interest often exceeds the original balance. You can end up paying 200-300% of what you originally borrowed." },
+          { question: "How can I pay off credit card debt faster?", answer: "Adding even $50-100 extra per month to your payment dramatically reduces payoff time and total interest. Adding $100/month to an $8,000 balance at 19.99% saves over $13,000 in interest." },
+        ]),
+        howToSchema("How to Calculate True Cost of Minimum Payments", "See the full cost of paying only the minimum", [
+          "Enter your credit card balance",
+          "Enter your interest rate",
+          "Select minimum payment type — percentage or fixed",
+          "Optionally enter extra monthly payment amount",
+          "Click Calculate True Cost to see full breakdown",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "Minimum Payment Calculator", url: "https://www.dayblip.com/tools/minimum-payment" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">What Is Your Minimum Payment Really Costing You?</h1>

@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useCallback } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 interface Debt { id: number; name: string; balance: string; rate: string; minPayment: string }
 
@@ -90,6 +92,36 @@ export default function DebtPayoffPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Debt Payoff Calculator",
+          "Create a debt payoff plan using the snowball or avalanche method and see your debt-free date.",
+          "https://www.dayblip.com/finance/debt-payoff",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "What is the debt avalanche method?", answer: "The avalanche method targets the debt with the highest interest rate first while paying minimums on the rest. Once it is cleared, you roll that payment to the next-highest rate. This minimizes total interest paid and is usually the fastest mathematically." },
+          { question: "What is the debt snowball method?", answer: "The snowball method targets the smallest balance first while paying minimums on the rest. Clearing small debts quickly builds momentum and motivation. It may cost slightly more interest than avalanche but works well for staying motivated." },
+          { question: "How does an extra monthly payment speed up payoff?", answer: "Any extra payment is applied to your priority debt on top of the minimums, shrinking the balance faster and reducing interest. The calculator shows how your extra payment shortens your timeline and how much interest you save." },
+          { question: "When will I be debt free?", answer: "Enter each debt's balance, rate, and minimum payment, your extra monthly payment, and your chosen strategy. The calculator simulates month by month to show your debt-free date, total interest, interest saved, and the payoff order." },
+        ]),
+        howToSchema(
+          "Debt Payoff Calculator — How To Use",
+          "Build a snowball or avalanche debt payoff plan and find your debt-free date.",
+          [
+            "Enter each debt's name, balance, interest rate, and minimum payment.",
+            "Add additional debts if needed, up to five.",
+            "Enter your extra monthly payment.",
+            "Choose the avalanche or snowball strategy.",
+            "Review your debt-free date, total interest, and payoff order.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Debt Payoff Calculator", url: "https://www.dayblip.com/finance/debt-payoff" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Debt Payoff Calculator</h1>

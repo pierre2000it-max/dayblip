@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -70,6 +72,36 @@ export default function CollegeSavingsPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "College Savings Calculator",
+          "Calculate how much to save now to cover future college costs with a 529 plan.",
+          "https://www.dayblip.com/finance/college-savings",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How much should I save for my child's college?", answer: "It depends on your child's age, the type of school, and your expected investment return. This calculator projects the future cost using 5% annual tuition inflation and shows the monthly contribution needed to fully fund the years of college you choose." },
+          { question: "What is a 529 plan?", answer: "A 529 plan is a tax-advantaged investment account for education. Earnings grow free of federal tax and withdrawals for qualified education expenses such as tuition, room and board, and books are also tax-free. Many states offer a deduction for contributions." },
+          { question: "How much does college cost in the future?", answer: "This calculator starts from average annual costs by school type, ranging from about $12,000 for community college to $58,000 for private universities, and inflates them by 5% per year until your child starts college to estimate the total projected cost." },
+          { question: "Can unused 529 funds be moved to a Roth IRA?", answer: "Yes. Under a rule that took effect in 2024, up to $35,000 of unused 529 funds can be rolled into the beneficiary's Roth IRA, subject to conditions. Unused funds can also be transferred to a sibling." },
+        ]),
+        howToSchema(
+          "College Savings Calculator — How To Use",
+          "Estimate how much to save monthly to cover future college costs with a 529 plan.",
+          [
+            "Set your child's current age and expected college start age.",
+            "Enter your current 529 savings and monthly contribution.",
+            "Enter your expected annual return and number of college years.",
+            "Select the college type.",
+            "Review the projected cost, funding gap, and monthly amount needed.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "College Savings Calculator", url: "https://www.dayblip.com/finance/college-savings" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">College Savings Calculator (529 Plan)</h1>

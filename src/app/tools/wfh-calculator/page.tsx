@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 type Situation = "remote" | "hybrid" | "office"
 type Transport  = "car"    | "transit" | "both"
@@ -233,6 +235,27 @@ export default function WFHCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("Work From Home Savings Calculator", "Calculate the true financial value of working from home versus the office. See exactly how much remote work saves or costs you per year.", "https://www.dayblip.com/tools/wfh-calculator", "FinanceApplication"),
+        faqSchema([
+          { question: "How much does working from home save?", answer: "The average remote worker saves $2,000-$7,000 per year compared to office workers when accounting for commute costs, work lunches, work clothing and coffee." },
+          { question: "Is working from home financially better?", answer: "For most workers yes. Remote work eliminates commute costs, reduces food and clothing expenses, and is equivalent to a salary raise of 10-15% for many workers." },
+          { question: "How much does commuting cost per year?", answer: "The average American commuter spends $2,000-$5,000 per year on transportation, work food and clothing. A 30-minute commute each way costs roughly 250 hours of unpaid time annually." },
+        ]),
+        howToSchema("How to Calculate Your WFH Savings", "Calculate your remote work savings per year", [
+          "Select your work situation — remote hybrid or office",
+          "Enter commute distance and transport method",
+          "Enter work food and coffee spending",
+          "Enter clothing and dry cleaning costs",
+          "Enter any WFH extra costs",
+          "Click Calculate My Savings for full breakdown",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "WFH Calculator", url: "https://www.dayblip.com/tools/wfh-calculator" },
+        ]),
+      ]} />
       {/* ── Hero ── */}
       <section
         className="px-6 py-16 text-center"

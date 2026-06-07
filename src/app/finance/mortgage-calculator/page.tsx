@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -63,6 +65,36 @@ export default function MortgagePage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Mortgage Calculator",
+          "Calculate your monthly mortgage payment, total interest and amortization schedule.",
+          "https://www.dayblip.com/finance/mortgage-calculator",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "What does this mortgage calculator include in the monthly payment?", answer: "It adds principal and interest, monthly property tax (from the home price and tax rate you enter) and home insurance to show your full monthly housing cost, not just the loan payment." },
+          { question: "How is total interest on a mortgage calculated?", answer: "The calculator uses standard amortization: each month interest accrues on the remaining balance, the rest of your payment reduces principal, and the interest paid over the full loan term is summed. A $320,000 loan at 7% over 30 years pays roughly $446,000 in interest." },
+          { question: "What is the 28% housing ratio rule?", answer: "Lenders often suggest your total housing payment stay at or below 28% of your gross monthly income. Enter your income and the calculator flags whether your payment fits within that guideline." },
+          { question: "How much does a shorter loan term save?", answer: "A 15-year mortgage has higher monthly payments than a 30-year but dramatically less total interest because you borrow for half the time. The amortization table lets you compare remaining balance at 5, 10, 15, 20, 25 and 30 years." },
+        ]),
+        howToSchema(
+          "Mortgage Calculator — How To Use",
+          "Estimate your monthly mortgage payment and total interest.",
+          [
+            "Enter the home price and your down payment.",
+            "Enter the interest rate and choose a loan term (30, 20 or 15 years).",
+            "Add the property tax rate and monthly home insurance cost.",
+            "Optionally enter your gross monthly income to run the 28% affordability check.",
+            "Review the monthly payment, total interest and amortization table, then use Share / Copy Link to save your scenario.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Mortgage Calculator", url: "https://www.dayblip.com/finance/mortgage-calculator" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Mortgage Payment Calculator</h1>

@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── Pure helpers (module scope) ─────────────────────────────────────────────
 function fvAnnuity(pv: number, pmt: number, annualRate: number, months: number): number {
@@ -129,6 +131,26 @@ export default function EarlyVsLatePage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("Early vs Late Saver Calculator", "See why starting to save earlier with less money beats starting later with more. Visualize the power of compound interest over time.", "https://www.dayblip.com/tools/early-vs-late", "FinanceApplication"),
+        faqSchema([
+          { question: "Is it better to save early or save more later?", answer: "Saving earlier almost always wins. Saving $200 per month from age 25 to 35 then stopping typically outperforms saving $500 per month from age 35 to 65, despite contributing far less money." },
+          { question: "Why does starting to save early matter so much?", answer: "Compound interest grows exponentially over time. Money invested at 25 has 40 years to compound versus money invested at 35 which only has 30 years — that 10-year difference is enormous." },
+          { question: "What is compound interest?", answer: "Compound interest means earning returns on your returns. $10,000 at 7% annual return becomes $76,123 after 30 years without adding a single dollar — the growth accelerates over time." },
+        ]),
+        howToSchema("How to Compare Early vs Late Saver Results", "Compare two saving strategies side by side", [
+          "Enter early saver start age and monthly contribution",
+          "Enter the age the early saver stops contributing",
+          "Enter late saver start age and monthly contribution",
+          "Set retirement age and expected annual return",
+          "Click Compare Savers to see who wins",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "Early vs Late Saver", url: "https://www.dayblip.com/tools/early-vs-late" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Early Saver vs Late Saver — Who Wins?</h1>

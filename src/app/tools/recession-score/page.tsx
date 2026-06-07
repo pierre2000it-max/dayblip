@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── Scoring tables ───────────────────────────────────────────────────────────
 function scoreEmergency(months: number): number {
@@ -179,6 +181,28 @@ export default function RecessionScorePage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("Recession Readiness Score", "Get your personal recession readiness score. Find out how long you could survive a job loss and your top 3 actions to prepare.", "https://www.dayblip.com/tools/recession-score", "FinanceApplication"),
+        faqSchema([
+          { question: "How do I prepare for a recession?", answer: "Build a 6-month emergency fund, pay off high-interest debt, diversify income sources, reduce essential fixed expenses, and diversify investments across asset classes." },
+          { question: "How much emergency fund do I need?", answer: "Financial experts recommend 3-6 months of essential living expenses in liquid savings. 6+ months provides strong protection during recessions or job loss." },
+          { question: "What is a recession readiness score?", answer: "A recession readiness score measures your financial resilience across emergency savings, job security, debt levels, investment diversification and income sources." },
+        ]),
+        howToSchema("How to Calculate Your Recession Readiness Score", "Measure your financial resilience", [
+          "Enter months of emergency fund savings",
+          "Select your industry and employment type",
+          "Enter total high-interest debt amount",
+          "Select your investment diversification level",
+          "Enter monthly side income if any",
+          "Set your essential spending percentage",
+          "Click Get My Score for full analysis",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "Recession Readiness Score", url: "https://www.dayblip.com/tools/recession-score" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Your Recession Readiness Score</h1>

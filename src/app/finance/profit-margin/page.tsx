@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -67,6 +69,36 @@ export default function ProfitMarginPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Profit Margin Calculator",
+          "Calculate gross, operating and net profit margins for your business.",
+          "https://www.dayblip.com/finance/profit-margin",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "What is the difference between gross, operating and net margin?", answer: "Gross margin is revenue minus cost of goods sold, divided by revenue. Operating margin subtracts operating expenses too. Net margin subtracts taxes as well — it is the share of revenue you actually keep as profit." },
+          { question: "How do you calculate gross profit margin?", answer: "Gross profit margin = (Revenue − Cost of Goods Sold) ÷ Revenue × 100. For example, $500,000 revenue and $200,000 COGS gives a $300,000 gross profit and a 60% gross margin." },
+          { question: "What is a good profit margin for my industry?", answer: "It varies widely. Software businesses often see 15–30% net margins while retail and e-commerce typically run 1–8%. The calculator includes an industry benchmark table so you can see typical ranges by sector." },
+          { question: "How do I set a price to hit a target margin?", answer: "The pricing tool divides your cost per unit by (1 minus your desired margin). Enter units sold and the margin you want, and it shows the required price per unit to reach it." },
+        ]),
+        howToSchema(
+          "Profit Margin Calculator — How To Use",
+          "Calculate gross, operating and net profit margins for a business.",
+          [
+            "Enter your total revenue for the period.",
+            "Enter cost of goods sold, operating expenses and taxes.",
+            "Read the gross, operating and net profit margin cards, each showing the dollar profit and percentage.",
+            "Optionally enter units sold and a desired margin in the pricing tool to find the required price per unit.",
+            "Compare your margins to the industry benchmark table.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Profit Margin Calculator", url: "https://www.dayblip.com/finance/profit-margin" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Profit Margin Calculator</h1>

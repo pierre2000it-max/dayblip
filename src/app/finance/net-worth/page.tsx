@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -33,6 +35,35 @@ export default function NetWorthPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Net Worth Calculator",
+          "Calculate your total net worth by subtracting liabilities from assets.",
+          "https://www.dayblip.com/finance/net-worth",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How is net worth calculated?", answer: "Net worth equals total assets minus total liabilities. The calculator adds up your cash, investments, retirement accounts, home and vehicle value and other assets, then subtracts your mortgage, car loan, credit card debt, student loans and other debts." },
+          { question: "Can net worth be negative?", answer: "Yes. If your debts exceed your assets — common for recent graduates or new homeowners — your net worth is negative. The figure turns red in the calculator to signal this." },
+          { question: "What assets should I include?", answer: "Include everything you own that has resale value: bank balances, brokerage and retirement accounts, the market value of your home and vehicles, and other valuables. Use current market values, not purchase prices." },
+          { question: "How do I compare my net worth to others my age?", answer: "Enter your age and the calculator shows the U.S. median net worth for your age band from the Federal Reserve Survey of Consumer Finances, plus what percentage of that median you have reached." },
+        ]),
+        howToSchema(
+          "Net Worth Calculator — How To Use",
+          "Find your total net worth and compare it to age benchmarks.",
+          [
+            "Enter the value of each asset: checking and savings, investments, retirement accounts, home, vehicle and other assets.",
+            "Enter each liability: mortgage, car loan, credit card debt, student loans and other debts.",
+            "Read your net worth, which updates automatically as total assets minus total liabilities.",
+            "Enter your age to compare against the median net worth for your age range.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Net Worth Calculator", url: "https://www.dayblip.com/finance/net-worth" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Net Worth Calculator</h1>

@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -49,6 +51,35 @@ export default function RetirementSavingsPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Retirement Savings Calculator",
+          "Find out if your retirement savings are on track to fund your retirement.",
+          "https://www.dayblip.com/finance/retirement-savings",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How does this calculator project my retirement savings?", answer: "It compounds your current savings and monthly contributions monthly at your expected return until your retirement age, giving the projected balance you would have when you stop working." },
+          { question: "What is the 25x rule?", answer: "The 25x rule estimates the nest egg you need as 25 times your desired annual retirement income, which corresponds to a 4% annual withdrawal rate. If you want $5,000 a month, that is $60,000 a year, so you would target $1.5 million." },
+          { question: "What return should I assume?", answer: "Many planners use a long-run average of around 7% for a diversified portfolio, but returns vary year to year and are not guaranteed. You can adjust the expected return field to test more conservative assumptions." },
+          { question: "What does 'on track' mean here?", answer: "You are flagged as on track when your projected savings at retirement meet or exceed the amount needed under the 25x rule. Otherwise the calculator shows the shortfall so you can adjust your contributions." },
+        ]),
+        howToSchema(
+          "Retirement Savings Calculator — How To Use",
+          "Check whether your retirement savings are on track.",
+          [
+            "Enter your current age and planned retirement age.",
+            "Enter your current savings and how much you save each month.",
+            "Set your expected annual return and your desired monthly retirement income.",
+            "Read the on-track or shortfall result, your projected balance versus the amount needed, and the savings milestones by age.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Retirement Savings Calculator", url: "https://www.dayblip.com/finance/retirement-savings" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Retirement Savings Calculator</h1>

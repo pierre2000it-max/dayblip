@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── Synonym resolution ───────────────────────────────────────────────────────
 const synonyms: Record<string, string> = {
@@ -830,6 +832,27 @@ export default function AIJobScorePage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("AI Job Replacement Risk Score", "Free tool that calculates your personalized AI job replacement risk score based on your job title. See which tasks AI will automate and how to protect your career.", "https://www.dayblip.com/tools/ai-job-score", "UtilitiesApplication"),
+        faqSchema([
+          { question: "Will AI replace my job?", answer: "AI replacement risk varies by role. Data entry (95/100 risk), accountants (72/100), software engineers (45/100), nurses (15/100) and therapists (8/100). Physical and empathy-based roles are safest." },
+          { question: "How is the AI job replacement score calculated?", answer: "The score (0-100) is based on the proportion of job tasks that can be automated by current AI technology, sourced from occupational data and O*NET US Department of Labor research." },
+          { question: "Which jobs are safest from AI replacement?", answer: "Jobs requiring physical presence, human empathy, and complex judgment are safest: nurses, therapists, electricians, plumbers, teachers, and social workers all score under 25/100." },
+          { question: "Which jobs are most at risk from AI?", answer: "Data entry clerks (95/100), telemarketers (92/100), bookkeepers (88/100), and cashiers (85/100) face the highest automation risk from current AI technology." },
+        ]),
+        howToSchema("How to Get Your AI Job Replacement Score", "Calculate your personalized AI job risk score in seconds", [
+          "Type your job title in the search box",
+          "Select your job from the suggestions or press Get My AI Risk Score",
+          "Review your score from 0-100 and risk label",
+          "Read which tasks AI will automate and which remain safe",
+          "Review recommended pivot skills for your career",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "AI Job Score", url: "https://www.dayblip.com/tools/ai-job-score" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Will AI Replace Your Job?</h1>

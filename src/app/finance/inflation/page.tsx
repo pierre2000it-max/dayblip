@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 const CPI: Record<number, number> = {
   1913: 9.9, 1920: 20.0, 1930: 16.7, 1940: 14.0, 1950: 24.1,
@@ -57,6 +59,35 @@ export default function InflationPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Inflation Calculator",
+          "See how inflation changes the purchasing power of money over time.",
+          "https://www.dayblip.com/finance/inflation",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "How do I calculate what money was worth in the past?", answer: "Choose a dollar amount and a starting year, and the calculator multiplies it by the ratio of the current Consumer Price Index to the index in that year. This shows the equivalent value in today's dollars and the change in purchasing power." },
+          { question: "What is purchasing power?", answer: "Purchasing power is how much you can buy with a given amount of money. As prices rise with inflation, the same dollar buys less over time. This calculator shows how much purchasing power has been gained or lost between two years." },
+          { question: "What data does this inflation calculator use?", answer: "It uses Consumer Price Index figures based on data from the US Bureau of Labor Statistics for benchmark years from 1913 through the present, allowing comparisons across more than a century." },
+          { question: "Can I convert today's dollars back to a past year?", answer: "Yes. Switch to the Today to Past mode, enter an amount, and select a target year to see what today's money would have been equivalent to in that earlier year." },
+        ]),
+        howToSchema(
+          "Inflation Calculator — How To Use",
+          "Compare the purchasing power of money across years using historical CPI data.",
+          [
+            "Choose Past to Today or Today to Past mode.",
+            "Enter the dollar amount.",
+            "Select the year to compare against.",
+            "Review the equivalent value and the change in purchasing power.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Inflation Calculator", url: "https://www.dayblip.com/finance/inflation" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Inflation Calculator</h1>

@@ -1,6 +1,8 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -94,6 +96,36 @@ export default function CapitalGainsPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema(
+          "Capital Gains Tax Calculator",
+          "Estimate the capital gains tax you owe on investment profits for short and long term holdings.",
+          "https://www.dayblip.com/finance/capital-gains",
+          "FinanceApplication"
+        ),
+        faqSchema([
+          { question: "What is the difference between short-term and long-term capital gains?", answer: "Short-term gains apply to assets held one year or less and are taxed at your ordinary income tax rate. Long-term gains apply to assets held more than one year and are taxed at lower rates of 0%, 15%, or 20% depending on your income and filing status." },
+          { question: "How much capital gains tax will I owe?", answer: "Enter your purchase price, sale price, holding period, annual income, and filing status. The calculator computes your gain and applies either ordinary income brackets (short-term) or the 0/15/20% long-term rates to estimate your federal tax owed and after-tax profit." },
+          { question: "Can I save money by holding an investment longer than a year?", answer: "Often yes. Because long-term rates are usually lower than ordinary income rates, holding an asset past the one-year mark can reduce the tax owed. The calculator shows a side-by-side comparison of selling now versus waiting for long-term treatment." },
+          { question: "What is the Net Investment Income Tax?", answer: "The Net Investment Income Tax is an additional 3.8% tax on investment income for filers whose income exceeds $200,000 (single) or $250,000 (married filing jointly). The calculator adds this surtax when your income crosses the threshold." },
+          { question: "Does this include state capital gains tax?", answer: "No. This calculator estimates federal capital gains tax only and does not include state taxes or every individual adjustment. Consult a CPA for figures specific to your situation and state." },
+        ]),
+        howToSchema(
+          "Capital Gains Tax Calculator — How To Use",
+          "Estimate federal tax on your investment gains for short and long term holdings.",
+          [
+            "Enter the purchase price and sale price of your asset.",
+            "Enter your annual income and select your filing status.",
+            "Choose whether the holding period is short-term or long-term.",
+            "Review your capital gain, tax rate, tax owed, and after-tax profit.",
+          ]
+        ),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Finance", url: "https://www.dayblip.com/finance" },
+          { name: "Capital Gains Tax Calculator", url: "https://www.dayblip.com/finance/capital-gains" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Capital Gains Tax Calculator</h1>

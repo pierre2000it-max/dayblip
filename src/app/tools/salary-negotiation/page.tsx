@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import SchemaMarkup from "@/components/SchemaMarkup"
+import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 // ─── Salary data (source: BLS OES 2025, educational estimates) ───────────────
 const salaryData: Record<string, Record<string, [number, number]>> = {
@@ -207,6 +209,28 @@ export default function SalaryNegotiationPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[
+        webApplicationSchema("Salary Negotiation Calculator", "Calculate exactly how much to ask for in salary negotiations. Get a ready-to-use negotiation script based on real market data for your role and location.", "https://www.dayblip.com/tools/salary-negotiation", "FinanceApplication"),
+        faqSchema([
+          { question: "Should I negotiate my salary?", answer: "Yes. 87% of employers expect salary negotiation and almost never rescind offers because of it. Not negotiating your starting salary can cost $300,000+ over a career due to compounding raises." },
+          { question: "How much should I ask for in salary negotiation?", answer: "Ask for 10-15% above the market median for your role, experience level and location. This gives room to settle at market rate while leaving you room to negotiate." },
+          { question: "What is the best way to negotiate salary?", answer: "Thank them for the offer, express enthusiasm, then cite specific market data for your role and location. Use a specific number not a range. Let silence work after making your ask." },
+          { question: "Will negotiating salary hurt my chances?", answer: "No. Studies show 87% of hiring managers expect negotiation and virtually no offers are rescinded due to reasonable salary negotiation." },
+        ]),
+        howToSchema("How to Calculate Your Salary Negotiation Amount", "Get your target salary number and a negotiation script", [
+          "Enter your job title",
+          "Select your years of experience",
+          "Select your state",
+          "Enter the salary you were offered or currently earn",
+          "Click Analyze My Salary to see market data",
+          "Copy the ready-to-use negotiation script",
+        ]),
+        breadcrumbSchema([
+          { name: "Home", url: "https://www.dayblip.com" },
+          { name: "Tools", url: "https://www.dayblip.com/tools" },
+          { name: "Salary Negotiation", url: "https://www.dayblip.com/tools/salary-negotiation" },
+        ]),
+      ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Should You Negotiate Your Salary?</h1>
