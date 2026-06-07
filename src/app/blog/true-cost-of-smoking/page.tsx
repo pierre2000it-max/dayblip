@@ -1,6 +1,6 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
-import ShareButtons from "@/components/blog/ShareButtons"
+import ShareButtons from "@/components/ShareButtons"
 
 const schema = {
   "@context": "https://schema.org",
@@ -50,6 +50,15 @@ export default function TrueCostOfSmokingPage() {
             </p>
           </div>
         </section>
+
+        {/* Share — Location 1: above article */}
+        <div className="mb-8">
+          <ShareButtons
+            text="A pack-a-day smoking habit invested instead at 7% return grows to $640,000 over 40 years. Calculate the full financial cost: www.dayblip.com/tools/smoking-cost"
+            url="https://www.dayblip.com/blog/true-cost-of-smoking"
+            title="The Financial Cost of Smoking"
+          />
+        </div>
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
           <p>
@@ -157,15 +166,16 @@ export default function TrueCostOfSmokingPage() {
           </p>
         </article>
 
-        <div className="mt-10 pt-8 border-t border-[#2d3748]">
-          <p className="text-[#a8a8b3] text-sm mb-4 font-medium">Found this useful? Share it.</p>
+        <RelatedTools tools={relatedTools} />
+
+        <div className="mt-8 pt-8 border-t border-[#2d3748]">
+          <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            shareText="A pack-a-day smoking habit invested instead at 7% grows to $640,000 over 40 years. Calculate your number:"
+            text="A pack-a-day smoking habit invested instead at 7% return grows to $640,000 over 40 years. Calculate the full financial cost: www.dayblip.com/tools/smoking-cost"
             url="https://www.dayblip.com/blog/true-cost-of-smoking"
+            title="The Financial Cost of Smoking"
           />
         </div>
-
-        <RelatedTools tools={relatedTools} />
       </div>
     </main>
   )

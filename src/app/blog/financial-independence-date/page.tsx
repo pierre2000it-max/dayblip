@@ -1,6 +1,6 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
-import ShareButtons from "@/components/blog/ShareButtons"
+import ShareButtons from "@/components/ShareButtons"
 
 const schema = {
   "@context": "https://schema.org",
@@ -50,6 +50,15 @@ export default function FinancialIndependenceDatePage() {
             </p>
           </div>
         </section>
+
+        {/* Share — Location 1: above article */}
+        <div className="mb-8">
+          <ShareButtons
+            text="Financial independence is your annual expenses divided by 0.04. Find the exact date you could stop working: www.dayblip.com/tools/fi-date"
+            url="https://www.dayblip.com/blog/financial-independence-date"
+            title="How to Calculate Your Financial Independence Date"
+          />
+        </div>
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
           <p>
@@ -164,15 +173,16 @@ export default function FinancialIndependenceDatePage() {
           </p>
         </article>
 
-        <div className="mt-10 pt-8 border-t border-[#2d3748]">
-          <p className="text-[#a8a8b3] text-sm mb-4 font-medium">Found this useful? Share it.</p>
+        <RelatedTools tools={relatedTools} />
+
+        <div className="mt-8 pt-8 border-t border-[#2d3748]">
+          <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            shareText="Financial independence = annual expenses × 25. Your exact FI date is calculable today. Find yours:"
+            text="Financial independence is your annual expenses divided by 0.04. Find the exact date you could stop working: www.dayblip.com/tools/fi-date"
             url="https://www.dayblip.com/blog/financial-independence-date"
+            title="How to Calculate Your Financial Independence Date"
           />
         </div>
-
-        <RelatedTools tools={relatedTools} />
       </div>
     </main>
   )

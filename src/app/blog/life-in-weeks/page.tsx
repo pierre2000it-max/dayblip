@@ -1,6 +1,6 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
-import ShareButtons from "@/components/blog/ShareButtons"
+import ShareButtons from "@/components/ShareButtons"
 
 const schema = {
   "@context": "https://schema.org",
@@ -50,6 +50,15 @@ export default function LifeInWeeksPage() {
             </p>
           </div>
         </section>
+
+        {/* Share — Location 1: above article */}
+        <div className="mb-8">
+          <ShareButtons
+            text="A 35-year-old has roughly 2,260 weeks remaining at average life expectancy. See your own grid: www.dayblip.com/tools/life-in-weeks"
+            url="https://www.dayblip.com/blog/life-in-weeks"
+            title="Your Life as a Grid of Squares"
+          />
+        </div>
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
           <p>
@@ -149,15 +158,16 @@ export default function LifeInWeeksPage() {
           </p>
         </article>
 
-        <div className="mt-10 pt-8 border-t border-[#2d3748]">
-          <p className="text-[#a8a8b3] text-sm mb-4 font-medium">Found this useful? Share it.</p>
+        <RelatedTools tools={relatedTools} />
+
+        <div className="mt-8 pt-8 border-t border-[#2d3748]">
+          <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            shareText="A 90-year life is 4,680 weeks. At 35, about 1,820 are already filled. See your own life grid:"
+            text="A 35-year-old has roughly 2,260 weeks remaining at average life expectancy. See your own grid: www.dayblip.com/tools/life-in-weeks"
             url="https://www.dayblip.com/blog/life-in-weeks"
+            title="Your Life as a Grid of Squares"
           />
         </div>
-
-        <RelatedTools tools={relatedTools} />
       </div>
     </main>
   )

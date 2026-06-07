@@ -1,6 +1,6 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
-import ShareButtons from "@/components/blog/ShareButtons"
+import ShareButtons from "@/components/ShareButtons"
 
 const schema = {
   "@context": "https://schema.org",
@@ -50,6 +50,15 @@ export default function MinimumPaymentPage() {
             </p>
           </div>
         </section>
+
+        {/* Share — Location 1: above article */}
+        <div className="mb-8">
+          <ShareButtons
+            text="Paying minimums on $8,000 credit card debt at 19.99% takes 27 years and costs $16,247 in interest. See your true cost: www.dayblip.com/tools/minimum-payment"
+            url="https://www.dayblip.com/blog/minimum-payment-true-cost"
+            title="True Cost of Credit Card Minimum Payments"
+          />
+        </div>
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
           <p>
@@ -128,15 +137,16 @@ export default function MinimumPaymentPage() {
           </p>
         </article>
 
-        <div className="mt-10 pt-8 border-t border-[#2d3748]">
-          <p className="text-[#a8a8b3] text-sm mb-4 font-medium">Found this useful? Share it.</p>
+        <RelatedTools tools={relatedTools} />
+
+        <div className="mt-8 pt-8 border-t border-[#2d3748]">
+          <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            shareText="$8,000 of credit card debt at minimum payments takes 27 years and costs $16,247 in interest. Adding $100/mo saves $13,400:"
+            text="Paying minimums on $8,000 credit card debt at 19.99% takes 27 years and costs $16,247 in interest. See your true cost: www.dayblip.com/tools/minimum-payment"
             url="https://www.dayblip.com/blog/minimum-payment-true-cost"
+            title="True Cost of Credit Card Minimum Payments"
           />
         </div>
-
-        <RelatedTools tools={relatedTools} />
       </div>
     </main>
   )

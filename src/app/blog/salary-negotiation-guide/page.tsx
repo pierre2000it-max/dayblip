@@ -1,6 +1,6 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
-import ShareButtons from "@/components/blog/ShareButtons"
+import ShareButtons from "@/components/ShareButtons"
 
 const schema = {
   "@context": "https://schema.org",
@@ -50,6 +50,15 @@ export default function SalaryNegotiationGuidePage() {
             </p>
           </div>
         </section>
+
+        {/* Share — Location 1: above article */}
+        <div className="mb-8">
+          <ShareButtons
+            text="55-60% of workers never negotiate their first salary. Starting $8,000 below market costs $300,000 over a career. Get your negotiation script: www.dayblip.com/tools/salary-negotiation"
+            url="https://www.dayblip.com/blog/salary-negotiation-guide"
+            title="How to Negotiate Your Salary — And Why Most People Never Do"
+          />
+        </div>
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
           <p>
@@ -140,15 +149,16 @@ export default function SalaryNegotiationGuidePage() {
           </p>
         </article>
 
-        <div className="mt-10 pt-8 border-t border-[#2d3748]">
-          <p className="text-[#a8a8b3] text-sm mb-4 font-medium">Found this useful? Share it.</p>
+        <RelatedTools tools={relatedTools} />
+
+        <div className="mt-8 pt-8 border-t border-[#2d3748]">
+          <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            shareText="55–60% of workers never negotiate their starting salary. Starting $8,000 below market = $300,000 career earnings gap:"
+            text="55-60% of workers never negotiate their first salary. Starting $8,000 below market costs $300,000 over a career. Get your negotiation script: www.dayblip.com/tools/salary-negotiation"
             url="https://www.dayblip.com/blog/salary-negotiation-guide"
+            title="How to Negotiate Your Salary — And Why Most People Never Do"
           />
         </div>
-
-        <RelatedTools tools={relatedTools} />
       </div>
     </main>
   )

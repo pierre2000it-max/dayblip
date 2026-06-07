@@ -1,6 +1,6 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
-import ShareButtons from "@/components/blog/ShareButtons"
+import ShareButtons from "@/components/ShareButtons"
 
 const schema = {
   "@context": "https://schema.org",
@@ -50,6 +50,15 @@ export default function MarketTimingCostPage() {
             </p>
           </div>
         </section>
+
+        {/* Share — Location 1: above article */}
+        <div className="mb-8">
+          <ShareButtons
+            text="Missing just 10 of the market's best days over 20 years can cut your returns by more than half. Calculate the cost: www.dayblip.com/tools/market-timing"
+            url="https://www.dayblip.com/blog/market-timing-cost"
+            title="The Real Cost of Trying to Time the Stock Market"
+          />
+        </div>
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
           <p>
@@ -132,15 +141,16 @@ export default function MarketTimingCostPage() {
           </p>
         </article>
 
-        <div className="mt-10 pt-8 border-t border-[#2d3748]">
-          <p className="text-[#a8a8b3] text-sm mb-4 font-medium">Found this useful? Share it.</p>
+        <RelatedTools tools={relatedTools} />
+
+        <div className="mt-8 pt-8 border-t border-[#2d3748]">
+          <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            shareText="Missing just 10 of the market's best days over 20 years cuts a $65,000 portfolio to $29,000. Those days follow the worst days:"
+            text="Missing just 10 of the market's best days over 20 years can cut your returns by more than half. Calculate the cost: www.dayblip.com/tools/market-timing"
             url="https://www.dayblip.com/blog/market-timing-cost"
+            title="The Real Cost of Trying to Time the Stock Market"
           />
         </div>
-
-        <RelatedTools tools={relatedTools} />
       </div>
     </main>
   )

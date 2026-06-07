@@ -1,6 +1,6 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
-import ShareButtons from "@/components/blog/ShareButtons"
+import ShareButtons from "@/components/ShareButtons"
 
 const schema = {
   "@context": "https://schema.org",
@@ -50,6 +50,15 @@ export default function WillAIReplaceMyJobPage() {
             </p>
           </div>
         </section>
+
+        {/* Share — Location 1: above article */}
+        <div className="mb-8">
+          <ShareButtons
+            text="AI replacement risk correlates with task type not salary. Data entry scores 95/100. Plumbers score 10/100. Check your job: www.dayblip.com/tools/ai-job-score"
+            url="https://www.dayblip.com/blog/will-ai-replace-my-job"
+            title="Will AI Replace Your Job? What the Data Actually Shows"
+          />
+        </div>
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
           <p>
@@ -142,15 +151,16 @@ export default function WillAIReplaceMyJobPage() {
           </p>
         </article>
 
-        <div className="mt-10 pt-8 border-t border-[#2d3748]">
-          <p className="text-[#a8a8b3] text-sm mb-4 font-medium">Found this useful? Share it.</p>
+        <RelatedTools tools={relatedTools} />
+
+        <div className="mt-8 pt-8 border-t border-[#2d3748]">
+          <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            shareText="AI replacement risk is about task type — not your salary or education. Check your job's score:"
+            text="AI replacement risk correlates with task type not salary. Data entry scores 95/100. Plumbers score 10/100. Check your job: www.dayblip.com/tools/ai-job-score"
             url="https://www.dayblip.com/blog/will-ai-replace-my-job"
+            title="Will AI Replace Your Job? What the Data Actually Shows"
           />
         </div>
-
-        <RelatedTools tools={relatedTools} />
       </div>
     </main>
   )

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
-import ShareButtons from "@/components/blog/ShareButtons"
+import ShareButtons from "@/components/ShareButtons"
 
 const schema = {
   "@context": "https://schema.org",
@@ -50,6 +50,15 @@ export default function BornInYourYearPage() {
             </p>
           </div>
         </section>
+
+        {/* Share — Location 1: above article */}
+        <div className="mb-8">
+          <ShareButtons
+            text="What was the world like the year you were born? Gas prices, the #1 song, world population and major events. Find your year: www.dayblip.com/born-in/1980"
+            url="https://www.dayblip.com/blog/born-in-your-year"
+            title="What the World Looked Like the Year You Were Born"
+          />
+        </div>
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
           <p>
@@ -128,15 +137,16 @@ export default function BornInYourYearPage() {
           </p>
         </article>
 
-        <div className="mt-10 pt-8 border-t border-[#2d3748]">
-          <p className="text-[#a8a8b3] text-sm mb-4 font-medium">Found this useful? Share it.</p>
+        <RelatedTools tools={relatedTools} />
+
+        <div className="mt-8 pt-8 border-t border-[#2d3748]">
+          <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            shareText="The world population the year you were born. The gas price. The number one song. See your birth year:"
+            text="What was the world like the year you were born? Gas prices, the #1 song, world population and major events. Find your year: www.dayblip.com/born-in/1980"
             url="https://www.dayblip.com/blog/born-in-your-year"
+            title="What the World Looked Like the Year You Were Born"
           />
         </div>
-
-        <RelatedTools tools={relatedTools} />
       </div>
     </main>
   )

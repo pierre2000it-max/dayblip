@@ -1,6 +1,6 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
-import ShareButtons from "@/components/blog/ShareButtons"
+import ShareButtons from "@/components/ShareButtons"
 
 const schema = {
   "@context": "https://schema.org",
@@ -50,6 +50,15 @@ export default function CompoundInterestEarlySaverPage() {
             </p>
           </div>
         </section>
+
+        {/* Share — Location 1: above article */}
+        <div className="mb-8">
+          <ShareButtons
+            text="Saving $200/month from age 25-35 then stopping often beats saving $500/month from 35-65. See the math: www.dayblip.com/tools/early-vs-late"
+            url="https://www.dayblip.com/blog/compound-interest-early-saver"
+            title="Why Starting to Invest Early Beats Saving More Later"
+          />
+        </div>
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
           <p>
@@ -138,15 +147,16 @@ export default function CompoundInterestEarlySaverPage() {
           </p>
         </article>
 
-        <div className="mt-10 pt-8 border-t border-[#2d3748]">
-          <p className="text-[#a8a8b3] text-sm mb-4 font-medium">Found this useful? Share it.</p>
+        <RelatedTools tools={relatedTools} />
+
+        <div className="mt-8 pt-8 border-t border-[#2d3748]">
+          <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            shareText="$200/month from age 25–35, then stopping, often beats $500/month from 35–65. The compounding math is staggering:"
+            text="Saving $200/month from age 25-35 then stopping often beats saving $500/month from 35-65. See the math: www.dayblip.com/tools/early-vs-late"
             url="https://www.dayblip.com/blog/compound-interest-early-saver"
+            title="Why Starting to Invest Early Beats Saving More Later"
           />
         </div>
-
-        <RelatedTools tools={relatedTools} />
       </div>
     </main>
   )

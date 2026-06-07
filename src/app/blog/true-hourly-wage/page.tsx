@@ -1,6 +1,6 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
-import ShareButtons from "@/components/blog/ShareButtons"
+import ShareButtons from "@/components/ShareButtons"
 
 const schema = {
   "@context": "https://schema.org",
@@ -53,6 +53,15 @@ export default function TrueHourlyWagePage() {
             </p>
           </div>
         </section>
+
+        {/* Share — Location 1: above article */}
+        <div className="mb-8">
+          <ShareButtons
+            text="Your $75,000 salary actually pays around $28/hr after commute and work costs. Calculate yours free: www.dayblip.com/tools/true-hourly-wage"
+            url="https://www.dayblip.com/blog/true-hourly-wage"
+            title="What Your Salary Actually Pays Per Hour"
+          />
+        </div>
 
         {/* Article */}
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
@@ -130,16 +139,16 @@ export default function TrueHourlyWagePage() {
           </p>
         </article>
 
-        {/* Share */}
-        <div className="mt-10 pt-8 border-t border-[#2d3748]">
-          <p className="text-[#a8a8b3] text-sm mb-4 font-medium">Found this useful? Share it.</p>
+        <RelatedTools tools={relatedTools} />
+
+        <div className="mt-8 pt-8 border-t border-[#2d3748]">
+          <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            shareText="My $75,000 salary actually pays ~$22/hr after commute and work costs. Calculate yours:"
+            text="Your $75,000 salary actually pays around $28/hr after commute and work costs. Calculate yours free: www.dayblip.com/tools/true-hourly-wage"
             url="https://www.dayblip.com/blog/true-hourly-wage"
+            title="What Your Salary Actually Pays Per Hour"
           />
         </div>
-
-        <RelatedTools tools={relatedTools} />
       </div>
     </main>
   )
