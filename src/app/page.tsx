@@ -5,17 +5,27 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import AdUnit from "@/components/AdUnit";
 
-// ── WebSite JSON-LD schema ─────────────────────────────────────────────────
+// ── JSON-LD schemas ────────────────────────────────────────────────────────
 const WEBSITE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Dayblip",
-  "url": "https://dayblip.com",
+  "description": "146+ free tools for life, money, history and more. No signup. No email. Ever.",
+  "url": "https://www.dayblip.com",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://dayblip.com/days-until/{search_term}",
-    "query-input": "required name=search_term",
+    "target": { "@type": "EntryPoint", "urlTemplate": "https://www.dayblip.com/tools/ai-job-score?job={search_term_string}" },
+    "query-input": "required name=search_term_string",
   },
+};
+
+const ORG_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Dayblip",
+  "url": "https://www.dayblip.com",
+  "description": "Free tools for curious minds",
+  "sameAs": ["https://twitter.com/dayblip365", "https://pinterest.com/dayblip365"],
 };
 
 // ── Easter: Anonymous Gregorian algorithm ──────────────────────────────────
@@ -128,33 +138,10 @@ export default function HomePage() {
     if (y >= 1900 && y <= today.getFullYear()) router.push(`/born-in/${yearInput}`);
   };
 
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Dayblip",
-    "description": "146+ free tools for life, money, history and more. No signup. No email. Ever.",
-    "url": "https://www.dayblip.com",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": { "@type": "EntryPoint", "urlTemplate": "https://www.dayblip.com/tools/ai-job-score?job={search_term_string}" },
-      "query-input": "required name=search_term_string",
-    },
-  };
-
-  const orgSchema2 = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Dayblip",
-    "url": "https://www.dayblip.com",
-    "description": "Free tools for curious minds",
-    "sameAs": ["https://twitter.com/dayblip365", "https://pinterest.com/dayblip365"],
-  };
-
   return (
     <div className="min-h-screen">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema2) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_SCHEMA) }} />
 
       {/* ════════════════════════════════════════════════════════════════
           SECTION 1 — HERO
