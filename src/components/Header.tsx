@@ -11,7 +11,7 @@ const navLinks = [
   { label: "Life & Money", href: "/tools" },
   { label: "Health", href: "/health" },
   { label: "On This Day", href: "/on-this-day" },
-  { label: "Tools", href: "/age-calculator" },
+  { label: "Tools", href: "/tools" },
   { label: "Blog", href: "/blog" },
 ];
 
