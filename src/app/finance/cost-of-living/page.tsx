@@ -119,11 +119,20 @@ export default function CostOfLivingPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Cost of Living Comparison</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Cost of Living Calculator — Compare Cities and States</h1>
           <p className="text-[#a8a8b3]">Compare the cost of living between two US cities</p>
         </div>
       </section>
 
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Cost of living varies dramatically across US cities. San Francisco is 94% more expensive than the national average. New York City is 85% higher. Austin Texas is 1% above average. To maintain the same lifestyle moving from San Francisco to Austin requires approximately 49% less income.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Cost of living measures how expensive it is to live in a particular city or region relative to a national baseline. It includes housing, food, transportation, healthcare and taxes. This calculator shows how much income you need in a new city to maintain your current standard of living.</p>
+        </div>
+      </section>
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[700px] space-y-8">
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Cost of Living Calculator" }]} />

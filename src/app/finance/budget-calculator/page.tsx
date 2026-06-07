@@ -130,8 +130,17 @@ export default function BudgetCalculatorPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Budget Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Budget Calculator — The 50/30/20 Rule Breakdown</h1>
           <p className="text-[#a8a8b3]">Build your budget using the proven 50/30/20 rule</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The 50/30/20 budget rule allocates 50% of after-tax income to needs, 30% to wants and 20% to savings and debt repayment. On a $5,000 monthly take-home: $2,500 for needs, $1,500 for wants and $1,000 for savings. Most Americans spend 77% on needs alone — leaving little for savings or discretionary spending.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The 50/30/20 budget rule is a simple framework for allocating after-tax income. Needs include housing, utilities, food, insurance and minimum debt payments. Wants are everything non-essential. The 20% savings category includes emergency fund, retirement and extra debt payments.</p>
         </div>
       </section>
 

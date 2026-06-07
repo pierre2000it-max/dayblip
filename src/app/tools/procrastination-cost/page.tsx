@@ -72,8 +72,18 @@ export default function ProcrastinationCostPage() {
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">What Has Procrastinating Cost You?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Procrastination Cost Calculator — What Waiting Is Really Costing You</h1>
           <p className="text-[#a8a8b3]">Calculate the real financial cost of putting things off</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Waiting 10 years to start investing $500 per month costs approximately $380,000 in lost retirement wealth at 7% annual return. Procrastinating on salary negotiation for 5 years on a $10,000 gap costs $50,000 in direct income plus compounding raises. The financial cost of procrastination compounds exactly like investment returns — but in reverse.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Procrastination has a measurable financial cost in compound terms. Every year of delay in starting to invest, negotiating salary, paying off debt or making a financial decision has a quantifiable cost that grows over time. This calculator shows the exact dollar cost of waiting different lengths of time on common financial decisions.</p>
         </div>
       </section>
 

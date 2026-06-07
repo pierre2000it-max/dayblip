@@ -102,8 +102,17 @@ export default function ProfitMarginPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Profit Margin Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Profit Margin Calculator — Gross Net and Operating Margin</h1>
           <p className="text-[#a8a8b3]">Calculate gross, operating and net profit margins for your business</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Profit margin measures how much of each dollar of revenue a business keeps as profit. A 20% net profit margin means keeping $0.20 of every dollar earned. Average net profit margins by industry: restaurants 3-9%, retail 2-5%, software 20-30%, consulting 15-25%, healthcare 3-7%.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Profit margin is calculated by dividing profit by revenue and multiplying by 100. Gross margin subtracts only cost of goods sold. Operating margin also subtracts operating expenses. Net margin subtracts all expenses including taxes and interest. This calculator shows all three margin types for any revenue and cost inputs.</p>
         </div>
       </section>
 

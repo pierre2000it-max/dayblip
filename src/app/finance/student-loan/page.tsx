@@ -91,8 +91,17 @@ export default function StudentLoanPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Student Loan Payoff Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Student Loan Calculator — True Cost of Your Student Debt</h1>
           <p className="text-[#a8a8b3]">See how extra payments can save you thousands</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average US student loan balance is $37,650. On a standard 10-year repayment at 6.5% interest the monthly payment is $427 and total interest paid is $13,567. Income-driven repayment reduces monthly payments but can double total interest over 20-25 years. 43 million Americans carry student loan debt totaling $1.7 trillion.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Student loan calculators show the true total cost of education debt including all interest paid over the repayment period. They compare different repayment strategies — standard 10-year, extended, graduated and income-driven plans — to show total interest and monthly payments for each approach.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

@@ -105,8 +105,18 @@ export default function CollegeSavingsPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">College Savings Calculator (529 Plan)</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">College Savings Calculator — How Much Do You Need to Save?</h1>
           <p className="text-[#a8a8b3]">Calculate how much to save for your child&apos;s college education</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Average annual college cost in 2025 is $38,000 at private universities and $11,000 at in-state public universities. To fully fund 4 years at a private university starting from a newborn requires saving approximately $650 per month for 18 years at 7% return. 529 plan contributions grow tax-free when used for qualified education expenses.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">College savings calculators project how much a 529 plan or other college savings account will be worth at the time of enrollment based on monthly contributions and investment returns. They account for estimated college cost inflation of 4-5% per year to show whether your savings rate is on track to meet actual future college costs.</p>
         </div>
       </section>
 

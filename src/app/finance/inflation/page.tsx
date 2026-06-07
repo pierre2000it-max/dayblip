@@ -91,8 +91,17 @@ export default function InflationPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Inflation Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Inflation Calculator — How Much Has Money Lost Its Value?</h1>
           <p className="text-[#a8a8b3]">See how purchasing power has changed over time</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">$100 in 1990 equals approximately $236 today due to inflation. The US dollar has lost 57% of its purchasing power since 1990. Average annual inflation in the US is 3.1% over the past 30 years. At 3% inflation money loses half its purchasing power every 23 years.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Inflation is the rate at which the general price of goods and services rises over time, reducing purchasing power. This calculator shows how much a dollar amount from any past year is worth today and how much today&apos;s dollars will be worth in the future at different inflation rates.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

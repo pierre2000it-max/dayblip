@@ -151,8 +151,17 @@ export default function FreelancerRatePage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Freelancer Rate Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Freelancer Rate Calculator — What Should You Charge Per Hour?</h1>
           <p className="text-[#a8a8b3]">Calculate exactly what hourly rate you need to charge as a freelancer</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">To earn $75,000 take-home as a freelancer you need to charge approximately $65-75 per hour depending on your expenses. Freelancers pay 15.3% self-employment tax on top of income tax. No paid vacation, sick days or employer benefits means your rate must be 40-60% higher than an equivalent employee salary.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Freelancer rate calculators determine the minimum hourly rate needed to match a target take-home income after self-employment tax, income tax, unpaid time off, health insurance and business expenses. Most new freelancers undercharge because they compare their rate to employee salaries without accounting for these additional costs.</p>
         </div>
       </section>
 

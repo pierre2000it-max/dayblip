@@ -111,8 +111,17 @@ export default function SocialSecurityPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Social Security Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Social Security Calculator — Estimate Your Monthly Benefit</h1>
           <p className="text-[#a8a8b3]">Find the best age to claim your Social Security benefits</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average Social Security benefit in 2025 is $1,907 per month. Maximum benefit at full retirement age is $3,822 per month. Claiming at 62 reduces benefits by up to 30%. Waiting until 70 increases benefits by 8% per year above full retirement age — up to 32% more total.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Social Security retirement benefits are calculated based on your 35 highest-earning years adjusted for inflation. The full retirement age is 67 for people born after 1960. This calculator estimates your monthly benefit based on your current earnings and planned retirement age.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

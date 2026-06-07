@@ -102,8 +102,17 @@ export default function SavingsGoalPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Savings Goal Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Savings Goal Calculator — How Long Until You Reach Your Target?</h1>
           <p className="text-[#a8a8b3]">Calculate how long it takes to reach any savings goal</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">To save $20,000 in 2 years you need to save $833 per month. At 5% annual interest in a high-yield savings account you need $792 per month. For a $50,000 emergency fund saving $1,000 per month takes 4.2 years without interest or 3.9 years at 5% yield.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A savings goal calculator shows how long it takes to reach a target amount at different monthly savings rates and interest yields. It accounts for compound interest on existing savings and regular contributions. Use it to plan emergency funds, down payments, vacations, home renovations or any other specific savings target.</p>
         </div>
       </section>
 

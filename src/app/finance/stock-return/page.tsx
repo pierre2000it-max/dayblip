@@ -84,11 +84,20 @@ export default function StockReturnPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Stock Return Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Stock Return Calculator — Historical Investment Performance</h1>
           <p className="text-[#a8a8b3]">Calculate your investment return and compare to market benchmarks</p>
         </div>
       </section>
 
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The S&amp;P 500 has returned an average of 10.5% annually since 1957 including dividends. $10,000 invested in the S&amp;P 500 in 1990 would be worth approximately $210,000 today. Individual stock returns vary widely. Past performance does not guarantee future results.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A stock return calculator shows the growth of an investment over time based on historical or projected returns. It accounts for compound growth where returns generate their own returns. This calculator shows total return, annualized return and final portfolio value for any starting amount and time period.</p>
+        </div>
+      </section>
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[700px] space-y-8">
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Stock Return Calculator" }]} />

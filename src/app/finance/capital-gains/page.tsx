@@ -129,8 +129,17 @@ export default function CapitalGainsPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Capital Gains Tax Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Capital Gains Tax Calculator — Short Term vs Long Term Rates</h1>
           <p className="text-[#a8a8b3]">Calculate how much tax you owe on investments, property and assets</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Short-term capital gains (assets held under 1 year) are taxed as ordinary income — up to 37%. Long-term capital gains (assets held over 1 year) are taxed at 0%, 15% or 20% depending on income. On a $50,000 gain a high earner pays $18,500 short-term versus $7,500 long-term — a $11,000 difference from holding one extra day.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Capital gains tax applies to profit from selling assets including stocks, real estate and cryptocurrency. The difference between short-term and long-term treatment creates a powerful incentive to hold investments for at least one year before selling. This calculator shows your exact tax liability for any gain amount under both short and long-term treatment.</p>
         </div>
       </section>
 

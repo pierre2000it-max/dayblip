@@ -110,8 +110,17 @@ export default function CarAffordabilityPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Car Affordability Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Car Affordability Calculator — How Much Car Can You Really Afford?</h1>
           <p className="text-[#a8a8b3]">Find out how much car you can actually afford</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The general rule is to spend no more than 15% of take-home pay on total car costs including payment, insurance, fuel and maintenance. On a $5,000 monthly take-home that is $750 total. The average new car payment in 2025 is $738 per month — before insurance, fuel and maintenance which add another $400-600 monthly.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Car affordability goes beyond the monthly payment. The true monthly cost of car ownership includes the loan payment, insurance, fuel, maintenance, registration and depreciation. This calculator shows total monthly ownership cost and whether a vehicle fits your budget using the 15% of take-home guideline.</p>
         </div>
       </section>
 

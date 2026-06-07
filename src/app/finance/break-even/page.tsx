@@ -84,8 +84,18 @@ export default function BreakEvenPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">Break Even Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Break Even Calculator — When Does Your Investment Pay Off?</h1>
           <p className="text-[#a8a8b3]">Find out when your business or product becomes profitable</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Break-even point is when total revenue equals total costs — the moment a business or investment stops losing money. A business with $10,000 monthly fixed costs and 40% gross margin breaks even at $25,000 in monthly revenue. Reducing fixed costs or increasing margin both move the break-even point lower and faster.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A break-even calculator determines the minimum sales volume or revenue needed to cover all costs. It is essential for pricing decisions, business planning and investment analysis. Break-even analysis helps answer how many units must be sold, how long until an investment pays back its cost and what price is needed to achieve profitability.</p>
         </div>
       </section>
 

@@ -90,8 +90,17 @@ export default function FourOhOneKPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">401(k) Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">401k Calculator — Maximize Your Retirement Savings</h1>
           <p className="text-[#a8a8b3]">Maximize your retirement savings with employer matching</p>
+        </div>
+      </section>
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The 2025 401k contribution limit is $23,500 per year ($31,000 if age 50+). Contributing enough to get the full employer match is always the first priority — it is a 50-100% instant return. $500 per month in a 401k at 7% return from age 25 becomes approximately $1.37 million at age 65.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A 401k is an employer-sponsored retirement savings account where contributions are made pre-tax, reducing your taxable income today. Many employers match contributions up to a percentage of salary — this match is free money that should always be captured first before any other investing. This calculator projects your 401k balance at retirement.</p>
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">

@@ -106,8 +106,18 @@ export default function SmokingCostPage() {
       ]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
-          <h1 className="mb-3 text-4xl font-bold text-white">The True Cost of Smoking</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">True Cost of Smoking Calculator — The Lifetime Financial Impact</h1>
           <p className="text-[#a8a8b3]">Calculate the full financial and health cost of your smoking habit</p>
+        </div>
+      </section>
+
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A pack-a-day smoker at $9.50 per pack spends $3,468 per year on cigarettes. Over 20 years that is $69,360 spent. If invested instead at 7% annual return that money would grow to $193,000. A smoker from age 20 to 65 spends approximately $156,000 on cigarettes alone — over $600,000 in lost investment opportunity.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The true cost of smoking includes the direct spending on cigarettes plus the compounding opportunity cost of that money not being invested. This calculator shows both the total amount spent and what that money would be worth today if invested instead. It also calculates the time cost of smoking — hours spent per year just on the act of smoking.</p>
         </div>
       </section>
 
