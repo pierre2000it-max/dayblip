@@ -50,6 +50,26 @@ const urls = [
   "https://www.dayblip.com/tools/music-of-your-year",
   "https://www.dayblip.com/tools/learning-calculator",
 
+  // High-impact tools (Phase 3)
+  "https://www.dayblip.com/tools/ai-job-score",
+  "https://www.dayblip.com/tools/fi-date",
+  "https://www.dayblip.com/tools/salary-negotiation",
+  "https://www.dayblip.com/tools/side-hustle",
+  "https://www.dayblip.com/tools/college-roi",
+  "https://www.dayblip.com/tools/wfh-calculator",
+  "https://www.dayblip.com/tools/recession-score",
+  "https://www.dayblip.com/tools/minimum-payment",
+  "https://www.dayblip.com/tools/early-vs-late",
+  "https://www.dayblip.com/tools/market-timing",
+  "https://www.dayblip.com/tools/sleep-debt",
+  "https://www.dayblip.com/tools/smoking-cost",
+
+  // Tool hub pages
+  "https://www.dayblip.com/tools/finance",
+  "https://www.dayblip.com/tools/life-money",
+  "https://www.dayblip.com/tools/misconceptions",
+  "https://www.dayblip.com/tools/curiosity",
+
   // Finance calculators
   "https://www.dayblip.com/finance/compound-interest",
   "https://www.dayblip.com/finance/retirement-savings",
@@ -108,12 +128,16 @@ const urls = [
   "https://www.dayblip.com/days-until/halloween",
   "https://www.dayblip.com/days-until/thanksgiving",
   "https://www.dayblip.com/days-until/new-years",
+  "https://www.dayblip.com/days-until/new-years-eve",
   "https://www.dayblip.com/days-until/valentines-day",
   "https://www.dayblip.com/days-until/st-patricks-day",
   "https://www.dayblip.com/days-until/easter",
   "https://www.dayblip.com/days-until/independence-day",
   "https://www.dayblip.com/days-until/black-friday",
   "https://www.dayblip.com/days-until/mothers-day",
+  "https://www.dayblip.com/days-until/fathers-day",
+  "https://www.dayblip.com/days-until/labor-day",
+  "https://www.dayblip.com/days-until/memorial-day",
 
   // World counters
   "https://www.dayblip.com/world-counters",
@@ -149,6 +173,10 @@ const urls = [
   "https://www.dayblip.com/day-of-year",
   "https://www.dayblip.com/week-number",
   "https://www.dayblip.com/birthday-now",
+
+  // Embed pages
+  "https://www.dayblip.com/embed",
+  "https://www.dayblip.com/embed/for-educators",
 
   // Games & history
   "https://www.dayblip.com/history-quiz",
@@ -318,7 +346,9 @@ async function main() {
   console.log(`  Total URLs submitted : ${urls.length}`);
   console.log(`  Born-in pages        : 81  (1940–2020)`);
   console.log(`  On-this-day pages    : ${onThisDayPages.length}`);
-  console.log(`  Tool pages           : 20`);
+  console.log(`  Tool pages           : 36`);
+  console.log(`  Finance pages        : 23`);
+  console.log(`  Holiday countdowns   : 14`);
   console.log();
   console.log("  Sitemap pings        : Google ✓  Bing ✓");
   console.log("  IndexNow endpoints   : 4");
