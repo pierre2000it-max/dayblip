@@ -95,6 +95,7 @@ export default function MarketTimingPage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">What Does Missing the Market&apos;s Best Days Cost You?</h1>
           <p className="text-[#a8a8b3]">See why trying to time the market is so dangerous</p>
+          <a href="/blog/market-timing-cost" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: Why Missing 10 Days Costs So Much →</a>
         </div>
       </section>
 

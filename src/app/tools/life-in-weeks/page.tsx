@@ -94,6 +94,7 @@ export default function LifeInWeeksPage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Life in Weeks — Visualize Your Entire Life as a Grid</h1>
           <p className="text-[#a8a8b3]">See your entire life visualized in one grid — every week you have lived and every week you have remaining</p>
+          <a href="/blog/life-in-weeks" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: Your Life as a Grid of Squares →</a>
         </div>
       </section>
 

@@ -108,6 +108,7 @@ export default function SmokingCostPage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">True Cost of Smoking Calculator — The Lifetime Financial Impact</h1>
           <p className="text-[#a8a8b3]">Calculate the full financial and health cost of your smoking habit</p>
+          <a href="/blog/true-cost-of-smoking" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: The Number Most Smokers Have Never Calculated →</a>
         </div>
       </section>
 

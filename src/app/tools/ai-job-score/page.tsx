@@ -859,6 +859,7 @@ export default function AIJobScorePage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Will AI Replace Your Job?</h1>
           <p className="text-[#a8a8b3]">Get your personalized AI risk score based on your job title</p>
+          <a href="/blog/will-ai-replace-my-job" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: Will AI Replace Your Job? →</a>
         </div>
       </section>
 

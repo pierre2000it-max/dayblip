@@ -237,6 +237,7 @@ export default function SalaryNegotiationPage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Salary Negotiation Calculator — How Much Should You Ask For?</h1>
           <p className="text-[#a8a8b3]">Calculate exactly how much to ask for and get a ready-to-use script</p>
+          <a href="/blog/salary-negotiation-guide" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: The 10-Minute Conversation Most People Never Have →</a>
         </div>
       </section>
 

@@ -225,6 +225,30 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Column — Blog */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-white font-bold text-base">Blog</h3>
+            <ul className="flex flex-col gap-2">
+              {[
+                { label: "All Articles", href: "/blog" },
+                { label: "True Hourly Wage", href: "/blog/true-hourly-wage" },
+                { label: "Will AI Replace My Job?", href: "/blog/will-ai-replace-my-job" },
+                { label: "Minimum Payment Cost", href: "/blog/minimum-payment-true-cost" },
+                { label: "Starting Early vs Late", href: "/blog/compound-interest-early-saver" },
+                { label: "Market Timing Cost", href: "/blog/market-timing-cost" },
+                { label: "Financial Independence", href: "/blog/financial-independence-date" },
+                { label: "Salary Negotiation Guide", href: "/blog/salary-negotiation-guide" },
+                { label: "Life in Weeks", href: "/blog/life-in-weeks" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-[#a8a8b3] text-sm transition-colors duration-200 hover:text-[#e94560]">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Column — Resources */}
           <div className="flex flex-col gap-3">
             <h3 className="text-white font-bold text-base">Resources</h3>

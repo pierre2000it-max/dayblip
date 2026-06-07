@@ -191,6 +191,7 @@ export default function FIDatePage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Financial Independence Calculator — When Can You Stop Working?</h1>
           <p className="text-[#a8a8b3]">Find the exact date you could stop working forever</p>
+          <a href="/blog/financial-independence-date" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: How to Calculate Your FI Date →</a>
         </div>
       </section>
 

@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Health", href: "/health" },
   { label: "On This Day", href: "/on-this-day" },
   { label: "Tools", href: "/age-calculator" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export default function Header() {

@@ -99,6 +99,7 @@ export default function TrueHourlyWagePage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">True Hourly Wage Calculator — What Does Your Job Really Pay?</h1>
           <p className="text-[#a8a8b3]">Calculate your true hourly wage after commute time, prep time and work costs</p>
+          <a href="/blog/true-hourly-wage" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: What Your Salary Actually Pays Per Hour →</a>
         </div>
       </section>
 

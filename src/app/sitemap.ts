@@ -288,6 +288,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/week-number",         0.8),
 
     // ═══════════════════════════════════════════════════════════════════════
+    // BLOG  (priority 0.9 / 0.8, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/blog",                                      0.9, MONTHLY),
+    p("/blog/true-hourly-wage",                     0.8, MONTHLY),
+    p("/blog/will-ai-replace-my-job",               0.8, MONTHLY),
+    p("/blog/minimum-payment-true-cost",            0.8, MONTHLY),
+    p("/blog/compound-interest-early-saver",        0.8, MONTHLY),
+    p("/blog/market-timing-cost",                   0.8, MONTHLY),
+    p("/blog/financial-independence-date",          0.8, MONTHLY),
+    p("/blog/salary-negotiation-guide",             0.8, MONTHLY),
+    p("/blog/life-in-weeks",                        0.8, MONTHLY),
+    p("/blog/born-in-your-year",                    0.8, MONTHLY),
+    p("/blog/true-cost-of-smoking",                 0.8, MONTHLY),
+
+    // ═══════════════════════════════════════════════════════════════════════
     // LEGAL PAGES  (priority 0.3, monthly)
     // ═══════════════════════════════════════════════════════════════════════
     p("/privacy", 0.3),

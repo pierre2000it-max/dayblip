@@ -157,6 +157,7 @@ export default function EarlyVsLatePage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Early Saver vs Late Saver — Who Wins?</h1>
           <p className="text-[#a8a8b3]">See why starting earlier with less beats starting later with more</p>
+          <a href="/blog/compound-interest-early-saver" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: The Math Behind Starting Early →</a>
         </div>
       </section>
 

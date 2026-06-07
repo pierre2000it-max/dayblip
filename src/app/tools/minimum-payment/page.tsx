@@ -111,6 +111,7 @@ export default function MinimumPaymentPage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">What Is Your Minimum Payment Really Costing You?</h1>
           <p className="text-[#a8a8b3]">See the shocking true cost of only paying minimums on your debt</p>
+          <a href="/blog/minimum-payment-true-cost" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: The True Cost of Minimum Payments →</a>
         </div>
       </section>
 
