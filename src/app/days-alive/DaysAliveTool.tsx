@@ -74,8 +74,19 @@ export default function DaysAliveTool() {
         style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">🎯</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Days Alive Milestone Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Days Alive Calculator — How Many Days Have You Been Alive?</h1>
           <p className="text-lg text-[#a8a8b3]">Find out when you hit major milestones in days alive</p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A 36-year-old has been alive for approximately 13,149 days. At 10,000 days old you are 27 years and 4 months. At 20,000 days old you are 54 years and 9 months. Most people never celebrate their 10,000 day milestone despite it being a remarkable achievement worth recognizing.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The days alive calculator converts your birth date into the total number of days you have been alive. It also shows milestone ages in days — your 1,000th day, 5,000th day, 10,000th day and 20,000th day. Many people find expressing age in days gives a fresh and striking perspective on time lived.</p>
         </div>
       </section>
 

@@ -101,8 +101,19 @@ export default function CouplesCountdownTool() {
         style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">💕</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Couples Countdown</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Couples Countdown — How Long Have You Been Together?</h1>
           <p className="text-lg text-[#a8a8b3]">How long have you been together?</p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A couple who started dating on January 1 2020 has been together for 6 years, 5 months and 7 days as of June 7 2026 — that is 2,349 days together. Traditional anniversary milestones include paper at 1 year, silver at 25 years and gold at 50 years. The average US marriage lasts 8 years.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The couples countdown calculator shows how long two people have been together by calculating the exact days, months and years since a relationship start date. It also shows upcoming anniversary milestones and the traditional gift associated with each anniversary year.</p>
         </div>
       </section>
 

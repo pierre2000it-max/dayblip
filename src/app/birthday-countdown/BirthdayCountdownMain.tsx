@@ -33,8 +33,19 @@ export default function BirthdayCountdownMain() {
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">🎂</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Create Your Birthday Countdown</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Birthday Countdown — How Many Days Until Your Next Birthday?</h1>
           <p className="text-lg text-[#a8a8b3]">Generate a personal countdown page to share with friends and family</p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">There are always between 0 and 364 days until your next birthday. The average person has 27,375 birthdays in a 75-year life. Your birthday falls on a different day of the week each year — advancing by one day in regular years and two days after a leap year. On average your birthday falls on a weekend approximately 2 out of every 7 years.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A birthday countdown calculates the exact number of days, hours, minutes and seconds until your next birthday and updates in real time. It also shows what day of the week your upcoming birthday falls on and how many birthdays you have celebrated so far in your lifetime.</p>
         </div>
       </section>
 

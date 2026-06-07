@@ -70,8 +70,19 @@ export default function OlderThanTool() {
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">📱</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Are You Older or Younger Than...?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Older Than Calculator — Are You Older Than the iPhone?</h1>
           <p className="text-lg text-[#a8a8b3]">Compare your age to famous inventions, events and things</p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The original iPhone launched June 29 2007 — making it 18 years old in 2026. The internet turned 57 in 2026 (ARPANET 1969). Wikipedia turned 25 in 2026. YouTube turned 21 in 2026. Netflix streaming turned 19 in 2026. Google turned 28 in 2026. Many everyday technologies are younger than the people who cannot imagine life without them.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The older than calculator compares your age to famous inventions, technologies, companies, events and cultural milestones. It shows which things in your daily life are older than you and which ones you are older than — giving a fun perspective on how quickly the modern world has been built within a single lifetime.</p>
         </div>
       </section>
 

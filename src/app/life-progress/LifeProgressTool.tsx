@@ -113,8 +113,19 @@ export default function LifeProgressTool() {
         style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">📊</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Your Life Progress Bar</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Life Progress Bar — What Percentage of Your Life Have You Lived?</h1>
           <p className="text-lg text-[#a8a8b3]">See how far through life you are</p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A 36-year-old has lived approximately 46% of the average US life expectancy of 78.6 years. At 40 you have lived 50.9% of the average lifespan. At 50 you have lived 63.6%. Most people find seeing life as a percentage surprisingly motivating — each year represents roughly 1.27% of a typical lifespan.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The life progress bar visualizes your lifespan as a percentage based on your current age and average US life expectancy. It shows how far through a typical life you are and how many years remain at the current average. Life expectancy varies by gender, health and lifestyle factors — this tool uses US national averages.</p>
         </div>
       </section>
 

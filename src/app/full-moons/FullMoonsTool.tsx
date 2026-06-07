@@ -67,11 +67,22 @@ export default function FullMoonsTool() {
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-6xl">🌕</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">How Many Full Moons Have You Lived?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Full Moons Calculator — How Many Full Moons Have You Lived?</h1>
           <p className="text-lg text-[#a8a8b3]">Calculate the number of full moons since you were born</p>
           <div className="mt-4 inline-block rounded-full border border-[#e94560]/40 bg-[#e94560]/10 px-4 py-1.5 text-sm text-[#e94560]">
             Moon phase today: {todayPhase}
           </div>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">There are approximately 12.37 full moons per year. A 36-year-old has lived through approximately 445 full moons. In a 78-year lifetime the average person sees roughly 965 full moons. The next full moon occurs approximately every 29.5 days — the length of one lunar cycle.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The full moons calculator counts the number of full moons that have occurred since your birth date based on the 29.5-day lunar cycle. It also shows the date of your next full moon and how many full moons remain in your expected lifetime. Many cultures have used full moons to mark time and celebrate life milestones throughout human history.</p>
         </div>
       </section>
 

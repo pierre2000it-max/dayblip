@@ -43,8 +43,19 @@ export default function BirthNumberTool() {
       <section className="px-6 py-16 text-center" style={{background:"linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)"}}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">🔢</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Your Number in Human History</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Birth Number Calculator — What Number Human Are You?</h1>
           <p className="text-lg text-[#a8a8b3]">Approximately what number human being are you in the history of our species?</p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Approximately 108 billion humans have ever been born. With a current world population of 8.1 billion that means about 100 billion people who ever lived have already died. A person born in 1990 was approximately the 98 billionth human ever born. You are among the most recent 8% of all humans who have ever existed.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The birth number calculator estimates your sequential number among all humans who have ever lived based on historical population data and your birth year. Demographers estimate that approximately 108 billion humans have been born since modern humans emerged 50,000 years ago. Your birth number places you in the context of all of human history.</p>
         </div>
       </section>
 

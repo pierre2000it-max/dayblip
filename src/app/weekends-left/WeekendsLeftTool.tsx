@@ -49,8 +49,19 @@ export default function WeekendsLeftTool() {
       <section className="px-6 py-16 text-center" style={{background:"linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)"}}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">🏖️</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">How Many Weekends Do You Have Left?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Weekends Left Calculator — How Many Weekends Do You Have Left?</h1>
           <p className="text-lg text-[#a8a8b3]">A thought-provoking look at your remaining weekends</p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A 36-year-old has approximately 2,236 weekends remaining until average life expectancy. That sounds like a lot but subtract weekends spent working, sick, traveling for obligations and running errands — the truly free weekends are far fewer. At 40 years old you have roughly 2,028 weekends left.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The weekends left calculator shows the number of Saturday and Sunday pairs remaining in your life based on your current age and average life expectancy. Many people find this number surprisingly motivating for prioritizing how they spend their free time — weekends are a finite and precious resource.</p>
         </div>
       </section>
 

@@ -81,8 +81,19 @@ export default function AgeFactsTool() {
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">🤯</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Fun Facts About Your Age</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Fun Age Facts — How Many Times Has Your Heart Beaten?</h1>
           <p className="text-lg text-[#a8a8b3]">Discover weird and wonderful facts about how long you&apos;ve been alive</p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A 36-year-old&apos;s heart has beaten approximately 1.4 billion times. They have taken about 340 million breaths. Their hair has grown roughly 216 inches — 18 feet total. They have slept approximately 12 years of their life. Their heart has pumped enough blood to fill 50 Olympic swimming pools.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Age facts calculators convert your years lived into biological statistics that reveal the extraordinary scale of ordinary human physiology. By entering your birth date you can discover your total heartbeats, breaths, hours slept, hair growth and other fascinating body statistics that accumulate invisibly over a lifetime.</p>
         </div>
       </section>
 

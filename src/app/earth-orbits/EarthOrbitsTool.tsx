@@ -43,8 +43,19 @@ export default function EarthOrbitsTool() {
       <section className="px-6 py-16 text-center" style={{background:"linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)"}}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">🌌</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">How Many Times Has Earth Orbited the Sun?</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Earth Orbits Calculator — How Many Times Have You Orbited the Sun?</h1>
           <p className="text-lg text-[#a8a8b3]">Cosmic facts about your time on Earth</p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">Each birthday marks one complete orbit of Earth around the Sun. A 36-year-old has completed 36 full orbits traveling approximately 20.8 billion miles through space. Earth travels at 67,000 miles per hour in its orbit. In your lifetime your body has traveled further through space than any human-made spacecraft ever launched.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Earth orbits calculators express age in terms of trips around the Sun — each year representing one complete 584-million-mile journey. It also calculates the total distance traveled through space, the speed of that journey and compares your space travel to famous spacecraft and astronomical distances. A fun cosmic perspective on the passage of time.</p>
         </div>
       </section>
 

@@ -54,8 +54,19 @@ export default function TimeSpentTool() {
       <section className="px-6 py-16 text-center" style={{ background:"linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">⏰</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Time Spent in Your Life</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Time Spent Calculator — How Much Life Have You Spent Sleeping?</h1>
           <p className="text-lg text-[#a8a8b3]">How much of your life have you spent sleeping, working and eating?</p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The average person spends 26 years sleeping in a 78-year lifetime. They spend 11 years working, 4 years eating, 3 years in education, 2 years watching TV and 1.5 years on social media daily. That leaves approximately 9 years for family, hobbies, exercise and everything else. Most people are surprised by how little truly discretionary time remains.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Time spent calculators break down a human lifetime into categories of activity based on average time use research. By entering your age the tool shows how many years you have already spent sleeping, working, eating and commuting — and how many years remain for each activity based on average life expectancy.</p>
         </div>
       </section>
 

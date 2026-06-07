@@ -66,8 +66,19 @@ export default function RetirementCountdownTool() {
       <section className="px-6 py-16 text-center" style={{background:"linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)"}}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">💼</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Retirement Countdown Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Retirement Countdown — How Many Days Until You Retire?</h1>
           <p className="text-lg text-[#a8a8b3]">Count down to the day you retire</p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">The standard US retirement age is 67 for full Social Security benefits for people born after 1960. A 36-year-old planning to retire at 67 has 11,315 days remaining until retirement — approximately 31 years. Early retirement at 55 would be 6,935 days away for the same 36-year-old.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A retirement countdown calculates the exact number of days, months and years until your target retirement date based on your current age and chosen retirement age. It shows the time remaining as a live countdown and helps make an abstract future milestone feel concrete and real.</p>
         </div>
       </section>
 

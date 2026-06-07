@@ -140,10 +140,21 @@ export default function DaysBetweenTool() {
         style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">⏱</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Days Between Dates</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Days Between Dates Calculator — Exact Days Between Any Two Dates</h1>
           <p className="text-lg text-[#a8a8b3]">
             Calculate the exact number of days between any two dates
           </p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">There are 365 days between January 1 2025 and January 1 2026. Between January 1 2000 and January 1 2026 there are 9,497 days. Leap years add one extra day every 4 years — there have been 7 leap years between 2000 and 2026. The calculator accounts for all leap years automatically.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A days between dates calculator finds the exact number of days separating any two calendar dates. It accounts for leap years, varying month lengths and can calculate both forward and backward in time. Common uses include calculating contract durations, project timelines, age differences and the time between historical events.</p>
         </div>
       </section>
 

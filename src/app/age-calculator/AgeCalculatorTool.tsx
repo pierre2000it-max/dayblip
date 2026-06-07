@@ -176,10 +176,21 @@ export default function AgeCalculatorTool() {
         style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">🎂</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Age Calculator</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Age Calculator — How Old Are You in Days, Weeks and Months?</h1>
           <p className="text-lg text-[#a8a8b3]">
             Find out exactly how old you are in years, months, weeks, days, hours and minutes
           </p>
+        </div>
+      </section>
+
+      {/* ── Quick Answer ───────────────────────────────────────────── */}
+      <section className="px-6 py-8 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
+            <p className="text-[#e2e8f0]">A person born on January 1 1990 is 36 years, 5 months and 6 days old as of June 7 2026. That is 13,308 days, 1,901 weeks or 437 months. In hours that is 319,392 hours lived. The most common way to calculate age is by counting complete years from birth date to the current date.</p>
+          </div>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">An age calculator determines your exact age in multiple units of time including years, months, weeks, days and hours. Unlike simply subtracting birth year from current year, an accurate age calculator accounts for the exact birth month and day to show your precise age down to the day.</p>
         </div>
       </section>
 
