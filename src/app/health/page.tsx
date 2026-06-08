@@ -5,7 +5,11 @@ const tools = [
   { emoji: "🧬", title: "Life Expectancy", desc: "Statistical estimate based on lifestyle", href: "/health/life-expectancy" },
   { emoji: "⚖️", title: "BMI Calculator", desc: "Calculate your body mass index", href: "/health/bmi-calculator" },
   { emoji: "🚬", title: "Habit Cost Calculator", desc: "How much has your habit cost you?", href: "/health/habit-cost" },
-  { emoji: "🛡️", title: "Life Insurance Needs", desc: "Calculate your coverage needs", href: "/health/life-insurance" },
+  { emoji: "🛡️", title: "Life Insurance Needs",   desc: "Calculate your coverage needs",           href: "/health/life-insurance" },
+  { emoji: "🍎", title: "Calorie Calculator",      desc: "Daily calorie needs for your goals",       href: "/health/calorie-calculator" },
+  { emoji: "💧", title: "Water Intake Calculator", desc: "How much water you need per day",          href: "/health/water-intake" },
+  { emoji: "❤️", title: "Heart Rate Zones",        desc: "Target heart rate zones for exercise",     href: "/health/heart-rate" },
+  { emoji: "🍺", title: "Alcohol Cost Calculator", desc: "True financial cost of drinking habits",   href: "/health/alcohol-cost" },
 ]
 
 export default function HealthPage() {

@@ -99,6 +99,19 @@ export default function SleepDebtPage() {
             { label: "Tools", href: "/tools" },
             { label: "Sleep Debt Calculator" }
           ]} />
+          {/* Quick Answer */}
+          <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
+            <div style={{ color: "#e94560", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "8px" }}>Quick Answer</div>
+            <p style={{ color: "#e8e8e8", fontSize: "15px", lineHeight: "1.6" }}>
+              The average American adult sleeps 6.8 hours per night — 1.2 hours less than the recommended 8 hours. That creates 8.4 hours of weekly sleep debt. Chronically sleeping under 7 hours is linked to increased risk of obesity heart disease and impaired cognitive function. The US loses an estimated $411 billion annually in productivity due to sleep deprivation.
+            </p>
+          </div>
+
+          {/* Definition */}
+          <p style={{ color: "#a8a8b3", fontSize: "14px", lineHeight: "1.7" }}>
+            Sleep debt is the cumulative deficit between the sleep you need and the sleep you actually get. Unlike financial debt sleep debt cannot be fully repaid in a single weekend. The CDC recommends 7-9 hours for adults aged 18-64 and 7-8 hours for adults 65 and older. This calculator shows your personal sleep debt and its estimated impact on cognitive performance.
+          </p>
+
           <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
             ⚠️ <strong>Educational purposes only.</strong> Not medical advice. Consult a healthcare professional for sleep-related health concerns.
           </div>
@@ -185,6 +198,23 @@ export default function SleepDebtPage() {
               <ShareButtons text={shareText} url={shareUrl} title="Sleep Debt Calculator" />
             </div>
           )}
+          {/* US Perspective Section */}
+          <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6 space-y-4">
+            <h2 className="text-white text-xl font-bold">Sleep Debt in America</h2>
+            <p className="text-[#a8a8b3] text-sm leading-relaxed">
+              The United States is one of the most sleep-deprived nations in the developed world. The CDC reports that 1 in 3 American adults do not get sufficient sleep on a regular basis — defined as less than 7 hours per night.
+            </p>
+            <p className="text-[#a8a8b3] text-sm leading-relaxed">
+              Sleep deprivation costs the US economy an estimated $411 billion per year in lost productivity according to research from the RAND Corporation — more than any other developed nation.
+            </p>
+            <p className="text-[#a8a8b3] text-sm leading-relaxed">
+              States with the highest rates of sleep deprivation include Hawaii at 46.5% of adults sleeping under 7 hours and Kentucky at 46.3%. Colorado has the best sleep rates at 28.8% of adults reporting insufficient sleep.
+            </p>
+            <p className="text-[#a8a8b3] text-sm leading-relaxed">
+              Short sleepers — those consistently getting under 6 hours — are 4 times more likely to catch a cold when exposed to a virus compared to those sleeping 7 or more hours according to research published in the journal Sleep.
+            </p>
+          </div>
+
           <RelatedTools tools={[
             { emoji: "📅", title: "Life in Weeks", desc: "See your whole life as a grid of weeks", href: "/tools/life-in-weeks" },
             { emoji: "🏠", title: "WFH Savings Calculator", desc: "What is remote work really worth?", href: "/tools/wfh-calculator" },

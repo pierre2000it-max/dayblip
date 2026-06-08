@@ -175,10 +175,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     // HEALTH CALCULATORS  (priority 0.9, monthly)
     // ═══════════════════════════════════════════════════════════════════════
-    p("/health/life-expectancy", 0.9),
-    p("/health/bmi-calculator",  0.9),
-    p("/health/habit-cost",      0.9),
-    p("/health/life-insurance",  0.9),
+    p("/health/life-expectancy",    0.9),
+    p("/health/bmi-calculator",    0.9),
+    p("/health/habit-cost",        0.9),
+    p("/health/life-insurance",    0.9),
+    p("/health/calorie-calculator",0.8),
+    p("/health/water-intake",      0.8),
+    p("/health/heart-rate",        0.8),
+    p("/health/alcohol-cost",      0.8),
 
     // ═══════════════════════════════════════════════════════════════════════
     // REAL ESTATE CALCULATORS  (priority 0.9, monthly)

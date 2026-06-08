@@ -163,7 +163,7 @@ export default function HomePage() {
             heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          120+ free tools for life, money, history and more. No signup. No email. Ever.
+          146+ free tools for life, money, history and more. No signup. No email. Ever.
         </p>
 
         {/* Live counters pill */}

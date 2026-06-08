@@ -100,6 +100,10 @@ const urls = [
   "https://www.dayblip.com/health/bmi-calculator",
   "https://www.dayblip.com/health/habit-cost",
   "https://www.dayblip.com/health/life-insurance",
+  "https://www.dayblip.com/health/calorie-calculator",
+  "https://www.dayblip.com/health/water-intake",
+  "https://www.dayblip.com/health/heart-rate",
+  "https://www.dayblip.com/health/alcohol-cost",
 
   // Real estate
   "https://www.dayblip.com/real-estate/rent-vs-buy",

@@ -132,7 +132,7 @@ export function generateOrganizationSchema() {
     "@type": "Organization",
     "name": "Dayblip",
     "url": "https://dayblip.com",
-    "description": "120+ free tools for life, money, history and more. No signup. No email. Ever.",
+    "description": "146+ free tools for life, money, history and more. No signup. No email. Ever.",
     "sameAs": [],
   };
 }
