@@ -31,6 +31,38 @@ interface Holiday {
 const holidays = holidaysData as Holiday[];
 const BASE = "https://www.dayblip.com";
 
+// ── Unique descriptive intro per holiday (SEO / unique content) ────────────────
+const HOLIDAY_INTROS: Record<string, string> = {
+  "christmas":
+    "Christmas is celebrated on December 25 in more than 160 countries worldwide. The holiday marks the birth of Jesus Christ in Christian tradition and has grown into a global celebration of family, generosity and winter festivities. Americans spend an average of $998 on Christmas gifts, decorations and food each year.",
+  "halloween":
+    "Halloween is celebrated on October 31 each year across the United States, Canada, Ireland and the United Kingdom. Rooted in the ancient Celtic festival of Samhain, it evolved into a night of costumes, trick-or-treating and jack-o-lanterns. Americans spend over $12 billion on Halloween annually — making it the second largest commercial holiday after Christmas.",
+  "thanksgiving":
+    "Thanksgiving is celebrated on the fourth Thursday of November in the United States. The holiday traces its origins to a 1621 harvest feast shared between the Pilgrims and the Wampanoag people. Approximately 46 million turkeys are consumed in the US on Thanksgiving Day each year.",
+  "new-years":
+    "New Year's Day on January 1 is the most widely celebrated holiday on Earth — observed in virtually every country across every time zone. The global celebration begins in the Pacific islands and sweeps westward over 26 hours. An estimated 1 billion people watch some form of New Year's countdown broadcast each year.",
+  "new-years-eve":
+    "New Year's Eve on December 31 is celebrated with fireworks, countdowns and gatherings in cities across the world. Times Square in New York City has hosted its famous ball drop since 1907. The global celebration generates over $300 billion in economic activity across travel, hospitality and entertainment each year.",
+  "valentines-day":
+    "Valentine's Day on February 14 is celebrated in the United States, Canada, the United Kingdom, Australia and dozens of other countries. The holiday honors Saint Valentine and has become a global celebration of romantic love. Americans spend approximately $24 billion on Valentine's Day gifts each year — averaging $192 per person.",
+  "st-patricks-day":
+    "Saint Patrick's Day on March 17 commemorates the death of Saint Patrick, the patron saint of Ireland, in 461 AD. The holiday celebrates Irish culture and heritage and is observed in more countries than any other national festival. An estimated 13 million pints of Guinness are consumed worldwide on Saint Patrick's Day.",
+  "easter":
+    "Easter is a Christian holiday celebrating the resurrection of Jesus Christ. Unlike most holidays it falls on a different date each year — the first Sunday after the first full moon following the spring equinox. Americans spend approximately $22 billion on Easter each year including candy, gifts, food and clothing.",
+  "independence-day":
+    "Independence Day on July 4 marks the adoption of the Declaration of Independence in 1776 when the United States declared independence from Britain. It is celebrated with fireworks, parades, barbecues and concerts across the country. Americans purchase approximately $2.5 billion worth of fireworks for Independence Day each year.",
+  "labor-day":
+    "Labor Day is celebrated on the first Monday of September in the United States and Canada. The holiday honors the American labor movement and the contributions of workers to society. It was first celebrated in 1882 in New York City and became a federal holiday in 1894.",
+  "memorial-day":
+    "Memorial Day is observed on the last Monday of May in the United States. The holiday honors military personnel who died while serving in the US armed forces. Originally called Decoration Day it was first widely observed after the Civil War. More than 36 million Americans travel over Memorial Day weekend each year.",
+  "fathers-day":
+    "Father's Day is celebrated on the third Sunday of June in the United States, Canada and the United Kingdom. The holiday honors fathers and father figures and was first celebrated in 1910 in Spokane, Washington. Americans spend approximately $20 billion on Father's Day gifts each year.",
+  "mothers-day":
+    "Mother's Day is celebrated on the second Sunday of May in the United States. The modern holiday was created by Anna Jarvis in 1908 and became a federal holiday in 1914. It is the busiest day of the year for restaurants and one of the top gift-giving holidays. Americans spend approximately $35 billion on Mother's Day each year.",
+  "black-friday":
+    "Black Friday falls on the day after Thanksgiving — the fourth Friday of November — and marks the traditional start of the Christmas shopping season in the United States. The name refers to retailers moving from financial loss to profit for the year. Americans spend over $9 billion online on Black Friday alone each year.",
+};
+
 // ── Metadata ─────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({
@@ -42,7 +74,10 @@ export async function generateMetadata({
   if (!holiday) return { title: "Not Found" };
   const year = new Date().getFullYear();
   const title = `Days Until ${holiday.name} ${year}`;
-  const description = `How many days until ${holiday.name}? Live countdown to ${holiday.name} ${year}. Updated in real time.`;
+  const intro = HOLIDAY_INTROS[params.slug];
+  const description = intro
+    ? intro.length > 160 ? `${intro.slice(0, 157).trimEnd()}...` : intro
+    : `How many days until ${holiday.name}? Live countdown to ${holiday.name} ${year}. Updated in real time.`;
   const url = `/days-until/${params.slug}`;
   return {
     title,
@@ -174,6 +209,19 @@ export default function CountdownPage({
             <p className="mb-10 text-lg text-[#a8a8b3]">
               Live countdown to {holiday.name} {year}
             </p>
+            {HOLIDAY_INTROS[holiday.slug] && (
+              <p
+                className="mx-auto text-center"
+                style={{
+                  fontSize: "15px",
+                  color: "#a8a8b3",
+                  maxWidth: "680px",
+                  paddingBottom: "24px",
+                }}
+              >
+                {HOLIDAY_INTROS[holiday.slug]}
+              </p>
+            )}
             <CountdownDisplay date={holiday.date} color={holiday.color} name={holiday.name} />
             <div className="mx-auto mt-4 max-w-[900px]">
               <AdUnit slot="1234567890" format="rectangle" />
