@@ -53,6 +53,23 @@ function getStats(d: BornInData) {
 const AGE_MILESTONES = [10, 18, 21, 30, 50];
 const POPULAR_YEARS  = [1985, 1990, 1995, 2000, 2005, 2010];
 
+// Split "Song Title - Artist" into its two parts.
+function splitSong(raw: string): { song: string; artist: string } {
+  const idx = raw.indexOf(" - ");
+  if (idx === -1) return { song: raw.trim(), artist: "" };
+  return { song: raw.slice(0, idx).trim(), artist: raw.slice(idx + 3).trim() };
+}
+
+// Build a unique 2-3 sentence intro paragraph from the year's own data.
+function buildIntro(d: BornInData): string {
+  const { song, artist } = splitSong(d.number1Song);
+  const event   = d.worldEvent.replace(/\.\s*$/, "");
+  const songClause = artist
+    ? `${song} by ${artist} was the number one song`
+    : `${song} was the number one song`;
+  return `${d.year} was a year the world would not forget — ${event.charAt(0).toLowerCase()}${event.slice(1)}. ${songClause}, while ${d.number1Movie} packed out movie theaters. Gas cost just ${d.gasPrice} a gallon and the global population stood at ${d.population}.`;
+}
+
 // ── Metadata ─────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({
@@ -62,8 +79,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const year  = parseInt(params.year, 10);
   const label = isNaN(year) ? params.year : String(year);
-  const title = `Born in ${label} | What Was The World Like?`;
-  const desc  = `Discover what the world looked like in ${label}. The #1 song, top movies, gas prices and major events from the year you were born.`;
+  const data  = isNaN(year) ? null : bornInData.find((d) => d.year === year) ?? null;
+
+  const title = data
+    ? `Born in ${label}? ${data.worldEvent} | What The World Was Like`
+    : `Born in ${label} | What Was The World Like?`;
+  const desc  = data
+    ? `In ${label}, ${data.worldEvent.replace(/\.\s*$/, "")}. "${splitSong(data.number1Song).song}" topped the charts, gas cost ${data.gasPrice} a gallon and the world population was ${data.population}. See every fact from the year you were born.`
+    : `Discover what the world looked like in ${label}. The #1 song, top movies, gas prices and major events from the year you were born.`;
   const url   = `/born-in/${label}`;
   return {
     title,
@@ -148,6 +171,21 @@ export default function BornInPage({
             </p>
           </div>
         </section>
+
+        {/* ── INTRO ─────────────────────────────────────────────────── */}
+        {data && (
+          <p
+            className="mx-auto pt-10 text-center"
+            style={{
+              fontSize: "16px",
+              color: "#a8a8b3",
+              maxWidth: "700px",
+              padding: "0 20px 24px",
+            }}
+          >
+            {buildIntro(data)}
+          </p>
+        )}
 
         {/* ── STATS or NO-DATA ──────────────────────────────────────── */}
         {data ? (
