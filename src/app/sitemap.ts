@@ -302,6 +302,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/blog/life-in-weeks",                        0.8, MONTHLY),
     p("/blog/born-in-your-year",                    0.8, MONTHLY),
     p("/blog/true-cost-of-smoking",                 0.8, MONTHLY),
+    p("/blog/true-cost-of-car-ownership",           0.8, MONTHLY),
+    p("/blog/rent-vs-buy-calculator",               0.8, MONTHLY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // LEGAL PAGES  (priority 0.3, monthly)

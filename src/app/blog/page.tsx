@@ -84,6 +84,22 @@ const articles = [
     readTime: "5 min read",
     href: "/blog/true-cost-of-smoking",
   },
+  {
+    category: "Finance",
+    title: "The Number on the Window Sticker Is the Least Important Number When Buying a Car",
+    excerpt:
+      "A $25,000 car appears to cost $495 per month. True monthly cost including insurance fuel maintenance and depreciation: $1,211. Most buyers never run this calculation.",
+    readTime: "6 min read",
+    href: "/blog/true-cost-of-car-ownership",
+  },
+  {
+    category: "Finance",
+    title: "Buying a Home Is Not Always Better Than Renting. Here Is the Math.",
+    excerpt:
+      "The break-even point where buying beats renting is typically 5-7 years. On a $400,000 home the true monthly cost is $3,400-$3,800 — not the $2,661 mortgage payment.",
+    readTime: "6 min read",
+    href: "/blog/rent-vs-buy-calculator",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life"]
