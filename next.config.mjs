@@ -20,6 +20,13 @@ const nextConfig = {
         destination: "https://www.dayblip.com/:path*",
         permanent: true, // 301
       },
+      {
+        // Google/AdSense crawler looks for the policy at /privacy-policy.
+        // Our page lives at /privacy — 301 so the expected URL resolves.
+        source: "/privacy-policy",
+        destination: "/privacy",
+        permanent: true, // 301
+      },
     ];
   },
 
