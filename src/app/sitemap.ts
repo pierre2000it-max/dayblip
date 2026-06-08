@@ -9,6 +9,7 @@ const otdKeys  = Object.keys(onThisDayData as Record<string, unknown>);
 const DAILY   = "daily"   as const;
 const WEEKLY  = "weekly"  as const;
 const MONTHLY = "monthly" as const;
+const YEARLY  = "yearly"  as const;
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
@@ -305,6 +306,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     // LEGAL PAGES  (priority 0.3, monthly)
     // ═══════════════════════════════════════════════════════════════════════
+    p("/about",   0.7, YEARLY),
     p("/privacy", 0.3),
     p("/terms",   0.3),
     p("/contact", 0.3),

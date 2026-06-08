@@ -42,6 +42,7 @@ const gamesHistoryLinks = [
 ];
 
 const bottomLinks = [
+  { label: "About", href: "/about" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms of Use", href: "/terms" },
   { label: "Contact", href: "/contact" },
