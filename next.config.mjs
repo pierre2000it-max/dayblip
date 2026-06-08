@@ -27,6 +27,26 @@ const nextConfig = {
         destination: "/privacy",
         permanent: true, // 301
       },
+      {
+        source: "/terms-of-service",
+        destination: "/terms",
+        permanent: true,
+      },
+      {
+        source: "/terms-of-use",
+        destination: "/terms",
+        permanent: true,
+      },
+      {
+        source: "/contact-us",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/contact-us/",
+        destination: "/contact",
+        permanent: true,
+      },
     ];
   },
 
