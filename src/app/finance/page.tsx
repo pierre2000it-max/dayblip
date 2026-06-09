@@ -25,6 +25,10 @@ const tools = [
   { emoji: "💹", title: "Capital Gains Tax", desc: "Tax on investments & property", href: "/finance/capital-gains" },
   { emoji: "📈", title: "Stock Return", desc: "Calculate your investment return", href: "/finance/stock-return" },
   { emoji: "🏙️", title: "Cost of Living", desc: "Compare cities side by side", href: "/finance/cost-of-living" },
+  { emoji: "🏛️", title: "No Tax on Overtime", desc: "Calculate your 2026 overtime tax savings", href: "/finance/overtime-tax" },
+  { emoji: "⏱️", title: "Overtime Pay Calculator", desc: "How much do you earn working extra hours?", href: "/finance/overtime-calculator" },
+  { emoji: "🧾", title: "Paycheck Calculator", desc: "Your exact net pay after all deductions", href: "/finance/paycheck-calculator" },
+  { emoji: "💵", title: "Tip Calculator", desc: "Split bills and calculate tips instantly", href: "/tools/tip-calculator" },
 ]
 
 export default function FinancePage() {

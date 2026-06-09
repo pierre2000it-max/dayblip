@@ -95,6 +95,12 @@ const urls = [
   "https://www.dayblip.com/finance/stock-return",
   "https://www.dayblip.com/finance/cost-of-living",
 
+  // Phase 1 — 2026 tax law calculators
+  "https://www.dayblip.com/finance/overtime-tax",
+  "https://www.dayblip.com/tools/tip-calculator",
+  "https://www.dayblip.com/finance/overtime-calculator",
+  "https://www.dayblip.com/finance/paycheck-calculator",
+
   // Health calculators
   "https://www.dayblip.com/health/life-expectancy",
   "https://www.dayblip.com/health/bmi-calculator",
@@ -350,8 +356,8 @@ async function main() {
   console.log(`  Total URLs submitted : ${urls.length}`);
   console.log(`  Born-in pages        : 81  (1940–2020)`);
   console.log(`  On-this-day pages    : ${onThisDayPages.length}`);
-  console.log(`  Tool pages           : 36`);
-  console.log(`  Finance pages        : 23`);
+  console.log(`  Tool pages           : 37`);
+  console.log(`  Finance pages        : 26`);
   console.log(`  Holiday countdowns   : 14`);
   console.log();
   console.log("  Sitemap pings        : Google ✓  Bing ✓");

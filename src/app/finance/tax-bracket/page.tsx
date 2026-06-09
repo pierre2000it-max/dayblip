@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -247,6 +248,12 @@ export default function TaxBracketPage() {
             title="Tax Bracket Calculator"
           />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Does not include credits, AMT, or other adjustments. Consult a tax professional or use IRS.gov for accurate calculations.</p>
+          <RelatedTools tools={[
+            { emoji: "🏛️", title: "No Tax on Overtime 2026", desc: "Calculate your overtime tax savings under new law", href: "/finance/overtime-tax" },
+            { emoji: "🧾", title: "Paycheck Calculator", desc: "Exact net pay per period after all deductions", href: "/finance/paycheck-calculator" },
+            { emoji: "💰", title: "Take Home Pay Calculator", desc: "Annual take-home salary after all taxes", href: "/finance/take-home-pay" },
+            { emoji: "⏱️", title: "Overtime Pay Calculator", desc: "How much do you earn working extra hours?", href: "/finance/overtime-calculator" },
+          ]} />
         </div>
       </section>
     </div>

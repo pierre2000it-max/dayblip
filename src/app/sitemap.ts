@@ -135,6 +135,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/finance/capital-gains",       0.9),
     p("/finance/stock-return",        0.9),
     p("/finance/cost-of-living",      0.9),
+    p("/finance/overtime-tax",        0.9),
+    p("/finance/overtime-calculator", 0.9),
+    p("/finance/paycheck-calculator", 0.9),
 
     // ═══════════════════════════════════════════════════════════════════════
     // LIFE & MONEY INSIGHT TOOLS  (priority 0.9, monthly)
@@ -143,6 +146,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/tools/early-vs-late",           0.9),
     p("/tools/market-timing",           0.9),
     p("/tools/sleep-debt",              0.9),
+    p("/tools/tip-calculator",          0.9),
     p("/tools/smoking-cost",            0.9),
     p("/tools/college-roi",            0.9),
     p("/tools/wfh-calculator",         0.9),
