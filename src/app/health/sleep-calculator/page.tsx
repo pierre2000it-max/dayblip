@@ -187,6 +187,11 @@ export default function SleepCalculatorPage() {
             { emoji: "🔥", title: "Calorie Calculator", desc: "Sleep affects metabolism and weight", href: "/health/calorie-calculator" },
             { emoji: "💊", title: "Habit Cost Calculator", desc: "Financial cost of unhealthy habits", href: "/health/habit-cost" },
           ]} />
+
+          <div style={{ background: "#1e2d4a", borderRadius: 8, padding: 16, textAlign: "center", marginTop: 32, marginBottom: 16 }}>
+            <p style={{ color: "#fff", fontSize: 14, marginBottom: 8, marginTop: 0 }}>Want to add this tool to your website?</p>
+            <a href="/embed" style={{ color: "#e94560", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Get the free embed code →</a>
+          </div>
         </div>
       </section>
     </div>

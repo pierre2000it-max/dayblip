@@ -63,6 +63,26 @@ const tools = [
     emoji: "🍼", name: "Pregnancy Due Date Calculator", desc: "Calculate pregnancy due date with trimester timeline and weekly milestones.", height: 460,
     slug: "due-date-calculator",
   },
+  {
+    emoji: "💱", name: "Currency Converter", desc: "Live exchange rates for 16 currencies. Updates daily. Perfect for travel and finance blogs.", height: 420,
+    slug: "currency-converter",
+  },
+  {
+    emoji: "📊", name: "Percentage Calculator", desc: "Three percentage calculators in one — find percentage of number, change and difference.", height: 440,
+    slug: "percentage-calculator",
+  },
+  {
+    emoji: "😴", name: "Sleep Calculator", desc: "Calculate the best bedtime or wake time based on 90-minute sleep cycles.", height: 460,
+    slug: "sleep-calculator",
+  },
+  {
+    emoji: "🔥", name: "Calorie Calculator", desc: "Daily calorie needs using Mifflin-St Jeor formula. Great for health and fitness blogs.", height: 500,
+    slug: "calorie-calculator",
+  },
+  {
+    emoji: "💪", name: "Body Fat Calculator", desc: "US Navy method body fat percentage. No calipers needed — just a measuring tape.", height: 480,
+    slug: "body-fat",
+  },
 ]
 
 function EmbedCard({ tool }: { tool: typeof tools[0] }) {

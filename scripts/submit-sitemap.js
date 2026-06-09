@@ -159,6 +159,13 @@ const urls = [
   "https://www.dayblip.com/embed/paycheck-calculator",
   "https://www.dayblip.com/embed/due-date-calculator",
 
+  // Embed Tier 2 — 5 more embeddable tools
+  "https://www.dayblip.com/embed/currency-converter",
+  "https://www.dayblip.com/embed/percentage-calculator",
+  "https://www.dayblip.com/embed/sleep-calculator",
+  "https://www.dayblip.com/embed/calorie-calculator",
+  "https://www.dayblip.com/embed/body-fat",
+
   // Phase 4 — Curiosity viral calculators
   "https://www.dayblip.com/curiosity/numerology",
   "https://www.dayblip.com/curiosity/chinese-zodiac",

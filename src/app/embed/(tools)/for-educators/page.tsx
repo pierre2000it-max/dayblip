@@ -9,11 +9,10 @@ const tools = [
   { emoji: "🎂", name: "Age Calculator", slug: "age-calculator", height: 400, use: "Math: date arithmetic, elapsed time" },
   { emoji: "🗓️", name: "Born In Year Facts", slug: "born-in", height: 440, use: "History, social studies: historical context" },
   { emoji: "🎓", name: "GPA Calculator", slug: "gpa-calculator", height: 520, use: "Academic advising: track and calculate student GPA. No student accounts required." },
+  { emoji: "📊", name: "Percentage Calculator", slug: "percentage-calculator", height: 440, use: "Math class: calculate any percentage — three calculation types. No signup needed." },
 ]
 
-const linkedTools = [
-  { emoji: "📊", name: "Percentage Calculator", href: "https://www.dayblip.com/tools/percentage-calculator", use: "Math class: calculate any percentage — three calculation types. No signup needed." },
-]
+const linkedTools: { emoji: string; name: string; href: string; use: string }[] = []
 
 function EmbedCodeBlock({ slug, height }: { slug: string; height: number }) {
   const [copied, setCopied] = useState(false)

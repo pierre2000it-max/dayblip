@@ -201,6 +201,11 @@ export default function CalorieCalculatorPage() {
             { emoji: "⚖️", title: "BMI Calculator",        desc: "Calculate your body mass index",         href: "/health/bmi-calculator" },
             { emoji: "😴", title: "Sleep Debt Calculator", desc: "How much sleep have you missed?",        href: "/tools/sleep-debt" },
           ]} />
+
+          <div style={{ background: "#1e2d4a", borderRadius: 8, padding: 16, textAlign: "center", marginTop: 32, marginBottom: 16 }}>
+            <p style={{ color: "#fff", fontSize: 14, marginBottom: 8, marginTop: 0 }}>Want to add this tool to your website?</p>
+            <a href="/embed" style={{ color: "#e94560", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Get the free embed code →</a>
+          </div>
         </div>
       </section>
     </div>
