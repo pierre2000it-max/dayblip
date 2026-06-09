@@ -650,6 +650,22 @@ const aiRiskData: Record<string, RiskEntry> = {
     pivotSkills: ["Climate resilience engineering", "Carbon capture technology", "Water resource management"],
     insight: "Environmental problem-solving, community engagement and novel remediation require human engineers.",
   },
+  "School Principal": {
+    score: 18, label: "Very Safe", color: "#15803d",
+    automatedTasks: ["Scheduling and timetabling", "Generating routine reports", "Processing administrative paperwork", "Tracking attendance data", "Budget spreadsheet management"],
+    safeTasks: ["Leading and mentoring teaching staff", "Building school culture and community", "Conflict resolution with students and families", "Strategic vision and school improvement", "Crisis management and emergency response", "Hiring and evaluating teachers", "Community and board relationships"],
+    timeline: "Administrative assistance in 3-5 years — leadership role safe long-term",
+    pivotSkills: ["Educational leadership certification", "Data-driven decision making", "Community engagement strategy", "Staff coaching and development"],
+    insight: "School principals require deep human judgment, community trust and leadership that AI cannot replicate. While administrative tasks will be assisted by AI the core role of building school culture, mentoring staff and managing complex human relationships is highly resistant to automation.",
+  },
+  "Professor": {
+    score: 28, label: "Mostly Safe", color: "#16a34a",
+    automatedTasks: ["Generating lecture notes and slides", "Grading multiple choice assessments", "Answering routine student questions", "Literature review assistance", "Course material organization"],
+    safeTasks: ["Original research and discovery", "Mentoring graduate students", "Leading seminars and discussion", "Peer review and academic judgment", "Grant writing and funding strategy", "Building academic relationships", "Complex subject matter expertise"],
+    timeline: "Content assistance in 2-4 years — research and mentorship safe long-term",
+    pivotSkills: ["Research methodology leadership", "Academic publishing strategy", "Cross-disciplinary collaboration", "AI tools for research acceleration"],
+    insight: "Professors combine original research expertise, deep subject mastery and human mentorship that AI cannot replicate. While AI will assist with content generation and grading, the core functions of advancing knowledge, mentoring the next generation and exercising academic judgment remain deeply human.",
+  },
   "Other": {
     score: 48, label: "Moderate Risk", color: "#d97706",
     automatedTasks: ["Routine and repetitive tasks", "Data processing and entry", "Report and document generation", "Scheduling and calendar management"],
