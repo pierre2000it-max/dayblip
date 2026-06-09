@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import TimeSpentTool from "./TimeSpentTool";
 export const metadata: Metadata = {
-  title: "Time Spent Calculator — How Have You Spent Your Life?",
-  description: "Calculate how much of your life you have spent sleeping, working, eating and on screens. Discover your life time breakdown.",
+  title: "Time Spent Calculator — How Many Years Have You Spent Sleeping? | Dayblip",
+  description: "Find out how many years of your life you have spent sleeping working eating and commuting. Enter your age and see your full lifetime time breakdown. Free — no signup.",
   keywords: ["how much time have I spent sleeping", "life time calculator", "time spent calculator", "how much of my life sleeping"],
 };
 export default function TimeSpentPage() { return <TimeSpentTool />; }

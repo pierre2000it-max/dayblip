@@ -61,6 +61,13 @@ const HOLIDAY_INTROS: Record<string, string> = {
     "Mother's Day is celebrated on the second Sunday of May in the United States. The modern holiday was created by Anna Jarvis in 1908 and became a federal holiday in 1914. It is the busiest day of the year for restaurants and one of the top gift-giving holidays. Americans spend approximately $35 billion on Mother's Day each year.",
   "black-friday":
     "Black Friday falls on the day after Thanksgiving — the fourth Friday of November — and marks the traditional start of the Christmas shopping season in the United States. The name refers to retailers moving from financial loss to profit for the year. Americans spend over $9 billion online on Black Friday alone each year.",
+  "summer-break":
+    "The first day of summer falls on the summer solstice — June 20 or 21 each year. It marks the longest day of the year and the unofficial start of summer vacation for millions of students across the United States.",
+};
+
+// ── Per-slug title overrides (for better CTR on specific search queries) ──────
+const HOLIDAY_TITLE_OVERRIDES: Record<string, string> = {
+  "summer-break": "How Many Days Until Summer Break? Live Countdown | Dayblip",
 };
 
 // ── Metadata ─────────────────────────────────────────────────────────────────
@@ -73,11 +80,14 @@ export async function generateMetadata({
   const holiday = holidays.find((h) => h.slug === params.slug);
   if (!holiday) return { title: "Not Found" };
   const year = new Date().getFullYear();
-  const title = `Days Until ${holiday.name} ${year}`;
+  const title = HOLIDAY_TITLE_OVERRIDES[params.slug] ?? `Days Until ${holiday.name} ${year}`;
   const intro = HOLIDAY_INTROS[params.slug];
-  const description = intro
-    ? intro.length > 160 ? `${intro.slice(0, 157).trimEnd()}...` : intro
-    : `How many days until ${holiday.name}? Live countdown to ${holiday.name} ${year}. Updated in real time.`;
+  const descriptionText = params.slug === "summer-break"
+    ? "Live countdown showing exactly how many days hours minutes and seconds until the first day of summer. Updates every second. Free — no signup ever."
+    : intro
+      ? intro.length > 160 ? `${intro.slice(0, 157).trimEnd()}...` : intro
+      : `How many days until ${holiday.name}? Live countdown to ${holiday.name} ${year}. Updated in real time.`;
+  const description = descriptionText;
   const url = `/days-until/${params.slug}`;
   return {
     title,

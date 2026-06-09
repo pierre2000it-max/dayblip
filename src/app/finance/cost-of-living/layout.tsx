@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Cost of Living Comparison Calculator | Dayblip",
-  description: "Compare the cost of living between 30 US cities. Find what salary you need to maintain your lifestyle after moving. Free cost of living calculator.",
+  title: "Cost of Living Comparison — Compare Any Two US Cities | Dayblip",
+  description: "Compare cost of living between any two US cities. See exactly how much more or less you need to earn to maintain the same lifestyle. Free. No signup ever.",
   alternates: { canonical: "https://www.dayblip.com/finance/cost-of-living" },
 }
 

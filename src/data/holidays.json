@@ -192,5 +192,25 @@
       { "q": "When is Mother's Day?", "a": "Mother's Day falls on the second Sunday of May each year." },
       { "q": "How many days until Mother's Day?", "a": "Use the live countdown above for the exact count." }
     ]
+  },
+  {
+    "slug": "summer-break",
+    "name": "First Day of Summer",
+    "emoji": "☀️",
+    "date": "06-21",
+    "description": "The first day of summer falls on the summer solstice — June 20 or 21 each year. It marks the longest day of the year and the unofficial start of summer vacation for millions of students across the United States.",
+    "color": "#f9a825",
+    "facts": [
+      "The summer solstice is the longest day of the year in the Northern Hemisphere",
+      "On the solstice the sun is directly over the Tropic of Cancer",
+      "Stonehenge in England was built to align with the summer solstice sunrise",
+      "The word solstice comes from the Latin sol sistere meaning sun standing still",
+      "Over 53 million K-12 students in the US look forward to summer break each year"
+    ],
+    "faqs": [
+      { "q": "When is the first day of summer?", "a": "The first day of summer falls on the summer solstice, June 20 or 21 each year." },
+      { "q": "How many days until summer break?", "a": "Use the live countdown above to see the exact number of days, hours, minutes and seconds until the first day of summer." },
+      { "q": "What day of the week is the first day of summer this year?", "a": "Check the countdown above for the exact date and day of the week." }
+    ]
   }
 ]
