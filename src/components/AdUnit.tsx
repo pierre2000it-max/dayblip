@@ -53,10 +53,10 @@ export default function AdUnit({ slot, format = "auto", className = "" }: AdUnit
   // The wrapper uses min-height:0 so an unfilled slot collapses to nothing
   // rather than showing a white iframe placeholder box.
   return (
-    <div className={`my-4 overflow-hidden ${className}`} style={{ minHeight: 0 }}>
+    <div className={`my-4 overflow-hidden ${className}`} style={{ minHeight: 0, background: "transparent" }}>
       <ins
         className="adsbygoogle"
-        style={{ display: "block", minHeight: 0 }}
+        style={{ display: "block", minHeight: 0, background: "transparent" }}
         data-ad-client="ca-pub-8231179871551744"
         data-ad-slot={slot}
         data-ad-format={format}

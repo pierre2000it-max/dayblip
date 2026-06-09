@@ -23,3 +23,23 @@ body {
     text-wrap: balance;
   }
 }
+
+/*
+ * AdSense white-box fix
+ * ─────────────────────────────────────────────────────────────────────────────
+ * AdSense injects an <iframe> with a white background directly into the <ins>
+ * element via JS — bypassing any min-height:0 on the parent wrapper.
+ *
+ * Two rules:
+ *  1. transparent background on ALL adsbygoogle elements so the white never
+ *     flashes even for a frame while the iframe is being created.
+ *  2. display:none on slots marked data-ad-status="unfilled" — AdSense sets
+ *     this attribute when no ad was served (including during site review /
+ *     pre-approval). Hiding the element collapses the reserved space entirely.
+ */
+ins.adsbygoogle {
+  background: transparent !important;
+}
+ins.adsbygoogle[data-ad-status="unfilled"] {
+  display: none !important;
+}
