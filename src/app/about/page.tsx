@@ -4,12 +4,12 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About Dayblip — Free Tools for Curious Minds",
   description:
-    "Dayblip is a free tool site built by a solo developer. 146+ free calculators covering personal finance, career, life and curiosity. No signup. No email. Free forever.",
+    "Dayblip is a free tool site built by a solo developer. 160+ free calculators covering personal finance, career, life and curiosity. No signup. No email. Free forever.",
   alternates: { canonical: "https://www.dayblip.com/about" },
   openGraph: {
     title: "About Dayblip — Free Tools for Curious Minds",
     description:
-      "Dayblip is a free tool site built by a solo developer. 146+ free calculators covering personal finance, career, life and curiosity. No signup. No email. Free forever.",
+      "Dayblip is a free tool site built by a solo developer. 160+ free calculators covering personal finance, career, life and curiosity. No signup. No email. Free forever.",
     type: "website",
     url: "https://www.dayblip.com/about",
     images: [{ url: "/og-default.svg", width: 1200, height: 630, alt: "About Dayblip" }],
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About Dayblip — Free Tools for Curious Minds",
     description:
-      "Dayblip is a free tool site built by a solo developer. 146+ free calculators covering personal finance, career, life and curiosity. No signup. No email. Free forever.",
+      "Dayblip is a free tool site built by a solo developer. 160+ free calculators covering personal finance, career, life and curiosity. No signup. No email. Free forever.",
   },
 };
 
@@ -97,7 +97,7 @@ export default function AboutPage() {
           <h2 className="mb-4 text-2xl font-bold text-white">What Is Dayblip?</h2>
           <div className="space-y-4 leading-relaxed" style={{ color: "#e8e8e8" }}>
             <p>
-              Dayblip is a collection of 146+ free interactive tools covering
+              Dayblip is a collection of 160+ free interactive tools covering
               personal finance, career decisions, life visualization and historical
               curiosity.
             </p>

@@ -59,7 +59,7 @@ export default function EmbedLayout({
             textDecoration: "none",
           }}
         >
-          146+ Free Tools →
+          160+ Free Tools →
         </a>
       </div>
     </>
