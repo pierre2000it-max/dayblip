@@ -687,12 +687,12 @@ const riskEmoji = (score: number) =>
   score >= 81 ? "🚨" : score >= 61 ? "🔴" : score >= 41 ? "🟠" : score >= 21 ? "🟡" : "🟢"
 
 // ─── O*NET API fallback ───────────────────────────────────────────────────────
-// O*NET is a free US Department of Labor API. client=demo for testing; register
-// free at services.onetcenter.org for a production client ID.
+// O*NET is a free US Department of Labor API — services.onetcenter.org
+// Production client ID: 6lz3V-RS5CA-M7PdM-3F2lS
 async function fetchOnetData(jobTitle: string): Promise<RiskEntry & { title: string } | null> {
   try {
     const searchUrl =
-      `https://services.onetcenter.org/ws/mnm/search?keyword=${encodeURIComponent(jobTitle)}&client=demo`
+      `https://services.onetcenter.org/ws/mnm/search?keyword=${encodeURIComponent(jobTitle)}&client=6lz3V-RS5CA-M7PdM-3F2lS`
 
     const searchRes = await fetch(searchUrl, { headers: { Accept: "application/json" } })
     if (!searchRes.ok) return null
@@ -705,7 +705,7 @@ async function fetchOnetData(jobTitle: string): Promise<RiskEntry & { title: str
     const title: string = occupation.title
 
     const tasksUrl =
-      `https://services.onetcenter.org/ws/online/occupations/${code}/summary/tasks?client=demo`
+      `https://services.onetcenter.org/ws/online/occupations/${code}/summary/tasks?client=6lz3V-RS5CA-M7PdM-3F2lS`
 
     const tasksRes = await fetch(tasksUrl, { headers: { Accept: "application/json" } })
     const tasksData = tasksRes.ok ? await tasksRes.json() : null
