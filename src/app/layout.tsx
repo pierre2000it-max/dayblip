@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 const BASE = "https://www.dayblip.com";
 const DEFAULT_DESCRIPTION =
-  "146+ free tools for life, money, history and more. Finance calculators, countdown timers, birthday tools, live world counters and much more. No signup. No email. Ever.";
+  "Dayblip — 146+ free interactive calculators for personal finance, career decisions, life in weeks, born in year facts and more. No signup. No email. Free forever.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE),

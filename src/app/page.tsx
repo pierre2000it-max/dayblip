@@ -163,7 +163,7 @@ export default function HomePage() {
             heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          146+ free tools for life, money, history and more. No signup. No email. Ever.
+          Dayblip is a free tool site with 146+ interactive calculators covering personal finance, career decisions, life visualization and historical curiosity. No signup. No email. No paywall. Free forever.
         </p>
 
         {/* Live counters pill */}
