@@ -101,6 +101,13 @@ const urls = [
   "https://www.dayblip.com/finance/overtime-calculator",
   "https://www.dayblip.com/finance/paycheck-calculator",
 
+  // Phase 2 — Education and utility calculators
+  "https://www.dayblip.com/education",
+  "https://www.dayblip.com/education/gpa-calculator",
+  "https://www.dayblip.com/education/grade-calculator",
+  "https://www.dayblip.com/tools/currency-converter",
+  "https://www.dayblip.com/tools/unit-converter",
+
   // Health calculators
   "https://www.dayblip.com/health/life-expectancy",
   "https://www.dayblip.com/health/bmi-calculator",

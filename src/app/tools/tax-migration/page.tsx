@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 const stateTaxRates: Record<string, number> = {
   "Alaska": 0, "Florida": 0, "Nevada": 0, "New Hampshire": 0, "South Dakota": 0, "Tennessee": 0,
@@ -206,6 +207,12 @@ export default function TaxMigrationPage() {
               {DISCLAIMER}
             </div>
           )}
+          <RelatedTools tools={[
+            { emoji: "💱", title: "Currency Converter", desc: "Live exchange rates for 150+ currencies", href: "/tools/currency-converter" },
+            { emoji: "🏙️", title: "Cost of Living Calculator", desc: "Compare costs between US cities", href: "/finance/cost-of-living" },
+            { emoji: "💰", title: "Take Home Pay Calculator", desc: "Your actual paycheck after taxes", href: "/finance/take-home-pay" },
+            { emoji: "📊", title: "Tax Bracket Calculator", desc: "See your federal marginal tax rate", href: "/finance/tax-bracket" },
+          ]} />
         </div>
       </section>
     </div>

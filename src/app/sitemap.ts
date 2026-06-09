@@ -140,6 +140,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/finance/paycheck-calculator", 0.9),
 
     // ═══════════════════════════════════════════════════════════════════════
+    // EDUCATION CALCULATORS  (priority 0.9, monthly) — Phase 2
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/education",                   0.9),
+    p("/education/gpa-calculator",    0.9),
+    p("/education/grade-calculator",  0.9),
+
+    // ═══════════════════════════════════════════════════════════════════════
     // LIFE & MONEY INSIGHT TOOLS  (priority 0.9, monthly)
     // ═══════════════════════════════════════════════════════════════════════
     p("/tools/minimum-payment",         0.9),
@@ -147,6 +154,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/tools/market-timing",           0.9),
     p("/tools/sleep-debt",              0.9),
     p("/tools/tip-calculator",          0.9),
+    p("/tools/currency-converter",      0.9),
+    p("/tools/unit-converter",          0.9),
     p("/tools/smoking-cost",            0.9),
     p("/tools/college-roi",            0.9),
     p("/tools/wfh-calculator",         0.9),

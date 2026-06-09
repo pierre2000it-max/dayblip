@@ -2,6 +2,7 @@
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
 
@@ -205,6 +206,12 @@ export default function CostOfLivingPage() {
             title="Cost of Living Comparison"
           />
           <p className="text-xs text-[#a8a8b3]">Cost of living index data is approximate. Actual costs vary significantly by neighborhood, lifestyle and personal choices. For educational purposes only.</p>
+          <RelatedTools tools={[
+            { emoji: "💱", title: "Currency Converter", desc: "Live exchange rates for 150+ currencies", href: "/tools/currency-converter" },
+            { emoji: "🗺️", title: "State Tax Migration", desc: "How much moving states saves in taxes", href: "/tools/tax-migration" },
+            { emoji: "💰", title: "Take Home Pay Calculator", desc: "Your actual paycheck after taxes", href: "/finance/take-home-pay" },
+            { emoji: "🏠", title: "Rent vs Buy Calculator", desc: "Is it cheaper to rent or buy?", href: "/real-estate/rent-vs-buy" },
+          ]} />
         </div>
       </section>
     </div>

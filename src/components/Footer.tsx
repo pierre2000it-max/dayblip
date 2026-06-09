@@ -250,6 +250,24 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Column — Education */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-white font-bold text-base">Education</h3>
+            <ul className="flex flex-col gap-2">
+              {[
+                { label: "GPA Calculator", href: "/education/gpa-calculator" },
+                { label: "Grade Calculator", href: "/education/grade-calculator" },
+                { label: "College ROI", href: "/tools/college-roi" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-[#a8a8b3] text-sm transition-colors duration-200 hover:text-[#e94560]">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Column — Resources */}
           <div className="flex flex-col gap-3">
             <h3 className="text-white font-bold text-base">Resources</h3>

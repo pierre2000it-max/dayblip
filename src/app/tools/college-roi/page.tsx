@@ -240,6 +240,7 @@ export default function CollegeROIPage() {
 
                 <ShareButtons text={shareText} url={shareUrl} title="College Degree ROI Calculator" />
                 <RelatedTools tools={[
+                  { emoji: "📊", title: "GPA Calculator", desc: "Calculate your grade point average", href: "/education/gpa-calculator" },
                   { emoji: "🎓", title: "Student Loans", desc: "Calculate your payoff timeline", href: "/finance/student-loan" },
                   { emoji: "💼", title: "Am I Underpaid?", desc: "Check market rate for your role", href: "/tools/salary-checker" },
                   { emoji: "⏰", title: "True Hourly Wage", desc: "What does your job really pay per hour?", href: "/tools/true-hourly-wage" },

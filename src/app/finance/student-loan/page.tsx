@@ -3,6 +3,7 @@ import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -159,6 +160,12 @@ export default function StudentLoanPage() {
             title="Student Loan Payoff Calculator"
           />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Loan terms vary. Visit studentaid.gov for official information.</p>
+          <RelatedTools tools={[
+            { emoji: "📊", title: "GPA Calculator", desc: "Calculate your semester or cumulative GPA", href: "/education/gpa-calculator" },
+            { emoji: "🎓", title: "College ROI Calculator", desc: "Was your degree worth the cost?", href: "/tools/college-roi" },
+            { emoji: "💰", title: "Take Home Pay Calculator", desc: "Your actual paycheck after taxes", href: "/finance/take-home-pay" },
+            { emoji: "📝", title: "Grade Calculator", desc: "What grade do you need on your final?", href: "/education/grade-calculator" },
+          ]} />
         </div>
       </section>
     </div>
