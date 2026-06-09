@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 const SKILLS = [
   { name: "Conversational Spanish", hours: 600 },
@@ -161,6 +162,12 @@ export default function TimeWastedPage() {
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="Screen Time Calculator" />
+              <RelatedTools tools={[
+                { emoji: "🔐", title: "Password Strength Checker", desc: "How long to crack your password?", href: "/tools/password-strength" },
+                { emoji: "📖", title: "Reading Time Calculator", desc: "How long to read any article or book", href: "/tools/reading-time" },
+                { emoji: "📚", title: "Learning Calculator", desc: "How long to master any skill", href: "/tools/learning-calculator" },
+                { emoji: "⏰", title: "Procrastination Cost", desc: "What waiting is costing you", href: "/tools/procrastination-cost" },
+              ]} />
             </div>
           )}
         </div>

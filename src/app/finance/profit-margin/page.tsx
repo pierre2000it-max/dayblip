@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
@@ -183,6 +184,12 @@ export default function ProfitMarginPage() {
             title="Profit Margin Calculator"
           />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Benchmarks are approximate industry averages and vary by company size, geography and business model.</p>
+          <RelatedTools tools={[
+            { emoji: "📊", title: "Percentage Calculator", desc: "Calculate any percentage instantly", href: "/tools/percentage-calculator" },
+            { emoji: "💹", title: "Break Even Calculator", desc: "When does your business break even?", href: "/finance/break-even" },
+            { emoji: "📈", title: "Stock Return Calculator", desc: "Investment return percentage", href: "/finance/stock-return" },
+            { emoji: "💰", title: "Tax Bracket Calculator", desc: "Marginal vs effective tax rate", href: "/finance/tax-bracket" },
+          ]} />
         </div>
       </section>
     </div>

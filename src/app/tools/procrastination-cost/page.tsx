@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 const GOALS = ["Side hustle", "Investing", "Starting a business", "Career change", "Paying off debt", "Learning a skill", "Exercise", "Other goal"]
 const ACTIONS = ["Invest it", "Pay off debt", "Save it"]
@@ -151,6 +152,12 @@ export default function ProcrastinationCostPage() {
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="Procrastination Cost Calculator" />
+              <RelatedTools tools={[
+                { emoji: "📖", title: "Reading Time Calculator", desc: "How long to read any article or book", href: "/tools/reading-time" },
+                { emoji: "📚", title: "Learning Calculator", desc: "How long to master any skill", href: "/tools/learning-calculator" },
+                { emoji: "💻", title: "Screen Time Calculator", desc: "What your screen time costs you", href: "/tools/time-wasted" },
+                { emoji: "🆓", title: "Financial Independence Date", desc: "Find the exact date you could stop working", href: "/tools/fi-date" },
+              ]} />
               {DISCLAIMER}
             </div>
           )}

@@ -146,6 +146,12 @@ const urls = [
   "https://www.dayblip.com/curiosity/side-hustle",
   "https://www.dayblip.com/curiosity/gym-membership",
 
+  // Phase 5 — Utility tools
+  "https://www.dayblip.com/tools/timezone-converter",
+  "https://www.dayblip.com/tools/percentage-calculator",
+  "https://www.dayblip.com/tools/reading-time",
+  "https://www.dayblip.com/tools/password-strength",
+
   // Phase 4 — Curiosity viral calculators
   "https://www.dayblip.com/curiosity/numerology",
   "https://www.dayblip.com/curiosity/chinese-zodiac",

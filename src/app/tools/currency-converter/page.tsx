@@ -166,9 +166,9 @@ export default function CurrencyConverterPage() {
           <ShareButtons text={shareText} url="https://www.dayblip.com/tools/currency-converter" title="Currency Converter" />
 
           <RelatedTools tools={[
+            { emoji: "🌐", title: "Time Zone Converter", desc: "Convert time zones for remote teams", href: "/tools/timezone-converter" },
             { emoji: "🏙️", title: "Cost of Living Calculator", desc: "Compare costs between US cities", href: "/finance/cost-of-living" },
             { emoji: "🗺️", title: "State Tax Migration", desc: "How much moving states saves you", href: "/tools/tax-migration" },
-            { emoji: "💰", title: "Take Home Pay Calculator", desc: "Your actual paycheck after taxes", href: "/finance/take-home-pay" },
             { emoji: "📐", title: "Unit Converter", desc: "Convert metric and imperial units", href: "/tools/unit-converter" },
           ]} />
         </div>

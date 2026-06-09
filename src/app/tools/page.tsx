@@ -40,6 +40,10 @@ const tools = [
   { emoji: "💝", title: "Compound Kindness", desc: "The ripple effect of daily kindness", href: "/tools/compound-kindness" },
   { emoji: "🎵", title: "Music of Your Year", desc: "The songs that defined your birth year", href: "/tools/music-of-your-year" },
   { emoji: "📚", title: "Learning Calculator", desc: "What could you achieve with your time?", href: "/tools/learning-calculator" },
+  { emoji: "🌐", title: "Time Zone Converter", desc: "Convert any time zone — DST handled automatically", href: "/tools/timezone-converter" },
+  { emoji: "%", title: "Percentage Calculator", desc: "Three types of percentage calculations in one", href: "/tools/percentage-calculator" },
+  { emoji: "📖", title: "Reading Time Calculator", desc: "How long to read any article or book", href: "/tools/reading-time" },
+  { emoji: "🔐", title: "Password Strength Checker", desc: "How long to crack your password?", href: "/tools/password-strength" },
 ]
 
 export default function ToolsPage() {

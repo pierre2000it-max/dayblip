@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
@@ -186,6 +187,12 @@ export default function BreakEvenPage() {
             />
           )}
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Break-even analysis is a simplification. Actual business results vary based on many factors.</p>
+          <RelatedTools tools={[
+            { emoji: "📊", title: "Percentage Calculator", desc: "Calculate any percentage instantly", href: "/tools/percentage-calculator" },
+            { emoji: "💹", title: "Profit Margin Calculator", desc: "Calculate business profit margin", href: "/finance/profit-margin" },
+            { emoji: "📈", title: "Stock Return Calculator", desc: "Investment return percentage", href: "/finance/stock-return" },
+            { emoji: "💰", title: "Freelancer Rate Calculator", desc: "What to charge as a freelancer", href: "/finance/freelancer-rate" },
+          ]} />
         </div>
       </section>
     </div>

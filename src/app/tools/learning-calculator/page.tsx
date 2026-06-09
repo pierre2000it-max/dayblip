@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 interface Skill { name: string; hours: number; category: string; description: string }
 
@@ -168,6 +169,12 @@ export default function LearningCalculatorPage() {
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="Learning Calculator" />
+              <RelatedTools tools={[
+                { emoji: "📖", title: "Reading Time Calculator", desc: "How long to read any article or book", href: "/tools/reading-time" },
+                { emoji: "⏰", title: "Procrastination Cost", desc: "What waiting is costing you", href: "/tools/procrastination-cost" },
+                { emoji: "💻", title: "Screen Time Calculator", desc: "What your screen time costs you", href: "/tools/time-wasted" },
+                { emoji: "📚", title: "College Degree ROI", desc: "Was your college investment worth it?", href: "/tools/college-roi" },
+              ]} />
             </div>
           )}
         </div>

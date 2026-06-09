@@ -229,10 +229,10 @@ export default function TipCalculatorPage() {
           <ShareButtons text={shareText} url="https://www.dayblip.com/tools/tip-calculator" title="Tip Calculator" />
 
           <RelatedTools tools={[
+            { emoji: "📊", title: "Percentage Calculator", desc: "Calculate any percentage instantly", href: "/tools/percentage-calculator" },
             { emoji: "💵", title: "No Tax on Overtime", desc: "Calculate your 2026 overtime tax savings", href: "/finance/overtime-tax" },
             { emoji: "💰", title: "Take Home Pay Calculator", desc: "Your full paycheck after all taxes", href: "/finance/take-home-pay" },
             { emoji: "⏰", title: "True Hourly Wage", desc: "What your job really pays per hour", href: "/tools/true-hourly-wage" },
-            { emoji: "📊", title: "Salary Negotiation", desc: "Get paid what your role is worth", href: "/tools/salary-negotiation" },
           ]} />
         </div>
       </section>

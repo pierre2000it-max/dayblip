@@ -483,11 +483,11 @@ export default function WFHCalculatorPage() {
                   title="Work From Home Savings Calculator"
                 />
                 <RelatedTools tools={[
+                  { emoji: "🌐", title: "Time Zone Converter", desc: "Convert time zones for remote teams", href: "/tools/timezone-converter" },
                   { emoji: "⏰", title: "True Hourly Wage", desc: "What does your job really pay per hour?", href: "/tools/true-hourly-wage" },
                   { emoji: "💰", title: "Salary Negotiation Guide", desc: "How much to ask for + ready-to-use script", href: "/tools/salary-negotiation" },
                   { emoji: "💼", title: "Side Hustle Potential", desc: "What could you earn with your skills?", href: "/tools/side-hustle" },
                   { emoji: "🤖", title: "Will AI Replace My Job?", desc: "Get your personalized AI risk score", href: "/tools/ai-job-score" },
-                  { emoji: "📉", title: "Recession Readiness Score", desc: "How prepared are you for a downturn?", href: "/tools/recession-score" },
                 ]} />
               </div>
             )

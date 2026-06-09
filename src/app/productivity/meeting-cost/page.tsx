@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 function pad(n: number) { return String(Math.floor(n)).padStart(2, "0") }
@@ -140,6 +141,12 @@ export default function MeetingCostPage() {
                 url={`https://www.dayblip.com/productivity/meeting-cost?attendees=${manualAttendees}&rate=${manualRate}&duration=${manualMins}`}
                 title="Meeting Cost Calculator"
               />
+              <RelatedTools tools={[
+                { emoji: "🌐", title: "Time Zone Converter", desc: "Best meeting time for remote teams", href: "/tools/timezone-converter" },
+                { emoji: "🏠", title: "WFH Savings Calculator", desc: "What is remote work really worth?", href: "/tools/wfh-calculator" },
+                { emoji: "⏰", title: "True Hourly Wage", desc: "What your job really pays per hour", href: "/tools/true-hourly-wage" },
+                { emoji: "📊", title: "Percentage Calculator", desc: "Calculate any percentage instantly", href: "/tools/percentage-calculator" },
+              ]} />
             </div>
           )}
 
