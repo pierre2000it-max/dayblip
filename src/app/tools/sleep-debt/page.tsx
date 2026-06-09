@@ -216,10 +216,9 @@ export default function SleepDebtPage() {
           </div>
 
           <RelatedTools tools={[
+            { emoji: "😴", title: "Sleep Calculator", desc: "Best bedtime based on 90-minute cycles", href: "/health/sleep-calculator" },
             { emoji: "📅", title: "Life in Weeks", desc: "See your whole life as a grid of weeks", href: "/tools/life-in-weeks" },
-            { emoji: "🏠", title: "WFH Savings Calculator", desc: "What is remote work really worth?", href: "/tools/wfh-calculator" },
-            { emoji: "😴", title: "Procrastination Cost", desc: "What is waiting really costing you?", href: "/tools/procrastination-cost" },
-            { emoji: "📱", title: "Screen Time Cost", desc: "What could you learn with that time?", href: "/tools/time-wasted" },
+            { emoji: "❤️", title: "Life Expectancy Calculator", desc: "How lifestyle affects longevity", href: "/health/life-expectancy" },
             { emoji: "🔢", title: "Life in Numbers", desc: "Your heartbeats, breaths and more, live", href: "/tools/life-in-numbers" },
           ]} />
         </div>

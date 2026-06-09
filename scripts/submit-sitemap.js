@@ -118,6 +118,12 @@ const urls = [
   "https://www.dayblip.com/health/heart-rate",
   "https://www.dayblip.com/health/alcohol-cost",
 
+  // Phase 3 — Health and personal calculators
+  "https://www.dayblip.com/health/due-date-calculator",
+  "https://www.dayblip.com/health/body-fat",
+  "https://www.dayblip.com/health/macro-calculator",
+  "https://www.dayblip.com/health/sleep-calculator",
+
   // Real estate
   "https://www.dayblip.com/real-estate/rent-vs-buy",
   "https://www.dayblip.com/real-estate/home-value",

@@ -196,9 +196,9 @@ export default function CalorieCalculatorPage() {
           )}
 
           <RelatedTools tools={[
-            { emoji: "⚖️", title: "BMI Calculator",       desc: "Calculate your body mass index",        href: "/health/bmi-calculator" },
-            { emoji: "🧬", title: "Life Expectancy",       desc: "Statistical estimate based on lifestyle", href: "/health/life-expectancy" },
-            { emoji: "🚬", title: "Habit Cost Calculator", desc: "Financial cost of daily habits",         href: "/health/habit-cost" },
+            { emoji: "💪", title: "Body Fat Calculator",   desc: "Calculate your body fat percentage",     href: "/health/body-fat" },
+            { emoji: "🥩", title: "Macro Calculator",      desc: "Daily protein carbs and fat targets",    href: "/health/macro-calculator" },
+            { emoji: "⚖️", title: "BMI Calculator",        desc: "Calculate your body mass index",         href: "/health/bmi-calculator" },
             { emoji: "😴", title: "Sleep Debt Calculator", desc: "How much sleep have you missed?",        href: "/tools/sleep-debt" },
           ]} />
         </div>

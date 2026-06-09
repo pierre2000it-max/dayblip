@@ -2,6 +2,7 @@
 import { useState, useMemo, useEffect } from "react"
 import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 interface Factor { key: string; label: string; options: { label: string; value: number }[] }
 
@@ -143,6 +144,12 @@ export default function LifeExpectancyPage() {
             <p className="text-red-300 font-semibold text-sm">⚠️ Strong Disclaimer</p>
             <p className="text-[#a8a8b3] text-xs mt-1">This calculator provides a rough statistical estimate for educational purposes only. It is not medical advice, a diagnosis, or a prediction of your actual lifespan. Genetics, environment, medical history and many other factors affect longevity in ways this calculator cannot capture. Always consult a qualified healthcare provider for health guidance.</p>
           </div>
+          <RelatedTools tools={[
+            { emoji: "🤰", title: "Pregnancy Due Date Calculator", desc: "Calculate your baby's due date", href: "/health/due-date-calculator" },
+            { emoji: "😴", title: "Sleep Calculator", desc: "Best bedtime based on 90-min cycles", href: "/health/sleep-calculator" },
+            { emoji: "⚖️", title: "BMI Calculator", desc: "Calculate your body mass index", href: "/health/bmi-calculator" },
+            { emoji: "🚬", title: "Habit Cost Calculator", desc: "Financial cost of daily habits", href: "/health/habit-cost" },
+          ]} />
         </div>
       </section>
     </div>

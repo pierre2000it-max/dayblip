@@ -10,6 +10,10 @@ const tools = [
   { emoji: "💧", title: "Water Intake Calculator", desc: "How much water you need per day",          href: "/health/water-intake" },
   { emoji: "❤️", title: "Heart Rate Zones",        desc: "Target heart rate zones for exercise",     href: "/health/heart-rate" },
   { emoji: "🍺", title: "Alcohol Cost Calculator", desc: "True financial cost of drinking habits",   href: "/health/alcohol-cost" },
+  { emoji: "🤰", title: "Pregnancy Due Date",       desc: "When is your baby due?",                   href: "/health/due-date-calculator" },
+  { emoji: "💪", title: "Body Fat Calculator",      desc: "Calculate body fat % with measuring tape", href: "/health/body-fat" },
+  { emoji: "🥩", title: "Macro Calculator",         desc: "Daily protein carbs and fat targets",      href: "/health/macro-calculator" },
+  { emoji: "😴", title: "Sleep Calculator",         desc: "Best bedtime based on sleep cycles",       href: "/health/sleep-calculator" },
 ]
 
 export default function HealthPage() {

@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 interface Category { label: string; min: number; max: number; color: string; bg: string }
 
@@ -159,6 +160,12 @@ export default function BMIPage() {
             />
           )}
           <p className="text-xs text-[#a8a8b3]">⚠️ BMI is a screening tool only and does not directly measure body fat or account for muscle mass. Not medical advice. Consult a healthcare provider for personalized guidance.</p>
+          <RelatedTools tools={[
+            { emoji: "💪", title: "Body Fat Calculator", desc: "More accurate than BMI — uses measurements", href: "/health/body-fat" },
+            { emoji: "🍎", title: "Calorie Calculator", desc: "Daily calorie needs for your goals", href: "/health/calorie-calculator" },
+            { emoji: "🥩", title: "Macro Calculator", desc: "Optimal protein carbs and fat targets", href: "/health/macro-calculator" },
+            { emoji: "❤️", title: "Life Expectancy Calculator", desc: "Statistical life expectancy estimate", href: "/health/life-expectancy" },
+          ]} />
         </div>
       </section>
     </div>

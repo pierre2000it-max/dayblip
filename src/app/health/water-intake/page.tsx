@@ -172,10 +172,10 @@ export default function WaterIntakePage() {
           )}
 
           <RelatedTools tools={[
+            { emoji: "🥩", title: "Macro Calculator",      desc: "Daily protein carbs and fat targets",  href: "/health/macro-calculator" },
             { emoji: "🍎", title: "Calorie Calculator",    desc: "Daily calorie needs for your goals",   href: "/health/calorie-calculator" },
             { emoji: "⚖️", title: "BMI Calculator",        desc: "Calculate your body mass index",       href: "/health/bmi-calculator" },
             { emoji: "😴", title: "Sleep Debt Calculator", desc: "How much sleep have you missed?",      href: "/tools/sleep-debt" },
-            { emoji: "🚬", title: "Habit Cost Calculator", desc: "Financial cost of daily habits",       href: "/health/habit-cost" },
           ]} />
         </div>
       </section>

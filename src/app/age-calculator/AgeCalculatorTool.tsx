@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import AdUnit from "@/components/AdUnit";
-import ShareButtons from "@/components/ShareButtons";
+import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -278,6 +279,13 @@ export default function AgeCalculatorTool() {
               title="Age Calculator"
             />
           )}
+
+          <RelatedTools tools={[
+            { emoji: "🤰", title: "Pregnancy Due Date Calculator", desc: "Calculate your baby's due date", href: "/health/due-date-calculator" },
+            { emoji: "📅", title: "Life in Weeks", desc: "Visualize your entire life as a grid", href: "/tools/life-in-weeks" },
+            { emoji: "🎂", title: "Days Between Dates", desc: "Exact days between any two dates", href: "/days-between" },
+            { emoji: "🧬", title: "Life Expectancy Calculator", desc: "Statistical life expectancy estimate", href: "/health/life-expectancy" },
+          ]} />
 
           {/* Ad — below results box */}
           <AdUnit slot="1234567890" format="rectangle" />
