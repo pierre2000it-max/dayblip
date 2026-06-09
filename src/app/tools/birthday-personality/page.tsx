@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 interface Profile {
   dob: string
@@ -230,6 +231,13 @@ export default function BirthdayPersonalityPage() {
               <ShareButtons text={shareText} url={shareUrl} title="Everything About Your Birthday" />
             </div>
           )}
+
+          <RelatedTools tools={[
+            { emoji: "🔢", title: "Numerology Calculator", desc: "Your life path number from birth date", href: "/curiosity/numerology" },
+            { emoji: "🐉", title: "Chinese Zodiac", desc: "Your animal sign and meaning", href: "/curiosity/chinese-zodiac" },
+            { emoji: "⭐", title: "Star Sign Calculator", desc: "Your western astrology sign", href: "/star-sign" },
+            { emoji: "❤️", title: "Love Compatibility", desc: "Numerology and zodiac compatibility", href: "/curiosity/compatibility" },
+          ]} />
         </div>
       </section>
     </div>

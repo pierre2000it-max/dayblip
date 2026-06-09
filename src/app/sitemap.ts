@@ -237,6 +237,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/curiosity/side-hustle",        0.85),
     p("/curiosity/gym-membership",     0.85),
 
+    // Phase 4 — Curiosity viral calculators
+    p("/curiosity/numerology",         0.8),
+    p("/curiosity/chinese-zodiac",     0.8),
+    p("/curiosity/compatibility",      0.8),
+    p("/curiosity/iq-estimate",        0.8),
+
     // ═══════════════════════════════════════════════════════════════════════
     // LIFE & PERSONAL TOOLS  (priority 0.8, monthly)
     // ═══════════════════════════════════════════════════════════════════════

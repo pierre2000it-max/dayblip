@@ -12,6 +12,10 @@ const TOOLS = [
   { emoji: "📱", title: "Phone Upgrades", desc: "The annual upgrade habit", href: "/curiosity/phone-upgrade" },
   { emoji: "💪", title: "Side Hustle", desc: "What extra income could build", href: "/curiosity/side-hustle" },
   { emoji: "🏋️", title: "Gym Membership", desc: "Your real cost per visit", href: "/curiosity/gym-membership" },
+  { emoji: "🔢", title: "Numerology Calculator", desc: "Your life path number and meaning", href: "/curiosity/numerology" },
+  { emoji: "🐉", title: "Chinese Zodiac", desc: "Your animal sign and personality traits", href: "/curiosity/chinese-zodiac" },
+  { emoji: "❤️", title: "Love Compatibility", desc: "Numerology and zodiac compatibility", href: "/curiosity/compatibility" },
+  { emoji: "🧠", title: "IQ Estimate Quiz", desc: "10-question logic and pattern quiz", href: "/curiosity/iq-estimate" },
 ]
 
 export default function CuriosityPage() {

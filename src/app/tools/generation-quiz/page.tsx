@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 type Gen = "Z" | "M" | "X" | "B"
 
@@ -167,6 +168,13 @@ export default function GenerationQuizPage() {
               <ShareButtons text={shareText} url={shareUrl} title="What Generation Are You Really?" />
             </div>
           )}
+
+          <RelatedTools tools={[
+            { emoji: "🔢", title: "Numerology Calculator", desc: "Your life path number and meaning", href: "/curiosity/numerology" },
+            { emoji: "🎂", title: "Birthday Personality", desc: "Everything your birthday reveals", href: "/tools/birthday-personality" },
+            { emoji: "🧠", title: "IQ Estimate Quiz", desc: "10-question logic and pattern quiz", href: "/curiosity/iq-estimate" },
+            { emoji: "⭐", title: "Star Sign Calculator", desc: "Your western astrology sign", href: "/star-sign" },
+          ]} />
         </div>
       </section>
     </div>
