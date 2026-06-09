@@ -152,6 +152,13 @@ const urls = [
   "https://www.dayblip.com/tools/reading-time",
   "https://www.dayblip.com/tools/password-strength",
 
+  // Embed Phase 6 — 5 new embeddable tools
+  "https://www.dayblip.com/embed/gpa-calculator",
+  "https://www.dayblip.com/embed/overtime-tax",
+  "https://www.dayblip.com/embed/tip-calculator",
+  "https://www.dayblip.com/embed/paycheck-calculator",
+  "https://www.dayblip.com/embed/due-date-calculator",
+
   // Phase 4 — Curiosity viral calculators
   "https://www.dayblip.com/curiosity/numerology",
   "https://www.dayblip.com/curiosity/chinese-zodiac",

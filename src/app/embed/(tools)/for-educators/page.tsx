@@ -8,6 +8,11 @@ const tools = [
   { emoji: "💳", name: "Debt Payoff", slug: "debt-payoff", height: 420, use: "Personal finance: cost of credit card debt" },
   { emoji: "🎂", name: "Age Calculator", slug: "age-calculator", height: 400, use: "Math: date arithmetic, elapsed time" },
   { emoji: "🗓️", name: "Born In Year Facts", slug: "born-in", height: 440, use: "History, social studies: historical context" },
+  { emoji: "🎓", name: "GPA Calculator", slug: "gpa-calculator", height: 520, use: "Academic advising: track and calculate student GPA. No student accounts required." },
+]
+
+const linkedTools = [
+  { emoji: "📊", name: "Percentage Calculator", href: "https://www.dayblip.com/tools/percentage-calculator", use: "Math class: calculate any percentage — three calculation types. No signup needed." },
 ]
 
 function EmbedCodeBlock({ slug, height }: { slug: string; height: number }) {
@@ -68,6 +73,20 @@ export default function ForEducatorsPage() {
           </div>
         ))}
       </div>
+
+      {linkedTools.length > 0 && (
+        <div style={{ marginTop: 8 }}>
+          {linkedTools.map(t => (
+            <div key={t.href} style={{ background: "#16213e", borderRadius: 8, padding: 16, marginBottom: 20 }}>
+              <div style={{ fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 4 }}>{t.emoji} {t.name}</div>
+              <div style={{ fontSize: 12, color: "#e94560", marginBottom: 8 }}>Best for: {t.use}</div>
+              <a href={t.href} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: "#4FC3F7", textDecoration: "none", fontWeight: 600 }}>
+                Open tool → {t.href.replace("https://www.dayblip.com", "dayblip.com")}
+              </a>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div style={{ marginTop: 32, padding: 16, background: "#16213e", borderRadius: 8, textAlign: "center" }}>
         <div style={{ fontSize: 14, color: "#a8a8b3", marginBottom: 8 }}>Browse all embeddable tools</div>

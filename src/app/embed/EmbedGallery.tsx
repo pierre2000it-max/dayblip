@@ -43,6 +43,26 @@ const tools = [
     emoji: "💼", name: "Salary Market Check", desc: "Market salary range for any job title and state", height: 440,
     slug: "salary-check",
   },
+  {
+    emoji: "🎓", name: "GPA Calculator", desc: "Free GPA calculator for students — weighted and unweighted. No signup.", height: 520,
+    slug: "gpa-calculator",
+  },
+  {
+    emoji: "🏛️", name: "No Tax on Overtime 2026", desc: "Calculate 2026 overtime tax savings under the One Big Beautiful Bill Act.", height: 480,
+    slug: "overtime-tax",
+  },
+  {
+    emoji: "🍽️", name: "Tip Calculator", desc: "Split any restaurant bill and calculate tips instantly.", height: 400,
+    slug: "tip-calculator",
+  },
+  {
+    emoji: "💵", name: "Paycheck Calculator", desc: "Calculate exact net pay after all taxes and deductions for any US state.", height: 520,
+    slug: "paycheck-calculator",
+  },
+  {
+    emoji: "🍼", name: "Pregnancy Due Date Calculator", desc: "Calculate pregnancy due date with trimester timeline and weekly milestones.", height: 460,
+    slug: "due-date-calculator",
+  },
 ]
 
 function EmbedCard({ tool }: { tool: typeof tools[0] }) {

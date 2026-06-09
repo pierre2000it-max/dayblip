@@ -340,6 +340,11 @@ export default function GPACalculatorPage() {
             { emoji: "💰", title: "Student Loan Calculator", desc: "True cost of your student debt", href: "/finance/student-loan" },
             { emoji: "🤖", title: "AI Job Score", desc: "How AI-proof is your field of study?", href: "/tools/ai-job-score" },
           ]} />
+
+          <div style={{ background: "#1e2d4a", borderRadius: 8, padding: 16, textAlign: "center", marginTop: 32, marginBottom: 16 }}>
+            <p style={{ color: "#fff", fontSize: 14, marginBottom: 8, marginTop: 0 }}>Want to add this tool to your website?</p>
+            <a href="/embed" style={{ color: "#e94560", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Get the free embed code →</a>
+          </div>
         </div>
       </section>
     </div>
