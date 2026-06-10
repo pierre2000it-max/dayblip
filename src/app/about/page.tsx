@@ -86,7 +86,7 @@ export default function AboutPage() {
               two days, negotiate a raise. I could not find one that was free, clean
               and did not require an account.
             </p>
-            <p>So I built it. Then I built 145 more.</p>
+            <p>So I built it. Then I built 160 more.</p>
           </div>
         </section>
 
