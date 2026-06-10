@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import DateNav from "./DateNav";
 import ShareButtons from "@/components/ShareButtons";
+import WikiEvents from "./WikiEvents";
 import onThisDayRaw from "@/data/onThisDay.json";
 import { generateOnThisDaySchema, generateBreadcrumbSchema } from "@/lib/seo";
 import AdUnit from "@/components/AdUnit";
@@ -81,7 +82,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const parsed = parseSlug(params.date);
   const label  = parsed ? `${MONTH_DISPLAY[parsed.month - 1]} ${ordinal(parsed.day)}` : params.date;
-  const title  = `On This Day: ${label} — History, Events & Birthdays`;
+  const title  = `What Happened on ${label}? Historical Events | Dayblip`;
   const desc   = `Discover what happened on ${label} in history. Famous birthdays, major events and historical facts.`;
   const url    = `/on-this-day/${params.date}`;
   return {
@@ -126,7 +127,6 @@ export default function OnThisDayPage({
   const monthDay       = `${MONTH_DISPLAY[month - 1]} ${day}`;
   const data           = onThisDayData[params.date] ?? null;
   const daysAway       = daysUntilDate(month, day);
-  const currentYear    = new Date().getFullYear();
   const prevSlug       = adjacentSlug(month, day, -1);
   const nextSlug       = adjacentSlug(month, day, 1);
   const pageUrl        = `${BASE}/on-this-day/${params.date}`;
@@ -185,86 +185,28 @@ export default function OnThisDayPage({
           </div>
         </section>
 
-        {data ? (
-          <>
-            {/* ── EVENTS ───────────────────────────────────────────── */}
-            <section className="bg-[#16213e] px-6 py-14">
-              <div className="mx-auto max-w-[900px]">
-                <h2 className="mb-10 text-2xl font-bold text-white">
-                  What Happened on {monthDay}?
-                </h2>
-                <div className="relative">
-                  <div className="absolute bottom-0 left-[5.5rem] top-0 w-px bg-[#0f3460]" />
-                  {[...data.events]
-                    .sort((a, b) => a.year - b.year)
-                    .map((ev) => (
-                      <div key={ev.year} className="relative mb-8 flex items-start gap-6">
-                        <div className="w-20 shrink-0 pt-0.5 text-right">
-                          <span className="text-lg font-bold text-[#e94560]">{ev.year}</span>
-                        </div>
-                        <div className="relative z-10 mt-2 h-3 w-3 shrink-0 rounded-full bg-[#e94560] ring-4 ring-[#16213e]" />
-                        <p className="flex-1 pt-0.5 leading-relaxed text-white">{ev.event}</p>
-                      </div>
-                    ))}
-                </div>
-              </div>
-            </section>
+        {/* ── LIVE WIKIPEDIA EVENTS ─────────────────────────────── */}
+        <WikiEvents
+          month={month}
+          day={day}
+          formattedDate={formattedDate}
+          monthDay={monthDay}
+          fallback={data}
+        />
 
-            {/* Ad — between events and birthdays */}
-            <div className="bg-[#16213e] px-6 pb-4">
-              <div className="mx-auto max-w-[900px]">
-                <AdUnit slot="1234567890" format="rectangle" />
-              </div>
-            </div>
-
-            {/* ── BIRTHDAYS ────────────────────────────────────────── */}
-            <section className="bg-[#1a1a2e] px-6 py-14">
-              <div className="mx-auto max-w-[900px]">
-                <h2 className="mb-8 text-2xl font-bold text-white">
-                  Famous Birthdays on {monthDay}
-                </h2>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                  {data.birthdays.map((b) => (
-                    <div key={b.name} className="rounded-xl border border-[#0f3460] bg-[#16213e] p-5">
-                      <p className="mb-1 text-lg font-bold text-white">{b.name}</p>
-                      <p className="mb-3 text-sm text-[#a8a8b3]">{b.role}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-semibold text-[#e94560]">Born {b.year}</span>
-                        <span className="text-xs text-[#a8a8b3]">{currentYear - b.year} years ago</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          </>
-        ) : (
-          <section className="bg-[#16213e] px-6 py-16">
-            <div className="mx-auto max-w-[900px] text-center">
-              <span className="mb-4 block text-5xl">📜</span>
-              <h2 className="mb-3 text-2xl font-bold text-white">Coming Soon</h2>
-              <p className="mb-8 text-[#a8a8b3]">
-                We are still adding history for{" "}
-                <strong className="text-white">{formattedDate}</strong>. Check back soon!
-              </p>
-              <div className="flex flex-wrap justify-center gap-3">
-                {POPULAR_DATES.map((d) => (
-                  <Link key={d.slug} href={`/on-this-day/${d.slug}`}
-                    className="rounded-full border border-[#0f3460] px-5 py-2 text-sm text-[#a8a8b3] transition-colors hover:border-[#e94560] hover:text-white">
-                    {d.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+        {/* Ad — after events */}
+        <div className="bg-[#1a1a2e] px-6 pb-4">
+          <div className="mx-auto max-w-[900px]">
+            <AdUnit slot="1234567890" format="rectangle" />
+          </div>
+        </div>
 
         <section className="bg-[#1a1a2e] px-6 py-10">
           <div className="mx-auto max-w-[900px]">
             <ShareButtons
-              text={data?.events?.[0] ? `On this day: ${data.events[0].event} Discover more history!` : `Discover what happened on ${formattedDate} in history!`}
+              text={`On ${monthDay} in history: see all historical events for any date at www.dayblip.com/on-this-day`}
               url={pageUrl}
-              title={`On This Day: ${formattedDate}`}
+              title={`What Happened on ${formattedDate}? Historical Events | Dayblip`}
             />
           </div>
         </section>
