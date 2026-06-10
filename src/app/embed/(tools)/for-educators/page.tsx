@@ -10,6 +10,8 @@ const tools = [
   { emoji: "🗓️", name: "Born In Year Facts", slug: "born-in", height: 440, use: "History, social studies: historical context" },
   { emoji: "🎓", name: "GPA Calculator", slug: "gpa-calculator", height: 520, use: "Academic advising: track and calculate student GPA. No student accounts required." },
   { emoji: "📊", name: "Percentage Calculator", slug: "percentage-calculator", height: 440, use: "Math class: calculate any percentage — three calculation types. No signup needed." },
+  { emoji: "📝", name: "Grade Calculator", slug: "grade-calculator", height: 440, use: "Students: final exam requirements and test scores. No accounts needed." },
+  { emoji: "⚖️", name: "BMI Calculator", slug: "bmi-calculator", height: 420, use: "Health and PE classes: visual BMI scale with healthy weight ranges. Imperial and metric." },
 ]
 
 const linkedTools: { emoji: string; name: string; href: string; use: string }[] = []

@@ -165,6 +165,11 @@ const urls = [
   "https://www.dayblip.com/embed/sleep-calculator",
   "https://www.dayblip.com/embed/calorie-calculator",
   "https://www.dayblip.com/embed/body-fat",
+  "https://www.dayblip.com/embed/overtime-calculator",
+  "https://www.dayblip.com/embed/unit-converter",
+  "https://www.dayblip.com/embed/bmi-calculator",
+  "https://www.dayblip.com/embed/grade-calculator",
+  "https://www.dayblip.com/embed/water-intake",
 
   // Phase 4 — Curiosity viral calculators
   "https://www.dayblip.com/curiosity/numerology",

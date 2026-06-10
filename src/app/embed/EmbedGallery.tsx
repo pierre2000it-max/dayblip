@@ -83,6 +83,26 @@ const tools = [
     emoji: "💪", name: "Body Fat Calculator", desc: "US Navy method body fat percentage. No calipers needed — just a measuring tape.", height: 480,
     slug: "body-fat",
   },
+  {
+    emoji: "⏱️", name: "Overtime Pay Calculator", desc: "Calculate gross overtime pay at 1.5x or 2x for any hourly rate and hours worked.", height: 420,
+    slug: "overtime-calculator",
+  },
+  {
+    emoji: "📐", name: "Unit Converter", desc: "Convert length, weight, temperature and volume units. Perfect for recipe and science blogs.", height: 400,
+    slug: "unit-converter",
+  },
+  {
+    emoji: "⚖️", name: "BMI Calculator", desc: "Body mass index calculator with visual scale and healthy weight range. Imperial and metric.", height: 420,
+    slug: "bmi-calculator",
+  },
+  {
+    emoji: "📝", name: "Grade Calculator", desc: "What grade do you need on your final exam? Plus instant test score calculator.", height: 440,
+    slug: "grade-calculator",
+  },
+  {
+    emoji: "💧", name: "Water Intake Calculator", desc: "Daily water intake calculator based on weight, activity level and climate. Great for health and wellness blogs.", height: 440,
+    slug: "water-intake",
+  },
 ]
 
 function EmbedCard({ tool }: { tool: typeof tools[0] }) {
