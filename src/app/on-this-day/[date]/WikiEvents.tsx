@@ -1,21 +1,16 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { Suspense } from "react";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 interface WikiEvent {
   year: string;
   text: string;
-  wikiUrl?: string;
 }
 
 interface WikiPerson {
   year: string;
   name: string;
   description: string;
-  wikiUrl?: string;
 }
 
 interface FallbackEvent  { year: number; event: string }
@@ -30,18 +25,12 @@ interface Props {
   fallback: FallbackData | null;
 }
 
-type Status = "loading" | "success" | "fallback" | "error";
-
 // ── Wikipedia API types ───────────────────────────────────────────────────────
 
-interface WikiApiPage { titles?: { normalized?: string }; description?: string; content_urls?: { desktop?: { page?: string } } }
+interface WikiApiPage { titles?: { normalized?: string }; description?: string }
 interface WikiApiEntry { year: number; text: string; pages?: WikiApiPage[] }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-
-function extractWikiUrl(pages?: WikiApiPage[]): string | undefined {
-  return pages?.[0]?.content_urls?.desktop?.page;
-}
 
 function extractDescription(pages?: WikiApiPage[]): string {
   return pages?.[0]?.description ?? "";
@@ -67,44 +56,41 @@ async function fetchWikipedia(month: number, day: number): Promise<{ events: Wik
   const events: WikiEvent[] = (data.events ?? []).slice(0, 10).map((e: WikiApiEntry) => ({
     year: String(e.year),
     text: e.text,
-    wikiUrl: extractWikiUrl(e.pages),
   }));
 
   const births: WikiPerson[] = (data.births ?? []).slice(0, 8).map((e: WikiApiEntry) => ({
     year: String(e.year),
     name: e.pages?.[0]?.titles?.normalized ?? e.text.split(",")[0],
     description: extractDescription(e.pages) || e.text,
-    wikiUrl: extractWikiUrl(e.pages),
   }));
 
   const deaths: WikiPerson[] = (data.deaths ?? []).slice(0, 5).map((e: WikiApiEntry) => ({
     year: String(e.year),
     name: e.pages?.[0]?.titles?.normalized ?? e.text.split(",")[0],
     description: extractDescription(e.pages) || e.text,
-    wikiUrl: extractWikiUrl(e.pages),
   }));
 
   return { events, births, deaths };
 }
 
 async function fetchBackup(month: number, day: number): Promise<{ events: WikiEvent[]; births: WikiPerson[]; deaths: WikiPerson[] }> {
-  const res = await fetch(`https://history.muffinlabs.com/date/${month}/${day}`);
+  const res = await fetch(`https://history.muffinlabs.com/date/${month}/${day}`, {
+    next: { revalidate: 86400 },
+  });
   if (!res.ok) throw new Error(`Backup API ${res.status}`);
   const data = await res.json();
 
-  const mapEntry = (e: { year: string; text: string; links?: { link?: string }[] }): WikiEvent => ({
+  const mapEntry = (e: { year: string; text: string }): WikiEvent => ({
     year: e.year,
     text: e.text,
-    wikiUrl: e.links?.[0]?.link,
   });
 
-  const mapPerson = (e: { year: string; text: string; links?: { link?: string }[] }): WikiPerson => {
+  const mapPerson = (e: { year: string; text: string }): WikiPerson => {
     const parts = e.text.split(",");
     return {
       year: e.year,
       name: parts[0]?.trim() ?? e.text,
       description: parts.slice(1).join(",").trim() || e.text,
-      wikiUrl: e.links?.[0]?.link,
     };
   };
 
@@ -115,72 +101,32 @@ async function fetchBackup(month: number, day: number): Promise<{ events: WikiEv
   };
 }
 
-// ── Component ─────────────────────────────────────────────────────────────────
+// ── Server component (actual fetch + render) ──────────────────────────────────
 
-export default function WikiEvents({ month, day, formattedDate, monthDay, fallback }: Props) {
-  const [status, setStatus]   = useState<Status>("loading");
-  const [events, setEvents]   = useState<WikiEvent[]>([]);
-  const [births, setBirths]   = useState<WikiPerson[]>([]);
-  const [deaths, setDeaths]   = useState<WikiPerson[]>([]);
+async function WikiEventsContent({ month, day, formattedDate, monthDay, fallback }: Props) {
+  let events: WikiEvent[] = [];
+  let births: WikiPerson[] = [];
+  let deaths: WikiPerson[] = [];
+  let fetchFailed = false;
 
-  useEffect(() => {
-    let cancelled = false;
-    setStatus("loading");
-
-    (async () => {
-      try {
-        const result = await fetchWikipedia(month, day);
-        if (!cancelled) {
-          setEvents(result.events);
-          setBirths(result.births);
-          setDeaths(result.deaths);
-          setStatus("success");
-        }
-      } catch {
-        try {
-          const result = await fetchBackup(month, day);
-          if (!cancelled) {
-            setEvents(result.events);
-            setBirths(result.births);
-            setDeaths(result.deaths);
-            setStatus("success");
-          }
-        } catch {
-          if (!cancelled) setStatus(fallback ? "fallback" : "error");
-        }
-      }
-    })();
-
-    return () => { cancelled = true; };
-  }, [month, day, fallback]);
-
-  // ── Loading ────────────────────────────────────────────────────────────────
-  if (status === "loading") {
-    return (
-      <section className="bg-[#16213e] px-6 py-20">
-        <div className="mx-auto max-w-[900px] text-center">
-          <div className="mb-4 inline-block h-10 w-10 animate-spin rounded-full border-4 border-[#0f3460] border-t-[#e94560]" />
-          <p className="text-[#a8a8b3]">Loading historical events…</p>
-        </div>
-      </section>
-    );
+  try {
+    const result = await fetchWikipedia(month, day);
+    events = result.events;
+    births = result.births;
+    deaths = result.deaths;
+  } catch {
+    try {
+      const result = await fetchBackup(month, day);
+      events = result.events;
+      births = result.births;
+      deaths = result.deaths;
+    } catch {
+      fetchFailed = true;
+    }
   }
 
-  // ── Error (no fallback) ────────────────────────────────────────────────────
-  if (status === "error") {
-    return (
-      <section className="bg-[#16213e] px-6 py-16">
-        <div className="mx-auto max-w-[900px] text-center">
-          <span className="mb-4 block text-5xl">📡</span>
-          <h2 className="mb-3 text-xl font-bold text-white">Unable to load live events</h2>
-          <p className="text-[#a8a8b3]">Please try again later.</p>
-        </div>
-      </section>
-    );
-  }
-
-  // ── Fallback to hardcoded data ─────────────────────────────────────────────
-  if (status === "fallback" && fallback) {
+  // ── Fallback to hardcoded data ───────────────────────────────────────────
+  if (fetchFailed && fallback) {
     return (
       <>
         <div className="bg-[#16213e] px-6 pt-8">
@@ -216,10 +162,22 @@ export default function WikiEvents({ month, day, formattedDate, monthDay, fallba
     );
   }
 
-  // ── Live data ──────────────────────────────────────────────────────────────
+  // ── Error (no fallback) ──────────────────────────────────────────────────
+  if (fetchFailed) {
+    return (
+      <section className="bg-[#16213e] px-6 py-16">
+        <div className="mx-auto max-w-[900px] text-center">
+          <span className="mb-4 block text-5xl">📡</span>
+          <h2 className="mb-3 text-xl font-bold text-white">Unable to load live events</h2>
+          <p className="text-[#a8a8b3]">Please try again later.</p>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Live data ────────────────────────────────────────────────────────────
   return (
     <>
-      {/* Live badge */}
       <div className="bg-[#16213e] px-6 pt-8">
         <div className="mx-auto max-w-[900px]">
           <p className="text-[14px] text-[#a8a8b3]">
@@ -246,12 +204,6 @@ export default function WikiEvents({ month, day, formattedDate, monthDay, fallba
                   <div className="relative z-10 mt-2 h-3 w-3 shrink-0 rounded-full bg-[#e94560] ring-4 ring-[#16213e]" />
                   <div className="flex-1 pt-0.5">
                     <p className="leading-relaxed text-[#e8e8e8]">{ev.text}</p>
-                    {ev.wikiUrl && (
-                      <a href={ev.wikiUrl} target="_blank" rel="noopener noreferrer"
-                        className="mt-1 inline-block text-xs text-[#a8a8b3] hover:text-[#e94560] transition-colors">
-                        Learn more →
-                      </a>
-                    )}
                   </div>
                 </div>
               ))}
@@ -270,15 +222,7 @@ export default function WikiEvents({ month, day, formattedDate, monthDay, fallba
                   className="rounded-xl border border-[#0f3460] bg-[#1e2d4a] p-5 transition-colors hover:border-l-4 hover:border-l-[#e94560]">
                   <p className="mb-1 text-lg font-bold text-white">{p.name}</p>
                   <p className="mb-3 line-clamp-2 text-sm text-[#a8a8b3]">{p.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-[#e94560]">Born {p.year}</span>
-                    {p.wikiUrl && (
-                      <a href={p.wikiUrl} target="_blank" rel="noopener noreferrer"
-                        className="text-xs text-[#a8a8b3] hover:text-[#e94560] transition-colors">
-                        Learn more →
-                      </a>
-                    )}
-                  </div>
+                  <span className="text-sm font-semibold text-[#e94560]">Born {p.year}</span>
                 </div>
               ))}
             </div>
@@ -297,15 +241,7 @@ export default function WikiEvents({ month, day, formattedDate, monthDay, fallba
                   className="rounded-xl border border-[#0f3460] bg-[#1e2d4a] p-5 transition-colors hover:border-l-4 hover:border-l-[#e94560]">
                   <p className="mb-1 text-lg font-bold text-white">{p.name}</p>
                   <p className="mb-3 line-clamp-2 text-sm text-[#a8a8b3]">{p.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-[#e94560]">{p.year}</span>
-                    {p.wikiUrl && (
-                      <a href={p.wikiUrl} target="_blank" rel="noopener noreferrer"
-                        className="text-xs text-[#a8a8b3] hover:text-[#e94560] transition-colors">
-                        Learn more →
-                      </a>
-                    )}
-                  </div>
+                  <span className="text-sm font-semibold text-[#e94560]">{p.year}</span>
                 </div>
               ))}
             </div>
@@ -316,7 +252,20 @@ export default function WikiEvents({ month, day, formattedDate, monthDay, fallba
   );
 }
 
-// ── Fallback timeline (reuses existing style) ──────────────────────────────────
+// ── Loading skeleton ──────────────────────────────────────────────────────────
+
+function LoadingUI() {
+  return (
+    <section className="bg-[#16213e] px-6 py-20">
+      <div className="mx-auto max-w-[900px] text-center">
+        <div className="mb-4 inline-block h-10 w-10 animate-spin rounded-full border-4 border-[#0f3460] border-t-[#e94560]" />
+        <p className="text-[#a8a8b3]">Loading historical events…</p>
+      </div>
+    </section>
+  );
+}
+
+// ── Fallback timeline ─────────────────────────────────────────────────────────
 
 function FallbackTimeline({ events }: { events: FallbackEvent[] }) {
   return (
@@ -335,5 +284,12 @@ function FallbackTimeline({ events }: { events: FallbackEvent[] }) {
   );
 }
 
-// ── suppress unused import warning ───────────────────────────────────────────
-void Link;
+// ── Public export (Suspense wrapper) ─────────────────────────────────────────
+
+export default function WikiEvents(props: Props) {
+  return (
+    <Suspense fallback={<LoadingUI />}>
+      <WikiEventsContent {...props} />
+    </Suspense>
+  );
+}
