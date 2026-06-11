@@ -239,7 +239,7 @@ export default function TimeMachineDatePage({ params }: { params: { date: string
                 ))}
               </div>
             ) : (
-              <p className="text-[#a8a8b3] text-sm">Historical events for this date could not be loaded right now. Try another date or check Wikipedia directly.</p>
+              <p className="text-[#a8a8b3] text-sm">Historical events for this date could not be loaded right now. Try another date.</p>
             )}
           </div>
 

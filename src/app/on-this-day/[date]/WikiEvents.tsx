@@ -223,7 +223,7 @@ export default function WikiEvents({ month, day, formattedDate, monthDay, fallba
       <div className="bg-[#16213e] px-6 pt-8">
         <div className="mx-auto max-w-[900px]">
           <p className="text-[14px] text-[#a8a8b3]">
-            Events below are loaded live from Wikipedia for {formattedDate}
+            Events below are loaded live for {formattedDate}
           </p>
         </div>
       </div>
@@ -249,7 +249,7 @@ export default function WikiEvents({ month, day, formattedDate, monthDay, fallba
                     {ev.wikiUrl && (
                       <a href={ev.wikiUrl} target="_blank" rel="noopener noreferrer"
                         className="mt-1 inline-block text-xs text-[#a8a8b3] hover:text-[#e94560] transition-colors">
-                        Wikipedia →
+                        Learn more →
                       </a>
                     )}
                   </div>
@@ -275,7 +275,7 @@ export default function WikiEvents({ month, day, formattedDate, monthDay, fallba
                     {p.wikiUrl && (
                       <a href={p.wikiUrl} target="_blank" rel="noopener noreferrer"
                         className="text-xs text-[#a8a8b3] hover:text-[#e94560] transition-colors">
-                        Wikipedia →
+                        Learn more →
                       </a>
                     )}
                   </div>
@@ -302,7 +302,7 @@ export default function WikiEvents({ month, day, formattedDate, monthDay, fallba
                     {p.wikiUrl && (
                       <a href={p.wikiUrl} target="_blank" rel="noopener noreferrer"
                         className="text-xs text-[#a8a8b3] hover:text-[#e94560] transition-colors">
-                        Wikipedia →
+                        Learn more →
                       </a>
                     )}
                   </div>
