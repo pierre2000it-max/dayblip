@@ -170,10 +170,10 @@ export default function GenerationQuizPage() {
           )}
 
           <RelatedTools tools={[
-            { emoji: "🔢", title: "Numerology Calculator", desc: "Your life path number and meaning", href: "/curiosity/numerology" },
+            { emoji: "🧬", title: "Generation Salary Comparison", desc: "Are you doing better than your parents?", href: "/tools/generation-compare" },
+            { emoji: "🧠", title: "Dayblip Daily", desc: "One financial puzzle every day", href: "/daily" },
             { emoji: "🎂", title: "Birthday Personality", desc: "Everything your birthday reveals", href: "/tools/birthday-personality" },
             { emoji: "🧠", title: "IQ Estimate Quiz", desc: "10-question logic and pattern quiz", href: "/curiosity/iq-estimate" },
-            { emoji: "⭐", title: "Star Sign Calculator", desc: "Your western astrology sign", href: "/star-sign" },
           ]} />
         </div>
       </section>

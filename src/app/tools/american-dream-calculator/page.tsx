@@ -270,9 +270,9 @@ export default function AmericanDreamPage() {
           />
 
           <RelatedTools tools={[
+            { emoji: "🧬", title: "Generation Salary Comparison", desc: "Are you doing better than your parents?", href: "/tools/generation-compare" },
             { emoji: "🆓", title: "FI Date Calculator", desc: "Find the exact date you could stop working", href: "/tools/fi-date" },
             { emoji: "🏙️", title: "Cost of Living", desc: "Compare cities side by side", href: "/finance/cost-of-living" },
-            { emoji: "💵", title: "Take Home Pay", desc: "Paycheck after all deductions", href: "/finance/take-home-pay" },
             { emoji: "⏰", title: "True Hourly Wage", desc: "What does your job really pay per hour?", href: "/tools/true-hourly-wage" },
           ]} />
         </div>

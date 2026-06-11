@@ -266,7 +266,7 @@ export default function IQEstimatePage() {
           )}
 
           <RelatedTools tools={[
-            { emoji: "🔢", title: "Numerology Calculator", desc: "What your numbers reveal about you", href: "/curiosity/numerology" },
+            { emoji: "🧠", title: "Dayblip Daily", desc: "One financial puzzle every day", href: "/daily" },
             { emoji: "🧬", title: "Generation Quiz", desc: "What generation do you really belong to?", href: "/tools/generation-quiz" },
             { emoji: "🎂", title: "Birthday Personality", desc: "What your birthday says about you", href: "/tools/birthday-personality" },
             { emoji: "📚", title: "Learning Calculator", desc: "How long to master any skill", href: "/tools/learning-calculator" },

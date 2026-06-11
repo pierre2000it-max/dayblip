@@ -316,9 +316,9 @@ export default function FinancialLifeScorePage() {
 
           <RelatedTools tools={[
             { emoji: "🆓", title: "FI Date Calculator", desc: "Find the exact date you could stop working", href: "/tools/fi-date" },
+            { emoji: "🛡️", title: "Life Insurance Calculator", desc: "How much coverage do you actually need?", href: "/tools/life-insurance-calculator" },
+            { emoji: "🧠", title: "Dayblip Daily", desc: "One financial puzzle every day", href: "/daily" },
             { emoji: "📊", title: "Net Worth", desc: "Know where you stand financially", href: "/finance/net-worth" },
-            { emoji: "💳", title: "Debt Payoff", desc: "Avalanche or snowball your debt", href: "/finance/debt-payoff" },
-            { emoji: "🛡️", title: "Emergency Fund", desc: "How much should you save?", href: "/finance/emergency-fund" },
           ]} />
         </div>
       </section>

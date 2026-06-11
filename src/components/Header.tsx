@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Countdowns", href: "/days-until/christmas" },
   { label: "Born In", href: "/born-in" },
   { label: "Finance", href: "/finance" },
+  { label: "Daily", href: "/daily" },
   { label: "Curiosity", href: "/curiosity" },
   { label: "Life & Money", href: "/tools/life-money" },
   { label: "Health", href: "/health" },

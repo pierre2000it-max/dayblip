@@ -302,10 +302,10 @@ export default function FIDatePage() {
                   </a>
                 </div>
                 <RelatedTools tools={[
+                  { emoji: "🛡️", title: "Life Insurance Calculator", desc: "How much coverage do you actually need?", href: "/tools/life-insurance-calculator" },
                   { emoji: "🏦", title: "Retirement Savings", desc: "Are you on track to retire?", href: "/finance/retirement-savings" },
                   { emoji: "💹", title: "Compound Interest", desc: "Watch your money grow over time", href: "/finance/compound-interest" },
                   { emoji: "💳", title: "Minimum Payment True Cost", desc: "See the shocking cost of paying minimums", href: "/tools/minimum-payment" },
-                  { emoji: "💳", title: "Debt Payoff", desc: "Avalanche or snowball your debt", href: "/finance/debt-payoff" },
                   { emoji: "📊", title: "Net Worth Calculator", desc: "Know where you stand financially", href: "/finance/net-worth" },
                 ]} />
                 {DISCLAIMER}
