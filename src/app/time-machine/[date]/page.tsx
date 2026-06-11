@@ -1,5 +1,5 @@
 "use client"
-import { use, useState, useEffect, useMemo } from "react"
+import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
@@ -103,8 +103,8 @@ interface WikiResponse {
   deaths?: WikiEvent[]
 }
 
-export default function TimeMachineDatePage({ params }: { params: Promise<{ date: string }> }) {
-  const { date } = use(params)
+export default function TimeMachineDatePage({ params }: { params: { date: string } }) {
+  const { date } = params
   const [wikiEvents, setWikiEvents] = useState<WikiEvent[]>([])
   const [wikiLoading, setWikiLoading] = useState(true)
 

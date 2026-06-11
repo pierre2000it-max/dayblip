@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-export async function generateMetadata({ params }: { params: Promise<{ date: string }> }): Promise<Metadata> {
-  const { date } = await params
+export async function generateMetadata({ params }: { params: { date: string } }): Promise<Metadata> {
+  const { date } = params
   const parts = date.split("-")
   const year = parts[0] ?? ""
   const month = parts[1] ?? ""
