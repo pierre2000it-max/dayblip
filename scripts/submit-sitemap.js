@@ -64,6 +64,12 @@ const urls = [
   "https://www.dayblip.com/tools/sleep-debt",
   "https://www.dayblip.com/tools/smoking-cost",
 
+  // Section 1 — New viral tools
+  "https://www.dayblip.com/finance/what-if-i-invested",
+  "https://www.dayblip.com/tools/american-dream-calculator",
+  "https://www.dayblip.com/tools/financial-life-score",
+  "https://www.dayblip.com/time-machine",
+
   // Tool hub pages
   "https://www.dayblip.com/tools/finance",
   "https://www.dayblip.com/tools/life-money",

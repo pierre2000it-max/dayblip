@@ -137,7 +137,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/finance/cost-of-living",      0.9),
     p("/finance/overtime-tax",        0.9),
     p("/finance/overtime-calculator", 0.9),
-    p("/finance/paycheck-calculator", 0.9),
+    p("/finance/paycheck-calculator",    0.9),
+    p("/finance/what-if-i-invested",     0.9),
 
     // ═══════════════════════════════════════════════════════════════════════
     // EDUCATION CALCULATORS  (priority 0.9, monthly) — Phase 2
@@ -149,6 +150,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     // LIFE & MONEY INSIGHT TOOLS  (priority 0.9, monthly)
     // ═══════════════════════════════════════════════════════════════════════
+    p("/tools/american-dream-calculator", 0.9),
+    p("/tools/financial-life-score",     0.9),
+    p("/time-machine",                   0.9),
     p("/tools/minimum-payment",         0.9),
     p("/tools/early-vs-late",           0.9),
     p("/tools/market-timing",           0.9),

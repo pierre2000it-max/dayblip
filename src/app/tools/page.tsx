@@ -44,6 +44,9 @@ const tools = [
   { emoji: "%", title: "Percentage Calculator", desc: "Three types of percentage calculations in one", href: "/tools/percentage-calculator" },
   { emoji: "📖", title: "Reading Time Calculator", desc: "How long to read any article or book", href: "/tools/reading-time" },
   { emoji: "🔐", title: "Password Strength Checker", desc: "How long to crack your password?", href: "/tools/password-strength" },
+  { emoji: "🇺🇸", title: "American Dream Calculator", desc: "How long until you can afford it all?", href: "/tools/american-dream-calculator" },
+  { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health 0–100", href: "/tools/financial-life-score" },
+  { emoji: "⏰", title: "Historical Time Machine", desc: "What did the world look like on any date?", href: "/time-machine" },
 ]
 
 export default function ToolsPage() {

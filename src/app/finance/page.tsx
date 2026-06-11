@@ -29,6 +29,7 @@ const tools = [
   { emoji: "⏱️", title: "Overtime Pay Calculator", desc: "How much do you earn working extra hours?", href: "/finance/overtime-calculator" },
   { emoji: "🧾", title: "Paycheck Calculator", desc: "Your exact net pay after all deductions", href: "/finance/paycheck-calculator" },
   { emoji: "💵", title: "Tip Calculator", desc: "Split bills and calculate tips instantly", href: "/tools/tip-calculator" },
+  { emoji: "📈", title: "What If I Had Invested", desc: "See what any investment would be worth today", href: "/finance/what-if-i-invested" },
 ]
 
 export default function FinancePage() {
