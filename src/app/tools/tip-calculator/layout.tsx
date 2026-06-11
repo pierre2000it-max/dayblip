@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Tip Calculator — Split Bills and Calculate Tips Instantly | Dayblip",
-  description: "Calculate tip amount per person for any bill size and tip percentage. Split among any number of people. Includes no-tax-on-tips info for tipped workers in 2026. Free.",
+  description: "Calculate tip amount and split the bill among any number of people. Includes 2026 no-tax-on-tips info for tipped workers. Free tip calculator — no signup.",
   alternates: { canonical: "https://www.dayblip.com/tools/tip-calculator" },
 }
 
