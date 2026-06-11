@@ -8,6 +8,9 @@ export const metadata: Metadata = {
 }
 
 const tools = [
+  { emoji: "💼", title: "Job Offer Comparison", desc: "Which offer is really worth more after taxes?", href: "/tools/job-offer-comparison" },
+  { emoji: "💍", title: "Relationship Cost Calculator", desc: "True cost of weddings divorce and having children", href: "/tools/relationship-calculator" },
+  { emoji: "💱", title: "Money Transfer Comparison", desc: "Cheapest way to send money internationally", href: "/tools/money-transfer-comparison" },
   { emoji: "💳", title: "Minimum Payment True Cost", desc: "See the shocking cost of paying minimums", href: "/tools/minimum-payment" },
   { emoji: "⏰", title: "Early vs Late Saver", desc: "Why starting earlier beats saving more", href: "/tools/early-vs-late" },
   { emoji: "📈", title: "Market Timing Cost", desc: "What missing 10 best days costs you", href: "/tools/market-timing" },
