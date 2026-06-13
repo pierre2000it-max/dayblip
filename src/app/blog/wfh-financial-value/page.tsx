@@ -76,7 +76,7 @@ export default function WfhFinancialValuePage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              The average American who commutes by car spends $8,466 per year on commuting costs alone according to the American Automobile Association. Adding work lunches ($2,500/year), work clothing ($1,800/year), and coffee ($1,100/year), the average remote worker saves $12,000–$14,000 per year compared to their in-office counterpart. At 7% annual investment returns, $12,000 per year invested instead grows to $1.13 million over 30 years.
+              The average American who commutes by car spends $8,466 per year on commuting costs alone according to the American Automobile Association. Adding work lunches ($2,500/year), work clothing ($1,800/year), and coffee ($1,100/year), the average remote worker saves $12,000–$14,000 per year compared to their in-office counterpart. At 7% annual investment returns, $12,000 per year invested instead grows to $1.13 million over 30 years. A 3-day hybrid schedule costs approximately $7,530 per year in work-related expenses — $4,287 less than fully in-office but $6,930 more than fully remote.
             </p>
           </div>
         </section>
@@ -87,7 +87,7 @@ export default function WfhFinancialValuePage() {
 
         <div className="mb-8">
           <ShareButtons
-            text="Remote work saves the average car commuter $12,317 per year in commute, meals, clothing, and parking costs. Over 30 years invested that is $1.2 million. Full breakdown: www.dayblip.com/blog/wfh-financial-value"
+            text="Remote work saves $12,317/year vs fully in-office. Even a 3-day hybrid costs $7,530/year. Full breakdown including hybrid scenarios: www.dayblip.com/blog/wfh-financial-value"
             url="https://www.dayblip.com/blog/wfh-financial-value"
             title="The True Financial Value of Working From Home"
           />
@@ -182,6 +182,69 @@ export default function WfhFinancialValuePage() {
             </table>
           </div>
 
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">The Hybrid Reality — What 2 or 3 Days in Office Actually Costs</h2>
+
+          <p>
+            Most workers are not choosing between fully remote and fully in-office. They are negotiating hybrid schedules — and the financial difference between those options is rarely calculated explicitly. A 3-day in-office schedule is not &ldquo;half the cost&rdquo; of 5 days. The numbers work out differently because some costs scale with days and others are fixed.
+          </p>
+
+          <div className="rounded-xl border border-[#0f3460] overflow-hidden my-6">
+            <table className="w-full text-sm">
+              <thead>
+                <tr style={{ background: "#1e2d4a" }}>
+                  <th className="text-left px-4 py-3 text-white font-semibold">Schedule</th>
+                  <th className="text-right px-4 py-3 text-white font-semibold">Annual Commute</th>
+                  <th className="text-right px-4 py-3 text-white font-semibold">Annual Food</th>
+                  <th className="text-right px-4 py-3 text-white font-semibold">Annual Clothing</th>
+                  <th className="text-right px-4 py-3 text-white font-semibold">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { schedule: "5 days (fully in-office)", commute: "$6,867", food: "$2,750", clothing: "$2,200", total: "$11,817" },
+                  { schedule: "3 days (hybrid)", commute: "$4,120", food: "$1,650", clothing: "$1,760", total: "$7,530" },
+                  { schedule: "2 days (hybrid)", commute: "$2,747", food: "$1,100", clothing: "$1,540", total: "$5,387" },
+                  { schedule: "0 days (fully remote)", commute: "$0", food: "$0", clothing: "$600", total: "$600" },
+                ].map((row, i) => (
+                  <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
+                    <td className="px-4 py-3 text-[#c9d1d9]">{row.schedule}</td>
+                    <td className="px-4 py-3 text-right text-[#a8a8b3]">{row.commute}</td>
+                    <td className="px-4 py-3 text-right text-[#a8a8b3]">{row.food}</td>
+                    <td className="px-4 py-3 text-right text-[#a8a8b3]">{row.clothing}</td>
+                    <td className="px-4 py-3 text-right font-semibold text-[#F9A825]">{row.total}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            The gap between fully in-office and 3-day hybrid is <strong className="text-white">$4,287 per year</strong>. That is real money — but the bigger number is the gap between 3-day hybrid and fully remote: <strong className="text-white">$6,930 per year</strong>. Over 10 years, that $6,930 annual difference invested at 7% grows to approximately <strong className="text-white">$95,000</strong>.
+          </p>
+
+          <p>
+            The practical implication: a 3-day hybrid schedule that pays $3,000 less than a fully remote offer is actually costing you <strong className="text-white">$3,930 more per year</strong> in total work-related expenses. The salary comparison alone understates the true gap by more than half.
+          </p>
+
+          <div style={{ background: "#1e2d4a", borderRadius: "8px", padding: "20px", margin: "32px 0", textAlign: "center" }}>
+            <p className="text-[#a8a8b3] mb-4 text-sm">See how your specific hybrid schedule compares financially:</p>
+            <Link
+              href="/tools/wfh-calculator"
+              style={{
+                display: "inline-block",
+                color: "#e94560",
+                fontWeight: 600,
+                textDecoration: "none",
+                fontSize: "16px",
+                border: "1px solid #e94560",
+                borderRadius: "6px",
+                padding: "10px 24px",
+              }}
+            >
+              WFH Savings Calculator →
+            </Link>
+          </div>
+
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What $12,000 Per Year Becomes When You Invest It Instead</h2>
 
           <p>
@@ -244,7 +307,7 @@ export default function WfhFinancialValuePage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="Remote work saves the average car commuter $12,317 per year in commute, meals, clothing, and parking costs. Over 30 years invested that is $1.2 million. Full breakdown: www.dayblip.com/blog/wfh-financial-value"
+            text="Remote work saves $12,317/year vs fully in-office. Even a 3-day hybrid costs $7,530/year. Full breakdown including hybrid scenarios: www.dayblip.com/blog/wfh-financial-value"
             url="https://www.dayblip.com/blog/wfh-financial-value"
             title="The True Financial Value of Working From Home"
           />
