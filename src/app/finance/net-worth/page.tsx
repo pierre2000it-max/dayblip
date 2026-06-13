@@ -164,6 +164,26 @@ export default function NetWorthPage() {
             { emoji: "💰", title: "Retirement Savings", desc: "Are you on track?", href: "/finance/retirement-savings" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">Source: Federal Reserve Survey of Consumer Finances. For educational purposes only. Medians vary by location, occupation and many other factors.</p>
+          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
+            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
+              Frequently Asked Questions
+            </h2>
+            {[
+              { q: "What is net worth?", a: "Net worth is the total value of everything you own minus everything you owe. Assets include cash, investments, real estate, and personal property. Liabilities include mortgage balance, car loans, student loans, and credit card debt." },
+              { q: "What is the average net worth by age in the US?", a: "According to Federal Reserve Survey of Consumer Finances data, median net worth by age is approximately: under 35 — $39,000; 35 to 44 — $135,000; 45 to 54 — $247,000; 55 to 64 — $365,000; 65 to 74 — $410,000. Mean values are significantly higher due to wealth concentration at the top." },
+              { q: "Is home equity counted in net worth?", a: "Yes. Home equity — the market value of your home minus your remaining mortgage balance — is a major component of net worth for most American households." },
+              { q: "How often should I calculate my net worth?", a: "Tracking net worth quarterly or annually gives a useful picture of financial progress. Monthly tracking can feel noisy due to market fluctuations in investment accounts." },
+            ].map((item, i) => (
+              <div key={i} style={{ marginBottom: '24px' }}>
+                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
+                  {item.q}
+                </h3>
+                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

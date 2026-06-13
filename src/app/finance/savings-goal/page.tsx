@@ -200,6 +200,26 @@ export default function SavingsGoalPage() {
             { emoji: "📊", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
             { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
           ]} />
+          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
+            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
+              Frequently Asked Questions
+            </h2>
+            {[
+              { q: "How long does it take to save a specific amount?", a: "Time to reach a savings goal depends on starting balance, monthly contribution, and interest rate. At 4.5 percent APY saving $500 per month from zero, reaching $50,000 takes approximately 7.5 years." },
+              { q: "What savings rate should I target?", a: "A common guideline is saving at least 20 percent of gross income — 10 percent for retirement and 10 percent for other goals. The earlier you start the less you need to save each month to reach the same goal due to compound interest." },
+              { q: "What interest rate should I assume?", a: "High-yield savings accounts as of 2024 to 2026 have offered 4 to 5.5 percent APY. Standard bank savings accounts typically offer 0.01 to 0.5 percent. Using a conservative 3 to 4 percent rate is reasonable for long-term planning." },
+              { q: "Does this calculator account for inflation?", a: "This calculator shows nominal growth — the actual dollar amount you will have. To estimate real purchasing power, subtract the expected inflation rate of around 3 percent from your interest rate." },
+            ].map((item, i) => (
+              <div key={i} style={{ marginBottom: '24px' }}>
+                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
+                  {item.q}
+                </h3>
+                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
 
         </div>
       </section>

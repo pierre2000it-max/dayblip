@@ -254,6 +254,26 @@ export default function TaxBracketPage() {
             { emoji: "💰", title: "Take Home Pay Calculator", desc: "Annual take-home salary after all taxes", href: "/finance/take-home-pay" },
             { emoji: "⏱️", title: "Overtime Pay Calculator", desc: "How much do you earn working extra hours?", href: "/finance/overtime-calculator" },
           ]} />
+          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
+            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
+              Frequently Asked Questions
+            </h2>
+            {[
+              { q: "How do US federal tax brackets work?", a: "The US uses a progressive tax system where different portions of your income are taxed at different rates. You only pay the higher rate on income above each threshold — not on your entire income. Moving into a higher bracket does not mean all your income is taxed at that rate." },
+              { q: "What is the difference between marginal and effective tax rate?", a: "Your marginal rate is the rate applied to your last dollar of income — the highest bracket you fall into. Your effective rate is your total tax paid divided by total income. Effective rate is always lower than marginal rate in a progressive system." },
+              { q: "What are the 2026 federal tax brackets?", a: "The 2026 federal income tax brackets for single filers are approximately: 10 percent on income up to $11,925; 12 percent up to $48,475; 22 percent up to $103,350; 24 percent up to $197,300; 32 percent up to $250,525; 35 percent up to $626,350; 37 percent above $626,350." },
+              { q: "Does this include state income tax?", a: "No. This calculator covers federal income tax only. State income tax rates vary widely — from 0 percent in states like Texas and Florida to over 13 percent in California." },
+            ].map((item, i) => (
+              <div key={i} style={{ marginBottom: '24px' }}>
+                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
+                  {item.q}
+                </h3>
+                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

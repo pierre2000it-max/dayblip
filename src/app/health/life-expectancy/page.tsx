@@ -58,6 +58,8 @@ export default function LifeExpectancyPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Life Expectancy Calculator","url":"https://www.dayblip.com/health/life-expectancy","description":"Estimate your statistical life expectancy based on age, gender, lifestyle factors, and health habits.","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the average US life expectancy?","acceptedAnswer":{"@type":"Answer","text":"According to CDC data, US life expectancy at birth is approximately 77 years as of the most recent data. Women live an average of 80 years and men approximately 74 years."}},{"@type":"Question","name":"What factors affect life expectancy most?","acceptedAnswer":{"@type":"Answer","text":"The strongest predictors are smoking status, body weight, physical activity level, diet quality, alcohol consumption, healthcare access, education level, and socioeconomic status. Genetics accounts for roughly 20 to 30 percent of longevity variation."}},{"@type":"Question","name":"How is statistical life expectancy calculated?","acceptedAnswer":{"@type":"Answer","text":"Life expectancy is calculated from actuarial life tables — statistical models based on age-specific mortality rates across large populations. The CDC and Social Security Administration publish these tables annually."}},{"@type":"Question","name":"Does this tool predict when I will die?","acceptedAnswer":{"@type":"Answer","text":"No. This tool provides a statistical estimate based on population averages and known risk factors. Individual outcomes vary enormously. The number is useful for financial planning — estimating retirement length, Social Security timing, and long-term care needs."}}]}) }} />
       <div className="bg-red-900/30 border-b border-red-500/30 px-6 py-4 text-center">
         <p className="text-red-300 font-semibold text-sm">⚠️ Statistical estimate for educational purposes only. NOT medical advice and cannot predict your actual lifespan. Consult your healthcare provider.</p>
       </div>
@@ -150,6 +152,26 @@ export default function LifeExpectancyPage() {
             { emoji: "⚖️", title: "BMI Calculator", desc: "Calculate your body mass index", href: "/health/bmi-calculator" },
             { emoji: "🚬", title: "Habit Cost Calculator", desc: "Financial cost of daily habits", href: "/health/habit-cost" },
           ]} />
+          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
+            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
+              Frequently Asked Questions
+            </h2>
+            {[
+              { q: "What is the average US life expectancy?", a: "According to CDC data, US life expectancy at birth is approximately 77 years as of the most recent data. Women live an average of 80 years and men approximately 74 years." },
+              { q: "What factors affect life expectancy most?", a: "The strongest predictors are smoking status, body weight, physical activity level, diet quality, alcohol consumption, healthcare access, education level, and socioeconomic status. Genetics accounts for roughly 20 to 30 percent of longevity variation." },
+              { q: "How is statistical life expectancy calculated?", a: "Life expectancy is calculated from actuarial life tables — statistical models based on age-specific mortality rates across large populations. The CDC and Social Security Administration publish these tables annually." },
+              { q: "Does this tool predict when I will die?", a: "No. This tool provides a statistical estimate based on population averages and known risk factors. Individual outcomes vary enormously. The number is useful for financial planning — estimating retirement length, Social Security timing, and long-term care needs." },
+            ].map((item, i) => (
+              <div key={i} style={{ marginBottom: '24px' }}>
+                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
+                  {item.q}
+                </h3>
+                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

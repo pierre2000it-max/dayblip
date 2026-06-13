@@ -201,6 +201,26 @@ export default function SocialSecurityPage() {
             { emoji: "📈", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">⚠️ This is an estimate. Visit ssa.gov for your actual Social Security benefit statement. Not financial advice.</p>
+          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
+            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
+              Frequently Asked Questions
+            </h2>
+            {[
+              { q: "When should I claim Social Security benefits?", a: "You can claim as early as 62 with reduced benefits or as late as 70 with maximum benefits. Waiting from 62 to 70 increases monthly benefits by approximately 76 percent. The breakeven point where delaying pays off is typically around age 80. If you expect to live past 80 delaying is usually better." },
+              { q: "How is Social Security benefit calculated?", a: "Social Security calculates your benefit based on your 35 highest-earning years adjusted for inflation. The formula replaces a higher percentage of income for lower earners. Your Full Retirement Age is 67 for anyone born after 1960." },
+              { q: "Does working while collecting Social Security affect my benefit?", a: "Before Full Retirement Age, earning above the exempt amount reduces benefits temporarily — $1 withheld for every $2 earned above the limit. After Full Retirement Age you can earn unlimited amounts without benefit reduction." },
+              { q: "Is Social Security income taxable?", a: "Up to 85 percent of Social Security benefits may be taxable if your combined income exceeds $34,000 for single filers or $44,000 for married filing jointly." },
+            ].map((item, i) => (
+              <div key={i} style={{ marginBottom: '24px' }}>
+                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
+                  {item.q}
+                </h3>
+                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

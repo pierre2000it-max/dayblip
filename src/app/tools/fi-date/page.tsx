@@ -312,6 +312,26 @@ export default function FIDatePage() {
               </div>
             )
           })()}
+          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
+            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
+              Frequently Asked Questions
+            </h2>
+            {[
+              { q: "What is financial independence?", a: "Financial independence means having enough invested assets that passive returns can cover your living expenses indefinitely — you no longer need to work for money. It is calculated using the 4 percent rule: annual expenses divided by 0.04 gives your FI number." },
+              { q: "What is a FI number?", a: "Your FI number is the total portfolio value needed to retire. If you spend $50,000 per year your FI number is $50,000 divided by 0.04 which equals $1,250,000. At this level a 4 percent annual withdrawal historically sustains a portfolio indefinitely." },
+              { q: "How long does it take to reach financial independence?", a: "Time to FI depends almost entirely on savings rate. At a 10 percent savings rate FI takes roughly 40 years. At 25 percent about 32 years. At 50 percent about 17 years. At 70 percent about 8.5 years. Increasing savings rate is more powerful than increasing income." },
+              { q: "What investment return should I assume?", a: "The US stock market has historically returned approximately 10 percent annually before inflation or about 7 percent after inflation. Most FI calculators use 7 percent real return as a conservative baseline. Your actual returns will vary based on asset allocation." },
+            ].map((item, i) => (
+              <div key={i} style={{ marginBottom: '24px' }}>
+                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
+                  {item.q}
+                </h3>
+                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

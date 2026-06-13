@@ -183,6 +183,26 @@ export default function EmergencyFundPage() {
             { emoji: "📈", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Emergency fund needs vary by individual circumstances.</p>
+          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
+            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
+              Frequently Asked Questions
+            </h2>
+            {[
+              { q: "How much should an emergency fund contain?", a: "Most financial planners recommend 3 to 6 months of essential expenses. If you have variable income, are self-employed, or work in a volatile industry, 6 to 12 months is more appropriate." },
+              { q: "Where should I keep my emergency fund?", a: "An emergency fund should be liquid and safe — a high-yield savings account is ideal. It should not be invested in stocks since market downturns can reduce its value exactly when you need it most." },
+              { q: "What counts as an emergency?", a: "True emergencies are unexpected necessary expenses — job loss, medical bills, major car or home repair. Planned expenses like holidays or vacations are not emergencies and should be budgeted separately." },
+              { q: "How is the recommended amount calculated?", a: "This calculator multiplies your monthly essential expenses by your chosen number of months. Essential expenses include rent or mortgage, utilities, food, transportation, insurance, and minimum debt payments." },
+            ].map((item, i) => (
+              <div key={i} style={{ marginBottom: '24px' }}>
+                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
+                  {item.q}
+                </h3>
+                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

@@ -248,6 +248,8 @@ export default function SalaryCheckerPage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Salary Checker — Am I Underpaid?","url":"https://www.dayblip.com/tools/salary-checker","description":"Check your salary against market rates for your job title, experience level, and location to see if you are underpaid.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is market salary data calculated?","acceptedAnswer":{"@type":"Answer","text":"Market salary data comes from Bureau of Labor Statistics Occupational Employment Statistics, employer salary surveys, and self-reported compensation databases. This tool uses aggregated national median data by job title and experience level."}},{"@type":"Question","name":"What does the 25th and 75th percentile salary mean?","acceptedAnswer":{"@type":"Answer","text":"The 25th percentile means 25 percent of people in that role earn less than that amount. The 75th percentile means 75 percent earn less. Your target negotiation range is typically between the median and 75th percentile."}},{"@type":"Question","name":"How do I know if I am underpaid?","acceptedAnswer":{"@type":"Answer","text":"Compare your current salary to market median for your role, experience level, industry, and geography. If you are below the 25th percentile you are likely underpaid. Cost of living varies significantly by city — $70,000 in Austin differs greatly from $70,000 in San Francisco."}},{"@type":"Question","name":"How often should I check my market salary?","acceptedAnswer":{"@type":"Answer","text":"Check annually at minimum before your review cycle so you have data to support a negotiation. Also check when you receive a job offer, after a promotion, or if you take on significantly more responsibility."}}]}) }} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Salary Checker — Am I Being Paid Fairly for My Role?</h1>
@@ -409,6 +411,26 @@ export default function SalaryCheckerPage() {
             { emoji: "📊", title: "Job Offer Comparison", desc: "Compare job offers", href: "/tools/job-offer-comparison" },
             { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
           ]} />
+          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
+            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
+              Frequently Asked Questions
+            </h2>
+            {[
+              { q: "How is market salary data calculated?", a: "Market salary data comes from Bureau of Labor Statistics Occupational Employment Statistics, employer salary surveys, and self-reported compensation databases. This tool uses aggregated national median data by job title and experience level." },
+              { q: "What does the 25th and 75th percentile salary mean?", a: "The 25th percentile means 25 percent of people in that role earn less than that amount. The 75th percentile means 75 percent earn less. Your target negotiation range is typically between the median and 75th percentile." },
+              { q: "How do I know if I am underpaid?", a: "Compare your current salary to market median for your role, experience level, industry, and geography. If you are below the 25th percentile you are likely underpaid. Cost of living varies significantly by city — $70,000 in Austin differs greatly from $70,000 in San Francisco." },
+              { q: "How often should I check my market salary?", a: "Check annually at minimum before your review cycle so you have data to support a negotiation. Also check when you receive a job offer, after a promotion, or if you take on significantly more responsibility." },
+            ].map((item, i) => (
+              <div key={i} style={{ marginBottom: '24px' }}>
+                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
+                  {item.q}
+                </h3>
+                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
 
         </div>
       </section>

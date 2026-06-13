@@ -175,6 +175,26 @@ export default function FourOhOneKPage() {
             { emoji: "📋", title: "Roth IRA vs Traditional", desc: "Which is better for you?", href: "/blog/roth-ira-vs-traditional-ira" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">401(k) contribution limits and employer match rules vary. Consult your plan documents and a financial advisor. For educational purposes only.</p>
+          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
+            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
+              Frequently Asked Questions
+            </h2>
+            {[
+              { q: "What is the 401k contribution limit for 2026?", a: "The IRS 401k contribution limit for 2026 is $23,500 for employees under 50. Workers aged 50 and over can make an additional catch-up contribution of $7,500 bringing their total to $31,000. These limits adjust annually for inflation." },
+              { q: "Should I contribute to a traditional or Roth 401k?", a: "Traditional 401k contributions reduce taxable income now and are taxed on withdrawal. Roth 401k contributions are made with after-tax dollars and withdrawals are tax-free. If you expect to be in a higher tax bracket in retirement than now, Roth is generally better." },
+              { q: "What happens to my 401k if I change jobs?", a: "You can roll your 401k balance to your new employer's plan, roll it to an IRA, leave it with the former employer if the balance is above $7,000, or cash it out which triggers taxes and a 10 percent early withdrawal penalty if under age 59 and a half." },
+              { q: "How does employer matching work?", a: "Common match structures include 50 percent of contributions up to 6 percent of salary or 100 percent of contributions up to 3 percent of salary. Always contribute at least enough to get the full employer match — it is an immediate 50 to 100 percent return on that portion." },
+            ].map((item, i) => (
+              <div key={i} style={{ marginBottom: '24px' }}>
+                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
+                  {item.q}
+                </h3>
+                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
