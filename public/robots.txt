@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /embed
 Disallow: /api/
+Disallow: /embed/
 
 User-agent: GPTBot
 Allow: /
