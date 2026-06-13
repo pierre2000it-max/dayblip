@@ -101,6 +101,14 @@ const articles = [
     href: "/blog/rent-vs-buy-calculator",
   },
   {
+    category: "Life",
+    title: "How Popular Was Your Name the Year You Were Born?",
+    excerpt:
+      "The SSA has recorded every name given to five or more American babies since 1880 — 144 years of data. Your 1-in-X number tells you your actual density among the people who grew up alongside you.",
+    readTime: "5 min read",
+    href: "/blog/name-popularity",
+  },
+  {
     category: "Finance",
     title: "No Tax on Overtime in 2026: What It Actually Means for Your Paycheck",
     excerpt:
