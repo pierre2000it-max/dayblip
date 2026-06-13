@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Generation Salary Comparison — Compare Your Salary to Your Parents at the Same Age | Dayblip",
@@ -11,11 +11,11 @@ export const metadata: Metadata = {
       "Are you doing better or worse than your parents at the same age? Compare salaries and home affordability across generations.",
     url: "https://www.dayblip.com/tools/generation-compare",
     type: "website",
-    images: [{ url: "https://www.dayblip.com/api/og/generation?diff=18&direction=less&homeRatio=7.6&parentRatio=2.8", width: 1200, height: 630, alt: "Generation Salary Comparison — Dayblip" }],
+    images: [{ url: "https://www.dayblip.com/api/og/generation?diff=18&direction=less&homeRatio=7.6&parentRatio=2.8&v=2", width: 1200, height: 630, alt: "Generation Salary Comparison — Dayblip" }],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["https://www.dayblip.com/api/og/generation?diff=18&direction=less&homeRatio=7.6&parentRatio=2.8"],
+    images: ["https://www.dayblip.com/api/og/generation?diff=18&direction=less&homeRatio=7.6&parentRatio=2.8&v=2"],
   },
 }
 

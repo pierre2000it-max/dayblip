@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Financial Life Score | Dayblip",
@@ -8,11 +8,11 @@ export const metadata: Metadata = {
     title: "Financial Life Score | Dayblip",
     description: "Get your personal Financial Life Score from 0 to 100 in 2 minutes.",
     url: "https://www.dayblip.com/tools/financial-life-score",
-    images: [{ url: "https://www.dayblip.com/api/og/life-score?score=73&zone=Financial+Strong+Zone", width: 1200, height: 630, alt: "Financial Life Score — Dayblip" }],
+    images: [{ url: "https://www.dayblip.com/api/og/life-score?score=73&zone=Financial+Strong+Zone&v=2", width: 1200, height: 630, alt: "Financial Life Score — Dayblip" }],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["https://www.dayblip.com/api/og/life-score?score=73&zone=Financial+Strong+Zone"],
+    images: ["https://www.dayblip.com/api/og/life-score?score=73&zone=Financial+Strong+Zone&v=2"],
   },
 }
 

@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Money Transfer Comparison — Find the Cheapest Way to Send Money | Dayblip",
@@ -11,9 +11,9 @@ export const metadata: Metadata = {
       "Compare the cheapest way to send money internationally including exchange rate markup.",
     url: "https://www.dayblip.com/tools/money-transfer-comparison",
     type: "website",
-    images: [{ url: "https://www.dayblip.com/api/og?title=Money+Transfer+Comparison&emoji=%F0%9F%92%B8&subtitle=Find+the+cheapest+way+to+send+money+%E2%80%94+Free", width: 1200, height: 630, alt: "Money Transfer Comparison — Dayblip" }],
+    images: [{ url: "https://www.dayblip.com/api/og?title=Money+Transfer+Comparison&emoji=%F0%9F%92%B8&subtitle=Find+the+cheapest+way+to+send+money+%E2%80%94+Free&v=2", width: 1200, height: 630, alt: "Money Transfer Comparison — Dayblip" }],
   },
-  twitter: { card: "summary_large_image", images: ["https://www.dayblip.com/api/og?title=Money+Transfer+Comparison&emoji=%F0%9F%92%B8&subtitle=Find+the+cheapest+way+to+send+money+%E2%80%94+Free"] },
+  twitter: { card: "summary_large_image", images: ["https://www.dayblip.com/api/og?title=Money+Transfer+Comparison&emoji=%F0%9F%92%B8&subtitle=Find+the+cheapest+way+to+send+money+%E2%80%94+Free&v=2"] },
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
