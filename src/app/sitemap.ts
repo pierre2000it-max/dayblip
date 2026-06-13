@@ -360,6 +360,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/blog/true-cost-of-smoking",                 0.8, MONTHLY),
     p("/blog/true-cost-of-car-ownership",           0.8, MONTHLY),
     p("/blog/rent-vs-buy-calculator",               0.8, MONTHLY),
+    p("/blog/name-popularity",                      0.8, MONTHLY),
+    p("/blog/no-tax-on-overtime-2026",              0.8, MONTHLY),
+    p("/blog/what-is-net-worth",                    0.8, MONTHLY),
+    p("/blog/how-much-house-can-you-afford",        0.8, MONTHLY),
+    p("/blog/the-4-percent-rule",                   0.8, MONTHLY),
+    p("/blog/roth-ira-vs-traditional-ira",          0.8, MONTHLY),
+    p("/blog/what-your-paycheck-shows-you",         0.8, MONTHLY),
+    p("/blog/how-much-saved-by-age",                0.8, MONTHLY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // LEGAL PAGES  (priority 0.3, monthly)

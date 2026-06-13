@@ -100,14 +100,72 @@ const articles = [
     readTime: "6 min read",
     href: "/blog/rent-vs-buy-calculator",
   },
+  {
+    category: "Finance",
+    title: "No Tax on Overtime in 2026: What It Actually Means for Your Paycheck",
+    excerpt:
+      "The proposed overtime tax exemption would exclude overtime wages from federal income tax — but not FICA. For a worker earning $22 per hour with 10 overtime hours weekly, the annual savings could be $1,200 to $3,300 depending on their bracket.",
+    readTime: "5 min read",
+    href: "/blog/no-tax-on-overtime-2026",
+  },
+  {
+    category: "Finance",
+    title: "What Is Net Worth and Why the Number Most People Know Is Wrong",
+    excerpt:
+      "The formula is simple: assets minus liabilities. The errors people make when applying it are consistent — and they compound. Median US household net worth was $192,700 per the Federal Reserve's 2022 survey.",
+    readTime: "5 min read",
+    href: "/blog/what-is-net-worth",
+  },
+  {
+    category: "Real Estate",
+    title: "How Much House Can You Actually Afford? The Number Banks Give You Is Not the Answer",
+    excerpt:
+      "Lenders approve based on what you can technically repay. A $400,000 home at 7% has a principal and interest payment of $2,129 — but true monthly cost including taxes, insurance, and maintenance is closer to $3,000.",
+    readTime: "6 min read",
+    href: "/blog/how-much-house-can-you-afford",
+  },
+  {
+    category: "Retirement",
+    title: "The 4% Rule: The Simple Math Behind Retirement That Changed How People Think About Work",
+    excerpt:
+      "One number derived from 75 years of market data became the foundation for retirement planning. It says you need 25x your annual expenses. On $50,000 per year that is $1,250,000.",
+    readTime: "6 min read",
+    href: "/blog/the-4-percent-rule",
+  },
+  {
+    category: "Retirement",
+    title: "Roth IRA vs Traditional IRA: The Decision That Comes Down to One Question",
+    excerpt:
+      "Both accounts grow tax-advantaged. The difference is when you pay taxes. If your tax rate will be higher in retirement than today, Roth wins. If lower, traditional wins. Getting it right can be worth tens of thousands.",
+    readTime: "6 min read",
+    href: "/blog/roth-ira-vs-traditional-ira",
+  },
+  {
+    category: "Finance",
+    title: "What Your Paycheck Actually Shows You (And the Four Numbers Most People Never Look At)",
+    excerpt:
+      "Most people check the deposit amount and stop there. The rest of the stub shows your effective tax rate, your total withholding percentage, and exactly where the gap between gross and net comes from.",
+    readTime: "5 min read",
+    href: "/blog/what-your-paycheck-shows-you",
+  },
+  {
+    category: "Retirement",
+    title: "How Much Should You Have Saved by Age? The Benchmarks and Why They Exist",
+    excerpt:
+      "The 1x salary by 30, 10x by 67 benchmarks come from Fidelity research built on specific assumptions. The Federal Reserve found median retirement savings for ages 55-64 was $185,000 — well below the targets.",
+    readTime: "5 min read",
+    href: "/blog/how-much-saved-by-age",
+  },
 ]
 
-const CATEGORIES = ["All", "Finance", "Career", "Life"]
+const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]
 
 const categoryColors: Record<string, string> = {
   Finance: "bg-blue-900/40 text-blue-300",
   Career: "bg-purple-900/40 text-purple-300",
   Life: "bg-green-900/40 text-green-300",
+  Retirement: "bg-orange-900/40 text-orange-300",
+  "Real Estate": "bg-emerald-900/40 text-emerald-300",
 }
 
 export default function BlogPage() {

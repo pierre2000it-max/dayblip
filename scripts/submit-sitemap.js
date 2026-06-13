@@ -257,6 +257,29 @@ const urls = [
   "https://www.dayblip.com/world-records",
   "https://www.dayblip.com/newspaper",
   "https://www.dayblip.com/this-week-in-history",
+
+  // Blog articles
+  "https://www.dayblip.com/blog",
+  "https://www.dayblip.com/blog/true-hourly-wage",
+  "https://www.dayblip.com/blog/will-ai-replace-my-job",
+  "https://www.dayblip.com/blog/minimum-payment-true-cost",
+  "https://www.dayblip.com/blog/compound-interest-early-saver",
+  "https://www.dayblip.com/blog/market-timing-cost",
+  "https://www.dayblip.com/blog/financial-independence-date",
+  "https://www.dayblip.com/blog/salary-negotiation-guide",
+  "https://www.dayblip.com/blog/life-in-weeks",
+  "https://www.dayblip.com/blog/born-in-your-year",
+  "https://www.dayblip.com/blog/true-cost-of-smoking",
+  "https://www.dayblip.com/blog/true-cost-of-car-ownership",
+  "https://www.dayblip.com/blog/rent-vs-buy-calculator",
+  "https://www.dayblip.com/blog/name-popularity",
+  "https://www.dayblip.com/blog/no-tax-on-overtime-2026",
+  "https://www.dayblip.com/blog/what-is-net-worth",
+  "https://www.dayblip.com/blog/how-much-house-can-you-afford",
+  "https://www.dayblip.com/blog/the-4-percent-rule",
+  "https://www.dayblip.com/blog/roth-ira-vs-traditional-ira",
+  "https://www.dayblip.com/blog/what-your-paycheck-shows-you",
+  "https://www.dayblip.com/blog/how-much-saved-by-age",
 ];
 
 // Born-in pages 1940–2020
