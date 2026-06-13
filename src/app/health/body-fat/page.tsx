@@ -4,6 +4,8 @@ import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
 
@@ -139,6 +141,7 @@ export default function BodyFatPage() {
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[700px] space-y-6">
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Health", href: "/health" }, { label: "Body Fat Calculator" }]} />
+          <LastUpdated />
 
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div style={{ color: "#e94560", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "8px" }}>Quick Answer</div>
@@ -291,6 +294,7 @@ export default function BodyFatPage() {
             </div>
           )}
 
+          <MethodologyNote text="Uses the US Navy circumference measurement method, validated as a reliable field estimate of body fat percentage in peer-reviewed literature." />
           <RelatedTools tools={[
             { emoji: "⚖️", title: "BMI Calculator", desc: "Body mass index and what it means", href: "/health/bmi-calculator" },
             { emoji: "🍎", title: "Calorie Calculator", desc: "Daily calorie needs for your goals", href: "/health/calorie-calculator" },

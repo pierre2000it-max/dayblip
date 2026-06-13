@@ -3,6 +3,8 @@ import { useState } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
 
@@ -126,6 +128,7 @@ export default function OvertimeTaxPage() {
             { label: "Finance", href: "/finance" },
             { label: "No Tax on Overtime" },
           ]} />
+          <LastUpdated />
 
           {/* Quick Answer */}
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
@@ -232,6 +235,7 @@ export default function OvertimeTaxPage() {
             </div>
           )}
 
+          <MethodologyNote text="Based on 2026 IRS federal tax brackets and FLSA overtime rate definition (1.5× regular pay for hours exceeding 40 per week)." />
           <RelatedTools tools={[
             { emoji: "💵", title: "Overtime Pay Calculator", desc: "Calculate gross overtime earnings", href: "/finance/overtime-calculator" },
             { emoji: "💰", title: "Take Home Pay Calculator", desc: "Your actual paycheck after all taxes", href: "/finance/take-home-pay" },

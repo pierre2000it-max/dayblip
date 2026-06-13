@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import Breadcrumb from "@/components/Breadcrumb"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -120,6 +122,7 @@ export default function TrueHourlyWagePage() {
             { label: "Tools", href: "/tools" },
             { label: "True Hourly Wage" }
           ]} />
+          <LastUpdated />
           {DISCLAIMER}
 
           <div className="space-y-4">
@@ -209,6 +212,7 @@ export default function TrueHourlyWagePage() {
               Get the free embed code →
             </a>
           </div>
+          <MethodologyNote text="Divides annual compensation by total hours committed to work — including commute, preparation, and decompression time — then subtracts annualized work-related costs." />
           <RelatedTools tools={[
             { emoji: "⏱️", title: "Overtime Pay Calculator", desc: "How much do you earn working extra hours?", href: "/finance/overtime-calculator" },
             { emoji: "💰", title: "Salary Negotiation Guide", desc: "How much to ask for + ready-to-use script", href: "/tools/salary-negotiation" },

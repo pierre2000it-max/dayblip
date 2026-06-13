@@ -2,11 +2,14 @@
 // Perplexity, etc.). These produce plain objects that are serialized into
 // <script type="application/ld+json"> tags via the SchemaMarkup component.
 
+import { DAYBLIP_AUTHOR, DAYBLIP_ORG } from "@/lib/authorSchema"
+
 export function webApplicationSchema(
   name: string,
   description: string,
   url: string,
-  category: string
+  category: string,
+  dateModified = "2026-06-13"
 ) {
   return {
     "@context": "https://schema.org",
@@ -16,16 +19,15 @@ export function webApplicationSchema(
     url,
     applicationCategory: category,
     operatingSystem: "Web",
+    dateModified,
+    author: DAYBLIP_AUTHOR,
+    publisher: DAYBLIP_ORG,
     offers: {
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
     },
-    provider: {
-      "@type": "Organization",
-      name: "Dayblip",
-      url: "https://www.dayblip.com",
-    },
+    provider: DAYBLIP_ORG,
   }
 }
 
@@ -68,7 +70,8 @@ export function articleSchema(
   headline: string,
   description: string,
   url: string,
-  datePublished: string
+  datePublished: string,
+  dateModified?: string
 ) {
   return {
     "@context": "https://schema.org",
@@ -77,11 +80,9 @@ export function articleSchema(
     description,
     url,
     datePublished,
-    publisher: {
-      "@type": "Organization",
-      name: "Dayblip",
-      url: "https://www.dayblip.com",
-    },
+    dateModified: dateModified ?? datePublished,
+    author: DAYBLIP_AUTHOR,
+    publisher: DAYBLIP_ORG,
   }
 }
 

@@ -3,6 +3,8 @@ import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -101,6 +103,7 @@ export default function RetirementSavingsPage() {
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Retirement Savings Calculator" }]} />
+          <LastUpdated />
           <div className="grid gap-4 md:grid-cols-3">
             {[
               { label: "Current Age", val: currentAge, set: setCurrentAge },
@@ -154,6 +157,7 @@ export default function RetirementSavingsPage() {
             </div>
           )}
 
+          <MethodologyNote text="Uses compound growth formula with annual IRS contribution limits. Historical S&P 500 return data sourced from FRED (Federal Reserve Economic Data)." />
           <ShareButtons
             text={`${calc.onTrack ? "✅ On track" : "⚠️ Shortfall"} for retirement! Projected savings: ${fmt(calc.projected)} vs ${fmt(calc.needed)} needed. (Educational only)`}
             url={`https://www.dayblip.com/finance/retirement-savings?age=${currentAge}&retireage=${retirementAge}&savings=${currentSavings}&monthly=${monthlySavings}&return=${expectedReturn}&income=${desiredIncome}`}

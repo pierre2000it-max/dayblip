@@ -3,6 +3,8 @@ import { useState } from "react"
 import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/RelatedTools"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 
 const ACTIVITY = [
   { label: "Sedentary (desk job, little exercise)",        multiplier: 1.2 },
@@ -103,6 +105,7 @@ export default function CalorieCalculatorPage() {
           <p style={{ color: "#a8a8b3", fontSize: "14px", lineHeight: "1.7", marginBottom: "24px" }}>
             Daily calorie needs are calculated using the Mifflin-St Jeor equation — the formula most widely used by registered dietitians and considered the most accurate for estimating basal metabolic rate. Your BMR is then multiplied by an activity factor to give your total daily energy expenditure.
           </p>
+          <LastUpdated />
         </div>
       </section>
 
@@ -195,6 +198,7 @@ export default function CalorieCalculatorPage() {
             </div>
           )}
 
+          <MethodologyNote text="Uses the Mifflin-St Jeor equation for basal metabolic rate (BMR), validated in clinical research as the most accurate general population formula. BMR is multiplied by the Harris-Benedict activity factor." />
           <RelatedTools tools={[
             { emoji: "💪", title: "Body Fat Calculator",   desc: "Calculate your body fat percentage",     href: "/health/body-fat" },
             { emoji: "🥩", title: "Macro Calculator",      desc: "Daily protein carbs and fat targets",    href: "/health/macro-calculator" },

@@ -3,6 +3,8 @@ import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
@@ -291,6 +293,7 @@ export default function WFHCalculatorPage() {
             { label: "Tools", href: "/tools" },
             { label: "WFH Savings Calculator" }
           ]} />
+          <LastUpdated />
 
           {/* Situation toggle */}
           <div>
@@ -488,6 +491,7 @@ export default function WFHCalculatorPage() {
                     Read: The True Financial Value of Working From Home →
                   </a>
                 </div>
+                <MethodologyNote text="Uses AAA cost-per-mile data for vehicle costs, BLS Consumer Expenditure Survey for food and clothing estimates, and IRS standard mileage rates." />
                 <RelatedTools tools={[
                   { emoji: "🌐", title: "Time Zone Converter", desc: "Convert time zones for remote teams", href: "/tools/timezone-converter" },
                   { emoji: "⏰", title: "True Hourly Wage", desc: "What does your job really pay per hour?", href: "/tools/true-hourly-wage" },

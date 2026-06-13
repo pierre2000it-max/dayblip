@@ -3,6 +3,8 @@ import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
@@ -193,6 +195,7 @@ export default function TakeHomePayPage() {
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Take Home Pay Calculator" }]} />
+          <LastUpdated />
 
           <div className="flex gap-2">
             {(["salary", "hourly"] as const).map(t => (
@@ -349,6 +352,7 @@ export default function TakeHomePayPage() {
             title="Take Home Pay Calculator"
           />
           <p className="text-xs text-[#a8a8b3]">Tax calculations are estimates for educational purposes. Does not include all deductions or credits. Use IRS.gov or a tax professional for exact figures.</p>
+          <MethodologyNote text="Based on 2026 IRS federal tax brackets, FICA rates (6.2% Social Security, 1.45% Medicare), and state income tax tables from each state's revenue department." />
           <RelatedTools tools={[
             { emoji: "🏛️", title: "No Tax on Overtime 2026", desc: "Calculate your overtime tax savings under new law", href: "/finance/overtime-tax" },
             { emoji: "🧾", title: "Paycheck Calculator", desc: "Exact net pay per period after all deductions", href: "/finance/paycheck-calculator" },

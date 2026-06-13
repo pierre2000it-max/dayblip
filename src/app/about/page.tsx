@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DAYBLIP_ORG } from "@/lib/authorSchema";
 
 export const metadata: Metadata = {
   title: "About Dayblip — Free Tools for Curious Minds",
@@ -61,9 +62,16 @@ const CATEGORIES = [
   },
 ];
 
+const orgSchema = {
+  "@context": "https://schema.org",
+  ...DAYBLIP_ORG,
+  "@type": "Organization",
+}
+
 export default function AboutPage() {
   return (
     <main style={{ backgroundColor: "#0d1b2a", color: "#e8e8e8" }} className="min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
       <div className="mx-auto max-w-[800px] px-6 py-16">
 
         {/* H1 */}
@@ -97,9 +105,10 @@ export default function AboutPage() {
           <h2 className="mb-4 text-2xl font-bold text-white">What Is Dayblip?</h2>
           <div className="space-y-4 leading-relaxed" style={{ color: "#e8e8e8" }}>
             <p>
-              Dayblip is a collection of 165+ free interactive tools covering
+              Dayblip is a collection of 165+ free interactive calculators and tools covering
               personal finance, career decisions, life visualization and historical
-              curiosity.
+              curiosity. Every calculation runs in the browser — no data is collected,
+              stored, or shared.
             </p>
             <p>Every tool on the site is:</p>
             <ul className="flex flex-col gap-2">
@@ -122,7 +131,37 @@ export default function AboutPage() {
 
         <hr className="my-12 border-t border-[#1a3a6e]" />
 
-        {/* Section 3 — The Tools */}
+        {/* Section 3 — Methodology and Sources */}
+        <section>
+          <h2 className="mb-4 text-2xl font-bold text-white">How the Calculations Work</h2>
+          <div className="space-y-4 leading-relaxed" style={{ color: "#e8e8e8" }}>
+            <p>
+              Every calculator on Dayblip is built from primary sources. No estimates,
+              no approximations where exact figures exist.
+            </p>
+            <ul className="flex flex-col gap-3">
+              {[
+                { label: "Tax calculators", src: "2026 IRS federal tax brackets, FICA rates, and state income tax tables sourced from each state's revenue department." },
+                { label: "Paycheck and withholding", src: "IRS Publication 15-T federal income tax withholding tables, current Social Security wage base, and Medicare rates." },
+                { label: "Mortgage and loan tools", src: "Standard amortization formula. Interest compounds monthly. Results match outputs from the CFPB mortgage calculator." },
+                { label: "Retirement calculators", src: "IRS contribution limits (updated annually), historical S&P 500 average return data from FRED (Federal Reserve Economic Data)." },
+                { label: "Health calculators (BMI, calories)", src: "CDC BMI classification thresholds. Mifflin-St Jeor equation for basal metabolic rate, which clinical research rates as the most accurate for the general population." },
+                { label: "Body fat estimation", src: "US Navy circumference measurement method, validated in peer-reviewed literature as a reliable field estimate." },
+                { label: "Cost of living comparisons", src: "Bureau of Labor Statistics Consumer Expenditure Survey and EPI Family Budget Calculator." },
+                { label: "Wage and salary data", src: "BLS Occupational Employment and Wage Statistics (OEWS) program, updated annually." },
+              ].map(({ label, src }) => (
+                <li key={label} className="flex flex-col gap-1">
+                  <span className="font-semibold text-white">{label}</span>
+                  <span style={{ color: "#a8a8b3" }} className="text-sm">{src}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <hr className="my-12 border-t border-[#1a3a6e]" />
+
+        {/* Section 4 — The Tools */}
         <section>
           <h2 className="mb-6 text-2xl font-bold text-white">What You Can Find Here</h2>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -142,18 +181,22 @@ export default function AboutPage() {
 
         <hr className="my-12 border-t border-[#1a3a6e]" />
 
-        {/* Section 4 — The Builder */}
+        {/* Section 5 — The Builder */}
         <section>
           <h2 className="mb-4 text-2xl font-bold text-white">Who Built This</h2>
           <div className="space-y-4 leading-relaxed" style={{ color: "#e8e8e8" }}>
-            <p>Dayblip is built and maintained by a solo developer.</p>
             <p>
-              The site runs on Next.js hosted on Vercel at zero monthly cost.
-              Every tool is built from scratch — no templates, no purchased
-              calculators.
+              Dayblip is built and maintained by a solo developer with a background
+              in software engineering and personal finance.
             </p>
             <p>
-              The free forever model is intentional. These tools should belong to
+              The site launched in 2026. Every tool is built from scratch — no
+              purchased calculators, no white-labeled widgets. The formulas are
+              documented, the sources are cited, and the math is verified against
+              official government calculators where they exist.
+            </p>
+            <p>
+              The free-forever model is intentional. These tools should belong to
               anyone who needs them — not just people who can afford a subscription.
             </p>
           </div>
@@ -161,13 +204,34 @@ export default function AboutPage() {
 
         <hr className="my-12 border-t border-[#1a3a6e]" />
 
-        {/* Section 5 — Contact */}
+        {/* Section 6 — Accuracy and Limitations */}
+        <section>
+          <h2 className="mb-4 text-2xl font-bold text-white">Accuracy and Limitations</h2>
+          <div className="space-y-4 leading-relaxed" style={{ color: "#e8e8e8" }}>
+            <p>
+              Dayblip calculators produce educational estimates, not professional advice.
+              Tax figures reflect current published rates but individual situations vary.
+              Health calculations use validated population formulas that produce reasonable
+              estimates, not clinical measurements.
+            </p>
+            <p>
+              For consequential financial decisions — taxes, mortgages, retirement
+              planning — consult a qualified professional who knows your specific situation.
+              Dayblip is a starting point for understanding, not a replacement for
+              professional advice.
+            </p>
+          </div>
+        </section>
+
+        <hr className="my-12 border-t border-[#1a3a6e]" />
+
+        {/* Section 7 — Contact */}
         <section>
           <h2 className="mb-4 text-2xl font-bold text-white">Get in Touch</h2>
           <div className="space-y-4 leading-relaxed" style={{ color: "#e8e8e8" }}>
             <p>
-              Have a suggestion for a new tool? Found a bug? Want to embed a tool
-              on your website?
+              Have a suggestion for a new tool? Found a calculation error? Want to
+              embed a tool on your website?
             </p>
             <p>
               Visit the embed page:{" "}

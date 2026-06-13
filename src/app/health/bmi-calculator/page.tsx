@@ -2,6 +2,8 @@
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/RelatedTools"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 
 interface Category { label: string; min: number; max: number; color: string; bg: string }
 
@@ -83,6 +85,7 @@ export default function BMIPage() {
             <p className="text-[#e2e8f0]">BMI is calculated by dividing weight in kilograms by height in meters squared. BMI ranges: under 18.5 is underweight, 18.5-24.9 is normal, 25-29.9 is overweight, 30 and above is obese. BMI does not measure body fat directly and does not account for muscle mass — athletes often show high BMI despite low body fat.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Body Mass Index (BMI) is a screening tool that uses height and weight to categorize weight status. While widely used in medical settings BMI has significant limitations — it does not distinguish between muscle and fat, does not account for age, sex or ethnicity differences, and is not a direct measure of health. A doctor can provide proper health assessment.</p>
+          <LastUpdated />
         </div>
       </section>
       <section className="bg-[#16213e] px-6 py-12">
@@ -160,6 +163,7 @@ export default function BMIPage() {
             />
           )}
           <p className="text-xs text-[#a8a8b3]">⚠️ BMI is a screening tool only and does not directly measure body fat or account for muscle mass. Not medical advice. Consult a healthcare provider for personalized guidance.</p>
+          <MethodologyNote text="Uses the standard BMI formula (weight in kg ÷ height in meters²) with CDC weight classification thresholds." />
           <RelatedTools tools={[
             { emoji: "💪", title: "Body Fat Calculator", desc: "More accurate than BMI — uses measurements", href: "/health/body-fat" },
             { emoji: "🍎", title: "Calorie Calculator", desc: "Daily calorie needs for your goals", href: "/health/calorie-calculator" },

@@ -3,6 +3,8 @@ import { useState } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
 
@@ -182,6 +184,7 @@ export default function PaycheckCalculatorPage() {
             { label: "Finance", href: "/finance" },
             { label: "Paycheck Calculator" },
           ]} />
+          <LastUpdated />
 
           {/* Quick Answer */}
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
@@ -334,6 +337,7 @@ export default function PaycheckCalculatorPage() {
             </div>
           )}
 
+          <MethodologyNote text="Uses 2026 FICA rates, federal income tax withholding tables (IRS Publication 15-T), and state payroll tax rates." />
           <RelatedTools tools={[
             { emoji: "💰", title: "Take Home Pay Calculator", desc: "Annual take-home by state", href: "/finance/take-home-pay" },
             { emoji: "🏛️", title: "No Tax on Overtime 2026", desc: "Save on overtime under new law", href: "/finance/overtime-tax" },

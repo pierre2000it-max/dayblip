@@ -3,6 +3,8 @@ import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -100,6 +102,7 @@ export default function CompoundInterestPage() {
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Compound Interest Calculator" }]} />
+          <LastUpdated />
           <div className="grid gap-4 md:grid-cols-2">
             <label className="flex flex-col gap-1">
               <span className="text-sm font-semibold text-white">Initial Investment ($)</span>
@@ -176,6 +179,7 @@ export default function CompoundInterestPage() {
               Get the free embed code →
             </a>
           </div>
+          <MethodologyNote text="Standard compound interest formula A = P(1 + r/n)^(nt). Contributions compound at the selected annual rate, applied monthly." />
           <ShareButtons
             text={`$${monthly}/month invested for ${years} years = ${fmt(calc.finalBalance)}! Only ${fmt(calc.totalContributions)} is my money, the rest is compound interest 📈 (Educational only)`}
             url={`https://www.dayblip.com/finance/compound-interest?principal=${initial}&monthly=${monthly}&rate=${rate}&years=${years}`}

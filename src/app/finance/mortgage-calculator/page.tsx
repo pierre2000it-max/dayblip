@@ -3,6 +3,8 @@ import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -116,6 +118,7 @@ export default function MortgagePage() {
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Mortgage Calculator" }]} />
+          <LastUpdated />
           <div className="grid gap-4 md:grid-cols-2">
             <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Home Price ($)</span>
               <input type="number" value={homePrice} onChange={e => setHomePrice(e.target.value)} className={inp} /></label>
@@ -206,6 +209,7 @@ export default function MortgagePage() {
               Get the free embed code →
             </a>
           </div>
+          <MethodologyNote text="Standard amortization formula. Interest compounds monthly on the outstanding principal balance." />
           <ShareButtons
             text={`My $${homePrice} mortgage at ${rate}% will cost ${fmt(calc.totalPaid)} total — ${fmt(calc.totalInterest)} in interest alone! Calculate yours (educational only):`}
             url={`https://www.dayblip.com/finance/mortgage-calculator?price=${homePrice}&down=${downPayment}&rate=${rate}&term=${term}`}
