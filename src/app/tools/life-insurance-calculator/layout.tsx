@@ -11,7 +11,9 @@ export const metadata: Metadata = {
       "Calculate how much life insurance you need using the DIME method. Free. No signup.",
     url: "https://www.dayblip.com/tools/life-insurance-calculator",
     type: "website",
+    images: [{ url: "/api/og?title=Life+Insurance+Calculator&emoji=%F0%9F%9B%A1%EF%B8%8F&subtitle=How+much+life+insurance+do+you+need%3F+%E2%80%94+Free", width: 1200, height: 630, alt: "Life Insurance Calculator — Dayblip" }],
   },
+  twitter: { card: "summary_large_image" },
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
