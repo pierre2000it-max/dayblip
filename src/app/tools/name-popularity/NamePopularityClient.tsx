@@ -434,6 +434,9 @@ export default function NamePopularityClient() {
                   <a href="/tools/generation-quiz" style={{ color: "#e94560", textDecoration: "none", fontSize: "15px", fontWeight: "500" }}>🧬 What Generation Am I?</a>
                   <a href="/number-one-song"       style={{ color: "#e94560", textDecoration: "none", fontSize: "15px", fontWeight: "500" }}>🎵 #1 Song on Your Birthday</a>
                   <a href="/birthday-twins"        style={{ color: "#e94560", textDecoration: "none", fontSize: "15px", fontWeight: "500" }}>🎂 Celebrity Birthday Twins</a>
+                  <a href="/tools/this-year-progress" style={{ color: "#e94560", textDecoration: "none", fontSize: "15px", fontWeight: "500" }}>📊 Year Progress</a>
+                  <a href="/tools/where-you-rank" style={{ color: "#e94560", textDecoration: "none", fontSize: "15px", fontWeight: "500" }}>🏆 Where Do You Rank?</a>
+                  <a href="/tools/couple-compatibility" style={{ color: "#e94560", textDecoration: "none", fontSize: "15px", fontWeight: "500" }}>💑 Couple Compatibility</a>
                 </div>
               </div>
 
