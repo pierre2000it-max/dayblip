@@ -165,6 +165,14 @@ export default function BornInPage({
             <p className="mb-1 text-lg text-[#a8a8b3]">
               You are <span className="font-bold text-white">{age} years old</span> today
             </p>
+            <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '12px 0 24px 0' }}>
+              Also explore:{' '}
+              <a href="/tools/life-in-weeks" style={{ color: '#e94560', textDecoration: 'none' }}>your life in weeks</a>,{' '}
+              <a href="/number-one-song" style={{ color: '#e94560', textDecoration: 'none' }}>your number one song</a>,{' '}
+              <a href="/birthday-twins" style={{ color: '#e94560', textDecoration: 'none' }}>your celebrity birthday twins</a>,
+              and{' '}
+              <a href="/tools/generation-quiz" style={{ color: '#e94560', textDecoration: 'none' }}>your generation</a>.
+            </p>
             <p className="text-[#a8a8b3]">
               You have been alive approximately{" "}
               <span className="font-bold text-[#e94560]">{commas(daysAlive)} days</span>
@@ -341,12 +349,21 @@ export default function BornInPage({
         {/* ── RELATED TOOLS ─────────────────────────────────────────────────── */}
         <section className="bg-[#1a1a2e] px-6 py-12">
           <div className="mx-auto max-w-[900px]">
+            {/* Cluster mesh block — do not remove */}
+            <div style={{ background: '#1e2d4a', borderRadius: '12px', padding: '24px', margin: '0 0 32px 0' }}>
+              <p style={{ color: '#a8a8b3', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 16px 0' }}>Explore Your Story</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+                <a href="/tools/life-in-weeks" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>📅 Life in Weeks</a>
+                <a href="/tools/generation-quiz" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🧬 What Generation Am I?</a>
+                <a href="/number-one-song" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🎵 #1 Song on Your Birthday</a>
+                <a href="/birthday-twins" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🎂 Celebrity Birthday Twins</a>
+              </div>
+            </div>
             <RelatedTools title="Explore More" tools={[
               { emoji: "📅", title: "Life in Weeks", desc: "See your entire life as a grid of weeks", href: "/tools/life-in-weeks" },
-              { emoji: "🔢", title: "Life in Numbers", desc: "Your heartbeats, breaths and more, live", href: "/tools/life-in-numbers" },
-              { emoji: "🎂", title: "Birthday Personality", desc: "Everything your birthday says about you", href: "/tools/birthday-personality" },
-              { emoji: "🧬", title: "Generation Quiz", desc: "What generation are you really?", href: "/tools/generation-quiz" },
-              { emoji: "🗓️", title: "Explore All Birth Years", desc: "Facts and history for every year 1940–2020", href: "/born-in" },
+              { emoji: "🧬", title: "What Generation Am I?", desc: "Find your true generational identity", href: "/tools/generation-quiz" },
+              { emoji: "🎵", title: "#1 Song on Your Birthday", desc: "Discover the hit song from your birth year", href: "/number-one-song" },
+              { emoji: "🎂", title: "Celebrity Birthday Twins", desc: "Famous people who share your birthday", href: "/birthday-twins" },
             ]} />
           </div>
         </section>

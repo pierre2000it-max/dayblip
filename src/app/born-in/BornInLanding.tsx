@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import RelatedTools from "@/components/RelatedTools";
 
 const POPULAR_YEARS = [1960,1965,1970,1975,1980,1985,1990,1995,2000,2005,2010,2015,2020];
 
@@ -30,6 +31,16 @@ export default function BornInLanding() {
           </h1>
           <p className="mb-8 text-lg text-[#a8a8b3]">
             Enter your birth year to discover what the world looked like when you arrived
+          </p>
+          <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '16px 0' }}>
+            Once you explore your birth year, discover{' '}
+            <a href="/tools/life-in-weeks" style={{ color: '#e94560', textDecoration: 'none' }}>how many weeks you have lived</a>,
+            find your{' '}
+            <a href="/birthday-twins" style={{ color: '#e94560', textDecoration: 'none' }}>celebrity birthday twins</a>,
+            hear the{' '}
+            <a href="/number-one-song" style={{ color: '#e94560', textDecoration: 'none' }}>number one song the day you were born</a>,
+            and discover{' '}
+            <a href="/tools/generation-quiz" style={{ color: '#e94560', textDecoration: 'none' }}>which generation you truly belong to</a>.
           </p>
 
           {/* Year input */}
@@ -86,6 +97,27 @@ export default function BornInLanding() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-[#1a1a2e] px-6 py-12">
+        <div className="mx-auto max-w-[700px]">
+          {/* Cluster mesh block — do not remove */}
+          <div style={{ background: '#1e2d4a', borderRadius: '12px', padding: '24px', margin: '0 0 32px 0' }}>
+            <p style={{ color: '#a8a8b3', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 16px 0' }}>Explore Your Story</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+              <a href="/tools/life-in-weeks" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>📅 Life in Weeks</a>
+              <a href="/tools/generation-quiz" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🧬 What Generation Am I?</a>
+              <a href="/number-one-song" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🎵 #1 Song on Your Birthday</a>
+              <a href="/birthday-twins" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🎂 Celebrity Birthday Twins</a>
+            </div>
+          </div>
+          <RelatedTools tools={[
+            { emoji: "📅", title: "Life in Weeks", desc: "See your entire life as a grid of weeks", href: "/tools/life-in-weeks" },
+            { emoji: "🧬", title: "What Generation Am I?", desc: "Find your true generational identity", href: "/tools/generation-quiz" },
+            { emoji: "🎵", title: "#1 Song on Your Birthday", desc: "Discover the hit song from your birth year", href: "/number-one-song" },
+            { emoji: "🎂", title: "Celebrity Birthday Twins", desc: "Famous people who share your birthday", href: "/birthday-twins" },
+          ]} />
         </div>
       </section>
     </div>

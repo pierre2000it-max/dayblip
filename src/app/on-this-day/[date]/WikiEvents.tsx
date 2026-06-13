@@ -1,6 +1,5 @@
-import { Suspense } from "react";
-
-// ── Types ─────────────────────────────────────────────────────────────────────
+// Pure display component — data is fetched server-side in page.tsx and passed as props.
+// No fetch, no Suspense, no loading state.
 
 interface WikiEvent {
   year: string;
@@ -13,117 +12,27 @@ interface WikiPerson {
   description: string;
 }
 
-interface FallbackEvent  { year: number; event: string }
+interface FallbackEvent    { year: number; event: string }
 interface FallbackBirthday { name: string; year: number; role: string }
-interface FallbackData   { events: FallbackEvent[]; birthdays: FallbackBirthday[] }
+
+export interface FallbackData { events: FallbackEvent[]; birthdays: FallbackBirthday[] }
+
+export interface WikiData {
+  events: WikiEvent[];
+  births: WikiPerson[];
+  deaths: WikiPerson[];
+  fetchFailed: boolean;
+}
 
 interface Props {
-  month: number;
-  day: number;
+  wikiData: WikiData;
   formattedDate: string;
   monthDay: string;
   fallback: FallbackData | null;
 }
 
-// ── Wikipedia API types ───────────────────────────────────────────────────────
-
-interface WikiApiPage { titles?: { normalized?: string }; description?: string }
-interface WikiApiEntry { year: number; text: string; pages?: WikiApiPage[] }
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-function extractDescription(pages?: WikiApiPage[]): string {
-  return pages?.[0]?.description ?? "";
-}
-
-function pad2(n: number): string {
-  return String(n).padStart(2, "0");
-}
-
-async function fetchWikipedia(month: number, day: number): Promise<{ events: WikiEvent[]; births: WikiPerson[]; deaths: WikiPerson[] }> {
-  const mm = pad2(month);
-  const dd = pad2(day);
-  const res = await fetch(
-    `https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/all/${mm}/${dd}`,
-    {
-      headers: { "Api-User-Agent": "Dayblip/1.0 (dayblip.com)" },
-      next: { revalidate: 86400 },
-    }
-  );
-  if (!res.ok) throw new Error(`Wikipedia API ${res.status}`);
-  const data = await res.json();
-
-  const events: WikiEvent[] = (data.events ?? []).slice(0, 10).map((e: WikiApiEntry) => ({
-    year: String(e.year),
-    text: e.text,
-  }));
-
-  const births: WikiPerson[] = (data.births ?? []).slice(0, 8).map((e: WikiApiEntry) => ({
-    year: String(e.year),
-    name: e.pages?.[0]?.titles?.normalized ?? e.text.split(",")[0],
-    description: extractDescription(e.pages) || e.text,
-  }));
-
-  const deaths: WikiPerson[] = (data.deaths ?? []).slice(0, 5).map((e: WikiApiEntry) => ({
-    year: String(e.year),
-    name: e.pages?.[0]?.titles?.normalized ?? e.text.split(",")[0],
-    description: extractDescription(e.pages) || e.text,
-  }));
-
-  return { events, births, deaths };
-}
-
-async function fetchBackup(month: number, day: number): Promise<{ events: WikiEvent[]; births: WikiPerson[]; deaths: WikiPerson[] }> {
-  const res = await fetch(`https://history.muffinlabs.com/date/${month}/${day}`, {
-    next: { revalidate: 86400 },
-  });
-  if (!res.ok) throw new Error(`Backup API ${res.status}`);
-  const data = await res.json();
-
-  const mapEntry = (e: { year: string; text: string }): WikiEvent => ({
-    year: e.year,
-    text: e.text,
-  });
-
-  const mapPerson = (e: { year: string; text: string }): WikiPerson => {
-    const parts = e.text.split(",");
-    return {
-      year: e.year,
-      name: parts[0]?.trim() ?? e.text,
-      description: parts.slice(1).join(",").trim() || e.text,
-    };
-  };
-
-  return {
-    events: (data.data?.Events ?? []).slice(0, 10).map(mapEntry),
-    births: (data.data?.Births ?? []).slice(0, 8).map(mapPerson),
-    deaths: (data.data?.Deaths ?? []).slice(0, 5).map(mapPerson),
-  };
-}
-
-// ── Server component (actual fetch + render) ──────────────────────────────────
-
-async function WikiEventsContent({ month, day, formattedDate, monthDay, fallback }: Props) {
-  let events: WikiEvent[] = [];
-  let births: WikiPerson[] = [];
-  let deaths: WikiPerson[] = [];
-  let fetchFailed = false;
-
-  try {
-    const result = await fetchWikipedia(month, day);
-    events = result.events;
-    births = result.births;
-    deaths = result.deaths;
-  } catch {
-    try {
-      const result = await fetchBackup(month, day);
-      events = result.events;
-      births = result.births;
-      deaths = result.deaths;
-    } catch {
-      fetchFailed = true;
-    }
-  }
+export default function WikiEvents({ wikiData, formattedDate, monthDay, fallback }: Props) {
+  const { events, births, deaths, fetchFailed } = wikiData;
 
   // ── Fallback to hardcoded data ───────────────────────────────────────────
   if (fetchFailed && fallback) {
@@ -252,19 +161,6 @@ async function WikiEventsContent({ month, day, formattedDate, monthDay, fallback
   );
 }
 
-// ── Loading skeleton ──────────────────────────────────────────────────────────
-
-function LoadingUI() {
-  return (
-    <section className="bg-[#16213e] px-6 py-20">
-      <div className="mx-auto max-w-[900px] text-center">
-        <div className="mb-4 inline-block h-10 w-10 animate-spin rounded-full border-4 border-[#0f3460] border-t-[#e94560]" />
-        <p className="text-[#a8a8b3]">Loading historical events…</p>
-      </div>
-    </section>
-  );
-}
-
 // ── Fallback timeline ─────────────────────────────────────────────────────────
 
 function FallbackTimeline({ events }: { events: FallbackEvent[] }) {
@@ -281,15 +177,5 @@ function FallbackTimeline({ events }: { events: FallbackEvent[] }) {
         </div>
       ))}
     </div>
-  );
-}
-
-// ── Public export (Suspense wrapper) ─────────────────────────────────────────
-
-export default function WikiEvents(props: Props) {
-  return (
-    <Suspense fallback={<LoadingUI />}>
-      <WikiEventsContent {...props} />
-    </Suspense>
   );
 }

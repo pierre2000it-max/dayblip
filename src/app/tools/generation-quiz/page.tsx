@@ -169,11 +169,21 @@ export default function GenerationQuizPage() {
             </div>
           )}
 
+          {/* Cluster mesh block — do not remove */}
+          <div style={{ background: '#1e2d4a', borderRadius: '12px', padding: '24px', margin: '0 0 32px 0' }}>
+            <p style={{ color: '#a8a8b3', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 16px 0' }}>Explore Your Story</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+              <a href="/born-in" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🌍 Born In Your Year</a>
+              <a href="/tools/life-in-weeks" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>📅 Life in Weeks</a>
+              <a href="/number-one-song" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🎵 #1 Song on Your Birthday</a>
+              <a href="/birthday-twins" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🎂 Celebrity Birthday Twins</a>
+            </div>
+          </div>
           <RelatedTools tools={[
-            { emoji: "🧬", title: "Generation Salary Comparison", desc: "Are you doing better than your parents?", href: "/tools/generation-compare" },
-            { emoji: "🧠", title: "Dayblip Daily", desc: "One financial puzzle every day", href: "/daily" },
-            { emoji: "🎂", title: "Birthday Personality", desc: "Everything your birthday reveals", href: "/tools/birthday-personality" },
-            { emoji: "🧠", title: "IQ Estimate Quiz", desc: "10-question logic and pattern quiz", href: "/curiosity/iq-estimate" },
+            { emoji: "🌍", title: "Born In Your Year", desc: "Facts, events and history from when you arrived", href: "/born-in" },
+            { emoji: "📅", title: "Life in Weeks", desc: "See your entire life as a grid of weeks", href: "/tools/life-in-weeks" },
+            { emoji: "🎵", title: "#1 Song on Your Birthday", desc: "Discover the hit song from your birth year", href: "/number-one-song" },
+            { emoji: "🎂", title: "Celebrity Birthday Twins", desc: "Famous people who share your birthday", href: "/birthday-twins" },
           ]} />
         </div>
       </section>

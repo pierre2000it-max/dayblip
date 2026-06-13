@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import DateNav from "./DateNav";
 import ShareButtons from "@/components/ShareButtons";
-import WikiEvents from "./WikiEvents";
+import WikiEvents, { type FallbackData, type WikiData } from "./WikiEvents";
 import onThisDayRaw from "@/data/onThisDay.json";
 import { generateOnThisDaySchema, generateBreadcrumbSchema } from "@/lib/seo";
 import AdUnit from "@/components/AdUnit";
@@ -29,6 +29,11 @@ const POPULAR_DATES = [
   { slug: "february-14", label: "February 14"  },
   { slug: "march-17",    label: "March 17"     },
 ];
+
+// ── Wikipedia API types ───────────────────────────────────────────────────────
+
+interface WikiApiPage { titles?: { normalized?: string }; description?: string }
+interface WikiApiEntry { year: number; text: string; pages?: WikiApiPage[] }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -73,6 +78,76 @@ function slugLabel(slug: string): string {
   return `${MONTH_DISPLAY[p.month - 1]} ${ordinal(p.day)}`;
 }
 
+function pad2(n: number): string {
+  return String(n).padStart(2, "0");
+}
+
+// ── Server-side Wikipedia fetch (cached 24 hrs) ───────────────────────────────
+
+async function fetchWikiData(month: number, day: number): Promise<WikiData> {
+  const mm = pad2(month);
+  const dd = pad2(day);
+
+  try {
+    const res = await fetch(
+      `https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/all/${mm}/${dd}`,
+      {
+        headers: { "Api-User-Agent": "Dayblip/1.0 (dayblip.com)" },
+        next: { revalidate: 86400 },
+      }
+    );
+    if (!res.ok) throw new Error(`Wikipedia API ${res.status}`);
+    const data = await res.json();
+
+    return {
+      fetchFailed: false,
+      events: (data.events ?? []).slice(0, 10).map((e: WikiApiEntry) => ({
+        year: String(e.year),
+        text: e.text,
+      })),
+      births: (data.births ?? []).slice(0, 8).map((e: WikiApiEntry) => ({
+        year: String(e.year),
+        name: e.pages?.[0]?.titles?.normalized ?? e.text.split(",")[0],
+        description: e.pages?.[0]?.description ?? e.text,
+      })),
+      deaths: (data.deaths ?? []).slice(0, 5).map((e: WikiApiEntry) => ({
+        year: String(e.year),
+        name: e.pages?.[0]?.titles?.normalized ?? e.text.split(",")[0],
+        description: e.pages?.[0]?.description ?? e.text,
+      })),
+    };
+  } catch {
+    // Backup API
+    try {
+      const res = await fetch(
+        `https://history.muffinlabs.com/date/${month}/${day}`,
+        { next: { revalidate: 86400 } }
+      );
+      if (!res.ok) throw new Error(`Backup API ${res.status}`);
+      const data = await res.json();
+
+      const mapEntry = (e: { year: string; text: string }) => ({ year: e.year, text: e.text });
+      const mapPerson = (e: { year: string; text: string }) => {
+        const parts = e.text.split(",");
+        return {
+          year: e.year,
+          name: parts[0]?.trim() ?? e.text,
+          description: parts.slice(1).join(",").trim() || e.text,
+        };
+      };
+
+      return {
+        fetchFailed: false,
+        events: (data.data?.Events ?? []).slice(0, 10).map(mapEntry),
+        births: (data.data?.Births ?? []).slice(0, 8).map(mapPerson),
+        deaths: (data.data?.Deaths ?? []).slice(0, 5).map(mapPerson),
+      };
+    } catch {
+      return { fetchFailed: true, events: [], births: [], deaths: [] };
+    }
+  }
+}
+
 // ── Metadata ─────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({
@@ -99,7 +174,7 @@ export async function generateMetadata({
 
 // ── Page ─────────────────────────────────────────────────────────────────────
 
-export default function OnThisDayPage({
+export default async function OnThisDayPage({
   params,
 }: {
   params: { date: string };
@@ -132,6 +207,10 @@ export default function OnThisDayPage({
   const pageUrl        = `${BASE}/on-this-day/${params.date}`;
   const desc           = `Discover what happened on ${formattedDate} in history. Famous birthdays, major events and historical facts.`;
 
+  // Fetch Wikipedia server-side — result is cached 24 hrs on Vercel edge.
+  // Page awaits this before rendering so users receive a complete page with no loading state.
+  const wikiData = await fetchWikiData(month, day);
+
   // JSON-LD schemas
   const articleSchema    = generateOnThisDaySchema(formattedDate, desc);
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -140,8 +219,8 @@ export default function OnThisDayPage({
     { name: formattedDate, url: pageUrl },
   ]);
 
-  // FAQ schema (only when data exists)
-  const faqSchema = data && data.events.length > 0 ? {
+  const fallbackForSchema = data ?? null;
+  const faqSchema = fallbackForSchema && fallbackForSchema.events.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: [
@@ -150,7 +229,7 @@ export default function OnThisDayPage({
         name: `What happened on ${formattedDate} in history?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: data.events.slice(0, 3).map(e => `${e.year}: ${e.event}`).join(" | "),
+          text: fallbackForSchema.events.slice(0, 3).map(e => `${e.year}: ${e.event}`).join(" | "),
         },
       },
     ],
@@ -185,13 +264,12 @@ export default function OnThisDayPage({
           </div>
         </section>
 
-        {/* ── LIVE WIKIPEDIA EVENTS ─────────────────────────────── */}
+        {/* ── EVENTS — pre-fetched, no loading state ────────────────── */}
         <WikiEvents
-          month={month}
-          day={day}
+          wikiData={wikiData}
           formattedDate={formattedDate}
           monthDay={monthDay}
-          fallback={data}
+          fallback={data as FallbackData | null}
         />
 
         {/* Ad — after events */}
@@ -211,7 +289,7 @@ export default function OnThisDayPage({
           </div>
         </section>
 
-        {/* Ad — below birthdays / coming-soon section */}
+        {/* Ad — below share section */}
         <div className="bg-[#1a1a2e] px-6 pb-4">
           <div className="mx-auto max-w-[900px]">
             <AdUnit slot="1234567890" format="rectangle" />

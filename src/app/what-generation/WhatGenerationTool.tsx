@@ -60,6 +60,12 @@ export default function WhatGenerationTool() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <p style={{ color: '#a8a8b3', fontSize: '14px', textAlign: 'center', padding: '12px 0' }}>
+        This tool has moved.{' '}
+        <a href="/tools/generation-quiz" style={{ color: '#e94560', textDecoration: 'none', fontWeight: '500' }}>
+          Visit the updated Generation Quiz →
+        </a>
+      </p>
       <section className="px-6 py-16 text-center" style={{background:"linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)"}}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">👶</div>
