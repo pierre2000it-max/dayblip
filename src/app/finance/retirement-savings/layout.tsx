@@ -8,9 +8,9 @@ export const metadata: Metadata = {
     title: "Retirement Savings Calculator — Are You On Track? | Dayblip",
     description: "Find out if your retirement savings are on track. See projected balance vs amount needed using the 25x rule.",
     url: "https://www.dayblip.com/finance/retirement-savings",
-    images: [{ url: "/api/og?title=Retirement+Savings+Calculator&emoji=%F0%9F%8F%96%EF%B8%8F&subtitle=Are+your+savings+on+track%3F+Free+calculator", width: 1200, height: 630, alt: "Retirement Savings Calculator — Dayblip" }],
+    images: [{ url: "https://www.dayblip.com/api/og?title=Retirement+Savings+Calculator&emoji=%F0%9F%8F%96%EF%B8%8F&subtitle=Are+your+savings+on+track%3F+Free+calculator", width: 1200, height: 630, alt: "Retirement Savings Calculator — Dayblip" }],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", images: ["https://www.dayblip.com/api/og?title=Retirement+Savings+Calculator&emoji=%F0%9F%8F%96%EF%B8%8F&subtitle=Are+your+savings+on+track%3F+Free+calculator"] },
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
