@@ -5,6 +5,7 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -215,6 +216,12 @@ export default function MortgagePage() {
             url={`https://www.dayblip.com/finance/mortgage-calculator?price=${homePrice}&down=${downPayment}&rate=${rate}&term=${term}`}
             title="Mortgage Payment Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "🏠", title: "Rent vs Buy Calculator", desc: "Should you rent or buy in your city?", href: "/blog/rent-vs-buy-calculator" },
+            { emoji: "💰", title: "How Much House Can You Afford?", desc: "The 28/36 rule explained", href: "/blog/how-much-house-can-you-afford" },
+            { emoji: "📊", title: "Net Worth Calculator", desc: "Calculate your total net worth", href: "/finance/net-worth" },
+            { emoji: "💸", title: "Debt Payoff Calculator", desc: "Avalanche vs snowball method", href: "/finance/debt-payoff" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Actual rates and costs may vary. Consult a mortgage professional.</p>
         </div>
       </section>

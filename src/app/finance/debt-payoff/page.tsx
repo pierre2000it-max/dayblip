@@ -5,6 +5,7 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 interface Debt { id: number; name: string; balance: string; rate: string; minPayment: string }
@@ -229,6 +230,12 @@ export default function DebtPayoffPage() {
               title="Debt Payoff Calculator"
             />
           )}
+          <RelatedTools tools={[
+            { emoji: "💳", title: "Minimum Payment Calculator", desc: "The true cost of minimum payments", href: "/tools/minimum-payment" },
+            { emoji: "📊", title: "Net Worth Calculator", desc: "Calculate your total net worth", href: "/finance/net-worth" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your overall financial health", href: "/tools/financial-life-score" },
+            { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Results are estimates.</p>
         </div>
       </section>

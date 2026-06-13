@@ -5,6 +5,7 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -185,6 +186,12 @@ export default function CompoundInterestPage() {
             url={`https://www.dayblip.com/finance/compound-interest?principal=${initial}&monthly=${monthly}&rate=${rate}&years=${years}`}
             title="Compound Interest Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
+            { emoji: "📈", title: "What If I Had Invested", desc: "See what any investment would be worth", href: "/finance/what-if-i-invested" },
+            { emoji: "🐢", title: "Early vs Late Saver", desc: "The true cost of waiting to invest", href: "/tools/early-vs-late" },
+            { emoji: "🏦", title: "Retirement Savings Calculator", desc: "Are you on track to retire?", href: "/finance/retirement-savings" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Results assume constant rate and do not account for taxes or fees.</p>
         </div>
       </section>

@@ -5,6 +5,7 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
+import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -163,6 +164,12 @@ export default function RetirementSavingsPage() {
             url={`https://www.dayblip.com/finance/retirement-savings?age=${currentAge}&retireage=${retirementAge}&savings=${currentSavings}&monthly=${monthlySavings}&return=${expectedReturn}&income=${desiredIncome}`}
             title="Retirement Savings Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "🏖️", title: "FI Date Calculator", desc: "Find your financial independence date", href: "/tools/fi-date" },
+            { emoji: "💵", title: "401k Calculator", desc: "Maximize your retirement contributions", href: "/finance/401k-calculator" },
+            { emoji: "📊", title: "Compound Interest Calculator", desc: "Watch your money grow over time", href: "/finance/compound-interest" },
+            { emoji: "👴", title: "Social Security Calculator", desc: "When should you claim benefits?", href: "/finance/social-security" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Uses 25x rule (4% withdrawal rate). Actual retirement needs vary by individual.</p>
         </div>
       </section>
