@@ -482,6 +482,12 @@ export default function WFHCalculatorPage() {
                   url={shareUrl}
                   title="Work From Home Savings Calculator"
                 />
+                <div className="mt-6 mb-2 rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5 text-sm">
+                  <p className="text-[#a8a8b3] mb-2">Want the full breakdown with investment projections?</p>
+                  <a href="/blog/wfh-financial-value" style={{ color: "#e94560", textDecoration: "none", fontWeight: 600 }}>
+                    Read: The True Financial Value of Working From Home →
+                  </a>
+                </div>
                 <RelatedTools tools={[
                   { emoji: "🌐", title: "Time Zone Converter", desc: "Convert time zones for remote teams", href: "/tools/timezone-converter" },
                   { emoji: "⏰", title: "True Hourly Wage", desc: "What does your job really pay per hour?", href: "/tools/true-hourly-wage" },

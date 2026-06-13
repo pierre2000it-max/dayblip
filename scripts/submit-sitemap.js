@@ -280,6 +280,7 @@ const urls = [
   "https://www.dayblip.com/blog/roth-ira-vs-traditional-ira",
   "https://www.dayblip.com/blog/what-your-paycheck-shows-you",
   "https://www.dayblip.com/blog/how-much-saved-by-age",
+  "https://www.dayblip.com/blog/wfh-financial-value",
 ];
 
 // Born-in pages 1940–2020

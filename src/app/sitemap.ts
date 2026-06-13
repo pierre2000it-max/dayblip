@@ -353,6 +353,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/blog/roth-ira-vs-traditional-ira",          0.8, MONTHLY),
     p("/blog/what-your-paycheck-shows-you",         0.8, MONTHLY),
     p("/blog/how-much-saved-by-age",                0.8, MONTHLY),
+    p("/blog/wfh-financial-value",                  0.8, MONTHLY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // LEGAL PAGES  (priority 0.3, monthly)

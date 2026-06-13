@@ -164,6 +164,14 @@ const articles = [
     readTime: "5 min read",
     href: "/blog/how-much-saved-by-age",
   },
+  {
+    category: "Career",
+    title: "The True Financial Value of Working From Home",
+    excerpt:
+      "Remote work saves the average car commuter $12,317 per year in commute costs, work meals, clothing, and parking. Over 30 years invested at 7%, that difference is $1.2 million.",
+    readTime: "5 min read",
+    href: "/blog/wfh-financial-value",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]
