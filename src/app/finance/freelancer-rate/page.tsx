@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtDec(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
@@ -203,7 +204,13 @@ export default function FreelancerRatePage() {
                 className="rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none">
                 {STATES.map(([name], i) => <option key={i} value={i}>{name}</option>)}
               </select></label>
-            <p className="text-xs text-[#a8a8b3]">Self-employment tax (15.3%) and federal income tax are calculated automatically.</p>
+            <RelatedTools tools={[
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "🧾", title: "Self-Employment Tax", desc: "Know your tax burden", href: "/finance/self-employment-tax" },
+            { emoji: "💼", title: "Side Hustle Calculator", desc: "Value your side income", href: "/tools/side-hustle" },
+            { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
+          ]} />
+          <p className="text-xs text-[#a8a8b3]">Self-employment tax (15.3%) and federal income tax are calculated automatically.</p>
           </div>
 
           {/* Result */}

@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtPct(n: number) { return (n >= 0 ? "+" : "") + n.toFixed(2) + "%" }
@@ -167,6 +168,12 @@ export default function StockReturnPage() {
             url={`https://www.dayblip.com/finance/stock-return?initial=${initialInv}&current=${currentValue}&years=${years}&dividends=${dividends}`}
             title="Stock Return Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "💡", title: "What If I Invested?", desc: "See investment growth", href: "/finance/what-if-i-invested" },
+            { emoji: "📈", title: "Compound Interest", desc: "Grow wealth over time", href: "/finance/compound-interest" },
+            { emoji: "⏱️", title: "Market Timing Cost", desc: "Cost of bad timing", href: "/tools/market-timing" },
+            { emoji: "💰", title: "Retirement Savings", desc: "Are you on track?", href: "/finance/retirement-savings" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Past returns do not guarantee future results. S&P 500 historical average is approximate. Not investment advice.</p>
         </div>
       </section>

@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 const salaryData: Record<string, Record<string, [number, number]>> = {
   "Software Engineer": { "0-1":[75000,95000],"2-4":[95000,130000],"5-9":[130000,170000],"10-14":[160000,210000],"15+":[190000,250000] },
@@ -402,7 +403,13 @@ export default function SalaryCheckerPage() {
 
               {DISCLAIMER}
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "💼", title: "Salary Negotiation", desc: "Negotiate a raise", href: "/tools/salary-negotiation" },
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "📊", title: "Job Offer Comparison", desc: "Compare job offers", href: "/tools/job-offer-comparison" },
+            { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
+          ]} />
+
         </div>
       </section>
     </div>

@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 const fieldRaises: Record<string, number> = {
   "Technology": 4.5, "Healthcare": 3.8, "Finance": 3.5, "Legal": 3.2, "Engineering": 3.8,
@@ -199,7 +200,13 @@ export default function CareerTimelinePage() {
               <ShareButtons text={shareText} url={shareUrl} title="Career Timeline Calculator" />
               {DISCLAIMER}
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "💵", title: "Salary Checker", desc: "Is your salary fair?", href: "/tools/salary-checker" },
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "🤖", title: "AI Job Score", desc: "AI risk for your job", href: "/tools/ai-job-score" },
+            { emoji: "📊", title: "Job Offer Comparison", desc: "Compare job offers", href: "/tools/job-offer-comparison" },
+          ]} />
+
         </div>
       </section>
     </div>

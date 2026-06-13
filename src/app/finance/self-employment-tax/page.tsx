@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -189,6 +190,12 @@ export default function SelfEmploymentTaxPage() {
             url={`https://www.dayblip.com/finance/self-employment-tax?income=${netIncome}&other=${w2Income}&filing=${filing}&expenses=${bizExpenses}`}
             title="Self-Employment Tax Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "⏱️", title: "Freelancer Rate Calculator", desc: "Set your hourly rate", href: "/finance/freelancer-rate" },
+            { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
+            { emoji: "💼", title: "Side Hustle Calculator", desc: "Value your side income", href: "/tools/side-hustle" },
+            { emoji: "📋", title: "Overtime Tax Calculator", desc: "Tax on extra hours", href: "/finance/overtime-tax" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Does not include all deductions, credits, or state taxes. Consult a CPA for accurate tax advice.</p>
         </div>
       </section>

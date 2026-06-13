@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -158,7 +159,13 @@ export default function ImpulseShoppingPage() {
             text={`My impulse shopping could cost me ${fmt(calc.highlight.value)} in future wealth! (Educational purposes only)`}
             url={`https://www.dayblip.com/curiosity/impulse-shopping?monthly=200&years=${years}&rate=${rate}`}
             title="Impulse Shopping Investment Calculator"
-          />
+          />          <RelatedTools tools={[
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "💸", title: "Habit Cost Calculator", desc: "Total cost of habits", href: "/health/habit-cost" },
+            { emoji: "📊", title: "Budget Calculator", desc: "Build a monthly budget", href: "/finance/budget-calculator" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+          ]} />
+
           {DISCLAIMER}
         </div>
       </section>

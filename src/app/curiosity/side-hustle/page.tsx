@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -175,7 +176,13 @@ export default function SideHustlePage() {
             text={`A ${hoursPerWeek}hr/week side hustle invested for ${years} years could build ${fmt(calc.bigNumber)}! (Educational purposes only)`}
             url={`https://www.dayblip.com/curiosity/side-hustle?hours=${hoursPerWeek}&hourly=${hourlyStr}&invest=${investPct}&years=${years}&rate=${rate}`}
             title="Side Hustle Investment Calculator"
-          />
+          />          <RelatedTools tools={[
+            { emoji: "🧾", title: "Self-Employment Tax", desc: "Know your tax burden", href: "/finance/self-employment-tax" },
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "📉", title: "Break-Even Calculator", desc: "When do you profit?", href: "/finance/break-even" },
+            { emoji: "💼", title: "Freelancer Rate", desc: "Set your hourly rate", href: "/finance/freelancer-rate" },
+          ]} />
+
           {DISCLAIMER}
         </div>
       </section>

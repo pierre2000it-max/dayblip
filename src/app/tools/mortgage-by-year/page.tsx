@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 const homeData: Record<number, { price: number; rate: number; medianIncome: number }> = {
   1970: { price: 23450, rate: 8.45, medianIncome: 9870 },
@@ -167,7 +168,13 @@ export default function MortgageByYearPage() {
 
               <ShareButtons text={shareText} url={shareUrl} title="Home Affordability by Year" />
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "🏠", title: "Mortgage Calculator", desc: "Calculate payments", href: "/finance/mortgage-calculator" },
+            { emoji: "📊", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+            { emoji: "💳", title: "Debt Payoff Calculator", desc: "Pay off debt faster", href: "/finance/debt-payoff" },
+            { emoji: "🏡", title: "Rent vs Buy", desc: "Should you rent or buy?", href: "/real-estate/rent-vs-buy" },
+          ]} />
+
         </div>
       </section>
     </div>

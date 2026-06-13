@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -193,7 +194,13 @@ export default function SavingsGoalPage() {
                 </table>
               </div>
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "📈", title: "Compound Interest", desc: "Grow wealth over time", href: "/finance/compound-interest" },
+            { emoji: "🚨", title: "Emergency Fund", desc: "Build your safety net", href: "/finance/emergency-fund" },
+            { emoji: "📊", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+            { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
+          ]} />
+
         </div>
       </section>
     </div>

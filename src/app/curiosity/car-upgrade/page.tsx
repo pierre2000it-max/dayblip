@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fvLump(pv: number, r: number, years: number): number {
@@ -159,7 +160,13 @@ export default function CarUpgradePage() {
             text={`Car upgrades over ${calcYears} years cost ${fmt(calc.totalInvestValue)} in opportunity cost! (Educational purposes only)`}
             url={`https://www.dayblip.com/curiosity/car-upgrade?expensive=${wantStr}&practical=${practStr}&buyevery=${buyEvery}&years=${calcYears}&rate=${rate}`}
             title="Car Upgrade Opportunity Cost Calculator"
-          />
+          />          <RelatedTools tools={[
+            { emoji: "🚗", title: "Car Affordability", desc: "Can you afford it?", href: "/finance/car-affordability" },
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "📊", title: "Budget Calculator", desc: "Build a monthly budget", href: "/finance/budget-calculator" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+          ]} />
+
           {DISCLAIMER}
         </div>
       </section>

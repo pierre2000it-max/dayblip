@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 
@@ -167,6 +168,12 @@ export default function SalaryCalculatorPage() {
             url={`https://www.dayblip.com/productivity/salary-calculator?amount=${amount}&per=${per}&filing=${filing}`}
             title="Salary Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
+            { emoji: "💵", title: "Salary Checker", desc: "Is your salary fair?", href: "/tools/salary-checker" },
+            { emoji: "🕐", title: "Overtime Calculator", desc: "Calculate overtime pay", href: "/finance/overtime-calculator" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">Tax estimates are approximate federal only and do not include state taxes, FICA, deductions or credits. Consult a tax professional for your actual tax liability.</p>
         </div>
       </section>

@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -128,6 +129,12 @@ export default function AffordabilityPage() {
             url={`https://www.dayblip.com/real-estate/affordability?income=${income}&debts=${monthlyDebts}&down=${downPayment}&rate=${mortgageRate}`}
             title="Home Affordability Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "🏠", title: "Mortgage Calculator", desc: "Calculate payments", href: "/finance/mortgage-calculator" },
+            { emoji: "📊", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+            { emoji: "🏡", title: "American Dream Calculator", desc: "Can you afford it?", href: "/tools/american-dream-calculator" },
+            { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. The 28/36 rule is a guideline; lenders use various criteria. Consult a mortgage professional.</p>
         </div>
       </section>

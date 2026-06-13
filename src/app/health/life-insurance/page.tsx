@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -111,6 +112,12 @@ export default function LifeInsurancePage() {
             url={`https://www.dayblip.com/health/life-insurance?income=${income}&years=${yearsReplace}&mortgage=${mortgage}`}
             title="Life Insurance Needs Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "🛡️", title: "Life Insurance Calculator", desc: "How much coverage?", href: "/tools/life-insurance-calculator" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+            { emoji: "📈", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+            { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">⚠️ This is a rough estimate. Consult a licensed insurance professional for accurate quotes and advice tailored to your situation. Not financial advice.</p>
         </div>
       </section>

@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -240,6 +241,12 @@ export default function CapitalGainsPage() {
             url={`https://www.dayblip.com/finance/capital-gains?purchase=${purchasePrice}&sale=${salePrice}&holding=${holding}&income=${annualIncome}&filing=${filing}`}
             title="Capital Gains Tax Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "📋", title: "Tax Bracket Calculator", desc: "Find your tax bracket", href: "/finance/tax-bracket" },
+            { emoji: "💡", title: "What If I Invested?", desc: "See investment growth", href: "/finance/what-if-i-invested" },
+            { emoji: "📈", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+            { emoji: "📊", title: "Compound Interest", desc: "Grow wealth over time", href: "/finance/compound-interest" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Does not include state capital gains taxes or all adjustments. Consult a CPA for accurate tax advice.</p>
         </div>
       </section>

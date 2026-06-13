@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -175,6 +176,12 @@ export default function EmergencyFundPage() {
             url="https://www.dayblip.com/finance/emergency-fund"
             title="Emergency Fund Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "💳", title: "Debt Payoff Calculator", desc: "Pay off debt faster", href: "/finance/debt-payoff" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+            { emoji: "📊", title: "Budget Calculator", desc: "Build a monthly budget", href: "/finance/budget-calculator" },
+            { emoji: "📈", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Emergency fund needs vary by individual circumstances.</p>
         </div>
       </section>

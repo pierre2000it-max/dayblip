@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 interface Result {
   acts: number; people: number; ripple: number; years: number
@@ -125,7 +126,13 @@ export default function CompoundKindnessPage() {
 
               <ShareButtons text={shareText} url={shareUrl} title="The Compound Effect of Kindness" />
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "📅", title: "Life in Weeks", desc: "Visualize your life", href: "/tools/life-in-weeks" },
+            { emoji: "⏳", title: "Procrastination Cost", desc: "Cost of waiting", href: "/tools/procrastination-cost" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+            { emoji: "🤔", title: "Regret Minimization", desc: "Make better decisions", href: "/tools/regret-minimization" },
+          ]} />
+
         </div>
       </section>
     </div>

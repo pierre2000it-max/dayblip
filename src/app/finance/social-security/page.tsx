@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -193,6 +194,12 @@ export default function SocialSecurityPage() {
             url={`https://www.dayblip.com/finance/social-security?birthyear=${birthYear}&benefit=${benefitAt62}&health=${health}&marital=${marital}`}
             title="Social Security Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "💰", title: "Retirement Savings", desc: "Are you on track?", href: "/finance/retirement-savings" },
+            { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
+            { emoji: "📊", title: "401(k) Calculator", desc: "Maximize your 401k", href: "/finance/401k-calculator" },
+            { emoji: "📈", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">⚠️ This is an estimate. Visit ssa.gov for your actual Social Security benefit statement. Not financial advice.</p>
         </div>
       </section>

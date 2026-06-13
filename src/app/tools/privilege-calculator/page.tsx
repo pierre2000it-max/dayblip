@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 const QUESTIONS = [
   "Clean drinking water access?",
@@ -152,7 +153,13 @@ export default function PrivilegeCalculatorPage() {
 
               <ShareButtons text={shareText} url={shareUrl} title="Your Global Perspective" />
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "👥", title: "Generation Compare", desc: "Compare generations", href: "/tools/generation-compare" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+            { emoji: "💵", title: "Salary Checker", desc: "Is your salary fair?", href: "/tools/salary-checker" },
+            { emoji: "📅", title: "Life in Weeks", desc: "Visualize your life", href: "/tools/life-in-weeks" },
+          ]} />
+
         </div>
       </section>
     </div>

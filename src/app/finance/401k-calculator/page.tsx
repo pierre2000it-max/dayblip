@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -167,6 +168,12 @@ export default function FourOhOneKPage() {
             url={`https://www.dayblip.com/finance/401k-calculator?age=${currentAge}&retireage=${retirementAge}&balance=${balance}&salary=${salary}&contrib=${yourPct}&match=${matchPct}&return=${returnPct}`}
             title="401(k) Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "💰", title: "Retirement Savings", desc: "Are you on track?", href: "/finance/retirement-savings" },
+            { emoji: "📈", title: "Compound Interest", desc: "Grow wealth over time", href: "/finance/compound-interest" },
+            { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
+            { emoji: "📋", title: "Roth IRA vs Traditional", desc: "Which is better for you?", href: "/blog/roth-ira-vs-traditional-ira" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">401(k) contribution limits and employer match rules vary. Consult your plan documents and a financial advisor. For educational purposes only.</p>
         </div>
       </section>

@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -134,6 +135,12 @@ export default function HomeValuePage() {
             url="https://dayblip.com/real-estate/home-value"
             title="Historical Home Value Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "📊", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+            { emoji: "🏡", title: "Rent vs Buy", desc: "Should you rent or buy?", href: "/real-estate/rent-vs-buy" },
+            { emoji: "🏠", title: "Mortgage Calculator", desc: "Calculate payments", href: "/finance/mortgage-calculator" },
+            { emoji: "🏡", title: "American Dream Calculator", desc: "Can you afford it?", href: "/tools/american-dream-calculator" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">Estimates based on US median home price trends. Individual property values vary significantly. Not real estate advice.</p>
         </div>
       </section>

@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -129,6 +130,12 @@ export default function HabitCostPage() {
             url={`https://www.dayblip.com/health/habit-cost?habit=${tab}&cost=${costStr}&freq=${freq}&years=${years}`}
             title="Habit Cost Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "🍺", title: "Alcohol Cost Calculator", desc: "Cost of drinking", href: "/health/alcohol-cost" },
+            { emoji: "🚬", title: "Smoking Cost Calculator", desc: "Cost of smoking", href: "/tools/smoking-cost" },
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "💳", title: "Debt Payoff Calculator", desc: "Pay off debt faster", href: "/finance/debt-payoff" },
+          ]} />
         </div>
       </section>
     </div>

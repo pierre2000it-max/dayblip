@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -140,7 +141,13 @@ export default function DiningOutPage() {
             text={`Dining out is costing me ${fmt(calc.diffAnnual)}/year. Invested for ${years} years = ${fmt(calc.invested)}! (Educational purposes only)`}
             url={`https://www.dayblip.com/curiosity/dining-out?meals=${timesPerWeek}&cost=${mealCostStr}&homecost=${homeCostStr}&years=${years}&rate=${rate}`}
             title="Dining Out Opportunity Cost Calculator"
-          />
+          />          <RelatedTools tools={[
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "💸", title: "Habit Cost Calculator", desc: "Total cost of habits", href: "/health/habit-cost" },
+            { emoji: "🍽️", title: "Tip Calculator", desc: "Calculate the right tip", href: "/tools/tip-calculator" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+          ]} />
+
           {DISCLAIMER}
         </div>
       </section>

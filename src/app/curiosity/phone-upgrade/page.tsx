@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fvLump(pv: number, r: number, years: number): number {
@@ -166,7 +167,13 @@ export default function PhoneUpgradePage() {
             text={`Upgrading my phone ${calc.freqLabel.toLowerCase()} costs ${fmt(calc.investedValue)} in opportunity over ${calcYears} years! (Educational purposes only)`}
             url={`https://www.dayblip.com/curiosity/phone-upgrade?price=${priceStr}&tradein=${tradeInStr}&freq=${upgradeFreq}&years=${calcYears}&rate=${rate}`}
             title="Phone Upgrade Cycle Calculator"
-          />
+          />          <RelatedTools tools={[
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "📊", title: "Budget Calculator", desc: "Build a monthly budget", href: "/finance/budget-calculator" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+            { emoji: "💸", title: "Habit Cost Calculator", desc: "Total cost of habits", href: "/health/habit-cost" },
+          ]} />
+
           {DISCLAIMER}
         </div>
       </section>

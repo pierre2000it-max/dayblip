@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -136,7 +137,13 @@ export default function SmokingInvestmentPage() {
             text={`Smoking has cost me ${fmt(calc.totalSpent)} so far. Invested instead it would be ${fmt(calc.pastInvested)}! (Educational purposes only)`}
             url={`https://www.dayblip.com/curiosity/smoking-investment?packs=${packsDay}&price=${priceStr}&started=${ageStarted}&current=${currentAge}&rate=${rate}`}
             title="Smoking Investment Calculator"
-          />
+          />          <RelatedTools tools={[
+            { emoji: "💸", title: "Habit Cost Calculator", desc: "Total cost of habits", href: "/health/habit-cost" },
+            { emoji: "🍺", title: "Alcohol Cost Calculator", desc: "Cost of drinking", href: "/health/alcohol-cost" },
+            { emoji: "📈", title: "Compound Interest", desc: "Grow wealth over time", href: "/finance/compound-interest" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+          ]} />
+
           {DISCLAIMER}
         </div>
       </section>

@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -156,6 +157,12 @@ export default function NetWorthPage() {
             url="https://www.dayblip.com/finance/net-worth"
             title="Net Worth Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "🏦", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
+            { emoji: "💳", title: "Debt Payoff Calculator", desc: "Pay off debt faster", href: "/finance/debt-payoff" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+            { emoji: "💰", title: "Retirement Savings", desc: "Are you on track?", href: "/finance/retirement-savings" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">Source: Federal Reserve Survey of Consumer Finances. For educational purposes only. Medians vary by location, occupation and many other factors.</p>
         </div>
       </section>

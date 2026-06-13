@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import bornInData from "@/data/bornIn.json"
+import RelatedTools from "@/components/RelatedTools"
 
 interface BornIn { year: number; number1Song: string }
 const SONGS = bornInData as BornIn[]
@@ -121,7 +122,13 @@ export default function MusicOfYourYearPage() {
 
               <ShareButtons text={shareText} url={shareUrl} title="The Music of Your Birth Year" />
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "🎂", title: "Born In Explorer", desc: "Explore your birth year", href: "/born-in" },
+            { emoji: "🎯", title: "Generation Quiz", desc: "What generation are you?", href: "/tools/generation-quiz" },
+            { emoji: "🌟", title: "Birthday Personality", desc: "Your birthday traits", href: "/tools/birthday-personality" },
+            { emoji: "🎂", title: "Age Calculator", desc: "How old are you exactly?", href: "/age-calculator" },
+          ]} />
+
         </div>
       </section>
     </div>

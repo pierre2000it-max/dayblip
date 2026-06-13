@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmt2(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }) }
@@ -204,7 +205,13 @@ export default function CarTrueCostPage() {
               <ShareButtons text={shareText} url={shareUrl} title="True Cost of Car Ownership" />
               {DISCLAIMER}
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "🚗", title: "Car Affordability", desc: "Can you afford it?", href: "/finance/car-affordability" },
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "📊", title: "Budget Calculator", desc: "Build a monthly budget", href: "/finance/budget-calculator" },
+            { emoji: "💳", title: "Debt Payoff Calculator", desc: "Pay off debt faster", href: "/finance/debt-payoff" },
+          ]} />
+
         </div>
       </section>
     </div>

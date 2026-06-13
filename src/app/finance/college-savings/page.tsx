@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -187,6 +188,12 @@ export default function CollegeSavingsPage() {
             url={`https://www.dayblip.com/finance/college-savings?childage=${childAge}&current=${currentSavings}&monthly=${monthly}&return=${returnPct}&type=${collegeTypeIdx}`}
             title="College Savings Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "🎓", title: "Student Loan Calculator", desc: "Plan for student debt", href: "/finance/student-loan" },
+            { emoji: "🏫", title: "College ROI Calculator", desc: "Is college worth it?", href: "/tools/college-roi" },
+            { emoji: "📈", title: "Compound Interest", desc: "Grow savings over time", href: "/finance/compound-interest" },
+            { emoji: "📚", title: "GPA Calculator", desc: "Track your GPA", href: "/education/gpa-calculator" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Tuition projections are estimates using 5% annual inflation. Actual costs vary by institution. Consult a financial advisor. 529 rules vary by state.</p>
         </div>
       </section>

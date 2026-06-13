@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -142,7 +143,13 @@ export default function LotteryPage() {
             text={`My $${weekly.toFixed(2)}/week lottery habit could be ${fmt(calc.invested)} if invested instead! (Educational purposes only)`}
             url={`https://www.dayblip.com/curiosity/lottery?weekly=${weeklyStr}&years=${years}&rate=${rate}`}
             title="Lottery vs Investing Calculator"
-          />
+          />          <RelatedTools tools={[
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+            { emoji: "📈", title: "Compound Interest", desc: "Grow wealth over time", href: "/finance/compound-interest" },
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "📊", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+          ]} />
+
           {DISCLAIMER}
         </div>
       </section>

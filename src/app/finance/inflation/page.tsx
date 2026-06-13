@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
+import RelatedTools from "@/components/RelatedTools"
 
 const CPI: Record<number, number> = {
   1913: 9.9, 1920: 20.0, 1930: 16.7, 1940: 14.0, 1950: 24.1,
@@ -192,6 +193,12 @@ export default function InflationPage() {
             url={`https://www.dayblip.com/finance/inflation?amount=${amount}&fromyear=${fromYear}&mode=${mode}`}
             title="Inflation Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "📈", title: "Compound Interest", desc: "Grow wealth over time", href: "/finance/compound-interest" },
+            { emoji: "💡", title: "What If I Invested?", desc: "See investment growth", href: "/finance/what-if-i-invested" },
+            { emoji: "🏖️", title: "Retirement Savings", desc: "Plan for retirement", href: "/finance/retirement-savings" },
+            { emoji: "🏠", title: "Cost of Living", desc: "Compare living costs", href: "/finance/cost-of-living" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">CPI data based on US Bureau of Labor Statistics. For educational purposes only.</p>
         </div>
       </section>

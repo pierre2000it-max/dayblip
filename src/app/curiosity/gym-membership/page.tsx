@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fv(monthly: number, r: number, years: number): number {
@@ -165,7 +166,13 @@ export default function GymMembershipPage() {
             text={`My gym membership costs $${calc.costPerVisit.toFixed(2)} per actual visit! Invested instead = ${fmt(calc.invested)} in ${investYears} years. (Educational purposes only)`}
             url={`https://www.dayblip.com/curiosity/gym-membership?monthly=${monthlyCostStr}&visits=${visitsPerMonth}&had=${yearsHad}&investyears=${investYears}&rate=${rate}`}
             title="Gym Membership Cost Calculator"
-          />
+          />          <RelatedTools tools={[
+            { emoji: "💸", title: "Habit Cost Calculator", desc: "Total cost of habits", href: "/health/habit-cost" },
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+            { emoji: "🔥", title: "Calorie Calculator", desc: "Track your calories", href: "/health/calorie-calculator" },
+          ]} />
+
           {DISCLAIMER}
         </div>
       </section>

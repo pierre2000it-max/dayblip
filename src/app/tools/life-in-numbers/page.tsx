@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 interface Stat { label: string; value: number; color?: string; prefix?: string }
 
@@ -131,7 +132,13 @@ export default function LifeInNumbersPage() {
               <Section title="🌍 The World While You Lived" stats={world} />
               <ShareButtons text={shareText} url={shareUrl} title="Your Life in Numbers" />
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "📅", title: "Life in Weeks", desc: "Visualize your life", href: "/tools/life-in-weeks" },
+            { emoji: "🎂", title: "Age Calculator", desc: "How old are you exactly?", href: "/age-calculator" },
+            { emoji: "❤️", title: "Life Expectancy", desc: "How long will you live?", href: "/health/life-expectancy" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+          ]} />
+
         </div>
       </section>
     </div>

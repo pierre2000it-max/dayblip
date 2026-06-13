@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import RelatedTools from "@/components/RelatedTools"
 
 export const metadata: Metadata = {
   title: "Money Misconceptions — Tools That Reveal the Truth | Dayblip",
@@ -50,7 +51,13 @@ export default function ToolsMisconceptionsPage() {
           </div>
           <div className="mt-10 text-center">
             <Link href="/tools" className="text-sm text-[#a8a8b3] hover:text-[#e94560] transition-colors">← Back to all tools</Link>
-          </div>
+          </div>          <RelatedTools tools={[
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+            { emoji: "👥", title: "Generation Compare", desc: "Compare generations", href: "/tools/generation-compare" },
+            { emoji: "📊", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+            { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
+          ]} />
+
         </div>
       </section>
     </div>

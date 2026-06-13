@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 const CURRENT_YEAR = 2026
 const FINNHUB_KEY = "d8f2su9r01qub7kfkojgd8f2su9r01qub7kfkok0"
@@ -460,7 +461,13 @@ export default function StockCalculatorPage() {
               <ShareButtons text={shareText} url={shareUrl} title="Historical Stock Calculator" />
               {DISCLAIMER}
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "💡", title: "What If I Invested?", desc: "See investment growth", href: "/finance/what-if-i-invested" },
+            { emoji: "📈", title: "Compound Interest", desc: "Grow wealth over time", href: "/finance/compound-interest" },
+            { emoji: "⏱️", title: "Market Timing Cost", desc: "Cost of bad timing", href: "/tools/market-timing" },
+            { emoji: "📊", title: "Stock Return Calculator", desc: "Calculate returns", href: "/finance/stock-return" },
+          ]} />
+
         </div>
       </section>
     </div>

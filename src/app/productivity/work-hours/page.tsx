@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtNum(n: number) { return Math.round(n).toLocaleString() }
@@ -119,6 +120,12 @@ export default function WorkHoursPage() {
             url={`https://www.dayblip.com/productivity/work-hours?started=${ageStarted}&current=${currentAge}&hours=${hoursPerWeek}&vacation=${vacationWeeks}&type=${wageType}&wage=${wage}`}
             title="Work Hours Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "🕐", title: "Overtime Calculator", desc: "Calculate overtime pay", href: "/finance/overtime-calculator" },
+            { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
+            { emoji: "⏳", title: "Time Wasted Calculator", desc: "Reclaim your time", href: "/tools/time-wasted" },
+          ]} />
         </div>
       </section>
     </div>

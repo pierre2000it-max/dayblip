@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 const QUESTIONS = [
   "If you do this and it WORKS OUT, how happy will 80-year-old you be?",
@@ -124,7 +125,13 @@ export default function RegretMinimizationPage() {
 
               <ShareButtons text={shareText} url={shareUrl} title="Regret Minimization Calculator" />
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "📅", title: "Life in Weeks", desc: "Visualize your life", href: "/tools/life-in-weeks" },
+            { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
+            { emoji: "⏳", title: "Procrastination Cost", desc: "Cost of waiting", href: "/tools/procrastination-cost" },
+            { emoji: "💯", title: "Financial Life Score", desc: "Rate your financial health", href: "/tools/financial-life-score" },
+          ]} />
+
         </div>
       </section>
     </div>

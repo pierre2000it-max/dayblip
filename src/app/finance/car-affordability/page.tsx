@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
+import RelatedTools from "@/components/RelatedTools"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -214,6 +215,12 @@ export default function CarAffordabilityPage() {
             url={`https://www.dayblip.com/finance/car-affordability?income=${annualIncome}&takehome=${monthlyTakeHome}&debts=${monthlyDebts}&down=${downPayment}&term=${loanTerm}&rate=${interestRate}`}
             title="Car Affordability Calculator"
           />
+          <RelatedTools tools={[
+            { emoji: "📈", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+            { emoji: "📊", title: "Budget Calculator", desc: "Build a monthly budget", href: "/finance/budget-calculator" },
+            { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
+            { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
+          ]} />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Interest rates vary by credit score and lender. Actual insurance and fuel costs vary by location and driving habits.</p>
         </div>
       </section>

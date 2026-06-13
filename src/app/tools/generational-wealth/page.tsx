@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import RelatedTools from "@/components/RelatedTools"
 
 const cpiAdjustment: Record<number, number> = {
   1970: 7.8, 1975: 5.8, 1980: 3.7, 1985: 2.9, 1990: 2.4, 1995: 2.0,
@@ -173,7 +174,13 @@ export default function GenerationalWealthPage() {
               <ShareButtons text={shareText} url={shareUrl} title="Generational Wealth Gap Calculator" />
               {DISCLAIMER}
             </div>
-          )}
+          )}          <RelatedTools tools={[
+            { emoji: "👥", title: "Generation Compare", desc: "Compare generations", href: "/tools/generation-compare" },
+            { emoji: "📈", title: "Compound Interest", desc: "Grow wealth over time", href: "/finance/compound-interest" },
+            { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
+            { emoji: "📊", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+          ]} />
+
         </div>
       </section>
     </div>
