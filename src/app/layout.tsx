@@ -43,6 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@dayblip365",
+    creator: "@dayblip365",
     title: "Dayblip — Free Tools for Curious Minds",
     description: "165+ free tools for life, money, history and more. No signup. No email. Ever.",
     images: ["https://www.dayblip.com/og-default.svg"],
