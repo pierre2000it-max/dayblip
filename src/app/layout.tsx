@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 const BASE = "https://www.dayblip.com";
 const DEFAULT_DESCRIPTION =
-  "Dayblip — 165+ free interactive calculators for personal finance, career decisions, life in weeks, born in year facts and more. No signup. No email. Free forever.";
+  "Dayblip — 175+ free interactive calculators for personal finance, career decisions, life in weeks, born in year facts and more. No signup. No email. Free forever.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE),
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Dayblip",
     title: "Dayblip — Free Tools for Curious Minds",
-    description: "165+ free tools for life, money, history and more. No signup. No email. Ever.",
+    description: "175+ free tools for life, money, history and more. No signup. No email. Ever.",
     url: "https://www.dayblip.com",
     images: [{ url: "https://www.dayblip.com/og-default.svg", width: 1200, height: 630, alt: "Dayblip — Free Tools for Curious Minds" }],
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     site: "@dayblip365",
     creator: "@dayblip365",
     title: "Dayblip — Free Tools for Curious Minds",
-    description: "165+ free tools for life, money, history and more. No signup. No email. Ever.",
+    description: "175+ free tools for life, money, history and more. No signup. No email. Ever.",
     images: ["https://www.dayblip.com/og-default.svg"],
   },
   robots: {
