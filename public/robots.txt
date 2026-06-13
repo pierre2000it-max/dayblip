@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Allow: /embed
+Allow: /api/og/
 Disallow: /api/
 Disallow: /embed/
 
