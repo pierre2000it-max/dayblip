@@ -38,6 +38,27 @@ export default function ResearchPage() {
           </div>
           <div className="mt-4 text-[#e94560] text-sm font-medium">Read report →</div>
         </Link>
+
+        <Link
+          href="/research/how-many-mondays-left"
+          style={{
+            background: "#1e2d4a",
+            borderRadius: "12px",
+            padding: "24px",
+            display: "block",
+            textDecoration: "none",
+            marginTop: "16px",
+          }}
+          className="border border-transparent hover:border-[#e94560] transition-all duration-200 group"
+        >
+          <div className="text-white font-bold text-xl mb-2 group-hover:text-[#e94560] transition-colors">
+            How Many Mondays Do You Have Left in Your Career?
+          </div>
+          <div className="text-[#a8a8b3]">
+            The number of working weeks remaining before retirement — and what each one is actually worth.
+          </div>
+          <div className="mt-4 text-[#e94560] text-sm font-medium">Read report →</div>
+        </Link>
       </div>
     </main>
   )
