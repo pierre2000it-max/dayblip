@@ -177,6 +177,7 @@ export default function GenerationQuizPage() {
               <a href="/tools/life-in-weeks" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>📅 Life in Weeks</a>
               <a href="/number-one-song" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🎵 #1 Song on Your Birthday</a>
               <a href="/birthday-twins" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🎂 Celebrity Birthday Twins</a>
+              <a href="/tools/name-popularity" style={{ color: '#e94560', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>🔤 Name Popularity</a>
             </div>
           </div>
           <RelatedTools tools={[
