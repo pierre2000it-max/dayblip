@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 import DateNav from "./DateNav";
 import ShareButtons from "@/components/ShareButtons";
@@ -172,6 +173,33 @@ export async function generateMetadata({
   };
 }
 
+// ── Static params — pre-renders all 366 date pages at build time ──────────────
+
+export async function generateStaticParams() {
+  const months = [
+    { name: "january",   days: 31 },
+    { name: "february",  days: 29 },
+    { name: "march",     days: 31 },
+    { name: "april",     days: 30 },
+    { name: "may",       days: 31 },
+    { name: "june",      days: 30 },
+    { name: "july",      days: 31 },
+    { name: "august",    days: 31 },
+    { name: "september", days: 30 },
+    { name: "october",   days: 31 },
+    { name: "november",  days: 30 },
+    { name: "december",  days: 31 },
+  ];
+
+  const params: { date: string }[] = [];
+  for (const month of months) {
+    for (let day = 1; day <= month.days; day++) {
+      params.push({ date: `${month.name}-${day}` });
+    }
+  }
+  return params;
+}
+
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function OnThisDayPage({
@@ -265,12 +293,18 @@ export default async function OnThisDayPage({
         </section>
 
         {/* ── EVENTS — pre-fetched, no loading state ────────────────── */}
-        <WikiEvents
-          wikiData={wikiData}
-          formattedDate={formattedDate}
-          monthDay={monthDay}
-          fallback={data as FallbackData | null}
-        />
+        <Suspense fallback={
+          <div style={{ background: "#1e2d4a", borderRadius: "12px", padding: "32px", textAlign: "center", color: "#a8a8b3", fontSize: "15px", margin: "32px 24px" }}>
+            Loading historical events...
+          </div>
+        }>
+          <WikiEvents
+            wikiData={wikiData}
+            formattedDate={formattedDate}
+            monthDay={monthDay}
+            fallback={data as FallbackData | null}
+          />
+        </Suspense>
 
         {/* Ad — after events */}
         <div className="bg-[#1a1a2e] px-6 pb-4">
