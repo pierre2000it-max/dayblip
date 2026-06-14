@@ -3,6 +3,7 @@ import { useState, useMemo, useEffect } from "react"
 import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/RelatedTools"
+import AuthorByline from "@/components/AuthorByline"
 
 interface Factor { key: string; label: string; options: { label: string; value: number }[] }
 
@@ -80,6 +81,7 @@ export default function LifeExpectancyPage() {
       </section>
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
+          <AuthorByline variant="tool" />
           <div className="grid gap-4 md:grid-cols-2">
             <div className="flex flex-col gap-1">
               <span className="text-sm font-semibold text-white">Gender</span>

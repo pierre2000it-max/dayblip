@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/blog/RelatedTools"
+import AuthorByline from "@/components/AuthorByline"
 
 export const metadata: Metadata = {
   title: "How Many Mondays Do You Have Left in Your Career? | Dayblip Research",
@@ -102,6 +103,7 @@ export default function HowManyMondaysLeftPage() {
           Most people have never counted them. The number is smaller than you think.
         </p>
 
+        <AuthorByline variant="research" />
         {/* Share — above article */}
         <div className="mb-8">
           <ShareButtons

@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/RelatedTools"
 import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
+import AuthorByline from "@/components/AuthorByline"
 
 interface Category { label: string; min: number; max: number; color: string; bg: string }
 
@@ -92,6 +93,7 @@ export default function BMIPage() {
       </section>
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[600px] space-y-8">
+          <AuthorByline variant="tool" />
           <div className="flex gap-2">
             {(["imperial", "metric"] as const).map(u => (
               <button key={u} onClick={() => setUnit(u)}

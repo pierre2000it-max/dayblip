@@ -5,6 +5,7 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
+import AuthorByline from "@/components/AuthorByline"
 
 const DISCLAIMER = (
   <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
@@ -207,6 +208,7 @@ export default function FIDatePage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-6">
+          <AuthorByline variant="tool" />
           <Breadcrumb crumbs={[
             { label: "Home", href: "/" },
             { label: "Tools", href: "/tools" },

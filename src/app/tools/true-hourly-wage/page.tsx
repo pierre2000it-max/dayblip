@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/Breadcrumb"
 import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
+import AuthorByline from "@/components/AuthorByline"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmt2(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }) }
@@ -119,6 +120,7 @@ export default function TrueHourlyWagePage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[700px] space-y-8">
+          <AuthorByline variant="tool" />
           <Breadcrumb crumbs={[
             { label: "Home", href: "/" },
             { label: "Tools", href: "/tools" },

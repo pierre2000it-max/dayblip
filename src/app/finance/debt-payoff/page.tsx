@@ -7,6 +7,7 @@ import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
+import AuthorByline from "@/components/AuthorByline"
 
 interface Debt { id: number; name: string; balance: string; rate: string; minPayment: string }
 
@@ -145,6 +146,7 @@ export default function DebtPayoffPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[900px] space-y-8">
+          <AuthorByline variant="tool" />
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Debt Payoff Calculator" }]} />
           <LastUpdated />
           <div className="space-y-3">

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
 import ShareButtons from "@/components/ShareButtons"
+import AuthorByline from "@/components/AuthorByline"
 
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
@@ -90,6 +91,7 @@ export default function NamePopularityBlogPage() {
           The 1-in-X number is the one that actually describes your life — not the rank, not the peak year.
         </p>
 
+        <AuthorByline variant="blog" />
         {/* Quick Answer */}
         <section className="mb-10">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>

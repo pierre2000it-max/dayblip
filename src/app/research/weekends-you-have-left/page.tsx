@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/blog/RelatedTools"
+import AuthorByline from "@/components/AuthorByline"
 
 export const metadata: Metadata = {
   title: "How Many Weekends Do You Have Left? | Dayblip Research",
@@ -103,6 +104,7 @@ export default function WeekendsYouHaveLeftPage() {
           The number that changes how you think about every Saturday morning.
         </p>
 
+        <AuthorByline variant="research" />
         {/* Share — above article */}
         <div className="mb-8">
           <ShareButtons

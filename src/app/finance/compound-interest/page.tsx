@@ -7,6 +7,7 @@ import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
+import AuthorByline from "@/components/AuthorByline"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -102,6 +103,7 @@ export default function CompoundInterestPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
+          <AuthorByline variant="tool" />
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Compound Interest Calculator" }]} />
           <LastUpdated />
           <div className="grid gap-4 md:grid-cols-2">

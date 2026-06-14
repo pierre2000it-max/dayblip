@@ -5,6 +5,7 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
+import AuthorByline from "@/components/AuthorByline"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -127,6 +128,7 @@ export default function CarAffordabilityPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[800px] space-y-8">
+          <AuthorByline variant="tool" />
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Car Affordability Calculator" }]} />
           <div className="grid gap-4 md:grid-cols-2">
             <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Annual Income ($)</span>

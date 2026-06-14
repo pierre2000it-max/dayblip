@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/RelatedTools"
+import AuthorByline from "@/components/AuthorByline"
 
 const salaryData: Record<string, Record<string, [number, number]>> = {
   "Software Engineer": { "0-1":[75000,95000],"2-4":[95000,130000],"5-9":[130000,170000],"10-14":[160000,210000],"15+":[190000,250000] },
@@ -268,6 +269,7 @@ export default function SalaryCheckerPage() {
 
       <section className="bg-[#16213e] px-6 py-12">
         <div className="mx-auto max-w-[700px] space-y-8">
+          <AuthorByline variant="tool" />
           {DISCLAIMER}
 
           <div className="space-y-5">
