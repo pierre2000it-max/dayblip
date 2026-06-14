@@ -108,7 +108,7 @@ export default function AboutPage() {
         {/* Photo */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "32px 0" }}>
           <img
-            src="/pierre.jpg"
+            src="/pierre-founder.jpg"
             alt="Pierre — Founder of Dayblip"
             style={{
               width: "120px",
