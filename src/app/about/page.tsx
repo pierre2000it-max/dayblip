@@ -115,6 +115,7 @@ export default function AboutPage() {
               height: "120px",
               borderRadius: "50%",
               objectFit: "cover",
+              objectPosition: "center center",
               border: "3px solid #e94560",
             }}
           />
