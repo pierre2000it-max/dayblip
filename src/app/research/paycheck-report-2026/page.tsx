@@ -13,75 +13,76 @@ interface StateRow {
   highlight?: "high" | "low"
 }
 
-// Gross $60,000 | Federal tax (single, standard deduction $14,600) | FICA 7.65% | State tax
-// Federal taxable income: $60,000 − $14,600 = $45,400
-// Federal income tax: 10% on first $11,600 = $1,160 + 12% on $33,800 = $4,056 → total $5,216
-// FICA: $60,000 × 7.65% = $4,590
-// Take-home = $60,000 − $5,216 − $4,590 − state tax
-// Sources: IRS Rev. Proc. 2023-34 (2024 brackets), SSA 2024 FICA, state revenue depts.
+// Gross $75,000 | Standard deduction $16,100 | Federal taxable income $58,900
+// Federal income tax: 10% × $11,925 + 12% × $36,549 + 22% × $10,424 = $7,872
+// FICA: 6.2% × $75,000 + 1.45% × $75,000 = $4,650 + $1,088 = $5,738
+// Total federal deductions: $13,610
+// After-federal base: $61,390
+// Take-home = $75,000 − $7,872 − $5,738 − state income tax
+// Sources: IRS Rev. Proc. 2025-28 (2026 brackets), SSA Fact Sheet 2026, state revenue depts.
 
 const STATES: StateRow[] = [
-  { state: "Wyoming",       abbr: "WY", takeHome: 50194, effective: 16.3,  noIncomeTax: true },
-  { state: "South Dakota",  abbr: "SD", takeHome: 50194, effective: 16.3,  noIncomeTax: true },
-  { state: "Alaska",        abbr: "AK", takeHome: 50194, effective: 16.3,  noIncomeTax: true },
-  { state: "Nevada",        abbr: "NV", takeHome: 50194, effective: 16.3,  noIncomeTax: true },
-  { state: "Florida",       abbr: "FL", takeHome: 50194, effective: 16.3,  noIncomeTax: true },
-  { state: "Texas",         abbr: "TX", takeHome: 50194, effective: 16.3,  noIncomeTax: true },
-  { state: "Washington",    abbr: "WA", takeHome: 50194, effective: 16.3,  noIncomeTax: true },
-  { state: "Tennessee",     abbr: "TN", takeHome: 50194, effective: 16.3,  noIncomeTax: true },
-  { state: "New Hampshire", abbr: "NH", takeHome: 50194, effective: 16.3,  noIncomeTax: true },
-  { state: "North Dakota",  abbr: "ND", takeHome: 49629, effective: 17.3,  noIncomeTax: false },
-  { state: "Arizona",       abbr: "AZ", takeHome: 49195, effective: 18.0,  noIncomeTax: false },
-  { state: "Indiana",       abbr: "IN", takeHome: 48961, effective: 18.4,  noIncomeTax: false },
-  { state: "Pennsylvania",  abbr: "PA", takeHome: 48952, effective: 18.4,  noIncomeTax: false },
-  { state: "Michigan",      abbr: "MI", takeHome: 48718, effective: 18.8,  noIncomeTax: false },
-  { state: "Colorado",      abbr: "CO", takeHome: 48480, effective: 19.2,  noIncomeTax: false },
-  { state: "Ohio",          abbr: "OH", takeHome: 48429, effective: 19.3,  noIncomeTax: false },
-  { state: "Utah",          abbr: "UT", takeHome: 48175, effective: 19.7,  noIncomeTax: false },
-  { state: "Illinois",      abbr: "IL", takeHome: 48053, effective: 19.9,  noIncomeTax: false },
-  { state: "Louisiana",     abbr: "LA", takeHome: 48016, effective: 20.0,  noIncomeTax: false },
-  { state: "North Carolina",abbr: "NC", takeHome: 47934, effective: 20.1,  noIncomeTax: false },
-  { state: "Alabama",       abbr: "AL", takeHome: 47892, effective: 20.2,  noIncomeTax: false },
-  { state: "Kentucky",      abbr: "KY", takeHome: 47742, effective: 20.4,  noIncomeTax: false },
-  { state: "Mississippi",   abbr: "MS", takeHome: 47736, effective: 20.4,  noIncomeTax: false },
-  { state: "Missouri",      abbr: "MO", takeHome: 47575, effective: 20.7,  noIncomeTax: false },
-  { state: "Georgia",       abbr: "GA", takeHome: 47459, effective: 20.9,  noIncomeTax: false },
-  { state: "New Mexico",    abbr: "NM", takeHome: 47433, effective: 20.9,  noIncomeTax: false },
-  { state: "Iowa",          abbr: "IA", takeHome: 47340, effective: 21.1,  noIncomeTax: false },
-  { state: "West Virginia", abbr: "WV", takeHome: 47280, effective: 21.2,  noIncomeTax: false },
-  { state: "Montana",       abbr: "MT", takeHome: 47192, effective: 21.3,  noIncomeTax: false },
-  { state: "Oklahoma",      abbr: "OK", takeHome: 47160, effective: 21.4,  noIncomeTax: false },
-  { state: "South Carolina",abbr: "SC", takeHome: 47088, effective: 21.5,  noIncomeTax: false },
-  { state: "Kansas",        abbr: "KS", takeHome: 47040, effective: 21.6,  noIncomeTax: false },
-  { state: "Nebraska",      abbr: "NE", takeHome: 46997, effective: 21.7,  noIncomeTax: false },
-  { state: "Arkansas",      abbr: "AR", takeHome: 46874, effective: 21.9,  noIncomeTax: false },
-  { state: "Delaware",      abbr: "DE", takeHome: 46872, effective: 21.9,  noIncomeTax: false },
-  { state: "Virginia",      abbr: "VA", takeHome: 46802, effective: 22.0,  noIncomeTax: false },
-  { state: "Idaho",         abbr: "ID", takeHome: 46741, effective: 22.1,  noIncomeTax: false },
-  { state: "Wisconsin",     abbr: "WI", takeHome: 46694, effective: 22.2,  noIncomeTax: false },
-  { state: "Rhode Island",  abbr: "RI", takeHome: 46584, effective: 22.4,  noIncomeTax: false },
-  { state: "Maine",         abbr: "ME", takeHome: 46511, effective: 22.5,  noIncomeTax: false },
-  { state: "Vermont",       abbr: "VT", takeHome: 46488, effective: 22.5,  noIncomeTax: false },
-  { state: "Maryland",      abbr: "MD", takeHome: 46425, effective: 22.6,  noIncomeTax: false },
-  { state: "New York",      abbr: "NY", takeHome: 46193, effective: 23.0,  noIncomeTax: false },
-  { state: "Connecticut",   abbr: "CT", takeHome: 46085, effective: 23.2,  noIncomeTax: false },
-  { state: "Massachusetts", abbr: "MA", takeHome: 46025, effective: 23.3,  noIncomeTax: false },
-  { state: "Minnesota",     abbr: "MN", takeHome: 45902, effective: 23.5,  noIncomeTax: false },
-  { state: "New Jersey",    abbr: "NJ", takeHome: 45842, effective: 23.6,  noIncomeTax: false },
-  { state: "Hawaii",        abbr: "HI", takeHome: 44829, effective: 25.3,  noIncomeTax: false, highlight: "low" },
-  { state: "Oregon",        abbr: "OR", takeHome: 44627, effective: 25.6,  noIncomeTax: false, highlight: "low" },
-  { state: "California",    abbr: "CA", takeHome: 44289, effective: 26.2,  noIncomeTax: false, highlight: "low" },
+  { state: "Wyoming",        abbr: "WY", takeHome: 61390, effective: 18.1, noIncomeTax: true },
+  { state: "South Dakota",   abbr: "SD", takeHome: 61390, effective: 18.1, noIncomeTax: true },
+  { state: "Alaska",         abbr: "AK", takeHome: 61390, effective: 18.1, noIncomeTax: true },
+  { state: "Nevada",         abbr: "NV", takeHome: 61390, effective: 18.1, noIncomeTax: true },
+  { state: "Florida",        abbr: "FL", takeHome: 61390, effective: 18.1, noIncomeTax: true },
+  { state: "Texas",          abbr: "TX", takeHome: 61390, effective: 18.1, noIncomeTax: true },
+  { state: "Washington",     abbr: "WA", takeHome: 61390, effective: 18.1, noIncomeTax: true },
+  { state: "Tennessee",      abbr: "TN", takeHome: 61390, effective: 18.1, noIncomeTax: true },
+  { state: "New Hampshire",  abbr: "NH", takeHome: 61390, effective: 18.1, noIncomeTax: true },
+  { state: "North Dakota",   abbr: "ND", takeHome: 60925, effective: 18.8, noIncomeTax: false },
+  { state: "Arizona",        abbr: "AZ", takeHome: 60568, effective: 19.2, noIncomeTax: false },
+  { state: "Indiana",        abbr: "IN", takeHome: 60375, effective: 19.5, noIncomeTax: false },
+  { state: "Pennsylvania",   abbr: "PA", takeHome: 60368, effective: 19.5, noIncomeTax: false },
+  { state: "Michigan",       abbr: "MI", takeHome: 60175, effective: 19.8, noIncomeTax: false },
+  { state: "Colorado",       abbr: "CO", takeHome: 59979, effective: 20.0, noIncomeTax: false },
+  { state: "Ohio",           abbr: "OH", takeHome: 59937, effective: 20.1, noIncomeTax: false },
+  { state: "Utah",           abbr: "UT", takeHome: 59728, effective: 20.4, noIncomeTax: false },
+  { state: "Illinois",       abbr: "IL", takeHome: 59628, effective: 20.5, noIncomeTax: false },
+  { state: "Louisiana",      abbr: "LA", takeHome: 59597, effective: 20.5, noIncomeTax: false },
+  { state: "North Carolina", abbr: "NC", takeHome: 59530, effective: 20.6, noIncomeTax: false },
+  { state: "Alabama",        abbr: "AL", takeHome: 59495, effective: 20.7, noIncomeTax: false },
+  { state: "Kentucky",       abbr: "KY", takeHome: 59372, effective: 20.8, noIncomeTax: false },
+  { state: "Mississippi",    abbr: "MS", takeHome: 59367, effective: 20.8, noIncomeTax: false },
+  { state: "Missouri",       abbr: "MO", takeHome: 59234, effective: 21.0, noIncomeTax: false },
+  { state: "Georgia",        abbr: "GA", takeHome: 59139, effective: 21.1, noIncomeTax: false },
+  { state: "New Mexico",     abbr: "NM", takeHome: 59118, effective: 21.2, noIncomeTax: false },
+  { state: "Iowa",           abbr: "IA", takeHome: 59041, effective: 21.3, noIncomeTax: false },
+  { state: "West Virginia",  abbr: "WV", takeHome: 58992, effective: 21.3, noIncomeTax: false },
+  { state: "Montana",        abbr: "MT", takeHome: 58919, effective: 21.4, noIncomeTax: false },
+  { state: "Oklahoma",       abbr: "OK", takeHome: 58893, effective: 21.5, noIncomeTax: false },
+  { state: "South Carolina", abbr: "SC", takeHome: 58834, effective: 21.6, noIncomeTax: false },
+  { state: "Kansas",         abbr: "KS", takeHome: 58794, effective: 21.6, noIncomeTax: false },
+  { state: "Nebraska",       abbr: "NE", takeHome: 58759, effective: 21.7, noIncomeTax: false },
+  { state: "Arkansas",       abbr: "AR", takeHome: 58658, effective: 21.8, noIncomeTax: false },
+  { state: "Delaware",       abbr: "DE", takeHome: 58656, effective: 21.8, noIncomeTax: false },
+  { state: "Virginia",       abbr: "VA", takeHome: 58598, effective: 21.9, noIncomeTax: false },
+  { state: "Idaho",          abbr: "ID", takeHome: 58548, effective: 21.9, noIncomeTax: false },
+  { state: "Wisconsin",      abbr: "WI", takeHome: 58509, effective: 22.0, noIncomeTax: false },
+  { state: "Rhode Island",   abbr: "RI", takeHome: 58419, effective: 22.1, noIncomeTax: false },
+  { state: "Maine",          abbr: "ME", takeHome: 58358, effective: 22.2, noIncomeTax: false },
+  { state: "Vermont",        abbr: "VT", takeHome: 58340, effective: 22.2, noIncomeTax: false },
+  { state: "Maryland",       abbr: "MD", takeHome: 58288, effective: 22.3, noIncomeTax: false },
+  { state: "New York",       abbr: "NY", takeHome: 58097, effective: 22.5, noIncomeTax: false },
+  { state: "Connecticut",    abbr: "CT", takeHome: 58008, effective: 22.7, noIncomeTax: false },
+  { state: "Massachusetts",  abbr: "MA", takeHome: 57959, effective: 22.7, noIncomeTax: false },
+  { state: "Minnesota",      abbr: "MN", takeHome: 57858, effective: 22.9, noIncomeTax: false },
+  { state: "New Jersey",     abbr: "NJ", takeHome: 57808, effective: 22.9, noIncomeTax: false },
+  { state: "Oregon",         abbr: "OR", takeHome: 57291, effective: 23.6, noIncomeTax: false, highlight: "low" },
+  { state: "California",     abbr: "CA", takeHome: 57104, effective: 23.9, noIncomeTax: false, highlight: "low" },
+  { state: "Hawaii",         abbr: "HI", takeHome: 56972, effective: 24.0, noIncomeTax: false, highlight: "low" },
 ]
 
 const KEY_NUMBERS = [
-  { value: "$50,194", label: "Best-case take-home", sub: "No-income-tax states", color: "#22c55e" },
-  { value: "$44,289", label: "Lowest take-home",    sub: "California",           color: "#e94560" },
-  { value: "$5,905",  label: "Annual gap",          sub: "Best vs. worst state", color: "#f59e0b" },
-  { value: "$492",    label: "Monthly gap",         sub: "Per month difference",  color: "#f59e0b" },
-  { value: "9 states",label: "No income tax",      sub: "Zero state income tax",  color: "#4FC3F7" },
-  { value: "26.2%",   label: "Highest effective rate", sub: "California",        color: "#e94560" },
-  { value: "16.3%",   label: "Lowest effective rate",  sub: "No-tax states",    color: "#22c55e" },
-  { value: "$9,806",  label: "Federal income tax",  sub: "Same in every state",   color: "#a8a8b3" },
+  { value: "$61,390", label: "Best-case take-home",     sub: "No-income-tax states",  color: "#22c55e" },
+  { value: "$56,972", label: "Lowest take-home",        sub: "Hawaii",                color: "#e94560" },
+  { value: "$4,418",  label: "Annual gap",              sub: "Best vs. worst state",  color: "#f59e0b" },
+  { value: "$368",    label: "Monthly gap",             sub: "Per month difference",  color: "#f59e0b" },
+  { value: "9 states",label: "No income tax",           sub: "Zero state income tax", color: "#4FC3F7" },
+  { value: "24.0%",   label: "Highest effective rate",  sub: "Hawaii",                color: "#e94560" },
+  { value: "18.1%",   label: "Lowest effective rate",   sub: "No-tax states",         color: "#22c55e" },
+  { value: "$13,610", label: "Federal deductions",      sub: "Same in every state",   color: "#a8a8b3" },
 ]
 
 const relatedTools = [
@@ -116,9 +117,9 @@ function fmt(n: number): string {
 const newsArticleSchema = {
   "@context": "https://schema.org",
   "@type": "NewsArticle",
-  headline: "2026 American Paycheck Report: 50-State Take-Home Pay Analysis",
+  headline: "2026 American Paycheck Report: How Much of a $75,000 Salary Do You Actually Keep?",
   description:
-    "How much of a $60,000 salary do workers actually keep across all 50 US states in 2026? Full breakdown using IRS brackets, FICA rates, and state income tax tables.",
+    "How much of a $75,000 salary do workers actually keep across all 50 US states in 2026? Full breakdown using IRS brackets, FICA rates, and state income tax tables.",
   url: "https://www.dayblip.com/research/paycheck-report-2026",
   datePublished: "2026-06-13",
   dateModified: "2026-06-13",
@@ -126,15 +127,15 @@ const newsArticleSchema = {
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
   image: "https://www.dayblip.com/og-default.svg",
   articleSection: "Personal Finance",
-  keywords: "paycheck calculator, take-home pay, state income tax 2026, net pay by state",
+  keywords: "paycheck calculator, take-home pay, state income tax 2026, net pay by state, $75000 salary",
 }
 
 const datasetSchema = {
   "@context": "https://schema.org",
   "@type": "Dataset",
-  name: "2026 US State Take-Home Pay — $60,000 Benchmark Salary",
+  name: "2026 US State Take-Home Pay — $75,000 Benchmark Salary",
   description:
-    "Annual take-home pay and effective tax rate for a single filer earning $60,000 in all 50 US states, using 2026 IRS federal brackets, standard deduction, FICA rates, and each state's current income tax schedule.",
+    "Annual take-home pay and effective tax rate for a single filer earning $75,000 in all 50 US states, using 2026 IRS federal brackets, standard deduction of $16,100, FICA rates, and each state's current income tax schedule.",
   url: "https://www.dayblip.com/research/paycheck-report-2026",
   creator: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
   datePublished: "2026-06-13",
@@ -173,12 +174,12 @@ export default function PaycheckReport2026() {
 
         {/* H1 */}
         <h1 className="text-white text-3xl md:text-4xl font-bold leading-tight mb-4">
-          2026 American Paycheck Report: How Much of a $60,000 Salary Do You Actually Keep?
+          2026 American Paycheck Report: How Much of a $75,000 Salary Do You Actually Keep?
         </h1>
 
         {/* Subtitle */}
         <p className="text-[#a8a8b3] text-lg leading-relaxed mb-4">
-          A state-by-state analysis of annual take-home pay for a single filer earning $60,000,
+          A state-by-state analysis of annual take-home pay for a single filer earning $75,000,
           using 2026 IRS federal tax brackets, current FICA rates, and each state&apos;s income tax schedule.
         </p>
 
@@ -190,9 +191,9 @@ export default function PaycheckReport2026() {
         <div className="rounded-2xl border border-[#e94560]/30 bg-[#e94560]/5 p-6 mb-10">
           <div className="text-[#e94560] text-xs font-semibold uppercase tracking-wider mb-2">Key Finding</div>
           <p className="text-white text-lg font-medium leading-relaxed">
-            A worker earning $60,000 keeps <strong className="text-[#22c55e]">$50,194</strong> annually in a no-income-tax
-            state — but only <strong className="text-[#e94560]">$44,289</strong> in California.
-            That&apos;s a <strong className="text-[#f59e0b]">$5,905 annual gap</strong> on the same gross salary.
+            A worker earning $75,000 keeps <strong className="text-[#22c55e]">$61,390</strong> annually in a no-income-tax
+            state — but only <strong className="text-[#e94560]">$56,972</strong> in Hawaii.
+            That&apos;s a <strong className="text-[#f59e0b]">$4,418 annual gap</strong> on the same gross salary.
           </p>
         </div>
 
@@ -204,14 +205,14 @@ export default function PaycheckReport2026() {
             from the number in your bank account.
           </p>
           <p>
-            We used a single benchmark — <strong className="text-white">$60,000 gross annual salary, single filer,
+            We used a single benchmark — <strong className="text-white">$75,000 gross annual salary, single filer,
             standard deduction, no dependents</strong> — and calculated the actual take-home pay for every US state
-            using 2026 tax schedules. The $60,000 figure was chosen because it sits near the US median individual
-            income and touches the 22% federal bracket, making the state-level variation especially meaningful.
+            using 2026 tax schedules. The $75,000 figure was chosen because it sits above the US median individual
+            income and crosses into the 22% federal bracket, making the state-level variation especially meaningful.
           </p>
           <p>
-            Federal taxes are identical across all states ($5,216 federal income tax + $4,590 FICA = $9,806 total
-            federal deductions). The entire difference between states is driven by state income tax alone.
+            Federal deductions are identical across all states ($7,872 federal income tax + $5,738 FICA = $13,610 total).
+            Every dollar of difference between states is driven entirely by state income tax.
           </p>
         </div>
 
@@ -233,7 +234,7 @@ export default function PaycheckReport2026() {
         <section className="mb-12">
           <h2 className="text-white text-xl font-bold mb-2">Federal Tax Calculation (Same in Every State)</h2>
           <p className="text-[#a8a8b3] text-sm mb-5">
-            Gross $60,000 · Standard deduction $14,600 · Taxable income $45,400
+            Gross $75,000 · Standard deduction $16,100 · Taxable income $58,900
           </p>
           <div className="overflow-x-auto rounded-xl border border-[#1e2d4a]">
             <table className="w-full text-sm">
@@ -247,10 +248,11 @@ export default function PaycheckReport2026() {
               </thead>
               <tbody>
                 {[
-                  { bracket: "$0 – $11,600",       rate: "10%", income: "$11,600", tax: "$1,160" },
-                  { bracket: "$11,601 – $45,400",  rate: "12%", income: "$33,800", tax: "$4,056" },
-                  { bracket: "Social Security",    rate: "6.2%", income: "$60,000 gross", tax: "$3,720" },
-                  { bracket: "Medicare",           rate: "1.45%", income: "$60,000 gross", tax: "$870" },
+                  { bracket: "$0 – $11,925",       rate: "10%",   income: "$11,925",       tax: "$1,193" },
+                  { bracket: "$11,926 – $48,475",  rate: "12%",   income: "$36,549",       tax: "$4,386" },
+                  { bracket: "$48,476 – $58,900",  rate: "22%",   income: "$10,424",       tax: "$2,293" },
+                  { bracket: "Social Security",    rate: "6.2%",  income: "$75,000 gross", tax: "$4,650" },
+                  { bracket: "Medicare",           rate: "1.45%", income: "$75,000 gross", tax: "$1,088" },
                 ].map((row) => (
                   <tr key={row.bracket} className="border-b border-[#1e2d4a] last:border-0 hover:bg-[#16213e]/50">
                     <td className="px-4 py-3 text-white">{row.bracket}</td>
@@ -261,7 +263,7 @@ export default function PaycheckReport2026() {
                 ))}
                 <tr className="bg-[#16213e]">
                   <td colSpan={3} className="px-4 py-3 text-white font-bold">Total federal deductions</td>
-                  <td className="px-4 py-3 text-right font-bold text-[#e94560]">$9,806</td>
+                  <td className="px-4 py-3 text-right font-bold text-[#e94560]">$13,610</td>
                 </tr>
               </tbody>
             </table>
@@ -272,7 +274,7 @@ export default function PaycheckReport2026() {
         <section className="mb-12">
           <h2 className="text-white text-xl font-bold mb-2">Take-Home Pay by State — All 50 States</h2>
           <p className="text-[#a8a8b3] text-sm mb-5">
-            Sorted highest to lowest take-home pay. Gross salary: $60,000 · Single filer · Standard deduction · 2026 rates.
+            Sorted highest to lowest take-home pay. Gross salary: $75,000 · Single filer · Standard deduction · 2026 rates.
           </p>
 
           {/* Legend */}
@@ -283,7 +285,7 @@ export default function PaycheckReport2026() {
             </span>
             <span className="flex items-center gap-1.5">
               <span className="inline-block w-3 h-3 rounded-sm" style={{ background: "rgba(233,69,96,0.12)" }}></span>
-              Highest-tax states (CA, OR, HI)
+              Highest-tax states (OR, CA, HI)
             </span>
           </div>
 
@@ -345,27 +347,27 @@ export default function PaycheckReport2026() {
               {
                 n: "01",
                 title: "Nine states take nothing extra",
-                body: "Wyoming, South Dakota, Alaska, Nevada, Florida, Texas, Washington, Tennessee, and New Hampshire levy no state income tax. Workers in these states keep an identical $50,194 from a $60,000 salary — the federal government gets the rest.",
+                body: "Wyoming, South Dakota, Alaska, Nevada, Florida, Texas, Washington, Tennessee, and New Hampshire levy no state income tax. Workers in these states keep an identical $61,390 from a $75,000 salary — the federal government takes $13,610 and the state takes nothing.",
               },
               {
                 n: "02",
-                title: "California's effective rate is nearly 10 points higher than no-tax states",
-                body: "At 26.2% total effective rate versus 16.3%, a California worker earning $60,000 takes home $5,905 less per year than an identical worker in Texas or Florida. That gap compounds significantly over a 30-year career.",
+                title: "The $4,418 gap compounds to ~$445,000 over a 30-year career",
+                body: "A Hawaii worker earning $75,000 takes home $4,418 less per year than an identical worker in Texas or Florida. That gap doesn't disappear — invested at a 7% annual return for 30 years, it compounds to approximately $445,000. State tax choice is a long-term wealth decision.",
               },
               {
                 n: "03",
-                title: "The 22% federal bracket is the hinge point",
-                body: "At $60,000 gross, only $14,800 of taxable income falls into the 22% federal bracket. Most of the salary is taxed at 10% and 12%. State income tax becomes disproportionately important at this income level because the marginal federal rate is moderate.",
+                title: "The 22% federal bracket kicks in at this salary level",
+                body: "At $75,000 gross with the 2026 standard deduction of $16,100, only $10,424 of taxable income falls into the 22% federal bracket. The majority of the salary is still taxed at 10% and 12%. State income tax becomes disproportionately impactful here because the federal marginal rate is still moderate.",
               },
               {
                 n: "04",
-                title: "Oregon beats California on most measures — but not take-home pay",
-                body: "Oregon is often positioned as a less-expensive alternative to California, but its top marginal income tax rate of 9.9% means a $60,000 worker in Oregon takes home $44,627 — just $338 more than a California worker ($44,289). The gap between the two states is smaller than most assume.",
+                title: "Hawaii edges out California and Oregon as the highest-tax state at this income",
+                body: "Hawaii's income tax structure — with a top bracket of 11% — results in a 24.0% total effective rate for a $75,000 earner, the highest of any state. Oregon (23.6%) and California (23.9%) follow closely. All three exceed the next tier by more than half a percentage point.",
               },
               {
                 n: "05",
                 title: "Middle-of-the-pack states cluster tightly",
-                body: "Thirty-two states fall within a $3,000 band ($47,000–$50,000 take-home). State income tax choice is most consequential at the extremes — the top 9 states and the bottom 3 (CA, OR, HI) drive the headline gap.",
+                body: "Thirty-two states fall within a roughly $3,000 band ($57,800–$60,900 take-home). State income tax choice is most consequential at the extremes — the 9 no-tax states and the bottom 3 (OR, CA, HI) drive the entire headline gap.",
               },
             ].map((f) => (
               <div key={f.n} className="flex gap-4 rounded-xl bg-[#16213e] border border-[#1e2d4a] p-5">
@@ -384,25 +386,27 @@ export default function PaycheckReport2026() {
           <h2 className="text-white text-xl font-bold mb-4">Methodology</h2>
           <div className="space-y-3 text-[#a8a8b3] text-sm leading-relaxed">
             <p>
-              All calculations use a <strong className="text-white">$60,000 gross annual salary, single filing status,
+              All calculations use a <strong className="text-white">$75,000 gross annual salary, single filing status,
               standard deduction, no dependents, no pre-tax deductions</strong> (such as 401(k) or HSA contributions).
               This represents the simplest possible tax situation to isolate the effect of geography.
             </p>
             <p>
               <strong className="text-white">Federal income tax</strong> uses 2026 brackets per IRS Revenue Procedure 2025-28.
-              Standard deduction: $14,600 (single). Taxable income: $45,400. Tax: 10% × $11,600 + 12% × $33,800 = $5,216.
+              Standard deduction: $16,100 (single). Taxable income: $58,900.
+              Tax: 10% × $11,925 + 12% × $36,549 + 22% × $10,424 = $7,872.
             </p>
             <p>
-              <strong className="text-white">FICA</strong>: Social Security 6.2% × $60,000 = $3,720. Medicare 1.45% × $60,000 = $870.
-              Total FICA: $4,590. Additional Medicare surtax (0.9%) does not apply below $200,000.
+              <strong className="text-white">FICA</strong>: Social Security 6.2% × $75,000 = $4,650.
+              Medicare 1.45% × $75,000 = $1,088. Total FICA: $5,738.
+              Additional Medicare surtax (0.9%) does not apply below $200,000.
             </p>
             <p>
               <strong className="text-white">State income tax</strong> uses each state&apos;s 2026 published rate schedules
-              sourced from state revenue department websites. Local income taxes (city, county) are not included.
-              State standard deductions are applied where available.
+              sourced from state revenue department websites and Tax Foundation data. Local income taxes (city, county)
+              are not included. State standard deductions are applied where available.
             </p>
             <p>
-              Take-home pay = $60,000 − $5,216 (federal) − $4,590 (FICA) − state income tax.
+              Take-home pay = $75,000 − $7,872 (federal income tax) − $5,738 (FICA) − state income tax.
             </p>
           </div>
         </section>
@@ -423,7 +427,7 @@ export default function PaycheckReport2026() {
         <div className="rounded-2xl border border-[#4FC3F7]/30 bg-[#4FC3F7]/5 p-6 mb-10">
           <div className="text-[#4FC3F7] text-sm font-semibold mb-2">Run Your Own Numbers →</div>
           <p className="text-[#a8a8b3] text-sm mb-4">
-            This report uses a $60,000 benchmark. For your actual salary, filing status, and pre-tax
+            This report uses a $75,000 benchmark. For your actual salary, filing status, and pre-tax
             deductions, use the free Dayblip Paycheck Calculator.
           </p>
           <Link
@@ -440,6 +444,7 @@ export default function PaycheckReport2026() {
           <ul className="text-[#a8a8b3] text-xs space-y-1.5">
             <li>· IRS Revenue Procedure 2025-28 — 2026 federal income tax brackets and standard deduction</li>
             <li>· Social Security Administration Fact Sheet 2026 — FICA contribution and benefit base</li>
+            <li>· Tax Foundation, State Individual Income Tax Rates and Brackets 2026</li>
             <li>· State revenue department publications for all 50 states (accessed June 2026)</li>
           </ul>
           <p className="text-[#a8a8b3] text-xs mt-3">
@@ -451,9 +456,9 @@ export default function PaycheckReport2026() {
         {/* Share */}
         <div className="mb-10">
           <ShareButtons
-            text="How much of a $60,000 salary do you actually keep? It depends on which state you live in — see the full breakdown at dayblip.com/research/paycheck-report-2026"
+            text="How much of a $75,000 salary do you actually keep? It depends on which state you live in — full 2026 breakdown at dayblip.com/research/paycheck-report-2026"
             url="https://www.dayblip.com/research/paycheck-report-2026"
-            title="2026 American Paycheck Report: 50-State Take-Home Pay Analysis | Dayblip"
+            title="2026 American Paycheck Report: $75,000 Salary 50-State Take-Home Pay | Dayblip"
           />
         </div>
 
