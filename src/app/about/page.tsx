@@ -184,6 +184,22 @@ export default function AboutPage() {
         {/* Section 5 — The Builder */}
         <section>
           <h2 className="mb-4 text-2xl font-bold text-white">Who Built This</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '32px 0' }}>
+            <img
+              src="/pierre.jpg"
+              alt="Pierre — Founder of Dayblip"
+              style={{
+                width: '120px',
+                height: '120px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '3px solid #e94560'
+              }}
+            />
+            <p style={{ color: '#a8a8b3', fontSize: '13px', marginTop: '8px', margin: '8px 0 0 0' }}>
+              Pierre — Founder, Dayblip
+            </p>
+          </div>
           <div className="space-y-4 leading-relaxed" style={{ color: "#e8e8e8" }}>
             <p>
               Dayblip is built and maintained by a solo developer with a background
