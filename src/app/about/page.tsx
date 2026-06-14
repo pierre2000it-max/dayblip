@@ -42,7 +42,7 @@ const personSchema = {
   name: "Pierre",
   jobTitle: "Founder, AI Consultant, Author, Entrepreneur",
   description:
-    "MBA, AI consultant, author, servant leader, and entrepreneur. Certified Scrum and Agile practitioner. Founder of Dayblip and Generational Wealth 360. Published author in financial literacy and wealth building.",
+    "MBA, AI consultant, author, servant leader, and entrepreneur. Certified Scrum and Agile practitioner. Founder of Dayblip and Generational Wealth 360. Published author and content creator in financial literacy and wealth building.",
   knowsAbout: [
     "Personal Finance",
     "Financial Literacy",
@@ -72,7 +72,7 @@ const personSchema = {
     },
   ],
   worksFor: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
-  sameAs: ["https://www.generationalwealth360.com"],
+  sameAs: ["https://www.generationalwealth360.com", "https://www.youtube.com/@GenerationalWealth360"],
   address: { "@type": "PostalAddress", addressRegion: "WI", addressCountry: "US" },
 }
 
@@ -180,6 +180,18 @@ export default function AboutPage() {
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
           What I do bring is a genuine obsession with making complicated things understandable, and years
           spent building tools, companies, and published work around exactly that.
+        </p>
+        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
+          If you want to go deeper on financial education topics, I also create content on YouTube at{" "}
+          <a
+            href="https://www.youtube.com/@GenerationalWealth360"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#e94560", textDecoration: "none" }}
+          >
+            Generational Wealth 360
+          </a>
+          . It is a growing channel and every video is free.
         </p>
 
         {/* What Dayblip is */}
