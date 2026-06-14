@@ -358,6 +358,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/blog/what-your-paycheck-shows-you",         0.8, MONTHLY),
     p("/blog/how-much-saved-by-age",                0.8, MONTHLY),
     p("/blog/wfh-financial-value",                  0.8, MONTHLY),
+    p("/blog/paycheck-by-state-2026",              0.8, MONTHLY),
+    p("/blog/moving-states-tax-savings",           0.8, MONTHLY),
+    p("/blog/average-salary-by-age",               0.8, MONTHLY),
+    p("/blog/is-college-worth-it",                 0.8, MONTHLY),
+    p("/blog/how-much-to-save-in-401k",            0.8, MONTHLY),
+    p("/blog/true-cost-of-commuting",              0.8, MONTHLY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // LEGAL PAGES  (priority 0.3, monthly)

@@ -172,6 +172,62 @@ const articles = [
     readTime: "5 min read",
     href: "/blog/wfh-financial-value",
   },
+  {
+    category: "Finance",
+    title: "Your $75,000 Salary Is Worth Very Different Amounts Depending on Your State",
+    excerpt:
+      "A $75,000 salary takes home $61,390 in Texas and $56,972 in Hawaii — a $4,418 annual gap driven entirely by state income tax. Full 50-state breakdown with IRS and Tax Foundation sources.",
+    readTime: "5 min read",
+    href: "/blog/paycheck-by-state-2026",
+  },
+  {
+    category: "Finance",
+    title: "The Tax Case for Moving States: What Relocating Actually Saves You",
+    excerpt:
+      "Moving from California to Texas saves $4,285 per year on a $75,000 salary. Over 30 years at 7%, that gap compounds to $429,000. The break-even on a $7,000 move: under two years.",
+    readTime: "5 min read",
+    href: "/blog/moving-states-tax-savings",
+  },
+  {
+    category: "Finance",
+    title: "What Is Net Worth and Why the Number Most People Know Is Wrong",
+    excerpt:
+      "The formula is assets minus liabilities. The errors people make applying it are consistent — and they compound. Median US household net worth: $192,700 per the Federal Reserve's 2022 survey.",
+    readTime: "5 min read",
+    href: "/blog/what-is-net-worth",
+  },
+  {
+    category: "Career",
+    title: "Average American Salary by Age: What BLS Data Actually Shows",
+    excerpt:
+      "Median weekly earnings peak at $1,220 ($63,440/year) for workers aged 45–54. The 16.3% gender pay gap reflects occupation mix alongside career interruptions. Full BLS breakdown.",
+    readTime: "6 min read",
+    href: "/blog/average-salary-by-age",
+  },
+  {
+    category: "Finance",
+    title: "Is College Worth It in 2026? The ROI Calculation Most People Never Run",
+    excerpt:
+      "CS degrees start at $75K–$100K+. Bootcamp graduates start at $55K–$70K. Average student debt: $29,400. Whether college is worth it is a math problem — here is how to run it.",
+    readTime: "6 min read",
+    href: "/blog/is-college-worth-it",
+  },
+  {
+    category: "Retirement",
+    title: "How Much to Save in Your 401(k): By Income Tier, 2026",
+    excerpt:
+      "The 2026 limit is $23,500. Maxing it for 30 years at 7% grows to $2.22M. Always capture the full employer match first. The right rate for everyone else depends on income tier.",
+    readTime: "5 min read",
+    href: "/blog/how-much-to-save-in-401k",
+  },
+  {
+    category: "Career",
+    title: "The True Cost of Your Commute in 2026: What AAA Data Shows",
+    excerpt:
+      "AAA estimates the average car commuter spends $8,466 per year on vehicle costs alone. Add 225 lost hours per year and the real annual cost of a 5-day commute tops $16,000.",
+    readTime: "5 min read",
+    href: "/blog/true-cost-of-commuting",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]

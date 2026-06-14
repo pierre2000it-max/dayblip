@@ -285,6 +285,12 @@ const urls = [
   "https://www.dayblip.com/blog/what-your-paycheck-shows-you",
   "https://www.dayblip.com/blog/how-much-saved-by-age",
   "https://www.dayblip.com/blog/wfh-financial-value",
+  "https://www.dayblip.com/blog/paycheck-by-state-2026",
+  "https://www.dayblip.com/blog/moving-states-tax-savings",
+  "https://www.dayblip.com/blog/average-salary-by-age",
+  "https://www.dayblip.com/blog/is-college-worth-it",
+  "https://www.dayblip.com/blog/how-much-to-save-in-401k",
+  "https://www.dayblip.com/blog/true-cost-of-commuting",
 ];
 
 // Born-in pages 1940–2020
