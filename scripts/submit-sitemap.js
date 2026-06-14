@@ -18,6 +18,10 @@ const urls = [
   // Core pages
   "https://www.dayblip.com",
   "https://www.dayblip.com/born-in",
+  "https://www.dayblip.com/research",
+  "https://www.dayblip.com/research/paycheck-report-2026",
+  "https://www.dayblip.com/research/weekends-you-have-left",
+  "https://www.dayblip.com/research/how-many-mondays-left",
   "https://www.dayblip.com/on-this-day",
   "https://www.dayblip.com/finance",
   "https://www.dayblip.com/health",

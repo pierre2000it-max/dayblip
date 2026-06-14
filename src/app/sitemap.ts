@@ -70,10 +70,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     // CORE LANDING PAGES  (priority 1.0, daily)
     // ═══════════════════════════════════════════════════════════════════════
-    p("/",             1.0, DAILY),
-    p("/born-in",      1.0, DAILY),
-    p("/on-this-day",  1.0, WEEKLY),
-    p("/finance",      1.0, MONTHLY),
+    p("/",                              1.0, DAILY),
+    p("/born-in",                       1.0, DAILY),
+    p("/on-this-day",                   1.0, WEEKLY),
+    p("/research",                      0.9, MONTHLY),
+    p("/research/paycheck-report-2026", 0.9, MONTHLY),
+    p("/research/weekends-you-have-left", 0.8, MONTHLY),
+    p("/research/how-many-mondays-left",  0.8, MONTHLY),
+    p("/finance",                       1.0, MONTHLY),
     p("/health",       1.0, MONTHLY),
     p("/real-estate",  1.0, MONTHLY),
     p("/productivity", 1.0, MONTHLY),
