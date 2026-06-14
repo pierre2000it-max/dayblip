@@ -63,7 +63,7 @@ const personSchema = {
     {
       "@type": "EducationalOccupationalCredential",
       credentialCategory: "certification",
-      name: "Certified Scrum Practitioner",
+      name: "Certified Scrum Master",
     },
     {
       "@type": "EducationalOccupationalCredential",
@@ -161,7 +161,7 @@ export default function AboutPage() {
           financial education.
         </p>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          I&apos;m also a certified Scrum and Agile practitioner — a formal way of saying I believe good things
+          I&apos;m also a certified Scrum Master and Agile practitioner — a formal way of saying I believe good things
           get built in small, tested, intentional steps. That philosophy shows up in how Dayblip gets built:
           one tool at a time, each one designed to actually work before the next one starts.
         </p>
