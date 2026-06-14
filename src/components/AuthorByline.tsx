@@ -37,7 +37,7 @@ export default function AuthorByline({ variant = "tool" }: { variant?: "tool" | 
         <span style={{ color: "#a8a8b3", fontSize: "13px" }}>
           {label}{" "}
           <strong style={{ color: "#ffffff", fontWeight: "600" }}>Pierre</strong>
-          <span style={{ color: "#a8a8b3" }}> — MBA, AI Consultant, Founder of Dayblip</span>
+          <span style={{ color: "#a8a8b3" }}> — MBA, Business Strategist & AI Consultant, Founder of Dayblip</span>
         </span>
         <Link
           href="/about"

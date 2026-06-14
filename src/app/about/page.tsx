@@ -40,10 +40,11 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Pierre",
-  jobTitle: "Founder, AI Consultant, Author, Entrepreneur",
+  jobTitle: "Founder, Business Strategist, AI Consultant, Author, Entrepreneur",
   description:
-    "MBA, AI consultant, author, servant leader, and entrepreneur. Certified Scrum and Agile practitioner. Founder of Dayblip and Generational Wealth 360. Published author and content creator in financial literacy and wealth building.",
+    "MBA, Business Strategist, AI consultant, author, servant leader, and entrepreneur. Certified Scrum Master and Agile practitioner. Founder of Dayblip and Generational Wealth 360. Published author and content creator in financial literacy and wealth building.",
   knowsAbout: [
+    "Business Strategy",
     "Personal Finance",
     "Financial Literacy",
     "Generational Wealth",
@@ -145,7 +146,7 @@ export default function AboutPage() {
           Who I am
         </h2>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          I&apos;m Pierre — an MBA, AI consultant, author, and entrepreneur based in Wisconsin.
+          I&apos;m Pierre — an MBA, Business Strategist, AI consultant, author, and entrepreneur based in Wisconsin.
         </p>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
           Over the years I&apos;ve founded several ventures, including an AI automation services company and{" "}
