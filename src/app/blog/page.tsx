@@ -189,14 +189,6 @@ const articles = [
     href: "/blog/moving-states-tax-savings",
   },
   {
-    category: "Finance",
-    title: "What Is Net Worth and Why the Number Most People Know Is Wrong",
-    excerpt:
-      "The formula is assets minus liabilities. The errors people make applying it are consistent — and they compound. Median US household net worth: $192,700 per the Federal Reserve's 2022 survey.",
-    readTime: "5 min read",
-    href: "/blog/what-is-net-worth",
-  },
-  {
     category: "Career",
     title: "Average American Salary by Age: What BLS Data Actually Shows",
     excerpt:
