@@ -12,6 +12,8 @@ const CPI: Record<number, number> = {
   1960: 29.6, 1970: 38.8, 1975: 53.8, 1980: 82.4, 1985: 107.6,
   1990: 130.7, 1995: 152.4, 2000: 172.2, 2005: 195.3, 2010: 218.1,
   2015: 237.0, 2020: 258.8, 2024: 314.0, 2026: 325.0,
+  // Projections at ~2% annual inflation — replace with BLS actuals each January
+  2027: 331.5, 2028: 338.1, 2029: 344.9, 2030: 351.8,
 }
 
 const YEARS = Object.keys(CPI).map(Number).sort((a, b) => a - b)
@@ -19,6 +21,7 @@ const YEARS = Object.keys(CPI).map(Number).sort((a, b) => a - b)
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 
 export default function InflationPage() {
+  const currentYear = new Date().getFullYear()
   const [mode, setMode] = useState<"past" | "present">("past")
   const [amount, setAmount] = useState("100")
   const [fromYear, setFromYear] = useState(1980)
@@ -34,20 +37,21 @@ export default function InflationPage() {
 
   const result = useMemo(() => {
     const a = parseFloat(amount) || 0
+    const cpiNow = CPI[currentYear] ?? CPI[2026]
     if (mode === "past") {
-      const adjusted = (a * CPI[2026]) / CPI[fromYear]
+      const adjusted = (a * cpiNow) / CPI[fromYear]
       const pct = ((adjusted - a) / a * 100).toFixed(1)
-      return { value: adjusted, label: `$${a} in ${fromYear} = ${fmt(adjusted)} in 2026`, pct: `+${pct}% purchasing power change` }
+      return { value: adjusted, label: `$${a} in ${fromYear} = ${fmt(adjusted)} in ${currentYear}`, pct: `+${pct}% purchasing power change` }
     } else {
-      const adjusted = (a * CPI[toYear]) / CPI[2026]
+      const adjusted = (a * CPI[toYear]) / cpiNow
       const pct = ((adjusted - a) / a * 100).toFixed(1)
       return { value: adjusted, label: `$${a} today = ${fmt(adjusted)} in ${toYear}`, pct: `${pct}% purchasing power change` }
     }
-  }, [mode, amount, fromYear, toYear])
+  }, [mode, amount, fromYear, toYear, currentYear])
 
   const buyingPowerRows = [1913, 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020].map(yr => ({
     year: yr,
-    value: (100 * CPI[2026]) / CPI[yr],
+    value: (100 * (CPI[currentYear] ?? CPI[2026])) / CPI[yr],
   }))
 
   const items = [
@@ -151,7 +155,7 @@ export default function InflationPage() {
           </div>
 
           <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5">
-            <h2 className="mb-3 font-bold text-white">💵 What was $100 worth? (in 2026 dollars)</h2>
+            <h2 className="mb-3 font-bold text-white">💵 What was $100 worth? (in {currentYear} dollars)</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead><tr className="border-b border-[#0f3460]">
