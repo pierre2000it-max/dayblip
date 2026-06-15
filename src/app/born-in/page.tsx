@@ -3,7 +3,7 @@ import BornInLanding from "./BornInLanding";
 
 export const metadata: Metadata = {
   title: "Born In — What Year Were You Born? | Dayblip",
-  description: "Enter your birth year to discover the #1 song, movies, gas prices and world events from the year you were born.",
+  description: "Enter your birth year to discover the #1 song, top movies, gas prices, and major world events from the year you were born. Free — no signup required.",
   keywords: ["born in", "birth year", "what happened when I was born", "born in 1990"],
   openGraph: {
     title: "Born In — What Year Were You Born? | Dayblip",
