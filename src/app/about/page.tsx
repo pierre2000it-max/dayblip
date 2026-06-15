@@ -4,12 +4,12 @@ import Link from "next/link"
 export const metadata: Metadata = {
   title: "About Dayblip — Free Tools for Curious Minds | Pierre, Founder",
   description:
-    "Dayblip was built by Pierre — MBA, AI consultant, author, servant leader, and entrepreneur in Wisconsin — to make 175+ useful tools free forever. No signup, no paywall, no email.",
+    "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 175+ free tools. No signup, no paywall, no email.",
   alternates: { canonical: "https://www.dayblip.com/about" },
   openGraph: {
     title: "About Dayblip — Free Tools for Curious Minds | Pierre, Founder",
     description:
-      "Dayblip was built by Pierre — MBA, AI consultant, author, servant leader, and entrepreneur in Wisconsin — to make 175+ useful tools free forever. No signup, no paywall, no email.",
+      "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 175+ free tools. No signup, no paywall, no email.",
     type: "website",
     url: "https://www.dayblip.com/about",
     images: [{ url: "/og-default.svg", width: 1200, height: 630, alt: "About Dayblip" }],
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About Dayblip — Free Tools for Curious Minds | Pierre, Founder",
     description:
-      "Dayblip was built by Pierre — MBA, AI consultant, author, servant leader, and entrepreneur in Wisconsin — to make 175+ useful tools free forever. No signup, no paywall, no email.",
+      "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 175+ free tools. No signup, no paywall, no email.",
   },
 }
 
