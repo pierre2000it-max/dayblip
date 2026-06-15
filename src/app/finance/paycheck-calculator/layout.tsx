@@ -2,7 +2,7 @@
 
 export const metadata: Metadata = {
   title: "Paycheck Calculator 2026 — Net Pay After Taxes and Deductions | Dayblip",
-  description: "Calculate your net paycheck after federal tax, state tax, FICA, and pre-tax deductions like 401k and health insurance. Free paycheck calculator — no signup.",
+  description: "Calculate your net paycheck after federal tax, state tax, FICA, and pre-tax deductions. Supports all 50 states. Free paycheck calculator.",
   alternates: { canonical: "https://www.dayblip.com/finance/paycheck-calculator" },
   openGraph: {
     title: "Paycheck Calculator 2026 — Net Pay After Taxes | Dayblip",

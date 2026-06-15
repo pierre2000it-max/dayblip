@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Numerology Calculator — Your Life Path Number and Meaning | Dayblip",
-  description: "Calculate your numerology life path number expression number and soul urge number from your birth date and name. Discover what your numbers mean. Free. No signup.",
+  description: "Calculate your numerology life path number, expression number, and soul urge number. Free numerology calculator — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/curiosity/numerology" },
 }
 

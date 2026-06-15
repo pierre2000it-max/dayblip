@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Roth IRA vs Traditional IRA: The Decision That Comes Down to One Question | Dayblip",
   description:
-    "The Roth vs traditional IRA decision reduces to a single factor: whether your tax rate will be higher now or in retirement. Here is how to figure out which applies to you.",
+    "Roth vs traditional IRA comes down to one question: will your tax rate be higher now or in retirement? Here is how to decide.",
   alternates: { canonical: "https://www.dayblip.com/blog/roth-ira-vs-traditional-ira" },
   openGraph: {
     title: "Roth IRA vs Traditional IRA: The Decision That Comes Down to One Question",

@@ -6,7 +6,7 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "Is College Worth It in 2026? The ROI Calculation Most People Never Run",
-  description: "CS starting salaries run $75K–$100K+. Bootcamp graduates start at $55K–$70K. Average student debt: $29,400. Whether college is worth it depends heavily on your major.",
+  description: "Is a college degree worth the cost? We ran the numbers on ROI by major, debt load, and career path. The answer depends on what you study.",
   url: "https://www.dayblip.com/blog/is-college-worth-it",
   datePublished: "2026-06-13",
   dateModified: "2026-06-13",

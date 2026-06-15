@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "The True Financial Value of Working From Home — What the Numbers Actually Show | Dayblip",
   description:
-    "Working from home saves $12,317 per year vs in-office. A 3-day hybrid saves $4,287. Full breakdown of every schedule option with a free WFH calculator. No signup.",
+    "Working from home saves the average commuter $12,317 per year. Here is the full calculation including time, gas, food, and clothing.",
   alternates: { canonical: "https://www.dayblip.com/blog/wfh-financial-value" },
   openGraph: {
     title: "The True Financial Value of Working From Home",

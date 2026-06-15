@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "The True Cost of Your Commute in 2026: What AAA Data Shows | Dayblip",
   description:
-    "The average car commuter spends $8,466/year on vehicle costs alone. Add 225 lost hours per year and the real annual cost tops $16,000. Full hybrid and full-remote breakdown.",
+    "AAA puts the average commute cost at $8,466 per year. Add lost time and the real cost exceeds $19,000. See your personal commute cost.",
   alternates: { canonical: "https://www.dayblip.com/blog/true-cost-of-commuting" },
   openGraph: {
     title: "The True Cost of Your Commute: What AAA Data Says You Are Actually Spending",

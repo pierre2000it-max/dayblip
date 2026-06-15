@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "What Your Paycheck Actually Shows You | Dayblip",
   description:
-    "Your pay stub contains more financial information than most people realize. Understanding every line tells you your true tax rate and what your benefits actually cost.",
+    "Your pay stub reveals more than just your net pay. Here is how to read every line and understand what each deduction actually means.",
   alternates: { canonical: "https://www.dayblip.com/blog/what-your-paycheck-shows-you" },
   openGraph: {
     title: "What Your Paycheck Actually Shows You (And the Four Numbers Most People Never Look At)",

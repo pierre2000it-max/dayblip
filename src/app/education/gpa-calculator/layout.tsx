@@ -2,7 +2,7 @@
 
 export const metadata: Metadata = {
   title: "GPA Calculator — Calculate Your Grade Point Average Instantly | Dayblip",
-  description: "Calculate your semester and cumulative GPA instantly. Weighted and unweighted GPA for high school and college. Enter grades and credit hours. Free — no signup.",
+  description: "Calculate your semester and cumulative GPA instantly. Supports weighted and unweighted grades. Free GPA calculator — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/education/gpa-calculator" },
   openGraph: {
     title: "GPA Calculator — Calculate Your Grade Point Average | Dayblip",
