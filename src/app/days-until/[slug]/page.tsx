@@ -65,6 +65,36 @@ const HOLIDAY_INTROS: Record<string, string> = {
     "The first day of summer falls on the summer solstice — June 20 or 21 each year. It marks the longest day of the year and the unofficial start of summer vacation for millions of students across the United States.",
 };
 
+// ── Dedicated meta descriptions per holiday (complete, keyword-rich, 130-155 chars) ──
+const HOLIDAY_META_DESCRIPTIONS: Record<string, string> = {
+  "halloween":
+    "How many days until Halloween 2026? Live countdown to October 31 with days, hours, minutes and seconds. Free — no signup required.",
+  "thanksgiving":
+    "How many days until Thanksgiving 2026? Live countdown to the fourth Thursday in November. Days, hours, minutes and seconds. Free.",
+  "new-years":
+    "How many days until New Year's Day 2027? Live countdown to January 1 with exact days, hours, minutes and seconds remaining. Free.",
+  "new-years-eve":
+    "How many days until New Year's Eve 2026? Live countdown to December 31 with exact days, hours, minutes and seconds remaining. Free.",
+  "valentines-day":
+    "How many days until Valentine's Day 2027? Live countdown to February 14 with exact days, hours, minutes and seconds remaining. Free.",
+  "st-patricks-day":
+    "How many days until St. Patrick's Day 2027? Live countdown to March 17 with exact days, hours, minutes and seconds remaining. Free.",
+  "easter":
+    "How many days until Easter 2027? Live countdown to Easter Sunday with exact days, hours, minutes and seconds remaining. Free tool.",
+  "independence-day":
+    "How many days until Independence Day 2026? Live countdown to July 4 with exact days, hours, minutes and seconds remaining. Free.",
+  "labor-day":
+    "How many days until Labor Day 2026? Live countdown to the first Monday in September with exact days, hours and minutes. Free tool.",
+  "memorial-day":
+    "How many days until Memorial Day 2026? Live countdown to the last Monday in May with exact days, hours, minutes and seconds. Free.",
+  "fathers-day":
+    "How many days until Father's Day 2026? Live countdown to the third Sunday in June with exact days, hours, minutes and seconds. Free.",
+  "mothers-day":
+    "How many days until Mother's Day 2027? Live countdown to the second Sunday in May with exact days, hours, minutes and seconds. Free.",
+  "black-friday":
+    "How many days until Black Friday 2026? Live countdown to the Friday after Thanksgiving with exact days, hours and minutes. Free tool.",
+};
+
 // ── Per-slug title overrides (for better CTR on specific search queries) ──────
 const HOLIDAY_TITLE_OVERRIDES: Record<string, string> = {
   "summer-break": "How Many Days Until Summer Break? Live Countdown | Dayblip",
@@ -86,9 +116,10 @@ export async function generateMetadata({
     ? "How many days until Christmas 2026? Live countdown to December 25 showing exact days, hours, minutes and seconds remaining. Free — no signup required."
     : params.slug === "summer-break"
     ? "Live countdown showing exactly how many days hours minutes and seconds until the first day of summer. Updates every second. Free — no signup ever."
-    : intro
+    : HOLIDAY_META_DESCRIPTIONS[params.slug]
+    ?? (intro
       ? intro.length > 160 ? `${intro.slice(0, 157).trimEnd()}...` : intro
-      : `How many days until ${holiday.name}? Live countdown to ${holiday.name} ${year}. Updated in real time.`;
+      : `How many days until ${holiday.name}? Live countdown to ${holiday.name} ${year}. Updated in real time.`);
   const description = descriptionText;
   const url = `/days-until/${params.slug}`;
   return {
