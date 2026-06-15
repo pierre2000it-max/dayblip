@@ -1,6 +1,45 @@
 "use client";
 import { useState } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import FAQAccordion from "@/components/FAQAccordion";
+import SchemaMarkup from "@/components/SchemaMarkup";
+
+const faqItems = [
+  {
+    question: "How many full moons since I was born?",
+    answer: "Enter your birthday in the Dayblip full moons calculator and it will show exactly how many full moons have occurred since the day you were born. The average person witnesses approximately 1,000 full moons in a lifetime — one every 29.5 days.",
+  },
+  {
+    question: "How many full moons are there in a year?",
+    answer: "There are typically 12 full moons in a year, one per month. Occasionally there are 13 full moons in a year — when this happens the extra full moon is called a Blue Moon. A Blue Moon occurs approximately every 2.5 years.",
+  },
+  {
+    question: "When is the next full moon?",
+    answer: "Full moons occur every 29.5 days on average. The Dayblip full moons calculator shows the exact date of the next full moon and counts down the days, hours, and minutes until it arrives.",
+  },
+  {
+    question: "What is a Blue Moon?",
+    answer: "A Blue Moon is the name given to the extra full moon that occurs when a year has 13 full moons instead of the usual 12. The phrase \"once in a Blue Moon\" refers to this rarity — it happens approximately every 2.5 years, or about 7 times every 19 years.",
+  },
+  {
+    question: "How long is a lunar cycle?",
+    answer: "A lunar cycle — from one full moon to the next — takes exactly 29 days, 12 hours, 44 minutes, and 3 seconds on average. This is called a synodic month. It differs slightly from a calendar month which is why full moon dates shift each year.",
+  },
+  {
+    question: "How many full moons will I see in my lifetime?",
+    answer: "The average human lifespan of 72 years contains approximately 890 full moons. If you live to 80 you will witness around 1,000 full moons. The Dayblip calculator shows exactly how many you have already seen based on your birthday.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": { "@type": "Answer", "text": item.answer },
+  })),
+};
 
 const REF_FULL_MOON = new Date(2025, 0, 13); // Jan 13, 2025
 const LUNAR_CYCLE   = 29.53059; // days
@@ -64,6 +103,7 @@ export default function FullMoonsTool() {
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <SchemaMarkup schemas={[faqSchema]} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-6xl">🌕</div>
@@ -141,6 +181,8 @@ export default function FullMoonsTool() {
               <div key={f} className="flex gap-2 mb-2"><span className="text-[#e94560]">→</span><span className="text-[#a8a8b3] text-sm">{f}</span></div>
             ))}
           </div>
+
+          <FAQAccordion items={faqItems} />
         </div>
       </section>
     </div>

@@ -97,7 +97,7 @@ const HOLIDAY_META_DESCRIPTIONS: Record<string, string> = {
 
 // ── Per-slug title overrides (for better CTR on specific search queries) ──────
 const HOLIDAY_TITLE_OVERRIDES: Record<string, string> = {
-  "summer-break": "How Many Days Until Summer Break? Live Countdown | Dayblip",
+  "summer-break": "Days Until Summer Break 2026 — Live Countdown | Dayblip",
 };
 
 // ── Metadata ─────────────────────────────────────────────────────────────────
@@ -115,7 +115,7 @@ export async function generateMetadata({
   const descriptionText = params.slug === "christmas"
     ? "How many days until Christmas 2026? Live countdown to December 25 showing exact days, hours, minutes and seconds remaining. Free — no signup required."
     : params.slug === "summer-break"
-    ? "Live countdown showing exactly how many days hours minutes and seconds until the first day of summer. Updates every second. Free — no signup ever."
+    ? "How many days until summer break 2026? Live countdown for students showing exact days, hours, minutes and seconds until school lets out. Free — no signup."
     : HOLIDAY_META_DESCRIPTIONS[params.slug]
     ?? (intro
       ? intro.length > 160 ? `${intro.slice(0, 157).trimEnd()}...` : intro
