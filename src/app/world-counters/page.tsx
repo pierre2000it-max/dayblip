@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import AuthorByline from "@/components/AuthorByline"
 import Link from "next/link"
 
 // ── Annual baselines ──────────────────────────────────────────────────────────
@@ -123,8 +124,35 @@ export default function WorldCountersPage() {
     ? `Since I was born, ${fmtBig(birthStats.babiesBorn)} babies have been born and the US debt grew by ${fmtDebt(birthStats.debtGrowth)}! Watch the world change live:`
     : "Watch the world change in real time — births, deaths, US debt, emails and more ticking every second!"
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How many people are in the world right now?", "acceptedAnswer": { "@type": "Answer", "text": "The world population is approximately 8.3 billion people as of 2026. It grows by roughly 70 million people per year, or about 0.85% annually, based on United Nations estimates." } },
+      { "@type": "Question", "name": "How many babies are born every second?", "acceptedAnswer": { "@type": "Answer", "text": "About 4.3 babies are born every second worldwide — roughly 259 births per minute, 15,500 per hour, and 372,000 per day, based on UN World Population Prospects data." } },
+      { "@type": "Question", "name": "How many people die every day?", "acceptedAnswer": { "@type": "Answer", "text": "Approximately 170,000 people die every day worldwide, which is about 2 deaths per second. The world still grows because births outpace deaths by roughly 2 to 1." } },
+      { "@type": "Question", "name": "What is the US national debt right now?", "acceptedAnswer": { "@type": "Answer", "text": "The US national debt updates daily and is displayed live on this page using data from the US Treasury Fiscal Data service. It increases by tens of thousands of dollars every second." } },
+      { "@type": "Question", "name": "How fast is the world population growing?", "acceptedAnswer": { "@type": "Answer", "text": "The world population grows by about 70 million people per year as of 2026. The growth rate is around 0.85% annually and declining — projected to reach zero around 2084 according to UN projections." } },
+      { "@type": "Question", "name": "Where does the data for these counters come from?", "acceptedAnswer": { "@type": "Answer", "text": "The counters use data from the United Nations Population Division, the World Health Organization, the US Census Bureau, and the US Treasury. Figures are statistically modeled estimates updated every second from the latest annual data." } },
+    ],
+  }
+
+  const datasetSchema = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "Real-Time World Statistics — Dayblip",
+    "description": "Live estimates of world population, births, deaths, and US national debt updated every second, calculated from United Nations, WHO, US Census Bureau, and US Treasury data.",
+    "url": "https://www.dayblip.com/world-counters",
+    "creator": { "@type": "Organization", "name": "Dayblip", "url": "https://www.dayblip.com" },
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "isAccessibleForFree": true,
+    "creditText": "Data sourced from United Nations, WHO, US Census Bureau, and US Treasury",
+  }
+
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetSchema) }} />
 
       {/* Hero */}
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
@@ -154,9 +182,10 @@ export default function WorldCountersPage() {
         <div className="mx-auto max-w-[800px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">A baby is born somewhere in the world every 0.23 seconds — approximately 140 million births per year. The world population grows by approximately 80 million people annually. The US national debt increases by roughly $72,920 every second. These counters update in real time based on current global statistical rates.</p>
+            <p className="text-[#e2e8f0]">The world population is approximately 8.3 billion people as of 2026, growing by about 70 million per year. Roughly 4.3 babies are born and 2 people die every second worldwide. These live counters update every second using the latest annual data and growth rates from the United Nations, WHO, and US Treasury.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Live world counters show global statistics updating in real time every second based on current annual rates from organizations including the UN, World Health Organization and US Treasury. The counters show world births, deaths and net population change today alongside the US national debt counter and your personal birth statistics.</p>
+          <div className="mt-4"><AuthorByline variant="tool" /></div>
         </div>
       </section>
 
@@ -322,6 +351,34 @@ export default function WorldCountersPage() {
             url="https://dayblip.com/world-counters"
             title="World Live Counters"
           />
+
+          {/* ── METHODOLOGY NOTE ───────────────────────────────────────────── */}
+          <div style={{ background: "#1e2d4a", borderRadius: "8px", padding: "16px 20px" }}>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#a8a8b3]">📐 Methodology</div>
+            <p style={{ color: "#a8a8b3", fontSize: "14px", lineHeight: "1.7", margin: 0 }}>
+              How these counters work: Each counter displays an estimate calculated in real time from the most recent annual figures and growth rates published by official sources. World population, births, and deaths are based on the United Nations World Population Prospects 2024 Revision and the US Census Bureau International Programs Center. Health figures use World Health Organization data. The US national debt counter uses daily data from the US Treasury Fiscal Data service. These are statistically modeled estimates updated every second — not exact live measurements, which are impossible to capture in real time for global metrics. Last reviewed June 2026.
+            </p>
+          </div>
+
+          {/* ── FAQ ────────────────────────────────────────────────────────── */}
+          <div>
+            <h2 className="text-2xl font-bold text-white mb-6">❓ Frequently Asked Questions</h2>
+            <div className="space-y-5">
+              {[
+                { q: "How many people are in the world right now?", a: "The world population is approximately 8.3 billion people as of 2026. It grows by roughly 70 million people per year, or about 0.85% annually, based on United Nations estimates." },
+                { q: "How many babies are born every second?", a: "About 4.3 babies are born every second worldwide — roughly 259 births per minute, 15,500 per hour, and 372,000 per day, based on UN World Population Prospects data." },
+                { q: "How many people die every day?", a: "Approximately 170,000 people die every day worldwide, which is about 2 deaths per second. The world still grows because births outpace deaths by roughly 2 to 1." },
+                { q: "What is the US national debt right now?", a: "The US national debt updates daily and is displayed live on this page using data from the US Treasury Fiscal Data service. It increases by tens of thousands of dollars every second." },
+                { q: "How fast is the world population growing?", a: "The world population grows by about 70 million people per year as of 2026. The growth rate is around 0.85% annually and declining — projected to reach zero around 2084 according to UN projections." },
+                { q: "Where does the data for these counters come from?", a: "The counters use data from the United Nations Population Division, the World Health Organization, the US Census Bureau, and the US Treasury. Figures are statistically modeled estimates updated every second from the latest annual data." },
+              ].map((item, i) => (
+                <div key={i} className="rounded-xl border border-[#0f3460] bg-[#0d1b2a] p-5">
+                  <h3 className="text-white font-semibold mb-2">{item.q}</h3>
+                  <p className="text-[#a8a8b3] text-sm leading-relaxed">{item.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* ── SOURCES ────────────────────────────────────────────────────── */}
           <div className="rounded-xl border border-[#0f3460] bg-[#0d1b2a] overflow-hidden">
