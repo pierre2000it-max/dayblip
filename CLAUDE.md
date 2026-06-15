@@ -188,6 +188,9 @@ grep -rn "description" src/app --include="*.tsx" --include="*.ts" | grep -v "//\
 
 Review the output. Any description over 155 characters must be fixed before building.
 
+## Annual Data Update Reminders
+- **src/data/cost-of-living.ts** — update COLI indexes, rent, home prices, and household income each January using C2ER Q4 report, Zillow December data, and Census ACS latest release.
+
 ## What Never to Do
 - Never use Tailwind (not installed)
 - Never add external links to tool or blog pages

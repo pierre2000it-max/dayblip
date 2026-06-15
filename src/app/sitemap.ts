@@ -185,6 +185,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/tools/life-insurance-calculator",      0.9),
     p("/daily",                                0.9, DAILY),
     p("/tools/generation-compare",             0.9),
+    p("/tools/cost-of-living",      0.9),
     p("/tools/true-hourly-wage",    0.9),
     p("/tools/career-timeline",     0.9),
     p("/tools/mortgage-by-year",    0.9),
