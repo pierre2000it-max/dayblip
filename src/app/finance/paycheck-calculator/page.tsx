@@ -117,8 +117,8 @@ export default function PaycheckCalculatorPage() {
     const annualState = taxableAnnual * stateRate
     const stateTax = annualState / periods
 
-    // FICA: cap SS at $168,600 annual
-    const ssCap = 168600
+    // FICA: cap SS at $176,100 annual (2026 SSA wage base)
+    const ssCap = 176100
     const annualSS = Math.min(annual, ssCap) * 0.062
     const annualMedicare = annual * 0.0145
     const socialSecurity = annualSS / periods
@@ -161,7 +161,7 @@ export default function PaycheckCalculatorPage() {
         faqSchema([
           { question: "How do I calculate my net paycheck?", answer: "Divide your annual salary by your number of pay periods to get gross pay. Then subtract federal income tax, state income tax, FICA (7.65%) and any pre-tax deductions like 401k and health insurance. A $75,000 salary paid biweekly has a gross paycheck of $2,884 and nets approximately $2,087 after taxes in an average state." },
           { question: "Does 401k reduce my paycheck taxes?", answer: "Yes. Traditional 401k contributions are pre-tax meaning they reduce your taxable income before federal and state taxes are calculated. A $200 biweekly 401k contribution reduces your gross paycheck by $200 but only reduces take-home by $156 because you save $44 in taxes." },
-          { question: "What is FICA tax on my paycheck?", answer: "FICA is 7.65% of gross wages — 6.2% for Social Security and 1.45% for Medicare. Social Security only applies to the first $168,600 of annual earnings. Medicare applies to all earnings. On a $2,884 gross paycheck FICA is approximately $221." },
+          { question: "What is FICA tax on my paycheck?", answer: "FICA is 7.65% of gross wages — 6.2% for Social Security and 1.45% for Medicare. Social Security only applies to the first $176,100 of annual earnings. Medicare applies to all earnings. On a $2,884 gross paycheck FICA is approximately $221." },
         ]),
         breadcrumbSchema([
           { name: "Home", url: "https://www.dayblip.com" },

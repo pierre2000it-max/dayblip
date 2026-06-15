@@ -138,10 +138,10 @@ const PUZZLES: Puzzle[] = [
     explanation: "Using the Rule of 72: 72 divided by 3% inflation = 24 years for prices to double. At 7% inflation, prices double in about 10 years. This is why keeping too much money in cash long-term erodes purchasing power — your dollars buy less over time even without spending them.",
   },
   {
-    question: "What is the maximum 401k contribution limit for 2024?",
-    options: ["$19,500", "$22,500", "$23,000", "$25,000"],
+    question: "What is the maximum 401k contribution limit for 2026?",
+    options: ["$19,500", "$22,500", "$23,500", "$25,000"],
     answer: 2,
-    explanation: "The 2024 401k contribution limit is $23,000 for employees ($30,500 if age 50 or older, including the $7,500 catch-up contribution). This limit applies to traditional and Roth 401k combined. Employer matching contributions do not count toward this limit.",
+    explanation: "The 2026 401k contribution limit is $23,500 for employees ($31,000 if age 50 or older, including the $7,500 catch-up contribution). This limit applies to traditional and Roth 401k combined. Employer matching contributions do not count toward this limit.",
   },
   {
     question: "What is compound interest often called?",
@@ -822,7 +822,7 @@ const PUZZLES: Puzzle[] = [
       "Financial Investment Contribution Agreement — 8.5% of wages",
     ],
     answer: 1,
-    explanation: "FICA (Federal Insurance Contributions Act) taxes fund Social Security and Medicare. Employees pay 7.65% of wages: 6.2% for Social Security (on wages up to $168,600 in 2024) and 1.45% for Medicare (no wage cap). Employers match the 7.65%, making the total FICA cost to the system 15.3% of wages.",
+    explanation: "FICA (Federal Insurance Contributions Act) taxes fund Social Security and Medicare. Employees pay 7.65% of wages: 6.2% for Social Security (on wages up to $176,100 in 2026) and 1.45% for Medicare (no wage cap). Employers match the 7.65%, making the total FICA cost to the system 15.3% of wages.",
   },
 ]
 

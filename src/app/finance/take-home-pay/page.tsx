@@ -104,7 +104,7 @@ export default function TakeHomePayPage() {
     const fedTax = calcFedTax(taxableIncome, filing)
     const stateRate = STATES[stateIdx][1]
     const stateTax = taxableIncome * stateRate
-    const ss = Math.min(annual, 168600) * 0.062
+    const ss = Math.min(annual, 176100) * 0.062
     const medicare = annual * 0.0145
 
     const totalTax = fedTax + stateTax + ss + medicare
