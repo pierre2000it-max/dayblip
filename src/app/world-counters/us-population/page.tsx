@@ -11,11 +11,11 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import Link from "next/link"
 
 // US Census Bureau population clock rates (as of 2024–2025):
-// 1 birth every 9 seconds, 1 death every 9.5 seconds, 1 net international migrant every 24 seconds
+// 1 birth every 9 seconds, 1 death every 9.5 seconds, 1 net international migrant every 28 seconds
 const BIRTHS_PER_SEC   = 1 / 9        // 0.11111
 const DEATHS_PER_SEC   = 1 / 9.5      // 0.10526
-const MIGRANTS_PER_SEC = 1 / 24       // 0.04167
-const NET_PER_SEC      = BIRTHS_PER_SEC - DEATHS_PER_SEC + MIGRANTS_PER_SEC // ~0.04752
+const MIGRANTS_PER_SEC = 1 / 28       // 0.03571
+const NET_PER_SEC      = BIRTHS_PER_SEC - DEATHS_PER_SEC + MIGRANTS_PER_SEC // ~0.04157
 
 // US Census Bureau projection for Jan 1, 2026
 const US_POP_JAN1_2026  = 335_893_238
@@ -108,15 +108,17 @@ export default function USPopulationPage() {
   const sod        = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
   const secSince2026 = Math.max(0, Math.floor((now.getTime() - jan1_2026.getTime()) / 1000))
   const secToday     = Math.floor((now.getTime() - sod.getTime()) / 1000)
-  const secThisYear  = Math.floor((now.getTime() - new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0).getTime()) / 1000)
 
   void tick
 
-  const currentPop   = Math.floor(US_POP_JAN1_2026 + secSince2026 * NET_PER_SEC)
-  const birthsToday  = secToday * BIRTHS_PER_SEC
-  const deathsToday  = secToday * DEATHS_PER_SEC
-  const migrantsToday = secToday * MIGRANTS_PER_SEC
-  const birthsThisYear = secThisYear * BIRTHS_PER_SEC
+  const currentPop     = Math.floor(US_POP_JAN1_2026 + secSince2026 * NET_PER_SEC)
+  const birthsToday    = secToday * BIRTHS_PER_SEC
+  const deathsToday    = secToday * DEATHS_PER_SEC
+  const migrantsToday  = secToday * MIGRANTS_PER_SEC
+  const birthsThisYear   = secSince2026 * BIRTHS_PER_SEC
+  const deathsThisYear   = secSince2026 * DEATHS_PER_SEC
+  const migrantsThisYear = secSince2026 * MIGRANTS_PER_SEC
+  const netGrowthThisYear = birthsThisYear - deathsThisYear + migrantsThisYear
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -197,8 +199,8 @@ export default function USPopulationPage() {
             <div className="grid grid-cols-3 gap-4">
               {[
                 { emoji: "👶", label: "Births this year", value: fmtBig(birthsThisYear), color: "#4ade80" },
-                { emoji: "💀", label: "Deaths this year", value: fmtBig(secThisYear * DEATHS_PER_SEC), color: "#f87171" },
-                { emoji: "📊", label: "Net population growth", value: `+${fmtBig(secThisYear * NET_PER_SEC)}`, color: "#4FC3F7" },
+                { emoji: "💀", label: "Deaths this year", value: fmtBig(deathsThisYear), color: "#f87171" },
+                { emoji: "📊", label: "Net population growth", value: `+${fmtBig(netGrowthThisYear)}`, color: "#4FC3F7" },
               ].map(s => (
                 <div key={s.label} className="rounded-xl border border-[#0f3460] bg-[#0d1b2a] p-5 text-center">
                   <div className="text-2xl mb-2">{s.emoji}</div>
