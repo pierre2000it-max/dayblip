@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { cities, CityData } from '@/data/cost-of-living'
 import { SALARY_DATA, SalaryEntry, STATES } from '@/data/salary-data'
+import { CitySelector, JobSelector } from './Selectors'
 import Breadcrumb from '@/components/Breadcrumb'
 import AuthorByline from '@/components/AuthorByline'
 import FAQAccordion from '@/components/FAQAccordion'
@@ -163,6 +164,8 @@ function CityComparison({ cityA, cityB, slug }: {
         <p style={{ color: '#a8a8b3', fontSize: '15px', margin: '0 0 24px' }}>
           Cost of living comparison — C2ER 2024-2025 data
         </p>
+
+        <CitySelector currentA={cityA.slug} currentB={cityB.slug} />
 
         <div style={{ background: '#1e2d4a', borderLeft: '4px solid #e94560', borderRadius: '8px', padding: '16px 20px', margin: '0 0 24px' }}>
           <p style={{ color: '#e94560', fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>QUICK ANSWER</p>
@@ -410,6 +413,8 @@ function JobComparison({ jobA, jobB, slug }: {
         <p style={{ color: '#a8a8b3', fontSize: '15px', margin: '0 0 24px' }}>
           National salary comparison — BLS OES 2024-2025 data
         </p>
+
+        <JobSelector currentA={jobA.slug} currentB={jobB.slug} />
 
         <div style={{ background: '#1e2d4a', borderLeft: '4px solid #e94560', borderRadius: '8px', padding: '16px 20px', margin: '0 0 24px' }}>
           <p style={{ color: '#e94560', fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>QUICK ANSWER</p>
