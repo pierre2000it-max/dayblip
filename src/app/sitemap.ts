@@ -207,6 +207,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/tools/freelancer-hub",        0.8),
     p("/tools/retirement-hub",        0.8),
     p("/tools/debt-hub",              0.8),
+    p("/tools/time-with-parents",     0.8),
+    p("/tools/time-with-kids",        0.8),
+    p("/tools/time-with-pet",         0.8),
 
     // ═══════════════════════════════════════════════════════════════════════
     // HEALTH CALCULATORS  (priority 0.9, monthly)
