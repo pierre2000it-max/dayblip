@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Breadcrumb from '@/components/Breadcrumb'
 import AuthorByline from '@/components/AuthorByline'
 import FAQAccordion from '@/components/FAQAccordion'
+import ShareButtons from '@/components/ShareButtons'
 import {
   getSalaryBySlug,
   getAllSalarySlugs,
@@ -49,7 +50,7 @@ export default async function SalaryPage({ params }: Props) {
   const faqItems = [
     {
       question: `What is the average ${entry.job.toLowerCase()} salary in ${state.name}?`,
-      answer: `The average ${entry.job.toLowerCase()} salary in ${state.name} is $${stateSalary.toLocaleString()} per year as of BLS OES May 2024. This works out to approximately $${hourly} per hour based on a standard 2,080-hour work year.`,
+      answer: `The average ${entry.job.toLowerCase()} salary in ${state.name} is $${stateSalary.toLocaleString()} per year as of BLS OES 2024-2025. This works out to approximately $${hourly} per hour based on a standard 2,080-hour work year.`,
     },
     {
       question: `How does ${state.name}&apos;s ${entry.job.toLowerCase()} salary compare to the national average?`,
@@ -65,11 +66,11 @@ export default async function SalaryPage({ params }: Props) {
     },
     {
       question: `Which states pay ${entry.job.toLowerCase()}s the most?`,
-      answer: `According to BLS OES May 2024, the top paying states for ${entry.blsTitle} are: ${top5.map((t) => `${t.state.name} ($${t.salary.toLocaleString()})`).join(', ')}.`,
+      answer: `According to BLS OES 2024-2025, the top paying states for ${entry.blsTitle} are: ${top5.map((t) => `${t.state.name} ($${t.salary.toLocaleString()})`).join(', ')}.`,
     },
     {
       question: `Is the ${entry.job.toLowerCase()} salary data from BLS reliable?`,
-      answer: `Yes. This data comes from the Bureau of Labor Statistics (BLS) Occupational Employment and Wage Statistics (OES) survey, May 2024. The BLS OES program surveys over 1.1 million business establishments semi-annually and is the most comprehensive source of occupational wage data in the United States.`,
+      answer: `Yes. This data comes from the Bureau of Labor Statistics (BLS) Occupational Employment and Wage Statistics (OES) survey, 2024-2025. The BLS OES program surveys over 1.1 million business establishments semi-annually and is the most comprehensive source of occupational wage data in the United States.`,
     },
   ]
 
@@ -90,7 +91,7 @@ export default async function SalaryPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Dataset',
     name: `${entry.job} Salary in ${state.name} 2024`,
-    description: `Average annual salary for ${entry.blsTitle} in ${state.name} from BLS OES May 2024`,
+    description: `Average annual salary for ${entry.blsTitle} in ${state.name} from BLS OES 2024-2025`,
     url: `https://www.dayblip.com/salary/${slug}`,
     creator: { '@type': 'Organization', name: 'Dayblip', url: 'https://www.dayblip.com' },
     publisher: { '@type': 'Organization', name: 'U.S. Bureau of Labor Statistics', url: 'https://www.bls.gov' },
@@ -121,7 +122,7 @@ export default async function SalaryPage({ params }: Props) {
           {entry.job} Salary in {state.name}
         </h1>
         <p style={{ color: '#a8a8b3', fontSize: '15px', margin: '0 0 24px 0' }}>
-          BLS OES May 2024 &mdash; {entry.blsTitle}
+          BLS OES 2024-2025 &mdash; {entry.blsTitle}
         </p>
 
         {/* Quick Answer */}
@@ -213,6 +214,11 @@ export default async function SalaryPage({ params }: Props) {
         {/* FAQ */}
         <FAQAccordion items={faqItems} />
 
+        <ShareButtons
+          text={`The average ${entry.job.toLowerCase()} salary in ${state.name} is $${stateSalary.toLocaleString()}/year. See how it compares to all 50 states at Dayblip 💼`}
+          url={`https://www.dayblip.com/salary/${slug}`}
+        />
+
         {/* Related Tools */}
         <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '24px', margin: '40px 0' }}>
           <h2 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '700', margin: '0 0 16px 0' }}>Related Tools</h2>
@@ -274,7 +280,7 @@ export default async function SalaryPage({ params }: Props) {
         <div style={{ borderTop: '1px solid #2a3a5c', paddingTop: '24px' }}>
           <h2 style={{ color: '#a8a8b3', fontSize: '14px', fontWeight: '600', margin: '0 0 8px 0' }}>Methodology</h2>
           <p style={{ color: '#6b7280', fontSize: '13px', margin: 0, lineHeight: 1.7 }}>
-            Salary data is sourced from the U.S. Bureau of Labor Statistics Occupational Employment and Wage Statistics (OES) program, May 2024 release. The OES survey samples approximately 1.1 million non-farm business establishments across the US. Figures represent mean annual wages. Individual salaries vary based on experience, education level, employer size, geographic location within the state, and other factors. Data is updated annually. For the most current figures, visit bls.gov/oes.
+            Salary data is sourced from the U.S. Bureau of Labor Statistics Occupational Employment and Wage Statistics (OES) program, 2024-2025 release. The OES survey samples approximately 1.1 million non-farm business establishments across the US. Figures represent mean annual wages. Individual salaries vary based on experience, education level, employer size, geographic location within the state, and other factors. Data is updated annually. For the most current figures, visit bls.gov/oes.
           </p>
         </div>
       </div>
