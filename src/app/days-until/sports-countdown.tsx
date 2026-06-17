@@ -24,8 +24,8 @@ export default function SportsCountdown({ event, faqItems }: SportsCountdownProp
   }, [event.date])
 
   const pad = (n: number) => String(n).padStart(2, '0')
-  const eventDate = new Date(event.date)
-  const formattedDate = eventDate.toLocaleDateString('en-US', {
+  const [year, month, day] = event.date.split('-').map(Number)
+  const formattedDate = new Date(year, month - 1, day).toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
