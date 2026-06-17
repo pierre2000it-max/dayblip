@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import holidaysData from "@/data/holidays.json";
 import onThisDayData from "@/data/onThisDay.json";
-import { getAllSalarySlugs } from "@/data/salary-data";
+import { getAllSalarySlugs, SALARY_DATA } from "@/data/salary-data";
+import { cities } from "@/data/cost-of-living";
 
 const BASE     = "https://www.dayblip.com";
 const holidays = holidaysData as Array<{ slug: string }>;
@@ -392,7 +393,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...otdSpotlight,    // spotlight dates not already in JSON (weekly, 0.8)
 
     // ═══════════════════════════════════════════════════════════════════════
-    // SALARY PAGES  (priority 0.8, monthly) — 20 jobs × 50 states = 1,000
+    // COMPARE PAGES  (priority 0.8, monthly) — city vs city + job vs job
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/compare", 0.8, MONTHLY),
+    ...(() => {
+      const slugs: string[] = []
+      for (let i = 0; i < cities.length; i++) {
+        for (let j = i + 1; j < cities.length; j++) {
+          slugs.push(`${cities[i].slug}-vs-${cities[j].slug}`)
+        }
+      }
+      for (let i = 0; i < SALARY_DATA.length; i++) {
+        for (let j = i + 1; j < SALARY_DATA.length; j++) {
+          slugs.push(`${SALARY_DATA[i].slug}-vs-${SALARY_DATA[j].slug}`)
+        }
+      }
+      return slugs.map((slug) => ({
+        url:             `${BASE}/compare/${slug}`,
+        lastModified:    new Date(),
+        changeFrequency: MONTHLY,
+        priority:        0.8,
+      }))
+    })(),
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // SALARY PAGES  (priority 0.8, monthly) — 40 jobs × 50 states = 2,000
     // ═══════════════════════════════════════════════════════════════════════
     p("/salary", 0.8, MONTHLY),
     ...getAllSalarySlugs().map((slug) => ({
