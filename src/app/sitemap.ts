@@ -116,6 +116,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/days-until/new-years-eve",   0.85, WEEKLY),
 
     // ═══════════════════════════════════════════════════════════════════════
+    // SPORTS COUNTDOWNS  (priority 0.8, weekly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/days-until/super-bowl",     0.8, WEEKLY),
+    p("/days-until/world-cup",      0.8, WEEKLY),
+    p("/days-until/world-series",   0.8, WEEKLY),
+    p("/days-until/march-madness",  0.8, WEEKLY),
+    p("/days-until/nba-finals",     0.8, WEEKLY),
+
+    // ═══════════════════════════════════════════════════════════════════════
     // FINANCE CALCULATORS  (priority 0.9, monthly)
     // ═══════════════════════════════════════════════════════════════════════
     p("/finance/compound-interest",   0.9),
