@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import holidaysData from "@/data/holidays.json";
 import onThisDayData from "@/data/onThisDay.json";
+import { getAllSalarySlugs } from "@/data/salary-data";
 
 const BASE     = "https://www.dayblip.com";
 const holidays = holidaysData as Array<{ slug: string }>;
@@ -386,5 +387,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...bornInUrls,      // born-in/1940 through born-in/2020 (monthly, 0.8)
     ...otdUrls,         // all on-this-day dates from onThisDay.json (weekly, 0.8)
     ...otdSpotlight,    // spotlight dates not already in JSON (weekly, 0.8)
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // SALARY PAGES  (priority 0.8, monthly) — 20 jobs × 50 states = 1,000
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/salary", 0.8, MONTHLY),
+    ...getAllSalarySlugs().map((slug) => ({
+      url:             `${BASE}/salary/${slug}`,
+      lastModified:    new Date(),
+      changeFrequency: MONTHLY,
+      priority:        0.8,
+    })),
   ];
 }
