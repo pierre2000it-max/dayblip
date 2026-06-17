@@ -222,6 +222,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/tools/time-with-pet",         0.8),
 
     // ═══════════════════════════════════════════════════════════════════════
+    // IS IT WORTH IT? SERIES  (priority 0.8, monthly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/tools/is-it-worth-it",                        0.8),
+    p("/tools/is-it-worth-it/buy-vs-rent",            0.8),
+    p("/tools/is-it-worth-it/lease-vs-buy-car",       0.8),
+    p("/tools/is-it-worth-it/degree-vs-bootcamp",     0.8),
+    p("/tools/is-it-worth-it/gym-membership",         0.8),
+    p("/tools/is-it-worth-it/cable-vs-streaming",     0.8),
+
+    // ═══════════════════════════════════════════════════════════════════════
     // HEALTH CALCULATORS  (priority 0.9, monthly)
     // ═══════════════════════════════════════════════════════════════════════
     p("/health/life-expectancy",       0.9),
