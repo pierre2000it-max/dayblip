@@ -1,0 +1,519 @@
+'use client'
+import { useState } from 'react'
+import ShareButtons from '@/components/ShareButtons'
+import FAQAccordion from '@/components/FAQAccordion'
+import AuthorByline from '@/components/AuthorByline'
+import Breadcrumb from '@/components/Breadcrumb'
+import RelatedTools from '@/components/RelatedTools'
+import LastUpdated from '@/components/LastUpdated'
+import MethodologyNote from '@/components/MethodologyNote'
+
+const STD_DEDUCTION: Record<string, number> = {
+  single: 16100,
+  mfj: 32200,
+  mfs: 16100,
+  hoh: 24150
+}
+
+const BRACKETS: Record<string, [number, number][]> = {
+  single: [
+    [12400, 0.10], [47150, 0.12], [100525, 0.22],
+    [191950, 0.24], [243725, 0.32], [609350, 0.35], [Infinity, 0.37]
+  ],
+  mfj: [
+    [24800, 0.10], [94300, 0.12], [201050, 0.22],
+    [383900, 0.24], [487450, 0.32], [731200, 0.35], [Infinity, 0.37]
+  ],
+  mfs: [
+    [12400, 0.10], [47150, 0.12], [100525, 0.22],
+    [191950, 0.24], [243725, 0.32], [365600, 0.35], [Infinity, 0.37]
+  ],
+  hoh: [
+    [17300, 0.10], [63050, 0.12], [100500, 0.22],
+    [191950, 0.24], [243700, 0.32], [609350, 0.35], [Infinity, 0.37]
+  ]
+}
+
+function calcFedTax(taxableIncome: number, status: string): number {
+  if (taxableIncome <= 0) return 0
+  const brackets = BRACKETS[status] ?? BRACKETS.single
+  let tax = 0
+  let prev = 0
+  for (const [limit, rate] of brackets) {
+    if (taxableIncome <= prev) break
+    const taxable = Math.min(taxableIncome, limit) - prev
+    tax += taxable * rate
+    prev = limit
+  }
+  return tax
+}
+
+export default function TaxRefundEstimatorPage() {
+  const [filingStatus, setFilingStatus] = useState('single')
+  const [grossIncome, setGrossIncome] = useState('')
+  const [federalWithheld, setFederalWithheld] = useState('')
+  const [deductionType, setDeductionType] = useState<'standard' | 'itemized'>('standard')
+  const [itemizedAmount, setItemizedAmount] = useState('')
+  const [preTaxDeductions, setPreTaxDeductions] = useState('')
+  const [childTaxCredit, setChildTaxCredit] = useState('0')
+  const [otherCredits, setOtherCredits] = useState('0')
+  const [result, setResult] = useState<{
+    verdict: 'REFUND' | 'OWE'
+    amount: number
+    grossIncome: number
+    adjustedGross: number
+    taxableIncome: number
+    totalTax: number
+    effectiveRate: number
+    marginalRate: number
+    withheld: number
+    totalCredits: number
+  } | null>(null)
+
+  function calculate() {
+    const gross = parseFloat(grossIncome)
+    const withheld = parseFloat(federalWithheld)
+    if (!gross || !withheld) return
+
+    const preTax = parseFloat(preTaxDeductions) || 0
+    const credits = (parseFloat(childTaxCredit) || 0) + (parseFloat(otherCredits) || 0)
+
+    const agi = Math.max(0, gross - preTax)
+
+    const stdDed = STD_DEDUCTION[filingStatus] ?? STD_DEDUCTION.single
+    const itemized = parseFloat(itemizedAmount) || 0
+    const deduction = deductionType === 'itemized' ? Math.max(itemized, stdDed) : stdDed
+
+    const taxableIncome = Math.max(0, agi - deduction)
+    const taxBeforeCredits = calcFedTax(taxableIncome, filingStatus)
+    const totalTax = Math.max(0, taxBeforeCredits - credits)
+
+    const diff = withheld - totalTax
+    const verdict: 'REFUND' | 'OWE' = diff >= 0 ? 'REFUND' : 'OWE'
+    const amount = Math.abs(diff)
+
+    const effectiveRate = gross > 0 ? (totalTax / gross) * 100 : 0
+
+    const brackets = BRACKETS[filingStatus] ?? BRACKETS.single
+    let marginalRate = 10
+    let prev = 0
+    for (const [limit, rate] of brackets) {
+      if (taxableIncome > prev) marginalRate = rate * 100
+      if (taxableIncome <= limit) break
+      prev = limit
+    }
+
+    setResult({
+      verdict,
+      amount: Math.round(amount),
+      grossIncome: Math.round(gross),
+      adjustedGross: Math.round(agi),
+      taxableIncome: Math.round(taxableIncome),
+      totalTax: Math.round(totalTax),
+      effectiveRate: Math.round(effectiveRate * 10) / 10,
+      marginalRate: Math.round(marginalRate),
+      withheld: Math.round(withheld),
+      totalCredits: Math.round(credits)
+    })
+  }
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    background: '#1e2d4a',
+    color: '#ffffff',
+    border: '1px solid #2a3f5f',
+    borderRadius: '8px',
+    padding: '12px 16px',
+    fontSize: '16px',
+    boxSizing: 'border-box',
+    outline: 'none',
+  }
+
+  const faqItems = [
+    {
+      question: 'How big is the average 2026 tax refund?',
+      answer: 'The average federal tax refund in recent years has been approximately $3,000-3,200 according to IRS filing statistics. For 2026 returns filed in early 2027 the average is expected to remain in a similar range. However refund size varies enormously based on income, filing status, withholding elections, and credits claimed. This calculator gives you a personalized estimate based on your specific situation.'
+    },
+    {
+      question: 'What is the 2026 standard deduction?',
+      answer: 'The 2026 standard deduction is $16,100 for single filers and married filing separately, $32,200 for married filing jointly and qualifying surviving spouses, and $24,150 for head of household. These amounts are set by IRS Revenue Procedure 2025-32 and reflect inflation adjustments under the One Big Beautiful Bill Act (OBBBA). Taxpayers age 65 or older receive an additional $2,050 (single) or $1,650 (married) per qualifying condition.'
+    },
+    {
+      question: 'What are the 2026 federal tax brackets?',
+      answer: 'The 2026 federal tax brackets for single filers are: 10% on taxable income up to $12,400; 12% from $12,400 to $47,150; 22% from $47,150 to $100,525; 24% from $100,525 to $191,950; 32% from $191,950 to $243,725; 35% from $243,725 to $609,350; and 37% above $609,350. These are per IRS Rev. Proc. 2025-32. Remember these are marginal rates — only the income in each bracket is taxed at that rate.'
+    },
+    {
+      question: 'What is the difference between a refund and a tax liability?',
+      answer: 'Your tax liability is the total federal income tax you owe based on your taxable income and applicable tax brackets. Your refund — or amount owed — is the difference between your tax liability and the taxes already withheld from your paychecks throughout the year. A refund means you withheld more than you owed. An amount owed means your withholding fell short of your liability.'
+    },
+    {
+      question: 'What reduces my taxable income the most?',
+      answer: 'The most impactful deductions and adjustments are pre-tax retirement contributions (401k up to $23,500 in 2026, or $31,000 if age 50+), HSA contributions ($4,300 single or $8,550 family in 2026), the standard deduction ($16,100 single, $32,200 MFJ), and itemized deductions if they exceed the standard deduction. Tax credits — which directly reduce your tax liability dollar for dollar rather than reducing taxable income — are even more valuable. The Child Tax Credit ($2,200 per qualifying child in 2026) is the most widely claimed.'
+    },
+    {
+      question: 'Should I adjust my W-4 after using this calculator?',
+      answer: 'If this calculator shows you consistently owe a large amount each year your withholding is too low — update your W-4 with your employer to withhold more each paycheck. If you consistently get a very large refund your withholding is too high — you are giving the IRS an interest-free loan. Updating your W-4 to withhold less puts more money in each paycheck which you can invest. The IRS Tax Withholding Estimator at irs.gov is the most accurate tool for calculating the exact W-4 adjustment needed.'
+    }
+  ]
+
+  return (
+    <main style={{ background: '#0d1b2a', minHeight: '100vh', padding: '32px 24px', fontFamily: 'Inter, sans-serif' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              {
+                '@type': 'Question',
+                name: 'What is the 2026 standard deduction?',
+                acceptedAnswer: { '@type': 'Answer', text: 'The 2026 standard deduction is $16,100 for single filers, $32,200 for married filing jointly, and $24,150 for head of household per IRS Rev. Proc. 2025-32.' }
+              },
+              {
+                '@type': 'Question',
+                name: 'How big is the average 2026 tax refund?',
+                acceptedAnswer: { '@type': 'Answer', text: 'The average federal tax refund has been approximately $3,000-3,200 based on recent IRS filing statistics. Individual refunds vary significantly based on income, withholding, and credits.' }
+              },
+              {
+                '@type': 'Question',
+                name: 'What are the 2026 federal tax brackets?',
+                acceptedAnswer: { '@type': 'Answer', text: '2026 single filer brackets: 10% to $12,400; 12% to $47,150; 22% to $100,525; 24% to $191,950; 32% to $243,725; 35% to $609,350; 37% above. Per IRS Rev. Proc. 2025-32.' }
+              }
+            ]
+          })
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebApplication',
+            name: '2026 Tax Refund Estimator',
+            url: 'https://www.dayblip.com/tools/tax-refund-estimator',
+            applicationCategory: 'FinanceApplication',
+            operatingSystem: 'Web',
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+            description: 'Estimate your 2026 federal tax refund or amount owed based on IRS Rev. Proc. 2025-32 brackets and standard deductions. Free, no signup required.'
+          })
+        }}
+      />
+
+      <div style={{ maxWidth: '760px', margin: '0 auto', padding: '0 0px' }}>
+        <Breadcrumb crumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Tools', href: '/tools' },
+          { label: 'Tax Refund Estimator' }
+        ]} />
+
+        <h1 style={{ color: '#ffffff', fontSize: '32px', fontWeight: '800', margin: '24px 0 8px' }}>
+          2026 Tax Refund Estimator
+        </h1>
+        <p style={{ color: '#a8a8b3', fontSize: '16px', margin: '0 0 24px', lineHeight: '1.6' }}>
+          Estimate your federal tax refund or amount owed for 2026.
+          Based on IRS Rev. Proc. 2025-32 tax brackets and standard deductions.
+        </p>
+
+        {/* Quick Answer Box */}
+        <div style={{ background: '#1e2d4a', borderLeft: '4px solid #e94560', borderRadius: '8px', padding: '16px 20px', margin: '0 0 24px' }}>
+          <div style={{ color: '#e94560', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '8px', fontWeight: '700' }}>QUICK ANSWER</div>
+          {result ? (
+            <p style={{ color: '#ffffff', fontSize: '15px', margin: 0, lineHeight: '1.7' }}>
+              Based on your numbers, your estimated 2026 federal{' '}
+              {result.verdict === 'REFUND'
+                ? <><strong style={{ color: '#4ade80' }}>refund is ${result.amount.toLocaleString()}</strong>. Your effective tax rate is {result.effectiveRate}% on a taxable income of ${result.taxableIncome.toLocaleString()}.</>
+                : <><strong style={{ color: '#e94560' }}>amount owed is ${result.amount.toLocaleString()}</strong>. Consider updating your W-4 to avoid a bill next year.</>
+              }
+            </p>
+          ) : (
+            <p style={{ color: '#ffffff', fontSize: '15px', margin: 0, lineHeight: '1.7' }}>
+              The average 2026 federal tax refund is approximately $3,100 based on IRS data.
+              Whether you get a refund depends on how much was withheld from your paychecks
+              versus your actual tax liability. Enter your numbers below for a personalized estimate.
+            </p>
+          )}
+        </div>
+
+        <AuthorByline variant="tool" />
+
+        {/* Input Section */}
+        <h2 style={{ color: '#ffffff', fontSize: '20px', fontWeight: '700', margin: '32px 0 16px' }}>
+          Your 2026 Tax Information
+        </h2>
+
+        {/* Filing Status */}
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ color: '#a8a8b3', fontSize: '13px', display: 'block', marginBottom: '8px' }}>Filing Status</label>
+          <select
+            value={filingStatus}
+            onChange={e => setFilingStatus(e.target.value)}
+            style={{ ...inputStyle }}
+          >
+            <option value="single">Single</option>
+            <option value="mfj">Married Filing Jointly</option>
+            <option value="mfs">Married Filing Separately</option>
+            <option value="hoh">Head of Household</option>
+          </select>
+        </div>
+
+        {/* Gross Income */}
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ color: '#a8a8b3', fontSize: '13px', display: 'block', marginBottom: '8px' }}>Gross Annual Income</label>
+          <input
+            type="number"
+            placeholder="$75,000"
+            value={grossIncome}
+            onChange={e => setGrossIncome(e.target.value)}
+            style={inputStyle}
+          />
+        </div>
+
+        {/* Federal Withheld */}
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ color: '#a8a8b3', fontSize: '13px', display: 'block', marginBottom: '8px' }}>Federal Taxes Withheld</label>
+          <input
+            type="number"
+            placeholder="$8,000"
+            value={federalWithheld}
+            onChange={e => setFederalWithheld(e.target.value)}
+            style={inputStyle}
+          />
+          <p style={{ color: '#a8a8b3', fontSize: '12px', margin: '4px 0 0' }}>
+            Find this on your W-2 Box 2 or add up your paystub YTD withholding
+          </p>
+        </div>
+
+        {/* Deduction Type Toggle */}
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ color: '#a8a8b3', fontSize: '13px', display: 'block', marginBottom: '8px' }}>Deduction Type</label>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            {(['standard', 'itemized'] as const).map(type => (
+              <button
+                key={type}
+                onClick={() => setDeductionType(type)}
+                style={{
+                  flex: 1,
+                  padding: '10px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  fontSize: '14px',
+                  background: deductionType === type ? '#e94560' : '#1e2d4a',
+                  color: '#ffffff'
+                }}
+              >
+                {type === 'standard'
+                  ? `Standard ($${(STD_DEDUCTION[filingStatus] ?? 16100).toLocaleString()})`
+                  : 'Itemized'
+                }
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Itemized Amount — conditional */}
+        {deductionType === 'itemized' && (
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{ color: '#a8a8b3', fontSize: '13px', display: 'block', marginBottom: '8px' }}>Total Itemized Deductions</label>
+            <input
+              type="number"
+              placeholder="e.g. $25,000"
+              value={itemizedAmount}
+              onChange={e => setItemizedAmount(e.target.value)}
+              style={inputStyle}
+            />
+            <p style={{ color: '#a8a8b3', fontSize: '12px', margin: '4px 0 0' }}>
+              Include mortgage interest, state taxes (up to $10,000), and charitable contributions
+            </p>
+          </div>
+        )}
+
+        {/* Pre-Tax Deductions */}
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ color: '#a8a8b3', fontSize: '13px', display: 'block', marginBottom: '8px' }}>Pre-Tax Deductions (annual)</label>
+          <input
+            type="number"
+            placeholder="$5,000"
+            value={preTaxDeductions}
+            onChange={e => setPreTaxDeductions(e.target.value)}
+            style={inputStyle}
+          />
+          <p style={{ color: '#a8a8b3', fontSize: '12px', margin: '4px 0 0' }}>
+            401k contributions, HSA, health insurance premiums paid pre-tax
+          </p>
+        </div>
+
+        {/* Child Tax Credit */}
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ color: '#a8a8b3', fontSize: '13px', display: 'block', marginBottom: '8px' }}>Child Tax Credit</label>
+          <input
+            type="number"
+            placeholder="$0"
+            value={childTaxCredit}
+            onChange={e => setChildTaxCredit(e.target.value)}
+            style={inputStyle}
+          />
+          <p style={{ color: '#a8a8b3', fontSize: '12px', margin: '4px 0 0' }}>
+            $2,000 per qualifying child under 17 in 2026
+          </p>
+        </div>
+
+        {/* Other Credits */}
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ color: '#a8a8b3', fontSize: '13px', display: 'block', marginBottom: '8px' }}>Other Tax Credits</label>
+          <input
+            type="number"
+            placeholder="$0"
+            value={otherCredits}
+            onChange={e => setOtherCredits(e.target.value)}
+            style={inputStyle}
+          />
+          <p style={{ color: '#a8a8b3', fontSize: '12px', margin: '4px 0 0' }}>
+            Education credits, retirement savings credit, EV credit, etc.
+          </p>
+        </div>
+
+        {/* Calculate Button */}
+        <button
+          onClick={calculate}
+          style={{
+            width: '100%',
+            background: '#e94560',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: '8px',
+            padding: '14px',
+            fontSize: '16px',
+            fontWeight: '700',
+            cursor: 'pointer',
+            marginTop: '8px'
+          }}
+        >
+          Estimate My 2026 Tax Refund
+        </button>
+
+        {/* Result Section */}
+        {result && (
+          <div style={{ margin: '40px 0' }}>
+            {/* Main verdict card */}
+            <div style={{
+              background: '#1e2d4a',
+              borderRadius: '16px',
+              padding: '32px',
+              textAlign: 'center',
+              marginBottom: '24px',
+              borderTop: `4px solid ${result.verdict === 'REFUND' ? '#4ade80' : '#e94560'}`
+            }}>
+              <p style={{ color: '#a8a8b3', fontSize: '15px', margin: '0 0 8px' }}>
+                {result.verdict === 'REFUND' ? 'Estimated Federal Refund' : 'Estimated Amount Owed'}
+              </p>
+              <div style={{
+                color: result.verdict === 'REFUND' ? '#4ade80' : '#e94560',
+                fontSize: '64px',
+                fontWeight: '800',
+                lineHeight: 1,
+                margin: '0 0 8px'
+              }}>
+                ${result.amount.toLocaleString()}
+              </div>
+              <p style={{ color: '#a8a8b3', fontSize: '14px', margin: 0 }}>
+                {result.verdict === 'REFUND'
+                  ? 'You likely overpaid your taxes through withholding'
+                  : 'You likely underpaid — consider adjusting your W-4'
+                }
+              </p>
+            </div>
+
+            {/* Tax breakdown */}
+            <div style={{ background: '#1e2d4a', borderRadius: '12px', padding: '24px', marginBottom: '24px' }}>
+              <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '700', margin: '0 0 16px' }}>
+                Tax Breakdown
+              </h3>
+              {[
+                { label: 'Gross Income', value: `$${result.grossIncome.toLocaleString()}` },
+                { label: 'Adjusted Gross Income', value: `$${result.adjustedGross.toLocaleString()}` },
+                { label: 'Taxable Income', value: `$${result.taxableIncome.toLocaleString()}` },
+                { label: 'Federal Tax Owed', value: `$${result.totalTax.toLocaleString()}` },
+                { label: 'Tax Credits Applied', value: `- $${result.totalCredits.toLocaleString()}` },
+                { label: 'Federal Tax Withheld', value: `$${result.withheld.toLocaleString()}` },
+                { label: 'Effective Tax Rate', value: `${result.effectiveRate}%` },
+                { label: 'Marginal Tax Rate', value: `${result.marginalRate}%` },
+              ].map((row, i) => (
+                <div key={row.label} style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  padding: '10px 0',
+                  borderBottom: i < 7 ? '1px solid #0d1b2a' : 'none'
+                }}>
+                  <span style={{ color: '#a8a8b3', fontSize: '14px' }}>{row.label}</span>
+                  <span style={{ color: '#ffffff', fontSize: '14px', fontWeight: '600' }}>{row.value}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* W-4 tip — owe */}
+            {result.verdict === 'OWE' && (
+              <div style={{
+                background: '#0d1b2a',
+                borderRadius: '12px',
+                padding: '20px 24px',
+                marginBottom: '24px',
+                borderLeft: '4px solid #e94560'
+              }}>
+                <p style={{ color: '#ffffff', fontSize: '14px', fontWeight: '700', margin: '0 0 8px' }}>
+                  Avoid this next year — update your W-4
+                </p>
+                <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                  If you owe ${result.amount.toLocaleString()} this year your withholding is too low.
+                  Ask your employer for a new W-4 form and increase your withholding by approximately
+                  ${Math.round(result.amount / 12).toLocaleString()} per month to break even next year.
+                </p>
+              </div>
+            )}
+
+            {/* Refund tip */}
+            {result.verdict === 'REFUND' && (
+              <div style={{
+                background: '#0d1b2a',
+                borderRadius: '12px',
+                padding: '20px 24px',
+                marginBottom: '24px',
+                borderLeft: '4px solid #4ade80'
+              }}>
+                <p style={{ color: '#ffffff', fontSize: '14px', fontWeight: '700', margin: '0 0 8px' }}>
+                  A large refund means you overpaid
+                </p>
+                <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                  A ${result.amount.toLocaleString()} refund means you gave the IRS an interest-free loan
+                  of ${Math.round(result.amount / 12).toLocaleString()} per month all year.
+                  Consider updating your W-4 to keep more money in each paycheck and invest the difference.
+                </p>
+              </div>
+            )}
+
+            <ShareButtons
+              text={`I estimated my 2026 tax ${result.verdict === 'REFUND' ? `refund: $${result.amount.toLocaleString()} back` : `bill: $${result.amount.toLocaleString()} owed`}. Effective rate: ${result.effectiveRate}%. Calculate yours at Dayblip 💰`}
+              url="https://www.dayblip.com/tools/tax-refund-estimator"
+              title="2026 Tax Refund Estimator — Dayblip"
+            />
+          </div>
+        )}
+
+        <FAQAccordion items={faqItems} />
+
+        <RelatedTools tools={[
+          { emoji: '💵', title: 'Take-Home Pay Calculator', desc: 'Your actual paycheck after all taxes', href: '/finance/take-home-pay' },
+          { emoji: '📊', title: 'Tax Bracket Calculator', desc: 'Your marginal and effective rates', href: '/finance/tax-bracket' },
+          { emoji: '🏦', title: '401k Calculator', desc: 'How much your contributions grow', href: '/finance/401k-calculator' },
+          { emoji: '💰', title: 'Where You Rank', desc: 'Your income percentile nationally', href: '/tools/where-you-rank' }
+        ]} />
+
+        <LastUpdated date="June 2026" />
+
+        <MethodologyNote text="Tax calculations use 2026 federal income tax brackets and standard deductions per IRS Revenue Procedure 2025-32. Federal withholding entered by the user is used directly — FICA taxes (Social Security and Medicare) are not included in this estimate as they are not refundable through income tax returns. State income taxes are not included. Credits are treated as non-refundable (cannot reduce tax below zero). This tool provides an estimate only — actual refunds depend on additional factors including other income sources, AMT, self-employment tax, and specific IRS calculations. Always consult a tax professional for advice specific to your situation. Source: IRS Rev. Proc. 2025-32; IRS Publication 505 (2026)." />
+      </div>
+    </main>
+  )
+}

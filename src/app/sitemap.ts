@@ -222,6 +222,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/tools/time-with-pet",         0.8),
 
     // ═══════════════════════════════════════════════════════════════════════
+    // TAX TOOLS  (priority 0.8, yearly)
+    // ═══════════════════════════════════════════════════════════════════════
+    p("/tools/tax-refund-estimator", 0.8, YEARLY),
+
+    // ═══════════════════════════════════════════════════════════════════════
     // IS IT WORTH IT? SERIES  (priority 0.8, monthly)
     // ═══════════════════════════════════════════════════════════════════════
     p("/tools/is-it-worth-it",                        0.8),
