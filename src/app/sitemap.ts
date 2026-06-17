@@ -237,10 +237,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     // WORLD LIVE COUNTERS  (priority 0.85, daily)
     // ═══════════════════════════════════════════════════════════════════════
-    p("/world-counters",               0.85, DAILY),
-    p("/world-counters/population",    0.85, DAILY),
-    p("/world-counters/us-debt",       0.85, DAILY),
-    p("/world-counters/births-today",  0.85, DAILY),
+    p("/world-counters",                          0.85, DAILY),
+    p("/world-counters/population",              0.85, DAILY),
+    p("/world-counters/us-debt",                 0.85, DAILY),
+    p("/world-counters/births-today",            0.85, DAILY),
+    p("/world-counters/co2-emissions",           0.85, DAILY),
+    p("/world-counters/money-printed-today",     0.85, DAILY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // CURIOSITY / OPPORTUNITY-COST CALCULATORS  (priority 0.85, monthly)
