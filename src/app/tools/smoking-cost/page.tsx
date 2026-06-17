@@ -4,6 +4,8 @@ import ShareButtons from "@/components/ShareButtons"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
+import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
 function fvAnnuity(monthly: number, annualRate: number, months: number): number {
@@ -129,6 +131,7 @@ export default function SmokingCostPage() {
             { label: "Tools", href: "/tools" },
             { label: "True Cost of Smoking" }
           ]} />
+          <AuthorByline variant="tool" />
           {DISCLAIMER}
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
@@ -204,6 +207,32 @@ export default function SmokingCostPage() {
               {DISCLAIMER}
             </div>
           )}
+          <FAQAccordion items={[
+            {
+              question: "How much does smoking cost per year?",
+              answer: "At the average US cigarette price of approximately $8.00 per pack, a one-pack-per-day smoker spends about $2,920 per year on cigarettes alone. Heavy smokers spending two packs per day spend nearly $6,000 annually. Over 20 years that is $58,000 to $120,000 in cigarette costs before accounting for health insurance premiums, medical costs, and lost investment opportunity."
+            },
+            {
+              question: "What would cigarette money be worth if invested?",
+              answer: "At $8 per pack per day invested at 7% annual return, a smoker who quit at 25 and invested the savings would have approximately $280,000 by age 65. Someone who smoked two packs per day would have forgone nearly $560,000 in potential investment value. The Dayblip calculator shows your exact number based on your smoking habit and timeline."
+            },
+            {
+              question: "How much does smoking cost over a lifetime?",
+              answer: "A one-pack-per-day smoker who starts at 18 and smokes until 65 spends approximately $137,000 on cigarettes in their lifetime at today&apos;s average prices. Adding health insurance premium differences, estimated medical costs, and lost investment returns, the true lifetime cost of smoking often exceeds $1 million for a lifetime smoker."
+            },
+            {
+              question: "Does smoking affect health insurance costs?",
+              answer: "Yes significantly. Under the Affordable Care Act insurers can charge smokers up to 50% more in premiums than non-smokers. For a typical individual health plan this can mean $1,500 to $3,000 more per year in premiums alone. Over a 20-year period this adds $30,000 to $60,000 to the true financial cost of smoking."
+            },
+            {
+              question: "How long does it take to save money after quitting smoking?",
+              answer: "The financial savings from quitting smoking begin immediately. A one-pack-per-day smoker saves approximately $8 per day, $56 per week, and $240 per month from day one. Within one year of quitting a former smoker has saved nearly $3,000 in cigarette costs alone — not counting health insurance savings and reduced medical expenses."
+            },
+            {
+              question: "What is the investment opportunity cost of smoking?",
+              answer: "Investment opportunity cost is the return you could have earned if cigarette money had been invested instead. At $8 per day invested at 7% annual return, the opportunity cost over 30 years is approximately $280,000. This is the money a smoker effectively gives up — not just the cigarettes but the compounding returns those dollars could have generated."
+            }
+          ]} />
           <RelatedTools tools={[
             { emoji: "💹", title: "Compound Interest", desc: "Watch your money grow over time", href: "/finance/compound-interest" },
             { emoji: "💰", title: "Savings Goal Calculator", desc: "How long to reach your goal?", href: "/finance/savings-goal" },
