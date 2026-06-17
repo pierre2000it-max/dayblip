@@ -356,7 +356,7 @@ export default function TimeWithParentsPage() {
           { emoji: '⏳', title: 'Time With Your Kids', desc: 'How long before they leave home', href: '/tools/time-with-kids' },
           { emoji: '🐾', title: 'Time With Your Pet', desc: 'Precious years remaining together', href: '/tools/time-with-pet' },
           { emoji: '📅', title: 'Life in Weeks', desc: 'Your entire life on one grid', href: '/tools/life-in-weeks' },
-          { emoji: '📆', title: 'Days Alive', desc: 'How many days have you lived', href: '/tools/days-alive' }
+          { emoji: '📆', title: 'Days Alive', desc: 'How many days have you lived', href: '/days-alive' }
         ]} />
 
         <LastUpdated date="June 2026" />
