@@ -1,0 +1,144 @@
+name: Sports Date Checker
+
+on:
+  schedule:
+    # Runs at 9:00 AM UTC on the 1st of every month
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+    # Also allows manual trigger
+
+jobs:
+  check-sports-dates:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check sports dates and create issue if needed
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs')
+            const path = require('path')
+
+            // Read sports-events.ts
+            const filePath = path.join(process.env.GITHUB_WORKSPACE, 'src/data/sports-events.ts')
+            const content = fs.readFileSync(filePath, 'utf8')
+
+            const unconfirmedEvents = []
+            const pastEvents = []
+            const today = new Date()
+            today.setHours(0, 0, 0, 0)
+
+            // Parse string values from a line, handling single and double quotes
+            function parseStr(line, key) {
+              const re = new RegExp(`${key}:\\s*['"]([^'"]+)['"]`)
+              const m = line.match(re)
+              return m ? m[1] : null
+            }
+
+            // Line-by-line parse — push on closing brace so confirmed (after notes) is captured
+            const lines = content.split('\n')
+            let currentEvent = {}
+
+            for (const line of lines) {
+              if (line.includes('slug:')) {
+                const v = parseStr(line, 'slug'); if (v) currentEvent.slug = v
+              }
+              if (line.includes('name:') && !line.includes('shortName')) {
+                const v = parseStr(line, 'name'); if (v) currentEvent.name = v
+              }
+              if (line.includes('date:')) {
+                const v = parseStr(line, 'date'); if (v) currentEvent.date = v
+              }
+              if (line.includes('notes:')) {
+                const v = parseStr(line, 'notes'); if (v) currentEvent.notes = v
+              }
+              if (line.includes('confirmed:')) {
+                const match = line.match(/confirmed:\s*(true|false)/)
+                if (match) currentEvent.confirmed = match[1] === 'true'
+              }
+              // Push on closing brace — all fields including confirmed are now set
+              if (/^\s*\},?\s*$/.test(line) && currentEvent.slug && currentEvent.date) {
+                const eventDate = new Date(currentEvent.date)
+                if (eventDate < today) {
+                  pastEvents.push({...currentEvent})
+                } else if (!currentEvent.confirmed) {
+                  unconfirmedEvents.push({...currentEvent})
+                }
+                currentEvent = {}
+              }
+            }
+
+            // Only create issue if there are unconfirmed or past events
+            if (unconfirmedEvents.length === 0 && pastEvents.length === 0) {
+              console.log('All sports dates confirmed and current. No issue needed.')
+              return
+            }
+
+            const monthYear = today.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+
+            let body = `# 🏆 Sports Date Review — ${monthYear}\n\n`
+            body += `Monthly automated check of \`src/data/sports-events.ts\`.\n\n`
+
+            if (pastEvents.length > 0) {
+              body += `## ⚠️ PAST EVENTS — Update Required\n\n`
+              body += `These events have passed. Update to next season's dates:\n\n`
+              for (const e of pastEvents) {
+                body += `### ${e.name}\n`
+                body += `- **Current date:** \`${e.date}\` (PAST)\n`
+                body += `- **Action needed:** Find and update to next season's confirmed date\n`
+                body += `- **File:** \`src/data/sports-events.ts\`\n\n`
+              }
+            }
+
+            if (unconfirmedEvents.length > 0) {
+              body += `## 📅 UNCONFIRMED DATES — Verify and Update\n\n`
+              body += `These events have approximate dates. Check if official dates have been announced:\n\n`
+              for (const e of unconfirmedEvents) {
+                body += `### ${e.name}\n`
+                body += `- **Current approximate date:** \`${e.date}\`\n`
+                body += `- **Notes:** ${e.notes || 'No notes'}\n`
+                body += `- **Action:** Verify official date and update \`confirmed: true\` when confirmed\n\n`
+
+                if (e.slug === 'world-series') {
+                  body += `- **Source:** https://www.mlb.com/world-series\n\n`
+                } else if (e.slug === 'march-madness') {
+                  body += `- **Source:** https://www.ncaa.com/march-madness\n\n`
+                } else if (e.slug === 'nba-finals') {
+                  body += `- **Source:** https://www.nba.com/playoffs\n\n`
+                } else if (e.slug === 'super-bowl') {
+                  body += `- **Source:** https://www.nfl.com/super-bowl\n\n`
+                }
+              }
+            }
+
+            body += `## 🔧 How to Update\n\n`
+            body += `1. Open \`src/data/sports-events.ts\`\n`
+            body += `2. Update the \`date\` field to the confirmed ISO date string\n`
+            body += `3. Change \`confirmed: false\` to \`confirmed: true\`\n`
+            body += `4. Update \`notes\` to reflect confirmed status\n`
+            body += `5. Run \`npm run build\` to verify no errors\n`
+            body += `6. Push to main — Vercel deploys automatically\n\n`
+            body += `---\n`
+            body += `*Created automatically by the Dayblip sports-date-checker GitHub Action.*\n`
+            body += `*Workflow: \`.github/workflows/sports-date-checker.yml\`*`
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🏆 Sports Date Review — ${monthYear}`,
+              labels: ['sports-dates', 'data'],
+              body
+            })
+
+            console.log('Sports date review issue created')
