@@ -154,6 +154,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/finance/overtime-calculator", 0.9),
     p("/finance/paycheck-calculator",    0.9),
     p("/finance/what-if-i-invested",     0.9),
+    p("/finance/first-paycheck",         0.9),
 
     // ═══════════════════════════════════════════════════════════════════════
     // EDUCATION CALCULATORS  (priority 0.9, monthly) — Phase 2
