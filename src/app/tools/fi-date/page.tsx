@@ -282,6 +282,145 @@ export default function FIDatePage() {
                   </table>
                 </div>
 
+                {/* ── NOW WHAT? Interpretation Layer ── */}
+                {(() => {
+                  const sr = result.savingsRate
+                  const mo = result.months
+                  const yr = Math.floor(mo / 12)
+                  const best = Math.min(result.accel200more, result.accel200less)
+                  const bestLabel = result.accel200more <= result.accel200less
+                    ? 'saving an extra $200/month'
+                    : 'cutting $200/month in expenses'
+
+                  let srTier: 'critical' | 'low' | 'good' | 'excellent'
+                  let srMessage: string
+                  if (sr < 10) {
+                    srTier = 'critical'
+                    srMessage = `Your savings rate is ${sr.toFixed(1)}% — below the 10% minimum most financial planners recommend. At this rate, reaching FI in ${yr} years will be extremely difficult without a significant income increase or expense reduction.`
+                  } else if (sr < 25) {
+                    srTier = 'low'
+                    srMessage = `Your savings rate is ${sr.toFixed(1)}%. The typical American saves 5–8%, so you are ahead — but FI-focused individuals typically target 25–50%. Closing that gap is the single highest-leverage move available to you.`
+                  } else if (sr < 50) {
+                    srTier = 'good'
+                    srMessage = `Your savings rate is ${sr.toFixed(1)}% — solidly above average and in the range most FIRE practitioners target. You are on a real path to financial independence.`
+                  } else {
+                    srTier = 'excellent'
+                    srMessage = `Your savings rate is ${sr.toFixed(1)}% — exceptional. You are saving at the level of aggressive FIRE practitioners. Maintaining this rate consistently is the primary challenge at your stage.`
+                  }
+
+                  let timelineMessage: string
+                  if (yr <= 5) {
+                    timelineMessage = `At ${yr} years to FI, you are in striking distance. Your primary job now is protecting your savings rate and avoiding lifestyle inflation as your income grows. A single large expense shock (job loss, medical, divorce) is the main risk at this stage — ensure your emergency fund covers 12+ months of expenses.`
+                  } else if (yr <= 15) {
+                    timelineMessage = `At ${yr} years to FI, you have a clear, achievable timeline. Compounding is beginning to do real work — your portfolio growth will increasingly outpace your contributions. The highest-ROI actions now are income growth (your savings rate compounds on a larger base) and keeping expenses flat as income rises.`
+                  } else if (yr <= 30) {
+                    timelineMessage = `At ${yr} years to FI, the timeline is long enough that small improvements compound dramatically. Shaving 5 years off a 25-year FI timeline is achievable with a 5–10% improvement in savings rate. Do not underestimate the impact of the accelerators above — small changes now produce large time savings later.`
+                  } else {
+                    timelineMessage = `At ${yr} years, FI under current inputs is a very long road. The most important variable to change is your savings rate — income growth combined with controlled expenses has the highest leverage here. Consider whether your income trajectory changes significantly in the next 5 years before treating this timeline as fixed.`
+                  }
+
+                  const leverMessage = best > 0
+                    ? `Your single most powerful lever right now: ${bestLabel} moves your FI date ${Math.floor(best / 12)} years and ${best % 12} months sooner. That is the highest-ROI financial change available to you today.`
+                    : `Run the accelerators above to find your highest-ROI next move.`
+
+                  let nextActions: string[]
+                  if (srTier === 'critical') {
+                    nextActions = [
+                      'Find one expense to cut immediately — target $200–500/month',
+                      'Calculate your true hourly wage to understand what your time costs',
+                      'Review every subscription and recurring charge this week',
+                      'Set an automatic transfer on payday before discretionary spending',
+                    ]
+                  } else if (srTier === 'low') {
+                    nextActions = [
+                      `Close the gap: increasing savings rate to 25% is your highest-leverage move`,
+                      'Negotiate salary or find income growth — same lifestyle at higher income = huge savings rate jump',
+                      'Automate savings increases of 1% per year to painlessly ratchet up your rate',
+                      'Use the True Hourly Wage calculator to reframe large purchases in time cost',
+                    ]
+                  } else if (srTier === 'good') {
+                    nextActions = [
+                      'Maintain rate through income growth — lifestyle inflation is the primary risk',
+                      'Optimize investment allocation — ensure tax-advantaged accounts (401k, IRA, HSA) are maxed first',
+                      'Build a 12-month expense emergency fund to protect against timeline disruption',
+                      'Model the impact of major life expenses (house, children, education) on this timeline',
+                    ]
+                  } else {
+                    nextActions = [
+                      'Model sequence-of-returns risk — high savings rate means large portfolio exposure near FI date',
+                      'Ensure 12–24 months of expenses in cash/short-term bonds as FI approaches',
+                      'Consider whether your withdrawal rate assumption accounts for healthcare costs pre-65',
+                      'Run your FI date with a 3.5% withdrawal rate as a stress test — 4% is optimistic over 40+ year horizons',
+                    ]
+                  }
+
+                  const borderColor = srTier === 'critical' ? '#e94560'
+                    : srTier === 'low' ? '#facc15'
+                    : srTier === 'good' ? '#4ade80'
+                    : '#a78bfa'
+
+                  const labelColor = borderColor
+
+                  return (
+                    <div style={{
+                      background: '#0d1b2a',
+                      borderRadius: '16px',
+                      padding: '28px 28px 24px',
+                      margin: '32px 0 24px',
+                      borderLeft: `4px solid ${borderColor}`,
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                        <span style={{ fontSize: '22px' }}>🧭</span>
+                        <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                          Now What? Your FI Action Plan
+                        </h3>
+                      </div>
+
+                      <div style={{ marginBottom: '20px' }}>
+                        <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                          Savings Rate Assessment
+                        </p>
+                        <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                          {srMessage}
+                        </p>
+                      </div>
+
+                      <div style={{ marginBottom: '20px' }}>
+                        <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                          What This Timeline Means
+                        </p>
+                        <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                          {timelineMessage}
+                        </p>
+                      </div>
+
+                      <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                        <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                          ⚡ {leverMessage}
+                        </p>
+                      </div>
+
+                      <div>
+                        <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                          Your Next 4 Actions
+                        </p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          {nextActions.map((action, i) => (
+                            <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                              <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>
+                                {i + 1}.
+                              </span>
+                              <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>
+                                {action}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })()}
+
                 <ShareButtons text={shareText} url={shareUrl} title="Financial Independence Date Calculator" />
                 {/* Embed this tool */}
                 <div style={{
