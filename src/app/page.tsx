@@ -10,7 +10,7 @@ const WEBSITE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Dayblip",
-  "description": "175+ free tools for life, money, history and more. No signup. No email. Ever.",
+  "description": "200+ free tools for life, money, history and more. No signup. No email. Ever.",
   "url": "https://www.dayblip.com",
   "potentialAction": {
     "@type": "SearchAction",
@@ -163,7 +163,7 @@ export default function HomePage() {
             heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Dayblip is a free tool site with 175+ interactive calculators covering personal finance, career decisions, life visualization and historical curiosity. No signup. No email. No paywall. Free forever.
+          Dayblip is a free tool site with 200+ interactive calculators covering personal finance, career decisions, life visualization and historical curiosity. No signup. No email. No paywall. Free forever.
         </p>
 
         {/* Live counters pill */}
