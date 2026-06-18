@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import AdUnit from "@/components/AdUnit";
+import FAQAccordion from "@/components/FAQAccordion";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -243,19 +244,7 @@ export default function DaysBetweenTool() {
       {/* ── FAQ ────────────────────────────────────────────────────── */}
       <section className="bg-[#16213e] px-6 py-14">
         <div className="mx-auto max-w-[700px]">
-          <h2 className="mb-8 text-2xl font-bold text-white">Frequently Asked Questions</h2>
-          <div className="space-y-3">
-            {FAQS.map(faq => (
-              <details key={faq.q}
-                className="group rounded-xl border border-[#1a1a2e] bg-[#1a1a2e] open:border-[#e94560]/40">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-white">
-                  <span>{faq.q}</span>
-                  <span className="shrink-0 text-xl text-[#e94560] transition-transform duration-200 group-open:rotate-45">+</span>
-                </summary>
-                <p className="px-5 pb-5 pt-1 leading-relaxed text-[#a8a8b3]">{faq.a}</p>
-              </details>
-            ))}
-          </div>
+          <FAQAccordion items={FAQS.map(faq => ({ question: faq.q, answer: faq.a }))} />
           {/* Ad — below FAQ */}
           <AdUnit slot="1234567890" format="leaderboard" />
         </div>
