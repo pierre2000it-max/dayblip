@@ -493,6 +493,164 @@ export default function TaxRefundEstimatorPage() {
               </div>
             )}
 
+            {/* ── NOW WHAT? Interpretation Layer ── */}
+            {(() => {
+              const isRefund = result.verdict === 'REFUND'
+              const effectiveRate = result.effectiveRate
+              const marginalRate = result.marginalRate
+              const amount = result.amount
+
+              const filingLabel = filingStatus === 'mfj' ? 'Married Filing Jointly'
+                : filingStatus === 'hoh' ? 'Head of Household'
+                : filingStatus === 'mfs' ? 'Married Filing Separately'
+                : 'Single'
+
+              let refundTier: 'small-refund' | 'large-refund' | 'small-owe' | 'large-owe' | 'break-even'
+              let verdictMessage: string
+
+              if (isRefund && amount < 500) {
+                refundTier = 'small-refund'
+                verdictMessage = `You are getting a $${amount.toLocaleString()} refund — a small, healthy amount. A small refund means your withholding was close to accurate. You gave the IRS a modest interest-free loan of approximately $${Math.round(amount / 12).toLocaleString()}/month. This is near-optimal — large refunds sound good but mean you overpaid all year.`
+              } else if (isRefund && amount >= 500) {
+                refundTier = 'large-refund'
+                verdictMessage = `You are getting a $${amount.toLocaleString()} refund. This feels like a windfall but it means you overpaid the IRS by $${Math.round(amount / 12).toLocaleString()}/month throughout the year. That money could have been in your paycheck — invested at 7% for a year $${amount.toLocaleString()} would have grown to $${Math.round(amount * 1.07).toLocaleString()}. Consider updating your W-4 to keep more each paycheck.`
+              } else if (!isRefund && amount < 500) {
+                refundTier = 'small-owe'
+                verdictMessage = `You owe $${amount.toLocaleString()} — a small, manageable amount. This means your withholding was slightly below your actual liability. A small amount owed is not a penalty issue if you withheld at least 90% of this year's tax or 100% of last year's tax (110% if income exceeds $150,000). Pay by April 15 to avoid interest charges.`
+              } else if (!isRefund && amount >= 500) {
+                refundTier = 'large-owe'
+                verdictMessage = `You owe $${amount.toLocaleString()} — a significant underpayment. This likely means your withholding elections on your W-4 are set too low, you had significant income without withholding (freelance, investments, bonuses), or a life change reduced your deductions. Pay by April 15 to stop interest from accruing at the current IRS rate of approximately 8% annually.`
+              } else {
+                refundTier = 'break-even'
+                verdictMessage = `You are near breakeven — the ideal outcome. Your withholding closely matched your actual tax liability. You neither gave the IRS an interest-free loan nor underpaid. This is the target that tax professionals aim for.`
+              }
+
+              let rateMessage: string
+              if (effectiveRate < 8) {
+                rateMessage = `Your ${effectiveRate}% effective federal rate is very low — you are keeping a high percentage of your income. At this rate the biggest financial lever is not tax reduction but savings rate and investment consistency.`
+              } else if (effectiveRate < 15) {
+                rateMessage = `Your ${effectiveRate}% effective federal rate is moderate. Pre-tax 401k contributions and HSA deposits are your most powerful tools to reduce this further — each dollar contributed reduces your taxable income dollar-for-dollar.`
+              } else if (effectiveRate < 22) {
+                rateMessage = `Your ${effectiveRate}% effective federal rate is in the upper-middle range. At this level maxing tax-advantaged accounts (401k $23,500, HSA $4,300 single in 2026) has meaningful impact on your effective rate and long-term wealth accumulation.`
+              } else {
+                rateMessage = `Your ${effectiveRate}% effective federal rate is high. At this level tax optimization is a high-ROI activity. Maxing all pre-tax accounts, reviewing itemized vs standard deduction, and timing income and deductions strategically can each save thousands annually.`
+              }
+
+              let w4Message: string
+              if (isRefund && amount >= 1000) {
+                const monthlyAdjust = Math.round(amount / 12)
+                w4Message = `To avoid overpaying next year: ask your HR department for a new W-4 form. In Step 4(c) enter an additional $${monthlyAdjust}/month as a deduction — or use the IRS Tax Withholding Estimator at irs.gov/W4app for a precise calculation. This keeps $${monthlyAdjust} more in each paycheck for you to invest.`
+              } else if (!isRefund && amount >= 500) {
+                const monthlyAdjust = Math.round(amount / 12)
+                w4Message = `To fix your withholding for next year: ask HR for a new W-4 form. In Step 4(c) enter an additional $${monthlyAdjust}/month in extra withholding. This spreads the payment across paychecks so you do not face a lump sum bill next April. Alternatively use the IRS Tax Withholding Estimator at irs.gov/W4app.`
+              } else {
+                w4Message = `Your withholding is well-calibrated. No W-4 adjustment needed unless your income, filing status, or deductions change significantly this year. Triggering events that warrant a W-4 review: marriage, divorce, new child, second job, large bonus, or starting freelance work.`
+              }
+
+              let nextActions: string[]
+              if (refundTier === 'large-refund') {
+                nextActions = [
+                  `Update your W-4 — add a deduction of approximately $${Math.round(amount / 12).toLocaleString()}/month in Step 4(c) to recapture that money in each paycheck`,
+                  `Invest your refund immediately — do not let it sit in a checking account. Put it in your Roth IRA ($7,000 limit), emergency fund, or brokerage account`,
+                  `Check if you missed any deductions — charitable contributions, student loan interest, educator expenses, or HSA contributions may reduce next year's bill`,
+                  `Model the compounding impact — $${amount.toLocaleString()} invested at 7% for 10 years grows to $${Math.round(amount * Math.pow(1.07, 10)).toLocaleString()}`
+                ]
+              } else if (refundTier === 'small-refund') {
+                nextActions = [
+                  `Your withholding is close to optimal — no W-4 change needed unless income or filing status changes`,
+                  `Invest your refund rather than spending it — even a small amount compounds meaningfully over time`,
+                  `Review your tax-advantaged account contributions for next year — 401k $23,500 limit, IRA $7,000 limit in 2026`,
+                  `Check if you qualify for any credits you may have missed — Child Tax Credit, Earned Income Credit, education credits`
+                ]
+              } else if (refundTier === 'large-owe') {
+                nextActions = [
+                  `Pay your balance by April 15 to stop interest charges — IRS charges approximately 8% annually on unpaid balances`,
+                  `Update your W-4 immediately — add $${Math.round(amount / 12).toLocaleString()}/month in extra withholding in Step 4(c) to prevent a repeat`,
+                  `If you had freelance or investment income without withholding consider making quarterly estimated tax payments next year (due April, June, September, January)`,
+                  `Verify you meet the safe harbor rule — you avoid underpayment penalty if you withheld at least 90% of this year's tax or 100% of last year's total tax`
+                ]
+              } else if (refundTier === 'small-owe') {
+                nextActions = [
+                  `Pay by April 15 — small amounts owed are common and not a problem if paid on time`,
+                  `Verify safe harbor: you avoid underpayment penalty if you withheld at least 90% of this year's tax or 100% of last year's tax`,
+                  `Consider adding $${Math.round(amount / 12).toLocaleString()}/month extra withholding on your W-4 if you prefer to break even rather than owe`,
+                  `Review whether any deductions were missed — mortgage interest, charitable contributions, or state taxes may reduce next year's liability`
+                ]
+              } else {
+                nextActions = [
+                  `Maintain your current withholding elections — your W-4 is well-calibrated`,
+                  `Review annually — update W-4 if income, filing status, or major deductions change`,
+                  `Focus on tax-advantaged investing for next year: 401k $23,500, HSA $4,300 single, IRA $7,000`,
+                  `Consider a tax professional review if your situation becomes more complex (freelance, investments, rental income)`
+                ]
+              }
+
+              const borderColor = isRefund
+                ? (amount >= 500 ? '#facc15' : '#4ade80')
+                : (amount >= 500 ? '#e94560' : '#60a5fa')
+
+              const labelColor = borderColor
+
+              return (
+                <div style={{
+                  background: '#0d1b2a',
+                  borderRadius: '16px',
+                  padding: '28px 28px 24px',
+                  margin: '32px 0 24px',
+                  borderLeft: `4px solid ${borderColor}`
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                    <span style={{ fontSize: '22px' }}>🧭</span>
+                    <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                      Now What? Your Tax Action Plan
+                    </h3>
+                  </div>
+
+                  <div style={{ marginBottom: '20px' }}>
+                    <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                      {isRefund ? `Refund — $${amount.toLocaleString()} Back` : `Amount Owed — $${amount.toLocaleString()}`}
+                    </p>
+                    <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                      {verdictMessage}
+                    </p>
+                  </div>
+
+                  <div style={{ marginBottom: '20px' }}>
+                    <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                      Tax Rate — {effectiveRate}% Effective / {marginalRate}% Marginal
+                    </p>
+                    <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                      {rateMessage}
+                    </p>
+                  </div>
+
+                  <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                    <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                      📋 W-4 Guidance ({filingLabel}): {w4Message}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                      Your Next 4 Actions
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {nextActions.map((action, i) => (
+                        <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                          <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>
+                            {i + 1}.
+                          </span>
+                          <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>
+                            {action}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )
+            })()}
+
             <ShareButtons
               text={`I estimated my 2026 tax ${result.verdict === 'REFUND' ? `refund: $${result.amount.toLocaleString()} back` : `bill: $${result.amount.toLocaleString()} owed`}. Effective rate: ${result.effectiveRate}%. Calculate yours at Dayblip 💰`}
               url="https://www.dayblip.com/tools/tax-refund-estimator"
