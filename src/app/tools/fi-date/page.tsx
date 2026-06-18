@@ -6,6 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 const DISCLAIMER = (
   <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
@@ -453,26 +454,32 @@ export default function FIDatePage() {
               </div>
             )
           })()}
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "What is financial independence?", a: "Financial independence means having enough invested assets that passive returns can cover your living expenses indefinitely — you no longer need to work for money. It is calculated using the 4 percent rule: annual expenses divided by 0.04 gives your FI number." },
-              { q: "What is a FI number?", a: "Your FI number is the total portfolio value needed to retire. If you spend $50,000 per year your FI number is $50,000 divided by 0.04 which equals $1,250,000. At this level a 4 percent annual withdrawal historically sustains a portfolio indefinitely." },
-              { q: "How long does it take to reach financial independence?", a: "Time to FI depends almost entirely on savings rate. At a 10 percent savings rate FI takes roughly 40 years. At 25 percent about 32 years. At 50 percent about 17 years. At 70 percent about 8.5 years. Increasing savings rate is more powerful than increasing income." },
-              { q: "What investment return should I assume?", a: "The US stock market has historically returned approximately 10 percent annually before inflation or about 7 percent after inflation. Most FI calculators use 7 percent real return as a conservative baseline. Your actual returns will vary based on asset allocation." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            {
+              question: "What is financial independence?",
+              answer: "Financial independence means having enough invested assets that passive returns can cover your living expenses indefinitely — you no longer need to work for money. It is calculated using the 4 percent rule: annual expenses divided by 0.04 gives your FI number."
+            },
+            {
+              question: "What is a FI number?",
+              answer: "Your FI number is the total portfolio value needed to retire. If you spend $50,000 per year your FI number is $50,000 divided by 0.04 which equals $1,250,000. At this level a 4 percent annual withdrawal historically sustains a portfolio indefinitely."
+            },
+            {
+              question: "How long does it take to reach financial independence?",
+              answer: "Time to FI depends almost entirely on savings rate. At a 10 percent savings rate FI takes roughly 40 years. At 25 percent about 32 years. At 50 percent about 17 years. At 70 percent about 8.5 years. Increasing savings rate is more powerful than increasing income."
+            },
+            {
+              question: "What investment return should I assume?",
+              answer: "The US stock market has historically returned approximately 10 percent annually before inflation or about 7 percent after inflation. Most FI calculators use 7 percent real return as a conservative baseline. Your actual returns will vary based on asset allocation."
+            },
+            {
+              question: "What is the 4 percent rule?",
+              answer: "The 4 percent rule comes from the 1994 Trinity Study which found that a portfolio of 50-75 percent stocks could sustain 30 years of withdrawals at 4 percent annually with high historical success rates. For longer retirements of 40-50 years many planners use 3 to 3.5 percent as a more conservative rate."
+            },
+            {
+              question: "What is a good savings rate for financial independence?",
+              answer: "Most FI practitioners target a savings rate of 25-50 percent of gross income. The average American saves 5-8 percent. At 25 percent savings rate FI takes approximately 32 years from zero. At 50 percent approximately 17 years. Every percentage point increase in savings rate meaningfully shortens the timeline."
+            },
+          ]} />
         </div>
       </section>
     </div>
