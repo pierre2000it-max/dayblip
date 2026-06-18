@@ -429,6 +429,180 @@ export default function WhereYouRankClient() {
             </div>
           </div>
 
+          {/* ── NOW WHAT? Interpretation Layer ── */}
+          {(() => {
+            const ip = result.incomePercentile
+            const wp = result.netWorthPercentile
+            const hasNetWorth = result.netWorth !== 0
+
+            // Income tier
+            let incomeTier: 'bottom' | 'middle' | 'upper-middle' | 'top10' | 'top1'
+            let incomeMessage: string
+
+            if (ip < 50) {
+              incomeTier = 'bottom'
+              incomeMessage = `Your income is in the bottom half of American earners. The median US household income is approximately $74,000 — closing that gap is the highest-leverage financial move available to you. Income growth compounds: every dollar of additional income invested at your current savings rate accelerates your entire financial timeline.`
+            } else if (ip < 75) {
+              incomeTier = 'middle'
+              incomeMessage = `Your income is in the ${ordinal(ip)} percentile — above median but below the top quarter. At this income level the biggest financial lever is usually savings rate, not income itself. Most people in this range can reach financial independence in 20-30 years by maintaining a 25-35% savings rate.`
+            } else if (ip < 90) {
+              incomeTier = 'upper-middle'
+              incomeMessage = `Your income is in the ${ordinal(ip)} percentile — top quarter of American earners. At this level lifestyle inflation is the primary risk. People who reach the 75th-90th percentile and maintain their pre-raise lifestyle accumulate wealth at dramatically higher rates than those who expand spending to match income.`
+            } else if (ip < 99) {
+              incomeTier = 'top10'
+              incomeMessage = `Your income is in the top 10% of American earners. At this level tax optimization becomes one of the highest-ROI financial activities — maximizing 401k ($23,500 in 2026), HSA ($4,300 single), and backdoor Roth IRA contributions can reduce your effective tax rate meaningfully. The gap between gross and net income is large at your level.`
+            } else {
+              incomeTier = 'top1'
+              incomeMessage = `Your income is in the top 1% of American earners. At this level the primary financial risks are lifestyle creep, tax drag, and concentration risk (over-reliance on a single income source). Diversification of income streams and aggressive tax-advantaged investing are the highest priorities.`
+            }
+
+            // Net worth assessment
+            let wealthMessage: string
+            if (!hasNetWorth) {
+              wealthMessage = ''
+            } else if (wp < 25) {
+              wealthMessage = `Your net worth is in the bottom quarter — this is where most people in their 20s and early 30s start. The priority at this stage is eliminating high-interest debt (anything above 6-7% APR), building a 3-6 month emergency fund, and starting retirement contributions to capture any employer match.`
+            } else if (wp < 50) {
+              wealthMessage = `Your net worth is in the ${ordinal(wp)} percentile — below median but building. The US median net worth is approximately $97,000. Closing that gap requires consistent investing over time — the average American who reaches median net worth does so primarily through home equity and retirement accounts, not savings accounts.`
+            } else if (wp < 75) {
+              wealthMessage = `Your net worth is in the ${ordinal(wp)} percentile — above median. At this stage the power of compounding is beginning to work in your favor. Protecting your net worth from lifestyle inflation and maintaining a consistent investment rate matters more than optimizing individual investments.`
+            } else if (wp < 90) {
+              wealthMessage = `Your net worth is in the ${ordinal(wp)} percentile — top quarter of American households. At this level asset allocation and tax efficiency become more important than savings rate alone. Ensure you are not over-concentrated in a single asset class (common at this level: too much in employer stock or real estate).`
+            } else {
+              wealthMessage = `Your net worth is in the top 10% of American households. At this level estate planning, asset protection, and tax-efficient withdrawal strategies matter significantly. The biggest risk is not losing wealth through poor investment decisions but through taxes, liability, and failure to protect assets across generations.`
+            }
+
+            // Income vs wealth gap analysis
+            let gapMessage: string
+            if (!hasNetWorth) {
+              gapMessage = ''
+            } else {
+              const gap = ip - wp
+              if (gap > 20) {
+                gapMessage = `Your income percentile (${ordinal(ip)}) is significantly higher than your wealth percentile (${ordinal(wp)}). This gap — common among high earners — typically means high spending relative to income. Closing it requires converting income into assets consistently. Every $1,000/month invested at 7% for 20 years becomes approximately $521,000.`
+              } else if (gap < -20) {
+                gapMessage = `Your wealth percentile (${ordinal(wp)}) is significantly higher than your income percentile (${ordinal(ip)}). This is a strong position — your assets are working hard relative to your income. This gap often reflects inheritance, a previous high-income period, real estate appreciation, or disciplined saving at a lower income level.`
+              } else {
+                gapMessage = `Your income and wealth percentiles are well-aligned — your assets reflect your earnings history. This balance suggests consistent saving behavior relative to your income level.`
+              }
+            }
+
+            // Next actions by income tier
+            let nextActions: string[]
+            if (incomeTier === 'bottom') {
+              nextActions = [
+                'Focus on income growth first — skills, certifications, or job change with 20-30% raise have more impact than any expense cut at this level',
+                'Eliminate all high-interest debt (credit cards, personal loans above 7%) before investing',
+                'Contribute enough to your 401k to capture the full employer match — this is a 50-100% instant return',
+                'Build a $1,000 starter emergency fund before anything else to avoid debt spiral from unexpected expenses',
+              ]
+            } else if (incomeTier === 'middle') {
+              nextActions = [
+                'Calculate your savings rate — target 25% or higher to reach FI within 30 years',
+                'Max your HSA if you have a high-deductible health plan — triple tax advantage, best account available',
+                'Automate a savings rate increase of 1% every 6 months — painless ratchet toward FI',
+                'Use the Dayblip FI Date calculator to find your exact financial independence timeline',
+              ]
+            } else if (incomeTier === 'upper-middle') {
+              nextActions = [
+                'Max 401k ($23,500 in 2026) and HSA ($4,300 single) before taxable investing — significant tax drag reduction',
+                'Calculate your true savings rate — income at your level often creates unconscious lifestyle inflation',
+                'Model the FI date impact of keeping expenses flat for the next 3 years while income grows',
+                'Consider backdoor Roth IRA if income exceeds direct contribution limits ($161,000 single in 2026)',
+              ]
+            } else if (incomeTier === 'top10') {
+              nextActions = [
+                'Max all tax-advantaged accounts first — 401k $23,500, HSA $4,300, backdoor Roth $7,000',
+                'Review your effective tax rate — top 10% earners frequently overpay through poor timing of deductions',
+                'Ensure investment portfolio is not concentrated — employer stock, single sector, or single geography',
+                'Model sequence-of-returns risk if FI is within 10 years — bond tent or cash buffer strategy',
+              ]
+            } else {
+              nextActions = [
+                'Consult a fee-only fiduciary CFP for tax optimization at your income level — worth thousands annually',
+                'Review income source diversification — high single-source income is concentration risk',
+                'Ensure estate documents are current — will, trusts, beneficiary designations, power of attorney',
+                'Model tax-efficient withdrawal sequence for retirement — Roth conversion ladder if applicable',
+              ]
+            }
+
+            const borderColor = incomeTier === 'bottom' ? '#e94560'
+              : incomeTier === 'middle' ? '#facc15'
+              : incomeTier === 'upper-middle' ? '#4ade80'
+              : incomeTier === 'top10' ? '#60a5fa'
+              : '#a78bfa'
+
+            const labelColor = borderColor
+
+            return (
+              <div style={{
+                background: '#0d1b2a',
+                borderRadius: '16px',
+                padding: '28px 28px 24px',
+                margin: '32px 0 24px',
+                borderLeft: `4px solid ${borderColor}`,
+              }}>
+                {/* Header */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                  <span style={{ fontSize: '22px' }}>🧭</span>
+                  <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                    Now What? Your Wealth Action Plan
+                  </h3>
+                </div>
+
+                {/* Income assessment */}
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Income Assessment — {ordinal(ip)} Percentile
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {incomeMessage}
+                  </p>
+                </div>
+
+                {/* Net worth assessment — only if entered */}
+                {hasNetWorth && wealthMessage && (
+                  <div style={{ marginBottom: '20px' }}>
+                    <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                      Wealth Assessment — {ordinal(wp)} Percentile
+                    </p>
+                    <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                      {wealthMessage}
+                    </p>
+                  </div>
+                )}
+
+                {/* Income vs wealth gap — only if net worth entered */}
+                {hasNetWorth && gapMessage && (
+                  <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                    <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                      ⚡ {gapMessage}
+                    </p>
+                  </div>
+                )}
+
+                {/* Next actions */}
+                <div>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                    Your Next 4 Actions
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {nextActions.map((action, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                        <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>
+                          {i + 1}.
+                        </span>
+                        <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>
+                          {action}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
+
           {/* 6. ShareButtons */}
           <ShareButtons
             text={shareText}
