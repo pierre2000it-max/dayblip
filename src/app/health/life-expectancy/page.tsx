@@ -4,6 +4,7 @@ import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 interface Factor { key: string; label: string; options: { label: string; value: number }[] }
 
@@ -154,26 +155,12 @@ export default function LifeExpectancyPage() {
             { emoji: "⚖️", title: "BMI Calculator", desc: "Calculate your body mass index", href: "/health/bmi-calculator" },
             { emoji: "🚬", title: "Habit Cost Calculator", desc: "Financial cost of daily habits", href: "/health/habit-cost" },
           ]} />
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "What is the average US life expectancy?", a: "According to CDC data, US life expectancy at birth is approximately 77 years as of the most recent data. Women live an average of 80 years and men approximately 74 years." },
-              { q: "What factors affect life expectancy most?", a: "The strongest predictors are smoking status, body weight, physical activity level, diet quality, alcohol consumption, healthcare access, education level, and socioeconomic status. Genetics accounts for roughly 20 to 30 percent of longevity variation." },
-              { q: "How is statistical life expectancy calculated?", a: "Life expectancy is calculated from actuarial life tables — statistical models based on age-specific mortality rates across large populations. The CDC and Social Security Administration publish these tables annually." },
-              { q: "Does this tool predict when I will die?", a: "No. This tool provides a statistical estimate based on population averages and known risk factors. Individual outcomes vary enormously. The number is useful for financial planning — estimating retirement length, Social Security timing, and long-term care needs." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "What is the average US life expectancy?", a: "According to CDC data, US life expectancy at birth is approximately 77 years as of the most recent data. Women live an average of 80 years and men approximately 74 years." },
+            { q: "What factors affect life expectancy most?", a: "The strongest predictors are smoking status, body weight, physical activity level, diet quality, alcohol consumption, healthcare access, education level, and socioeconomic status. Genetics accounts for roughly 20 to 30 percent of longevity variation." },
+            { q: "How is statistical life expectancy calculated?", a: "Life expectancy is calculated from actuarial life tables — statistical models based on age-specific mortality rates across large populations. The CDC and Social Security Administration publish these tables annually." },
+            { q: "Does this tool predict when I will die?", a: "No. This tool provides a statistical estimate based on population averages and known risk factors. Individual outcomes vary enormously. The number is useful for financial planning — estimating retirement length, Social Security timing, and long-term care needs." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>

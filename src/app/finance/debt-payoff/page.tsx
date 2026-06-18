@@ -8,6 +8,7 @@ import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 interface Debt { id: number; name: string; balance: string; rate: string; minPayment: string }
 
@@ -239,26 +240,12 @@ export default function DebtPayoffPage() {
             { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Results are estimates.</p>
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "What is the difference between avalanche and snowball debt payoff?", a: "Avalanche pays the highest interest rate debt first minimizing total interest paid. Snowball pays the smallest balance first creating psychological wins. Avalanche saves more money mathematically. Snowball works better for people who need motivation from early progress." },
-              { q: "How long does it take to pay off credit card debt?", a: "It depends on balance, interest rate, and monthly payment. A $5,000 balance at 20 percent APR paying only the minimum takes over 30 years and costs more than $7,000 in interest. Paying $200 per month clears it in about 32 months." },
-              { q: "Should I pay off debt or invest?", a: "If your debt interest rate exceeds expected investment returns, pay off debt first. High-interest credit card debt at 20 percent or more should almost always be paid before investing. Low-interest debt like mortgages at 3 to 5 percent may be worth carrying while investing, especially with employer match available." },
-              { q: "What is a debt-to-income ratio?", a: "Debt-to-income ratio is your total monthly debt payments divided by gross monthly income. Lenders typically want DTI below 43 percent for mortgage qualification. Below 36 percent is considered healthy." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "What is the difference between avalanche and snowball debt payoff?", a: "Avalanche pays the highest interest rate debt first minimizing total interest paid. Snowball pays the smallest balance first creating psychological wins. Avalanche saves more money mathematically. Snowball works better for people who need motivation from early progress." },
+            { q: "How long does it take to pay off credit card debt?", a: "It depends on balance, interest rate, and monthly payment. A $5,000 balance at 20 percent APR paying only the minimum takes over 30 years and costs more than $7,000 in interest. Paying $200 per month clears it in about 32 months." },
+            { q: "Should I pay off debt or invest?", a: "If your debt interest rate exceeds expected investment returns, pay off debt first. High-interest credit card debt at 20 percent or more should almost always be paid before investing. Low-interest debt like mortgages at 3 to 5 percent may be worth carrying while investing, especially with employer match available." },
+            { q: "What is a debt-to-income ratio?", a: "Debt-to-income ratio is your total monthly debt payments divided by gross monthly income. Lenders typically want DTI below 43 percent for mortgage qualification. Below 36 percent is considered healthy." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>

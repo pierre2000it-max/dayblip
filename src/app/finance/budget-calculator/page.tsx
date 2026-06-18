@@ -6,6 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -214,26 +215,12 @@ export default function BudgetCalculatorPage() {
             { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">The 50/30/20 rule is a guideline, not a rigid rule. Adjust based on your income, debt, and goals. For educational purposes only.</p>
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "What is the 50/30/20 budgeting rule?", a: "The 50/30/20 rule allocates 50 percent of after-tax income to needs such as rent, food, utilities, and minimum debt payments; 30 percent to wants like dining out and entertainment; and 20 percent to savings and extra debt payments. It is a starting guideline not a rigid rule." },
-              { q: "What counts as a need vs a want?", a: "Needs are expenses required for basic living — housing, utilities, groceries, transportation to work, minimum debt payments, and essential insurance. Wants are discretionary — restaurants, streaming services, clothing beyond basics, hobbies, and vacations." },
-              { q: "How do I handle irregular income in a budget?", a: "Budget based on your lowest typical monthly income. In months where you earn more, direct the surplus to savings or debt. This prevents overspending in good months and shortfalls in lean ones." },
-              { q: "Should I budget gross or net income?", a: "Budget using net take-home income — the amount that actually hits your bank account after taxes and deductions. Gross income includes money you never see so budgeting from it leads to overspending." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "What is the 50/30/20 budgeting rule?", a: "The 50/30/20 rule allocates 50 percent of after-tax income to needs such as rent, food, utilities, and minimum debt payments; 30 percent to wants like dining out and entertainment; and 20 percent to savings and extra debt payments. It is a starting guideline not a rigid rule." },
+            { q: "What counts as a need vs a want?", a: "Needs are expenses required for basic living — housing, utilities, groceries, transportation to work, minimum debt payments, and essential insurance. Wants are discretionary — restaurants, streaming services, clothing beyond basics, hobbies, and vacations." },
+            { q: "How do I handle irregular income in a budget?", a: "Budget based on your lowest typical monthly income. In months where you earn more, direct the surplus to savings or debt. This prevents overspending in good months and shortfalls in lean ones." },
+            { q: "Should I budget gross or net income?", a: "Budget using net take-home income — the amount that actually hits your bank account after taxes and deductions. Gross income includes money you never see so budgeting from it leads to overspending." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>

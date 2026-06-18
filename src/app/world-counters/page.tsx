@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 import Link from "next/link"
 
 // ── Annual baselines ──────────────────────────────────────────────────────────
@@ -361,24 +362,14 @@ export default function WorldCountersPage() {
           </div>
 
           {/* ── FAQ ────────────────────────────────────────────────────────── */}
-          <div>
-            <h2 className="text-2xl font-bold text-white mb-6">❓ Frequently Asked Questions</h2>
-            <div className="space-y-5">
-              {[
-                { q: "How many people are in the world right now?", a: "The world population is approximately 8.3 billion people as of 2026. It grows by roughly 70 million people per year, or about 0.85% annually, based on United Nations estimates." },
-                { q: "How many babies are born every second?", a: "About 4.3 babies are born every second worldwide — roughly 259 births per minute, 15,500 per hour, and 372,000 per day, based on UN World Population Prospects data." },
-                { q: "How many people die every day?", a: "Approximately 170,000 people die every day worldwide, which is about 2 deaths per second. The world still grows because births outpace deaths by roughly 2 to 1." },
-                { q: "What is the US national debt right now?", a: "The US national debt updates daily and is displayed live on this page using data from the US Treasury Fiscal Data service. It increases by tens of thousands of dollars every second." },
-                { q: "How fast is the world population growing?", a: "The world population grows by about 70 million people per year as of 2026. The growth rate is around 0.85% annually and declining — projected to reach zero around 2084 according to UN projections." },
-                { q: "Where does the data for these counters come from?", a: "The counters use data from the United Nations Population Division, the World Health Organization, the US Census Bureau, and the US Treasury. Figures are statistically modeled estimates updated every second from the latest annual data." },
-              ].map((item, i) => (
-                <div key={i} className="rounded-xl border border-[#0f3460] bg-[#0d1b2a] p-5">
-                  <h3 className="text-white font-semibold mb-2">{item.q}</h3>
-                  <p className="text-[#a8a8b3] text-sm leading-relaxed">{item.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <FAQAccordion items={[
+            { q: "How many people are in the world right now?", a: "The world population is approximately 8.3 billion people as of 2026. It grows by roughly 70 million people per year, or about 0.85% annually, based on United Nations estimates." },
+            { q: "How many babies are born every second?", a: "About 4.3 babies are born every second worldwide — roughly 259 births per minute, 15,500 per hour, and 372,000 per day, based on UN World Population Prospects data." },
+            { q: "How many people die every day?", a: "Approximately 170,000 people die every day worldwide, which is about 2 deaths per second. The world still grows because births outpace deaths by roughly 2 to 1." },
+            { q: "What is the US national debt right now?", a: "The US national debt updates daily and is displayed live on this page using data from the US Treasury Fiscal Data service. It increases by tens of thousands of dollars every second." },
+            { q: "How fast is the world population growing?", a: "The world population grows by about 70 million people per year as of 2026. The growth rate is around 0.85% annually and declining — projected to reach zero around 2084 according to UN projections." },
+            { q: "Where does the data for these counters come from?", a: "The counters use data from the United Nations Population Division, the World Health Organization, the US Census Bureau, and the US Treasury. Figures are statistically modeled estimates updated every second from the latest annual data." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
 
           {/* ── SOURCES ────────────────────────────────────────────────────── */}
           <div className="rounded-xl border border-[#0f3460] bg-[#0d1b2a] overflow-hidden">

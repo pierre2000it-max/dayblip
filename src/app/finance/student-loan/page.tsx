@@ -6,6 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function addMonths(months: number) {
@@ -168,26 +169,12 @@ export default function StudentLoanPage() {
             { emoji: "💰", title: "Take Home Pay Calculator", desc: "Your actual paycheck after taxes", href: "/finance/take-home-pay" },
             { emoji: "📝", title: "Grade Calculator", desc: "What grade do you need on your final?", href: "/education/grade-calculator" },
           ]} />
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "What repayment plan should I choose?", a: "Standard 10-year repayment minimizes total interest paid. Income-driven plans cap payments at 5 to 20 percent of discretionary income and offer forgiveness after 10 to 25 years. If pursuing Public Service Loan Forgiveness an income-driven plan is required." },
-              { q: "What is the difference between subsidized and unsubsidized loans?", a: "Subsidized loans do not accrue interest while you are enrolled at least half-time, during the grace period, or during deferment. Unsubsidized loans accrue interest from disbursement — unpaid interest capitalizes and increases your principal balance." },
-              { q: "Should I pay off student loans early?", a: "If your loan rate is above 6 to 7 percent, accelerating payoff often beats investing in taxable accounts. If your rate is below 5 percent, investing may produce better long-term returns. Federal loans below 4 percent are generally worth carrying while investing in retirement accounts first." },
-              { q: "What is student loan capitalization?", a: "Capitalization is when unpaid interest is added to your loan principal. This increases the balance on which future interest is calculated. It commonly occurs after the grace period ends, when leaving deferment or forbearance, and when switching repayment plans." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "What repayment plan should I choose?", a: "Standard 10-year repayment minimizes total interest paid. Income-driven plans cap payments at 5 to 20 percent of discretionary income and offer forgiveness after 10 to 25 years. If pursuing Public Service Loan Forgiveness an income-driven plan is required." },
+            { q: "What is the difference between subsidized and unsubsidized loans?", a: "Subsidized loans do not accrue interest while you are enrolled at least half-time, during the grace period, or during deferment. Unsubsidized loans accrue interest from disbursement — unpaid interest capitalizes and increases your principal balance." },
+            { q: "Should I pay off student loans early?", a: "If your loan rate is above 6 to 7 percent, accelerating payoff often beats investing in taxable accounts. If your rate is below 5 percent, investing may produce better long-term returns. Federal loans below 4 percent are generally worth carrying while investing in retirement accounts first." },
+            { q: "What is student loan capitalization?", a: "Capitalization is when unpaid interest is added to your loan principal. This increases the balance on which future interest is calculated. It commonly occurs after the grace period ends, when leaving deferment or forbearance, and when switching repayment plans." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>

@@ -6,6 +6,7 @@ import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmt2(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }) }
@@ -224,26 +225,12 @@ export default function TrueHourlyWagePage() {
             { emoji: "💼", title: "Side Hustle Potential", desc: "What could you earn with your skills?", href: "/tools/side-hustle" },
             { emoji: "🤖", title: "Will AI Replace My Job?", desc: "Get your personalized AI risk score", href: "/tools/ai-job-score" },
           ]} />
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "What is a true hourly wage?", a: "True hourly wage is your actual compensation per hour of time your job consumes — including commute, prep time, and unpaid overtime — minus all work-related expenses like commuting costs, clothing, and bought lunches. It is almost always lower than your stated hourly rate." },
-              { q: "How do you calculate true hourly wage?", a: "Start with take-home pay after tax. Subtract all annual work-required costs including commuting, clothing, and food. Add up all hours the job consumes including commute and overtime. Divide adjusted income by total hours." },
-              { q: "Why does true hourly wage matter?", a: "True hourly wage changes how you evaluate job offers, raises, remote work, and side income. A $90,000 job with a long commute may pay less per true hour than an $80,000 job close to home. Remote work saves both money and time often equivalent to a 10 to 15 percent salary increase." },
-              { q: "What work expenses should I include?", a: "Include commuting costs such as gas, transit, and parking; work clothing and dry cleaning; bought lunches and convenience dinners on late nights; professional development not covered by your employer; and any tools or software you pay for personally." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "What is a true hourly wage?", a: "True hourly wage is your actual compensation per hour of time your job consumes — including commute, prep time, and unpaid overtime — minus all work-related expenses like commuting costs, clothing, and bought lunches. It is almost always lower than your stated hourly rate." },
+            { q: "How do you calculate true hourly wage?", a: "Start with take-home pay after tax. Subtract all annual work-required costs including commuting, clothing, and food. Add up all hours the job consumes including commute and overtime. Divide adjusted income by total hours." },
+            { q: "Why does true hourly wage matter?", a: "True hourly wage changes how you evaluate job offers, raises, remote work, and side income. A $90,000 job with a long commute may pay less per true hour than an $80,000 job close to home. Remote work saves both money and time often equivalent to a 10 to 15 percent salary increase." },
+            { q: "What work expenses should I include?", a: "Include commuting costs such as gas, transit, and parking; work clothing and dry cleaning; bought lunches and convenience dinners on late nights; professional development not covered by your employer; and any tools or software you pay for personally." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>

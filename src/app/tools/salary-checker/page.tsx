@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 const salaryData: Record<string, Record<string, [number, number]>> = {
   "Software Engineer": { "0-1":[75000,95000],"2-4":[95000,130000],"5-9":[130000,170000],"10-14":[160000,210000],"15+":[190000,250000] },
@@ -413,26 +414,12 @@ export default function SalaryCheckerPage() {
             { emoji: "📊", title: "Job Offer Comparison", desc: "Compare job offers", href: "/tools/job-offer-comparison" },
             { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
           ]} />
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "How is market salary data calculated?", a: "Market salary data comes from Bureau of Labor Statistics Occupational Employment Statistics, employer salary surveys, and self-reported compensation databases. This tool uses aggregated national median data by job title and experience level." },
-              { q: "What does the 25th and 75th percentile salary mean?", a: "The 25th percentile means 25 percent of people in that role earn less than that amount. The 75th percentile means 75 percent earn less. Your target negotiation range is typically between the median and 75th percentile." },
-              { q: "How do I know if I am underpaid?", a: "Compare your current salary to market median for your role, experience level, industry, and geography. If you are below the 25th percentile you are likely underpaid. Cost of living varies significantly by city — $70,000 in Austin differs greatly from $70,000 in San Francisco." },
-              { q: "How often should I check my market salary?", a: "Check annually at minimum before your review cycle so you have data to support a negotiation. Also check when you receive a job offer, after a promotion, or if you take on significantly more responsibility." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "How is market salary data calculated?", a: "Market salary data comes from Bureau of Labor Statistics Occupational Employment Statistics, employer salary surveys, and self-reported compensation databases. This tool uses aggregated national median data by job title and experience level." },
+            { q: "What does the 25th and 75th percentile salary mean?", a: "The 25th percentile means 25 percent of people in that role earn less than that amount. The 75th percentile means 75 percent earn less. Your target negotiation range is typically between the median and 75th percentile." },
+            { q: "How do I know if I am underpaid?", a: "Compare your current salary to market median for your role, experience level, industry, and geography. If you are below the 25th percentile you are likely underpaid. Cost of living varies significantly by city — $70,000 in Austin differs greatly from $70,000 in San Francisco." },
+            { q: "How often should I check my market salary?", a: "Check annually at minimum before your review cycle so you have data to support a negotiation. Also check when you receive a job offer, after a promotion, or if you take on significantly more responsibility." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
 
         </div>
       </section>

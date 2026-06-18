@@ -8,6 +8,7 @@ import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -195,26 +196,12 @@ export default function CompoundInterestPage() {
             { emoji: "🏦", title: "Retirement Savings Calculator", desc: "Are you on track to retire?", href: "/finance/retirement-savings" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Results assume constant rate and do not account for taxes or fees.</p>
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "How does compound interest work?", a: "Compound interest calculates interest on both your original principal and the interest already earned. Each period your interest is added to your balance and the next period's interest is calculated on that larger amount. This creates exponential growth over time." },
-              { q: "What is the difference between APY and APR?", a: "APR is the annual percentage rate — the base interest rate without compounding. APY is the annual percentage yield — it reflects the actual return after compounding is applied. APY is always equal to or higher than APR." },
-              { q: "How often should interest compound for best results?", a: "The more frequently interest compounds the faster your balance grows. Daily compounding produces slightly more than monthly which produces more than annual. For most savings accounts the difference between daily and monthly compounding is small over short periods." },
-              { q: "What formula does this calculator use?", a: "This calculator uses the standard compound interest formula A equals P times (1 plus r divided by n) raised to the power of n times t, where P is principal, r is annual rate, n is compounding frequency per year, and t is time in years." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "How does compound interest work?", a: "Compound interest calculates interest on both your original principal and the interest already earned. Each period your interest is added to your balance and the next period's interest is calculated on that larger amount. This creates exponential growth over time." },
+            { q: "What is the difference between APY and APR?", a: "APR is the annual percentage rate — the base interest rate without compounding. APY is the annual percentage yield — it reflects the actual return after compounding is applied. APY is always equal to or higher than APR." },
+            { q: "How often should interest compound for best results?", a: "The more frequently interest compounds the faster your balance grows. Daily compounding produces slightly more than monthly which produces more than annual. For most savings accounts the difference between daily and monthly compounding is small over short periods." },
+            { q: "What formula does this calculator use?", a: "This calculator uses the standard compound interest formula A equals P times (1 plus r divided by n) raised to the power of n times t, where P is principal, r is annual rate, n is compounding frequency per year, and t is time in years." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>

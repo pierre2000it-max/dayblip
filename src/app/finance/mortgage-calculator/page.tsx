@@ -8,6 +8,7 @@ import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -225,26 +226,12 @@ export default function MortgagePage() {
             { emoji: "💸", title: "Debt Payoff Calculator", desc: "Avalanche vs snowball method", href: "/finance/debt-payoff" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Actual rates and costs may vary. Consult a mortgage professional.</p>
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "How is a monthly mortgage payment calculated?", a: "Monthly payment is calculated using the formula M equals P times r times (1 plus r) to the power of n, divided by (1 plus r) to the power of n minus 1, where P is loan principal, r is monthly interest rate, and n is total number of payments. This covers principal and interest only." },
-              { q: "What is included in a mortgage payment?", a: "A standard mortgage payment covers principal reduction and interest. Your total monthly housing cost also includes property taxes, homeowner's insurance, and if your down payment is under 20 percent, private mortgage insurance known as PMI." },
-              { q: "What is a good mortgage interest rate?", a: "Mortgage rates change daily based on Federal Reserve policy, bond markets, and lender competition. As of 2024 to 2026, 30-year fixed rates have ranged between 6 and 8 percent. Your personal rate depends on credit score, down payment, loan type, and lender." },
-              { q: "How much house can I afford?", a: "A common guideline is to keep total housing costs below 28 percent of gross monthly income. For an $80,000 annual salary that suggests a maximum housing payment of around $1,867 per month including taxes and insurance." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "How is a monthly mortgage payment calculated?", a: "Monthly payment is calculated using the formula M equals P times r times (1 plus r) to the power of n, divided by (1 plus r) to the power of n minus 1, where P is loan principal, r is monthly interest rate, and n is total number of payments. This covers principal and interest only." },
+            { q: "What is included in a mortgage payment?", a: "A standard mortgage payment covers principal reduction and interest. Your total monthly housing cost also includes property taxes, homeowner's insurance, and if your down payment is under 20 percent, private mortgage insurance known as PMI." },
+            { q: "What is a good mortgage interest rate?", a: "Mortgage rates change daily based on Federal Reserve policy, bond markets, and lender competition. As of 2024 to 2026, 30-year fixed rates have ranged between 6 and 8 percent. Your personal rate depends on credit score, down payment, loan type, and lender." },
+            { q: "How much house can I afford?", a: "A common guideline is to keep total housing costs below 28 percent of gross monthly income. For an $80,000 annual salary that suggests a maximum housing payment of around $1,867 per month including taxes and insurance." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>

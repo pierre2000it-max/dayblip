@@ -8,6 +8,7 @@ import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 function fmtK(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -361,26 +362,12 @@ export default function TakeHomePayPage() {
             { emoji: "📊", title: "Tax Bracket Calculator", desc: "Marginal vs effective tax rate", href: "/finance/tax-bracket" },
             { emoji: "⏱️", title: "Overtime Pay Calculator", desc: "How much do you earn working extra hours?", href: "/finance/overtime-calculator" },
           ]} />
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "What is FICA tax?", a: "FICA stands for Federal Insurance Contributions Act. It covers Social Security tax at 6.2 percent on wages up to $176,100 in 2026 and Medicare tax at 1.45 percent on all wages plus an additional 0.9 percent on wages above $200,000. Employers match these contributions." },
-              { q: "Why does my paycheck differ from salary divided by pay periods?", a: "Your gross pay equals salary divided by pay periods. Your net take-home is lower after federal income tax withholding, FICA taxes, state income tax, and any pre-tax deductions like 401k contributions or health insurance premiums." },
-              { q: "How do pre-tax deductions affect take-home pay?", a: "Pre-tax deductions reduce your taxable income before taxes are calculated. Contributing $500 per month to a 401k does not reduce take-home pay by $500 — it reduces it by $500 minus the taxes you would have paid on that amount making the real cost lower." },
-              { q: "What is the standard deduction for 2026?", a: "The 2026 standard deduction is approximately $15,000 for single filers and $30,000 for married filing jointly. This reduces your taxable income before the bracket calculation is applied." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "What is FICA tax?", a: "FICA stands for Federal Insurance Contributions Act. It covers Social Security tax at 6.2 percent on wages up to $176,100 in 2026 and Medicare tax at 1.45 percent on all wages plus an additional 0.9 percent on wages above $200,000. Employers match these contributions." },
+            { q: "Why does my paycheck differ from salary divided by pay periods?", a: "Your gross pay equals salary divided by pay periods. Your net take-home is lower after federal income tax withholding, FICA taxes, state income tax, and any pre-tax deductions like 401k contributions or health insurance premiums." },
+            { q: "How do pre-tax deductions affect take-home pay?", a: "Pre-tax deductions reduce your taxable income before taxes are calculated. Contributing $500 per month to a 401k does not reduce take-home pay by $500 — it reduces it by $500 minus the taxes you would have paid on that amount making the real cost lower." },
+            { q: "What is the standard deduction for 2026?", a: "The 2026 standard deduction is approximately $15,000 for single filers and $30,000 for married filing jointly. This reduces your taxable income before the bracket calculation is applied." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>

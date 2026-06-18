@@ -6,6 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 const CPI: Record<number, number> = {
   1913: 9.9, 1920: 20.0, 1930: 16.7, 1940: 14.0, 1950: 24.1,
@@ -206,26 +207,12 @@ export default function InflationPage() {
             { emoji: "🏠", title: "Cost of Living", desc: "Compare living costs", href: "/finance/cost-of-living" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">CPI data based on US Bureau of Labor Statistics. For educational purposes only.</p>
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "What is inflation?", a: "Inflation is the rate at which the general price level of goods and services rises over time, reducing purchasing power. When inflation is 3 percent per year, something that costs $100 today will cost $103 next year." },
-              { q: "What data source is used to calculate inflation?", a: "Inflation calculations use the Consumer Price Index published by the US Bureau of Labor Statistics. The CPI tracks the average price change over time for a fixed basket of consumer goods and services." },
-              { q: "What has average US inflation been historically?", a: "The US has averaged approximately 3.1 percent annual inflation since 1926. The 2021 to 2023 period saw elevated inflation peaking above 9 percent in mid-2022 before declining. Long-term financial planning typically assumes 2 to 3 percent annual inflation." },
-              { q: "How does inflation affect savings?", a: "Inflation erodes purchasing power. $100,000 in savings earning 1 percent interest while inflation runs at 3 percent loses roughly 2 percent of real value per year. After 20 years at that gap, the real purchasing power drops to about $67,000 in today's dollars." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "What is inflation?", a: "Inflation is the rate at which the general price level of goods and services rises over time, reducing purchasing power. When inflation is 3 percent per year, something that costs $100 today will cost $103 next year." },
+            { q: "What data source is used to calculate inflation?", a: "Inflation calculations use the Consumer Price Index published by the US Bureau of Labor Statistics. The CPI tracks the average price change over time for a fixed basket of consumer goods and services." },
+            { q: "What has average US inflation been historically?", a: "The US has averaged approximately 3.1 percent annual inflation since 1926. The 2021 to 2023 period saw elevated inflation peaking above 9 percent in mid-2022 before declining. Long-term financial planning typically assumes 2 to 3 percent annual inflation." },
+            { q: "How does inflation affect savings?", a: "Inflation erodes purchasing power. $100,000 in savings earning 1 percent interest while inflation runs at 3 percent loses roughly 2 percent of real value per year. After 20 years at that gap, the real purchasing power drops to about $67,000 in today's dollars." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>

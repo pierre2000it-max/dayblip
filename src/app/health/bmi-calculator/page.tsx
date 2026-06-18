@@ -5,6 +5,7 @@ import RelatedTools from "@/components/RelatedTools"
 import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 interface Category { label: string; min: number; max: number; color: string; bg: string }
 
@@ -179,26 +180,12 @@ export default function BMIPage() {
             <p style={{ color: "#fff", fontSize: 14, marginBottom: 8, marginTop: 0 }}>Want to add this tool to your website?</p>
             <a href="/embed" style={{ color: "#e94560", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Get the free embed code →</a>
           </div>
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "How is BMI calculated?", a: "BMI is calculated by dividing weight in kilograms by height in meters squared. In imperial units the formula is weight in pounds multiplied by 703 divided by height in inches squared. This calculator handles both unit systems." },
-              { q: "What are the BMI categories?", a: "Standard BMI categories are: Underweight below 18.5, Normal weight 18.5 to 24.9, Overweight 25 to 29.9, Obese Class I 30 to 34.9, Obese Class II 35 to 39.9, Obese Class III 40 and above. These categories are defined by the World Health Organization." },
-              { q: "What are the limitations of BMI?", a: "BMI does not distinguish between muscle and fat mass. Athletes and muscular individuals often have high BMIs despite low body fat. BMI also does not account for fat distribution — visceral fat around organs carries higher health risk than subcutaneous fat. It is a screening tool not a diagnostic measure." },
-              { q: "Is BMI accurate for all populations?", a: "BMI was developed using data from European populations and may not accurately reflect health risks for all ethnic groups. Some research suggests Asian populations face higher health risks at lower BMI thresholds. Always discuss BMI with a healthcare provider for personal health decisions." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "How is BMI calculated?", a: "BMI is calculated by dividing weight in kilograms by height in meters squared. In imperial units the formula is weight in pounds multiplied by 703 divided by height in inches squared. This calculator handles both unit systems." },
+            { q: "What are the BMI categories?", a: "Standard BMI categories are: Underweight below 18.5, Normal weight 18.5 to 24.9, Overweight 25 to 29.9, Obese Class I 30 to 34.9, Obese Class II 35 to 39.9, Obese Class III 40 and above. These categories are defined by the World Health Organization." },
+            { q: "What are the limitations of BMI?", a: "BMI does not distinguish between muscle and fat mass. Athletes and muscular individuals often have high BMIs despite low body fat. BMI also does not account for fat distribution — visceral fat around organs carries higher health risk than subcutaneous fat. It is a screening tool not a diagnostic measure." },
+            { q: "Is BMI accurate for all populations?", a: "BMI was developed using data from European populations and may not accurately reflect health risks for all ethnic groups. Some research suggests Asian populations face higher health risks at lower BMI thresholds. Always discuss BMI with a healthcare provider for personal health decisions." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>

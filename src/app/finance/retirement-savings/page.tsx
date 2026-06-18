@@ -8,6 +8,7 @@ import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -173,26 +174,12 @@ export default function RetirementSavingsPage() {
             { emoji: "👴", title: "Social Security Calculator", desc: "When should you claim benefits?", href: "/finance/social-security" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Uses 25x rule (4% withdrawal rate). Actual retirement needs vary by individual.</p>
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "How much should I have saved for retirement by age?", a: "A common benchmark is to have 1 times your salary saved by 30, 3 times by 40, 6 times by 50, 8 times by 60, and 10 times by retirement. These are guidelines from Fidelity based on retiring at 67 and maintaining your pre-retirement lifestyle." },
-              { q: "What is the 4 percent rule?", a: "The 4 percent rule suggests you can withdraw 4 percent of your retirement portfolio in the first year then adjust for inflation each year with a high probability your money lasts 30 years. On a $1 million portfolio that is $40,000 per year." },
-              { q: "How does employer match affect my retirement savings?", a: "Employer match is free money. If your employer matches 50 percent of contributions up to 6 percent of salary and you earn $60,000, contributing 6 percent gets you an additional $1,800 from your employer — an immediate 50 percent return on that portion." },
-              { q: "What rate of return should I assume?", a: "The US stock market has historically returned approximately 10 percent annually before inflation or about 7 percent after inflation. Most retirement calculators use 6 to 7 percent as a conservative baseline. Your actual returns will vary based on asset allocation and market conditions." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "How much should I have saved for retirement by age?", a: "A common benchmark is to have 1 times your salary saved by 30, 3 times by 40, 6 times by 50, 8 times by 60, and 10 times by retirement. These are guidelines from Fidelity based on retiring at 67 and maintaining your pre-retirement lifestyle." },
+            { q: "What is the 4 percent rule?", a: "The 4 percent rule suggests you can withdraw 4 percent of your retirement portfolio in the first year then adjust for inflation each year with a high probability your money lasts 30 years. On a $1 million portfolio that is $40,000 per year." },
+            { q: "How does employer match affect my retirement savings?", a: "Employer match is free money. If your employer matches 50 percent of contributions up to 6 percent of salary and you earn $60,000, contributing 6 percent gets you an additional $1,800 from your employer — an immediate 50 percent return on that portion." },
+            { q: "What rate of return should I assume?", a: "The US stock market has historically returned approximately 10 percent annually before inflation or about 7 percent after inflation. Most retirement calculators use 6 to 7 percent as a conservative baseline. Your actual returns will vary based on asset allocation and market conditions." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>

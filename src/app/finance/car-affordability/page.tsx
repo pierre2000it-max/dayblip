@@ -6,6 +6,7 @@ import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
+import FAQAccordion from "@/components/FAQAccordion"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -224,26 +225,12 @@ export default function CarAffordabilityPage() {
             { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Interest rates vary by credit score and lender. Actual insurance and fuel costs vary by location and driving habits.</p>
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '48px 20px 0 20px' }}>
-            <h2 style={{ color: '#ffffff', fontSize: '22px', fontWeight: '700', margin: '0 0 24px 0' }}>
-              Frequently Asked Questions
-            </h2>
-            {[
-              { q: "How much car can I afford?", a: "A common guideline is to keep total vehicle costs including payment, insurance, fuel, and maintenance below 15 to 20 percent of take-home pay. For a $4,000 per month take-home that is $600 to $800 per month total." },
-              { q: "What is a good car loan interest rate?", a: "Car loan rates depend on credit score and loan term. With excellent credit above 750, rates in 2024 to 2026 have ranged from 5 to 7 percent for new cars. With fair credit between 620 and 680 rates can exceed 10 to 14 percent." },
-              { q: "Is it better to buy or lease a car?", a: "Buying is better long-term — you build equity and eliminate payments once paid off. Leasing has lower monthly payments but you never own the vehicle and face mileage limits and wear-and-tear charges. Buying used is typically the most cost-effective option." },
-              { q: "How much should I put down on a car?", a: "A 20 percent down payment on a new car avoids being underwater on the loan since new cars depreciate 15 to 25 percent in the first year. For used cars 10 percent is a common minimum." },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '24px' }}>
-                <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
-                  {item.q}
-                </h3>
-                <p style={{ color: '#a8a8b3', fontSize: '15px', lineHeight: '1.7', margin: '0' }}>
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={[
+            { q: "How much car can I afford?", a: "A common guideline is to keep total vehicle costs including payment, insurance, fuel, and maintenance below 15 to 20 percent of take-home pay. For a $4,000 per month take-home that is $600 to $800 per month total." },
+            { q: "What is a good car loan interest rate?", a: "Car loan rates depend on credit score and loan term. With excellent credit above 750, rates in 2024 to 2026 have ranged from 5 to 7 percent for new cars. With fair credit between 620 and 680 rates can exceed 10 to 14 percent." },
+            { q: "Is it better to buy or lease a car?", a: "Buying is better long-term — you build equity and eliminate payments once paid off. Leasing has lower monthly payments but you never own the vehicle and face mileage limits and wear-and-tear charges. Buying used is typically the most cost-effective option." },
+            { q: "How much should I put down on a car?", a: "A 20 percent down payment on a new car avoids being underwater on the loan since new cars depreciate 15 to 25 percent in the first year. For used cars 10 percent is a common minimum." },
+          ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
     </div>
