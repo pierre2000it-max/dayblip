@@ -276,6 +276,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/world-counters/births-today",            0.85, DAILY),
     p("/world-counters/co2-emissions",           0.85, DAILY),
     p("/world-counters/money-printed-today",     0.85, DAILY),
+    p("/world-counters/plastic-in-ocean",        0.85, DAILY),
+    p("/world-counters/trees-cut-today",         0.85, DAILY),
+    p("/world-counters/earthquakes-today",       0.85, DAILY),
+    p("/world-counters/us-population",           0.85, DAILY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // CURIOSITY / OPPORTUNITY-COST CALCULATORS  (priority 0.85, monthly)
