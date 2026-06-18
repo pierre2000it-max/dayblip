@@ -155,6 +155,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/finance/paycheck-calculator",    0.9),
     p("/finance/what-if-i-invested",     0.9),
     p("/finance/first-paycheck",         0.9),
+    p("/finance/holiday-budget",         0.9),
 
     // ═══════════════════════════════════════════════════════════════════════
     // EDUCATION CALCULATORS  (priority 0.9, monthly) — Phase 2
@@ -237,6 +238,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/tools/is-it-worth-it/gym-membership",         0.8),
     p("/tools/is-it-worth-it/cable-vs-streaming",     0.8),
     p("/tools/is-it-worth-it/black-friday-deal",      0.8),
+    p("/tools/new-year-resolution-cost",              0.9),
 
     // ═══════════════════════════════════════════════════════════════════════
     // HEALTH CALCULATORS  (priority 0.9, monthly)
