@@ -14,9 +14,11 @@ interface SportsCountdownProps {
 }
 
 export default function SportsCountdown({ event, faqItems }: SportsCountdownProps) {
-  const [timeLeft, setTimeLeft] = useState(getDaysUntil(event.date))
+  const [mounted, setMounted] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(() => getDaysUntil(event.date))
 
   useEffect(() => {
+    setMounted(true)
     const interval = setInterval(() => {
       setTimeLeft(getDaysUntil(event.date))
     }, 1000)
@@ -104,10 +106,10 @@ export default function SportsCountdown({ event, faqItems }: SportsCountdownProp
               margin: '0 auto'
             }}>
               {[
-                { value: timeLeft.days.toLocaleString(), label: 'Days' },
-                { value: pad(timeLeft.hours), label: 'Hours' },
-                { value: pad(timeLeft.minutes), label: 'Minutes' },
-                { value: pad(timeLeft.seconds), label: 'Seconds' },
+                { value: mounted ? timeLeft.days.toLocaleString() : '--', label: 'Days' },
+                { value: mounted ? pad(timeLeft.hours) : '--', label: 'Hours' },
+                { value: mounted ? pad(timeLeft.minutes) : '--', label: 'Minutes' },
+                { value: mounted ? pad(timeLeft.seconds) : '--', label: 'Seconds' },
               ].map(item => (
                 <div key={item.label} style={{
                   background: '#0d1b2a',

@@ -338,6 +338,33 @@ export default function CountdownPage({
           </div>
         </section>
 
+        {/* ── SPORTS COUNTDOWNS ─────────────────────────────────────── */}
+        <section className="bg-[#0f3460] px-6 py-10">
+          <div className="mx-auto max-w-[900px]">
+            <h2 className="mb-6 text-xl font-bold text-white">
+              🏆 Sports Countdowns
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              {[
+                { emoji: '⚽', label: 'World Cup Final', href: '/days-until/world-cup' },
+                { emoji: '🏈', label: 'Super Bowl', href: '/days-until/super-bowl' },
+                { emoji: '⚾', label: 'World Series', href: '/days-until/world-series' },
+                { emoji: '🏀', label: 'March Madness', href: '/days-until/march-madness' },
+                { emoji: '🏆', label: 'NBA Finals', href: '/days-until/nba-finals' },
+              ].map(sport => (
+                <Link
+                  key={sport.href}
+                  href={sport.href}
+                  className="flex items-center gap-2 rounded-xl bg-[#1a1a2e] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#16213e]"
+                >
+                  <span>{sport.emoji}</span>
+                  <span>{sport.label}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
       </div>
     </>
   );
