@@ -374,7 +374,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     // ADDITIONAL DATE TOOLS
     // ═══════════════════════════════════════════════════════════════════════
-    p("/days-until",          0.8, DAILY),
+    p("/days-until",          0.9, DAILY),
     p("/days-between",        0.9, WEEKLY),  // also in core, deduplicated by Next.js
     p("/days-since",          0.8),          // appears in multiple sections — fine
     p("/day-of-year",         0.8),
