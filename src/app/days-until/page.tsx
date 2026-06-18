@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { generateBreadcrumbSchema } from '@/lib/seo'
 
 // ── Sports data (from sports-events.ts — hardcoded for server render perf) ───
 
@@ -58,34 +57,36 @@ const HOLIDAYS = [
 ]
 
 export default function DaysUntilHubPage() {
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Home', url: 'https://www.dayblip.com' },
-    { name: 'Countdown Timers', url: 'https://www.dayblip.com/days-until' },
-  ])
-
-  const collectionSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: 'Countdown Timers — Days Until Holidays and Sports Events',
-    description:
-      'Free live countdown timers to every major holiday and sports event. Days until Christmas, Super Bowl, World Cup, NBA Finals, and more.',
-    url: 'https://www.dayblip.com/days-until',
-    publisher: {
-      '@type': 'Organization',
-      name: 'Dayblip',
-      url: 'https://www.dayblip.com',
-    },
-  }
-
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Countdown Timers — Days Until Holidays and Sports Events",
+            "url": "https://www.dayblip.com/days-until",
+            "description": "Free live countdown timers to every major holiday and sports event. Updated in real time.",
+            "breadcrumb": {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.dayblip.com"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Countdowns",
+                  "item": "https://www.dayblip.com/days-until"
+                }
+              ]
+            }
+          })
+        }}
       />
 
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '32px 20px 64px' }}>
