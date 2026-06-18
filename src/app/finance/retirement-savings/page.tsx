@@ -162,6 +162,178 @@ export default function RetirementSavingsPage() {
           )}
 
           <MethodologyNote text="Uses compound growth formula with annual IRS contribution limits. Historical S&P 500 return data sourced from FRED (Federal Reserve Economic Data)." />
+          {/* ── NOW WHAT? Interpretation Layer ── */}
+          {(() => {
+            const yearsToRetirement = parseFloat(retirementAge) - parseFloat(currentAge)
+            const monthly = parseFloat(monthlySavings) || 0
+            const returnRate = parseFloat(expectedReturn) || 7
+            const shortfall = Math.abs(calc.surplus)
+            const isOnTrack = calc.onTrack
+            const projectedStr = fmt(calc.projected)
+            const neededStr = fmt(calc.needed)
+
+            const r = returnRate / 100 / 12
+            const n = yearsToRetirement * 12
+            const extraMonthly = !isOnTrack && r > 0 && n > 0
+              ? Math.round(shortfall * r / (Math.pow(1 + r, n) - 1))
+              : 0
+
+            let timelineTier: 'urgent' | 'moderate' | 'comfortable' | 'long'
+            if (yearsToRetirement <= 10) timelineTier = 'urgent'
+            else if (yearsToRetirement <= 20) timelineTier = 'moderate'
+            else if (yearsToRetirement <= 30) timelineTier = 'comfortable'
+            else timelineTier = 'long'
+
+            let surplusTier: 'large-surplus' | 'small-surplus' | 'small-shortfall' | 'large-shortfall'
+            if (isOnTrack && calc.surplus > calc.needed * 0.25) surplusTier = 'large-surplus'
+            else if (isOnTrack) surplusTier = 'small-surplus'
+            else if (!isOnTrack && shortfall < calc.needed * 0.25) surplusTier = 'small-shortfall'
+            else surplusTier = 'large-shortfall'
+
+            let primaryMessage: string
+            if (surplusTier === 'large-surplus') {
+              primaryMessage = `You are projected to have ${projectedStr} at retirement — significantly more than your ${neededStr} target. You have strong financial flexibility. The primary risks at this stage are sequence-of-returns risk (a market downturn near retirement can be devastating), healthcare costs before Medicare eligibility at 65, and inflation eroding purchasing power over a long retirement. Consider whether your ${returnRate}% return assumption is conservative enough for a long retirement horizon.`
+            } else if (surplusTier === 'small-surplus') {
+              primaryMessage = `You are projected to reach ${projectedStr} — on track to meet your ${neededStr} target with a modest margin. Maintaining your current savings rate consistently is the primary challenge. Lifestyle inflation, job changes, and unexpected expenses are the most common reasons on-track savers fall behind. Review this projection annually and after any significant income or expense change.`
+            } else if (surplusTier === 'small-shortfall') {
+              primaryMessage = `You are projected to fall short of your ${neededStr} target by ${fmt(shortfall)}. This gap is closeable. Adding $${extraMonthly.toLocaleString()}/month to your contributions today would close it entirely — at your current salary that is often achievable through a single raise or one eliminated expense. Small consistent increases in savings rate compound dramatically over ${yearsToRetirement} years.`
+            } else {
+              primaryMessage = `You are projected to fall short of your ${neededStr} target by ${fmt(shortfall)}. This is a significant gap but ${yearsToRetirement} years is meaningful time to close it. Closing this gap requires adding approximately $${extraMonthly.toLocaleString()}/month in contributions, increasing your expected return through asset allocation, or reducing your desired retirement income target. Most people close large gaps through a combination of all three.`
+            }
+
+            let timelineMessage: string
+            if (timelineTier === 'urgent') {
+              timelineMessage = `With ${yearsToRetirement} years to retirement your most powerful levers are: maximize catch-up contributions (401k $31,000 if age 50+, IRA $8,000 if age 50+), eliminate discretionary expenses to boost monthly savings, and review whether your retirement date can flex 2-3 years — each extra year of work adds both contributions and delays withdrawals.`
+            } else if (timelineTier === 'moderate') {
+              timelineMessage = `With ${yearsToRetirement} years to retirement compounding still works strongly in your favor. Increasing monthly contributions by $200-500 now produces dramatically larger results than waiting 5 years. The highest-leverage action: automate a 1% savings increase every 6 months — you will not feel the reduction in take-home pay but the long-term impact is significant.`
+            } else if (timelineTier === 'comfortable') {
+              timelineMessage = `With ${yearsToRetirement} years to retirement you have significant time for compounding to work. The primary risk is complacency — most people who fall short in retirement were on track at your stage but stopped increasing contributions as income grew. Set a rule: every raise increases your savings rate by at least half the raise percentage.`
+            } else {
+              timelineMessage = `With ${yearsToRetirement} years to retirement time is your most powerful asset. Even small amounts invested consistently now produce enormous results. $500/month at ${returnRate}% for ${yearsToRetirement} years grows to approximately ${fmt(Math.round(500 * (Math.pow(1 + returnRate/100/12, n) - 1) / (returnRate/100/12)))}. The biggest risk at your stage is not starting — or stopping — early.`
+            }
+
+            let savingsMessage: string
+            if (monthly === 0) {
+              savingsMessage = `You are contributing $0/month. Starting any contribution — even $50/month — begins the compounding clock. Open a 401k through your employer (especially if they match) or a Roth IRA and automate the smallest amount you can sustain. Increase it every 6 months.`
+            } else if (monthly < 500) {
+              savingsMessage = `You are contributing $${monthly.toLocaleString()}/month. This is a start but likely below what is needed for a comfortable retirement. Target increasing to $${Math.min(monthly + 300, 1000).toLocaleString()}/month — find one expense to cut or redirect your next raise entirely to retirement savings.`
+            } else if (monthly < 1500) {
+              savingsMessage = `You are contributing $${monthly.toLocaleString()}/month — a solid foundation. Verify you are maximizing employer match first (free money), then consider increasing to the 401k limit ($23,500 in 2026) over the next few years through incremental raises.`
+            } else {
+              savingsMessage = `You are contributing $${monthly.toLocaleString()}/month ($${(monthly * 12).toLocaleString()}/year) — a strong savings rate. Ensure contributions are going into tax-advantaged accounts first (401k, IRA, HSA) before taxable accounts. At this level asset allocation and sequence-of-returns risk management become increasingly important.`
+            }
+
+            let nextActions: string[]
+            if (surplusTier === 'large-surplus') {
+              nextActions = [
+                `Model sequence-of-returns risk — a 30% market drop in year 1 of retirement has a dramatically different impact than the same drop in year 10. Build a 2-3 year cash/bond buffer as retirement approaches`,
+                `Review your ${returnRate}% return assumption — long retirements of 25-30+ years may want to use 5-6% to be conservative`,
+                `Plan healthcare costs before Medicare at 65 — average couple spends $300,000+ on healthcare in retirement`,
+                `Consider whether your retirement date could move earlier — your surplus may support it`
+              ]
+            } else if (surplusTier === 'small-surplus') {
+              nextActions = [
+                `Protect your savings rate through income changes — when you get a raise, immediately redirect half to retirement before lifestyle adjusts`,
+                `Max your 401k ($23,500 in 2026) if not already there — tax-deferred growth at your timeline is significant`,
+                `Review this projection annually — rerun with actual returns, updated savings, and any major life changes`,
+                `Build a 6-12 month emergency fund to avoid raiding retirement savings during unexpected expenses`
+              ]
+            } else if (surplusTier === 'small-shortfall') {
+              nextActions = [
+                `Add $${extraMonthly.toLocaleString()}/month to close your projected gap — this is achievable through a salary increase, expense reduction, or 401k increase`,
+                `Max employer 401k match immediately if you are not already — unmatched contributions are the most expensive retirement mistake`,
+                `Consider whether your ${returnRate}% return assumption is realistic — a diversified stock/bond portfolio has historically returned 6-8% long-term`,
+                `Rerun this calculator after your next raise and redirect at least 50% of the increase to retirement savings`
+              ]
+            } else {
+              nextActions = [
+                `Close the gap in steps: target adding $${Math.round(extraMonthly * 0.4).toLocaleString()}/month now (40% of needed increase) and the rest over 3 years`,
+                `Review your desired retirement income ($${parseFloat(desiredIncome).toLocaleString()}/month) — reducing by 10-15% significantly changes the required target`,
+                `Max all tax-advantaged accounts: 401k $23,500, IRA $7,000, HSA $4,300 single ($8,550 family) in 2026`,
+                `Consider working 2-3 years longer — each additional year adds contributions AND delays withdrawals, dramatically improving outcomes`
+              ]
+            }
+
+            const borderColor = surplusTier === 'large-surplus' ? '#a78bfa'
+              : surplusTier === 'small-surplus' ? '#4ade80'
+              : surplusTier === 'small-shortfall' ? '#facc15'
+              : '#e94560'
+
+            const labelColor = borderColor
+
+            return (
+              <div style={{
+                background: '#0d1b2a',
+                borderRadius: '16px',
+                padding: '28px 28px 24px',
+                margin: '32px 0 24px',
+                borderLeft: `4px solid ${borderColor}`
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                  <span style={{ fontSize: '22px' }}>🧭</span>
+                  <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                    Now What? Your Retirement Action Plan
+                  </h3>
+                </div>
+
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    {isOnTrack
+                      ? `On Track — ${projectedStr} Projected`
+                      : `Shortfall — ${fmt(shortfall)} Gap to Close`
+                    }
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {primaryMessage}
+                  </p>
+                </div>
+
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Timeline — {yearsToRetirement} Years to Retirement
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {timelineMessage}
+                  </p>
+                </div>
+
+                <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                  <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                    💰 {savingsMessage}
+                  </p>
+                </div>
+
+                {!isOnTrack && extraMonthly > 0 && (
+                  <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                    <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                      ⚡ To close your {fmt(shortfall)} gap completely:
+                      add ${extraMonthly.toLocaleString()}/month to your contributions today.
+                      That is ${(extraMonthly * 12).toLocaleString()}/year redirected to your future self.
+                    </p>
+                  </div>
+                )}
+
+                <div>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                    Your Next 4 Actions
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {nextActions.map((action, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                        <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>
+                          {i + 1}.
+                        </span>
+                        <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>
+                          {action}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
+
           <ShareButtons
             text={`${calc.onTrack ? "✅ On track" : "⚠️ Shortfall"} for retirement! Projected savings: ${fmt(calc.projected)} vs ${fmt(calc.needed)} needed. (Educational only)`}
             url={`https://www.dayblip.com/finance/retirement-savings?age=${currentAge}&retireage=${retirementAge}&savings=${currentSavings}&monthly=${monthlySavings}&return=${expectedReturn}&income=${desiredIncome}`}
