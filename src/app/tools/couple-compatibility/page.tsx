@@ -2,26 +2,30 @@ import type { Metadata } from "next"
 import Breadcrumb from "@/components/Breadcrumb"
 import AdUnit from "@/components/AdUnit"
 import CoupleCompatibilityClient from "./CoupleCompatibilityClient"
+import FAQAccordion from "@/components/FAQAccordion"
+import AuthorByline from "@/components/AuthorByline"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 
 export const metadata: Metadata = {
   title: "Couple Compatibility Calculator — Your Real Numbers Together | Dayblip",
   description:
-    "Enter two birthdates and see the real numbers of your relationship — days alive together, shared weekends remaining, generation match, age gap in days, and more.",
+    "Enter two birthdates and see the real numbers of your relationship — days alive together, shared weekends remaining, generation match, and more.",
   alternates: { canonical: "https://www.dayblip.com/tools/couple-compatibility" },
   openGraph: {
     title: "Couple Compatibility Calculator — Your Real Numbers Together | Dayblip",
     description:
-      "Enter two birthdates and see the real numbers of your relationship — days alive together, shared weekends remaining, generation match, age gap in days, and more.",
+      "Enter two birthdates and see the real numbers of your relationship — days alive together, shared weekends remaining, generation match, and more.",
     url: "https://www.dayblip.com/tools/couple-compatibility",
     type: "website",
-    images: [{ url: "https://www.dayblip.com/og-default.svg", width: 1200, height: 630, alt: "Couple Compatibility Calculator — Dayblip" }],
+    images: [{ url: "https://www.dayblip.com/api/og/tools", width: 1200, height: 630, alt: "Couple Compatibility Calculator — Dayblip" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Couple Compatibility Calculator — Your Real Numbers Together | Dayblip",
     description:
-      "Enter two birthdates and see the real numbers of your relationship — days alive together, shared weekends remaining, generation match, age gap in days, and more.",
-    images: ["https://www.dayblip.com/og-default.svg"],
+      "Enter two birthdates and see the real numbers of your relationship — days alive together, shared weekends remaining, generation match, and more.",
+    images: ["https://www.dayblip.com/api/og/tools"],
   },
 }
 
@@ -160,33 +164,15 @@ export default function CoupleCompatibilityPage() {
 
             <CoupleCompatibilityClient />
 
-            {/* FAQ */}
-            <div style={{ marginTop: "48px" }}>
-              <h2
-                style={{ color: "#ffffff", fontSize: "22px", fontWeight: 700, marginBottom: "24px" }}
-              >
-                Frequently Asked Questions
-              </h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                {FAQ_ITEMS.map((item) => (
-                  <div
-                    key={item.q}
-                    style={{ background: "#1e2d4a", borderRadius: "10px", padding: "20px 24px" }}
-                  >
-                    <h3
-                      style={{ color: "#ffffff", fontSize: "16px", fontWeight: 600, margin: "0 0 8px 0" }}
-                    >
-                      {item.q}
-                    </h3>
-                    <p style={{ color: "#a8a8b3", fontSize: "15px", margin: 0, lineHeight: 1.6 }}>
-                      {item.a}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <FAQAccordion items={FAQ_ITEMS.map(f => ({
+              question: f.q,
+              answer: f.a
+            }))} />
 
             <AdUnit slot="2847591036" format="leaderboard" className="mt-8" />
+            <AuthorByline variant="tool" />
+            <LastUpdated date="June 2026" />
+            <MethodologyNote text="Days alive together calculated from the younger person's birthdate to today. Shared weekends remaining calculated assuming both partners live to age 80 — this is a statistical estimate, not a prediction. Generation categories based on Pew Research Center generational definitions: Gen Alpha born 2013+, Gen Z born 1997-2012, Millennial born 1981-1996, Gen X born 1965-1980, Baby Boomer born 1946-1964, Silent Generation born 1928-1945. Milestone dates calculated by adding exact day counts to the younger partner's birthdate." />
           </div>
         </section>
       </div>

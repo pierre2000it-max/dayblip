@@ -1,6 +1,9 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import RelatedTools from "@/components/RelatedTools"
+import Breadcrumb from "@/components/Breadcrumb"
+import AuthorByline from "@/components/AuthorByline"
+import LastUpdated from "@/components/LastUpdated"
 
 export const metadata: Metadata = {
   title: "Money Misconceptions — Tools That Reveal the Truth | Dayblip",
@@ -31,13 +34,13 @@ export default function ToolsMisconceptionsPage() {
       </section>
       <section className="bg-[#16213e] px-6 py-16">
         <div className="mx-auto max-w-[900px]">
-          <nav className="mb-8 flex items-center gap-1 text-sm text-[#a8a8b3]">
-            <Link href="/" className="hover:text-[#e94560] transition-colors">Home</Link>
-            <span className="text-[#0f3460]">/</span>
-            <Link href="/tools" className="hover:text-[#e94560] transition-colors">Tools</Link>
-            <span className="text-[#0f3460]">/</span>
-            <span className="text-white font-medium">Misconceptions</span>
-          </nav>
+          <Breadcrumb crumbs={[
+            { label: 'Home', href: '/' },
+            { label: 'Tools', href: '/tools' },
+            { label: 'Money Misconceptions' }
+          ]} />
+          <AuthorByline variant="tool" />
+          <LastUpdated date="June 2026" />
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {tools.map(t => (
               <Link key={t.href} href={t.href} className="flex items-start gap-4 rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6 transition-all hover:border-[#e94560]">

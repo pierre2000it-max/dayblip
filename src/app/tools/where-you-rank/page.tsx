@@ -2,26 +2,30 @@ import type { Metadata } from "next"
 import Breadcrumb from "@/components/Breadcrumb"
 import AdUnit from "@/components/AdUnit"
 import WhereYouRankClient from "./WhereYouRankClient"
+import FAQAccordion from "@/components/FAQAccordion"
+import AuthorByline from "@/components/AuthorByline"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 
 export const metadata: Metadata = {
   title: "Where Do You Rank? Income & Wealth Percentile Calculator | Dayblip",
   description:
-    "Find out what percentile you are in for income, net worth, and wealth in the US. See how you rank compared to every other American — the number may surprise you.",
+    "Find out your income and wealth percentile in the US. See how you rank compared to every other American — the number may surprise you.",
   alternates: { canonical: "https://www.dayblip.com/tools/where-you-rank" },
   openGraph: {
     title: "Where Do You Rank? Income & Wealth Percentile Calculator | Dayblip",
     description:
-      "Find out what percentile you are in for income, net worth, and wealth in the US. See how you rank compared to every other American — the number may surprise you.",
+      "Find out your income and wealth percentile in the US. See how you rank compared to every other American — the number may surprise you.",
     url: "https://www.dayblip.com/tools/where-you-rank",
     type: "website",
-    images: [{ url: "https://www.dayblip.com/og-default.svg", width: 1200, height: 630, alt: "Where Do You Rank? — Dayblip" }],
+    images: [{ url: "https://www.dayblip.com/api/og/tools", width: 1200, height: 630, alt: "Where Do You Rank? — Dayblip" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Where Do You Rank? Income & Wealth Percentile Calculator | Dayblip",
     description:
-      "Find out what percentile you are in for income, net worth, and wealth in the US. See how you rank compared to every other American — the number may surprise you.",
-    images: ["https://www.dayblip.com/og-default.svg"],
+      "Find out your income and wealth percentile in the US. See how you rank compared to every other American — the number may surprise you.",
+    images: ["https://www.dayblip.com/api/og/tools"],
   },
 }
 
@@ -158,29 +162,15 @@ export default function WhereYouRankPage() {
 
             <WhereYouRankClient />
 
-            {/* FAQ */}
-            <div style={{ marginTop: "48px" }}>
-              <h2 style={{ color: "#ffffff", fontSize: "22px", fontWeight: 700, marginBottom: "24px" }}>
-                Frequently Asked Questions
-              </h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                {FAQ_ITEMS.map((item) => (
-                  <div
-                    key={item.q}
-                    style={{ background: "#1e2d4a", borderRadius: "10px", padding: "20px 24px" }}
-                  >
-                    <h3 style={{ color: "#ffffff", fontSize: "16px", fontWeight: 600, margin: "0 0 8px 0" }}>
-                      {item.q}
-                    </h3>
-                    <p style={{ color: "#a8a8b3", fontSize: "15px", margin: 0, lineHeight: 1.6 }}>
-                      {item.a}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <FAQAccordion items={FAQ_ITEMS.map(f => ({
+              question: f.q,
+              answer: f.a
+            }))} />
 
             <AdUnit slot="2847591036" format="leaderboard" className="mt-8" />
+            <AuthorByline variant="tool" />
+            <LastUpdated date="June 2026" />
+            <MethodologyNote text="Income percentile calculated using US Census Bureau Current Population Survey data. Net worth percentile calculated using Federal Reserve Survey of Consumer Finances 2022 data. Percentiles are estimated via linear interpolation between published distribution breakpoints. Approximately 258 million adults used as the US adult population base. All figures are estimates — actual percentiles vary with annual data updates. Income and wealth distributions are for US residents only." />
           </div>
         </section>
       </div>

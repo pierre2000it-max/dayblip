@@ -2,6 +2,10 @@ import type { Metadata } from "next"
 import Breadcrumb from "@/components/Breadcrumb"
 import AdUnit from "@/components/AdUnit"
 import ThisYearProgressClient from "./ThisYearProgressClient"
+import FAQAccordion from "@/components/FAQAccordion"
+import AuthorByline from "@/components/AuthorByline"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 
 export const metadata: Metadata = {
   title: "Year Progress 2026 — How Much of the Year Is Left? | Dayblip",
@@ -14,14 +18,14 @@ export const metadata: Metadata = {
       "See exactly how much of 2026 is complete and how many days remain. Live year progress bar updated in real time — see where 2026 stands right now.",
     url: "https://www.dayblip.com/tools/this-year-progress",
     type: "website",
-    images: [{ url: "https://www.dayblip.com/og-default.svg", width: 1200, height: 630, alt: "Year Progress 2026 — Dayblip" }],
+    images: [{ url: "https://www.dayblip.com/api/og/tools", width: 1200, height: 630, alt: "2026 Year Progress — Dayblip" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Year Progress 2026 — How Much of the Year Is Left? | Dayblip",
     description:
       "See exactly how much of 2026 is complete and how many days remain. Live year progress bar updated in real time — see where 2026 stands right now.",
-    images: ["https://www.dayblip.com/og-default.svg"],
+    images: ["https://www.dayblip.com/api/og/tools"],
   },
 }
 
@@ -158,29 +162,15 @@ export default function ThisYearProgressPage() {
 
             <ThisYearProgressClient />
 
-            {/* FAQ */}
-            <div style={{ marginTop: "48px" }}>
-              <h2 style={{ color: "#ffffff", fontSize: "22px", fontWeight: 700, marginBottom: "24px" }}>
-                Frequently Asked Questions
-              </h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                {FAQ_ITEMS.map((item) => (
-                  <div
-                    key={item.q}
-                    style={{ background: "#1e2d4a", borderRadius: "10px", padding: "20px 24px" }}
-                  >
-                    <h3 style={{ color: "#ffffff", fontSize: "16px", fontWeight: 600, margin: "0 0 8px 0" }}>
-                      {item.q}
-                    </h3>
-                    <p style={{ color: "#a8a8b3", fontSize: "15px", margin: 0, lineHeight: 1.6 }}>
-                      {item.a}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <FAQAccordion items={FAQ_ITEMS.map(f => ({
+              question: f.q,
+              answer: f.a
+            }))} />
 
             <AdUnit slot="2847591036" format="leaderboard" className="mt-8" />
+            <AuthorByline variant="tool" />
+            <LastUpdated date="June 2026" />
+            <MethodologyNote text="Year progress calculated as elapsed days since January 1 2026 divided by 365 total days (2026 is not a leap year). Day of year is the number of days elapsed plus one. Weeks remaining calculated as floor division of remaining days by 7. Milestone dates are fixed calendar dates for Q1 end (April 1), year midpoint (July 2), Q3 end (October 1), final quarter start (November 30), and year end (December 31). Progress bar updates every second using JavaScript setInterval." />
           </div>
         </section>
       </div>
