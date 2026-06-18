@@ -134,19 +134,8 @@ export default function DaysUntilHubPage() {
                     border: '1px solid #e5e7eb',
                     borderRadius: 12,
                     padding: '20px 20px 16px',
-                    transition: 'box-shadow 0.15s, border-color 0.15s',
                     background: '#fff',
                     cursor: 'pointer',
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget
-                    el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'
-                    el.style.borderColor = '#6366f1'
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget
-                    el.style.boxShadow = 'none'
-                    el.style.borderColor = '#e5e7eb'
                   }}
                 >
                   <div style={{ fontSize: 36, marginBottom: 8 }}>{event.emoji}</div>
@@ -206,17 +195,6 @@ export default function DaysUntilHubPage() {
                   color: '#374151',
                   textDecoration: 'none',
                   background: '#f9fafb',
-                  transition: 'background 0.12s, border-color 0.12s',
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget
-                  el.style.background = '#ede9fe'
-                  el.style.borderColor = '#8b5cf6'
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget
-                  el.style.background = '#f9fafb'
-                  el.style.borderColor = '#e5e7eb'
                 }}
               >
                 <span>{h.emoji}</span>
