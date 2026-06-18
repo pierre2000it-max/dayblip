@@ -349,6 +349,160 @@ export default function TakeHomePayPage() {
               Get the free embed code →
             </a>
           </div>
+          {/* ── NOW WHAT? Interpretation Layer ── */}
+          {(() => {
+            const effectiveRate = parseFloat(calc.effectiveRate)
+            const marginalRate = Math.round(calc.marginal * 100)
+            const takeHomePct = Math.round((calc.annualTakeHome / calc.annual) * 100)
+            const annualK401 = calc.perCheckBreakdown.k401 * calc.freq
+            const k401Pct = parseFloat(fourOhOneK) || 0
+
+            // Effective rate tier
+            let rateTier: 'low' | 'moderate' | 'high' | 'very-high'
+            let rateMessage: string
+
+            if (effectiveRate < 10) {
+              rateTier = 'low'
+              rateMessage = `Your effective federal tax rate is ${calc.effectiveRate}% — in the lowest tier. At this income and deduction level your federal tax burden is minimal. The bigger opportunity is not tax reduction but savings rate — more of your income is available to invest than most Americans at similar income levels.`
+            } else if (effectiveRate < 18) {
+              rateTier = 'moderate'
+              rateMessage = `Your effective federal tax rate is ${calc.effectiveRate}%. You are in the moderate range — paying meaningfully less than your ${marginalRate}% marginal rate suggests because lower brackets apply to lower portions of income. Pre-tax contributions (401k, HSA) are your most powerful tool to reduce this further.`
+            } else if (effectiveRate < 25) {
+              rateTier = 'high'
+              rateMessage = `Your effective federal tax rate is ${calc.effectiveRate}% — in the upper range for US earners. At this level tax optimization strategies have significant dollar impact. Maxing pre-tax retirement accounts, HSA contributions, and timing of deductions can meaningfully reduce your effective rate.`
+            } else {
+              rateTier = 'very-high'
+              rateMessage = `Your effective federal tax rate is ${calc.effectiveRate}% — among the highest in the US. At this level the gap between gross and net income is substantial. A fee-only tax advisor or CFP can identify optimization strategies specific to your situation that may save thousands annually.`
+            }
+
+            // Take-home percentage framing
+            let takeHomeMessage: string
+            if (takeHomePct >= 80) {
+              takeHomeMessage = `You keep ${takeHomePct}% of your gross income — above average. This gives you significant flexibility to build wealth. The primary lever now is how much of that take-home you invest vs spend.`
+            } else if (takeHomePct >= 70) {
+              takeHomeMessage = `You keep ${takeHomePct}% of your gross income. This is typical for your income and state. Every percentage point increase in your savings rate — without increasing income — directly accelerates your financial independence timeline.`
+            } else if (takeHomePct >= 60) {
+              takeHomeMessage = `You keep ${takeHomePct}% of your gross income — taxes and deductions are taking a significant share. If you are in a high-tax state consider modeling the take-home difference in a no-tax state like Texas or Florida — the gap can be $8,000-15,000+ annually at higher incomes.`
+            } else {
+              takeHomeMessage = `You keep only ${takeHomePct}% of your gross income. Combined federal, state, and FICA taxes are taking a substantial portion. This is the reality of high-income, high-tax-state employment. Tax-advantaged account maximization is the highest-priority financial action at your level.`
+            }
+
+            // 401k advice
+            let k401Message: string
+            if (k401Pct === 0) {
+              k401Message = `You are contributing 0% to your 401k. If your employer matches any amount you are leaving free compensation on the table. At a $${Math.round(calc.annual).toLocaleString()} salary a 3% employer match = $${Math.round(calc.annual * 0.03).toLocaleString()}/year in free money. Start here before any other investment.`
+            } else if (k401Pct < 6) {
+              k401Message = `You are contributing ${k401Pct}% to your 401k ($${Math.round(annualK401).toLocaleString()}/year). If your employer matches up to 6% and you contribute less, you are leaving money unclaimed. Verify your employer match threshold and contribute at least that amount.`
+            } else if (k401Pct < 15) {
+              k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) to your 401k — a solid start. The 2026 limit is $23,500 ($31,000 if age 50+). Increasing to the maximum adds significant tax-deferred compounding over a career.`
+            } else {
+              k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) to your 401k — strong contribution rate. If not already at the $23,500 limit consider increasing further. Next priority: HSA ($4,300 single, $8,550 family in 2026) if you have a high-deductible health plan.`
+            }
+
+            // Next actions by rate tier
+            let nextActions: string[]
+            if (rateTier === 'low') {
+              nextActions = [
+                `Savings rate is your highest lever — target investing 20-30% of your $${Math.round(calc.annualTakeHome).toLocaleString()} take-home`,
+                `Contribute at least enough to 401k to capture full employer match — instant 50-100% return`,
+                `Open a Roth IRA if income is below $161,000 single ($240,000 MFJ) — $7,000/year tax-free growth`,
+                `Build 3-6 month emergency fund before aggressive investing — $${Math.round(calc.annualTakeHome / 12 * 4).toLocaleString()} target`,
+              ]
+            } else if (rateTier === 'moderate') {
+              nextActions = [
+                `Max your 401k ($23,500 in 2026) — reduces taxable income and lowers your effective rate`,
+                `Open or max an HSA if you have a high-deductible plan — triple tax advantage, best account available`,
+                `Consider traditional vs Roth 401k — at ${marginalRate}% marginal rate traditional pre-tax usually wins`,
+                `Model the impact of increasing 401k contribution by 2% — use the calculator above to see take-home change`,
+              ]
+            } else if (rateTier === 'high') {
+              nextActions = [
+                `Max 401k ($23,500) and HSA ($4,300 single) before any taxable investing — significant effective rate reduction`,
+                `Review itemized vs standard deduction ($16,100 single in 2026) — mortgage interest + state taxes may exceed standard`,
+                `Consider backdoor Roth IRA if income exceeds direct contribution limits`,
+                `Model after-tax take-home in lower-tax states — at your income the difference can exceed $10,000/year`,
+              ]
+            } else {
+              nextActions = [
+                `Consult a fee-only fiduciary CFP — at your effective rate professional tax strategy is worth the cost`,
+                `Max all tax-advantaged accounts: 401k $23,500, HSA $4,300, backdoor Roth $7,000`,
+                `Review compensation structure — equity, deferred compensation, or bonus timing can shift tax years`,
+                `Model relocation to a no-income-tax state if remote work is possible — savings can exceed $15,000/year`,
+              ]
+            }
+
+            const borderColor = rateTier === 'low' ? '#4ade80'
+              : rateTier === 'moderate' ? '#60a5fa'
+              : rateTier === 'high' ? '#facc15'
+              : '#e94560'
+
+            const labelColor = borderColor
+
+            return (
+              <div style={{
+                background: '#0d1b2a',
+                borderRadius: '16px',
+                padding: '28px 28px 24px',
+                margin: '32px 0 24px',
+                borderLeft: `4px solid ${borderColor}`,
+              }}>
+                {/* Header */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                  <span style={{ fontSize: '22px' }}>🧭</span>
+                  <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                    Now What? Your Tax Action Plan
+                  </h3>
+                </div>
+
+                {/* Effective rate assessment */}
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Effective Rate — {calc.effectiveRate}% Federal
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {rateMessage}
+                  </p>
+                </div>
+
+                {/* Take-home percentage */}
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Take-Home Rate — {takeHomePct}% of Gross
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {takeHomeMessage}
+                  </p>
+                </div>
+
+                {/* 401k callout */}
+                <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                  <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                    📈 {k401Message}
+                  </p>
+                </div>
+
+                {/* Next actions */}
+                <div>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                    Your Next 4 Actions
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {nextActions.map((action, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                        <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>
+                          {i + 1}.
+                        </span>
+                        <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>
+                          {action}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
+
           <ShareButtons
             text={`My salary take-home is ${fmtK(calc.annualTakeHome)}/year after taxes. Effective rate: ${calc.effectiveRate}% (Educational only)`}
             url={`https://www.dayblip.com/finance/take-home-pay?salary=${amount}&state=${stateIdx}&filing=${filing}&type=${wageType}&retirement=${fourOhOneK}`}
