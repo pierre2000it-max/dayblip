@@ -5,6 +5,10 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
+import FAQAccordion from "@/components/FAQAccordion"
+import AuthorByline from "@/components/AuthorByline"
+import LastUpdated from "@/components/LastUpdated"
+import MethodologyNote from "@/components/MethodologyNote"
 
 const ZODIAC = [
   ["Capricorn", [1,1],[1,19]], ["Aquarius", [1,20],[2,18]], ["Pisces", [2,19],[3,20]],
@@ -157,6 +161,8 @@ export default function DueDateCalculatorPage() {
 
           <p style={{ color: "#a8a8b3", fontSize: "14px", lineHeight: "1.7" }}>An estimated due date (EDD) marks the end of the 40th week of pregnancy counted from the first day of your last menstrual period. Pregnancy is divided into three trimesters: first (weeks 1–12) second (weeks 13–26) and third (weeks 27–40). Your healthcare provider may adjust your due date based on ultrasound measurements. This calculator is for informational purposes only — always consult your doctor.</p>
 
+          <AuthorByline variant="tool" />
+
           {/* Method toggle */}
           <div className="flex rounded-lg overflow-hidden border border-[#0f3460]">
             <button onClick={() => setMethod("lmp")}
@@ -261,9 +267,39 @@ export default function DueDateCalculatorPage() {
                 ⚠️ This calculator provides an estimate for informational purposes only. Actual due dates are determined by your healthcare provider based on clinical assessment and ultrasound. Always consult your doctor or midwife for medical advice.
               </div>
 
+              <FAQAccordion items={[
+                {
+                  question: "How is a pregnancy due date calculated?",
+                  answer: "A due date is calculated using Naegele's Rule — add 280 days (40 weeks) to the first day of your last menstrual period (LMP). If your cycle is longer or shorter than 28 days the calculator adjusts accordingly. For example a 35-day cycle shifts the due date 7 days later. Conception date calculation adds 266 days (38 weeks) from the estimated date of conception. Your healthcare provider may adjust your due date based on first-trimester ultrasound measurements which are the most accurate method."
+                },
+                {
+                  question: "How accurate is a due date calculator?",
+                  answer: "Due date calculators provide an estimate — only about 5% of babies are born on their exact due date. Most babies arrive within 2 weeks before or after the estimated due date. First-trimester ultrasound (before 14 weeks) is the most accurate method for confirming dates and can adjust the LMP-based estimate if there is a significant discrepancy. The due date is best understood as the center of a 5-week window (weeks 38-42) during which birth is expected."
+                },
+                {
+                  question: "What is full term pregnancy?",
+                  answer: "Full term pregnancy is defined as 39-40 weeks of gestation. Early term is 37-38 weeks, late term is 41 weeks, and post-term is 42 weeks or more. Babies born before 37 weeks are considered premature. The American College of Obstetricians and Gynecologists recommends avoiding elective deliveries before 39 weeks when possible as the final weeks of pregnancy are important for brain, lung, and liver development."
+                },
+                {
+                  question: "What are the three trimesters of pregnancy?",
+                  answer: "The first trimester runs from week 1 through week 12 — covering early development, organ formation, and the highest risk period for miscarriage. The second trimester runs from week 13 through week 26 — often called the most comfortable trimester, when most major anomaly screenings occur. The third trimester runs from week 27 through week 40 — covering rapid fetal growth, lung maturation, and preparation for birth."
+                },
+                {
+                  question: "Can I use this calculator if my cycle is not 28 days?",
+                  answer: "Yes — this calculator adjusts for cycle length. The standard Naegele's Rule assumes a 28-day cycle with ovulation on day 14. If your cycle is longer (say 35 days) ovulation typically occurs on day 21, shifting conception and the due date approximately 7 days later. Use the cycle length slider to enter your average cycle length. If your cycle is irregular consult your healthcare provider — ultrasound dating is more reliable in that case."
+                },
+                {
+                  question: "When should I see a doctor after calculating my due date?",
+                  answer: "Schedule your first prenatal appointment as soon as you have a positive pregnancy test — ideally between weeks 6 and 8. Early prenatal care is associated with better outcomes for both mother and baby. Your doctor will confirm your due date with ultrasound, conduct initial blood work, and establish your prenatal care schedule. Do not rely on this calculator as a substitute for medical care — it is a planning tool only."
+                }
+              ]} />
+
               <ShareButtons text={shareText} url="https://www.dayblip.com/health/due-date-calculator" title="Pregnancy Due Date Calculator" />
             </div>
           )}
+
+          <LastUpdated date="June 2026" />
+          <MethodologyNote text="Due date calculated using Naegele's Rule: first day of last menstrual period plus 280 days (40 weeks), adjusted for cycle length deviation from 28-day baseline. Conception date method adds 266 days (38 weeks) from estimated conception date. Trimester boundaries: first trimester weeks 1-12, second trimester weeks 13-26, third trimester weeks 27-40. Full term defined as 39-40 weeks per American College of Obstetricians and Gynecologists (ACOG) guidelines. Weekly milestones sourced from ACOG and Mayo Clinic pregnancy week-by-week data. This calculator is for informational and planning purposes only — not a substitute for medical advice. Always consult your healthcare provider for clinical due date determination." />
 
           <RelatedTools tools={[
             { emoji: "📅", title: "Age Calculator", desc: "Calculate exact age in days and weeks", href: "/age-calculator" },
