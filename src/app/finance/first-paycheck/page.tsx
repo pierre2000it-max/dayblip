@@ -513,6 +513,147 @@ export default function FirstPaycheckPage() {
               </div>
             )}
 
+            {/* ── NOW WHAT? Interpretation Layer ── */}
+            {(() => {
+              const effectiveRate = result.effectiveRate
+              const marginalRate = result.marginalRate
+              const takeHomePct = Math.round((result.netPaycheck / result.grossPaycheck) * 100)
+              const annualK401 = result.retirement * result.periods
+              const k401Pct = parseFloat(fourOhOneK) || 0
+              const annualTaxes = (result.fedTax + result.stateTax + result.ss + result.medicare) * result.periods
+
+              let shockTier: 'mild' | 'moderate' | 'significant' | 'severe'
+              let shockMessage: string
+
+              if (takeHomePct >= 82) {
+                shockTier = 'mild'
+                shockMessage = `You keep ${takeHomePct}% of your gross paycheck — a relatively mild deduction. At your income level and state, taxes and deductions are taking a smaller share than most. This is a strong starting position for building wealth early in your career.`
+              } else if (takeHomePct >= 74) {
+                shockTier = 'moderate'
+                shockMessage = `You keep ${takeHomePct}% of your gross paycheck. The gap between your offer letter number and your bank deposit is typical for your income and location. Every new employee experiences this — the key is understanding which deductions are mandatory (taxes, FICA) vs choices you control (401k, health insurance).`
+              } else if (takeHomePct >= 65) {
+                shockTier = 'significant'
+                shockMessage = `You keep ${takeHomePct}% of your gross paycheck — taxes and deductions are taking a significant share. At your income level combined federal, state, and FICA taxes add up quickly. The good news: pre-tax contributions (401k, HSA) directly reduce your taxable income and increase your take-home relative to not contributing at all.`
+              } else {
+                shockTier = 'severe'
+                shockMessage = `You keep only ${takeHomePct}% of your gross paycheck. The gap between offer and take-home is large — driven by your income level, state tax rate (${result.stateName}), and deductions. This is the reality of higher-income employment. Understanding where each dollar goes is the first step to optimizing your financial position.`
+              }
+
+              let k401Message: string
+              if (k401Pct === 0) {
+                k401Message = `You are contributing 0% to your 401k. This is the single most important first financial decision of your career. If your employer matches any amount you are leaving free money unclaimed. At a $${result.annualGross.toLocaleString()} salary a 3% employer match = $${Math.round(result.annualGross * 0.03).toLocaleString()}/year in free compensation. Enroll today and contribute at minimum the match percentage.`
+              } else if (k401Pct < 6) {
+                k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) to your 401k. Good start — but verify your employer match threshold. Most employers match up to 3-6%. If your employer matches 6% and you contribute ${k401Pct}% you are leaving ${6 - k401Pct}% of your salary in unclaimed matching funds.`
+              } else if (k401Pct < 15) {
+                k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) — a strong start for your first job. The 2026 limit is $23,500. If you increase contributions by 1% per year you will reach the maximum within a few years without feeling a significant paycheck impact. Time in market at your age is your greatest asset.`
+              } else {
+                k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) — exceptional for a first job. If not already at the $23,500 annual limit consider increasing further. Next priority: open a Roth IRA ($7,000/year) while your income is likely below the phase-out threshold ($161,000 single in 2026).`
+              }
+
+              let nextActions: string[]
+              if (shockTier === 'mild' || shockTier === 'moderate') {
+                nextActions = [
+                  `Contribute at least enough to your 401k to capture the full employer match — verify the exact match percentage with HR this week`,
+                  `Open a Roth IRA immediately — at your income level you likely qualify and tax-free growth over 40 years is enormous`,
+                  `Build a $1,000 starter emergency fund before lifestyle inflation sets in — automate a transfer on your first payday`,
+                  `Avoid lifestyle inflation for 12 months — live on what you earned before this job and invest the difference`
+                ]
+              } else if (shockTier === 'significant') {
+                nextActions = [
+                  `Increase 401k contributions — every pre-tax dollar contributed reduces your taxable income and increases your effective take-home`,
+                  `Open an HSA if your health plan is HSA-eligible — triple tax advantage and the best savings account available`,
+                  `Model your budget on your net paycheck ($${result.netPaycheck.toLocaleString()}) not your gross — gross is a fiction that hits your bank account before you can spend it`,
+                  `Negotiate salary review in 6 months — first-year employees who negotiate early earn significantly more over a career than those who wait`
+                ]
+              } else {
+                nextActions = [
+                  `Max tax-advantaged accounts: 401k ($23,500 in 2026) and HSA ($4,300 single) — at your income these are essential, not optional`,
+                  `Understand your marginal rate (${marginalRate}%) — every raise, bonus, or side income is taxed at this rate, not your effective rate`,
+                  `Consider traditional 401k over Roth 401k at your income level — pre-tax contributions save more at a ${marginalRate}% marginal rate`,
+                  `Track your net worth from day one — knowing your starting number makes every future milestone more meaningful`
+                ]
+              }
+
+              const borderColor = shockTier === 'mild' ? '#4ade80'
+                : shockTier === 'moderate' ? '#60a5fa'
+                : shockTier === 'significant' ? '#facc15'
+                : '#e94560'
+
+              const labelColor = borderColor
+
+              return (
+                <div style={{
+                  background: '#0d1b2a',
+                  borderRadius: '16px',
+                  padding: '28px 28px 24px',
+                  margin: '32px 0 24px',
+                  borderLeft: `4px solid ${borderColor}`
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                    <span style={{ fontSize: '22px' }}>🧭</span>
+                    <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                      Now What? Your First Paycheck Action Plan
+                    </h3>
+                  </div>
+
+                  <div style={{ marginBottom: '20px' }}>
+                    <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                      Paycheck Reality — You Keep {takeHomePct}% of Gross
+                    </p>
+                    <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                      {shockMessage}
+                    </p>
+                  </div>
+
+                  <div style={{ marginBottom: '20px' }}>
+                    <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                      Your Tax Picture — {effectiveRate}% Effective / {marginalRate}% Marginal
+                    </p>
+                    <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                      Your effective rate ({effectiveRate}%) is what you actually pay on total income.
+                      Your marginal rate ({marginalRate}%) is what you pay on the next dollar earned —
+                      this applies to raises, bonuses, and side income. The gap between these two numbers
+                      is how the progressive tax system works: lower brackets apply to lower income, not all income.
+                      You pay ${Math.round(annualTaxes).toLocaleString()} in total federal, state, and FICA taxes annually.
+                    </p>
+                  </div>
+
+                  <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                    <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                      📈 {k401Message}
+                    </p>
+                  </div>
+
+                  <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                    <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                      ⏰ Time is your biggest advantage. $200/month invested at age 22 at 7% annual return
+                      grows to approximately $525,000 by age 62. The same $200/month started at 32 grows
+                      to only $243,000. Starting now — even a small amount — is worth more than starting
+                      later with more.
+                    </p>
+                  </div>
+
+                  <div>
+                    <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                      Your First 4 Financial Moves
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {nextActions.map((action, i) => (
+                        <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                          <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>
+                            {i + 1}.
+                          </span>
+                          <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>
+                            {action}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )
+            })()}
+
             <ShareButtons
               text={`I calculated my first real paycheck on a $${result.annualGross.toLocaleString()} salary — take-home is $${result.netPaycheck.toLocaleString()} per paycheck (${Math.round(result.netPaycheck / result.grossPaycheck * 100)}% of gross). No more paycheck shock. Calculate yours at Dayblip 💵`}
               url="https://www.dayblip.com/finance/first-paycheck"
