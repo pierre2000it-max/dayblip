@@ -214,6 +214,119 @@ export default function MortgagePage() {
             </a>
           </div>
           <MethodologyNote text="Standard amortization formula. Interest compounds monthly on the outstanding principal balance." />
+          {/* ── NOW WHAT? Interpretation Layer ── */}
+          {(() => {
+            const homePriceAmt = parseFloat(homePrice) || 0
+            const downAmt = parseFloat(downPayment) || 0
+            const downPct = homePriceAmt > 0 ? Math.round((downAmt / homePriceAmt) * 100) : 0
+            const loanAmt = homePriceAmt - downAmt
+            const interestRatio = loanAmt > 0
+              ? Math.round((calc.totalInterest / loanAmt) * 100)
+              : 0
+            const termNum = term
+            const rateNum = parseFloat(rate) || 7
+
+            let affordTier: 'no-income' | 'affordable' | 'stretch'
+            let affordMessage: string
+
+            if (calc.affordable === null) {
+              affordTier = 'no-income'
+              affordMessage = `Enter your gross monthly income above to see whether this mortgage meets the 28% front-end ratio guideline used by most lenders. The 28% rule means your total monthly payment (principal, interest, taxes, insurance) should not exceed 28% of gross monthly income.`
+            } else if (calc.affordable === true) {
+              affordTier = 'affordable'
+              affordMessage = `This mortgage payment (${fmt(calc.total)}/month) is within the 28% guideline — lenders will likely qualify you for this loan at your income level. Note: this is the front-end ratio only. Lenders also check total debt payments (back-end ratio, typically 36-43% maximum including car loans, student loans, and credit cards).`
+            } else {
+              affordTier = 'stretch'
+              affordMessage = `This mortgage payment (${fmt(calc.total)}/month) exceeds the 28% affordability guideline at your income level. Lenders may still approve the loan if your back-end ratio is acceptable and credit score is strong — but you are in stretch territory. Consider a lower price point, larger down payment, or longer term to reduce monthly payment.`
+            }
+
+            let downMessage: string
+            if (downPct < 10) {
+              downMessage = `Your ${downPct}% down payment will require Private Mortgage Insurance (PMI) — typically 0.5-1.5% of the loan annually. On a ${fmt(loanAmt)} loan that is ${fmt(Math.round(loanAmt * 0.01 / 12))}-${fmt(Math.round(loanAmt * 0.015 / 12))}/month added to your payment until you reach 20% equity.`
+            } else if (downPct < 20) {
+              downMessage = `Your ${downPct}% down payment is below the 20% threshold — PMI likely applies. You are ${20 - downPct}% away from avoiding PMI. On this loan avoiding PMI saves approximately ${fmt(Math.round(loanAmt * 0.01 / 12))}-${fmt(Math.round(loanAmt * 0.0125 / 12))}/month.`
+            } else {
+              downMessage = `Your ${downPct}% down payment avoids PMI — a meaningful monthly saving. You also start with substantial equity which reduces risk if home values decline and improves your loan-to-value ratio for future refinancing.`
+            }
+
+            const totalInterestStr = fmt(calc.totalInterest)
+            let nextActions: string[]
+
+            if (affordTier === 'stretch') {
+              nextActions = [
+                `Increase down payment to reduce loan amount and monthly payment — each $10,000 additional down saves approximately ${fmt(Math.round(10000 * rateNum / 100 / 12 / (1 - Math.pow(1 + rateNum / 100 / 12, -termNum * 12))))}/month`,
+                `Consider a ${termNum === 30 ? '15' : '30'}-year term — ${termNum === 30 ? 'higher monthly but approximately ' + fmt(Math.round(calc.totalInterest * 0.4)) + ' less interest total' : 'lower monthly payment at higher total interest cost'}`,
+                `Verify your back-end debt-to-income ratio — add all monthly debt payments and ensure total stays below 43% of gross income`,
+                `Check whether waiting 12-18 months to save a larger down payment changes affordability significantly`
+              ]
+            } else {
+              nextActions = [
+                `You will pay ${totalInterestStr} in interest over ${termNum} years — consider making one extra principal payment per year to reduce this by 4-6 years`,
+                `${downPct < 20 ? 'Track your equity — request PMI cancellation as soon as you reach 20% equity (you can request this; lenders must cancel at 22%)' : 'Refinance if rates drop 1%+ below your current rate — model the break-even point before deciding'}`,
+                `Build a home maintenance reserve of 1-2% of home value annually (${fmt(Math.round(homePriceAmt * 0.015 / 12))}/month) — unexpected repairs are the most common cause of financial stress for new homeowners`,
+                `Verify your property tax and insurance estimates — these can change annually and affect your true monthly payment`
+              ]
+            }
+
+            const borderColor = affordTier === 'affordable' ? '#4ade80'
+              : affordTier === 'no-income' ? '#60a5fa'
+              : '#facc15'
+            const labelColor = borderColor
+
+            return (
+              <div style={{
+                background: '#0d1b2a',
+                borderRadius: '16px',
+                padding: '28px 28px 24px',
+                margin: '32px 0 24px',
+                borderLeft: `4px solid ${borderColor}`
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                  <span style={{ fontSize: '22px' }}>🧭</span>
+                  <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                    Now What? Your Mortgage Action Plan
+                  </h3>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Affordability — {calc.affordable === null ? 'Enter Income to Check' : calc.affordable ? '✅ Within 28% Guideline' : '⚠️ Exceeds 28% Guideline'}
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {affordMessage}
+                  </p>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Down Payment — {downPct}% ({downPct >= 20 ? 'No PMI' : 'PMI Required'})
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {downMessage}
+                  </p>
+                </div>
+                <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                  <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                    💡 Total interest cost: {totalInterestStr} over {termNum} years —
+                    {interestRatio}% of your original loan amount.
+                    Making one extra mortgage payment per year reduces a 30-year mortgage
+                    by approximately 4-6 years and saves tens of thousands in interest.
+                  </p>
+                </div>
+                <div>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                    Your Next 4 Actions
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {nextActions.map((action, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                        <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>{i + 1}.</span>
+                        <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>{action}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
           <ShareButtons
             text={`My $${homePrice} mortgage at ${rate}% will cost ${fmt(calc.totalPaid)} total — ${fmt(calc.totalInterest)} in interest alone! Calculate yours (educational only):`}
             url={`https://www.dayblip.com/finance/mortgage-calculator?price=${homePrice}&down=${downPayment}&rate=${rate}&term=${term}`}

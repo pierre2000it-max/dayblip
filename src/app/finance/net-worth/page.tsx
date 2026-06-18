@@ -155,6 +155,152 @@ export default function NetWorthPage() {
             </table>
           </div>
 
+          {/* ── NOW WHAT? Interpretation Layer ── */}
+          {(() => {
+            const nw = calc.netWorth
+            const assets = calc.totalAssets
+            const liabilities = calc.totalLiabilities
+            const ageNum = parseFloat(age) || 0
+            const pctOfMedian = calc.pctOfMedian ? parseFloat(calc.pctOfMedian) : null
+            const hasAge = ageNum > 0
+            const hasData = assets > 0 || liabilities > 0
+
+            if (!hasData) {
+              return (
+                <div style={{
+                  background: '#0d1b2a',
+                  borderRadius: '16px',
+                  padding: '24px 28px',
+                  margin: '32px 0 24px',
+                  borderLeft: '4px solid #60a5fa'
+                }}>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    Enter your assets and liabilities above to see your personalized net worth action plan.
+                  </p>
+                </div>
+              )
+            }
+
+            let tier: 'negative' | 'low' | 'building' | 'established' | 'strong'
+            let tierMessage: string
+
+            if (nw < 0) {
+              tier = 'negative'
+              tierMessage = `Your net worth is -${fmt(Math.abs(nw))} — your liabilities exceed your assets. This is common in your 20s and early 30s (student loans, car loans, mortgages) and is not a crisis if trending in the right direction. The priority: stop the gap from widening. Do not add new liabilities and start directing any cash flow surplus toward the highest-rate debt.`
+            } else if (nw < 50000) {
+              tier = 'low'
+              tierMessage = `Your net worth is ${fmt(nw)} — you are in positive territory and building. The US median net worth is $97,000 (Federal Reserve SCF 2022). The fastest path to closing that gap: eliminate high-interest debt, maximize employer retirement match, and let compound interest work. Every dollar of debt eliminated and invested doubles the net worth impact.`
+            } else if (nw < 250000) {
+              tier = 'building'
+              tierMessage = `Your net worth of ${fmt(nw)} puts you in building territory — above early stages but below the inflection point where compounding significantly accelerates. The primary lever now: increase investable assets relative to depreciating assets (cars, consumer goods). Real estate and retirement accounts at this level are the dominant drivers.`
+            } else if (nw < 1000000) {
+              tier = 'established'
+              tierMessage = `Your net worth of ${fmt(nw)} is established. You are above the US median and building toward financial independence. At this level asset allocation, tax efficiency, and protecting against sequence-of-returns risk become increasingly important. The biggest risk: lifestyle inflation that consumes income that could accelerate the next milestone.`
+            } else {
+              tier = 'strong'
+              tierMessage = `Your net worth of ${fmt(nw)} is strong. At this level you are likely approaching or have reached financial independence territory. Estate planning, asset protection, tax-efficient withdrawal strategies, and legacy planning become high-priority. A fee-only fiduciary advisor generates positive ROI at this net worth level.`
+            }
+
+            let benchmarkMessage: string
+            if (!hasAge) {
+              benchmarkMessage = `Enter your age above to see how your net worth compares to the median for your age group — from Federal Reserve Survey of Consumer Finances data.`
+            } else if (pctOfMedian === null) {
+              benchmarkMessage = `Net worth benchmarks are available for ages 25+. At your stage the most important metric is the direction of your net worth — is it increasing each month?`
+            } else if (pctOfMedian < 50) {
+              benchmarkMessage = `Your net worth is ${calc.pctOfMedian}% of the median for your age group — below the midpoint for your peers. This is a common starting position and closes quickly with consistent investing. The gap between the bottom and median net worth for most age groups can be closed in 5-10 years of disciplined saving.`
+            } else if (pctOfMedian < 150) {
+              benchmarkMessage = `Your net worth is ${calc.pctOfMedian}% of the median for your age group — near or at the median. You are on pace with your peers. The next milestone: reach 2× the median for your age group by increasing savings rate and investment returns.`
+            } else {
+              benchmarkMessage = `Your net worth is ${calc.pctOfMedian}% of the median for your age group — well above your peers. At this level peer comparison becomes less relevant than your own FI number. Use the Dayblip FI Date calculator to find your personal financial independence timeline.`
+            }
+
+            const liabilityRatio = assets > 0 ? Math.round((liabilities / assets) * 100) : 0
+
+            let nextActions: string[]
+            if (tier === 'negative') {
+              nextActions = [
+                `List all liabilities by interest rate — target highest rate first (avalanche) or smallest balance first (snowball) based on your psychology`,
+                `Find the minimum to contribute to 401k to capture full employer match — even while in negative net worth this is typically worth it`,
+                `Track net worth monthly — negative net worth trending toward zero is meaningful progress even if the number is still negative`,
+                `Stop taking on new liabilities — every new loan while net worth is negative compounds the hole`
+              ]
+            } else if (tier === 'low' || tier === 'building') {
+              nextActions = [
+                `Identify your single largest liability — if it is high-interest debt, aggressive payoff is often the highest guaranteed return available`,
+                `Maximize retirement account contributions — 401k and IRA assets count toward net worth and grow tax-advantaged`,
+                `Calculate your net worth monthly or quarterly — tracking creates accountability and reveals the trend`,
+                `Use the Dayblip FI Date calculator to find how your current net worth trajectory maps to financial independence`
+              ]
+            } else if (tier === 'established') {
+              nextActions = [
+                `Review asset allocation — at ${fmt(nw)} net worth, a 10% market correction is a large dollar amount. Ensure allocation matches risk tolerance and timeline`,
+                `Audit tax efficiency — are high-growth assets in tax-advantaged accounts and bonds in taxable accounts?`,
+                `Model your FI number — at this net worth you may be closer to financial independence than you think`,
+                `Ensure estate basics are in place: will, beneficiary designations, and power of attorney`
+              ]
+            } else {
+              nextActions = [
+                `Consult a fee-only fiduciary CFP — at ${fmt(nw)} net worth professional tax and estate planning generates clear positive ROI`,
+                `Review withdrawal sequencing for retirement — order of accounts (taxable, traditional, Roth) significantly affects tax liability`,
+                `Ensure asset protection is in place — liability insurance, umbrella policy, and appropriate entity structure if self-employed`,
+                `Consider Roth conversion ladder if in a lower-income year — converting traditional IRA to Roth at current tax rates`
+              ]
+            }
+
+            const borderColor = tier === 'negative' ? '#e94560'
+              : tier === 'low' ? '#facc15'
+              : tier === 'building' ? '#60a5fa'
+              : tier === 'established' ? '#4ade80'
+              : '#a78bfa'
+            const labelColor = borderColor
+
+            return (
+              <div style={{
+                background: '#0d1b2a',
+                borderRadius: '16px',
+                padding: '28px 28px 24px',
+                margin: '32px 0 24px',
+                borderLeft: `4px solid ${borderColor}`
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                  <span style={{ fontSize: '22px' }}>🧭</span>
+                  <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                    Now What? Your Net Worth Action Plan
+                  </h3>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Net Worth — {nw >= 0 ? fmt(nw) : '-' + fmt(Math.abs(nw))}
+                    {liabilityRatio > 0 ? ` (${liabilityRatio}% Liability Ratio)` : ''}
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {tierMessage}
+                  </p>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    {hasAge ? `Age Benchmark — ${calc.pctOfMedian ?? '—'}% of Median for Age ${ageNum}` : 'Age Benchmark — Enter Age to Compare'}
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {benchmarkMessage}
+                  </p>
+                </div>
+                <div>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                    Your Next 4 Actions
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {nextActions.map((action, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                        <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>{i + 1}.</span>
+                        <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>{action}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
           <ShareButtons
             text="Free net worth calculator with Federal Reserve age benchmarks. (Educational only)"
             url="https://www.dayblip.com/finance/net-worth"

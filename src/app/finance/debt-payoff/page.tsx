@@ -227,11 +227,132 @@ export default function DebtPayoffPage() {
           )}
           <MethodologyNote text="Standard amortization formula applied per payment period. Avalanche method orders debts by highest interest rate; snowball method by lowest balance." />
           {calc && (
-            <ShareButtons
-              text={`Using ${strategy} strategy I'll be debt free in ${calc.months} months and save ${fmt(calc.interestSaved)} in interest! (Educational only)`}
-              url="https://www.dayblip.com/finance/debt-payoff"
-              title="Debt Payoff Calculator"
-            />
+            <>
+              {/* ── NOW WHAT? Interpretation Layer ── */}
+              {(() => {
+                const months = calc.months
+                const years = Math.floor(months / 12)
+                const remainMonths = months % 12
+                const interestSaved = calc.interestSaved
+                const extraAmt = parseFloat(extra) || 0
+
+                let tier: 'urgent' | 'moderate' | 'long' | 'crushing'
+                let tierMessage: string
+
+                if (months <= 12) {
+                  tier = 'urgent'
+                  tierMessage = `You are ${months} month${months === 1 ? '' : 's'} from debt freedom — so close you can see it. At this stage the most important thing is protecting your payoff date. Do not take on any new debt, avoid missing payments, and consider making one extra payment this month to finish even sooner.`
+                } else if (months <= 36) {
+                  tier = 'moderate'
+                  tierMessage = `You will be debt-free in ${years > 0 ? years + ' year' + (years > 1 ? 's' : '') + (remainMonths > 0 ? ' and ' + remainMonths + ' months' : '') : months + ' months'} — a clear, achievable finish line. Stay focused on the plan. The biggest risk at this stage is lifestyle creep eating into your extra payments or taking on new debt before the old is cleared.`
+                } else if (months <= 84) {
+                  tier = 'long'
+                  tierMessage = `Your debt-free date is ${years} year${years > 1 ? 's' : ''} away. The ${strategy === 'avalanche' ? 'avalanche (highest interest first)' : 'snowball (smallest balance first)'} strategy you chose is ${strategy === 'avalanche' ? 'mathematically optimal — minimizing total interest paid' : 'psychologically powerful — early wins build momentum'}. Staying consistent over this timeline is the primary challenge.`
+                } else {
+                  tier = 'crushing'
+                  tierMessage = `At ${years} years to debt freedom, your debt load is significant. This timeline can be compressed dramatically: every $100/month in extra payments materially shortens the timeline. The first priority is stopping new debt accumulation — paying down $500 while adding $300 in new debt is running in place.`
+                }
+
+                const strategyMessage = strategy === 'avalanche'
+                  ? `The avalanche method (highest APR first) minimizes total interest paid — mathematically optimal. You save the most money this way. The psychological challenge: your first payoff may take longer than with the snowball method.`
+                  : `The snowball method (smallest balance first) creates early wins and psychological momentum. Research shows completion rates are higher with snowball for many people. You pay slightly more interest than avalanche but the motivational benefit is real.`
+
+                let extraMessage: string
+                if (extraAmt === 0) {
+                  extraMessage = `You have no extra payment allocated. Adding even $100/month to your debt payoff can shorten your timeline by months or years and save significant interest. Try adding an amount above and recalculate to see the impact.`
+                } else if (interestSaved > 0) {
+                  extraMessage = `Your ${fmt(extraAmt)}/month extra payment saves ${fmt(interestSaved)} in interest. This is one of the highest guaranteed returns available — paying down ${strategy === 'avalanche' ? 'high-interest' : 'your'} debt at your rates is a guaranteed return equal to those rates.`
+                } else {
+                  extraMessage = `Your extra payment of ${fmt(extraAmt)}/month is accelerating your payoff significantly.`
+                }
+
+                let nextActions: string[]
+                if (tier === 'urgent') {
+                  nextActions = [
+                    `Make one extra payment this month — you are close enough that it meaningfully moves the finish line`,
+                    `Plan your "debt-free celebration" spending in advance — give yourself a reward that does not undo the progress`,
+                    `The day you are debt-free: redirect the full payment amount to savings and investing immediately, before lifestyle adjusts`,
+                    `Build a 3-6 month emergency fund with your freed-up cash flow — this prevents the next crisis from creating new debt`
+                  ]
+                } else if (tier === 'moderate') {
+                  nextActions = [
+                    `Automate your extra payment so it never competes with discretionary spending`,
+                    `Look for one windfall to accelerate: tax refund, bonus, or side income applied directly to debt`,
+                    `Review whether balance transfers or personal loans at lower rates could reduce total interest — only if you will not accumulate new balance`,
+                    `Build a $1,000 emergency fund now even while paying debt — this prevents small emergencies from derailing the plan`
+                  ]
+                } else {
+                  nextActions = [
+                    `Find $200-500/month in additional payments — at ${years} years even small increases compound into years saved`,
+                    `Stop all new debt accumulation — new debt while paying off old is the primary reason payoff timelines extend`,
+                    `Consider a side income source directed entirely at debt — even $300/month consistently shortens ${years}-year timelines dramatically`,
+                    `After payoff redirect every dollar of debt payments to investing — your debt payment habit becomes your wealth-building habit`
+                  ]
+                }
+
+                const borderColor = tier === 'urgent' ? '#4ade80'
+                  : tier === 'moderate' ? '#60a5fa'
+                  : tier === 'long' ? '#facc15'
+                  : '#e94560'
+                const labelColor = borderColor
+
+                return (
+                  <div style={{
+                    background: '#0d1b2a',
+                    borderRadius: '16px',
+                    padding: '28px 28px 24px',
+                    margin: '32px 0 24px',
+                    borderLeft: `4px solid ${borderColor}`
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                      <span style={{ fontSize: '22px' }}>🧭</span>
+                      <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                        Now What? Your Debt Payoff Action Plan
+                      </h3>
+                    </div>
+                    <div style={{ marginBottom: '20px' }}>
+                      <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                        Timeline — Debt Free in {years > 0 ? years + 'yr ' : ''}{remainMonths > 0 ? remainMonths + 'mo' : ''}
+                      </p>
+                      <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                        {tierMessage}
+                      </p>
+                    </div>
+                    <div style={{ marginBottom: '20px' }}>
+                      <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                        Strategy — {strategy === 'avalanche' ? 'Avalanche (Highest APR First)' : 'Snowball (Smallest Balance First)'}
+                      </p>
+                      <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                        {strategyMessage}
+                      </p>
+                    </div>
+                    <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                      <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                        💡 {extraMessage}
+                      </p>
+                    </div>
+                    <div>
+                      <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                        Your Next 4 Actions
+                      </p>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        {nextActions.map((action, i) => (
+                          <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                            <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>{i + 1}.</span>
+                            <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>{action}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })()}
+              <ShareButtons
+                text={`Using ${strategy} strategy I'll be debt free in ${calc.months} months and save ${fmt(calc.interestSaved)} in interest! (Educational only)`}
+                url="https://www.dayblip.com/finance/debt-payoff"
+                title="Debt Payoff Calculator"
+              />
+            </>
           )}
           <RelatedTools tools={[
             { emoji: "💳", title: "Minimum Payment Calculator", desc: "The true cost of minimum payments", href: "/tools/minimum-payment" },

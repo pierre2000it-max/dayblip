@@ -203,6 +203,150 @@ export default function BudgetCalculatorPage() {
             </div>
           </div>
 
+          {/* ── NOW WHAT? Interpretation Layer ── */}
+          {(() => {
+            const incomeAmt = parseFloat(income) || 0
+            const needsPct = parseInt(calc.needsPct) || 0
+            const wantsPct = parseInt(calc.wantsPct) || 0
+            const savingsPct = parseInt(calc.savingsPct) || 0
+            const hasActuals = needsPct > 0 || wantsPct > 0 || savingsPct > 0
+
+            if (!hasActuals || incomeAmt === 0) {
+              return (
+                <div style={{
+                  background: '#0d1b2a',
+                  borderRadius: '16px',
+                  padding: '24px 28px',
+                  margin: '32px 0 24px',
+                  borderLeft: '4px solid #60a5fa'
+                }}>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    Enter your income and actual spending above to see your personalized budget action plan based on the 50/30/20 rule.
+                  </p>
+                </div>
+              )
+            }
+
+            const needsGap = needsPct - 50
+            const wantsGap = wantsPct - 30
+            const savingsGap = 20 - savingsPct
+
+            let tier: 'healthy' | 'needs-heavy' | 'wants-heavy' | 'savings-critical' | 'off-track'
+            let tierMessage: string
+
+            if (savingsPct >= 20 && needsPct <= 50 && wantsPct <= 30) {
+              tier = 'healthy'
+              tierMessage = `Your budget is aligned with the 50/30/20 framework — needs at ${needsPct}%, wants at ${wantsPct}%, savings at ${savingsPct}%. This is the target most financial planners recommend as a starting point. The next step: optimize within the savings category (emergency fund first, then retirement, then taxable investing).`
+            } else if (needsPct > 60) {
+              tier = 'needs-heavy'
+              tierMessage = `Your needs category is ${needsPct}% of income — ${needsGap} points above the 50% guideline. When necessities consume more than 60% of income it becomes structurally difficult to save. This often reflects housing costs (the single largest needs expense for most people). The most impactful change: reduce fixed costs — housing, transportation, or insurance — rather than cutting variable spending.`
+            } else if (wantsPct > 40) {
+              tier = 'wants-heavy'
+              tierMessage = `Your wants category is ${wantsPct}% of income — ${wantsGap} points above the 30% guideline. Discretionary spending is the most controllable budget category. Unlike needs (fixed) and savings (should be automated), wants are flexible. Identifying your top 3 wants expenses and cutting the lowest-value ones often yields $200-500/month in redirectable income.`
+            } else if (savingsPct < 10) {
+              tier = 'savings-critical'
+              tierMessage = `Your savings rate is ${savingsPct}% — ${savingsGap} points below the 20% target. At this savings rate financial independence is a very long timeline and any unexpected expense creates debt. The most effective fix: automate savings before spending. Move savings transfers to payday — money that never hits your spending account does not get spent.`
+            } else {
+              tier = 'off-track'
+              tierMessage = `Your budget is off the 50/30/20 framework across multiple categories. This is common — the framework is a target, not a rigid rule. Identify the single largest gap (needs at ${needsPct}%, wants at ${wantsPct}%, savings at ${savingsPct}%) and focus on closing that one gap first rather than optimizing all three simultaneously.`
+            }
+
+            const annualSavings = Math.round(incomeAmt * savingsPct / 100)
+            let savingsMessage: string
+            if (savingsPct === 0) {
+              savingsMessage = `You are saving 0% of your income. Automating even $50/paycheck starts the habit. Increase by $50 every 3 months until you feel the constraint — most people can reach 10% without noticing.`
+            } else if (savingsPct < 10) {
+              savingsMessage = `You are saving ${savingsPct}% (${fmt(annualSavings)}/year). Doubling this to ${savingsPct * 2}% adds ${fmt(annualSavings)} more per year to your financial foundation. Automate the increase on your next payday.`
+            } else if (savingsPct < 20) {
+              savingsMessage = `You are saving ${savingsPct}% (${fmt(annualSavings)}/year) — above average but below the 20% target. Closing the gap to 20% adds ${fmt(Math.round(incomeAmt * (20 - savingsPct) / 100))}/year to your savings rate. Find one recurring expense to cut and redirect it.`
+            } else {
+              savingsMessage = `You are saving ${savingsPct}% (${fmt(annualSavings)}/year) — above the 20% target. Strong savings discipline. Ensure this savings is going into the right accounts: emergency fund first, then retirement accounts (401k, IRA), then taxable investing.`
+            }
+
+            let nextActions: string[]
+            if (tier === 'healthy') {
+              nextActions = [
+                `Optimize your savings stack: emergency fund (3-6 months) → 401k match → HSA → Roth IRA → additional 401k → taxable`,
+                `Review your needs category quarterly — subscriptions and recurring charges creep up silently`,
+                `Increase savings rate by 1% per year — at ${savingsPct}% you are already strong; reaching 25-30% significantly accelerates wealth building`,
+                `Use the Dayblip FI Date calculator to find how your current savings rate maps to financial independence`
+              ]
+            } else if (tier === 'needs-heavy') {
+              nextActions = [
+                `Audit housing cost — if rent or mortgage exceeds 30% of gross income it is the primary budget constraint`,
+                `Review insurance: auto, home/renters, and health premiums are often reducible through shopping or plan changes`,
+                `Consider geographic arbitrage — if remote work is possible moving to a lower cost-of-living area can shift needs from 65% to 45% overnight`,
+                `Find one fixed expense to eliminate or reduce — subscriptions, insurance, or utilities are the most tractable`
+              ]
+            } else if (tier === 'wants-heavy') {
+              nextActions = [
+                `Identify your top 3 wants expenses by dollar amount — these are the highest-leverage cuts`,
+                `Automate savings before your wants spending — pay yourself first so wants spending is residual`,
+                `Apply the 24-hour rule to non-essential purchases above $50 — most impulse wants disappear after sleeping on it`,
+                `Find one wants category to cut by 50% for 30 days — restaurant spending, entertainment, or subscriptions`
+              ]
+            } else {
+              nextActions = [
+                `Automate a savings transfer on payday — even $100/paycheck builds the habit before optimizing the amount`,
+                `Find the single largest controllable expense and cut it — focus beats optimization across many categories`,
+                `Close the needs or wants overage first (your larger gap is ${needsGap > wantsGap ? 'needs at ' + needsPct + '%' : 'wants at ' + wantsPct + '%'}) before targeting savings`,
+                `Rerun this calculator monthly — budget visibility alone changes spending behavior for most people`
+              ]
+            }
+
+            const borderColor = tier === 'healthy' ? '#4ade80'
+              : tier === 'needs-heavy' ? '#e94560'
+              : tier === 'wants-heavy' ? '#facc15'
+              : tier === 'savings-critical' ? '#e94560'
+              : '#60a5fa'
+            const labelColor = borderColor
+
+            return (
+              <div style={{
+                background: '#0d1b2a',
+                borderRadius: '16px',
+                padding: '28px 28px 24px',
+                margin: '32px 0 24px',
+                borderLeft: `4px solid ${borderColor}`
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                  <span style={{ fontSize: '22px' }}>🧭</span>
+                  <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                    Now What? Your Budget Action Plan
+                  </h3>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Budget Health — Needs {needsPct}% / Wants {wantsPct}% / Savings {savingsPct}%
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {tierMessage}
+                  </p>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Savings Rate — {savingsPct}% ({fmt(annualSavings)}/Year)
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {savingsMessage}
+                  </p>
+                </div>
+                <div>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                    Your Next 4 Actions
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {nextActions.map((action, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                        <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>{i + 1}.</span>
+                        <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>{action}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
           <ShareButtons
             text={`50/30/20 budget breakdown for $${income}/month income — free budget planner!`}
             url={`https://www.dayblip.com/finance/budget-calculator?income=${income}`}

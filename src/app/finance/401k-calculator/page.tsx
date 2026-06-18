@@ -166,6 +166,134 @@ export default function FourOhOneKPage() {
             </table>
           </div>
 
+          {/* ── NOW WHAT? Interpretation Layer ── */}
+          {(() => {
+            const salaryAmt = parseFloat(salary) || 0
+            const yourPctNum = parseFloat(yourPct) || 0
+            const matchPctNum = parseFloat(matchPct) || 0
+            const yearsToRetire = parseFloat(retirementAge) - parseFloat(currentAge)
+            const uncapturedMatch = calc.leavingMoney
+              ? Math.round(salaryAmt * (matchPctNum - yourPctNum) / 100)
+              : 0
+
+            let tier: 'no-match' | 'below-match' | 'at-match' | 'above-match' | 'maxed'
+            let tierMessage: string
+            const limit2026 = 23500
+
+            if (yourPctNum === 0) {
+              tier = 'no-match'
+              tierMessage = `You are contributing 0% to your 401k. This is the most expensive financial mistake most Americans make. If your employer matches ${matchPctNum}% and you contribute nothing, you forfeit ${fmt(Math.round(salaryAmt * matchPctNum / 100))}/year in free compensation. Enroll today — it takes 10 minutes and the match is immediate free money.`
+            } else if (calc.leavingMoney) {
+              tier = 'below-match'
+              tierMessage = `You are contributing ${yourPctNum}% but your employer matches up to ${matchPctNum}%. You are forfeiting ${fmt(uncapturedMatch)}/year in employer matching funds — the equivalent of a ${Math.round(uncapturedMatch / salaryAmt * 100)}% pay cut you volunteered for. Increase to ${matchPctNum}% immediately.`
+            } else if (yourPctNum <= matchPctNum + 1) {
+              tier = 'at-match'
+              tierMessage = `You are capturing your full employer match — the most important first step. Your projected balance of ${fmt(Math.round(calc.projected))} generates approximately ${fmt(Math.round(calc.monthlyIncome))}/month in retirement income at a 4% withdrawal rate. The next lever: increase contributions toward the $${limit2026.toLocaleString()} annual limit.`
+            } else if (calc.yourAnnual < limit2026 * 0.9) {
+              tier = 'above-match'
+              tierMessage = `You are contributing above the employer match — strong financial discipline. Your ${fmt(Math.round(calc.yourAnnual))}/year contribution grows to a projected ${fmt(Math.round(calc.projected))} over ${Math.round(yearsToRetire)} years. You have room to increase toward the 2026 limit of $${limit2026.toLocaleString()} for additional tax-deferred growth.`
+            } else {
+              tier = 'maxed'
+              tierMessage = `You are at or near the 2026 401k limit of $${limit2026.toLocaleString()} — exceptional retirement discipline. Your projected ${fmt(Math.round(calc.projected))} balance generates approximately ${fmt(Math.round(calc.monthlyIncome))}/month in retirement income. Next priority: overflow into a backdoor Roth IRA ($7,000) or taxable brokerage account.`
+            }
+
+            let incomeMessage: string
+            if (calc.monthlyIncome < 1000) {
+              incomeMessage = `Your projected ${fmt(Math.round(calc.monthlyIncome))}/month retirement income from this 401k alone is below a comfortable threshold. Social Security (average benefit ~$1,800/month in 2026) and other savings will need to supplement this significantly.`
+            } else if (calc.monthlyIncome < 3000) {
+              incomeMessage = `Your projected ${fmt(Math.round(calc.monthlyIncome))}/month from this 401k provides a meaningful foundation. Combined with Social Security (average ~$1,800/month) you may approach ${fmt(Math.round(calc.monthlyIncome + 1800))}/month total — a starting point for modeling your full retirement income picture.`
+            } else {
+              incomeMessage = `Your projected ${fmt(Math.round(calc.monthlyIncome))}/month from this 401k alone is a strong retirement income foundation. Combined with Social Security and any other savings you are building toward genuine financial independence in retirement.`
+            }
+
+            let nextActions: string[]
+            if (tier === 'no-match' || tier === 'below-match') {
+              nextActions = [
+                `Log into your HR portal today and increase 401k contribution to ${matchPctNum}% — this takes 10 minutes and recaptures ${fmt(Math.round(salaryAmt * matchPctNum / 100))}/year in free money`,
+                `Understand your vesting schedule — employer match may vest gradually (cliff or graded vesting). Know when it becomes fully yours`,
+                `Choose a target-date fund if you are unsure about investment selection — automatically rebalances toward bonds as retirement approaches`,
+                `Set a calendar reminder to increase contribution by 1% every 6 months until you reach 15% total`
+              ]
+            } else if (tier === 'at-match') {
+              nextActions = [
+                `Increase contribution by 2% — the take-home pay impact is smaller than you expect due to pre-tax reduction in federal and state taxes`,
+                `Verify your investment allocation — default fund selections are often too conservative for a ${Math.round(yearsToRetire)}-year timeline`,
+                `Check your vesting status — ensure you understand when employer contributions become 100% yours`,
+                `Open a Roth IRA ($7,000/year) if your income is below the phase-out threshold — complementary tax-free growth`
+              ]
+            } else {
+              nextActions = [
+                tier === 'maxed'
+                  ? `Max is reached — next priority is backdoor Roth IRA ($7,000/year) if income exceeds direct contribution limits`
+                  : `Push toward the $${limit2026.toLocaleString()} limit — each additional $1,000/year at ${parseFloat(returnPct) || 7}% for ${Math.round(yearsToRetire)} years adds ${fmt(Math.round(1000 * (Math.pow(1 + (parseFloat(returnPct) || 7) / 100, yearsToRetire) - 1) / ((parseFloat(returnPct) || 7) / 100)))} to your balance`,
+                `Review asset allocation — at your contribution level a 1% return drag from poor fund selection is thousands over ${Math.round(yearsToRetire)} years`,
+                `Model Social Security claiming age — delaying from 62 to 70 increases benefit by approximately 77%, dramatically changing total retirement income`,
+                `Consider HSA if eligible — triple tax advantage and can be used as a stealth retirement account after 65`
+              ]
+            }
+
+            const borderColor = tier === 'no-match' ? '#e94560'
+              : tier === 'below-match' ? '#facc15'
+              : tier === 'at-match' ? '#60a5fa'
+              : tier === 'above-match' ? '#4ade80'
+              : '#a78bfa'
+            const labelColor = borderColor
+
+            return (
+              <div style={{
+                background: '#0d1b2a',
+                borderRadius: '16px',
+                padding: '28px 28px 24px',
+                margin: '32px 0 24px',
+                borderLeft: `4px solid ${borderColor}`
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                  <span style={{ fontSize: '22px' }}>🧭</span>
+                  <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                    Now What? Your 401k Action Plan
+                  </h3>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Contribution Status — {yourPctNum}% of ${salaryAmt.toLocaleString()} Salary
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {tierMessage}
+                  </p>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Projected Retirement Income — {fmt(Math.round(calc.monthlyIncome))}/Month
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {incomeMessage}
+                  </p>
+                </div>
+                {uncapturedMatch > 0 && (
+                  <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                    <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                      ⚠️ You are forfeiting {fmt(uncapturedMatch)}/year in employer matching funds.
+                      Over {Math.round(yearsToRetire)} years at {parseFloat(returnPct) || 7}% that uncaptured match
+                      would have grown to approximately {fmt(Math.round(uncapturedMatch * (Math.pow(1 + (parseFloat(returnPct) || 7) / 100, yearsToRetire) - 1) / ((parseFloat(returnPct) || 7) / 100)))}.
+                    </p>
+                  </div>
+                )}
+                <div>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                    Your Next 4 Actions
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {nextActions.map((action, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                        <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>{i + 1}.</span>
+                        <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>{action}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
           <ShareButtons
             text={`Investing ${yourPct}% of my $${salary} salary in 401k = ${fmt(calc.projected)} at retirement! (Educational only)`}
             url={`https://www.dayblip.com/finance/401k-calculator?age=${currentAge}&retireage=${retirementAge}&balance=${balance}&salary=${salary}&contrib=${yourPct}&match=${matchPct}&return=${returnPct}`}

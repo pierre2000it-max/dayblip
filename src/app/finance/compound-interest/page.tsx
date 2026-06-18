@@ -184,6 +184,134 @@ export default function CompoundInterestPage() {
             </a>
           </div>
           <MethodologyNote text="Standard compound interest formula A = P(1 + r/n)^(nt). Contributions compound at the selected annual rate, applied monthly." />
+          {/* ── NOW WHAT? Interpretation Layer ── */}
+          {(() => {
+            const initialAmt = parseFloat(initial) || 0
+            const monthlyAmt = parseFloat(monthly) || 0
+            const rateAmt = parseFloat(rate) || 7
+            const multiplier = calc.multiplier
+            const interest = calc.totalInterest
+            const contributions = calc.totalContributions
+            const interestRatio = contributions > 0
+              ? Math.round((interest / contributions) * 100)
+              : 0
+
+            let tier: 'early' | 'building' | 'strong' | 'exceptional'
+            let tierMessage: string
+
+            if (multiplier < 2) {
+              tier = 'early'
+              tierMessage = `Your money grows to ${multiplier.toFixed(2)}× its contributed value over ${years} years. You are in the early compounding phase where time has not yet produced dramatic results. This is exactly where most people give up — and exactly where staying consistent matters most. Every year you continue, the growth curve steepens.`
+            } else if (multiplier < 4) {
+              tier = 'building'
+              tierMessage = `Your money grows to ${multiplier.toFixed(2)}× its contributed value. Compounding is working — interest earned ($${interest.toLocaleString()}) is approaching your total contributions ($${contributions.toLocaleString()}). This ratio keeps improving: at this rate your interest will soon exceed new contributions, making time your most powerful financial asset.`
+            } else if (multiplier < 8) {
+              tier = 'strong'
+              tierMessage = `Your money grows to ${multiplier.toFixed(2)}× its contributed value — compounding is doing significant work. Your interest earned ($${interest.toLocaleString()}) exceeds your total contributions ($${contributions.toLocaleString()}). You are past the inflection point where money earns more than you put in.`
+            } else {
+              tier = 'exceptional'
+              tierMessage = `Your money grows to ${multiplier.toFixed(2)}× its contributed value — exceptional compounding. Interest earned ($${interest.toLocaleString()}) dwarfs contributions ($${contributions.toLocaleString()}). This illustrates why time in the market is the single most important variable in wealth building. The math here is not intuitive — it is exponential.`
+            }
+
+            let ratioMessage: string
+            if (interestRatio < 50) {
+              ratioMessage = `Interest earned represents ${interestRatio}% of your contributions — compounding is starting but time is doing limited work yet. Extending the timeline by even 5 years dramatically changes this ratio.`
+            } else if (interestRatio < 150) {
+              ratioMessage = `Interest earned represents ${interestRatio}% of your contributions — compounding is meaningful. You are earning back roughly $${Math.round(interestRatio / 100)} for every dollar contributed beyond principal.`
+            } else {
+              ratioMessage = `Interest earned is ${interestRatio}% of your contributions — compounding is doing most of the heavy lifting. The market, not your labor, is building your wealth at this stage.`
+            }
+
+            let nextActions: string[]
+            if (tier === 'early') {
+              nextActions = [
+                `Increase the years — even 5 additional years at this rate transforms the outcome dramatically`,
+                `Automate your $${monthlyAmt > 0 ? monthlyAmt.toLocaleString() : 'monthly'} contribution so you never miss a month — consistency beats optimization`,
+                `Do not interrupt compounding — the cost of stopping contributions for 2 years is often larger than the total amount saved in those years`,
+                `Open a Roth IRA if eligible — same compounding math with zero tax on the growth`
+              ]
+            } else if (tier === 'building') {
+              nextActions = [
+                `Increase monthly contributions — you are approaching the inflection point where interest exceeds new money. Adding more now has outsized impact`,
+                `Verify your ${rateAmt}% return assumption — a diversified index fund portfolio has historically returned 7-10% long-term`,
+                `Protect against sequence-of-returns risk if this timeline approaches retirement — shift toward bonds as the date nears`,
+                `Reinvest all dividends — dividend reinvestment is a significant component of long-term compounding that many investors overlook`
+              ]
+            } else if (tier === 'strong') {
+              nextActions = [
+                `Your interest now exceeds contributions — protect this by never interrupting the compounding chain`,
+                `Review asset allocation — at this balance level a 10% market correction is a large dollar amount. Ensure allocation matches your risk tolerance`,
+                `Consider tax efficiency — at your projected balance, tax drag on dividends and capital gains in taxable accounts becomes meaningful`,
+                `Model the impact of a 1% return increase — at this scale even small return improvements produce large absolute dollar differences`
+              ]
+            } else {
+              nextActions = [
+                `Sequence-of-returns risk is your primary concern at this multiplier — build a 3-5 year cash/bond buffer before retirement`,
+                `Tax planning becomes critical at this balance — Roth conversions, tax-loss harvesting, and withdrawal sequencing matter significantly`,
+                `Review your safe withdrawal rate assumption — at this balance a 3.5% rate instead of 4% adds significant longevity protection`,
+                `Consider a fee-only fiduciary advisor — at this projected balance professional tax and estate planning generates positive ROI`
+              ]
+            }
+
+            const borderColor = tier === 'early' ? '#60a5fa'
+              : tier === 'building' ? '#4ade80'
+              : tier === 'strong' ? '#a78bfa'
+              : '#e94560'
+            const labelColor = borderColor
+
+            return (
+              <div style={{
+                background: '#0d1b2a',
+                borderRadius: '16px',
+                padding: '28px 28px 24px',
+                margin: '32px 0 24px',
+                borderLeft: `4px solid ${borderColor}`
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                  <span style={{ fontSize: '22px' }}>🧭</span>
+                  <h3 style={{ color: '#ffffff', fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                    Now What? Your Compounding Action Plan
+                  </h3>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Growth — {multiplier.toFixed(2)}× Multiplier Over {years} Years
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {tierMessage}
+                  </p>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    Interest vs Contributions — {interestRatio}% Ratio
+                  </p>
+                  <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.7', margin: 0 }}>
+                    {ratioMessage}
+                  </p>
+                </div>
+                <div style={{ background: '#1e2d4a', borderRadius: '10px', padding: '14px 18px', marginBottom: '20px' }}>
+                  <p style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.7', margin: 0, fontWeight: '600' }}>
+                    ⏰ Rule of 72: At {rateAmt}% return your money doubles every {calc.rule72} years.
+                    That means ${initialAmt > 0 ? initialAmt.toLocaleString() : 'your initial investment'} becomes
+                    twice as large by year {calc.rule72} — without adding another dollar.
+                  </p>
+                </div>
+                <div>
+                  <p style={{ color: labelColor, fontSize: '11px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                    Your Next 4 Actions
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {nextActions.map((action, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                        <span style={{ color: borderColor, fontSize: '14px', fontWeight: '800', minWidth: '20px', marginTop: '1px' }}>{i + 1}.</span>
+                        <p style={{ color: '#a8a8b3', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>{action}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
           <ShareButtons
             text={`$${monthly}/month invested for ${years} years = ${fmt(calc.finalBalance)}! Only ${fmt(calc.totalContributions)} is my money, the rest is compound interest 📈 (Educational only)`}
             url={`https://www.dayblip.com/finance/compound-interest?principal=${initial}&monthly=${monthly}&rate=${rate}&years=${years}`}
