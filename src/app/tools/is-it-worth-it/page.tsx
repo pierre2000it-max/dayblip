@@ -32,6 +32,12 @@ const tools = [
     title: 'Cable vs Streaming',
     desc: 'Is cutting the cord worth it? Compare your total streaming bill to cable.',
     href: '/tools/is-it-worth-it/cable-vs-streaming'
+  },
+  {
+    emoji: '🛍️',
+    title: 'Black Friday Deal Analyzer',
+    desc: 'Is that deal actually real or did they inflate the price? Find out in seconds.',
+    href: '/tools/is-it-worth-it/black-friday-deal'
   }
 ]
 

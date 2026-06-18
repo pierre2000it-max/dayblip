@@ -235,6 +235,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/tools/is-it-worth-it/degree-vs-bootcamp",     0.8),
     p("/tools/is-it-worth-it/gym-membership",         0.8),
     p("/tools/is-it-worth-it/cable-vs-streaming",     0.8),
+    p("/tools/is-it-worth-it/black-friday-deal",      0.8),
 
     // ═══════════════════════════════════════════════════════════════════════
     // HEALTH CALCULATORS  (priority 0.9, monthly)
