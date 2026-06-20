@@ -90,13 +90,14 @@ export default async function SalaryPage({ params }: Props) {
   const datasetSchema = {
     '@context': 'https://schema.org',
     '@type': 'Dataset',
-    name: `${entry.job} Salary in ${state.name} 2024`,
+    name: `${entry.job} Salary in ${state.name} 2026`,
     description: `Average annual salary for ${entry.blsTitle} in ${state.name} from BLS OES 2024-2025`,
     url: `https://www.dayblip.com/salary/${slug}`,
     creator: { '@type': 'Organization', name: 'Dayblip', url: 'https://www.dayblip.com' },
     publisher: { '@type': 'Organization', name: 'U.S. Bureau of Labor Statistics', url: 'https://www.bls.gov' },
-    temporalCoverage: '2024',
-    spatialCoverage: { '@type': 'State', name: state.name, containedInPlace: { '@type': 'Country', name: 'United States' } },
+    license: 'https://creativecommons.org/licenses/by/4.0/',
+    temporalCoverage: '2024-2025',
+    spatialCoverage: { '@type': 'Place', name: state.name },
     variableMeasured: 'Mean Annual Wage',
   }
 
@@ -148,7 +149,7 @@ export default async function SalaryPage({ params }: Props) {
             ${stateSalary.toLocaleString()}
           </div>
           <div style={{ color: '#a8a8b3', fontSize: '15px' }}>
-            {entry.job} &bull; {state.name} &bull; 2024
+            {entry.job} &bull; {state.name} &bull; 2026
           </div>
         </div>
 
