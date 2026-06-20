@@ -141,7 +141,7 @@ const datasetSchema = {
   datePublished: "2026-06-13",
   license: "https://creativecommons.org/licenses/by/4.0/",
   variableMeasured: ["Annual take-home pay", "Effective total tax rate"],
-  spatialCoverage: "United States",
+  spatialCoverage: { "@type": "Place", name: "United States" },
   temporalCoverage: "2026",
 }
 
