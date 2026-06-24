@@ -411,6 +411,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/blog/is-college-worth-it",                 0.8, MONTHLY),
     p("/blog/how-much-to-save-in-401k",            0.8, MONTHLY),
     p("/blog/true-cost-of-commuting",              0.8, MONTHLY),
+    p("/blog/how-to-build-emergency-fund",         0.8, MONTHLY),
+    p("/blog/true-cost-of-minimum-payments",       0.8, MONTHLY),
+    p("/blog/what-is-a-hysa",                      0.8, MONTHLY),
+    p("/blog/how-to-read-your-w2",                 0.8, MONTHLY),
+    p("/blog/renting-vs-buying-2026",              0.8, MONTHLY),
+    p("/blog/what-is-a-roth-ira",                  0.8, MONTHLY),
+    p("/blog/how-much-house-can-i-afford",         0.8, MONTHLY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // LEGAL PAGES  (priority 0.3, monthly)

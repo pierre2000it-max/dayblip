@@ -291,6 +291,13 @@ const urls = [
   "https://www.dayblip.com/blog/is-college-worth-it",
   "https://www.dayblip.com/blog/how-much-to-save-in-401k",
   "https://www.dayblip.com/blog/true-cost-of-commuting",
+  "https://www.dayblip.com/blog/how-to-build-emergency-fund",
+  "https://www.dayblip.com/blog/true-cost-of-minimum-payments",
+  "https://www.dayblip.com/blog/what-is-a-hysa",
+  "https://www.dayblip.com/blog/how-to-read-your-w2",
+  "https://www.dayblip.com/blog/renting-vs-buying-2026",
+  "https://www.dayblip.com/blog/what-is-a-roth-ira",
+  "https://www.dayblip.com/blog/how-much-house-can-i-afford",
 ];
 
 // Born-in pages 1940–2020

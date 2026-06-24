@@ -220,6 +220,62 @@ const articles = [
     readTime: "5 min read",
     href: "/blog/true-cost-of-commuting",
   },
+  {
+    category: "Finance",
+    title: "How to Build a 6-Month Emergency Fund — Step by Step",
+    excerpt:
+      "The average American household needs $14,400-$28,800. Where to keep it in 2026, how much to save monthly, and the exact step-by-step build plan.",
+    readTime: "6 min read",
+    href: "/blog/how-to-build-emergency-fund",
+  },
+  {
+    category: "Finance",
+    title: "The True Cost of Credit Card Minimum Payments",
+    excerpt:
+      "A $5,000 balance at 19.99% APR costs $6,270 in interest on minimum payments. Paying $200/month instead saves $5,108 and 12.5 years.",
+    readTime: "5 min read",
+    href: "/blog/true-cost-of-minimum-payments",
+  },
+  {
+    category: "Finance",
+    title: "What Is a HYSA and Should You Open One in 2026?",
+    excerpt:
+      "The best HYSAs pay 3.80-4.50% APY vs 0.38% national average. On $20,000 that is $774 more per year with identical risk.",
+    readTime: "5 min read",
+    href: "/blog/what-is-a-hysa",
+  },
+  {
+    category: "Finance",
+    title: "How to Read Your W-2 Form — Every Box Explained",
+    excerpt:
+      "Box 1 is not your salary. Box 3 is often different from Box 1. Box 12 has 30+ codes. Every W-2 box explained in plain English.",
+    readTime: "6 min read",
+    href: "/blog/how-to-read-your-w2",
+  },
+  {
+    category: "Real Estate",
+    title: "Renting vs Buying a Home in 2026 — The Real Break-Even Math",
+    excerpt:
+      "Buying a $350,000 home at 7% costs $2,800-3,200/month total. The break-even vs renting is 5-8 years in most US markets right now.",
+    readTime: "7 min read",
+    href: "/blog/renting-vs-buying-2026",
+  },
+  {
+    category: "Retirement",
+    title: "What Is a Roth IRA and Who Should Open One?",
+    excerpt:
+      "$7,000/year at 7% for 30 years = ~$706,000 tax-free. The 2026 contribution limit, income rules, and how to open one in 15 min.",
+    readTime: "6 min read",
+    href: "/blog/what-is-a-roth-ira",
+  },
+  {
+    category: "Real Estate",
+    title: "How Much House Can I Actually Afford? The Full Calculation",
+    excerpt:
+      "Banks approve 28% of gross income. Planners recommend 25% of net. On a $75,000 salary those are very different numbers.",
+    readTime: "6 min read",
+    href: "/blog/how-much-house-can-i-afford",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]
