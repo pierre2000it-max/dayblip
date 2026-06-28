@@ -363,16 +363,9 @@ async function main() {
   console.log("=".repeat(48));
   console.log();
 
-  // ── STEP 1: Google sitemap ping ──────────────
-  console.log("1. Pinging Google...");
-  try {
-    const res = await fetch(
-      "https://www.google.com/ping?sitemap=" + encodeURIComponent(SITEMAP_URL)
-    );
-    console.log(`   Google: HTTP ${res.status} ${res.ok ? "✅" : "⚠️"}`);
-  } catch (e) {
-    console.log(`   Google: Failed — ${e.message}`);
-  }
+  // ── STEP 1: Google sitemap ping (deprecated — returns 404, skipped) ─────
+  // Google retired the /ping endpoint; sitemap is auto-discovered via GSC.
+  console.log("1. Google ping skipped (endpoint deprecated — sitemap auto-discovered).");
 
   // ── STEP 2: Bing sitemap ping (deprecated — returns 410, skipped) ───────
   // Bing retired the /ping endpoint; submit via IndexNow below instead.
