@@ -96,7 +96,7 @@ export default async function SalaryPage({ params }: Props) {
     creator: { '@type': 'Organization', name: 'Dayblip', url: 'https://www.dayblip.com' },
     publisher: { '@type': 'Organization', name: 'U.S. Bureau of Labor Statistics', url: 'https://www.bls.gov' },
     license: 'https://creativecommons.org/licenses/by/4.0/',
-    temporalCoverage: '2024-2025',
+    temporalCoverage: '2024/2025',
     spatialCoverage: { '@type': 'Place', name: state.name },
     variableMeasured: 'Mean Annual Wage',
   }

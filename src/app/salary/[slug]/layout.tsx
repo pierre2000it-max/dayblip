@@ -12,7 +12,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${entry.job} Salary in ${state.name} 2026 | Dayblip`,
     description: `The average ${entry.job.toLowerCase()} salary in ${state.name} is ${formatted} per year (BLS OES 2024-2025). See how ${state.name} compares to the national median of $${entry.national.toLocaleString()}.`,
-    robots: { index: false, follow: false },
     alternates: { canonical: `https://www.dayblip.com/salary/${slug}` },
     openGraph: {
       title: `${entry.job} Salary in ${state.name} 2026 | Dayblip`,
