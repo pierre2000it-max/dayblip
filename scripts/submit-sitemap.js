@@ -374,16 +374,9 @@ async function main() {
     console.log(`   Google: Failed — ${e.message}`);
   }
 
-  // ── STEP 2: Bing sitemap ping ─────────────────
-  console.log("2. Pinging Bing...");
-  try {
-    const res = await fetch(
-      "https://www.bing.com/ping?sitemap=" + encodeURIComponent(SITEMAP_URL)
-    );
-    console.log(`   Bing: HTTP ${res.status} ${res.ok ? "✅" : "⚠️"}`);
-  } catch (e) {
-    console.log(`   Bing: Failed — ${e.message}`);
-  }
+  // ── STEP 2: Bing sitemap ping (deprecated — returns 410, skipped) ───────
+  // Bing retired the /ping endpoint; submit via IndexNow below instead.
+  console.log("2. Bing ping skipped (endpoint deprecated — use IndexNow).");
 
   // ── STEP 3: IndexNow submissions ──────────────
   console.log();

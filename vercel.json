@@ -12,11 +12,5 @@
         { "key": "X-Robots-Tag",  "value": "noindex" }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/272eea5409654b49b404dee73c5f0bfb.txt",
-      "destination": "/272eea5409654b49b404dee73c5f0bfb.txt"
-    }
   ]
 }
