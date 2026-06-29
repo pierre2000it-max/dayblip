@@ -4,5 +4,6 @@ export const metadata: Metadata = {
   title: "How Many Weekends Do You Have Left?",
   description: "Calculate how many weekends you have left in your life. A thought-provoking countdown to make the most of your time.",
   keywords: ["how many weekends left", "weekends remaining", "weekends left in life", "life weekends calculator"],
+  alternates: { canonical: "https://www.dayblip.com/weekends-left" },
 };
 export default function WeekendsLeftPage() { return <WeekendsLeftTool />; }
