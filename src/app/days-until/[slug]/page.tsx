@@ -121,7 +121,7 @@ export async function generateMetadata({
       ? intro.length > 160 ? `${intro.slice(0, 157).trimEnd()}...` : intro
       : `How many days until ${holiday.name}? Live countdown to ${holiday.name} ${year}. Updated in real time.`);
   const description = descriptionText;
-  const url = `/days-until/${params.slug}`;
+  const url = `https://www.dayblip.com/days-until/${params.slug}`;
   return {
     title,
     description,

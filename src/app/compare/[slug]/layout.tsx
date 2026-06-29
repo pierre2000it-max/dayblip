@@ -34,7 +34,6 @@ export async function generateMetadata(
     return {
       title,
       description,
-      robots: { index: false, follow: false },
       alternates: { canonical: `https://www.dayblip.com/compare/${slug}` },
       openGraph: {
         title,
@@ -59,7 +58,6 @@ export async function generateMetadata(
     return {
       title,
       description,
-      robots: { index: false, follow: false },
       alternates: { canonical: `https://www.dayblip.com/compare/${slug}` },
       openGraph: {
         title,
@@ -79,7 +77,6 @@ export async function generateMetadata(
   return {
     title: 'Comparison | Dayblip',
     description: 'Side by side comparison tool. Free — no signup required.',
-    robots: { index: false, follow: false }
   }
 }
 

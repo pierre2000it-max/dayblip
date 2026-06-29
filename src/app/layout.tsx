@@ -14,7 +14,7 @@ const DEFAULT_DESCRIPTION =
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE),
-  alternates: { canonical: "/" },
+  alternates: { canonical: "https://www.dayblip.com/" },
   title: {
     template: "%s | Dayblip",
     default: "Dayblip — Free Tools for Curious Minds",

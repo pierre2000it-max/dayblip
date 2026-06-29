@@ -75,10 +75,8 @@ const urls = [
   "https://www.dayblip.com/time-machine",
 
   // Tool hub pages
-  "https://www.dayblip.com/tools/finance",
   "https://www.dayblip.com/tools/life-money",
   "https://www.dayblip.com/tools/misconceptions",
-  "https://www.dayblip.com/tools/curiosity",
 
   // Finance calculators
   "https://www.dayblip.com/finance/compound-interest",

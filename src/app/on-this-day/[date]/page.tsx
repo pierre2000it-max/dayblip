@@ -160,7 +160,7 @@ export async function generateMetadata({
   const label  = parsed ? `${MONTH_DISPLAY[parsed.month - 1]} ${ordinal(parsed.day)}` : params.date;
   const title  = `What Happened on ${label}? Historical Events | Dayblip`;
   const desc   = `Discover what happened on ${label} in history. Famous birthdays, major events and historical facts.`;
-  const url    = `/on-this-day/${params.date}`;
+  const url    = `https://www.dayblip.com/on-this-day/${params.date}`;
   return {
     title,
     description: desc,
