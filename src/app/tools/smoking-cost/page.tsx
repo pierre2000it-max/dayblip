@@ -83,7 +83,7 @@ export default function SmokingCostPage() {
   function downloadShareImage() {
     if (!result) return
     const trueCost = result.totalSpent + result.investmentValue
-    generateShareImage({
+    void generateShareImage({
       title: "My True Cost of Smoking",
       primaryStat: fmt(trueCost),
       primaryLabel: "total true lifetime cost",

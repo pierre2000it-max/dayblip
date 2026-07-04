@@ -473,7 +473,7 @@ export default function BirthdayTwinsTool() {
   function downloadShareImage() {
     if (!searched || people.length === 0) return
     const twinStats = people.slice(0, 2).map((p, i) => ({ label: `Twin ${i + 1}`, value: p.name }))
-    generateShareImage({
+    void generateShareImage({
       title: "My Celebrity Birthday Twins",
       primaryStat: dateLabel,
       primaryLabel: "your birthday",

@@ -68,7 +68,7 @@ export default function DaysAliveTool() {
 
   function downloadShareImage() {
     if (!results) return
-    generateShareImage({
+    void generateShareImage({
       title: "My Days Alive",
       primaryStat: daysOld.toLocaleString(),
       primaryLabel: "days alive",

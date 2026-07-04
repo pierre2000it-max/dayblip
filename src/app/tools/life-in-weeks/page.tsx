@@ -86,7 +86,7 @@ export default function LifeInWeeksPage() {
 
   function downloadShareImage() {
     if (!result) return
-    generateShareImage({
+    void generateShareImage({
       title: "My Life in Weeks",
       primaryStat: result.weeksRemaining.toLocaleString(),
       primaryLabel: "weeks remaining",

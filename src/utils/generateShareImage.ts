@@ -18,12 +18,14 @@ export interface ShareImageOptions {
     cols: 52
     rows: number
   }
+  /** Optional background image URL — draws image + dark overlay instead of gradient */
+  backgroundImageUrl?: string
 }
 
-export function generateShareImage(opts: ShareImageOptions): void {
+export async function generateShareImage(opts: ShareImageOptions): Promise<void> {
   const {
     title, primaryStat, primaryLabel, stats, tagline, toolUrl,
-    filename = "dayblip-result.png", grid,
+    filename = "dayblip-result.png", grid, backgroundImageUrl,
   } = opts
 
   const SIZE = 1080
@@ -33,14 +35,33 @@ export function generateShareImage(opts: ShareImageOptions): void {
   const ctx = canvas.getContext("2d")!
 
   // ── Background ────────────────────────────────────────────────
-  ctx.fillStyle = "#0f1117"
-  ctx.fillRect(0, 0, SIZE, SIZE)
+  if (backgroundImageUrl) {
+    await new Promise<void>(resolve => {
+      const img = new Image()
+      img.crossOrigin = "anonymous"
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, SIZE, SIZE)
+        ctx.fillStyle = "rgba(0,0,0,0.6)"
+        ctx.fillRect(0, 0, SIZE, SIZE)
+        resolve()
+      }
+      img.onerror = () => {
+        ctx.fillStyle = "#0f1117"
+        ctx.fillRect(0, 0, SIZE, SIZE)
+        resolve()
+      }
+      img.src = backgroundImageUrl
+    })
+  } else {
+    ctx.fillStyle = "#0f1117"
+    ctx.fillRect(0, 0, SIZE, SIZE)
 
-  const grad = ctx.createLinearGradient(0, 0, SIZE * 0.6, SIZE * 0.4)
-  grad.addColorStop(0, "rgba(15,52,96,0.5)")
-  grad.addColorStop(1, "rgba(15,17,23,0)")
-  ctx.fillStyle = grad
-  ctx.fillRect(0, 0, SIZE, SIZE)
+    const grad = ctx.createLinearGradient(0, 0, SIZE * 0.6, SIZE * 0.4)
+    grad.addColorStop(0, "rgba(15,52,96,0.5)")
+    grad.addColorStop(1, "rgba(15,17,23,0)")
+    ctx.fillStyle = grad
+    ctx.fillRect(0, 0, SIZE, SIZE)
+  }
 
   const PAD = 64
   const FONT = "system-ui,sans-serif"

@@ -41,7 +41,7 @@ export default function EarthOrbitsTool() {
 
   function downloadShareImage() {
     if (!result) return
-    generateShareImage({
+    void generateShareImage({
       title: "My Earth Orbits",
       primaryStat: String(result.orbits),
       primaryLabel: "orbits around the sun",

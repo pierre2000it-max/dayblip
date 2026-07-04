@@ -99,7 +99,7 @@ export default function LifeProgressTool() {
 
   function downloadShareImage() {
     if (!result) return
-    generateShareImage({
+    void generateShareImage({
       title: "My Life Progress",
       primaryStat: `${result.pct}%`,
       primaryLabel: "through your life",

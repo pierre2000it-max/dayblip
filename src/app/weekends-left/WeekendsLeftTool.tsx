@@ -37,7 +37,7 @@ export default function WeekendsLeftTool() {
   function downloadShareImage() {
     if (!result) return
     const age = Math.floor((Date.now() - new Date(dob + "T00:00:00").getTime()) / 86400000 / 365.25)
-    generateShareImage({
+    void generateShareImage({
       title: "Weekends Left in My Life",
       primaryStat: commas(result.remaining),
       primaryLabel: "weekends remaining",

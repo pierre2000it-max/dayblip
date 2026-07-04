@@ -14,4 +14,6 @@ export interface Countdown {
   theme: "dark" | "light"
   created_at: string
   view_count: number
+  photo_url: string | null
+  delete_token: string | null
 }

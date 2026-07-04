@@ -91,7 +91,7 @@ export default function TrueHourlyWagePage() {
 
   function downloadShareImage() {
     if (!result) return
-    generateShareImage({
+    void generateShareImage({
       title: "My True Hourly Wage",
       primaryStat: `$${result.trueHourly.toFixed(2)}`,
       primaryLabel: "true hourly rate",

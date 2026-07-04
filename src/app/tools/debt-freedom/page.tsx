@@ -143,7 +143,7 @@ export default function DebtFreedomPage() {
 
   function downloadShareImage() {
     if (!result) return
-    generateShareImage({
+    void generateShareImage({
       title: "My Debt Freedom Date",
       primaryStat: result.daysAway.toLocaleString(),
       primaryLabel: "days until debt freedom",

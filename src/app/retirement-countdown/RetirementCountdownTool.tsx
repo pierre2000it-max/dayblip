@@ -63,7 +63,7 @@ export default function RetirementCountdownTool() {
 
   function downloadShareImage() {
     if (!retDate || retired) return
-    generateShareImage({
+    void generateShareImage({
       title: "My Retirement Countdown",
       primaryStat: timeLeft.d.toLocaleString(),
       primaryLabel: "days until retirement",

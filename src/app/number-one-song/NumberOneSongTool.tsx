@@ -93,7 +93,7 @@ export default function NumberOneSongTool() {
 
   function downloadShareImage() {
     if (!result) return
-    generateShareImage({
+    void generateShareImage({
       title: "#1 Song When I Was Born",
       primaryStat: result.data.year.toString(),
       primaryLabel: "the year you were born",

@@ -53,7 +53,7 @@ export default function CompoundInterestPage() {
   }, [initial, monthly, rate, years])
 
   function downloadShareImage() {
-    generateShareImage({
+    void generateShareImage({
       title: "My Compound Interest",
       primaryStat: fmt(calc.finalBalance),
       primaryLabel: `projected balance in ${years} years`,

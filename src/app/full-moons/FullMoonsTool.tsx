@@ -97,7 +97,7 @@ export default function FullMoonsTool() {
 
   function downloadShareImage() {
     if (!result) return
-    generateShareImage({
+    void generateShareImage({
       title: "Full Moons Since I Was Born",
       primaryStat: result.moons.toLocaleString(),
       primaryLabel: "full moons in your lifetime",
