@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "How Much Should You Have Saved by Age? The Benchmarks Explained | Dayblip",
+  title: "How Much Should You Have Saved by Age? The Benchmarks Explained",
   description:
     "The savings benchmarks by age explained — where they come from, what they assume, and how to interpret them for your actual situation.",
   alternates: { canonical: "https://www.dayblip.com/blog/how-much-saved-by-age" },

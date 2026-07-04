@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 export const metadata: Metadata = {
-  title: "Side Hustle Income Calculator — What Could You Earn? | Dayblip",
+  title: "Side Hustle Income Calculator — What Could You Earn?",
   description: "Find your ideal side hustle based on your skills and time. Calculate realistic monthly income potential. Free.",
   alternates: { canonical: "https://www.dayblip.com/tools/side-hustle" },
 }

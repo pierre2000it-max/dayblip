@@ -97,7 +97,7 @@ const HOLIDAY_META_DESCRIPTIONS: Record<string, string> = {
 
 // ── Per-slug title overrides (for better CTR on specific search queries) ──────
 const HOLIDAY_TITLE_OVERRIDES: Record<string, string> = {
-  "summer-break": "Days Until Summer Break 2026 — Live Countdown | Dayblip",
+  "summer-break": "Days Until Summer Break 2026 — Live Countdown",
 };
 
 // ── Metadata ─────────────────────────────────────────────────────────────────

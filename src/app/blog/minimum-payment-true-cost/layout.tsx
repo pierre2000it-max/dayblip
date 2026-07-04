@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "True Cost of Credit Card Minimum Payments | Dayblip Blog",
+  title: "True Cost of Credit Card Minimum Payments",
   description:
     "Paying minimums on $8,000 at 19.99% takes 27 years and costs $16,247 in interest. Adding $100 per month saves $13,400 and 23 years.",
   alternates: { canonical: "https://www.dayblip.com/blog/minimum-payment-true-cost" },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "The Real Cost of Trying to Time the Stock Market | Dayblip",
+  title: "The Real Cost of Trying to Time the Stock Market",
   description:
     "Missing just 10 of the market's best days over 20 years can cut your returns by more than half. Those days almost always follow the worst days.",
   alternates: { canonical: "https://www.dayblip.com/blog/market-timing-cost" },

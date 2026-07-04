@@ -8,12 +8,12 @@ import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
 
 export const metadata: Metadata = {
-  title: "Year Progress 2026 — How Much of the Year Is Left? | Dayblip",
+  title: "Year Progress 2026 — How Much of the Year Is Left?",
   description:
     "See exactly how much of 2026 is complete and how many days remain. Live year progress bar updated in real time — see where 2026 stands right now.",
   alternates: { canonical: "https://www.dayblip.com/tools/this-year-progress" },
   openGraph: {
-    title: "Year Progress 2026 — How Much of the Year Is Left? | Dayblip",
+    title: "Year Progress 2026 — How Much of the Year Is Left?",
     description:
       "See exactly how much of 2026 is complete and how many days remain. Live year progress bar updated in real time — see where 2026 stands right now.",
     url: "https://www.dayblip.com/tools/this-year-progress",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Year Progress 2026 — How Much of the Year Is Left? | Dayblip",
+    title: "Year Progress 2026 — How Much of the Year Is Left?",
     description:
       "See exactly how much of 2026 is complete and how many days remain. Live year progress bar updated in real time — see where 2026 stands right now.",
     images: ["https://www.dayblip.com/api/og/tools"],

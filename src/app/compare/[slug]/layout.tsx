@@ -29,7 +29,7 @@ export async function generateMetadata(
   if (type === 'city') {
     const cityA = cities.find(c => c.slug === aSlug)!
     const cityB = cities.find(c => c.slug === bSlug)!
-    const title = `${cityA.name} vs ${cityB.name} — Cost of Living Comparison | Dayblip`
+    const title = `${cityA.name} vs ${cityB.name} — Cost of Living Comparison`
     const description = `Compare cost of living between ${cityA.name} and ${cityB.name}. Housing, groceries, transport, healthcare side by side. COLI: ${cityA.name} ${cityA.coliIndex} vs ${cityB.name} ${cityB.coliIndex}. Free.`.slice(0, 155)
     return {
       title,
@@ -53,7 +53,7 @@ export async function generateMetadata(
   if (type === 'job') {
     const jobA = SALARY_DATA.find(j => j.slug === aSlug)!
     const jobB = SALARY_DATA.find(j => j.slug === bSlug)!
-    const title = `${jobA.job} vs ${jobB.job} Salary Comparison | Dayblip`
+    const title = `${jobA.job} vs ${jobB.job} Salary Comparison`
     const description = `Compare ${jobA.job} and ${jobB.job} salaries nationwide. National median: ${jobA.job} $${jobA.national.toLocaleString()} vs ${jobB.job} $${jobB.national.toLocaleString()}. BLS 2024-2025. Free.`.slice(0, 155)
     return {
       title,
@@ -75,7 +75,7 @@ export async function generateMetadata(
   }
 
   return {
-    title: 'Comparison | Dayblip',
+    title: 'Comparison',
     description: 'Side by side comparison tool. Free — no signup required.',
   }
 }

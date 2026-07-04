@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Your $75,000 Salary Is Worth Very Different Amounts by State — 2026 Data | Dayblip",
+  title: "Your $75,000 Salary Is Worth Very Different Amounts by State — 2026 Data",
   description:
     "A $75,000 salary takes home $61,390 in Texas and $56,972 in Hawaii. Full 50-state 2026 take-home breakdown with IRS and Tax Foundation sources. No signup.",
   alternates: { canonical: "https://www.dayblip.com/blog/paycheck-by-state-2026" },

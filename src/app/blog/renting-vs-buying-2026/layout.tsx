@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Renting vs Buying a Home in 2026 — The Real Break-Even Math | Dayblip",
+  title: "Renting vs Buying a Home in 2026 — The Real Break-Even Math",
   description:
     "At current mortgage rates buying a $350,000 home costs $2,800-3,200/month in true total costs. The break-even point where buying wins financially is 5-8 years in most markets. The full calculation most people skip.",
   alternates: { canonical: "https://www.dayblip.com/blog/renting-vs-buying-2026" },

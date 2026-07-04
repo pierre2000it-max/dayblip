@@ -1,4 +1,4 @@
-﻿import type { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import Header from "@/components/Header";
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE),
   alternates: { canonical: "https://www.dayblip.com/" },
   title: {
-    template: "%s | Dayblip",
+    template: "%s",
     default: "Dayblip — Free Tools for Curious Minds",
   },
   description: DEFAULT_DESCRIPTION,

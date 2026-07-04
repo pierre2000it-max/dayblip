@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Roth IRA vs Traditional IRA: The Decision That Comes Down to One Question | Dayblip",
+  title: "Roth IRA vs Traditional IRA: The Decision That Comes Down to One Question",
   description:
     "Roth vs traditional IRA comes down to one question: will your tax rate be higher now or in retirement? Here is how to decide.",
   alternates: { canonical: "https://www.dayblip.com/blog/roth-ira-vs-traditional-ira" },

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms of Use | Dayblip",
+  title: "Terms of Use",
   description: "Dayblip terms of use — the rules governing use of dayblip.com.",
   robots: { index: false, follow: false },
 };

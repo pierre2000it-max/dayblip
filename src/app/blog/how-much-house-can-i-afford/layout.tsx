@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "How Much House Can I Actually Afford? The Calculation Banks Use vs What You Should Use | Dayblip",
+  title: "How Much House Can I Actually Afford? The Calculation Banks Use vs What You Should Use",
   description:
     "Banks will lend you up to 43% of gross income per standard DTI rules. Most financial planners recommend keeping housing at 28% or below. The real number that works for your budget is different from both.",
   alternates: { canonical: "https://www.dayblip.com/blog/how-much-house-can-i-afford" },

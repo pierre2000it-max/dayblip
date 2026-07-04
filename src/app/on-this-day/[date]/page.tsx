@@ -158,7 +158,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const parsed = parseSlug(params.date);
   const label  = parsed ? `${MONTH_DISPLAY[parsed.month - 1]} ${ordinal(parsed.day)}` : params.date;
-  const title  = `What Happened on ${label}? Historical Events | Dayblip`;
+  const title  = `What Happened on ${label}? Historical Events`;
   const desc   = `Discover what happened on ${label} in history. Famous birthdays, major events and historical facts.`;
   const url    = `https://www.dayblip.com/on-this-day/${params.date}`;
   return {
@@ -318,7 +318,7 @@ export default async function OnThisDayPage({
             <ShareButtons
               text={`On ${monthDay} in history: see all historical events for any date at www.dayblip.com/on-this-day`}
               url={pageUrl}
-              title={`What Happened on ${formattedDate}? Historical Events | Dayblip`}
+              title={`What Happened on ${formattedDate}? Historical Events`}
             />
           </div>
         </section>

@@ -1,7 +1,7 @@
-﻿import type { Metadata } from "next"
+import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Calorie Calculator — Daily Calorie Needs for Your Goals | Dayblip",
+  title: "Calorie Calculator — Daily Calorie Needs for Your Goals",
   description:
     "Calculate your daily calorie needs based on age weight height activity level and goal. Uses the Mifflin-St Jeor equation — the most accurate calorie formula available.",
   alternates: { canonical: "https://www.dayblip.com/health/calorie-calculator" },

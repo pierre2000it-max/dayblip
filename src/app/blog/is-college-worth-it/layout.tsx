@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Is College Worth It in 2026? The ROI Calculation Most People Never Run | Dayblip",
+  title: "Is College Worth It in 2026? The ROI Calculation Most People Never Run",
   description:
     "Is a college degree worth the cost? We ran the numbers on ROI by major, debt load, and career path. The answer depends on what you study.",
   alternates: { canonical: "https://www.dayblip.com/blog/is-college-worth-it" },

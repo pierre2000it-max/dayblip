@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "How to Calculate Your Financial Independence Date | Dayblip Blog",
+  title: "How to Calculate Your Financial Independence Date",
   description:
     "Financial independence is your annual expenses divided by 0.04. The date you hit that number is calculable today — and for many people it is earlier than expected.",
   alternates: { canonical: "https://www.dayblip.com/blog/financial-independence-date" },

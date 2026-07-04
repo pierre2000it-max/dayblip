@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Freelancer Rate Calculator — What Should I Charge? | Dayblip",
+  title: "Freelancer Rate Calculator — What Should I Charge?",
   description: "Calculate your minimum freelance hourly rate based on income goals, expenses, taxes and benefits. Includes industry benchmarks. Free freelancer calculator.",
   alternates: { canonical: "https://www.dayblip.com/finance/freelancer-rate" },
 }

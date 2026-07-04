@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "What Your Paycheck Actually Shows You | Dayblip",
+  title: "What Your Paycheck Actually Shows You",
   description:
     "Your pay stub reveals more than just your net pay. Here is how to read every line and understand what each deduction actually means.",
   alternates: { canonical: "https://www.dayblip.com/blog/what-your-paycheck-shows-you" },

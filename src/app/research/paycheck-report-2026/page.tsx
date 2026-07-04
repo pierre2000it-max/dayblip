@@ -458,7 +458,7 @@ export default function PaycheckReport2026() {
           <ShareButtons
             text="How much of a $75,000 salary do you actually keep? It depends on which state you live in — full 2026 breakdown at dayblip.com/research/paycheck-report-2026"
             url="https://www.dayblip.com/research/paycheck-report-2026"
-            title="2026 American Paycheck Report: $75,000 Salary 50-State Take-Home Pay | Dayblip"
+            title="2026 American Paycheck Report: $75,000 Salary 50-State Take-Home Pay"
           />
         </div>
 

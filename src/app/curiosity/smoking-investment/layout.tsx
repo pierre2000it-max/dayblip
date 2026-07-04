@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Smoking Cost Calculator — Financial Cost of Smoking | Dayblip",
+  title: "Smoking Cost Calculator — Financial Cost of Smoking",
   description: "Calculate the true financial cost of smoking and what investing instead could build. Shows future value if you quit today. Educational calculator only.",
   alternates: { canonical: "https://www.dayblip.com/curiosity/smoking-investment" },
 }

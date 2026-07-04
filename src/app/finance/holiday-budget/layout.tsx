@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Holiday Budget Planner 2026 — How Much Should I Spend on Gifts? | Dayblip',
+  title: 'Holiday Budget Planner 2026 — How Much Should I Spend on Gifts?',
   description: 'Plan your holiday gift budget by recipient. See your total vs budget, cost per person, and the true cost if you put it on a credit card. Free — no signup required.',
   alternates: {
     canonical: 'https://www.dayblip.com/finance/holiday-budget'
   },
   openGraph: {
-    title: 'Holiday Budget Planner 2026 | Dayblip',
+    title: 'Holiday Budget Planner 2026',
     description: 'Plan your holiday gift spending by recipient. See your total, cost per person, and credit card true cost.',
     url: 'https://www.dayblip.com/finance/holiday-budget',
     images: [{
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Holiday Budget Planner 2026 | Dayblip',
+    title: 'Holiday Budget Planner 2026',
     description: 'Plan your holiday gift budget and avoid January credit card shock. Free.',
     images: ['https://www.dayblip.com/api/og/tools']
   }

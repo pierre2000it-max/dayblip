@@ -3,7 +3,7 @@ import Link from "next/link"
 import Breadcrumb from "@/components/Breadcrumb"
 
 export const metadata: Metadata = {
-  title: "Education Calculators — GPA, Grades, College ROI and More | Dayblip",
+  title: "Education Calculators — GPA, Grades, College ROI and More",
   description: "Free education calculators for students. GPA calculator, grade calculator, college ROI, student loan cost and more. No signup. No email. Free forever.",
   alternates: { canonical: "https://www.dayblip.com/education" },
 }

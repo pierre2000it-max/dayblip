@@ -8,12 +8,12 @@ import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
 
 export const metadata: Metadata = {
-  title: "Couple Compatibility Calculator — Your Real Numbers Together | Dayblip",
+  title: "Couple Compatibility Calculator — Your Real Numbers Together",
   description:
     "Enter two birthdates and see the real numbers of your relationship — days alive together, shared weekends remaining, generation match, and more.",
   alternates: { canonical: "https://www.dayblip.com/tools/couple-compatibility" },
   openGraph: {
-    title: "Couple Compatibility Calculator — Your Real Numbers Together | Dayblip",
+    title: "Couple Compatibility Calculator — Your Real Numbers Together",
     description:
       "Enter two birthdates and see the real numbers of your relationship — days alive together, shared weekends remaining, generation match, and more.",
     url: "https://www.dayblip.com/tools/couple-compatibility",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Couple Compatibility Calculator — Your Real Numbers Together | Dayblip",
+    title: "Couple Compatibility Calculator — Your Real Numbers Together",
     description:
       "Enter two birthdates and see the real numbers of your relationship — days alive together, shared weekends remaining, generation match, and more.",
     images: ["https://www.dayblip.com/api/og/tools"],

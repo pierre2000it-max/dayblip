@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "The True Financial Value of Working From Home — What the Numbers Actually Show | Dayblip",
+  title: "The True Financial Value of Working From Home — What the Numbers Actually Show",
   description:
     "Working from home saves the average commuter $12,317 per year. Here is the full calculation including time, gas, food, and clothing.",
   alternates: { canonical: "https://www.dayblip.com/blog/wfh-financial-value" },

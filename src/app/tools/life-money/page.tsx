@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Life & Money Tools — Career, Income and Wealth Calculators | Dayblip",
+  title: "Life & Money Tools — Career, Income and Wealth Calculators",
   description: "Free calculators for salary negotiation, financial independence, AI job risk, true hourly wage, WFH savings, recession readiness and more. No signup needed.",
   alternates: { canonical: "https://www.dayblip.com/tools/life-money" },
 }

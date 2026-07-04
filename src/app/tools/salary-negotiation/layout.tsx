@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 export const metadata: Metadata = {
-  title: "Salary Negotiation Calculator — How Much Should You Ask For? | Dayblip",
+  title: "Salary Negotiation Calculator — How Much Should You Ask For?",
   description: "Calculate exactly how much to negotiate your salary. Get a ready-to-use negotiation script based on real market data.",
   alternates: { canonical: "https://www.dayblip.com/tools/salary-negotiation" },
 }

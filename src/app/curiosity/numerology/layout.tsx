@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Numerology Calculator — Your Life Path Number and Meaning | Dayblip",
+  title: "Numerology Calculator — Your Life Path Number and Meaning",
   description: "Calculate your numerology life path number, expression number, and soul urge number. Free numerology calculator — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/curiosity/numerology" },
 }

@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Contact | Dayblip",
+  title: "Contact",
   description: "Get in touch with the Dayblip team.",
+  alternates: { canonical: "https://www.dayblip.com/contact" },
 };
 
 const CONTACTS = [

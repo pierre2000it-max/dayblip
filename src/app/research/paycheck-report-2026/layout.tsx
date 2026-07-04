@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "The State of the American Paycheck 2026 | $75,000 Salary 50-State Breakdown | Dayblip Research",
+  title: "The State of the American Paycheck 2026 | $75,000 Salary 50-State Breakdown",
   description:
     "A $75,000 salary takes home $61,390 in Texas and $56,972 in Hawaii. Full 50-state 2026 take-home pay breakdown using verified IRS and Tax Foundation data.",
   alternates: { canonical: "https://www.dayblip.com/research/paycheck-report-2026" },
   openGraph: {
-    title: "The State of the American Paycheck 2026 | $75,000 Salary 50-State Breakdown | Dayblip Research",
+    title: "The State of the American Paycheck 2026 | $75,000 Salary 50-State Breakdown",
     description:
       "A $75,000 salary takes home $61,390 in Texas and $56,972 in Hawaii. Full 50-state 2026 take-home pay breakdown using verified IRS and Tax Foundation data.",
     type: "article",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "The State of the American Paycheck 2026 | $75,000 Salary 50-State Breakdown | Dayblip Research",
+    title: "The State of the American Paycheck 2026 | $75,000 Salary 50-State Breakdown",
     description:
       "A $75,000 salary takes home $61,390 in Texas and $56,972 in Hawaii. Full 50-state 2026 take-home pay breakdown using verified IRS and Tax Foundation data.",
   },

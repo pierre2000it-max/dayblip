@@ -8,12 +8,12 @@ import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
 
 export const metadata: Metadata = {
-  title: "Where Do You Rank? Income & Wealth Percentile Calculator | Dayblip",
+  title: "Where Do You Rank? Income & Wealth Percentile Calculator",
   description:
     "Find out your income and wealth percentile in the US. See how you rank compared to every other American — the number may surprise you.",
   alternates: { canonical: "https://www.dayblip.com/tools/where-you-rank" },
   openGraph: {
-    title: "Where Do You Rank? Income & Wealth Percentile Calculator | Dayblip",
+    title: "Where Do You Rank? Income & Wealth Percentile Calculator",
     description:
       "Find out your income and wealth percentile in the US. See how you rank compared to every other American — the number may surprise you.",
     url: "https://www.dayblip.com/tools/where-you-rank",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Where Do You Rank? Income & Wealth Percentile Calculator | Dayblip",
+    title: "Where Do You Rank? Income & Wealth Percentile Calculator",
     description:
       "Find out your income and wealth percentile in the US. See how you rank compared to every other American — the number may surprise you.",
     images: ["https://www.dayblip.com/api/og/tools"],

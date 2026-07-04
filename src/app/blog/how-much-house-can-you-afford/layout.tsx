@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "How Much House Can You Actually Afford? | Dayblip",
+  title: "How Much House Can You Actually Afford?",
   description:
     "Lenders approve based on what you can technically repay. That is not the same as what you can comfortably afford. Here is how to find your real number.",
   alternates: { canonical: "https://www.dayblip.com/blog/how-much-house-can-you-afford" },

@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Trees Cut Down Today — Live Counter | Dayblip",
+  title: "Trees Cut Down Today — Live Counter",
   description: "Watch the live count of trees cut down today worldwide. Based on 15 billion trees felled per year. See how many are planted vs cut. Free real-time counter.",
   alternates: { canonical: "https://www.dayblip.com/world-counters/trees-cut-today" },
   openGraph: {
-    title: "Trees Cut Down Today — Live Counter | Dayblip",
+    title: "Trees Cut Down Today — Live Counter",
     description: "Live counter of trees cut down today. 15 billion per year — ~475 every second. See the net loss in real time.",
     url: "https://www.dayblip.com/world-counters/trees-cut-today",
   },

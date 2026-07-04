@@ -2,12 +2,12 @@
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "About Dayblip — Free Tools for Curious Minds | Pierre, Founder",
+  title: "Meet Pierre — Founder of Dayblip",
   description:
     "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 200+ free tools. No signup, no paywall, no email.",
   alternates: { canonical: "https://www.dayblip.com/about" },
   openGraph: {
-    title: "About Dayblip — Free Tools for Curious Minds | Pierre, Founder",
+    title: "Meet Pierre — Founder of Dayblip",
     description:
       "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 200+ free tools. No signup, no paywall, no email.",
     type: "website",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Dayblip — Free Tools for Curious Minds | Pierre, Founder",
+    title: "Meet Pierre — Founder of Dayblip",
     description:
       "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 200+ free tools. No signup, no paywall, no email.",
   },

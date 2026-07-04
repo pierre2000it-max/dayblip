@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Countdown Timers — Days Until Holidays and Sports Events | Dayblip',
+  title: 'Countdown Timers — Days Until Holidays and Sports Events',
   description:
     'Free countdown timers to every major holiday and sports event. Days until Christmas, New Year, Super Bowl, World Cup, NBA Finals, and more. Updated live. Free.',
   alternates: { canonical: 'https://www.dayblip.com/days-until' },
   openGraph: {
-    title: 'Countdown Timers — Days Until Holidays and Sports | Dayblip',
+    title: 'Countdown Timers — Days Until Holidays and Sports',
     description:
       'Free countdown timers to every major holiday and sports event. Live countdowns updated in real time.',
     url: 'https://www.dayblip.com/days-until',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Countdown Timers | Dayblip',
+    title: 'Countdown Timers',
     description: 'Days until every major holiday and sports event. Free live countdowns.',
     images: ['https://www.dayblip.com/api/og/tools'],
   },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "What Is a Roth IRA and Who Should Open One in 2026? | Dayblip",
+  title: "What Is a Roth IRA and Who Should Open One in 2026?",
   description:
     "A Roth IRA lets $7,000 grow tax-free until retirement. Withdraw contributions any time penalty-free. The 2026 income limit for single filers is $150,000. Everything you need to know to decide.",
   alternates: { canonical: "https://www.dayblip.com/blog/what-is-a-roth-ira" },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Student Loan Payoff Calculator — Save on Interest | Dayblip",
+  title: "Student Loan Payoff Calculator — Save on Interest",
   description: "See how extra payments can save thousands on student loans. Calculate payoff date, total interest and months saved. Free student loan calculator.",
   alternates: { canonical: "https://www.dayblip.com/finance/student-loan" },
 }

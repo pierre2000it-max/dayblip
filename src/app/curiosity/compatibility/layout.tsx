@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Love Compatibility Calculator — Are You Compatible? | Dayblip",
+  title: "Love Compatibility Calculator — Are You Compatible?",
   description: "Calculate love compatibility based on numerology life path numbers and Chinese zodiac signs. Free compatibility calculator.",
   alternates: { canonical: "https://www.dayblip.com/curiosity/compatibility" },
 }

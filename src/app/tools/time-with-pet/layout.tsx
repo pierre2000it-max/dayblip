@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Time Left With Your Pet Calculator | Dayblip',
+  title: 'Time Left With Your Pet Calculator',
   description: 'Calculate how many years, walks, and cuddles you have left with your dog or cat based on their age and breed. Cherish every moment. Free — no signup required.',
   alternates: {
     canonical: 'https://www.dayblip.com/tools/time-with-pet'
   },
   openGraph: {
-    title: 'Time Left With Your Pet Calculator | Dayblip',
+    title: 'Time Left With Your Pet Calculator',
     description: 'Calculate how many years, walks, and cuddles you have left with your dog or cat. Every moment counts.',
     url: 'https://www.dayblip.com/tools/time-with-pet',
     images: [{
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Time Left With Your Pet Calculator | Dayblip',
+    title: 'Time Left With Your Pet Calculator',
     description: 'How many walks do you have left with your dog? Calculate now.',
     images: ['https://www.dayblip.com/api/og/tools']
   }

@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Couples Countdown — How Long Have You Been Together?",
   description: "Calculate how many days you have been with your partner. Find your relationship milestones and anniversary countdown.",
   keywords: ["how long have we been together", "relationship days calculator", "couples countdown", "anniversary countdown"],
+  alternates: { canonical: "https://www.dayblip.com/couples-countdown" },
 };
 
 export default function CouplesCountdownPage() {

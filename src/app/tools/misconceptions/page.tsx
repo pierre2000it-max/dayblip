@@ -6,7 +6,7 @@ import AuthorByline from "@/components/AuthorByline"
 import LastUpdated from "@/components/LastUpdated"
 
 export const metadata: Metadata = {
-  title: "Money Misconceptions — Tools That Reveal the Truth | Dayblip",
+  title: "Money Misconceptions — Tools That Reveal the Truth",
   description: "Tools that challenge common money myths. See the true cost of minimum payments, why timing the market fails, what your hourly wage really is, and more.",
   alternates: { canonical: "https://www.dayblip.com/tools/misconceptions" },
 }

@@ -5,7 +5,7 @@ import RelatedTools from "@/components/blog/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
 
 export const metadata: Metadata = {
-  title: "How Many Weekends Do You Have Left? | Dayblip Research",
+  title: "How Many Weekends Do You Have Left?",
   description:
     "At 40 you have roughly 2,080 weekends left if you live to 80. At 50 you have 1,560. The data behind the number that changes how you think about Saturday morning.",
   alternates: { canonical: "https://www.dayblip.com/research/weekends-you-have-left" },

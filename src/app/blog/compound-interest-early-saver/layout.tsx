@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Why Starting to Invest Early Beats Saving More Later | Dayblip",
+  title: "Why Starting to Invest Early Beats Saving More Later",
   description:
     "Saving $200 per month from 25 to 35 often outperforms $500 per month from 35 to 65. The math explains why time beats amount.",
   alternates: { canonical: "https://www.dayblip.com/blog/compound-interest-early-saver" },
