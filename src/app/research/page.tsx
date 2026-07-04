@@ -12,7 +12,7 @@ export const metadata: Metadata = {
       "Original data reports from Dayblip: paycheck take-home by state, weekends remaining, career weeks left, and more. Free, no signup.",
     type: "website",
     url: "https://www.dayblip.com/research",
-    images: [{ url: "/og-default.svg", width: 1200, height: 630, alt: "The Dayblip Index" }],
+    images: [{ url: "/api/og?title=The+Dayblip+Index&emoji=📊&subtitle=Original+research+and+data+reports", width: 1200, height: 630, alt: "The Dayblip Index" }],
   },
   twitter: {
     card: "summary_large_image",

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: URL },
   openGraph: {
     title: TITLE, description: DESC, type: "website", url: URL,
-    images: [{ url: "/og-default.svg", width: 1200, height: 630, alt: TITLE }],
+    images: [{ url: "/api/og?title=Age+Calculator&emoji=🎂&subtitle=How+old+are+you+in+days%2C+weeks+and+months", width: 1200, height: 630, alt: TITLE }],
   },
   twitter: { card: "summary_large_image", title: TITLE, description: DESC },
 };

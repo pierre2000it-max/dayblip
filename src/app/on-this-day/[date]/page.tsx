@@ -167,7 +167,7 @@ export async function generateMetadata({
     alternates: { canonical: url },
     openGraph: {
       title, description: desc, type: "article", url,
-      images: [{ url: "/og-default.svg", width: 1200, height: 630, alt: title }],
+      images: [{ url: "/api/og?title=On+This+Day+in+History&emoji=📰&subtitle=Historical+events+for+any+date", width: 1200, height: 630, alt: title }],
     },
     twitter: { card: "summary_large_image", title, description: desc },
   };

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
       "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 200+ free tools. No signup, no paywall, no email.",
     type: "website",
     url: "https://www.dayblip.com/about",
-    images: [{ url: "/og-default.svg", width: 1200, height: 630, alt: "About Dayblip" }],
+    images: [{ url: "/api/og?title=Meet+Pierre&emoji=👋&subtitle=Founder+of+Dayblip", width: 1200, height: 630, alt: "Meet Pierre — Founder of Dayblip" }],
   },
   twitter: {
     card: "summary_large_image",

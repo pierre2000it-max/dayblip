@@ -136,7 +136,7 @@ export async function generateMetadata({
       description,
       type: "website",
       url,
-      images: [{ url: "/og-default.svg", width: 1200, height: 630, alt: title }],
+      images: [{ url: "/api/og?title=Days+Until+Calculator&emoji=⏳&subtitle=Count+down+to+any+date+or+holiday", width: 1200, height: 630, alt: title }],
     },
     twitter: { card: "summary_large_image", title, description },
   };

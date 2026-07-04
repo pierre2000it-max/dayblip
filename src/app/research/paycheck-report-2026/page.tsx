@@ -125,7 +125,7 @@ const newsArticleSchema = {
   dateModified: "2026-06-13",
   author: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
-  image: "https://www.dayblip.com/og-default.svg",
+  image: "https://www.dayblip.com/api/og?title=2026+Paycheck+Report&emoji=💵&subtitle=%2475%2C000+salary+across+all+50+states",
   articleSection: "Personal Finance",
   keywords: "paycheck calculator, take-home pay, state income tax 2026, net pay by state, $75000 salary",
 }

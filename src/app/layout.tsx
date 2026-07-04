@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Dayblip — Free Tools for Curious Minds",
     description: "200+ free tools for life, money, history and more. No signup. No email. Ever.",
     url: "https://www.dayblip.com",
-    images: [{ url: "https://www.dayblip.com/og-default.svg", width: 1200, height: 630, alt: "Dayblip — Free Tools for Curious Minds" }],
+    images: [{ url: "https://www.dayblip.com/api/og?title=Free+Tools+for+Curious+Minds&emoji=🧮&subtitle=No+signup.+No+email.+Free+forever.", width: 1200, height: 630, alt: "Dayblip — Free Tools for Curious Minds" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     creator: "@dayblip365",
     title: "Dayblip — Free Tools for Curious Minds",
     description: "200+ free tools for life, money, history and more. No signup. No email. Ever.",
-    images: ["https://www.dayblip.com/og-default.svg"],
+    images: ["https://www.dayblip.com/api/og?title=Free+Tools+for+Curious+Minds&emoji=🧮&subtitle=No+signup.+No+email.+Free+forever."],
   },
   robots: {
     index: true,
