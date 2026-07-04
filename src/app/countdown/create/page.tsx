@@ -46,7 +46,7 @@ export default function CreateCountdownPage() {
 
       if (dbError) {
         console.error("Supabase error:", JSON.stringify(dbError));
-        setError(dbError?.message || dbError?.code || "Unknown Supabase error — check console");
+        setError("Something went wrong. Please try again.");
         setLoading(false);
         return;
       }
