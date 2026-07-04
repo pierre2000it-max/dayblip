@@ -46,6 +46,7 @@ const bottomLinks = [
   { label: "Research", href: "/research" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms of Use", href: "/terms" },
+  { label: "Disclosure", href: "/disclosure" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -301,6 +302,11 @@ export default function Footer() {
             </Link>
           ))}
         </div>
+
+        {/* Affiliate disclosure */}
+        <p className="mt-6 text-center text-xs text-[#a8a8b3]">
+          Some links on this site are affiliate links. We may earn a small commission if you sign up or make a purchase — at no cost to you. We only recommend products we believe are genuinely useful.
+        </p>
       </div>
     </footer>
   );

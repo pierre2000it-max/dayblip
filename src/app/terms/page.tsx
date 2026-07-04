@@ -43,7 +43,11 @@ const SECTIONS = [
     body: `We reserve the right to modify or replace these Terms of Use at any time at our sole discretion. When we make material changes, we will update the "last updated" date at the top of this page. Your continued use of the site following the posting of any changes constitutes your acceptance of the new terms.`,
   },
   {
-    title: "8. Contact",
+    title: "8. Affiliate Relationships",
+    body: `Some content on Dayblip includes affiliate links to third-party products and services. Dayblip may receive compensation when users sign up for or purchase products through these links. All affiliate recommendations are clearly disclosed. Dayblip is not responsible for the products, services, or policies of third-party companies we link to. Use of third-party services is at your own discretion.`,
+  },
+  {
+    title: "9. Contact",
     body: `If you have questions about these Terms of Use, please contact us at legal@dayblip.com.`,
   },
 ];

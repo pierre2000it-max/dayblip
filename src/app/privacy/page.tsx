@@ -47,7 +47,11 @@ const SECTIONS = [
     body: `We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "last updated" date. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.`,
   },
   {
-    title: "8. Contact Us",
+    title: "8. Affiliate Links",
+    body: `Dayblip participates in affiliate marketing programs. Some pages on this site contain affiliate links, meaning we may earn a commission if you click a link and sign up for or purchase a product or service. This comes at no additional cost to you. Affiliate relationships do not influence our tool results or editorial content. We only recommend products we believe provide genuine value to our users.`,
+  },
+  {
+    title: "9. Contact Us",
     body: `If you have any questions about this Privacy Policy, please contact us at privacy@dayblip.com.`,
   },
 ];

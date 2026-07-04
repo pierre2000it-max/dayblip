@@ -422,10 +422,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     // LEGAL PAGES  (priority 0.3, monthly)
     // ═══════════════════════════════════════════════════════════════════════
-    p("/about",   0.7, YEARLY),
-    p("/privacy", 0.3),
-    p("/terms",   0.3),
-    p("/contact", 0.3),
+    p("/about",       0.7, YEARLY),
+    p("/privacy",     0.3),
+    p("/terms",       0.3),
+    p("/disclosure",  0.3, YEARLY),
+    p("/contact",     0.3),
 
     // ═══════════════════════════════════════════════════════════════════════
     // DYNAMIC URL SETS

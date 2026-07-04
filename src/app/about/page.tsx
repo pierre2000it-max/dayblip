@@ -125,116 +125,68 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* Intro */}
+        {/* Founder */}
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          I built Dayblip because I got tired of the scavenger hunt.
+          Dayblip was built by Pierre Ndongue, an MBA and entrepreneur based in Milwaukee, Wisconsin.
+          Pierre built Dayblip out of frustration with financial calculator sites that were cluttered
+          with ads, required signups, and gave generic answers.
         </p>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          You know the one. You have a simple question — how much will this loan actually cost me, what was
-          the world like the year I was born, how many years until I could retire — and answering it means
-          opening eight tabs, getting nagged for your email on three of them, hitting a paywall on two, and
-          finally cobbling together an answer from a site covered in popups.
-        </p>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          I thought it should be simpler than that. I&apos;m genuinely curious about money, time, and the numbers
-          that shape a life — and I think that curiosity should be free to follow. So I built the version I
-          wanted to exist.
+          The goal was simple: build the tools he actually wanted to use — fast, honest, and completely free.
         </p>
 
-        {/* Who I am */}
+        {/* Our Mission */}
         <h2 style={{ color: "#ffffff", fontSize: "24px", fontWeight: 700, margin: "48px 0 16px 0" }}>
-          Who I am
+          Our Mission
         </h2>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          I&apos;m Pierre — an MBA, Business Strategist, AI consultant, author, and entrepreneur based in Wisconsin.
+          Dayblip&apos;s mission is to make personal finance and life math accessible to everyone. Every tool
+          on this site is free, requires no email address, and never will require one. We believe everyone
+          deserves access to the same financial clarity that expensive advisors charge for.
         </p>
+
+        {/* What We Believe */}
+        <h2 style={{ color: "#ffffff", fontSize: "24px", fontWeight: 700, margin: "48px 0 16px 0" }}>
+          What We Believe
+        </h2>
+        <ul style={{ margin: "0 0 20px 0", padding: 0, listStyle: "none" }}>
+          {[
+            "Free tools should actually be free",
+            "Your data belongs to you",
+            "Financial clarity should not require a subscription",
+            "Good design makes hard topics easier",
+          ].map((item) => (
+            <li key={item} style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 8px 0", paddingLeft: "20px", position: "relative" }}>
+              <span style={{ position: "absolute", left: 0 }}>—</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        {/* Affiliate Transparency */}
+        <h2 style={{ color: "#ffffff", fontSize: "24px", fontWeight: 700, margin: "48px 0 16px 0" }}>
+          Affiliate Transparency
+        </h2>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          Over the years I&apos;ve founded several ventures, including an AI automation services company and{" "}
-          <a
-            href="https://www.generationalwealth360.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "#e94560", textDecoration: "none" }}
-          >
-            Generational Wealth 360
+          How Dayblip stays free: Some finance pages on Dayblip contain affiliate links to financial
+          products we genuinely recommend. If you sign up through one of our links, we may earn a
+          commission at no cost to you. This is how we keep every tool free forever. See our full
+          affiliate disclosure at{" "}
+          <Link href="/disclosure" style={{ color: "#e94560", textDecoration: "none" }}>
+            /disclosure
+          </Link>
+          .
+        </p>
+
+        {/* Contact */}
+        <h2 style={{ color: "#ffffff", fontSize: "24px", fontWeight: 700, margin: "48px 0 16px 0" }}>
+          Contact
+        </h2>
+        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
+          Questions, feedback, or partnership inquiries:{" "}
+          <a href="mailto:hello@dayblip.com" style={{ color: "#e94560", textDecoration: "none" }}>
+            hello@dayblip.com
           </a>
-          , where I&apos;ve authored financial literacy content and published works on wealth building and
-          financial education.
-        </p>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          I&apos;m also a certified Scrum Master and Agile practitioner — a formal way of saying I believe good things
-          get built in small, tested, intentional steps. That philosophy shows up in how Dayblip gets built:
-          one tool at a time, each one designed to actually work before the next one starts.
-        </p>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          Outside of building, I&apos;ve spent years in leadership roles guided by one principle: serve first.
-          Whether leading teams or building products, the question I keep coming back to is the same — how
-          does this help the people it touches? Dayblip is that question applied to tools.
-        </p>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          I should be upfront about one thing: I am not a certified financial planner. Dayblip&apos;s finance
-          tools are built on standard, publicly documented formulas and reputable data sources — the Social
-          Security Administration, the Census Bureau, the Bureau of Labor Statistics, the CDC. They&apos;re
-          designed to make numbers visible and help you think clearly. They are not personalized financial
-          advice, and for decisions that matter, a licensed professional is worth every penny.
-        </p>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          What I do bring is a genuine obsession with making complicated things understandable, and years
-          spent building tools, companies, and published work around exactly that.
-        </p>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          If you want to go deeper on financial education topics, I also create content on YouTube at{" "}
-          <a
-            href="https://www.youtube.com/@GenerationalWealth360"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "#e94560", textDecoration: "none" }}
-          >
-            Generational Wealth 360
-          </a>
-          . It is a growing channel and every video is free.
-        </p>
-
-        {/* What Dayblip is */}
-        <h2 style={{ color: "#ffffff", fontSize: "24px", fontWeight: 700, margin: "48px 0 16px 0" }}>
-          What Dayblip is
-        </h2>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          200+ free calculators and tools covering personal finance, career decisions, life visualization, and
-          historical curiosity.
-        </p>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          No signup. No email required. No paywall. Free, and I intend to keep it that way.
-        </p>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          The tools fall into a few buckets. There are the practical ones — mortgage, debt payoff, retirement,
-          take-home pay. There are the ones that show you something about your own life you&apos;d never
-          calculated — your life as a grid of weeks, the number one song the day you were born, how popular
-          your name was the year you arrived. And there&apos;s original research, where I run the numbers on
-          questions most people never stop to ask, like how many weekends you have left.
-        </p>
-
-        {/* Why it's free */}
-        <h2 style={{ color: "#ffffff", fontSize: "24px", fontWeight: 700, margin: "48px 0 16px 0" }}>
-          Why it&apos;s free
-        </h2>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          Because the information should be. I run ads to cover the cost of keeping the lights on, and
-          that&apos;s the whole business model. You get the tools. I get to keep building them.
-        </p>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          Giving back to the community has always been part of how I work. Free tools that help real people
-          make better decisions about their money and their time — that&apos;s not a business strategy.
-          It&apos;s just what I think this kind of platform should do.
-        </p>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          Free also means free to share. Many of Dayblip&apos;s tools can be embedded directly on your own
-          website, blog, or classroom page — no cost, no catch. If a calculator here would help your readers,
-          your students, or your community, take it. That&apos;s what it&apos;s for.
-        </p>
-        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          If something on Dayblip ever taught you something, surprised you, or made you see a number
-          you&apos;d never seen before — that&apos;s the entire point. That&apos;s the thing I set out to build.
         </p>
 
         {/* Closing line */}
