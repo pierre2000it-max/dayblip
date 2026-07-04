@@ -163,6 +163,26 @@ export default function AboutPage() {
           ))}
         </ul>
 
+        {/* Recognition */}
+        <h2 style={{ color: "#ffffff", fontSize: "24px", fontWeight: 700, margin: "48px 0 16px 0" }}>
+          Recognition
+        </h2>
+        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
+          Dayblip&apos;s financial education resources have been approved by the Jump$tart Coalition for
+          Personal Financial Literacy — a national nonprofit dedicated to improving financial literacy
+          among students and consumers across the United States.
+        </p>
+        <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
+          <a
+            href="https://www.jumpstart.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#e94560", textDecoration: "none" }}
+          >
+            Learn more about Jump$tart Coalition
+          </a>
+        </p>
+
         {/* Affiliate Transparency */}
         <h2 style={{ color: "#ffffff", fontSize: "24px", fontWeight: 700, margin: "48px 0 16px 0" }}>
           Affiliate Transparency
