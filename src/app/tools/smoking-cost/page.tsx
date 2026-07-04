@@ -7,6 +7,7 @@ import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
+import { generateShareImage } from "@/utils/generateShareImage"
 
 function fvAnnuity(monthly: number, annualRate: number, months: number): number {
   const r = annualRate / 100 / 12
@@ -78,6 +79,24 @@ export default function SmokingCostPage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  function downloadShareImage() {
+    if (!result) return
+    const trueCost = result.totalSpent + result.investmentValue
+    generateShareImage({
+      title: "My True Cost of Smoking",
+      primaryStat: fmt(trueCost),
+      primaryLabel: "total true lifetime cost",
+      stats: [
+        { label: "Spent on cigarettes", value: fmt(result.totalSpent) },
+        { label: "Lost investment returns", value: fmt(result.investmentValue) },
+        { label: "Habit", value: `${result.packsPerDay.toFixed(1)} packs/day for ${result.yearsSmoking} years` },
+      ],
+      tagline: "What could you do with this money?",
+      toolUrl: "dayblip.com/tools/smoking-cost",
+      filename: "dayblip-smoking-cost.png",
+    })
+  }
 
   const shareUrl  = result ? `https://www.dayblip.com/tools/smoking-cost?perday=${perDay}&price=${packPrice}&started=${started}&age=${currentAge}&rate=${rate}` : ""
   const shareText = result
@@ -204,6 +223,18 @@ export default function SmokingCostPage() {
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="True Cost of Smoking Calculator" />
+              <button
+                onClick={downloadShareImage}
+                style={{
+                  width: "100%", background: "#e8445a", color: "#fff",
+                  border: "none", borderRadius: "8px", padding: "12px 24px",
+                  fontSize: "16px", fontWeight: "600", cursor: "pointer",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+              >
+                📸 Download Your Result
+              </button>
               {DISCLAIMER}
             </div>
           )}

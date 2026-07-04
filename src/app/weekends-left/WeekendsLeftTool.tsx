@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import { generateShareImage } from "@/utils/generateShareImage";
 
 function commas(n: number) { return Math.round(n).toLocaleString(); }
 
@@ -32,6 +33,24 @@ export default function WeekendsLeftTool() {
     }
     setResult({ lived:weekendsLived, remaining:weekendsRemaining, totalYrs:lifespan });
   };
+
+  function downloadShareImage() {
+    if (!result) return
+    const age = Math.floor((Date.now() - new Date(dob + "T00:00:00").getTime()) / 86400000 / 365.25)
+    generateShareImage({
+      title: "Weekends Left in My Life",
+      primaryStat: commas(result.remaining),
+      primaryLabel: "weekends remaining",
+      stats: [
+        { label: "Current age", value: `${age} years old` },
+        { label: "Weekends already had", value: commas(result.lived) },
+        { label: "Life expectancy used", value: `${result.totalYrs} years` },
+      ],
+      tagline: "This weekend counts.",
+      toolUrl: "dayblip.com/weekends-left",
+      filename: "dayblip-weekends-left.png",
+    })
+  }
 
   // Days to next Saturday
   const today = new Date();
@@ -108,11 +127,25 @@ export default function WeekendsLeftTool() {
               </div>
 
               {result && (
-                <ShareButtons
-                  text={`I have approximately ${Math.round(result.remaining).toLocaleString()} weekends left. Making every one count!`}
-                  url={"https://www.dayblip.com/weekends-left?dob=" + dob}
-                  title="Weekends Left Calculator"
-                />
+                <>
+                  <ShareButtons
+                    text={`I have approximately ${Math.round(result.remaining).toLocaleString()} weekends left. Making every one count!`}
+                    url={"https://www.dayblip.com/weekends-left?dob=" + dob}
+                    title="Weekends Left Calculator"
+                  />
+                  <button
+                    onClick={downloadShareImage}
+                    style={{
+                      width: "100%", background: "#e8445a", color: "#fff",
+                      border: "none", borderRadius: "8px", padding: "12px 24px",
+                      fontSize: "16px", fontWeight: "600", cursor: "pointer",
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                    onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+                  >
+                    📸 Download Your Result
+                  </button>
+                </>
               )}
             </div>
           )}

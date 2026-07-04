@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import { generateShareImage } from "@/utils/generateShareImage"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
 
@@ -81,6 +82,29 @@ export default function LifeInWeeksPage() {
     link.download = "dayblip-life-in-weeks.png"
     link.href = canvas.toDataURL("image/png")
     link.click()
+  }
+
+  function downloadShareImage() {
+    if (!result) return
+    generateShareImage({
+      title: "My Life in Weeks",
+      primaryStat: result.weeksRemaining.toLocaleString(),
+      primaryLabel: "weeks remaining",
+      stats: [
+        { label: "Weeks lived", value: result.weeksLived.toLocaleString() },
+        { label: "Through your life", value: `${result.pct.toFixed(1)}%` },
+        { label: "Life expectancy used", value: `${result.expectancy} years` },
+      ],
+      tagline: "Make every week count.",
+      toolUrl: "dayblip.com/tools/life-in-weeks",
+      filename: "dayblip-life-in-weeks.png",
+      grid: {
+        weeksLived: result.weeksLived,
+        weeksTotal: result.weeksTotal,
+        cols: 52,
+        rows: result.expectancy,
+      },
+    })
   }
 
   const shareUrl = result ? `https://www.dayblip.com/tools/life-in-weeks?dob=${result.dob}&expectancy=${result.expectancy}` : ""
@@ -171,6 +195,18 @@ export default function LifeInWeeksPage() {
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="Your Life in Weeks" />
+              <button
+                onClick={downloadShareImage}
+                style={{
+                  width: "100%", background: "#e8445a", color: "#fff",
+                  border: "none", borderRadius: "8px", padding: "12px 24px",
+                  fontSize: "16px", fontWeight: "600", cursor: "pointer",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+              >
+                📸 Download Your Result
+              </button>
             </div>
           )}
           {/* Cluster mesh block — do not remove */}
