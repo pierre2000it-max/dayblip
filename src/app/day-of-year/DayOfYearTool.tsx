@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -120,6 +121,11 @@ export default function DayOfYearTool() {
               </div>
             )}
           </div>
+          <ShareButtons
+            text={`Today is day ${dayNum} of ${totalDays} in ${year}. How far through the year are we? Check on Dayblip!`}
+            url="https://www.dayblip.com/day-of-year"
+            title="Day of Year"
+          />
         </div>
       </section>
     </div>

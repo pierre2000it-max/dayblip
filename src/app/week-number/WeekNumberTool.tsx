@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 function getWeekNumber(d: Date): number {
   const s = new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
@@ -112,6 +113,11 @@ export default function WeekNumberTool() {
               <p className="mt-3 text-white">{lookupResult.date.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})} is <strong className="text-[#e94560]">Week {lookupResult.week}</strong> of {lookupResult.date.getFullYear()}</p>
             )}
           </div>
+          <ShareButtons
+            text={`We are in week ${week} of ${year}. See what week it is on Dayblip!`}
+            url="https://www.dayblip.com/week-number"
+            title="Week Number"
+          />
         </div>
       </section>
     </div>

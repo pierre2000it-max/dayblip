@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import AdUnit from "@/components/AdUnit";
 import FAQAccordion from "@/components/FAQAccordion";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -184,7 +185,8 @@ export default function DaysBetweenTool() {
 
           {/* Results */}
           {result && (
-            <div className="mt-6 rounded-xl border border-[#e94560]/30 bg-[#1a1a2e] p-6">
+            <div className="mt-6 space-y-4">
+            <div className="rounded-xl border border-[#e94560]/30 bg-[#1a1a2e] p-6">
               {/* Headline */}
               <p className="mb-1 text-3xl font-bold text-[#e94560]">
                 {result.totalDays.toLocaleString()} days
@@ -213,6 +215,12 @@ export default function DaysBetweenTool() {
                   </div>
                 ))}
               </div>
+            </div>
+            <ShareButtons
+              text={`There are ${result.totalDays.toLocaleString()} days between those dates. Calculate yours on Dayblip!`}
+              url="https://www.dayblip.com/days-between"
+              title="Days Between Dates Calculator"
+            />
             </div>
           )}
         </div>

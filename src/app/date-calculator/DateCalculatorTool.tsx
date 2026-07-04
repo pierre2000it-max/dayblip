@@ -3,6 +3,7 @@
 import { useState } from "react";
 import AdUnit from "@/components/AdUnit";
 import FAQAccordion from "@/components/FAQAccordion";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -276,6 +277,20 @@ export default function DateCalculatorTool() {
                 </div>
               )}
             </div>
+          )}
+          {mode === "add-subtract" && resultA && (
+            <ShareButtons
+              text={`${resultA.amount} ${resultA.unit} ${resultA.operation === "add" ? "after" : "before"} ${formatDateShort(resultA.fromDate)} is ${formatDateShort(resultA.resultDate)}. Calculated on Dayblip!`}
+              url="https://www.dayblip.com/date-calculator"
+              title="Date Calculator"
+            />
+          )}
+          {mode === "days-between" && resultB && (
+            <ShareButtons
+              text={`There are ${resultB.totalDays.toLocaleString()} days between ${formatDateShort(resultB.date1)} and ${formatDateShort(resultB.date2)}. Calculated on Dayblip!`}
+              url="https://www.dayblip.com/date-calculator"
+              title="Date Calculator"
+            />
           )}
           {/* Ad — below results box */}
           <AdUnit slot="1234567890" format="rectangle" />

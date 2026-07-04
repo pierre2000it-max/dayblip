@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Date helpers ──────────────────────────────────────────────────────────────
 
@@ -94,6 +95,7 @@ export default function WorldCountdownsTool() {
     EVENTS.map(e => calc(e.getTarget()))
   );
   const [times, setTimes] = useState<string[]>(() => CITIES.map(c => cityTime(c.tz)));
+  const olympicsDays = Math.max(0, Math.ceil((new Date(2028, 6, 14).getTime() - Date.now()) / 86400000));
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -153,6 +155,13 @@ export default function WorldCountdownsTool() {
                 </div>
               );
             })}
+          </div>
+          <div className="mt-6">
+            <ShareButtons
+              text={`The next Olympics is in ${olympicsDays.toLocaleString()} days. See live countdowns to every major world event on Dayblip!`}
+              url="https://www.dayblip.com/world-countdowns"
+              title="Live World Countdowns"
+            />
           </div>
         </div>
       </section>

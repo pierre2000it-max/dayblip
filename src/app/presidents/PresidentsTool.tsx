@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const PRESIDENTS = [
   {number:1,name:"George Washington",start:1789,end:1797,party:"Unaffiliated",fact:"Only president elected unanimously"},
@@ -53,6 +54,7 @@ export default function PresidentsTool() {
 
           <div className="space-y-2">
             {PRESIDENTS.map(p => {
+
               const highlight = dob && inLifetime(p);
               const myAge = birthYear ? Math.min(p.end,currentYear) - birthYear : null;
               return (
@@ -75,6 +77,11 @@ export default function PresidentsTool() {
               );
             })}
           </div>
+          <ShareButtons
+            text="From George Washington to today — explore every US president and their legacy on Dayblip!"
+            url="https://www.dayblip.com/presidents"
+            title="US Presidential Timeline"
+          />
         </div>
       </section>
     </div>

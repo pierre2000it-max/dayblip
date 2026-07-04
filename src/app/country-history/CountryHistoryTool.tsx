@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const COUNTRIES: Record<string, {year:number;event:string}[]> = {
   "United States": [
@@ -146,6 +147,11 @@ export default function CountryHistoryTool() {
               </div>
             ))}
           </div>
+          <ShareButtons
+            text="Explore the history and key dates of every country on Dayblip!"
+            url="https://www.dayblip.com/country-history"
+            title="Historical Events by Country"
+          />
         </div>
       </section>
     </div>

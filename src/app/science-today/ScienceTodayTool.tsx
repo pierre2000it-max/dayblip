@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const MONTH_SLUG = ["january","february","march","april","may","june","july","august","september","october","november","december"];
 
@@ -81,6 +82,11 @@ export default function ScienceTodayTool() {
             <h3 className="font-bold text-white mb-3">⚡ Science Fact of the Day</h3>
             <p className="text-[#a8a8b3]">{RANDOM_FACTS[today.getDate() % RANDOM_FACTS.length]}</p>
           </div>
+          <ShareButtons
+            text="Explore today's science anniversaries and discoveries on Dayblip!"
+            url="https://www.dayblip.com/science-today"
+            title="This Day in Science"
+          />
         </div>
       </section>
     </div>

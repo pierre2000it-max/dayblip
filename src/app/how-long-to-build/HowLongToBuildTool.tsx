@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 const BUILDS = [
   {name:"Great Wall of China",emoji:"🧱",years:1800,description:"Built across multiple dynasties",completed:1644},
@@ -41,6 +42,7 @@ export default function HowLongToBuildTool() {
               className="w-full max-w-xs rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none" />
           </div>
 
+          <div className="space-y-6">
           <div className="grid gap-4 sm:grid-cols-2">
             {BUILDS.map(b => {
               const timesOver = myAge && b.years < myAge ? Math.floor(myAge/b.years) : null;
@@ -65,6 +67,12 @@ export default function HowLongToBuildTool() {
                 </div>
               );
             })}
+          </div>
+          <ShareButtons
+            text="Ever wonder how long it took to build the Great Wall or the Eiffel Tower? Find out on Dayblip!"
+            url="https://www.dayblip.com/how-long-to-build"
+            title="How Long to Build"
+          />
           </div>
         </div>
       </section>

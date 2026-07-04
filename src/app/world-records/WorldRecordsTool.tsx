@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
 
 type Tab = "mile"|"building"|"population";
 
@@ -92,6 +93,11 @@ export default function WorldRecordsTool() {
               ))}
             </div>
           )}
+          <ShareButtons
+            text="Some world records are mind-blowing — check them out on Dayblip!"
+            url="https://www.dayblip.com/world-records"
+            title="World Records Through Time"
+          />
         </div>
       </section>
     </div>
