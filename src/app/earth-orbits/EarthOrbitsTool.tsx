@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import { generateShareImage } from "@/utils/generateShareImage";
 
 function commas(n: number) { return n.toLocaleString(); }
 
@@ -37,6 +38,23 @@ export default function EarthOrbitsTool() {
     setResult({ days, years:years.toFixed(4), orbits:orbits.toFixed(4), miles, moonCycles, sunrises, lightYrs });
   };
 
+
+  function downloadShareImage() {
+    if (!result) return
+    generateShareImage({
+      title: "My Earth Orbits",
+      primaryStat: String(result.orbits),
+      primaryLabel: "orbits around the sun",
+      stats: [
+        { label: "Miles traveled", value: Number(result.miles).toLocaleString() },
+        { label: "Sunrises witnessed", value: Number(result.sunrises).toLocaleString() },
+        { label: "Moon cycles", value: Number(result.moonCycles).toLocaleString() },
+      ],
+      tagline: "You have traveled billions of miles.",
+      toolUrl: "dayblip.com/earth-orbits",
+      filename: "dayblip-earth-orbits.png",
+    })
+  }
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -98,6 +116,16 @@ export default function EarthOrbitsTool() {
                   url={"https://www.dayblip.com/earth-orbits?dob=" + dob}
                   title="Earth Orbits Calculator"
                 />
+              )}
+              {result && (
+                <button
+                  onClick={downloadShareImage}
+                  style={{ width: "100%", background: "#e8445a", color: "#fff", border: "none", borderRadius: "8px", padding: "12px 24px", fontSize: "16px", fontWeight: "600", cursor: "pointer", marginTop: "8px" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+                >
+                  📸 Download Your Result
+                </button>
               )}
             </div>
           )}

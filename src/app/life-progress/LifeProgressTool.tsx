@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import { generateShareImage } from "@/utils/generateShareImage";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -95,6 +96,23 @@ export default function LifeProgressTool() {
     });
   };
 
+
+  function downloadShareImage() {
+    if (!result) return
+    generateShareImage({
+      title: "My Life Progress",
+      primaryStat: `${result.pct}%`,
+      primaryLabel: "through your life",
+      stats: [
+        { label: "Days lived", value: result.daysLived.toLocaleString() },
+        { label: "Days remaining", value: result.daysRemaining.toLocaleString() },
+        { label: "Years lived", value: result.yearsLived },
+      ],
+      tagline: "Make the most of every remaining day.",
+      toolUrl: "dayblip.com/life-progress",
+      filename: "dayblip-life-progress.png",
+    })
+  }
 
   const STATS = result ? [
     { icon: "✅", label: "Days lived",         val: commas(result.daysLived) },
@@ -209,6 +227,16 @@ export default function LifeProgressTool() {
                   url={"https://www.dayblip.com/life-progress?dob=" + dob}
                   title="Life Progress Bar"
                 />
+              )}
+              {result && (
+                <button
+                  onClick={downloadShareImage}
+                  style={{ width: "100%", background: "#e8445a", color: "#fff", border: "none", borderRadius: "8px", padding: "12px 24px", fontSize: "16px", fontWeight: "600", cursor: "pointer", marginTop: "8px" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+                >
+                  📸 Download Your Result
+                </button>
               )}
             </div>
           )}

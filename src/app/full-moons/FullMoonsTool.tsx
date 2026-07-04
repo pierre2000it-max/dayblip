@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import { generateShareImage } from "@/utils/generateShareImage";
 import FAQAccordion from "@/components/FAQAccordion";
 import SchemaMarkup from "@/components/SchemaMarkup";
 
@@ -94,6 +95,23 @@ export default function FullMoonsTool() {
   };
 
 
+  function downloadShareImage() {
+    if (!result) return
+    generateShareImage({
+      title: "Full Moons Since I Was Born",
+      primaryStat: result.moons.toLocaleString(),
+      primaryLabel: "full moons in your lifetime",
+      stats: [
+        { label: "Current moon phase", value: result.phase },
+        { label: "Last full moon", value: `${result.daysAgo} days ago` },
+        { label: "Full moons per year", value: "~12.4" },
+      ],
+      tagline: "You have watched the moon complete hundreds of cycles.",
+      toolUrl: "dayblip.com/full-moons",
+      filename: "dayblip-full-moons.png",
+    })
+  }
+
   const FACTS = [
     "A full moon cycle is called a lunation",
     "There are 12–13 full moons per year",
@@ -154,6 +172,16 @@ export default function FullMoonsTool() {
                   url="https://dayblip.com/full-moons"
                   title="Full Moons Calculator"
                 />
+              )}
+              {result && (
+                <button
+                  onClick={downloadShareImage}
+                  style={{ width: "100%", background: "#e8445a", color: "#fff", border: "none", borderRadius: "8px", padding: "12px 24px", fontSize: "16px", fontWeight: "600", cursor: "pointer", marginTop: "8px" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+                >
+                  📸 Download Your Result
+                </button>
               )}
             </div>
           )}

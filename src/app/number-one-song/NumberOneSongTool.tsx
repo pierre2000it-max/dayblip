@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import ShareButtons from "@/components/ShareButtons";
+import { generateShareImage } from "@/utils/generateShareImage";
 import RelatedTools from "@/components/RelatedTools";
 import bornInRaw from "@/data/bornIn.json";
 
@@ -90,6 +91,23 @@ export default function NumberOneSongTool() {
   };
 
 
+  function downloadShareImage() {
+    if (!result) return
+    generateShareImage({
+      title: "#1 Song When I Was Born",
+      primaryStat: result.data.year.toString(),
+      primaryLabel: "the year you were born",
+      stats: [
+        { label: "#1 song", value: `"${result.song.title}"` },
+        { label: "Artist", value: result.song.artist },
+        { label: "#1 movie", value: result.data.number1Movie },
+      ],
+      tagline: "The soundtrack of the week you arrived.",
+      toolUrl: "dayblip.com/number-one-song",
+      filename: "dayblip-number-one-song.png",
+    })
+  }
+
   // Nearest year in data
   const nearestYear = year && !result
     ? bornInData.reduce((best, d) => Math.abs(d.year - year) < Math.abs(best.year - year) ? d : best).year
@@ -170,6 +188,16 @@ export default function NumberOneSongTool() {
                   url="https://dayblip.com/number-one-song"
                   title="Number One Song on My Birthday"
                 />
+              )}
+              {result && (
+                <button
+                  onClick={downloadShareImage}
+                  style={{ width: "100%", background: "#e8445a", color: "#fff", border: "none", borderRadius: "8px", padding: "12px 24px", fontSize: "16px", fontWeight: "600", cursor: "pointer", marginTop: "8px" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+                >
+                  📸 Download Your Result
+                </button>
               )}
             </div>
           )}

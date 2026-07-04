@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import { generateShareImage } from "@/utils/generateShareImage"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -140,6 +141,23 @@ export default function DebtFreedomPage() {
   const shareUrl = result && typeof window !== "undefined" ? window.location.href.split("?")[0] + window.location.search : "https://www.dayblip.com/tools/debt-freedom"
   const shareText = result ? `I will be completely DEBT FREE on ${fdStr}! That is ${result.daysAway} days away! Calculate your debt freedom date:` : ""
 
+  function downloadShareImage() {
+    if (!result) return
+    generateShareImage({
+      title: "My Debt Freedom Date",
+      primaryStat: result.daysAway.toLocaleString(),
+      primaryLabel: "days until debt freedom",
+      stats: [
+        { label: "Freedom date", value: fdStr },
+        { label: "Total interest", value: fmt(result.sim.totalInterest) },
+        { label: "Months to payoff", value: `${result.sim.months} months` },
+      ],
+      tagline: "Freedom is a date on the calendar.",
+      toolUrl: "dayblip.com/tools/debt-freedom",
+      filename: "dayblip-debt-freedom.png",
+    })
+  }
+
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
@@ -242,6 +260,14 @@ export default function DebtFreedomPage() {
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="Debt Freedom Date Calculator" />
+              <button
+                onClick={downloadShareImage}
+                style={{ width: "100%", background: "#e8445a", color: "#fff", border: "none", borderRadius: "8px", padding: "12px 24px", fontSize: "16px", fontWeight: "600", cursor: "pointer", marginTop: "8px" }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+              >
+                📸 Download Your Result
+              </button>
               {DISCLAIMER}
             </div>
           )}

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import { generateShareImage } from "@/utils/generateShareImage";
 
 function pad(n: number) { return String(n).padStart(2,"0"); }
 function fmtDate(d: Date) { return d.toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"}); }
@@ -59,6 +60,23 @@ export default function RetirementCountdownTool() {
   const daysOldAtRetirement = retDate && birthDate
     ? Math.round((retDate.getTime()-birthDate.getTime())/86400000)
     : null;
+
+  function downloadShareImage() {
+    if (!retDate || retired) return
+    generateShareImage({
+      title: "My Retirement Countdown",
+      primaryStat: timeLeft.d.toLocaleString(),
+      primaryLabel: "days until retirement",
+      stats: [
+        { label: "Retirement date", value: fmtDate(retDate) },
+        { label: "Retiring at age", value: `${retAge}` },
+        { label: "Days old at retirement", value: daysOldAtRetirement ? daysOldAtRetirement.toLocaleString() : "—" },
+      ],
+      tagline: "Every day worked is one day closer.",
+      toolUrl: "dayblip.com/retirement-countdown",
+      filename: "dayblip-retirement-countdown.png",
+    })
+  }
 
 
   return (
@@ -146,6 +164,14 @@ export default function RetirementCountdownTool() {
                       title="Retirement Countdown"
                     />
                   )}
+                  <button
+                    onClick={downloadShareImage}
+                    style={{ width: "100%", background: "#e8445a", color: "#fff", border: "none", borderRadius: "8px", padding: "12px 24px", fontSize: "16px", fontWeight: "600", cursor: "pointer", marginTop: "8px" }}
+                    onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                    onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+                  >
+                    📸 Download Your Result
+                  </button>
                 </>
               )}
             </div>

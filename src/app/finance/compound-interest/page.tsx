@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import { generateShareImage } from "@/utils/generateShareImage"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import LastUpdated from "@/components/LastUpdated"
@@ -50,6 +51,22 @@ export default function CompoundInterestPage() {
     })
     return { finalBalance, totalContributions, totalInterest, multiplier, rule72, rows }
   }, [initial, monthly, rate, years])
+
+  function downloadShareImage() {
+    generateShareImage({
+      title: "My Compound Interest",
+      primaryStat: fmt(calc.finalBalance),
+      primaryLabel: `projected balance in ${years} years`,
+      stats: [
+        { label: "My contributions", value: fmt(calc.totalContributions) },
+        { label: "Interest earned", value: fmt(calc.totalInterest) },
+        { label: "Money multiplied", value: `${calc.multiplier.toFixed(1)}×` },
+      ],
+      tagline: "Time in the market beats timing the market.",
+      toolUrl: "dayblip.com/finance/compound-interest",
+      filename: "dayblip-compound-interest.png",
+    })
+  }
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
 
@@ -317,6 +334,14 @@ export default function CompoundInterestPage() {
             url={`https://www.dayblip.com/finance/compound-interest?principal=${initial}&monthly=${monthly}&rate=${rate}&years=${years}`}
             title="Compound Interest Calculator"
           />
+          <button
+            onClick={downloadShareImage}
+            style={{ width: "100%", background: "#e8445a", color: "#fff", border: "none", borderRadius: "8px", padding: "12px 24px", fontSize: "16px", fontWeight: "600", cursor: "pointer", marginTop: "8px" }}
+            onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+            onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+          >
+            📸 Download Your Result
+          </button>
           <RelatedTools tools={[
             { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
             { emoji: "📈", title: "What If I Had Invested", desc: "See what any investment would be worth", href: "/finance/what-if-i-invested" },

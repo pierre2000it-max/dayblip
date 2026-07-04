@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import { generateShareImage } from "@/utils/generateShareImage"
 import Breadcrumb from "@/components/Breadcrumb"
 import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
@@ -87,6 +88,23 @@ export default function TrueHourlyWagePage() {
 
   const shareUrl = result ? `https://www.dayblip.com/tools/true-hourly-wage?salary=${result.salary}&hours=${parseFloat(hours) || 0}` : ""
   const shareText = result ? `My ${fmt(result.salary)} salary actually pays ${fmt2(result.trueHourly)}/hour after commute and work costs! That is ${fmt2(result.diff)} less per hour than I thought 😮 (Educational only)` : ""
+
+  function downloadShareImage() {
+    if (!result) return
+    generateShareImage({
+      title: "My True Hourly Wage",
+      primaryStat: `$${result.trueHourly.toFixed(2)}`,
+      primaryLabel: "true hourly rate",
+      stats: [
+        { label: "Stated salary", value: `$${result.salary.toLocaleString()}` },
+        { label: "Nominal hourly", value: `$${result.officialHourly.toFixed(2)}` },
+        { label: "Actually earning", value: `${result.pctLess.toFixed(1)}% less than you think` },
+      ],
+      tagline: "Know what you are really worth.",
+      toolUrl: "dayblip.com/tools/true-hourly-wage",
+      filename: "dayblip-true-hourly-wage.png",
+    })
+  }
 
   const numField = (label: string, value: string, set: (v: string) => void, prefix?: string) => (
     <label className="block">
@@ -194,6 +212,14 @@ export default function TrueHourlyWagePage() {
               </div>
 
               <ShareButtons text={shareText} url={shareUrl} title="True Hourly Wage Calculator" />
+              <button
+                onClick={downloadShareImage}
+                style={{ width: "100%", background: "#e8445a", color: "#fff", border: "none", borderRadius: "8px", padding: "12px 24px", fontSize: "16px", fontWeight: "600", cursor: "pointer", marginTop: "8px" }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+              >
+                📸 Download Your Result
+              </button>
               {DISCLAIMER}
             </div>
           )}

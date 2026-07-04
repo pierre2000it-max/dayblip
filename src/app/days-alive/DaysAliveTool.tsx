@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import { generateShareImage } from "@/utils/generateShareImage";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -64,6 +65,23 @@ export default function DaysAliveTool() {
   const past   = results?.filter(m => m.isPast)  ?? [];
   const future = results?.filter(m => !m.isPast) ?? [];
   const next   = future[0];
+
+  function downloadShareImage() {
+    if (!results) return
+    generateShareImage({
+      title: "My Days Alive",
+      primaryStat: daysOld.toLocaleString(),
+      primaryLabel: "days alive",
+      stats: [
+        { label: "Next milestone", value: next ? `Day ${next.days.toLocaleString()}` : "—" },
+        { label: "Days away", value: next ? `${next.daysAway.toLocaleString()} days` : "—" },
+        { label: "Milestones passed", value: `${past.length} of ${MILESTONE_DAYS.length}` },
+      ],
+      tagline: "Every day is a milestone worth celebrating.",
+      toolUrl: "dayblip.com/days-alive",
+      filename: "dayblip-days-alive.png",
+    })
+  }
 
 
   return (
@@ -163,6 +181,14 @@ export default function DaysAliveTool() {
                 url={"https://www.dayblip.com/days-alive?dob=" + dob}
                 title="Days Alive Calculator"
               />
+              <button
+                onClick={downloadShareImage}
+                style={{ width: "100%", background: "#e8445a", color: "#fff", border: "none", borderRadius: "8px", padding: "12px 24px", fontSize: "16px", fontWeight: "600", cursor: "pointer", marginTop: "8px" }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+              >
+                📸 Download Your Result
+              </button>
             </div>
           )}
         </div>

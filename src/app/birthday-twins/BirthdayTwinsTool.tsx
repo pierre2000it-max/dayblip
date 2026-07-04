@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import { generateShareImage } from "@/utils/generateShareImage";
 import RelatedTools from "@/components/RelatedTools";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -469,6 +470,20 @@ export default function BirthdayTwinsTool() {
 
   const handleSearch = () => pushAndSearch(month, safeDay);
 
+  function downloadShareImage() {
+    if (!searched || people.length === 0) return
+    const twinStats = people.slice(0, 2).map((p, i) => ({ label: `Twin ${i + 1}`, value: p.name }))
+    generateShareImage({
+      title: "My Celebrity Birthday Twins",
+      primaryStat: dateLabel,
+      primaryLabel: "your birthday",
+      stats: [...twinStats, { label: "Star sign", value: sign }],
+      tagline: "Who do you share your birthday with?",
+      toolUrl: "dayblip.com/birthday-twins",
+      filename: "dayblip-birthday-twins.png",
+    })
+  }
+
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -573,6 +588,14 @@ export default function BirthdayTwinsTool() {
                     url={shareUrl}
                     title="Birthday Twin Finder"
                   />
+                  <button
+                    onClick={downloadShareImage}
+                    style={{ width: "100%", background: "#e8445a", color: "#fff", border: "none", borderRadius: "8px", padding: "12px 24px", fontSize: "16px", fontWeight: "600", cursor: "pointer", marginTop: "8px" }}
+                    onMouseEnter={e => (e.currentTarget.style.background = "#c73348")}
+                    onMouseLeave={e => (e.currentTarget.style.background = "#e8445a")}
+                  >
+                    📸 Download Your Result
+                  </button>
                 </>
               )}
             </div>
