@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import onThisDay from "@/data/onThisDay.json";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import AdUnit from "@/components/AdUnit";
@@ -111,23 +112,34 @@ const TOOLS = [
   },
 ];
 
-const HISTORY_FACTS = [
-  { year: "1863", fact: "Emancipation Proclamation took effect" },
-  { year: "1892", fact: "Ellis Island opened" },
-  { year: "1959", fact: "Fidel Castro took power in Cuba" },
-];
 
 export default function HomePage() {
   const router = useRouter();
   const [dateInput, setDateInput]   = useState("");
   const [yearInput, setYearInput]   = useState("");
   const [heroVisible, setHeroVisible] = useState(false);
+  const [today, setToday] = useState<Date | null>(null);
+  const [historyFacts, setHistoryFacts] = useState<{ year: string; fact: string }[]>([]);
+  const [historyDateLabel, setHistoryDateLabel] = useState("...");
 
-  useEffect(() => { setHeroVisible(true); }, []);
+  useEffect(() => {
+    setHeroVisible(true);
+    const now = new Date();
+    setToday(now);
+    const slug = `${MONTH_SHORT[now.getMonth()]}-${now.getDate()}`;
+    const entry = (onThisDay as Record<string, { events: { year: number; event: string }[] }>)[slug];
+    if (entry?.events) {
+      setHistoryFacts(entry.events.slice(0, 3).map(e => ({ year: String(e.year), fact: e.event })));
+    }
+    setHistoryDateLabel(`${MONTH_LONG[now.getMonth()]} ${now.getDate()}`);
+  }, []);
 
-  const today       = new Date();
-  const todayDisplay = `${DAY_NAMES[today.getDay()]}, ${MONTH_LONG[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
-  const todaySlug   = `${MONTH_SHORT[today.getMonth()]}-${today.getDate()}`;
+  const todayDisplay = today
+    ? `${DAY_NAMES[today.getDay()]}, ${MONTH_LONG[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`
+    : "";
+  const todaySlug = today
+    ? `${MONTH_SHORT[today.getMonth()]}-${today.getDate()}`
+    : "";
 
   const handleCalculate = () => {
     if (dateInput) router.push(`/days-until/${dateInput}`);
@@ -135,7 +147,8 @@ export default function HomePage() {
 
   const handleBornIn = () => {
     const y = parseInt(yearInput, 10);
-    if (y >= 1900 && y <= today.getFullYear()) router.push(`/born-in/${yearInput}`);
+    const currentYear = today ? today.getFullYear() : new Date().getFullYear();
+    if (y >= 1900 && y <= currentYear) router.push(`/born-in/${yearInput}`);
   };
 
   return (
@@ -264,7 +277,7 @@ export default function HomePage() {
               <input
                 type="number"
                 min={1900}
-                max={today.getFullYear()}
+                max={today ? today.getFullYear() : new Date().getFullYear()}
                 placeholder="Enter year e.g. 1990"
                 value={yearInput}
                 onChange={(e) => setYearInput(e.target.value)}
@@ -304,11 +317,11 @@ export default function HomePage() {
             Today is {todayDisplay}. Here&apos;s what happened...
           </h2>
           <p className="mb-8 text-sm text-[#a8a8b3]">
-            Historical facts for January 1
+            Historical facts for {historyDateLabel}
           </p>
 
           <div className="mb-8 flex max-w-2xl flex-col gap-4">
-            {HISTORY_FACTS.map((item) => (
+            {historyFacts.map((item) => (
               <div
                 key={item.year}
                 className="flex items-start gap-4 rounded-lg bg-[#16213e] px-5 py-4"
