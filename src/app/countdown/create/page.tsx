@@ -44,7 +44,12 @@ export default function CreateCountdownPage() {
         theme,
       });
 
-      if (dbError) throw dbError;
+      if (dbError) {
+        console.error("Supabase error:", JSON.stringify(dbError));
+        setError(dbError?.message || dbError?.code || "Unknown Supabase error — check console");
+        setLoading(false);
+        return;
+      }
       router.push(`/countdown/${slug}`);
     } catch (err) {
       console.error(err);
