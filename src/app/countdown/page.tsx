@@ -141,6 +141,35 @@ export default function CountdownHubPage() {
           </div>
         </div>
       </section>
+
+      {/* Sports Countdowns */}
+      <section className="bg-[#16213e] px-6 py-16">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-8 text-center text-2xl font-bold text-white">
+            🏆 Sports Countdowns
+          </h2>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {[
+              { emoji: "⚽", label: "World Cup Final",  href: "/days-until/world-cup" },
+              { emoji: "🏈", label: "Super Bowl",        href: "/days-until/super-bowl" },
+              { emoji: "⚾", label: "World Series",      href: "/days-until/world-series" },
+              { emoji: "🏀", label: "March Madness",     href: "/days-until/march-madness" },
+              { emoji: "🏆", label: "NBA Finals",        href: "/days-until/nba-finals" },
+            ].map(({ emoji, label, href }) => (
+              <Link
+                key={href}
+                href={href}
+                className="group flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5 text-center transition-colors hover:border-[#e94560]/60"
+              >
+                <span className="text-3xl">{emoji}</span>
+                <span className="text-sm font-medium text-[#a8a8b3] group-hover:text-white transition-colors">
+                  {label}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
