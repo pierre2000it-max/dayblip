@@ -29,7 +29,7 @@ async function compressImage(file: File): Promise<Blob> {
       const ctx = canvas.getContext("2d")!;
       ctx.drawImage(img, 0, 0, w, h);
       canvas.toBlob(
-        blob => { blob ? resolve(blob) : reject(new Error("Compression failed")); },
+        blob => { if (blob) { resolve(blob); } else { reject(new Error("Compression failed")); } },
         "image/jpeg",
         0.85,
       );
