@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import { getStreak, updateStreak, type StreakData } from "@/utils/streakManager";
+import { generateShareImage } from "@/utils/generateShareImage";
 
 const QUESTIONS = [
   { q:"In what year did the Berlin Wall fall?", opts:["1987","1989","1991","1993"], ans:"1989", exp:"The Berlin Wall fell on November 9, 1989, marking the end of the Cold War division of Germany." },
@@ -37,11 +39,23 @@ const QUESTIONS = [
 
 function pad(n: number) { return String(n).padStart(2,"0"); }
 
+const STREAK_KEY = "dayblip_trivia_streak";
+
+const MILESTONES: Record<number, string> = {
+  3:   "You're on a roll! 🎯",
+  7:   "One week strong! 🔥",
+  14:  "Two weeks — history buff! 📚",
+  30:  "30 days — legendary! 🏆",
+  100: "100 days — unstoppable! 👑",
+};
+
 export default function DailyTriviaTool() {
-  const [answered, setAnswered] = useState<string | null>(null);
-  const [streak,   setStreak]   = useState(0);
-  const [best,     setBest]     = useState(0);
-  const [timeLeft, setTimeLeft] = useState({ h:0, m:0, s:0 });
+  const [answered,        setAnswered]        = useState<string | null>(null);
+  const [streak,          setStreak]          = useState(0);
+  const [best,            setBest]            = useState(0);
+  const [timeLeft,        setTimeLeft]        = useState({ h:0, m:0, s:0 });
+  const [streakData,      setStreakData]      = useState<StreakData | null>(null);
+  const [prevStreakCount, setPrevStreakCount] = useState(0);
 
   // Pick question based on day of year
   const today    = new Date();
@@ -51,15 +65,24 @@ export default function DailyTriviaTool() {
   const dateLabel = today.toLocaleDateString("en-US", { weekday:"long", month:"long", day:"numeric" });
 
   useEffect(() => {
+    let answeredToday = false;
     try {
       const saved = localStorage.getItem("dt_data");
       if (saved) {
         const d = JSON.parse(saved);
-        if (d.date === new Date().toDateString()) setAnswered(d.answered);
+        if (d.date === new Date().toDateString()) {
+          setAnswered(d.answered);
+          answeredToday = true;
+        }
         setStreak(d.streak ?? 0);
         setBest(d.best ?? 0);
       }
     } catch { /* ignore */ }
+    // Seed streak day 1 for users who answered today before the streak feature existed
+    if (answeredToday && getStreak(STREAK_KEY) === null) {
+      updateStreak(STREAK_KEY);
+    }
+    setStreakData(getStreak(STREAK_KEY));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -88,8 +111,14 @@ export default function DailyTriviaTool() {
         date: today.toDateString(), answered: opt, streak: newStreak, best: newBest,
       }));
     } catch { /* ignore */ }
+    const prev    = getStreak(STREAK_KEY);
+    const updated = updateStreak(STREAK_KEY);
+    if (prev && prev.count > 1 && updated.count === 1) setPrevStreakCount(prev.count);
+    setStreakData(updated);
   };
 
+
+  const streakBroke = prevStreakCount > 0 && streakData?.count === 1;
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -98,10 +127,6 @@ export default function DailyTriviaTool() {
           <div className="mb-4 text-5xl">🧠</div>
           <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Daily History Trivia</h1>
           <p className="text-lg text-[#a8a8b3]">A new question every day. Come back tomorrow for more!</p>
-          <div className="mt-4 flex justify-center gap-4">
-            <span className="rounded-full bg-[#e94560]/10 border border-[#e94560]/30 px-4 py-1 text-sm text-[#e94560]">🔥 Streak: {streak} days</span>
-            <span className="rounded-full bg-[#0f3460] px-4 py-1 text-sm text-[#a8a8b3]">Best: {best} days</span>
-          </div>
         </div>
       </section>
 
@@ -144,6 +169,57 @@ export default function DailyTriviaTool() {
             <p className="text-[#a8a8b3] text-sm mb-1">New question in</p>
             <p className="text-2xl font-bold text-white tabular-nums">{pad(timeLeft.h)}:{pad(timeLeft.m)}:{pad(timeLeft.s)}</p>
           </div>
+
+          {/* ── STREAK CARD ─────────────────────────────────────────── */}
+          {streakData && answered !== null && (
+            streakBroke ? (
+              <div style={{ background: "#1e2435", border: "1px solid #0f3460", borderRadius: 12, padding: 20 }}>
+                <p className="text-2xl mb-1">😔</p>
+                <p className="font-bold text-white">Streak reset</p>
+                <p className="text-[#a8a8b3] text-sm mt-2">
+                  Your {prevStreakCount}-day streak ended. Start a new one today!
+                </p>
+                <p className="text-[#a8a8b3] text-xs mt-3">
+                  Best streak: {streakData.longestStreak} days
+                </p>
+              </div>
+            ) : (
+              <div style={{ background: "#1e2435", border: "1px solid #0f3460", borderRadius: 12, padding: 20 }}>
+                <div className="flex items-center gap-3 mb-3">
+                  <span style={{ fontSize: 32 }}>🔥</span>
+                  <span className="text-2xl font-bold" style={{ color: "#e8445a" }}>
+                    {streakData.count}-Day Streak!
+                  </span>
+                </div>
+                <p className="text-[#a8a8b3] text-sm">Longest streak: {streakData.longestStreak} days</p>
+                <p className="text-[#a8a8b3] text-sm">Total days played: {streakData.totalPlayed}</p>
+                <p className="text-[#a8a8b3] text-sm mt-3">
+                  {MILESTONES[streakData.count] ?? "Come back tomorrow to keep it going!"}
+                </p>
+                <button
+                  onClick={() => void generateShareImage({
+                    title: "Daily Trivia Streak",
+                    primaryStat: String(streakData.count),
+                    primaryLabel: "day streak 🔥",
+                    stats: [
+                      { label: "Longest streak",    value: `${streakData.longestStreak} days` },
+                      { label: "Total days played", value: `${streakData.totalPlayed} days` },
+                    ],
+                    tagline: "Can you beat my streak?",
+                    toolUrl: "dayblip.com/daily-trivia",
+                    filename: "dayblip-trivia-streak.png",
+                  })}
+                  style={{
+                    background: "#e8445a", color: "white", borderRadius: 8,
+                    padding: "12px 24px", width: "100%", marginTop: 12,
+                    fontWeight: 600, border: "none", cursor: "pointer",
+                  }}
+                >
+                  📸 Share Your Streak
+                </button>
+              </div>
+            )
+          )}
 
           {answered && (
             <div className="space-y-2">

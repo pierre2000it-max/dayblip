@@ -7,6 +7,7 @@ import WikiEvents, { type FallbackData, type WikiData } from "./WikiEvents";
 import onThisDayRaw from "@/data/onThisDay.json";
 import { generateOnThisDaySchema, generateBreadcrumbSchema } from "@/lib/seo";
 import AdUnit from "@/components/AdUnit";
+import OtdStreakBadge from "./OtdStreakBadge";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -322,6 +323,9 @@ export default async function OnThisDayPage({
             />
           </div>
         </section>
+
+        {/* ── STREAK BADGE ──────────────────────────────────────── */}
+        <OtdStreakBadge />
 
         {/* Ad — below share section */}
         <div className="bg-[#1a1a2e] px-6 pb-4">
