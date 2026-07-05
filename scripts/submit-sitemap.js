@@ -296,6 +296,8 @@ const urls = [
   "https://www.dayblip.com/blog/renting-vs-buying-2026",
   "https://www.dayblip.com/blog/what-is-a-roth-ira",
   "https://www.dayblip.com/blog/how-much-house-can-i-afford",
+  "https://www.dayblip.com/blog/cost-of-raising-a-child-2026",
+  "https://www.dayblip.com/blog/debt-avalanche-vs-snowball",
 ];
 
 // Born-in pages 1940–2020

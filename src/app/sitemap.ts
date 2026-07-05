@@ -419,6 +419,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/blog/renting-vs-buying-2026",              0.8, MONTHLY),
     p("/blog/what-is-a-roth-ira",                  0.8, MONTHLY),
     p("/blog/how-much-house-can-i-afford",         0.8, MONTHLY),
+    p("/blog/cost-of-raising-a-child-2026",       0.8, MONTHLY),
+    p("/blog/debt-avalanche-vs-snowball",          0.8, MONTHLY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // LEGAL PAGES  (priority 0.3, monthly)

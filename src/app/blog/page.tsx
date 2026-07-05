@@ -94,6 +94,22 @@ const articles = [
   },
   {
     category: "Finance",
+    title: "How Much Does It Actually Cost to Raise a Child in 2026?",
+    excerpt:
+      "The inflation-adjusted USDA estimate is approximately $310,000 from birth to 18 for a middle-income family. Housing is 29%. Childcare can run $17,836/year. The full breakdown.",
+    readTime: "7 min read",
+    href: "/blog/cost-of-raising-a-child-2026",
+  },
+  {
+    category: "Finance",
+    title: "Debt Avalanche vs Debt Snowball — Which Method Actually Works Better?",
+    excerpt:
+      "Avalanche saves $1,361 more in a real $18,000 scenario. Snowball gets more people to finish per Journal of Marketing Research. The full comparison with real numbers.",
+    readTime: "6 min read",
+    href: "/blog/debt-avalanche-vs-snowball",
+  },
+  {
+    category: "Finance",
     title: "Buying a Home Is Not Always Better Than Renting. Here Is the Math.",
     excerpt:
       "The break-even point where buying beats renting is typically 5-7 years. On a $400,000 home the true monthly cost is $3,400-$3,800 — not the $2,661 mortgage payment.",
