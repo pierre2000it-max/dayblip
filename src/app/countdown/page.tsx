@@ -111,6 +111,36 @@ export default function CountdownHubPage() {
           </Link>
         </div>
       </section>
+
+      {/* Popular Countdowns */}
+      <section className="px-6 py-16">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-8 text-center text-2xl font-bold text-white">
+            Popular Countdowns
+          </h2>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {[
+              { emoji: "🎄", label: "Days Until Christmas",    href: "/days-until/christmas" },
+              { emoji: "🎆", label: "Days Until New Year's",   href: "/days-until/new-years" },
+              { emoji: "🎃", label: "Days Until Halloween",    href: "/days-until/halloween" },
+              { emoji: "🦃", label: "Days Until Thanksgiving", href: "/days-until/thanksgiving" },
+              { emoji: "💝", label: "Days Until Valentine's",  href: "/days-until/valentines-day" },
+              { emoji: "🏖️", label: "Days Until Summer",       href: "/days-until/summer" },
+            ].map(({ emoji, label, href }) => (
+              <Link
+                key={href}
+                href={href}
+                className="group flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5 text-center transition-colors hover:border-[#e94560]/60"
+              >
+                <span className="text-3xl">{emoji}</span>
+                <span className="text-sm font-medium text-[#a8a8b3] group-hover:text-white transition-colors">
+                  {label}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
