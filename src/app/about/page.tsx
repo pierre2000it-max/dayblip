@@ -4,12 +4,12 @@ import Link from "next/link"
 export const metadata: Metadata = {
   title: "Meet Pierre — Founder of Dayblip",
   description:
-    "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 200+ free tools. No signup, no paywall, no email.",
+    "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 300+ free tools. No signup, no paywall, no email.",
   alternates: { canonical: "https://www.dayblip.com/about" },
   openGraph: {
     title: "Meet Pierre — Founder of Dayblip",
     description:
-      "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 200+ free tools. No signup, no paywall, no email.",
+      "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 300+ free tools. No signup, no paywall, no email.",
     type: "website",
     url: "https://www.dayblip.com/about",
     images: [{ url: "/api/og?title=Meet+Pierre&emoji=👋&subtitle=Founder+of+Dayblip", width: 1200, height: 630, alt: "Meet Pierre — Founder of Dayblip" }],
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Meet Pierre — Founder of Dayblip",
     description:
-      "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 200+ free tools. No signup, no paywall, no email.",
+      "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 300+ free tools. No signup, no paywall, no email.",
   },
 }
 
@@ -28,7 +28,7 @@ const orgSchema = {
   name: "Dayblip",
   url: "https://www.dayblip.com",
   description:
-    "Free tools for curious minds — 200+ calculators for personal finance, career, life visualization, and historical curiosity.",
+    "Free tools for curious minds — 300+ calculators for personal finance, career, life visualization, and historical curiosity.",
   founder: { "@type": "Person", name: "Pierre" },
   foundingLocation: {
     "@type": "Place",
@@ -200,7 +200,7 @@ export default function AboutPage() {
           What Dayblip is
         </h2>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          200+ free calculators and tools covering personal finance, career decisions, life visualization, and
+          300+ free calculators and tools covering personal finance, career decisions, life visualization, and
           historical curiosity.
         </p>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
@@ -330,7 +330,7 @@ export default function AboutPage() {
             Explore the Tools
           </h2>
           <p style={{ color: "#a8a8b3", fontSize: "15px", margin: "0 0 24px 0" }}>
-            200+ free tools and counting. No signup, no email, no paywall.
+            300+ free tools and counting. No signup, no email, no paywall.
           </p>
           <Link
             href="/tools"
