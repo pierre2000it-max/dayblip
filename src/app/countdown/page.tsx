@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 };
 
 const EXAMPLES = [
-  { emoji: "💍", label: "Wedding day" },
-  { emoji: "🌴", label: "Dream vacation" },
-  { emoji: "🎓", label: "Graduation" },
-  { emoji: "🏠", label: "Moving day" },
-  { emoji: "👶", label: "Baby due date" },
-  { emoji: "🎂", label: "Birthday party" },
-  { emoji: "🎄", label: "Holiday trip" },
-  { emoji: "🏆", label: "Race / competition" },
+  { emoji: "💍", label: "Wedding day",        href: "/countdown/create?name=Our+Wedding+Day" },
+  { emoji: "🌴", label: "Dream vacation",     href: "/countdown/create?name=Our+Dream+Vacation" },
+  { emoji: "🎓", label: "Graduation",         href: "/countdown/create?name=My+Graduation+Day" },
+  { emoji: "🏠", label: "Moving day",         href: "/countdown/create?name=Our+Moving+Day" },
+  { emoji: "👶", label: "Baby due date",      href: "/countdown/create?name=Baby%27s+Due+Date" },
+  { emoji: "🎂", label: "Birthday party",     href: "/countdown/create?name=My+Birthday+Party" },
+  { emoji: "🎄", label: "Holiday trip",       href: "/countdown/create?name=Our+Holiday+Trip" },
+  { emoji: "🏆", label: "Race / competition", href: "/countdown/create?name=My+Race+Day" },
 ];
 
 export default function CountdownHubPage() {
@@ -61,14 +61,15 @@ export default function CountdownHubPage() {
             What can you count down to?
           </h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {EXAMPLES.map(({ emoji, label }) => (
-              <div
+            {EXAMPLES.map(({ emoji, label, href }) => (
+              <Link
                 key={label}
-                className="flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5 text-center"
+                href={href}
+                className="group flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5 text-center transition-colors hover:border-[#e94560]/60"
               >
                 <span className="text-3xl">{emoji}</span>
-                <span className="text-sm font-medium text-[#a8a8b3]">{label}</span>
-              </div>
+                <span className="text-sm font-medium text-[#a8a8b3] group-hover:text-white transition-colors">{label}</span>
+              </Link>
             ))}
           </div>
         </div>

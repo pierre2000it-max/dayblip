@@ -1,5 +1,6 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
@@ -47,11 +48,12 @@ function formatBytes(bytes: number): string {
 
 type PageState = "form" | "success";
 
-export default function CreateCountdownPage() {
+function CreateForm() {
+  const searchParams = useSearchParams();
   const [pageState, setPageState] = useState<PageState>("form");
 
   // Form fields
-  const [eventName, setEventName] = useState("");
+  const [eventName, setEventName] = useState(searchParams.get("name") ?? "");
   const [eventDate, setEventDate] = useState("");
   const [message, setMessage] = useState("");
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -252,6 +254,7 @@ export default function CreateCountdownPage() {
   }
 
   // ── Creation form ──────────────────────────────────────────────
+  // (pageState === "form")
   return (
     <div
       className="min-h-screen bg-[#1a1a2e] px-4 py-16"
@@ -399,5 +402,13 @@ export default function CreateCountdownPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function CreateCountdownPage() {
+  return (
+    <Suspense fallback={null}>
+      <CreateForm />
+    </Suspense>
   );
 }
