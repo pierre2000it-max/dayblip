@@ -10,6 +10,7 @@ import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -106,6 +107,12 @@ export default function CompoundInterestPage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Compound Interest Calculator — Watch Your Money Grow</h1>
           <p className="text-[#a8a8b3]">See how your money grows over time with the power of compounding</p>
+        </div>
+      </section>
+
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <GeoAnswerBlock answer="To calculate compound interest: multiply your principal by (1 + annual rate ÷ compounding periods) raised to the power of (periods × years). A $10,000 investment at 7% annual interest compounded monthly grows to $20,097 in 10 years. The longer the timeframe, the more dramatic the compounding effect. Use the interactive tool below to see your exact numbers." />
         </div>
       </section>
 

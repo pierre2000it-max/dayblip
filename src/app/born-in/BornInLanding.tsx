@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import RelatedTools from "@/components/RelatedTools";
+import GeoAnswerBlock from "@/components/GeoAnswerBlock";
 
 const POPULAR_YEARS = [1960,1965,1970,1975,1980,1985,1990,1995,2000,2005,2010,2015,2020];
 
@@ -63,6 +64,12 @@ export default function BornInLanding() {
             </div>
             {error && <p className="text-sm text-[#e94560]">{error}</p>}
           </div>
+        </div>
+      </section>
+
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To find what the world was like the year you were born: look up the major events, number one songs, popular movies, gas prices, and world population from that year. Birth years between 1940 and 2020 are covered. Every year has a unique snapshot of the world as it existed when you arrived. Use the interactive tool below." />
         </div>
       </section>
 

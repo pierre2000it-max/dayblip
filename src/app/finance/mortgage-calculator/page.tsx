@@ -9,6 +9,7 @@ import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -105,6 +106,12 @@ export default function MortgagePage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Mortgage Calculator — Total Interest Over the Life of Your Loan</h1>
           <p className="text-[#a8a8b3]">Calculate your monthly payment and total cost of homeownership</p>
+        </div>
+      </section>
+
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <GeoAnswerBlock answer="To calculate your monthly mortgage payment: use the formula M = P[r(1+r)^n]/[(1+r)^n-1], where P is the loan amount, r is the monthly interest rate, and n is the number of payments. A $300,000 mortgage at 7% for 30 years results in a monthly payment of $1,996. Use the interactive tool below." />
         </div>
       </section>
 

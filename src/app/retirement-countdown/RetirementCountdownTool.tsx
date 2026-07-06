@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 import { generateShareImage } from "@/utils/generateShareImage";
+import GeoAnswerBlock from "@/components/GeoAnswerBlock";
 
 function pad(n: number) { return String(n).padStart(2,"0"); }
 function fmtDate(d: Date) { return d.toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"}); }
@@ -86,6 +87,13 @@ export default function RetirementCountdownTool() {
           <div className="mb-4 text-5xl">💼</div>
           <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Retirement Countdown — How Many Days Until You Retire?</h1>
           <p className="text-lg text-[#a8a8b3]">Count down to the day you retire</p>
+        </div>
+      </section>
+
+      {/* ── GEO Answer Block ───────────────────────────────────────── */}
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To calculate days until retirement: subtract today's date from your target retirement date. If you plan to retire at 65 and are currently 40, you have approximately 9,125 days remaining. Breaking that into weeks, months, and years makes the timeline feel concrete and motivates consistent saving. Use the interactive tool below." />
         </div>
       </section>
 

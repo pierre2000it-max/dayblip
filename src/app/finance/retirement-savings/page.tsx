@@ -9,6 +9,7 @@ import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -90,6 +91,12 @@ export default function RetirementSavingsPage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Retirement Savings Calculator — Are You on Track?</h1>
           <p className="text-[#a8a8b3]">Find out if you are on track to retire comfortably</p>
+        </div>
+      </section>
+
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <GeoAnswerBlock answer="To calculate retirement savings needed: multiply your desired annual retirement income by 25 (the 4% withdrawal rule). To retire on $60,000 per year, you need $1,500,000 saved. Start with your current age, target retirement age, and current savings to see exactly how much to save each month. Use the interactive tool below." />
         </div>
       </section>
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import GeoAnswerBlock from "@/components/GeoAnswerBlock";
 import { generateShareImage } from "@/utils/generateShareImage";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -133,6 +134,13 @@ export default function LifeProgressTool() {
           <div className="mb-4 text-5xl">📊</div>
           <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Life Progress Bar — What Percentage of Your Life Have You Lived?</h1>
           <p className="text-lg text-[#a8a8b3]">See how far through life you are</p>
+        </div>
+      </section>
+
+      {/* ── GEO Answer Block ───────────────────────────────────────── */}
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To calculate your life progress percentage: divide your age by your life expectancy and multiply by 100. A 40-year-old with a life expectancy of 80 is exactly 50% through their life. The average American lives 78.7 years. Seeing this as a percentage makes the finite nature of time viscerally real. Use the interactive tool below." />
         </div>
       </section>
 

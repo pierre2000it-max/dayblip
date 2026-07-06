@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
@@ -140,6 +141,12 @@ export default function TaxBracketPage() {
           <p className="text-[#a8a8b3]">Find your federal tax bracket and see exactly how much you owe</p>
         </div>
       </section>
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To calculate your federal tax bracket: the US uses a progressive tax system where only income within each bracket is taxed at that rate. A single filer earning $80,000 in 2025 pays 10% on the first $11,600, 12% on income up to $47,150, and 22% on the remainder — an effective rate of approximately 16%. Use the interactive tool below." />
+        </div>
+      </section>
+
       <section className="px-6 py-8 bg-[#1a1a2e]">
         <div className="mx-auto max-w-[700px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>

@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
@@ -137,6 +138,12 @@ export default function BudgetCalculatorPage() {
           <p className="text-[#a8a8b3]">Build your budget using the proven 50/30/20 rule</p>
         </div>
       </section>
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To build a budget: follow the 50/30/20 rule — allocate 50% of after-tax income to needs, 30% to wants, and 20% to savings and debt repayment. On a $5,000 monthly take-home salary, that means $2,500 for needs, $1,500 for wants, and $1,000 toward savings and debt. Use the interactive tool below." />
+        </div>
+      </section>
+
       <section className="px-6 py-8 bg-[#1a1a2e]">
         <div className="mx-auto max-w-[700px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>

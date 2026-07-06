@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
@@ -102,6 +103,12 @@ export default function InflationPage() {
           <p className="text-[#a8a8b3]">See how purchasing power has changed over time</p>
         </div>
       </section>
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To calculate inflation's impact: divide the price in the target year by the price in the base year, then subtract 1 and multiply by 100. $100 in 1990 is equivalent to approximately $236 in 2025 due to cumulative inflation. The average annual US inflation rate since 1990 is 2.6%. Use the interactive tool below." />
+        </div>
+      </section>
+
       <section className="px-6 py-8 bg-[#1a1a2e]">
         <div className="mx-auto max-w-[700px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>

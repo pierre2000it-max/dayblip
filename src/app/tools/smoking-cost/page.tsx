@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import FinanceCTA from "@/components/FinanceCTA"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
@@ -131,6 +132,12 @@ export default function SmokingCostPage() {
           <h1 className="mb-3 text-4xl font-bold text-white">True Cost of Smoking Calculator — The Lifetime Financial Impact</h1>
           <p className="text-[#a8a8b3]">Calculate the full financial and health cost of your smoking habit</p>
           <a href="/blog/true-cost-of-smoking" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: The Number Most Smokers Have Never Calculated →</a>
+        </div>
+      </section>
+
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To calculate the true cost of smoking: multiply daily packs by pack price by 365 for annual cost, then calculate the investment opportunity cost using compound interest. One pack per day for 30 years costs $87,600 in cigarettes plus $324,000 in lost investment returns — a total true cost of over $400,000. Use the interactive tool below." />
         </div>
       </section>
 

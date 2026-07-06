@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import LastUpdated from "@/components/LastUpdated"
@@ -181,6 +182,12 @@ export default function TakeHomePayPage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Take Home Pay Calculator — What Is Your Actual Paycheck?</h1>
           <p className="text-[#a8a8b3]">Find out exactly how much you actually take home after all deductions</p>
+        </div>
+      </section>
+
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To calculate take-home pay: subtract federal income tax, state income tax, Social Security (6.2%), Medicare (1.45%), and any pre-tax deductions from gross salary. A $75,000 gross salary in California results in approximately $53,000 in annual take-home pay after all taxes and deductions. Use the interactive tool below." />
         </div>
       </section>
 

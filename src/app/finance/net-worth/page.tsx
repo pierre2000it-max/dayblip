@@ -7,6 +7,7 @@ import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -72,6 +73,12 @@ export default function NetWorthPage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Net Worth Calculator — What Are You Really Worth?</h1>
           <p className="text-[#a8a8b3]">Know exactly where you stand financially</p>
+        </div>
+      </section>
+
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[800px]">
+          <GeoAnswerBlock answer="To calculate net worth: subtract your total liabilities from your total assets. Assets include cash, investments, property, and retirement accounts. Liabilities include mortgage balance, car loans, credit card debt, and student loans. The average US net worth at age 35 is $76,000. Use the interactive tool below to calculate yours." />
         </div>
       </section>
 

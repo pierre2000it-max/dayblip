@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import GeoAnswerBlock from "@/components/GeoAnswerBlock";
 import FinanceCTA from "@/components/FinanceCTA";
 import { generateShareImage } from "@/utils/generateShareImage";
 
@@ -64,6 +65,13 @@ export default function EarthOrbitsTool() {
           <div className="mb-4 text-5xl">🌌</div>
           <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Earth Orbits Calculator — How Many Times Have You Orbited the Sun?</h1>
           <p className="text-lg text-[#a8a8b3]">Cosmic facts about your time on Earth</p>
+        </div>
+      </section>
+
+      {/* ── GEO Answer Block ───────────────────────────────────────── */}
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To calculate how many times Earth has orbited the sun since you were born: subtract your birth year from the current year. Earth completes one orbit every 365.25 days. A person born in 1985 has experienced approximately 40 full orbits around the sun. Each orbit equals one year of your life lived at 67,000 miles per hour. Use the interactive tool below." />
         </div>
       </section>
 

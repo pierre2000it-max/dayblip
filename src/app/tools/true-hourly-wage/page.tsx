@@ -8,6 +8,7 @@ import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmt2(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }) }
@@ -124,6 +125,12 @@ export default function TrueHourlyWagePage() {
           <h1 className="mb-3 text-4xl font-bold text-white">True Hourly Wage Calculator — What Does Your Job Really Pay?</h1>
           <p className="text-[#a8a8b3]">Calculate your true hourly wage after commute time, prep time and work costs</p>
           <a href="/blog/true-hourly-wage" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: What Your Salary Actually Pays Per Hour →</a>
+        </div>
+      </section>
+
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To calculate your true hourly wage: subtract all work-related expenses and add all work-related time to get your real rate. A $60,000 salary with $400/month in commuting costs and 50-hour work weeks yields a true hourly wage of $18.46 — not the $28.85 your contract suggests. Use the interactive tool below." />
         </div>
       </section>
 

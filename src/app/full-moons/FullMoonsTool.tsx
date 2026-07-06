@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import GeoAnswerBlock from "@/components/GeoAnswerBlock";
 import { generateShareImage } from "@/utils/generateShareImage";
 import FAQAccordion from "@/components/FAQAccordion";
 import SchemaMarkup from "@/components/SchemaMarkup";
@@ -130,6 +131,13 @@ export default function FullMoonsTool() {
           <div className="mt-4 inline-block rounded-full border border-[#e94560]/40 bg-[#e94560]/10 px-4 py-1.5 text-sm text-[#e94560]">
             Moon phase today: {todayPhase}
           </div>
+        </div>
+      </section>
+
+      {/* ── GEO Answer Block ───────────────────────────────────────── */}
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To calculate full moons since your birth: divide the number of days you have lived by 29.53 (the lunar cycle length in days). A person who is 35 years old has experienced approximately 446 full moons. There are roughly 12.37 full moons per year. Use the interactive tool below to find your exact full moon count." />
         </div>
       </section>
 

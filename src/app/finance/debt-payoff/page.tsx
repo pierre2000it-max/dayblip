@@ -9,6 +9,7 @@ import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 
 interface Debt { id: number; name: string; balance: string; rate: string; minPayment: string }
 
@@ -132,6 +133,12 @@ export default function DebtPayoffPage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Debt Payoff Calculator — Avalanche vs Snowball Method</h1>
           <p className="text-[#a8a8b3]">Choose your strategy and become debt free faster</p>
+        </div>
+      </section>
+
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[900px]">
+          <GeoAnswerBlock answer="To calculate your debt freedom date: divide your total debt balance by your monthly payment minus the monthly interest charge. Making only minimum payments on $10,000 of credit card debt at 20% APR takes over 30 years to pay off. Adding $100/month cuts that to under 4 years. Use the interactive tool below." />
         </div>
       </section>
 

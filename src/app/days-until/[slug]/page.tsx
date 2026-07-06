@@ -10,6 +10,7 @@ import {
 } from "@/lib/seo";
 import AdUnit from "@/components/AdUnit";
 import FinanceCTA from "@/components/FinanceCTA";
+import GeoAnswerBlock from "@/components/GeoAnswerBlock";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -96,6 +97,11 @@ const HOLIDAY_CTAS: Record<string, { emoji: string; headline: string; descriptio
     linkText: "Debt Freedom Date Calculator",
     href: "/tools/debt-freedom",
   },
+}
+
+// ── GEO direct-answer blocks — AI-extractable, holiday-specific ──────────────
+const HOLIDAY_GEO: Record<string, string> = {
+  "christmas": "Christmas falls on December 25 every year. To calculate days until Christmas: subtract today's date from December 25 of the current or next year. If today is July 4, there are 174 days until Christmas. Christmas is celebrated by over 2 billion people across 160+ countries. Americans spend an average of $998 on Christmas each year. See the live countdown below.",
 }
 
 // ── Dedicated meta descriptions per holiday (complete, keyword-rich, 130-155 chars) ──
@@ -304,6 +310,15 @@ export default function CountdownPage({
             </div>
           </div>
         </section>
+
+        {/* ── GEO ANSWER BLOCK (holiday-specific) ───────────────────── */}
+        {HOLIDAY_GEO[holiday.slug] && (
+          <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+            <div className="mx-auto max-w-[900px]">
+              <GeoAnswerBlock answer={HOLIDAY_GEO[holiday.slug]!} />
+            </div>
+          </section>
+        )}
 
         {/* ── FINANCE CTA (holiday-specific) ────────────────────────── */}
         {HOLIDAY_CTAS[holiday.slug] && (

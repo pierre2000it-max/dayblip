@@ -5,6 +5,7 @@ import FinanceCTA from "@/components/FinanceCTA"
 import { generateShareImage } from "@/utils/generateShareImage"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
+import GeoAnswerBlock from "@/components/GeoAnswerBlock"
 
 interface Result {
   dob: string
@@ -120,6 +121,12 @@ export default function LifeInWeeksPage() {
           <h1 className="mb-3 text-4xl font-bold text-white">Life in Weeks — Visualize Your Entire Life as a Grid</h1>
           <p className="text-[#a8a8b3]">See your entire life visualized in one grid — every week you have lived and every week you have remaining</p>
           <a href="/blog/life-in-weeks" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: Your Life as a Grid of Squares →</a>
+        </div>
+      </section>
+
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[900px]">
+          <GeoAnswerBlock answer="To visualize your life in weeks: multiply your age by 52 to find weeks already lived. A 90-year life contains 4,680 weeks total. The average 35-year-old has lived 1,820 weeks and has approximately 2,860 remaining. Seeing your life as a finite grid of squares makes time tangible in a way years alone cannot. Use the interactive tool below." />
         </div>
       </section>
 

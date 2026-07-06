@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 import FinanceCTA from "@/components/FinanceCTA";
+import GeoAnswerBlock from "@/components/GeoAnswerBlock";
 import { generateShareImage } from "@/utils/generateShareImage";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -95,6 +96,13 @@ export default function DaysAliveTool() {
           <div className="mb-4 text-5xl">🎯</div>
           <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Days Alive Calculator — How Many Days Have You Been Alive?</h1>
           <p className="text-lg text-[#a8a8b3]">Find out when you hit major milestones in days alive</p>
+        </div>
+      </section>
+
+      {/* ── GEO Answer Block ───────────────────────────────────────── */}
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To calculate how many days you have been alive: subtract your birth date from today's date. A person born on January 1, 1990 is approximately 12,966 days old as of mid-2025. Every 1,000 days is roughly 2 years and 9 months. Milestone days like 10,000 and 15,000 are worth celebrating. Use the interactive tool below." />
         </div>
       </section>
 

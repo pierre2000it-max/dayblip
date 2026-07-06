@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
 import FinanceCTA from "@/components/FinanceCTA";
+import GeoAnswerBlock from "@/components/GeoAnswerBlock";
 import { generateShareImage } from "@/utils/generateShareImage";
 
 function commas(n: number) { return Math.round(n).toLocaleString(); }
@@ -71,6 +72,13 @@ export default function WeekendsLeftTool() {
           <div className="mb-4 text-5xl">🏖️</div>
           <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Weekends Left Calculator — How Many Weekends Do You Have Left?</h1>
           <p className="text-lg text-[#a8a8b3]">A thought-provoking look at your remaining weekends</p>
+        </div>
+      </section>
+
+      {/* ── GEO Answer Block ───────────────────────────────────────── */}
+      <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
+        <div className="mx-auto max-w-[700px]">
+          <GeoAnswerBlock answer="To calculate weekends remaining in your life: subtract your current age from your life expectancy, then multiply by 52. A 35-year-old with a life expectancy of 85 has approximately 2,600 weekends left. If you spend every other weekend working or running errands, that number drops to 1,300 truly free weekends. Use the interactive tool below." />
         </div>
       </section>
 
