@@ -9,9 +9,6 @@ import AuthorByline from "@/components/AuthorByline"
 export const metadata: Metadata = {
   title: "How Popular Was Your Name the Year You Were Born?",
   description: "The year you were born, how many other babies shared your name? Using 144 years of SSA data, here is what your birth year number actually tells you.",
-  alternates: {
-    canonical: "https://www.dayblip.com/blog/name-popularity",
-  },
   openGraph: {
     title: "How Popular Was Your Name the Year You Were Born?",
     description: "The year you were born, how many other babies shared your name? Using 144 years of SSA data, here is what your birth year number actually tells you.",

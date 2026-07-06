@@ -4,6 +4,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Terms of Use",
   description: "Dayblip terms of use — the rules governing use of dayblip.com.",
+  alternates: {
+    canonical: "https://www.dayblip.com/terms",
+  },
   robots: { index: false, follow: false },
 };
 
