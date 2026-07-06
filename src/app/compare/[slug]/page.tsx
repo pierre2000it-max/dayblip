@@ -540,6 +540,118 @@ function JobComparison({ jobA, jobB, slug }: {
   )
 }
 
+// ─── NOINDEX WHITELIST ────────────────────────────────────────────────────────
+// Only these slugs are indexed. All other auto-generated pairs get noindex
+// to prevent thin-content crawl waste on ~1,800 low-traffic combinations.
+
+const INDEXED_CITY_PAIRS = new Set([
+  'new-york-vs-los-angeles', 'los-angeles-vs-new-york',
+  'new-york-vs-chicago', 'chicago-vs-new-york',
+  'new-york-vs-miami', 'miami-vs-new-york',
+  'new-york-vs-san-francisco', 'san-francisco-vs-new-york',
+  'new-york-vs-austin', 'austin-vs-new-york',
+  'new-york-vs-seattle', 'seattle-vs-new-york',
+  'new-york-vs-denver', 'denver-vs-new-york',
+  'new-york-vs-dallas', 'dallas-vs-new-york',
+  'new-york-vs-houston', 'houston-vs-new-york',
+  'new-york-vs-phoenix', 'phoenix-vs-new-york',
+  'los-angeles-vs-san-francisco', 'san-francisco-vs-los-angeles',
+  'los-angeles-vs-chicago', 'chicago-vs-los-angeles',
+  'los-angeles-vs-miami', 'miami-vs-los-angeles',
+  'los-angeles-vs-seattle', 'seattle-vs-los-angeles',
+  'los-angeles-vs-austin', 'austin-vs-los-angeles',
+  'los-angeles-vs-denver', 'denver-vs-los-angeles',
+  'los-angeles-vs-dallas', 'dallas-vs-los-angeles',
+  'los-angeles-vs-houston', 'houston-vs-los-angeles',
+  'los-angeles-vs-phoenix', 'phoenix-vs-los-angeles',
+  'chicago-vs-miami', 'miami-vs-chicago',
+  'chicago-vs-austin', 'austin-vs-chicago',
+  'chicago-vs-seattle', 'seattle-vs-chicago',
+  'chicago-vs-denver', 'denver-vs-chicago',
+  'chicago-vs-dallas', 'dallas-vs-chicago',
+  'chicago-vs-houston', 'houston-vs-chicago',
+  'chicago-vs-phoenix', 'phoenix-vs-chicago',
+  'san-francisco-vs-seattle', 'seattle-vs-san-francisco',
+  'san-francisco-vs-austin', 'austin-vs-san-francisco',
+  'san-francisco-vs-denver', 'denver-vs-san-francisco',
+  'san-francisco-vs-miami', 'miami-vs-san-francisco',
+  'san-francisco-vs-chicago', 'chicago-vs-san-francisco',
+  'austin-vs-seattle', 'seattle-vs-austin',
+  'austin-vs-denver', 'denver-vs-austin',
+  'austin-vs-miami', 'miami-vs-austin',
+  'austin-vs-dallas', 'dallas-vs-austin',
+  'austin-vs-houston', 'houston-vs-austin',
+  'seattle-vs-denver', 'denver-vs-seattle',
+  'seattle-vs-miami', 'miami-vs-seattle',
+  'dallas-vs-houston', 'houston-vs-dallas',
+  'dallas-vs-phoenix', 'phoenix-vs-dallas',
+  'houston-vs-phoenix', 'phoenix-vs-houston',
+  'denver-vs-phoenix', 'phoenix-vs-denver',
+  'miami-vs-tampa', 'tampa-vs-miami',
+  'boston-vs-new-york', 'new-york-vs-boston',
+  'boston-vs-chicago', 'chicago-vs-boston',
+  'boston-vs-san-francisco', 'san-francisco-vs-boston',
+  'boston-vs-miami', 'miami-vs-boston',
+  'atlanta-vs-charlotte', 'charlotte-vs-atlanta',
+  'atlanta-vs-miami', 'miami-vs-atlanta',
+  'atlanta-vs-austin', 'austin-vs-atlanta',
+  'atlanta-vs-dallas', 'dallas-vs-atlanta',
+  'nashville-vs-austin', 'austin-vs-nashville',
+  'nashville-vs-atlanta', 'atlanta-vs-nashville',
+  'nashville-vs-charlotte', 'charlotte-vs-nashville',
+  'nashville-vs-dallas', 'dallas-vs-nashville',
+  'portland-vs-seattle', 'seattle-vs-portland',
+  'portland-vs-denver', 'denver-vs-portland',
+  'las-vegas-vs-phoenix', 'phoenix-vs-las-vegas',
+  'las-vegas-vs-los-angeles', 'los-angeles-vs-las-vegas',
+  'san-diego-vs-los-angeles', 'los-angeles-vs-san-diego',
+  'san-diego-vs-san-francisco', 'san-francisco-vs-san-diego',
+  'minneapolis-vs-chicago', 'chicago-vs-minneapolis',
+  'detroit-vs-chicago', 'chicago-vs-detroit',
+  'columbus-vs-chicago', 'chicago-vs-columbus',
+])
+
+const INDEXED_JOB_PAIRS = new Set([
+  'software-engineer-vs-data-scientist', 'data-scientist-vs-software-engineer',
+  'software-engineer-vs-product-manager', 'product-manager-vs-software-engineer',
+  'doctor-vs-lawyer', 'lawyer-vs-doctor',
+  'nurse-vs-teacher', 'teacher-vs-nurse',
+  'nurse-vs-doctor', 'doctor-vs-nurse',
+  'accountant-vs-financial-advisor', 'financial-advisor-vs-accountant',
+  'software-engineer-vs-nurse', 'nurse-vs-software-engineer',
+  'teacher-vs-software-engineer', 'software-engineer-vs-teacher',
+  'lawyer-vs-software-engineer', 'software-engineer-vs-lawyer',
+  'doctor-vs-software-engineer', 'software-engineer-vs-doctor',
+  'accountant-vs-software-engineer', 'software-engineer-vs-accountant',
+  'nurse-vs-accountant', 'accountant-vs-nurse',
+  'teacher-vs-accountant', 'accountant-vs-teacher',
+  'electrician-vs-plumber', 'plumber-vs-electrician',
+  'electrician-vs-software-engineer', 'software-engineer-vs-electrician',
+  'plumber-vs-software-engineer', 'software-engineer-vs-plumber',
+  'pharmacist-vs-nurse', 'nurse-vs-pharmacist',
+  'pharmacist-vs-doctor', 'doctor-vs-pharmacist',
+  'financial-advisor-vs-lawyer', 'lawyer-vs-financial-advisor',
+  'dentist-vs-doctor', 'doctor-vs-dentist',
+  'dentist-vs-lawyer', 'lawyer-vs-dentist',
+  'data-scientist-vs-product-manager', 'product-manager-vs-data-scientist',
+  'marketing-manager-vs-product-manager', 'product-manager-vs-marketing-manager',
+  'ux-designer-vs-software-engineer', 'software-engineer-vs-ux-designer',
+  'nurse-vs-physical-therapist', 'physical-therapist-vs-nurse',
+  'teacher-vs-social-worker', 'social-worker-vs-teacher',
+])
+
+function isIndexed(slug: string): boolean {
+  return INDEXED_CITY_PAIRS.has(slug) || INDEXED_JOB_PAIRS.has(slug)
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params
+  if (!isIndexed(slug)) {
+    return { robots: { index: false, follow: false } }
+  }
+  return {}
+}
+
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 
 type Props = { params: Promise<{ slug: string }> }
