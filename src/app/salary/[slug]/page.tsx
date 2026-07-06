@@ -19,6 +19,47 @@ export async function generateStaticParams() {
 
 type Props = { params: Promise<{ slug: string }> }
 
+// ─── INDEXING TIERS ───────────────────────────────────────────────────────────
+// Tier 1: high-demand jobs → index all 50 states
+// Tier 2: mid-demand jobs  → index top 20 states only
+// Tier 3: low-demand jobs  → noindex all 50 states
+
+const TIER_1_JOBS = new Set([
+  'nurse', 'registered-nurse', 'teacher', 'software-engineer',
+  'doctor', 'surgeon', 'lawyer', 'pharmacist', 'dentist',
+  'police-officer', 'firefighter', 'electrician', 'plumber', 'accountant',
+])
+
+const TIER_2_JOBS = new Set([
+  'truck-driver', 'project-manager', 'data-analyst', 'financial-advisor',
+  'physical-therapist', 'web-developer', 'cybersecurity-analyst', 'pilot',
+  'it-manager', 'marketing-manager', 'construction-manager',
+  'real-estate-agent', 'veterinarian',
+])
+
+const TIER_2_STATES = new Set([
+  'CA', 'NY', 'TX', 'FL', 'IL', 'WA', 'CO', 'MA', 'PA', 'GA',
+  'AZ', 'NJ', 'VA', 'OH', 'MI', 'NC', 'MN', 'MD', 'OR', 'TN',
+])
+
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params
+  const data = getSalaryBySlug(slug)
+  if (!data) return {}
+
+  const { entry, state } = data
+
+  if (TIER_1_JOBS.has(entry.slug)) return {}
+
+  if (TIER_2_JOBS.has(entry.slug)) {
+    if (TIER_2_STATES.has(state.abbreviation)) return {}
+    return { robots: { index: false, follow: false } }
+  }
+
+  // Tier 3 — noindex all states
+  return { robots: { index: false, follow: false } }
+}
+
 export default async function SalaryPage({ params }: Props) {
   const { slug } = await params
   const data = getSalaryBySlug(slug)
