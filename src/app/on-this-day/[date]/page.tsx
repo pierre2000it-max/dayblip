@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import DateNav from "./DateNav";
 import ShareButtons from "@/components/ShareButtons";
+import FinanceCTA from "@/components/FinanceCTA";
 import WikiEvents, { type FallbackData, type WikiData } from "./WikiEvents";
 import onThisDayRaw from "@/data/onThisDay.json";
 import { generateOnThisDaySchema, generateBreadcrumbSchema } from "@/lib/seo";
@@ -316,6 +317,13 @@ export default async function OnThisDayPage({
 
         <section className="bg-[#1a1a2e] px-6 py-10">
           <div className="mx-auto max-w-[900px]">
+            <FinanceCTA
+              emoji="💰"
+              headline="How has your money kept up with history?"
+              description="See how inflation has changed the value of money since you were born."
+              linkText="Inflation Calculator"
+              href="/finance/inflation"
+            />
             <ShareButtons
               text={`On ${monthDay} in history: see all historical events for any date at www.dayblip.com/on-this-day`}
               url={pageUrl}

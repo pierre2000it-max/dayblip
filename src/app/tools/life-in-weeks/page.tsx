@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import FinanceCTA from "@/components/FinanceCTA"
 import { generateShareImage } from "@/utils/generateShareImage"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
@@ -194,6 +195,13 @@ export default function LifeInWeeksPage() {
                 <p className="text-base font-medium">&ldquo;This visualization is not meant to be depressing. Each empty square is a week of opportunity still ahead.&rdquo;</p>
               </div>
 
+              <FinanceCTA
+                emoji="⏳"
+                headline="Time is your most valuable asset"
+                description="See if you are on track to retire before your weeks run out."
+                linkText="Retirement Countdown Calculator"
+                href="/retirement-countdown"
+              />
               <ShareButtons text={shareText} url={shareUrl} title="Your Life in Weeks" />
               <button
                 onClick={downloadShareImage}

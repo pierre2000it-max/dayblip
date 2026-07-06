@@ -43,3 +43,7 @@ ins.adsbygoogle {
 ins.adsbygoogle[data-ad-status="unfilled"] {
   display: none !important;
 }
+
+/* ── FinanceCTA link hover ───────────────────────────────────────────────── */
+.finance-cta-link { text-decoration: none; }
+.finance-cta-link:hover { text-decoration: underline; }

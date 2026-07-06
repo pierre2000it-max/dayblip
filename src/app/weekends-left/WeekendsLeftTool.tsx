@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import FinanceCTA from "@/components/FinanceCTA";
 import { generateShareImage } from "@/utils/generateShareImage";
 
 function commas(n: number) { return Math.round(n).toLocaleString(); }
@@ -128,6 +129,13 @@ export default function WeekendsLeftTool() {
 
               {result && (
                 <>
+                  <FinanceCTA
+                    emoji="🏖️"
+                    headline="Make every weekend count"
+                    description="Find out your real hourly wage — you might be able to afford more weekends off than you think."
+                    linkText="True Hourly Wage Calculator"
+                    href="/tools/true-hourly-wage"
+                  />
                   <ShareButtons
                     text={`I have approximately ${Math.round(result.remaining).toLocaleString()} weekends left. Making every one count!`}
                     url={"https://www.dayblip.com/weekends-left?dob=" + dob}

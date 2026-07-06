@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import FinanceCTA from "@/components/FinanceCTA"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
@@ -222,6 +223,13 @@ export default function SmokingCostPage() {
                 </div>
               </div>
 
+              <FinanceCTA
+                emoji="🏦"
+                headline="What if you invested instead?"
+                description="See how much that money could grow in a retirement account over time."
+                linkText="Retirement Savings Calculator"
+                href="/finance/retirement-savings"
+              />
               <ShareButtons text={shareText} url={shareUrl} title="True Cost of Smoking Calculator" />
               <button
                 onClick={downloadShareImage}

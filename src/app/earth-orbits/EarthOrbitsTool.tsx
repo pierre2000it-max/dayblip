@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import FinanceCTA from "@/components/FinanceCTA";
 import { generateShareImage } from "@/utils/generateShareImage";
 
 function commas(n: number) { return n.toLocaleString(); }
@@ -110,6 +111,15 @@ export default function EarthOrbitsTool() {
                 <div className="flex gap-2"><span className="text-[#e94560]">→</span><span className="text-[#a8a8b3] text-sm">Light from your birth date has traveled approximately <strong className="text-white">{String(result.lightYrs)} km</strong> away</span></div>
               </div>
 
+              {result && (
+                <FinanceCTA
+                  emoji="🌍"
+                  headline="Every orbit is a year of potential compound growth"
+                  description="See what your money could have grown to over your lifetime."
+                  linkText="Compound Interest Calculator"
+                  href="/finance/compound-interest"
+                />
+              )}
               {result && (
                 <ShareButtons
                   text={`Since I was born Earth has orbited the sun ${result.orbits} times and traveled ${Number(result.miles).toLocaleString()} miles! 🌍`}

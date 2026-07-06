@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import ShareButtons from "@/components/ShareButtons";
+import FinanceCTA from "@/components/FinanceCTA";
 import { generateShareImage } from "@/utils/generateShareImage";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -176,6 +177,13 @@ export default function DaysAliveTool() {
               )}
 
               {/* Share */}
+              <FinanceCTA
+                emoji="📈"
+                headline="Your days are your greatest asset"
+                description="See how much your money could grow over the days you have ahead."
+                linkText="Compound Interest Calculator"
+                href="/finance/compound-interest"
+              />
               <ShareButtons
                 text={`I am ${daysOld.toLocaleString()} days old today! 🎉 Find out how many days old you are!`}
                 url={"https://www.dayblip.com/days-alive?dob=" + dob}

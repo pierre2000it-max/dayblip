@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import ShareButtons from "@/components/ShareButtons";
+import FinanceCTA from "@/components/FinanceCTA";
 
 // ── Date helpers ──────────────────────────────────────────────────────────────
 
@@ -157,6 +158,13 @@ export default function WorldCountdownsTool() {
             })}
           </div>
           <div className="mt-6">
+            <FinanceCTA
+              emoji="🎁"
+              headline="Make your holidays count"
+              description="See how much your holiday spending could grow if you invested it instead of spending it."
+              linkText="Try the Compound Interest Calculator"
+              href="/finance/compound-interest"
+            />
             <ShareButtons
               text={`The next Olympics is in ${olympicsDays.toLocaleString()} days. See live countdowns to every major world event on Dayblip!`}
               url="https://www.dayblip.com/world-countdowns"
