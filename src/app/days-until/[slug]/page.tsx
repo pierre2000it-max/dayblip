@@ -9,6 +9,7 @@ import {
   getNextHolidayDate,
 } from "@/lib/seo";
 import AdUnit from "@/components/AdUnit";
+import FinanceCTA from "@/components/FinanceCTA";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -64,6 +65,38 @@ const HOLIDAY_INTROS: Record<string, string> = {
   "summer-break":
     "The first day of summer falls on the summer solstice — June 20 or 21 each year. It marks the longest day of the year and the unofficial start of summer vacation for millions of students across the United States.",
 };
+
+// ── Finance CTAs — holiday-specific internal links ────────────────────────────
+const HOLIDAY_CTAS: Record<string, { emoji: string; headline: string; description: string; linkText: string; href: string }> = {
+  "christmas": {
+    emoji: "🎁",
+    headline: "Make your holidays count",
+    description: "See how much your holiday budget could grow if you invested it instead. One calculation could change how you think about holiday spending.",
+    linkText: "Try the Compound Interest Calculator",
+    href: "/finance/compound-interest",
+  },
+  "new-years": {
+    emoji: "🎆",
+    headline: "New year, new financial goals",
+    description: "See if you are on track to retire comfortably. A new year is the perfect time to check your retirement timeline.",
+    linkText: "Check Your Retirement Timeline",
+    href: "/finance/retirement-savings",
+  },
+  "thanksgiving": {
+    emoji: "🦃",
+    headline: "Grateful for your financial health?",
+    description: "See your true net worth and find out where you stand financially heading into the new year.",
+    linkText: "Net Worth Calculator",
+    href: "/finance/net-worth",
+  },
+  "halloween": {
+    emoji: "🎃",
+    headline: "Don't let debt haunt you",
+    description: "See exactly when you will be debt free and how much interest you will save by paying more each month.",
+    linkText: "Debt Freedom Date Calculator",
+    href: "/tools/debt-freedom",
+  },
+}
 
 // ── Dedicated meta descriptions per holiday (complete, keyword-rich, 130-155 chars) ──
 const HOLIDAY_META_DESCRIPTIONS: Record<string, string> = {
@@ -271,6 +304,15 @@ export default function CountdownPage({
             </div>
           </div>
         </section>
+
+        {/* ── FINANCE CTA (holiday-specific) ────────────────────────── */}
+        {HOLIDAY_CTAS[holiday.slug] && (
+          <section className="bg-[#1a1a2e] px-6 pt-8 pb-2">
+            <div className="mx-auto max-w-[900px]">
+              <FinanceCTA {...HOLIDAY_CTAS[holiday.slug]!} />
+            </div>
+          </section>
+        )}
 
         {/* ── ABOUT + FACTS ─────────────────────────────────────────── */}
         <section className="bg-[#16213e] px-6 py-14">
