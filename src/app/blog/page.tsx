@@ -292,6 +292,46 @@ const articles = [
     readTime: "6 min read",
     href: "/blog/how-much-house-can-i-afford",
   },
+  {
+    category: "Finance",
+    title: "The True Annual Cost of Owning a Dog or Cat in 2026",
+    excerpt:
+      "Dog ownership costs $1,390–$5,295 per year and $34,550 over a lifetime per Rover 2025. Cat: $760–$3,495 per year. Vet fees rose 11% in 2025. The full breakdown by category.",
+    readTime: "6 min read",
+    href: "/blog/true-cost-of-owning-a-pet",
+  },
+  {
+    category: "Retirement",
+    title: "What Is the 4% Rule and Does It Still Work in 2026?",
+    excerpt:
+      "Multiply annual retirement spending by 25. At $50,000/year you need $1,250,000. Social Security reduces that number significantly. Some researchers now suggest 3.3–3.5%.",
+    readTime: "6 min read",
+    href: "/blog/what-is-the-4-percent-rule",
+  },
+  {
+    category: "Finance",
+    title: "How Much Does a Wedding Actually Cost in 2026?",
+    excerpt:
+      "The average US wedding costs $34,200 per The Knot 2026 study of 10,474 couples. The median is closer to $20,000–$25,000. At $292 per guest cutting 30 people saves $8,760.",
+    readTime: "6 min read",
+    href: "/blog/how-much-does-a-wedding-cost",
+  },
+  {
+    category: "Career",
+    title: "How to Compare Two Job Offers the Right Way in 2026",
+    excerpt:
+      "A $90,000 California in-office job can be worth less than an $82,000 remote Texas job after state tax, commute cost, and benefits. The full 6-factor comparison framework.",
+    readTime: "6 min read",
+    href: "/blog/how-to-compare-job-offers",
+  },
+  {
+    category: "Finance",
+    title: "The True Cost of Student Loans — What You Actually Pay Back",
+    excerpt:
+      "A $30,000 loan at 6.39% on standard 10-year repayment costs $10,800 in interest — you repay $40,800. Extended to 20 years: $53,280. The full breakdown by balance and plan.",
+    readTime: "6 min read",
+    href: "/blog/true-cost-of-student-loans",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]
