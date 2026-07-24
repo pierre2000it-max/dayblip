@@ -190,7 +190,7 @@ export default function FreelancerHubPage() {
           ]} />
 
           <p style={{ color: "#6b7280", fontSize: "13px", lineHeight: "1.6", marginTop: "40px" }}>
-            Freelancer financial estimates on this page use standard IRS self-employment tax rates (15.3% on net earnings up to the SS wage base of $176,100 for 2026), average US employer benefit cost data from the Bureau of Labor Statistics, and typical freelance utilization rates of 70-80% billable hours. Individual results vary significantly based on field, location, experience, and client mix. Not financial or tax advice.
+            Freelancer financial estimates on this page use standard IRS self-employment tax rates (15.3% on net earnings up to the SS wage base of $184,500 for 2026), average US employer benefit cost data from the Bureau of Labor Statistics, and typical freelance utilization rates of 70-80% billable hours. Individual results vary significantly based on field, location, experience, and client mix. Not financial or tax advice.
           </p>
         </div>
       </section>

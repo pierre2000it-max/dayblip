@@ -124,10 +124,10 @@ export default function FirstPaycheckPage() {
     const annualStateTax = taxableIncome * stateRate
     const stateName = STATES[stateIdx]?.[0] ?? 'No state tax'
 
-    const annualSs = Math.min(annual, 176100) * 0.062
+    const annualSs = Math.min(annual, 184500) * 0.062
     const annualMedicare = annual * 0.0145
 
-    const employerSs = Math.min(annual, 176100) * 0.062
+    const employerSs = Math.min(annual, 184500) * 0.062
     const employerMedicare = annual * 0.0145
     const totalEmployerCost = annual + employerSs + employerMedicare
 
@@ -667,7 +667,7 @@ export default function FirstPaycheckPage() {
         <FAQAccordion items={[
           {
             question: 'Why is my paycheck so much less than my salary?',
-            answer: 'Your gross salary is split between you and several tax authorities before it reaches your bank account. Federal income tax takes 10-22% for most new graduates. Social Security takes 6.2% on the first $176,100 of wages. Medicare takes 1.45% on all wages. State income tax varies from 0% (Texas, Florida, Washington) to 9-11% (California, Oregon, Hawaii). Health insurance premiums and 401k contributions are deducted before or after tax depending on the plan. The result is that most employees take home 65-80% of their gross salary.'
+            answer: 'Your gross salary is split between you and several tax authorities before it reaches your bank account. Federal income tax takes 10-22% for most new graduates. Social Security takes 6.2% on the first $184,500 of wages. Medicare takes 1.45% on all wages. State income tax varies from 0% (Texas, Florida, Washington) to 9-11% (California, Oregon, Hawaii). Health insurance premiums and 401k contributions are deducted before or after tax depending on the plan. The result is that most employees take home 65-80% of their gross salary.'
           },
           {
             question: 'What is the difference between gross pay and net pay?',
@@ -675,7 +675,7 @@ export default function FirstPaycheckPage() {
           },
           {
             question: 'What is Social Security tax and why do I pay it?',
-            answer: 'Social Security tax is 6.2% of your gross wages up to $176,100 in 2026 — the wage base set by the Social Security Administration. This funds the Social Security retirement and disability programs. Your employer also pays 6.2% on your behalf — money that never appears on your paycheck. You will receive Social Security benefits when you retire, become disabled, or your survivors will receive benefits if you die. The amount you receive is based on your lifetime earnings history.'
+            answer: 'Social Security tax is 6.2% of your gross wages up to $184,500 in 2026 — the wage base set by the Social Security Administration. This funds the Social Security retirement and disability programs. Your employer also pays 6.2% on your behalf — money that never appears on your paycheck. You will receive Social Security benefits when you retire, become disabled, or your survivors will receive benefits if you die. The amount you receive is based on your lifetime earnings history.'
           },
           {
             question: 'Should I contribute to my 401k on my first job?',
@@ -699,7 +699,7 @@ export default function FirstPaycheckPage() {
         ]} />
 
         <LastUpdated date="June 2026" />
-        <MethodologyNote text="Federal income tax calculated using 2026 brackets per IRS Revenue Procedure 2025-32. Standard deduction: $16,100 single, $32,200 married filing jointly, $24,150 head of household. Social Security tax: 6.2% on wages up to $176,100 (2026 wage base per SSA). Medicare tax: 1.45% on all wages (additional 0.9% on wages above $200,000 not included). State income tax applied as flat rate on federal taxable income — rates are approximations based on top marginal rates and may differ from actual liability for some income levels. Health insurance deduction treated as pre-tax (Section 125 cafeteria plan). 401k contribution treated as pre-tax traditional contribution. Roth 401k, HSA, FSA, and other deductions not included. This calculator provides an estimate — actual withholding depends on W-4 elections, additional income sources, and employer-specific payroll processing. Always verify with your employer's HR or payroll department. Sources: IRS Rev. Proc. 2025-32, SSA 2026 COLA announcement, state revenue department rate schedules." />
+        <MethodologyNote text="Federal income tax calculated using 2026 brackets per IRS Revenue Procedure 2025-32. Standard deduction: $15,000 single, $30,000 married filing jointly, $22,500 head of household. Social Security tax: 6.2% on wages up to $184,500 (2026 wage base per SSA). Medicare tax: 1.45% on all wages (additional 0.9% on wages above $200,000 not included). State income tax applied as flat rate on federal taxable income — rates are approximations based on top marginal rates and may differ from actual liability for some income levels. Health insurance deduction treated as pre-tax (Section 125 cafeteria plan). 401k contribution treated as pre-tax traditional contribution. Roth 401k, HSA, FSA, and other deductions not included. This calculator provides an estimate — actual withholding depends on W-4 elections, additional income sources, and employer-specific payroll processing. Always verify with your employer's HR or payroll department. Sources: IRS Rev. Proc. 2025-32, SSA 2026 COLA announcement, state revenue department rate schedules." />
       </div>
     </main>
   )

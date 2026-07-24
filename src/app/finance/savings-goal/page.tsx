@@ -20,7 +20,7 @@ const PRESETS = [
 ]
 
 function addMonthsLabel(months: number): string {
-  const d = new Date(2025, 4, 1)
+  const d = new Date()
   d.setMonth(d.getMonth() + months)
   return d.toLocaleDateString("en-US", { month: "long", year: "numeric" })
 }

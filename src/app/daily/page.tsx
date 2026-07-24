@@ -822,7 +822,7 @@ const PUZZLES: Puzzle[] = [
       "Financial Investment Contribution Agreement — 8.5% of wages",
     ],
     answer: 1,
-    explanation: "FICA (Federal Insurance Contributions Act) taxes fund Social Security and Medicare. Employees pay 7.65% of wages: 6.2% for Social Security (on wages up to $176,100 in 2026) and 1.45% for Medicare (no wage cap). Employers match the 7.65%, making the total FICA cost to the system 15.3% of wages.",
+    explanation: "FICA (Federal Insurance Contributions Act) taxes fund Social Security and Medicare. Employees pay 7.65% of wages: 6.2% for Social Security (on wages up to $184,500 in 2026) and 1.45% for Medicare (no wage cap). Employers match the 7.65%, making the total FICA cost to the system 15.3% of wages.",
   },
 ]
 

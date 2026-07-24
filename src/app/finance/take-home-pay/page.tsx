@@ -26,20 +26,20 @@ const STATES: [string, number][] = [
 ]
 
 const BRACKETS_SINGLE: [number, number][] = [
-  [12400, 0.10], [47150, 0.12], [100525, 0.22],
-  [191950, 0.24], [243725, 0.32], [609350, 0.35], [Infinity, 0.37],
+  [11925, 0.10], [48475, 0.12], [103350, 0.22],
+  [197300, 0.24], [250525, 0.32], [626350, 0.35], [Infinity, 0.37],
 ]
 const BRACKETS_MFJ: [number, number][] = [
-  [24800, 0.10], [94300, 0.12], [201050, 0.22],
-  [383900, 0.24], [487450, 0.32], [731200, 0.35], [Infinity, 0.37],
+  [23850, 0.10], [96950, 0.12], [206700, 0.22],
+  [394600, 0.24], [501050, 0.32], [751600, 0.35], [Infinity, 0.37],
 ]
 const BRACKETS_HOH: [number, number][] = [
-  [17300, 0.10], [63050, 0.12], [100500, 0.22],
-  [191950, 0.24], [243700, 0.32], [609350, 0.35], [Infinity, 0.37],
+  [17000, 0.10], [64850, 0.12], [103350, 0.22],
+  [197300, 0.24], [250500, 0.32], [626350, 0.35], [Infinity, 0.37],
 ]
 
 const STD_DEDUCTION: Record<string, number> = {
-  single: 16100, mfj: 32200, mfs: 16100, hoh: 24150,
+  single: 15000, mfj: 30000, mfs: 15000, hoh: 22500,
 }
 
 function calcFedTax(taxable: number, filing: string): number {
@@ -106,7 +106,7 @@ export default function TakeHomePayPage() {
     const fedTax = calcFedTax(taxableIncome, filing)
     const stateRate = STATES[stateIdx][1]
     const stateTax = taxableIncome * stateRate
-    const ss = Math.min(annual, 176100) * 0.062
+    const ss = Math.min(annual, 184500) * 0.062
     const medicare = annual * 0.0145
 
     const totalTax = fedTax + stateTax + ss + medicare
@@ -524,7 +524,7 @@ export default function TakeHomePayPage() {
             { emoji: "⏱️", title: "Overtime Pay Calculator", desc: "How much do you earn working extra hours?", href: "/finance/overtime-calculator" },
           ]} />
           <FAQAccordion items={[
-            { q: "What is FICA tax?", a: "FICA stands for Federal Insurance Contributions Act. It covers Social Security tax at 6.2 percent on wages up to $176,100 in 2026 and Medicare tax at 1.45 percent on all wages plus an additional 0.9 percent on wages above $200,000. Employers match these contributions." },
+            { q: "What is FICA tax?", a: "FICA stands for Federal Insurance Contributions Act. It covers Social Security tax at 6.2 percent on wages up to $184,500 in 2026 and Medicare tax at 1.45 percent on all wages plus an additional 0.9 percent on wages above $200,000. Employers match these contributions." },
             { q: "Why does my paycheck differ from salary divided by pay periods?", a: "Your gross pay equals salary divided by pay periods. Your net take-home is lower after federal income tax withholding, FICA taxes, state income tax, and any pre-tax deductions like 401k contributions or health insurance premiums." },
             { q: "How do pre-tax deductions affect take-home pay?", a: "Pre-tax deductions reduce your taxable income before taxes are calculated. Contributing $500 per month to a 401k does not reduce take-home pay by $500 — it reduces it by $500 minus the taxes you would have paid on that amount making the real cost lower." },
             { q: "What is the standard deduction for 2026?", a: "The 2026 standard deduction is approximately $15,000 for single filers and $30,000 for married filing jointly. This reduces your taxable income before the bracket calculation is applied." },

@@ -15,7 +15,7 @@ interface Debt { id: number; name: string; balance: string; rate: string; minPay
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function addMonths(months: number) {
-  const d = new Date(2025, 4, 1) // fixed reference date for determinism
+  const d = new Date()
   d.setMonth(d.getMonth() + months)
   return d.toLocaleDateString("en-US", { month: "long", year: "numeric" })
 }

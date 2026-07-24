@@ -65,7 +65,7 @@ export default function EmbedTakeHomePay() {
     const federal = calcFederalTax(s, married)
     const stateRate = STATE_TAX[state] ?? 0.05
     const stateTax = s * stateRate
-    const fica = Math.min(s, 176100) * 0.0765 + Math.max(0, s - 176100) * 0.0145
+    const fica = Math.min(s, 184500) * 0.0765 + Math.max(0, s - 184500) * 0.0145
     const takeHome = s - federal - stateTax - fica
     const monthly = takeHome / 12
     const effectiveRate = s > 0 ? ((federal + stateTax + fica) / s) * 100 : 0

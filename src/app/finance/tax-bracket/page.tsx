@@ -143,7 +143,7 @@ export default function TaxBracketPage() {
       </section>
       <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
         <div className="mx-auto max-w-[700px]">
-          <GeoAnswerBlock answer="To calculate your federal tax bracket: the US uses a progressive tax system where only income within each bracket is taxed at that rate. A single filer earning $80,000 in 2025 pays 10% on the first $11,600, 12% on income up to $47,150, and 22% on the remainder — an effective rate of approximately 16%. Use the interactive tool below." />
+          <GeoAnswerBlock answer="To calculate your federal tax bracket: the US uses a progressive tax system where only income within each bracket is taxed at that rate. A single filer earning $80,000 in 2025 pays 10% on the first $11,925, 12% on income up to $48,475, and 22% on the remainder — an effective rate of approximately 16%. Use the interactive tool below." />
         </div>
       </section>
 
@@ -151,7 +151,7 @@ export default function TaxBracketPage() {
         <div className="mx-auto max-w-[700px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">The US uses a progressive tax system where different portions of income are taxed at different rates. A $100,000 earner in the 22% bracket does NOT pay 22% on all income. They pay 10% on the first $11,600, 12% on the next $35,550 and 22% only on the remainder. Their effective rate is approximately 15.7% — not 22%.</p>
+            <p className="text-[#e2e8f0]">The US uses a progressive tax system where different portions of income are taxed at different rates. A $100,000 earner in the 22% bracket does NOT pay 22% on all income. They pay 10% on the first $11,925, 12% on the next $36,550 and 22% only on the remainder. Their effective rate is approximately 15.7% — not 22%.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Your marginal tax rate is the rate on your last dollar of income and determines which bracket you are in. Your effective tax rate is the actual percentage of total income paid in federal taxes — always lower than the marginal rate. Understanding the difference is the most common tax misconception in the US.</p>
         </div>
