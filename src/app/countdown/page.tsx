@@ -151,7 +151,6 @@ export default function CountdownHubPage() {
           </h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             {[
-              { emoji: "⚽", label: "World Cup Final",  href: "/days-until/world-cup" },
               { emoji: "🏈", label: "Super Bowl",        href: "/days-until/super-bowl" },
               { emoji: "⚾", label: "World Series",      href: "/days-until/world-series" },
               { emoji: "🏀", label: "March Madness",     href: "/days-until/march-madness" },

@@ -4,13 +4,6 @@ import Link from 'next/link'
 
 const SPORTS = [
   {
-    slug: 'world-cup',
-    emoji: '⚽',
-    name: 'FIFA World Cup Final',
-    date: 'July 19, 2026',
-    confirmed: true,
-  },
-  {
     slug: 'super-bowl',
     emoji: '🏈',
     name: 'Super Bowl LXI',

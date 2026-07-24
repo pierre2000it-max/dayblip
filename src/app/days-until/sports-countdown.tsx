@@ -36,7 +36,6 @@ export default function SportsCountdown({ event, faqItems }: SportsCountdownProp
 
   const allSports = [
     { slug: 'super-bowl', label: '🏈 Super Bowl' },
-    { slug: 'world-cup', label: '⚽ World Cup' },
     { slug: 'world-series', label: '⚾ World Series' },
     { slug: 'march-madness', label: '🏀 March Madness' },
     { slug: 'nba-finals', label: '🏀 NBA Finals' },
