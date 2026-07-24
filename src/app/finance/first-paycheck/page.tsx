@@ -37,19 +37,19 @@ const STATES: [string, number][] = [
 ]
 
 const BRACKETS_SINGLE: [number, number][] = [
-  [12400, 0.10], [47150, 0.12], [100525, 0.22],
-  [191950, 0.24], [243725, 0.32], [609350, 0.35], [Infinity, 0.37],
+  [11925, 0.10], [48475, 0.12], [103350, 0.22],
+  [197300, 0.24], [250525, 0.32], [626350, 0.35], [Infinity, 0.37],
 ]
 const BRACKETS_MFJ: [number, number][] = [
-  [24800, 0.10], [94300, 0.12], [201050, 0.22],
-  [383900, 0.24], [487450, 0.32], [731200, 0.35], [Infinity, 0.37],
+  [23850, 0.10], [96950, 0.12], [206700, 0.22],
+  [394600, 0.24], [501050, 0.32], [751600, 0.35], [Infinity, 0.37],
 ]
 const BRACKETS_HOH: [number, number][] = [
-  [17300, 0.10], [63050, 0.12], [100500, 0.22],
-  [191950, 0.24], [243700, 0.32], [609350, 0.35], [Infinity, 0.37],
+  [17000, 0.10], [64850, 0.12], [103350, 0.22],
+  [197300, 0.24], [250500, 0.32], [626350, 0.35], [Infinity, 0.37],
 ]
 const STD_DEDUCTION: Record<string, number> = {
-  single: 16100, mfj: 32200, mfs: 16100, hoh: 24150,
+  single: 15000, mfj: 30000, mfs: 15000, hoh: 22500,
 }
 
 function calcFedTax(taxableIncome: number, filing: string): number {
@@ -113,7 +113,7 @@ export default function FirstPaycheckPage() {
     const healthInsAnnual = healthIns * periods
     const k401Annual = annual * (k401pct / 100)
 
-    const stdDed = STD_DEDUCTION[filing] ?? 16100
+    const stdDed = STD_DEDUCTION[filing] ?? 15000
     const preTaxDeductions = healthInsAnnual + k401Annual
     const agi = Math.max(0, annual - preTaxDeductions)
     const taxableIncome = Math.max(0, agi - stdDed)

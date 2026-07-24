@@ -100,7 +100,7 @@ const PUZZLES: Puzzle[] = [
     question: "Which state has the highest average property tax burden?",
     options: ["California", "New York", "New Jersey", "Illinois"],
     answer: 2,
-    explanation: "New Jersey has the highest average property taxes in the nation at approximately $9,000+ per year. While California has the highest income tax rate at 13.3%, New Jersey's combination of high property taxes, income taxes, and other levies gives it the heaviest overall tax burden.",
+    explanation: "New Jersey has the highest average property taxes in the nation at approximately $9,000+ per year. While California has the highest income tax rate at up to 13.3%, New Jersey's combination of high property taxes, income taxes, and other levies gives it the heaviest overall tax burden.",
   },
   {
     question: "The average American spends approximately how much per year on coffee?",

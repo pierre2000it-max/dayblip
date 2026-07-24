@@ -93,9 +93,9 @@ const WORK_DAYS: Record<WorkArrangement, number> = {
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function getFederalRate(salary: number): number {
-  if (salary <= 44725) return 0.12
-  if (salary <= 95375) return 0.22
-  if (salary <= 182050) return 0.24
+  if (salary <= 48475) return 0.12
+  if (salary <= 103350) return 0.22
+  if (salary <= 197300) return 0.24
   return 0.32
 }
 

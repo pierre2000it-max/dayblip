@@ -7,8 +7,8 @@ function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", 
 
 function calcFederalTax(annual: number, filing: string): number {
   const brackets = filing === "married"
-    ? [[23200, 0.10], [89450, 0.12], [190750, 0.22], [364200, 0.24], [Infinity, 0.32]]
-    : [[11600, 0.10], [44725, 0.12], [95375, 0.22], [182050, 0.24], [Infinity, 0.32]]
+    ? [[23850, 0.10], [96950, 0.12], [206700, 0.22], [394600, 0.24], [Infinity, 0.32]]
+    : [[11925, 0.10], [48475, 0.12], [103350, 0.22], [197300, 0.24], [Infinity, 0.32]]
   let tax = 0
   let prev = 0
   for (const [limit, rate] of brackets as [number, number][]) {

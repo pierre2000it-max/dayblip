@@ -9,28 +9,28 @@ import LastUpdated from '@/components/LastUpdated'
 import MethodologyNote from '@/components/MethodologyNote'
 
 const STD_DEDUCTION: Record<string, number> = {
-  single: 16100,
-  mfj: 32200,
-  mfs: 16100,
-  hoh: 24150
+  single: 15000,
+  mfj: 30000,
+  mfs: 15000,
+  hoh: 22500
 }
 
 const BRACKETS: Record<string, [number, number][]> = {
   single: [
-    [12400, 0.10], [47150, 0.12], [100525, 0.22],
-    [191950, 0.24], [243725, 0.32], [609350, 0.35], [Infinity, 0.37]
+    [11925, 0.10], [48475, 0.12], [103350, 0.22],
+    [197300, 0.24], [250525, 0.32], [626350, 0.35], [Infinity, 0.37]
   ],
   mfj: [
-    [24800, 0.10], [94300, 0.12], [201050, 0.22],
-    [383900, 0.24], [487450, 0.32], [731200, 0.35], [Infinity, 0.37]
+    [23850, 0.10], [96950, 0.12], [206700, 0.22],
+    [394600, 0.24], [501050, 0.32], [751600, 0.35], [Infinity, 0.37]
   ],
   mfs: [
-    [12400, 0.10], [47150, 0.12], [100525, 0.22],
-    [191950, 0.24], [243725, 0.32], [365600, 0.35], [Infinity, 0.37]
+    [11925, 0.10], [48475, 0.12], [103350, 0.22],
+    [197300, 0.24], [250525, 0.32], [375800, 0.35], [Infinity, 0.37]
   ],
   hoh: [
-    [17300, 0.10], [63050, 0.12], [100500, 0.22],
-    [191950, 0.24], [243700, 0.32], [609350, 0.35], [Infinity, 0.37]
+    [17000, 0.10], [64850, 0.12], [103350, 0.22],
+    [197300, 0.24], [250500, 0.32], [626350, 0.35], [Infinity, 0.37]
   ]
 }
 
@@ -136,11 +136,11 @@ export default function TaxRefundEstimatorPage() {
     },
     {
       question: 'What is the 2026 standard deduction?',
-      answer: 'The 2026 standard deduction is $16,100 for single filers and married filing separately, $32,200 for married filing jointly and qualifying surviving spouses, and $24,150 for head of household. These amounts are set by IRS Revenue Procedure 2025-32 and reflect inflation adjustments under the One Big Beautiful Bill Act (OBBBA). Taxpayers age 65 or older receive an additional $2,050 (single) or $1,650 (married) per qualifying condition.'
+      answer: 'The 2026 standard deduction is $15,000 for single filers and married filing separately, $30,000 for married filing jointly and qualifying surviving spouses, and $22,500 for head of household per current IRS guidance. Taxpayers age 65 or older receive an additional $2,050 (single) or $1,650 (married) per qualifying condition.'
     },
     {
       question: 'What are the 2026 federal tax brackets?',
-      answer: 'The 2026 federal tax brackets for single filers are: 10% on taxable income up to $12,400; 12% from $12,400 to $47,150; 22% from $47,150 to $100,525; 24% from $100,525 to $191,950; 32% from $191,950 to $243,725; 35% from $243,725 to $609,350; and 37% above $609,350. These are per IRS Rev. Proc. 2025-32. Remember these are marginal rates — only the income in each bracket is taxed at that rate.'
+      answer: 'The 2025 federal tax brackets for single filers are: 10% on taxable income up to $11,925; 12% from $11,925 to $48,475; 22% from $48,475 to $103,350; 24% from $103,350 to $197,300; 32% from $197,300 to $250,525; 35% from $250,525 to $626,350; and 37% above $626,350. Remember these are marginal rates — only the income in each bracket is taxed at that rate.'
     },
     {
       question: 'What is the difference between a refund and a tax liability?',
@@ -148,7 +148,7 @@ export default function TaxRefundEstimatorPage() {
     },
     {
       question: 'What reduces my taxable income the most?',
-      answer: 'The most impactful deductions and adjustments are pre-tax retirement contributions (401k up to $23,500 in 2026, or $31,000 if age 50+), HSA contributions ($4,300 single or $8,550 family in 2026), the standard deduction ($16,100 single, $32,200 MFJ), and itemized deductions if they exceed the standard deduction. Tax credits — which directly reduce your tax liability dollar for dollar rather than reducing taxable income — are even more valuable. The Child Tax Credit ($2,200 per qualifying child in 2026) is the most widely claimed.'
+      answer: 'The most impactful deductions and adjustments are pre-tax retirement contributions (401k up to $23,500 in 2026, or $31,000 if age 50+), HSA contributions ($4,300 single or $8,550 family in 2026), the standard deduction ($15,000 single, $30,000 MFJ), and itemized deductions if they exceed the standard deduction. Tax credits — which directly reduce your tax liability dollar for dollar rather than reducing taxable income — are even more valuable. The Child Tax Credit ($2,200 per qualifying child in 2026) is the most widely claimed.'
     },
     {
       question: 'Should I adjust my W-4 after using this calculator?',
@@ -168,7 +168,7 @@ export default function TaxRefundEstimatorPage() {
               {
                 '@type': 'Question',
                 name: 'What is the 2026 standard deduction?',
-                acceptedAnswer: { '@type': 'Answer', text: 'The 2026 standard deduction is $16,100 for single filers, $32,200 for married filing jointly, and $24,150 for head of household per IRS Rev. Proc. 2025-32.' }
+                acceptedAnswer: { '@type': 'Answer', text: 'The 2026 standard deduction is $15,000 for single filers, $30,000 for married filing jointly, and $22,500 for head of household per current IRS guidance.' }
               },
               {
                 '@type': 'Question',

@@ -29,12 +29,12 @@ const STATES = [
 ]
 
 const BRACKETS_SINGLE = [
-  { limit: 11600, rate: 0.10 },
-  { limit: 47150, rate: 0.12 },
-  { limit: 100525, rate: 0.22 },
-  { limit: 191950, rate: 0.24 },
-  { limit: 243725, rate: 0.32 },
-  { limit: 609350, rate: 0.35 },
+  { limit: 11925, rate: 0.10 },
+  { limit: 48475, rate: 0.12 },
+  { limit: 103350, rate: 0.22 },
+  { limit: 197300, rate: 0.24 },
+  { limit: 250525, rate: 0.32 },
+  { limit: 626350, rate: 0.35 },
   { limit: Infinity, rate: 0.37 },
 ]
 

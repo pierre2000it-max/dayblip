@@ -119,11 +119,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     // SPORTS COUNTDOWNS  (priority 0.8, weekly)
     // ═══════════════════════════════════════════════════════════════════════
-    p("/days-until/super-bowl",     0.8, WEEKLY),
+    p("/days-until/super-bowl",     0.6, MONTHLY),
     p("/days-until/world-cup",      0.5, MONTHLY),
     p("/days-until/world-series",   0.8, WEEKLY),
-    p("/days-until/march-madness",  0.8, WEEKLY),
-    p("/days-until/nba-finals",     0.8, WEEKLY),
+    p("/days-until/march-madness",  0.6, MONTHLY),
+    p("/days-until/nba-finals",     0.6, MONTHLY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // FINANCE CALCULATORS  (priority 0.9, monthly)

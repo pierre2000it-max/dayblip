@@ -22,7 +22,7 @@ const STATES: [string, number][] = [
   ["WI – 7.65%", 0.0765], ["MN – 9.85%", 0.0985], ["IL – 4.95%", 0.0495],
   ["UT – 4.85%", 0.0485], ["MD – 5.75%", 0.0575], ["CT – 7.0%", 0.07],
   ["MA – 9.0%", 0.09], ["NY – 10.9%", 0.109], ["NJ – 10.75%", 0.1075],
-  ["CA – 13.3%", 0.133], ["OR – 9.9%", 0.099], ["HI – 11.0%", 0.11],
+  ["CA – up to 13.3%", 0.133], ["OR – 9.9%", 0.099], ["HI – 11.0%", 0.11],
 ]
 
 const BRACKETS_SINGLE: [number, number][] = [
@@ -272,6 +272,9 @@ export default function TakeHomePayPage() {
                 <span className="text-[#4ade80] text-xl">{fmt(calc.perCheckBreakdown.net)}</span>
               </div>
             </div>
+            {stateIdx === 21 && (
+              <p className="mt-3 text-xs text-[#a8a8b3]">* California uses a progressive rate schedule. The 13.3% top rate applies only to income above $1,000,000. Your effective state rate is lower than this figure.</p>
+            )}
           </div>
 
           {/* Annual summary */}
@@ -425,7 +428,7 @@ export default function TakeHomePayPage() {
             } else if (rateTier === 'high') {
               nextActions = [
                 `Max 401k ($23,500) and HSA ($4,300 single) before any taxable investing — significant effective rate reduction`,
-                `Review itemized vs standard deduction ($16,100 single in 2026) — mortgage interest + state taxes may exceed standard`,
+                `Review itemized vs standard deduction ($15,000 single in 2026) — mortgage interest + state taxes may exceed standard`,
                 `Consider backdoor Roth IRA if income exceeds direct contribution limits`,
                 `Model after-tax take-home in lower-tax states — at your income the difference can exceed $10,000/year`,
               ]
