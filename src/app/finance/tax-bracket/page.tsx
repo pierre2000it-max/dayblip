@@ -17,39 +17,39 @@ const STD_DEDUCTION: Record<Filing, number> = { single: 16100, mfj: 32200, mfs: 
 
 const BRACKET_DEFS: Record<Filing, [number, number, string][]> = {
   single: [
-    [11925, 0.10, "#4ade80"],
-    [48475, 0.12, "#86efac"],
-    [103350, 0.22, "#F9A825"],
-    [197300, 0.24, "#fb923c"],
-    [250525, 0.32, "#f97316"],
-    [626350, 0.35, "#ef4444"],
+    [12400, 0.10, "#4ade80"],
+    [50400, 0.12, "#86efac"],
+    [105700, 0.22, "#F9A825"],
+    [201775, 0.24, "#fb923c"],
+    [256225, 0.32, "#f97316"],
+    [640600, 0.35, "#ef4444"],
     [Infinity, 0.37, "#dc2626"],
   ],
   mfj: [
-    [23850, 0.10, "#4ade80"],
-    [96950, 0.12, "#86efac"],
-    [206700, 0.22, "#F9A825"],
-    [394600, 0.24, "#fb923c"],
-    [501050, 0.32, "#f97316"],
-    [751600, 0.35, "#ef4444"],
+    [24800, 0.10, "#4ade80"],
+    [100800, 0.12, "#86efac"],
+    [211400, 0.22, "#F9A825"],
+    [403550, 0.24, "#fb923c"],
+    [512450, 0.32, "#f97316"],
+    [768700, 0.35, "#ef4444"],
     [Infinity, 0.37, "#dc2626"],
   ],
   mfs: [
-    [11925, 0.10, "#4ade80"],
-    [48475, 0.12, "#86efac"],
-    [103350, 0.22, "#F9A825"],
-    [197300, 0.24, "#fb923c"],
-    [250525, 0.32, "#f97316"],
-    [375800, 0.35, "#ef4444"],
+    [12400, 0.10, "#4ade80"],
+    [50400, 0.12, "#86efac"],
+    [105700, 0.22, "#F9A825"],
+    [201775, 0.24, "#fb923c"],
+    [256225, 0.32, "#f97316"],
+    [384350, 0.35, "#ef4444"],
     [Infinity, 0.37, "#dc2626"],
   ],
   hoh: [
-    [17000, 0.10, "#4ade80"],
-    [64850, 0.12, "#86efac"],
-    [103350, 0.22, "#F9A825"],
-    [197300, 0.24, "#fb923c"],
-    [250500, 0.32, "#f97316"],
-    [626350, 0.35, "#ef4444"],
+    [17700, 0.10, "#4ade80"],
+    [67450, 0.12, "#86efac"],
+    [105700, 0.22, "#F9A825"],
+    [201775, 0.24, "#fb923c"],
+    [256200, 0.32, "#f97316"],
+    [640600, 0.35, "#ef4444"],
     [Infinity, 0.37, "#dc2626"],
   ],
 }
@@ -143,7 +143,7 @@ export default function TaxBracketPage() {
       </section>
       <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
         <div className="mx-auto max-w-[700px]">
-          <GeoAnswerBlock answer="To calculate your federal tax bracket: the US uses a progressive tax system where only income within each bracket is taxed at that rate. A single filer earning $80,000 in 2025 pays 10% on the first $11,925, 12% on income up to $48,475, and 22% on the remainder — an effective rate of approximately 16%. Use the interactive tool below." />
+          <GeoAnswerBlock answer="To calculate your federal tax bracket: the US uses a progressive tax system where only income within each bracket is taxed at that rate. A single filer earning $80,000 in 2026 pays 10% on the first $12,400, 12% on income up to $50,400, and 22% on the remainder — an effective rate of approximately 15%. Use the interactive tool below." />
         </div>
       </section>
 
@@ -151,7 +151,7 @@ export default function TaxBracketPage() {
         <div className="mx-auto max-w-[700px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">The US uses a progressive tax system where different portions of income are taxed at different rates. A $100,000 earner in the 22% bracket does NOT pay 22% on all income. They pay 10% on the first $11,925, 12% on the next $36,550 and 22% only on the remainder. Their effective rate is approximately 15.7% — not 22%.</p>
+            <p className="text-[#e2e8f0]">The US uses a progressive tax system where different portions of income are taxed at different rates. A $100,000 earner in the 22% bracket does NOT pay 22% on all income. They pay 10% on the first $12,400, 12% on the next $38,000 and 22% only on the remainder. Their effective rate is approximately 15.7% — not 22%.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Your marginal tax rate is the rate on your last dollar of income and determines which bracket you are in. Your effective tax rate is the actual percentage of total income paid in federal taxes — always lower than the marginal rate. Understanding the difference is the most common tax misconception in the US.</p>
         </div>
@@ -267,7 +267,7 @@ export default function TaxBracketPage() {
           <FAQAccordion items={[
             { q: "How do US federal tax brackets work?", a: "The US uses a progressive tax system where different portions of your income are taxed at different rates. You only pay the higher rate on income above each threshold — not on your entire income. Moving into a higher bracket does not mean all your income is taxed at that rate." },
             { q: "What is the difference between marginal and effective tax rate?", a: "Your marginal rate is the rate applied to your last dollar of income — the highest bracket you fall into. Your effective rate is your total tax paid divided by total income. Effective rate is always lower than marginal rate in a progressive system." },
-            { q: "What are the 2026 federal tax brackets?", a: "The 2026 federal income tax brackets for single filers are approximately: 10 percent on income up to $11,925; 12 percent up to $48,475; 22 percent up to $103,350; 24 percent up to $197,300; 32 percent up to $250,525; 35 percent up to $626,350; 37 percent above $626,350." },
+            { q: "What are the 2026 federal tax brackets?", a: "The 2026 federal income tax brackets for single filers are approximately: 10 percent on income up to $12,400; 12 percent up to $50,400; 22 percent up to $105,700; 24 percent up to $201,775; 32 percent up to $256,225; 35 percent up to $640,600; 37 percent above $640,600." },
             { q: "Does this include state income tax?", a: "No. This calculator covers federal income tax only. State income tax rates vary widely — from 0 percent in states like Texas and Florida to over 13 percent in California." },
           ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>

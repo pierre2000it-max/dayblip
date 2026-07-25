@@ -17,20 +17,20 @@ const STD_DEDUCTION: Record<string, number> = {
 
 const BRACKETS: Record<string, [number, number][]> = {
   single: [
-    [11925, 0.10], [48475, 0.12], [103350, 0.22],
-    [197300, 0.24], [250525, 0.32], [626350, 0.35], [Infinity, 0.37]
+    [12400, 0.10], [50400, 0.12], [105700, 0.22],
+    [201775, 0.24], [256225, 0.32], [640600, 0.35], [Infinity, 0.37]
   ],
   mfj: [
-    [23850, 0.10], [96950, 0.12], [206700, 0.22],
-    [394600, 0.24], [501050, 0.32], [751600, 0.35], [Infinity, 0.37]
+    [24800, 0.10], [100800, 0.12], [211400, 0.22],
+    [403550, 0.24], [512450, 0.32], [768700, 0.35], [Infinity, 0.37]
   ],
   mfs: [
-    [11925, 0.10], [48475, 0.12], [103350, 0.22],
-    [197300, 0.24], [250525, 0.32], [375800, 0.35], [Infinity, 0.37]
+    [12400, 0.10], [50400, 0.12], [105700, 0.22],
+    [201775, 0.24], [256225, 0.32], [384350, 0.35], [Infinity, 0.37]
   ],
   hoh: [
-    [17000, 0.10], [64850, 0.12], [103350, 0.22],
-    [197300, 0.24], [250500, 0.32], [626350, 0.35], [Infinity, 0.37]
+    [17700, 0.10], [67450, 0.12], [105700, 0.22],
+    [201775, 0.24], [256200, 0.32], [640600, 0.35], [Infinity, 0.37]
   ]
 }
 
@@ -140,7 +140,7 @@ export default function TaxRefundEstimatorPage() {
     },
     {
       question: 'What are the 2026 federal tax brackets?',
-      answer: 'The 2025 federal tax brackets for single filers are: 10% on taxable income up to $11,925; 12% from $11,925 to $48,475; 22% from $48,475 to $103,350; 24% from $103,350 to $197,300; 32% from $197,300 to $250,525; 35% from $250,525 to $626,350; and 37% above $626,350. Remember these are marginal rates — only the income in each bracket is taxed at that rate.'
+      answer: 'The 2026 federal tax brackets for single filers are: 10% on taxable income up to $12,400; 12% from $12,400 to $50,400; 22% from $50,400 to $105,700; 24% from $105,700 to $201,775; 32% from $201,775 to $256,225; 35% from $256,225 to $640,600; and 37% above $640,600. Remember these are marginal rates — only the income in each bracket is taxed at that rate.'
     },
     {
       question: 'What is the difference between a refund and a tax liability?',
