@@ -13,7 +13,7 @@ function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", 
 
 type Filing = "single" | "mfj" | "mfs" | "hoh"
 
-const STD_DEDUCTION: Record<Filing, number> = { single: 15000, mfj: 30000, mfs: 15000, hoh: 22500 }
+const STD_DEDUCTION: Record<Filing, number> = { single: 16100, mfj: 32200, mfs: 16100, hoh: 24150 }
 
 const BRACKET_DEFS: Record<Filing, [number, number, string][]> = {
   single: [

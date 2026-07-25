@@ -39,7 +39,7 @@ const BRACKETS_HOH: [number, number][] = [
 ]
 
 const STD_DEDUCTION: Record<string, number> = {
-  single: 15000, mfj: 30000, mfs: 15000, hoh: 22500,
+  single: 16100, mfj: 32200, mfs: 16100, hoh: 24150,
 }
 
 function calcFedTax(taxable: number, filing: string): number {
@@ -95,7 +95,7 @@ export default function TakeHomePayPage() {
     const annual = wageType === "salary" ? a : a * (parseFloat(hoursPerWeek) || 40) * 52
     const grossPerCheck = annual / freq
 
-    const stdDed = STD_DEDUCTION[filing] || 15000
+    const stdDed = STD_DEDUCTION[filing] || 16100
     const k401AnnualPct = (parseFloat(fourOhOneK) || 0) / 100
     const k401Annual = annual * k401AnnualPct
     const hiAnnual = (parseFloat(healthIns) || 0) * freq
@@ -428,7 +428,7 @@ export default function TakeHomePayPage() {
             } else if (rateTier === 'high') {
               nextActions = [
                 `Max 401k ($23,500) and HSA ($4,300 single) before any taxable investing — significant effective rate reduction`,
-                `Review itemized vs standard deduction ($15,000 single in 2026) — mortgage interest + state taxes may exceed standard`,
+                `Review itemized vs standard deduction ($16,100 single in 2026) — mortgage interest + state taxes may exceed standard`,
                 `Consider backdoor Roth IRA if income exceeds direct contribution limits`,
                 `Model after-tax take-home in lower-tax states — at your income the difference can exceed $10,000/year`,
               ]
@@ -530,7 +530,7 @@ export default function TakeHomePayPage() {
             { q: "What is FICA tax?", a: "FICA stands for Federal Insurance Contributions Act. It covers Social Security tax at 6.2 percent on wages up to $184,500 in 2026 and Medicare tax at 1.45 percent on all wages plus an additional 0.9 percent on wages above $200,000. Employers match these contributions." },
             { q: "Why does my paycheck differ from salary divided by pay periods?", a: "Your gross pay equals salary divided by pay periods. Your net take-home is lower after federal income tax withholding, FICA taxes, state income tax, and any pre-tax deductions like 401k contributions or health insurance premiums." },
             { q: "How do pre-tax deductions affect take-home pay?", a: "Pre-tax deductions reduce your taxable income before taxes are calculated. Contributing $500 per month to a 401k does not reduce take-home pay by $500 — it reduces it by $500 minus the taxes you would have paid on that amount making the real cost lower." },
-            { q: "What is the standard deduction for 2026?", a: "The 2026 standard deduction is approximately $15,000 for single filers and $30,000 for married filing jointly. This reduces your taxable income before the bracket calculation is applied." },
+            { q: "What is the standard deduction for 2026?", a: "The 2026 standard deduction is approximately $16,100 for single filers and $32,200 for married filing jointly. This reduces your taxable income before the bracket calculation is applied." },
           ].map(item => ({ question: item.q, answer: item.a }))} />
         </div>
       </section>
