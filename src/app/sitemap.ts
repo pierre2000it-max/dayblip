@@ -85,6 +85,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/productivity", 1.0, MONTHLY),
     p("/curiosity",    1.0, MONTHLY),
     p("/tools",        1.0, MONTHLY),
+    p("/zip-score",    0.9, WEEKLY),
     p("/countdown",    0.6, MONTHLY),
     p("/embed",                0.8),
     p("/embed/for-educators",  0.7),
