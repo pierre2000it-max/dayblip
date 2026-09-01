@@ -28,194 +28,194 @@ jobs:
               labels: ['annual-update', 'data'],
               body: `# Dayblip Annual Data Update Checklist — ${year}
 
-Triggered automatically on January 1st. Complete all items before January 31st.
+            Triggered automatically on January 1st. Complete all items before January 31st.
 
----
+            ---
 
-## 🏛️ IRS TAX DATA — Update by January 31st
-Source: https://www.irs.gov/newsroom (search "inflation adjustments ${year}")
-Revenue Procedure published each October for the following tax year.
+            ## 🏛️ IRS TAX DATA — Update by January 31st
+            Source: https://www.irs.gov/newsroom (search "inflation adjustments ${year}")
+            Revenue Procedure published each October for the following tax year.
 
-### Files to update:
+            ### Files to update:
 
-**\`src/app/finance/take-home-pay/page.tsx\`**
-- [ ] \`STD_DEDUCTION\` object — single, mfj, mfs, hoh values
-- [ ] \`BRACKETS_SINGLE\`, \`BRACKETS_MFJ\`, \`BRACKETS_HOH\` arrays
-- [ ] Any year references in FAQ text
+            **\`src/app/finance/take-home-pay/page.tsx\`**
+            - [ ] \`STD_DEDUCTION\` object — single, mfj, mfs, hoh values
+            - [ ] \`BRACKETS_SINGLE\`, \`BRACKETS_MFJ\`, \`BRACKETS_HOH\` arrays
+            - [ ] Any year references in FAQ text
 
-**\`src/app/finance/tax-bracket/page.tsx\`**
-- [ ] Tax bracket threshold values
-- [ ] Standard deduction values
-- [ ] Year in page title and meta description (layout.tsx)
+            **\`src/app/finance/tax-bracket/page.tsx\`**
+            - [ ] Tax bracket threshold values
+            - [ ] Standard deduction values
+            - [ ] Year in page title and meta description (layout.tsx)
 
-**\`src/app/finance/paycheck-calculator/page.tsx\`**
-- [ ] \`const ssCap = XXXXXX\` — SS wage base (from SSA, not IRS)
-- [ ] Federal bracket arrays
-- [ ] FAQ text mentioning year
+            **\`src/app/finance/paycheck-calculator/page.tsx\`**
+            - [ ] \`const ssCap = XXXXXX\` — SS wage base (from SSA, not IRS)
+            - [ ] Federal bracket arrays
+            - [ ] FAQ text mentioning year
 
-**\`src/app/embed/(tools)/take-home-pay/page.tsx\`**
-- [ ] \`Math.min(s, XXXXXX)\` — SS wage base
-- [ ] ⚠️ This file has historically been 2+ years stale — prioritize
+            **\`src/app/embed/(tools)/take-home-pay/page.tsx\`**
+            - [ ] \`Math.min(s, XXXXXX)\` — SS wage base
+            - [ ] ⚠️ This file has historically been 2+ years stale — prioritize
 
-**\`src/app/daily/page.tsx\`**
-- [ ] 401k contribution limit label (IRS)
-- [ ] SS wage base in FICA explanation text (two locations)
+            **\`src/app/daily/page.tsx\`**
+            - [ ] 401k contribution limit label (IRS)
+            - [ ] SS wage base in FICA explanation text (two locations)
 
-**\`src/app/tools/tax-refund-estimator/page.tsx\`**
-- [ ] \`STD_DEDUCTION\` object
-- [ ] \`BRACKETS\` object — all 4 filing statuses
-- [ ] Meta title year (layout.tsx)
+            **\`src/app/tools/tax-refund-estimator/page.tsx\`**
+            - [ ] \`STD_DEDUCTION\` object
+            - [ ] \`BRACKETS\` object — all 4 filing statuses
+            - [ ] Meta title year (layout.tsx)
 
----
+            ---
 
-## 📊 SSA WAGE BASE — Update by January 31st
-Source: https://www.ssa.gov/oact/cola/cbb.html
-Announced each October for the following year.
+            ## 📊 SSA WAGE BASE — Update by January 31st
+            Source: https://www.ssa.gov/oact/cola/cbb.html
+            Announced each October for the following year.
 
-- [ ] \`src/app/finance/paycheck-calculator/page.tsx\` — \`ssCap\`
-- [ ] \`src/app/finance/take-home-pay/page.tsx\` — \`Math.min(annual, XXXXXX)\`
-- [ ] \`src/app/embed/(tools)/take-home-pay/page.tsx\` — \`Math.min(s, XXXXXX)\`
-- [ ] \`src/app/daily/page.tsx\` — text "on wages up to $X in 20XX"
+            - [ ] \`src/app/finance/paycheck-calculator/page.tsx\` — \`ssCap\`
+            - [ ] \`src/app/finance/take-home-pay/page.tsx\` — \`Math.min(annual, XXXXXX)\`
+            - [ ] \`src/app/embed/(tools)/take-home-pay/page.tsx\` — \`Math.min(s, XXXXXX)\`
+            - [ ] \`src/app/daily/page.tsx\` — text "on wages up to $X in 20XX"
 
----
+            ---
 
-## 💰 IRA AND 401K LIMITS — Update by January 31st
-Source: https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-401k-and-profit-sharing-plan-contribution-limits
+            ## 💰 IRA AND 401K LIMITS — Update by January 31st
+            Source: https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-401k-and-profit-sharing-plan-contribution-limits
 
-- [ ] \`src/app/blog/roth-ira-vs-traditional-ira/page.tsx\` — IRA phase-out thresholds
-- [ ] \`src/app/blog/how-much-saved-by-age/page.tsx\` — 401k/IRA contribution limits
-- [ ] \`src/app/daily/page.tsx\` — 401k limit label
+            - [ ] \`src/app/blog/roth-ira-vs-traditional-ira/page.tsx\` — IRA phase-out thresholds
+            - [ ] \`src/app/blog/how-much-saved-by-age/page.tsx\` — 401k/IRA contribution limits
+            - [ ] \`src/app/daily/page.tsx\` — 401k limit label
 
----
+            ---
 
-## 🌍 WORLD COUNTER ANCHORS — Update by January 15th
-Update JAN1 anchor constants to new year baseline values.
+            ## 🌍 WORLD COUNTER ANCHORS — Update by January 15th
+            Update JAN1 anchor constants to new year baseline values.
 
-**\`src/app/world-counters/us-population/page.tsx\`**
-- [ ] \`US_POP_JAN1_${year}\` — Source: https://www.census.gov/popclock
+            **\`src/app/world-counters/us-population/page.tsx\`**
+            - [ ] \`US_POP_JAN1_${year}\` — Source: https://www.census.gov/popclock
 
-**\`src/app/world-counters/us-debt/page.tsx\`**
-- [ ] \`DEBT_JAN1_${year}\` — Source: https://fiscaldata.treasury.gov
-- [ ] \`DEBT_PER_SEC\` — recalculate from recent 12-month average
+            **\`src/app/world-counters/us-debt/page.tsx\`**
+            - [ ] \`DEBT_JAN1_${year}\` — Source: https://fiscaldata.treasury.gov
+            - [ ] \`DEBT_PER_SEC\` — recalculate from recent 12-month average
 
-**\`src/app/world-counters/plastic-in-ocean/page.tsx\`**
-- [ ] \`CUMULATIVE_MT_JAN1_${year}\` — Source: UNEP / Our World in Data
+            **\`src/app/world-counters/plastic-in-ocean/page.tsx\`**
+            - [ ] \`CUMULATIVE_MT_JAN1_${year}\` — Source: UNEP / Our World in Data
 
-**\`src/app/world-counters/population/page.tsx\`**
-- [ ] \`WORLD_POP_NOW\`, \`ANNUAL_BIRTHS\`, \`ANNUAL_DEATHS\`
-- [ ] Source: https://population.un.org/dataportal/
+            **\`src/app/world-counters/population/page.tsx\`**
+            - [ ] \`WORLD_POP_NOW\`, \`ANNUAL_BIRTHS\`, \`ANNUAL_DEATHS\`
+            - [ ] Source: https://population.un.org/dataportal/
 
-**\`src/app/world-counters/births-today/page.tsx\`**
-- [ ] \`ANNUAL_BIRTHS\`, \`ANNUAL_DEATHS\` — keep in sync with population page
+            **\`src/app/world-counters/births-today/page.tsx\`**
+            - [ ] \`ANNUAL_BIRTHS\`, \`ANNUAL_DEATHS\` — keep in sync with population page
 
----
+            ---
 
-## 🏙️ COST OF LIVING DATA — Update by February 28th
-Source: C2ER COLI Q4 release (published January/February)
-Rent data: https://www.zillow.com/research/data/
-Home prices: Zillow ZHVI
-Household income: Census ACS (released September previous year)
+            ## 🏙️ COST OF LIVING DATA — Update by February 28th
+            Source: C2ER COLI Q4 release (published January/February)
+            Rent data: https://www.zillow.com/research/data/
+            Home prices: Zillow ZHVI
+            Household income: Census ACS (released September previous year)
 
-- [ ] \`src/data/cost-of-living.ts\` — all 50 cities:
-  - \`coliIndex\` — C2ER Q4 COLI
-  - \`medRent1br\` — Zillow December rent
-  - \`medHomePrice\` — Zillow ZHVI
-  - \`medHouseholdIncome\` — Census ACS
-  - All category indexes: groceries, housing, utilities, transport, healthcare
+            - [ ] \`src/data/cost-of-living.ts\` — all 50 cities:
+              - \`coliIndex\` — C2ER Q4 COLI
+              - \`medRent1br\` — Zillow December rent
+              - \`medHomePrice\` — Zillow ZHVI
+              - \`medHouseholdIncome\` — Census ACS
+              - All category indexes: groceries, housing, utilities, transport, healthcare
 
----
+            ---
 
-## 📈 BLS SALARY DATA — Update by June 30th
-Source: BLS OES annual release (published May each year)
-URL: https://www.bls.gov/oes/
+            ## 📈 BLS SALARY DATA — Update by June 30th
+            Source: BLS OES annual release (published May each year)
+            URL: https://www.bls.gov/oes/
 
-- [ ] \`src/data/salary-data.ts\` — all 40 jobs × 50 states
-  - National median for each job
-  - State-level medians for each job × state combination
-  - Update \`blsTitle\` if BLS changed occupation name
-  - Update data label from prior year to "${year}-${year + 1}"
+            - [ ] \`src/data/salary-data.ts\` — all 40 jobs × 50 states
+              - National median for each job
+              - State-level medians for each job × state combination
+              - Update \`blsTitle\` if BLS changed occupation name
+              - Update data label from prior year to "${year}-${year + 1}"
 
-- [ ] \`src/app/tools/salary-negotiation/page.tsx\` — BLS OES salary ranges
-- [ ] \`src/app/tools/salary-checker/page.tsx\` — keep in sync
-- [ ] \`src/app/embed/(tools)/salary-check/page.tsx\` — add year label
-- [ ] \`src/app/research/how-many-mondays-left/page.tsx\` — BLS Q4 median weekly earnings
-- [ ] \`src/app/blog/average-salary-by-age/page.tsx\` — ⚠️ 2+ years stale — prioritize
+            - [ ] \`src/app/tools/salary-negotiation/page.tsx\` — BLS OES salary ranges
+            - [ ] \`src/app/tools/salary-checker/page.tsx\` — keep in sync
+            - [ ] \`src/app/embed/(tools)/salary-check/page.tsx\` — add year label
+            - [ ] \`src/app/research/how-many-mondays-left/page.tsx\` — BLS Q4 median weekly earnings
+            - [ ] \`src/app/blog/average-salary-by-age/page.tsx\` — ⚠️ 2+ years stale — prioritize
 
----
+            ---
 
-## 📉 CPI / INFLATION TABLE — Update by February 28th
-Source: https://www.bls.gov/cpi/
+            ## 📉 CPI / INFLATION TABLE — Update by February 28th
+            Source: https://www.bls.gov/cpi/
 
-- [ ] \`src/app/finance/inflation/page.tsx\` — extend \`CPI\` constant table
-  - Add actual CPI value for previous year
-  - Add projected CPI for current year + 5
+            - [ ] \`src/app/finance/inflation/page.tsx\` — extend \`CPI\` constant table
+              - Add actual CPI value for previous year
+              - Add projected CPI for current year + 5
 
----
+            ---
 
-## 🏠 INTEREST RATES — Update as needed
-Review current rates and update defaults if significantly changed.
+            ## 🏠 INTEREST RATES — Update as needed
+            Review current rates and update defaults if significantly changed.
 
-- [ ] \`src/app/finance/mortgage-calculator/page.tsx\` — default rate
-- [ ] \`src/app/finance/savings-goal/page.tsx\` — default return rate
-- [ ] \`src/app/tools/currency-converter/page.tsx\` — exchange rate year reference
+            - [ ] \`src/app/finance/mortgage-calculator/page.tsx\` — default rate
+            - [ ] \`src/app/finance/savings-goal/page.tsx\` — default return rate
+            - [ ] \`src/app/tools/currency-converter/page.tsx\` — exchange rate year reference
 
----
+            ---
 
-## 🏈 SPORTS DATES — Update as announced
-- [ ] \`src/data/sports-events.ts\` — verify all 5 events
-  - World Series ${year} Game 1 — announced ~October
-  - March Madness ${year + 1} First Four — announced ~March
-  - NBA Finals ${year + 1} Game 1 — announced ~May/June
-  - Super Bowl ${year + 1} — should already be confirmed 2 years out
-  - FIFA World Cup — next is 2030
+            ## 🏈 SPORTS DATES — Update as announced
+            - [ ] \`src/data/sports-events.ts\` — verify all 5 events
+              - World Series ${year} Game 1 — announced ~October
+              - March Madness ${year + 1} First Four — announced ~March
+              - NBA Finals ${year + 1} Game 1 — announced ~May/June
+              - Super Bowl ${year + 1} — should already be confirmed 2 years out
+              - FIFA World Cup — next is 2030
 
----
+            ---
 
-## 📰 METADATA YEARS — Update titles and descriptions
-Review layout.tsx files for year-specific titles.
+            ## 📰 METADATA YEARS — Update titles and descriptions
+            Review layout.tsx files for year-specific titles.
 
-- [ ] \`src/app/finance/tax-bracket/layout.tsx\` — year in title
-- [ ] \`src/app/finance/paycheck-calculator/layout.tsx\` — year in title
-- [ ] \`src/app/finance/401k-calculator/layout.tsx\` — year in title
-- [ ] \`src/app/tools/tax-refund-estimator/layout.tsx\` — year in title
-- [ ] \`src/app/blog/paycheck-by-state-2026/\` — consider redirect to new year URL
+            - [ ] \`src/app/finance/tax-bracket/layout.tsx\` — year in title
+            - [ ] \`src/app/finance/paycheck-calculator/layout.tsx\` — year in title
+            - [ ] \`src/app/finance/401k-calculator/layout.tsx\` — year in title
+            - [ ] \`src/app/tools/tax-refund-estimator/layout.tsx\` — year in title
+            - [ ] \`src/app/blog/paycheck-by-state-2026/\` — consider redirect to new year URL
 
----
+            ---
 
-## ✅ VERIFICATION AFTER ALL UPDATES
+            ## ✅ VERIFICATION AFTER ALL UPDATES
 
-After all updates run these checks:
-\`\`\`bash
-# Search for stale year references
-grep -rn "2025\\|2024" src/data/ --include="*.ts"
-grep -rn "ssCap\\|STD_DEDUCTION\\|BRACKETS" src/app/finance/ --include="*.tsx"
+            After all updates run these checks:
+            \`\`\`bash
+            # Search for stale year references
+            grep -rn "2025\\|2024" src/data/ --include="*.ts"
+            grep -rn "ssCap\\|STD_DEDUCTION\\|BRACKETS" src/app/finance/ --include="*.tsx"
 
-# Build must pass clean
-npm run build
+            # Build must pass clean
+            npm run build
 
-# Submit updated sitemap
-node scripts/submit-sitemap.js
-\`\`\`
+            # Submit updated sitemap
+            node scripts/submit-sitemap.js
+            \`\`\`
 
----
+            ---
 
-## 📚 SOURCE REFERENCE
+            ## 📚 SOURCE REFERENCE
 
-| Data | Source | Published |
-|---|---|---|
-| IRS tax brackets | IRS Rev. Proc. (October) | October |
-| SS wage base | SSA COLA announcement | October |
-| 401k/IRA limits | IRS COLA announcement | October/November |
-| World counters | Census/UN/Treasury | January |
-| Cost of living | C2ER Q4 COLI | January/February |
-| CPI | BLS CPI release | January |
-| BLS OES salaries | BLS OES annual | May |
-| Sports dates | League announcements | Varies |
+            | Data | Source | Published |
+            |---|---|---|
+            | IRS tax brackets | IRS Rev. Proc. (October) | October |
+            | SS wage base | SSA COLA announcement | October |
+            | 401k/IRA limits | IRS COLA announcement | October/November |
+            | World counters | Census/UN/Treasury | January |
+            | Cost of living | C2ER Q4 COLI | January/February |
+            | CPI | BLS CPI release | January |
+            | BLS OES salaries | BLS OES annual | May |
+            | Sports dates | League announcements | Varies |
 
----
+            ---
 
-*This issue was created automatically by the Dayblip annual-data-reminder GitHub Action.*
-*Workflow file: \`.github/workflows/annual-data-reminder.yml\`*`
+            *This issue was created automatically by the Dayblip annual-data-reminder GitHub Action.*
+            *Workflow file: \`.github/workflows/annual-data-reminder.yml\`*`
             })
 
             console.log('Annual data update issue created successfully')
