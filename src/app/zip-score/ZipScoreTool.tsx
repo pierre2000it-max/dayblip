@@ -32,6 +32,8 @@ type ScoreResult = {
   alternate_zip: string | null;
   alternate_band_low: number | null;
   alternate_band_high: number | null;
+  competitor_count: number;
+  higher_scoring_zips_count: number;
   insufficient: boolean;
   reason: string | null;
 };
@@ -269,11 +271,24 @@ export default function ZipScoreTool() {
                     </p>
                   </div>
                 </div>
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <span className="text-xs text-gray-400">Competitors found</span>
+                    <p className="font-medium text-gray-800">
+                      {result.competitor_count} in {result.zip}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-xs text-gray-400">Higher-scoring ZIPs nearby</span>
+                    <p className="font-medium text-gray-800">
+                      {result.higher_scoring_zips_count} score higher than {result.zip}
+                    </p>
+                  </div>
+                </div>
                 <div className="text-sm">
                   <span className="text-xs text-gray-400">Confidence</span>
                   <p className="font-medium text-gray-800">
-                    {confidenceBadge(result.confidence)} (
-                    {result.assumed_pct.toFixed(1)}% assumed data)
+                    {confidenceBadge(result.confidence)} Free score uses 5 of 7 criteria. Full report adds live competitor data.
                   </p>
                 </div>
                 {result.alternate_zip &&
