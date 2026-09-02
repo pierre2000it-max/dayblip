@@ -32,7 +32,7 @@ type ScoreResult = {
   alternate_zip: string | null;
   alternate_band_low: number | null;
   alternate_band_high: number | null;
-  competitor_count: number;
+  competitor_count: number | null;
   higher_scoring_zips_count: number;
   insufficient: boolean;
   reason: string | null;
@@ -266,12 +266,14 @@ export default function ZipScoreTool() {
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div>
-                    <span className="text-xs text-gray-400">Competitors found</span>
-                    <p className="font-medium text-gray-800">
-                      {result.competitor_count} in {result.zip}
-                    </p>
-                  </div>
+                  {result.competitor_count !== null && (
+                    <div>
+                      <span className="text-xs text-gray-400">Competitors found</span>
+                      <p className="font-medium text-gray-800">
+                        {result.competitor_count} in {result.zip}
+                      </p>
+                    </div>
+                  )}
                   <div>
                     <span className="text-xs text-gray-400">Higher-scoring ZIPs nearby</span>
                     <p className="font-medium text-gray-800">
