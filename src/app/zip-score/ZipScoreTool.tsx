@@ -38,12 +38,6 @@ type ScoreResult = {
   reason: string | null;
 };
 
-function confidenceBadge(confidence: string): string {
-  if (confidence === "high") return "🟢 High";
-  if (confidence === "moderate") return "🟡 Moderate";
-  return "🔴 Low";
-}
-
 function criterionLabel(slug: string): string {
   return slug.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
@@ -288,7 +282,7 @@ export default function ZipScoreTool() {
                 <div className="text-sm">
                   <span className="text-xs text-gray-400">Confidence</span>
                   <p className="font-medium text-gray-800">
-                    {confidenceBadge(result.confidence)} Free score uses 5 of 7 criteria. Full report adds live competitor data.
+                    Free score uses 5 of 7 criteria. Full report adds live competitor data.
                   </p>
                 </div>
                 {result.alternate_zip &&
