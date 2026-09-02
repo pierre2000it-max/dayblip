@@ -139,7 +139,7 @@ export default function ZipScoreTool() {
 
   return (
     <main className="max-w-lg mx-auto px-4 py-10">
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">
+      <h1 className="text-2xl font-bold text-white mb-2">
         Free ZIP Market Score
       </h1>
       <p className="text-gray-600 mb-6 text-sm">
