@@ -253,12 +253,12 @@ export default function ZipScoreTool() {
           ) : (
             /* Score result */
             <>
-              <div className="border border-gray-200 rounded-lg p-5 space-y-3">
-                <p className="text-sm text-gray-500">
+              <div className="bg-white border border-gray-200 rounded-lg p-5 space-y-3">
+                <p className="text-sm text-gray-600">
                   {result.zip} · {categoryLabel(result.category)}
                 </p>
                 <div>
-                  <span className="text-xs uppercase tracking-wide text-gray-400">
+                  <span className="text-xs uppercase tracking-wide text-gray-500">
                     Score band
                   </span>
                   <p className="text-2xl font-bold text-gray-900">
@@ -267,18 +267,18 @@ export default function ZipScoreTool() {
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <div>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-gray-500">
                       Strongest signal
                     </span>
-                    <p className="font-medium text-gray-800">
+                    <p className="font-medium text-gray-900">
                       {criterionLabel(result.strongest_criterion)}
                     </p>
                   </div>
                   <div>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-gray-500">
                       Weakest signal
                     </span>
-                    <p className="font-medium text-gray-800">
+                    <p className="font-medium text-gray-900">
                       {criterionLabel(result.weakest_criterion)}
                     </p>
                   </div>
@@ -286,22 +286,22 @@ export default function ZipScoreTool() {
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   {result.competitor_count !== null && (
                     <div>
-                      <span className="text-xs text-gray-400">Competitors found</span>
-                      <p className="font-medium text-gray-800">
+                      <span className="text-xs text-gray-500">Competitors found</span>
+                      <p className="font-medium text-gray-900">
                         {result.competitor_count} in {result.zip}
                       </p>
                     </div>
                   )}
                   <div>
-                    <span className="text-xs text-gray-400">Higher-scoring ZIPs nearby</span>
-                    <p className="font-medium text-gray-800">
+                    <span className="text-xs text-gray-500">Higher-scoring ZIPs nearby</span>
+                    <p className="font-medium text-gray-900">
                       {result.higher_scoring_zips_count} score higher than {result.zip}
                     </p>
                   </div>
                 </div>
                 <div className="text-sm">
-                  <span className="text-xs text-gray-400">Confidence</span>
-                  <p className="font-medium text-gray-800">
+                  <span className="text-xs text-gray-500">Confidence</span>
+                  <p className="font-medium text-gray-900">
                     Free score uses 5 of 7 criteria. Full report adds live competitor data.
                   </p>
                 </div>
@@ -309,10 +309,10 @@ export default function ZipScoreTool() {
                   result.alternate_band_low !== null &&
                   result.alternate_band_high !== null && (
                     <div className="text-sm border-t border-gray-100 pt-3">
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs text-gray-500">
                         Nearest higher-scoring ZIP
                       </span>
-                      <p className="font-medium text-gray-800">
+                      <p className="font-medium text-gray-900">
                         {result.alternate_zip} · {result.alternate_band_low} –{" "}
                         {result.alternate_band_high}
                       </p>
@@ -321,8 +321,8 @@ export default function ZipScoreTool() {
               </div>
 
               {/* Email capture */}
-              <div className="border border-gray-200 rounded-lg p-5 space-y-3">
-                <p className="text-sm font-medium text-gray-800">
+              <div className="bg-white border border-gray-200 rounded-lg p-5 space-y-3">
+                <p className="text-sm font-medium text-gray-900">
                   Save this score and get a breakdown of what&apos;s holding it
                   back.
                 </p>
@@ -353,7 +353,7 @@ export default function ZipScoreTool() {
 
               {/* CTA */}
               <div className="border border-blue-100 bg-blue-50 rounded-lg p-5 space-y-3">
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-gray-800">
                   The full report names every competitor in {result.zip}, shows
                   the revenue math, and tells you the 3 nearby ZIPs that score
                   higher.
