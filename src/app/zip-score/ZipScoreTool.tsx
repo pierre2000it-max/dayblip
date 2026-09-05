@@ -302,7 +302,7 @@ export default function ZipScoreTool() {
                 <div className="text-sm">
                   <span className="text-xs text-gray-500">Confidence</span>
                   <p className="font-medium text-gray-900">
-                    Free score uses 5 of 7 criteria. Full report adds live competitor data.
+                    Free score uses 5 of 6 criteria. Full report adds live competitor data.
                   </p>
                 </div>
                 {result.alternate_zip &&
