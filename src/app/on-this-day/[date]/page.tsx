@@ -153,6 +153,16 @@ async function fetchWikiData(month: number, day: number): Promise<WikiData> {
 
 // ── Metadata ─────────────────────────────────────────────────────────────────
 
+// Only these 16 curated dates are indexed — they have local JSON fallback data
+// and are submitted in the sitemap. The remaining 350 API-only dates get noindex.
+const INDEXED_DATES = new Set([
+  'january-1', 'january-15', 'january-20',
+  'february-2', 'february-14', 'march-14',
+  'march-17', 'april-15', 'june-6', 'july-4',
+  'august-6', 'september-11', 'october-31',
+  'november-22', 'december-25', 'december-31',
+])
+
 export async function generateMetadata({
   params,
 }: {
@@ -163,6 +173,9 @@ export async function generateMetadata({
   const title  = `What Happened on ${label}? Historical Events`;
   const desc   = `Discover what happened on ${label} in history. Famous birthdays, major events and historical facts.`;
   const url    = `https://www.dayblip.com/on-this-day/${params.date}`;
+  const robots = INDEXED_DATES.has(params.date)
+    ? undefined
+    : { index: false, follow: false };
   return {
     title,
     description: desc,
@@ -172,6 +185,7 @@ export async function generateMetadata({
       images: [{ url: "/api/og?title=On+This+Day+in+History&emoji=📰&subtitle=Historical+events+for+any+date", width: 1200, height: 630, alt: title }],
     },
     twitter: { card: "summary_large_image", title, description: desc },
+    ...(robots && { robots }),
   };
 }
 
