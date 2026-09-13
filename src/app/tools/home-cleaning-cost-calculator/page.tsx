@@ -524,11 +524,11 @@ export default function HomeCleaningCostCalculatorPage() {
                       textAlign: "center",
                     }}>
                       <p style={{ color: "#e2e8f0", fontSize: 14, lineHeight: 1.7, marginBottom: 18 }}>
-                        EcoClean provides professional residential cleaning services in
-                        Wisconsin. Get an accurate quote based on your specific home.
+                        Ready to book? Search for professional cleaning services in your area
+                        and get an accurate quote based on your specific home.
                       </p>
                       <a
-                        href="https://ecocleanwis.com"
+                        href="https://www.google.com/search?q=professional+cleaning+services+near+me"
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{
@@ -542,7 +542,7 @@ export default function HomeCleaningCostCalculatorPage() {
                           textDecoration: "none",
                         }}
                       >
-                        Get a Free Quote from EcoClean →
+                        Find a Local Cleaning Service →
                       </a>
                     </div>
 
@@ -561,7 +561,7 @@ export default function HomeCleaningCostCalculatorPage() {
             <div style={{ marginTop: 40 }}>
               <MethodologyNote text="Estimates are based on typical market rates for residential cleaning in the US and are provided for informational purposes only. Actual prices vary by provider, location, and specific home conditions. Contact EcoClean for an accurate quote." />
               <p style={{ color: "#a8a8b3", fontSize: 13, marginTop: 8, fontStyle: "italic" }}>
-                Powered by EcoClean — professional cleaning services in Wisconsin.
+                Estimates based on typical US market rates. Contact a local provider for an accurate quote.
               </p>
               <LastUpdated date="September 2026" />
             </div>
