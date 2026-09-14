@@ -156,6 +156,12 @@ export default function ZipScoreTool() {
       <h1 className="text-2xl font-bold text-white mb-2">
         Free ZIP Market Score
       </h1>
+      <p className="text-gray-600 mb-1 text-sm">
+        A free market research tool powered by{" "}
+        <a href="https://ziplicit.com?src=dayblip_header" className="underline hover:text-gray-400">
+          Ziplicit
+        </a>
+      </p>
       <p className="text-gray-600 mb-6 text-sm">
         Enter a business category and US ZIP code to see your free market
         viability band.
