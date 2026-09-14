@@ -365,7 +365,7 @@ export default function ZipScoreTool() {
                   See the full {result.zip} report →
                 </a>
                 <p className="text-xs text-center text-gray-500">
-                  $99 · Ready in 60 seconds
+                  $99 · Delivered under 2 minutes
                 </p>
               </div>
 
