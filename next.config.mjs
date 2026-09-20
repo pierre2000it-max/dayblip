@@ -68,6 +68,29 @@ const nextConfig = {
           { key: "X-Frame-Options",          value: "SAMEORIGIN" },
           { key: "X-XSS-Protection",         value: "1; mode=block" },
           { key: "Referrer-Policy",          value: "strict-origin-when-cross-origin" },
+          // CSP in report-only mode — violations logged to browser console, nothing blocked.
+          // Promote to Content-Security-Policy once reports confirm no legitimate domains are missing.
+          {
+            key: "Content-Security-Policy-Report-Only",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' pagead2.googlesyndication.com",
+              "style-src 'self' 'unsafe-inline' fonts.googleapis.com",
+              "font-src 'self' fonts.gstatic.com",
+              "frame-src pagead2.googlesyndication.com googleads.g.doubleclick.net",
+              "connect-src 'self' fonts.googleapis.com pagead2.googlesyndication.com adservice.google.com googleads.g.doubleclick.net open.er-api.com www.wikidata.org query.wikidata.org earthquake.usgs.gov api.jsonbin.io ziplicit.com",
+              "img-src 'self' data: pagead2.googlesyndication.com googleads.g.doubleclick.net",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "frame-ancestors 'self'",
+            ].join("; "),
+          },
+          // Permissions-Policy — enforcing directly (low blast-radius, no domain allowlist needed)
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+          },
         ],
       },
       {
