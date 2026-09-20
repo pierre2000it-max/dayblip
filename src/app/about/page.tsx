@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from "next"
 import { TOOL_COUNT } from "@/data/tool-count"
+import { DAYBLIP_ORG } from "@/lib/authorSchema"
 import Link from "next/link"
 
 export const metadata: Metadata = {
@@ -23,19 +24,7 @@ export const metadata: Metadata = {
   },
 }
 
-const orgSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Dayblip",
-  url: "https://www.dayblip.com",
-  description:
-    `Free tools for curious minds — ${TOOL_COUNT} calculators for personal finance, career, life visualization, and historical curiosity.`,
-  founder: { "@type": "Person", name: "Pierre" },
-  foundingLocation: {
-    "@type": "Place",
-    address: { "@type": "PostalAddress", addressRegion: "WI", addressCountry: "US" },
-  },
-}
+const orgSchema = { "@context": "https://schema.org", ...DAYBLIP_ORG }
 
 const personSchema = {
   "@context": "https://schema.org",
