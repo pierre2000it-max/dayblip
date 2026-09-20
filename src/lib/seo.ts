@@ -1,3 +1,5 @@
+import { TOOL_COUNT } from "@/data/tool-count"
+
 // ── Date calculation helpers (server-safe, no browser APIs) ──────────────────
 
 function getEaster(year: number): Date {
@@ -132,7 +134,7 @@ export function generateOrganizationSchema() {
     "@type": "Organization",
     "name": "Dayblip",
     "url": "https://dayblip.com",
-    "description": "175+ free tools for life, money, history and more. No signup. No email. Ever.",
+    "description": `${TOOL_COUNT} free tools for life, money, history and more. No signup. No email. Ever.`,
     "sameAs": [],
   };
 }
