@@ -4,6 +4,10 @@
 
 import { DAYBLIP_AUTHOR, DAYBLIP_ORG } from "@/lib/authorSchema"
 
+// Reference the canonical org by @id only — avoids duplicating the full entity
+// on every tool/article page. Google resolves the @id back to the root layout block.
+const DAYBLIP_ORG_REF = { "@id": DAYBLIP_ORG["@id"] }
+
 export function webApplicationSchema(
   name: string,
   description: string,
@@ -21,13 +25,13 @@ export function webApplicationSchema(
     operatingSystem: "Web",
     dateModified,
     author: DAYBLIP_AUTHOR,
-    publisher: DAYBLIP_ORG,
+    publisher: DAYBLIP_ORG_REF,
     offers: {
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
     },
-    provider: DAYBLIP_ORG,
+    provider: DAYBLIP_ORG_REF,
   }
 }
 
@@ -82,7 +86,7 @@ export function articleSchema(
     datePublished,
     dateModified: dateModified ?? datePublished,
     author: DAYBLIP_AUTHOR,
-    publisher: DAYBLIP_ORG,
+    publisher: DAYBLIP_ORG_REF,
   }
 }
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { TOOL_COUNT } from "@/data/tool-count";
+import { DAYBLIP_ORG } from "@/lib/authorSchema";
 import onThisDay from "@/data/onThisDay.json";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -21,14 +22,7 @@ const WEBSITE_SCHEMA = {
   },
 };
 
-const ORG_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Dayblip",
-  "url": "https://www.dayblip.com",
-  "description": "Free tools for curious minds",
-  "sameAs": ["https://twitter.com/dayblip365", "https://pinterest.com/dayblip365"],
-};
+const ORG_SCHEMA = { "@context": "https://schema.org", ...DAYBLIP_ORG };
 
 // ── Easter: Anonymous Gregorian algorithm ──────────────────────────────────
 function getEaster(year: number): Date {
