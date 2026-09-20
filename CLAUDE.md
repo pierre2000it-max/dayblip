@@ -132,7 +132,7 @@ Pace needed: 1.8 articles per week.
 
 ## Site Counts (as of June 13 2026)
 - Total URLs in sitemap: 316
-- Total tool pages: ~190+
+- Total tool pages: ~175+
 - Blog articles: 21
 - Embed tools: 25
 - Born-in pages: 81 (1940-2020)

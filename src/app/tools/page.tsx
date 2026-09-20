@@ -72,7 +72,7 @@ export default function ToolsPage() {
             <Link href="/tools/finance" className="flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all hover:border-[#e94560]">
               <span className="text-3xl">💰</span>
               <span className="font-semibold text-white text-sm">Finance Calculators</span>
-              <span className="text-xs text-[#a8a8b3]">23 tools</span>
+              <span className="text-xs text-[#a8a8b3]">28 tools</span>
             </Link>
             <Link href="/tools/life-money" className="flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all hover:border-[#e94560]">
               <span className="text-3xl">💡</span>
@@ -82,12 +82,12 @@ export default function ToolsPage() {
             <Link href="/tools/misconceptions" className="flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all hover:border-[#e94560]">
               <span className="text-3xl">🔍</span>
               <span className="font-semibold text-white text-sm">Misconceptions</span>
-              <span className="text-xs text-[#a8a8b3]">8 tools</span>
+              <span className="text-xs text-[#a8a8b3]">12 tools</span>
             </Link>
             <Link href="/tools/curiosity" className="flex flex-col items-center gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 text-center transition-all hover:border-[#e94560]">
               <span className="text-3xl">🌟</span>
               <span className="font-semibold text-white text-sm">Curiosity</span>
-              <span className="text-xs text-[#a8a8b3]">12 tools</span>
+              <span className="text-xs text-[#a8a8b3]">14 tools</span>
             </Link>
           </div>
         </div>
