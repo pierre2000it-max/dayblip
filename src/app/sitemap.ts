@@ -1,12 +1,28 @@
 import type { MetadataRoute } from "next";
 import holidaysData from "@/data/holidays.json";
-import onThisDayData from "@/data/onThisDay.json";
-import { getAllSalarySlugs, SALARY_DATA } from "@/data/salary-data";
+import { getAllSalarySlugs, getSalaryBySlug, SALARY_DATA } from "@/data/salary-data";
 import { cities } from "@/data/cost-of-living";
+import { INDEXED_CITY_PAIRS, INDEXED_JOB_PAIRS } from "@/data/compare-index";
 
 const BASE     = "https://www.dayblip.com";
 const holidays = holidaysData as Array<{ slug: string }>;
-const otdKeys  = Object.keys(onThisDayData as Record<string, unknown>);
+
+// ── Salary indexing tiers (mirrors salary/[slug]/page.tsx) ───────────────────
+const SALARY_TIER_1 = new Set([
+  'nurse', 'registered-nurse', 'teacher', 'software-engineer',
+  'doctor', 'surgeon', 'lawyer', 'pharmacist', 'dentist',
+  'police-officer', 'firefighter', 'electrician', 'plumber', 'accountant',
+])
+const SALARY_TIER_2 = new Set([
+  'truck-driver', 'project-manager', 'data-analyst', 'financial-advisor',
+  'physical-therapist', 'web-developer', 'cybersecurity-analyst', 'pilot',
+  'it-manager', 'marketing-manager', 'construction-manager',
+  'real-estate-agent', 'veterinarian',
+])
+const SALARY_TIER_2_STATES = new Set([
+  'ca','ny','tx','fl','il','wa','co','ma','pa','ga',
+  'az','nj','va','oh','mi','nc','mn','md','or','tn',
+])
 
 const DAILY   = "daily"   as const;
 const WEEKLY  = "weekly"  as const;
@@ -41,31 +57,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:        0.8,
   }));
 
-  // ── Dynamic: all on-this-day pages (from onThisDay.json) ─────────────────
-  const otdUrls: MetadataRoute.Sitemap = otdKeys.map((key) => ({
-    url:             `${BASE}/on-this-day/${key}`,
-    lastModified:    new Date(),
-    changeFrequency: WEEKLY,
-    priority:        0.8,
-  }));
-
-  // ── Static on-this-day spotlight dates (ensures indexed even if not in JSON)
+  // ── Static on-this-day spotlight dates — only these 16 are indexed ─────────
   const OTD_SPOTLIGHT = [
     "january-1","january-15","january-20","february-2","february-14",
     "march-14","march-17","april-15","june-6","july-4",
     "august-6","september-11","october-31","november-22",
     "december-25","december-31",
   ];
-  // de-dupe against dynamic set
-  const otdDynSet = new Set(otdKeys);
-  const otdSpotlight: MetadataRoute.Sitemap = OTD_SPOTLIGHT
-    .filter((d) => !otdDynSet.has(d))
-    .map((d) => ({
-      url:             `${BASE}/on-this-day/${d}`,
-      lastModified:    new Date(),
-      changeFrequency: WEEKLY,
-      priority:        0.8,
-    }));
+  const otdSpotlight: MetadataRoute.Sitemap = OTD_SPOTLIGHT.map((d) => ({
+    url:             `${BASE}/on-this-day/${d}`,
+    lastModified:    new Date(),
+    changeFrequency: WEEKLY,
+    priority:        0.8,
+  }));
 
   return [
 
@@ -377,10 +381,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ADDITIONAL DATE TOOLS
     // ═══════════════════════════════════════════════════════════════════════
     p("/days-until",          0.9, DAILY),
-    p("/days-between",        0.9, WEEKLY),  // also in core, deduplicated by Next.js
-    p("/days-since",          0.8),          // appears in multiple sections — fine
-    p("/day-of-year",         0.8),
-    p("/week-number",         0.8),
 
     // ═══════════════════════════════════════════════════════════════════════
     // BLOG  (priority 0.9 / 0.8, monthly)
@@ -442,23 +442,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     ...countdownUrls,   // all holidays from holidays.json  (daily, 0.9)
     ...bornInUrls,      // born-in/1940 through born-in/2020 (monthly, 0.8)
-    ...otdUrls,         // all on-this-day dates from onThisDay.json (weekly, 0.8)
-    ...otdSpotlight,    // spotlight dates not already in JSON (weekly, 0.8)
+    ...otdSpotlight,    // 16 indexed spotlight dates (weekly, 0.8)
 
     // ═══════════════════════════════════════════════════════════════════════
-    // COMPARE PAGES  (priority 0.8, monthly) — city vs city + job vs job
+    // COMPARE PAGES  (priority 0.8, monthly)
+    // Only whitelisted city pairs and job pairs are indexed.
     // ═══════════════════════════════════════════════════════════════════════
     p("/compare", 0.8, MONTHLY),
     ...(() => {
       const slugs: string[] = []
       for (let i = 0; i < cities.length; i++) {
         for (let j = i + 1; j < cities.length; j++) {
-          slugs.push(`${cities[i].slug}-vs-${cities[j].slug}`)
+          const slug = `${cities[i].slug}-vs-${cities[j].slug}`
+          if (INDEXED_CITY_PAIRS.has(slug)) slugs.push(slug)
         }
       }
       for (let i = 0; i < SALARY_DATA.length; i++) {
         for (let j = i + 1; j < SALARY_DATA.length; j++) {
-          slugs.push(`${SALARY_DATA[i].slug}-vs-${SALARY_DATA[j].slug}`)
+          const slug = `${SALARY_DATA[i].slug}-vs-${SALARY_DATA[j].slug}`
+          if (INDEXED_JOB_PAIRS.has(slug)) slugs.push(slug)
         }
       }
       return slugs.map((slug) => ({
@@ -470,14 +472,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })(),
 
     // ═══════════════════════════════════════════════════════════════════════
-    // SALARY PAGES  (priority 0.8, monthly) — 40 jobs × 50 states = 2,000
+    // SALARY PAGES  (priority 0.8, monthly)
+    // Tier 1 (14 jobs): all 50 states = 700 slugs
+    // Tier 2 (13 jobs): top-20 states = 260 slugs
+    // Tier 3 (13 jobs): noindex — excluded
     // ═══════════════════════════════════════════════════════════════════════
     p("/salary", 0.8, MONTHLY),
-    ...getAllSalarySlugs().map((slug) => ({
-      url:             `${BASE}/salary/${slug}`,
-      lastModified:    new Date(),
-      changeFrequency: MONTHLY,
-      priority:        0.8,
-    })),
+    ...getAllSalarySlugs()
+      .filter((slug) => {
+        const data = getSalaryBySlug(slug)
+        if (!data) return false
+        const jobSlug = data.entry.slug
+        const stateAbbr = data.state.abbreviation.toLowerCase()
+        if (SALARY_TIER_1.has(jobSlug)) return true
+        if (SALARY_TIER_2.has(jobSlug)) return SALARY_TIER_2_STATES.has(stateAbbr)
+        return false
+      })
+      .map((slug) => ({
+        url:             `${BASE}/salary/${slug}`,
+        lastModified:    new Date(),
+        changeFrequency: MONTHLY,
+        priority:        0.8,
+      })),
   ];
 }
