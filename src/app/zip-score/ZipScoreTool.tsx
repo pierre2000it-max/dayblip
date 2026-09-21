@@ -368,7 +368,7 @@ export default function ZipScoreTool() {
               {/* CTA */}
               <div className="border border-blue-100 bg-blue-50 rounded-lg p-5 space-y-3">
                 <p className="text-sm text-gray-800">
-                  The full report names every competitor in {result.zip}, shows
+                  The full report names every verified competitor found in listed sources for {result.zip}, shows
                   the revenue math, and tells you the 3 nearby ZIPs that score
                   higher.
                 </p>
