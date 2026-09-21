@@ -100,22 +100,20 @@ const relatedTools = [
 ]
 
 export default function PlasticInOceanPage() {
-  const [tick, setTick] = useState(0)
+  const [now, setNow] = useState<Date | null>(null)
 
   useEffect(() => {
-    const t = setInterval(() => setTick(n => n + 1), 1000)
+    setNow(new Date())
+    const t = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(t)
   }, [])
 
-  const now        = new Date()
-  const sod        = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
-  const jan1_2026  = new Date(Date.UTC(2026, 0, 1, 0, 0, 0, 0))
-  const jan1_year  = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
-  const secToday   = Math.floor((now.getTime() - sod.getTime())  / 1000)
-  const secThisYear = Math.floor((now.getTime() - jan1_year.getTime()) / 1000)
-  const secSince2026 = Math.max(0, Math.floor((now.getTime() - jan1_2026.getTime()) / 1000))
-
-  void tick
+  const jan1_2026    = new Date(Date.UTC(2026, 0, 1, 0, 0, 0, 0))
+  const sod          = now ? new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0) : new Date(0)
+  const jan1_year    = now ? new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0) : new Date(0)
+  const secToday     = now ? Math.floor((now.getTime() - sod.getTime()) / 1000) : 0
+  const secThisYear  = now ? Math.floor((now.getTime() - jan1_year.getTime()) / 1000) : 0
+  const secSince2026 = now ? Math.max(0, Math.floor((now.getTime() - jan1_2026.getTime()) / 1000)) : 0
 
   const kgToday          = secToday * PLASTIC_KG_PER_SEC
   const mtToday          = kgToday / 1_000

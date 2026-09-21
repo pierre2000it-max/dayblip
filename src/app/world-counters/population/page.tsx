@@ -21,21 +21,18 @@ const DEATHS_PER_SEC = ANNUAL_DEATHS / SECS_YEAR
 const NET_PER_SEC    = ANNUAL_NET    / SECS_YEAR
 
 export default function PopulationCounterPage() {
-  const [tick, setTick] = useState(0)
+  const [now, setNow] = useState<Date | null>(null)
 
   useEffect(() => {
-    const t = setInterval(() => setTick(n => n + 1), 1000)
+    setNow(new Date())
+    const t = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(t)
   }, [])
 
-  // Always use fresh new Date() — never store Date in state (avoids SSR mismatch)
-  const now       = new Date()
-  const sod       = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
-  const jan1      = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
-  const secToday  = Math.floor((now.getTime() - sod.getTime())  / 1000)
-  const secThisYr = Math.floor((now.getTime() - jan1.getTime()) / 1000)
-
-  void tick  // consumed to force re-render each second
+  const sod       = now ? new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0) : new Date(0)
+  const jan1      = now ? new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0) : new Date(0)
+  const secToday  = now ? Math.floor((now.getTime() - sod.getTime())  / 1000) : 0
+  const secThisYr = now ? Math.floor((now.getTime() - jan1.getTime()) / 1000) : 0
 
   const currentPop  = Math.floor(WORLD_POP_NOW + secThisYr * NET_PER_SEC)
   const birthsToday = secToday * BIRTHS_PER_SEC
@@ -97,7 +94,7 @@ export default function PopulationCounterPage() {
 
           {/* This year */}
           <div>
-            <h2 className="text-xl font-bold text-white mb-4">This Year So Far ({now.getFullYear()})</h2>
+            <h2 className="text-xl font-bold text-white mb-4">This Year So Far ({now ? now.getFullYear() : new Date().getFullYear()})</h2>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {[
                 { emoji: "👶", label: "Births this year", value: fmtBig(secThisYr * (ANNUAL_BIRTHS / SECS_YEAR)), color: "#4ade80" },

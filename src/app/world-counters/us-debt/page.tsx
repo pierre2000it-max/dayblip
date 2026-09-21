@@ -25,15 +25,16 @@ function fmtDollars(n: number): string {
 }
 
 export default function USDebtPage() {
-  const [now, setNow] = useState(() => new Date())
+  const [now, setNow] = useState<Date | null>(null)
 
   useEffect(() => {
+    setNow(new Date())
     const t = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(t)
   }, [])
 
-  const secThisYr = secondsSinceJan1(now)
-  const secToday  = secondsToday(now)
+  const secThisYr = now ? secondsSinceJan1(now) : 0
+  const secToday  = now ? secondsToday(now) : 0
   const totalDebt     = DEBT_JAN1_2026 + secThisYr * DEBT_PER_SEC
   const debtPerCitizen   = totalDebt / US_POPULATION
   const debtPerTaxpayer  = totalDebt / US_TAXPAYERS
@@ -86,7 +87,7 @@ export default function USDebtPage() {
             <div className="grid gap-4 md:grid-cols-2">
               {[
                 { label: "Added today", value: fmtDollars(debtTodayIncrease), color: "#f87171" },
-                { label: `Added this year (${now.getFullYear()})`, value: fmtDollars(debtThisYrIncrease), color: "#fbbf24" },
+                { label: `Added this year (${now ? now.getFullYear() : new Date().getFullYear()})`, value: fmtDollars(debtThisYrIncrease), color: "#fbbf24" },
                 { label: "Added per minute", value: fmtDollars(DEBT_PER_SEC * 60), color: "#fca5a5" },
                 { label: "Added per hour", value: fmtDollars(DEBT_PER_SEC * 3600), color: "#fbbf24" },
                 { label: "Added per day (est.)", value: fmtDollars(DEBT_PER_SEC * 86400), color: "#f87171" },

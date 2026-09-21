@@ -96,20 +96,18 @@ const relatedTools = [
 ]
 
 export default function USPopulationPage() {
-  const [tick, setTick] = useState(0)
+  const [now, setNow] = useState<Date | null>(null)
 
   useEffect(() => {
-    const t = setInterval(() => setTick(n => n + 1), 1000)
+    setNow(new Date())
+    const t = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(t)
   }, [])
 
-  const now        = new Date()
-  const jan1_2026  = new Date(Date.UTC(2026, 0, 1, 0, 0, 0, 0))
-  const sod        = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
-  const secSince2026 = Math.max(0, Math.floor((now.getTime() - jan1_2026.getTime()) / 1000))
-  const secToday     = Math.floor((now.getTime() - sod.getTime()) / 1000)
-
-  void tick
+  const jan1_2026    = new Date(Date.UTC(2026, 0, 1, 0, 0, 0, 0))
+  const sod          = now ? new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0) : new Date(0)
+  const secSince2026 = now ? Math.max(0, Math.floor((now.getTime() - jan1_2026.getTime()) / 1000)) : 0
+  const secToday     = now ? Math.floor((now.getTime() - sod.getTime()) / 1000) : 0
 
   const currentPop     = Math.floor(US_POP_JAN1_2026 + secSince2026 * NET_PER_SEC)
   const birthsToday    = secToday * BIRTHS_PER_SEC
@@ -195,7 +193,7 @@ export default function USPopulationPage() {
 
           {/* This year */}
           <div>
-            <h2 className="text-xl font-bold text-white mb-4">This Year So Far ({now.getFullYear()})</h2>
+            <h2 className="text-xl font-bold text-white mb-4">This Year So Far ({now ? now.getFullYear() : new Date().getFullYear()})</h2>
             <div className="grid grid-cols-3 gap-4">
               {[
                 { emoji: "👶", label: "Births this year", value: fmtBig(birthsThisYear), color: "#4ade80" },

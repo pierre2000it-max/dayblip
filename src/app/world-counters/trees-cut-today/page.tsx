@@ -97,20 +97,18 @@ const relatedTools = [
 ]
 
 export default function TreesCutTodayPage() {
-  const [tick, setTick] = useState(0)
+  const [now, setNow] = useState<Date | null>(null)
 
   useEffect(() => {
-    const t = setInterval(() => setTick(n => n + 1), 1000)
+    setNow(new Date())
+    const t = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(t)
   }, [])
 
-  const now         = new Date()
-  const sod         = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
-  const jan1        = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
-  const secToday    = Math.floor((now.getTime() - sod.getTime())  / 1000)
-  const secThisYear = Math.floor((now.getTime() - jan1.getTime()) / 1000)
-
-  void tick
+  const sod         = now ? new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0) : new Date(0)
+  const jan1        = now ? new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0) : new Date(0)
+  const secToday    = now ? Math.floor((now.getTime() - sod.getTime())  / 1000) : 0
+  const secThisYear = now ? Math.floor((now.getTime() - jan1.getTime()) / 1000) : 0
 
   const cutToday      = secToday * TREES_CUT_PER_SEC
   const plantedToday  = secToday * TREES_PLANTED_PER_SEC
@@ -216,7 +214,7 @@ export default function TreesCutTodayPage() {
 
           {/* This year */}
           <div>
-            <h2 className="text-xl font-bold text-white mb-4">This Year So Far ({now.getFullYear()})</h2>
+            <h2 className="text-xl font-bold text-white mb-4">This Year So Far ({now ? now.getFullYear() : new Date().getFullYear()})</h2>
             <div className="grid grid-cols-2 gap-4">
               {[
                 { emoji: "🪓", label: "Trees cut this year", value: fmtBig(cutThisYear), color: "#f87171" },

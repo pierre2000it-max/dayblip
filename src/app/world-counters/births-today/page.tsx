@@ -19,19 +19,16 @@ function fmtBig(n: number) {
 }
 
 export default function BirthdaysTodayPage() {
-  const [tick, setTick] = useState(0)
+  const [now, setNow] = useState<Date | null>(null)
 
   useEffect(() => {
-    const t = setInterval(() => setTick(n => n + 1), 1000)
+    setNow(new Date())
+    const t = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(t)
   }, [])
 
-  // Always use fresh new Date() to avoid SSR/hydration mismatch
-  const now     = new Date()
-  const sod     = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
-  const secToday = Math.floor((now.getTime() - sod.getTime()) / 1000)
-
-  void tick  // consumed to force re-render each second
+  const sod      = now ? new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0) : new Date(0)
+  const secToday = now ? Math.floor((now.getTime() - sod.getTime()) / 1000) : 0
 
   const birthsToday = secToday * BIRTHS_PER_SEC
   const deathsToday = secToday * DEATHS_PER_SEC
