@@ -89,9 +89,12 @@ export default function ZipScoreTool() {
     }
 
     setLoading(true);
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15_000);
     try {
       const res = await fetch(
-        `${API_BASE}/api/free-score?zip=${trimmedZip}&cat=${category}`
+        `${API_BASE}/api/free-score?zip=${trimmedZip}&cat=${category}`,
+        { signal: controller.signal }
       );
       if (res.status === 429) {
         setRateLimited(true);
@@ -104,9 +107,14 @@ export default function ZipScoreTool() {
       }
       const data: ScoreResult = await res.json();
       setResult(data);
-    } catch {
-      setError("Could not reach the scoring service. Try again.");
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") {
+        setError("The scoring service is taking too long. Please try again.");
+      } else {
+        setError("Could not reach the scoring service. Try again.");
+      }
     } finally {
+      clearTimeout(timer);
       setLoading(false);
     }
   }
