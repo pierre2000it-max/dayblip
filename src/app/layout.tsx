@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
@@ -108,6 +109,7 @@ gtag('consent','default',{
         <Header />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

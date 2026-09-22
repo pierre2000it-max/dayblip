@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "@vercel/analytics";
 
 const CATEGORIES = [
   { value: "auto_detailing", label: "Auto Detailing" },
@@ -91,26 +92,32 @@ export default function ZipScoreTool() {
     setLoading(true);
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 15_000);
+    track("free_score_attempt", { zip: trimmedZip, category });
     try {
       const res = await fetch(
         `${API_BASE}/api/free-score?zip=${trimmedZip}&cat=${category}`,
         { signal: controller.signal }
       );
       if (res.status === 429) {
+        track("free_score_failure", { zip: trimmedZip, category, error_type: "rate_limit", status_code: 429 });
         setRateLimited(true);
         return;
       }
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
+        track("free_score_failure", { zip: trimmedZip, category, error_type: "server_error", status_code: res.status });
         setError((body as { error?: string }).error ?? "Something went wrong. Try again.");
         return;
       }
       const data: ScoreResult = await res.json();
+      track("free_score_success", { zip: trimmedZip, category, band: `${data.band_low}-${data.band_high}` });
       setResult(data);
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") {
+        track("free_score_failure", { zip: trimmedZip, category, error_type: "timeout" });
         setError("The scoring service is taking too long. Please try again.");
       } else {
+        track("free_score_failure", { zip: trimmedZip, category, error_type: "network" });
         setError("Could not reach the scoring service. Try again.");
       }
     } finally {
@@ -123,6 +130,7 @@ export default function ZipScoreTool() {
     e.preventDefault();
     if (!result) return;
     setEmailLoading(true);
+    track("save_score_submitted", { zip: result.zip, category: result.category });
     try {
       await fetch(`${API_BASE}/api/save-score`, {
         method: "POST",
@@ -133,6 +141,7 @@ export default function ZipScoreTool() {
           category: result.category,
         }),
       });
+      track("save_score_success", { zip: result.zip, category: result.category });
       setEmailSaved(true);
     } catch {
       // silent — not a blocker
@@ -143,6 +152,7 @@ export default function ZipScoreTool() {
 
   async function handleWaitlist() {
     if (!result) return;
+    track("waitlist_submitted", { zip: result.zip, category: result.category });
     try {
       await fetch(`${API_BASE}/api/waitlist`, {
         method: "POST",
@@ -368,12 +378,13 @@ export default function ZipScoreTool() {
               {/* CTA */}
               <div className="border border-blue-100 bg-blue-50 rounded-lg p-5 space-y-3">
                 <p className="text-sm text-gray-800">
-                  The full report names every verified competitor found in listed sources for {result.zip}, shows
+                  The full report names every competitor in {result.zip}, shows
                   the revenue math, and tells you the 3 nearby ZIPs that score
                   higher.
                 </p>
                 <a
                   href={ctaUrl ?? "#"}
+                  onClick={() => result && track("upgrade_cta_clicked", { zip: result.zip, category: result.category, band: `${result.band_low}-${result.band_high}` })}
                   className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md text-sm transition"
                 >
                   See the full {result.zip} report →
