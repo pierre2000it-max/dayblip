@@ -99,21 +99,26 @@ const relatedTools = [
   { emoji: "👶", title: "Babies Born Today", desc: "A baby is born every 0.44 seconds", href: "/world-counters/births-today" },
 ]
 
+const JAN1_2026_MS = Date.UTC(2026, 0, 1, 0, 0, 0, 0)
+
 export default function PlasticInOceanPage() {
-  const [now, setNow] = useState<Date | null>(null)
+  const [secToday,     setSecToday]     = useState(0)
+  const [secThisYear,  setSecThisYear]  = useState(0)
+  const [secSince2026, setSecSince2026] = useState(0)
 
   useEffect(() => {
-    setNow(new Date())
-    const t = setInterval(() => setNow(new Date()), 1000)
+    function tick() {
+      const now       = new Date()
+      const sod       = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
+      const jan1_year = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
+      setSecToday(Math.floor((now.getTime()     - sod.getTime())       / 1000))
+      setSecThisYear(Math.floor((now.getTime()  - jan1_year.getTime()) / 1000))
+      setSecSince2026(Math.max(0, Math.floor((now.getTime() - JAN1_2026_MS) / 1000)))
+    }
+    tick()
+    const t = setInterval(tick, 1000)
     return () => clearInterval(t)
   }, [])
-
-  const jan1_2026    = new Date(Date.UTC(2026, 0, 1, 0, 0, 0, 0))
-  const sod          = now ? new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0) : new Date(0)
-  const jan1_year    = now ? new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0) : new Date(0)
-  const secToday     = now ? Math.floor((now.getTime() - sod.getTime()) / 1000) : 0
-  const secThisYear  = now ? Math.floor((now.getTime() - jan1_year.getTime()) / 1000) : 0
-  const secSince2026 = now ? Math.max(0, Math.floor((now.getTime() - jan1_2026.getTime()) / 1000)) : 0
 
   const kgToday          = secToday * PLASTIC_KG_PER_SEC
   const mtToday          = kgToday / 1_000

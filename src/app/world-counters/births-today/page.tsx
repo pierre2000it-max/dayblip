@@ -19,16 +19,19 @@ function fmtBig(n: number) {
 }
 
 export default function BirthdaysTodayPage() {
-  const [now, setNow] = useState<Date | null>(null)
+  const [secToday, setSecToday] = useState(0)
 
   useEffect(() => {
-    setNow(new Date())
-    const t = setInterval(() => setNow(new Date()), 1000)
+    function tick() {
+      const now = new Date()
+      const sod = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
+      setSecToday(Math.floor((now.getTime() - sod.getTime()) / 1000))
+    }
+    tick()
+    const t = setInterval(tick, 1000)
     return () => clearInterval(t)
   }, [])
 
-  const sod      = now ? new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0) : new Date(0)
-  const secToday = now ? Math.floor((now.getTime() - sod.getTime()) / 1000) : 0
 
   const birthsToday = secToday * BIRTHS_PER_SEC
   const deathsToday = secToday * DEATHS_PER_SEC

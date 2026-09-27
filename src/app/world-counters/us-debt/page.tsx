@@ -25,20 +25,26 @@ function fmtDollars(n: number): string {
 }
 
 export default function USDebtPage() {
-  const [now, setNow] = useState<Date | null>(null)
+  const [secThisYr, setSecThisYr] = useState(0)
+  const [secToday,  setSecToday]  = useState(0)
+  const [year,      setYear]      = useState(2026)
 
   useEffect(() => {
-    setNow(new Date())
-    const t = setInterval(() => setNow(new Date()), 1000)
+    function tick() {
+      const now = new Date()
+      setSecThisYr(secondsSinceJan1(now))
+      setSecToday(secondsToday(now))
+      setYear(now.getFullYear())
+    }
+    tick()
+    const t = setInterval(tick, 1000)
     return () => clearInterval(t)
   }, [])
 
-  const secThisYr = now ? secondsSinceJan1(now) : 0
-  const secToday  = now ? secondsToday(now) : 0
-  const totalDebt     = DEBT_JAN1_2026 + secThisYr * DEBT_PER_SEC
-  const debtPerCitizen   = totalDebt / US_POPULATION
-  const debtPerTaxpayer  = totalDebt / US_TAXPAYERS
-  const debtTodayIncrease = secToday * DEBT_PER_SEC
+  const totalDebt          = DEBT_JAN1_2026 + secThisYr * DEBT_PER_SEC
+  const debtPerCitizen     = totalDebt / US_POPULATION
+  const debtPerTaxpayer    = totalDebt / US_TAXPAYERS
+  const debtTodayIncrease  = secToday  * DEBT_PER_SEC
   const debtThisYrIncrease = secThisYr * DEBT_PER_SEC
 
   return (
@@ -87,7 +93,7 @@ export default function USDebtPage() {
             <div className="grid gap-4 md:grid-cols-2">
               {[
                 { label: "Added today", value: fmtDollars(debtTodayIncrease), color: "#f87171" },
-                { label: `Added this year (${now ? now.getFullYear() : new Date().getFullYear()})`, value: fmtDollars(debtThisYrIncrease), color: "#fbbf24" },
+                { label: `Added this year (${year})`, value: fmtDollars(debtThisYrIncrease), color: "#fbbf24" },
                 { label: "Added per minute", value: fmtDollars(DEBT_PER_SEC * 60), color: "#fca5a5" },
                 { label: "Added per hour", value: fmtDollars(DEBT_PER_SEC * 3600), color: "#fbbf24" },
                 { label: "Added per day (est.)", value: fmtDollars(DEBT_PER_SEC * 86400), color: "#f87171" },

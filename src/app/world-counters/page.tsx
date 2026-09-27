@@ -84,32 +84,43 @@ function SectionHead({ title, color }: { title: string; color: string }) {
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export default function WorldCountersPage() {
-  // Use a tick counter instead of storing the Date in state.
-  // getSecToday() is always computed from a fresh new Date() to avoid
-  // SSR/hydration mismatches that cause it to equal secThisYear.
-  const [redraw, setRedraw] = useState(false)
-  const [dob, setDob] = useState("")
-  const [dobDate, setDobDate] = useState<Date | null>(null)
+  const [secToday,   setSecToday]   = useState(0)
+  const [secThisYear,setSecThisYear]= useState(0)
+  const [secThisHour,setSecThisHour]= useState(0)
+  const [year,       setYear]       = useState(2026)
+  const [dob, setDob]               = useState("")
+  const [dobDate, setDobDate]       = useState<Date | null>(null)
+  const [secSinceBirth, setSecSinceBirth] = useState<number | null>(null)
   const [sourcesOpen, setSourcesOpen] = useState(false)
 
   useEffect(() => {
-    const t = setInterval(() => setRedraw(r => !r), 1000)
+    function tick() {
+      const now         = new Date()
+      const startOfDay  = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
+      const startOfYear = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
+      setSecToday(Math.floor((now.getTime()    - startOfDay.getTime())  / 1000))
+      setSecThisYear(Math.floor((now.getTime() - startOfYear.getTime()) / 1000))
+      setSecThisHour(now.getMinutes() * 60 + now.getSeconds())
+      setYear(now.getFullYear())
+    }
+    tick()
+    const t = setInterval(tick, 1000)
     return () => clearInterval(t)
   }, [])
-  void redraw  // read here so ESLint sees it as used; the toggle triggers re-render
 
-  // Always derive time from a live new Date() — never from stale state
-  const now = new Date()
+  // Keep secSinceBirth in sync with dobDate changes and the 1-second tick
+  useEffect(() => {
+    if (!dobDate) { setSecSinceBirth(null); return }
+    const d = dobDate
+    function tickDob() {
+      setSecSinceBirth((Date.now() - d.getTime()) / 1000)
+    }
+    tickDob()
+    const t = setInterval(tickDob, 1000)
+    return () => clearInterval(t)
+  }, [dobDate])
 
-  // Time buckets — recalculate each tick
-  const startOfDay    = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
-  const secToday      = Math.floor((now.getTime() - startOfDay.getTime()) / 1000)
-  const startOfYear   = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
-  const secThisYear   = Math.floor((now.getTime() - startOfYear.getTime()) / 1000)
-  const secThisHour   = now.getMinutes() * 60 + now.getSeconds()
   const currentDebt   = DEBT_JAN1_2026 + secThisYear * DEBT_PER_SEC
-
-  const secSinceBirth = dobDate ? (now.getTime() - dobDate.getTime()) / 1000 : null
 
   // birthStats computed inline (now is a local var, so useMemo on it is pointless)
   const birthStats = secSinceBirth && secSinceBirth > 0 ? {
@@ -333,7 +344,7 @@ export default function WorldCountersPage() {
 
           {/* ── THIS YEAR ──────────────────────────────────────────────────── */}
           <div>
-            <h2 className="text-2xl font-bold text-white mb-6">📆 This Year So Far ({now.getFullYear()})</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">📆 This Year So Far ({year})</h2>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
               <CounterCard emoji="👶" label="Babies born this year"        value={fmtBig(secThisYear * BIRTHS_PER_SEC)}    color="#4ade80" />
               <CounterCard emoji="💀" label="People died this year"        value={fmtBig(secThisYear * DEATHS_PER_SEC)}    color="#f87171" />
