@@ -1,3 +1,5 @@
+import { DAYBLIP_ORG } from "@/lib/authorSchema"
+
 // ── Date calculation helpers (server-safe, no browser APIs) ──────────────────
 
 function getEaster(year: number): Date {
@@ -127,14 +129,7 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
 }
 
 export function generateOrganizationSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Dayblip",
-    "url": "https://dayblip.com",
-    "description": "175+ free tools for life, money, history and more. No signup. No email. Ever.",
-    "sameAs": [],
-  };
+  return { "@context": "https://schema.org", ...DAYBLIP_ORG }
 }
 
 export function generateWebPageSchema(name: string, description: string, url: string) {

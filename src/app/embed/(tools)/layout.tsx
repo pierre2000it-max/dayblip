@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { TOOL_COUNT } from "@/data/tool-count"
 
 export const metadata: Metadata = {
   robots: {
@@ -68,7 +69,7 @@ export default function EmbedLayout({
             textDecoration: "none",
           }}
         >
-          175+ Free Tools →
+          {TOOL_COUNT} Free Tools →
         </a>
       </div>
     </>

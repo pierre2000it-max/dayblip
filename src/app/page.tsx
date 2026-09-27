@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { TOOL_COUNT } from "@/data/tool-count";
+import { DAYBLIP_ORG } from "@/lib/authorSchema";
 import onThisDay from "@/data/onThisDay.json";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -11,7 +13,7 @@ const WEBSITE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Dayblip",
-  "description": "175+ free tools for life, money, history and more. No signup. No email. Ever.",
+  "description": `${TOOL_COUNT} free tools for life, money, history and more. No signup. No email. Ever.`,
   "url": "https://www.dayblip.com",
   "potentialAction": {
     "@type": "SearchAction",
@@ -20,14 +22,7 @@ const WEBSITE_SCHEMA = {
   },
 };
 
-const ORG_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Dayblip",
-  "url": "https://www.dayblip.com",
-  "description": "Free tools for curious minds",
-  "sameAs": ["https://twitter.com/dayblip365", "https://pinterest.com/dayblip365"],
-};
+const ORG_SCHEMA = { "@context": "https://schema.org", ...DAYBLIP_ORG };
 
 // ── Easter: Anonymous Gregorian algorithm ──────────────────────────────────
 function getEaster(year: number): Date {
@@ -176,7 +171,7 @@ export default function HomePage() {
             heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Dayblip is a free tool site with 175+ interactive calculators covering personal finance, career decisions, life visualization and historical curiosity. No signup. No email. No paywall. Free forever.
+          Dayblip is a free tool site with {TOOL_COUNT} interactive calculators covering personal finance, career decisions, life visualization and historical curiosity. No signup. No email. No paywall. Free forever.
         </p>
 
         {/* Live counters pill */}

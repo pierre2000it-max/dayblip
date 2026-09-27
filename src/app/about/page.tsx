@@ -1,15 +1,17 @@
 ﻿import type { Metadata } from "next"
+import { TOOL_COUNT } from "@/data/tool-count"
+import { DAYBLIP_ORG } from "@/lib/authorSchema"
 import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Meet Pierre — Founder of Dayblip",
   description:
-    "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 175+ free tools. No signup, no paywall, no email.",
+    `Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — ${TOOL_COUNT} free tools. No signup, no paywall, no email.`,
   alternates: { canonical: "https://www.dayblip.com/about" },
   openGraph: {
     title: "Meet Pierre — Founder of Dayblip",
     description:
-      "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 175+ free tools. No signup, no paywall, no email.",
+      `Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — ${TOOL_COUNT} free tools. No signup, no paywall, no email.`,
     type: "website",
     url: "https://www.dayblip.com/about",
     images: [{ url: "/api/og?title=Meet+Pierre&emoji=👋&subtitle=Founder+of+Dayblip", width: 1200, height: 630, alt: "Meet Pierre — Founder of Dayblip" }],
@@ -18,23 +20,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Meet Pierre — Founder of Dayblip",
     description:
-      "Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — 175+ free tools. No signup, no paywall, no email.",
+      `Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — ${TOOL_COUNT} free tools. No signup, no paywall, no email.`,
   },
 }
 
-const orgSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Dayblip",
-  url: "https://www.dayblip.com",
-  description:
-    "Free tools for curious minds — 175+ calculators for personal finance, career, life visualization, and historical curiosity.",
-  founder: { "@type": "Person", name: "Pierre" },
-  foundingLocation: {
-    "@type": "Place",
-    address: { "@type": "PostalAddress", addressRegion: "WI", addressCountry: "US" },
-  },
-}
+const orgSchema = { "@context": "https://schema.org", ...DAYBLIP_ORG }
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -200,7 +190,7 @@ export default function AboutPage() {
           What Dayblip is
         </h2>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          175+ free calculators and tools covering personal finance, career decisions, life visualization, and
+          {TOOL_COUNT} free calculators and tools covering personal finance, career decisions, life visualization, and
           historical curiosity.
         </p>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
@@ -330,7 +320,7 @@ export default function AboutPage() {
             Explore the Tools
           </h2>
           <p style={{ color: "#a8a8b3", fontSize: "15px", margin: "0 0 24px 0" }}>
-            175+ free tools and counting. No signup, no email, no paywall.
+            {TOOL_COUNT} free tools and counting. No signup, no email, no paywall.
           </p>
           <Link
             href="/tools"
