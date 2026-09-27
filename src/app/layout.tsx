@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 import { generateOrganizationSchema } from "@/lib/seo";
 import "./globals.css";
 
@@ -71,12 +72,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* GCM v2 — must be the very first script so consent defaults are
+            set before any Google tag fires. All signals default to denied;
+            vanilla-cookieconsent calls gtag('consent','update') on accept. */}
+        <script dangerouslySetInnerHTML={{ __html: `
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{
+  'ad_storage':'denied',
+  'ad_user_data':'denied',
+  'ad_personalization':'denied',
+  'analytics_storage':'denied',
+  'wait_for_update':500
+});
+`.trim() }} />
         {/* Resource hints — reduce connection latency for external assets */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <script
@@ -89,6 +103,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
+        <CookieConsent />
         <Header />
         {children}
         <Footer />
