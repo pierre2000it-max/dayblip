@@ -91,7 +91,7 @@ export default function ZipScoreTool() {
 
     setLoading(true);
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 15_000);
+    const timer = setTimeout(() => controller.abort(), 45_000);
     track("free_score_attempt", { zip: trimmedZip, category });
     try {
       const res = await fetch(
@@ -115,7 +115,7 @@ export default function ZipScoreTool() {
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") {
         track("free_score_failure", { zip: trimmedZip, category, error_type: "timeout" });
-        setError("The scoring service is taking too long. Please try again.");
+        setError("The scoring service is taking too long (limit: 45s). Please try again.");
       } else {
         track("free_score_failure", { zip: trimmedZip, category, error_type: "network" });
         setError("Could not reach the scoring service. Try again.");
@@ -223,7 +223,7 @@ export default function ZipScoreTool() {
           disabled={loading}
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md text-sm disabled:opacity-60 transition"
         >
-          {loading ? "Scoring…" : "Get free score →"}
+          {loading ? "Scoring… (new ZIPs can take up to 45 seconds)" : "Get free score →"}
         </button>
       </form>
 
