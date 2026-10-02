@@ -76,7 +76,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' fonts.googleapis.com",
               "font-src 'self' fonts.gstatic.com",
               "frame-src pagead2.googlesyndication.com googleads.g.doubleclick.net *.adtrafficquality.google www.google.com",
-              "connect-src 'self' fonts.googleapis.com pagead2.googlesyndication.com adservice.google.com googleads.g.doubleclick.net *.adtrafficquality.google open.er-api.com www.wikidata.org query.wikidata.org earthquake.usgs.gov api.jsonbin.io ziplicit.com",
+              "connect-src 'self' fonts.googleapis.com pagead2.googlesyndication.com adservice.google.com googleads.g.doubleclick.net *.adtrafficquality.google open.er-api.com www.wikidata.org query.wikidata.org earthquake.usgs.gov api.jsonbin.io ziplicit.com www.ziplicit.com",
               "img-src 'self' data: pagead2.googlesyndication.com googleads.g.doubleclick.net *.adtrafficquality.google",
               "object-src 'none'",
               "base-uri 'self'",
