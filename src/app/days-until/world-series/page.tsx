@@ -12,7 +12,7 @@ export default function WorldSeriesPage() {
       faqItems={[
         {
           question: 'When is the 2026 World Series?',
-          answer: 'The 2026 MLB World Series is expected to begin in late October 2026. The exact date is confirmed after the American League and National League Championship Series conclude. Game 1 of the World Series is typically scheduled for the last week of October. This page will update when the official date is announced by MLB.'
+          answer: 'Game 1 of the 2026 World Series is Friday October 23 2026, per the MLB schedule. A Game 7, if needed, is Saturday October 31. Game 1 is hosted by the pennant winner with the better 2026 regular season record, and the matchup is set when the League Championship Series ends on or before October 20.'
         },
         {
           question: 'What is the World Series?',
@@ -28,7 +28,7 @@ export default function WorldSeriesPage() {
         },
         {
           question: 'Who won the last World Series?',
-          answer: 'The most recent World Series was played in October 2025. Check the MLB website or ESPN for the current champion. The countdown on this page tracks the next World Series in October 2026.'
+          answer: 'The 2026 World Series begins October 23 2026. The previous World Series was played in October 2025. Check the MLB website or ESPN for the 2025 champion. The countdown on this page tracks Game 1 of the 2026 series.'
         },
         {
           question: 'How long is the MLB season before the World Series?',

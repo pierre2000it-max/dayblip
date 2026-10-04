@@ -11,29 +11,29 @@ export default function WorldCupPage() {
       event={event}
       faqItems={[
         {
-          question: 'When is the FIFA World Cup 2026 Final?',
-          answer: 'The FIFA World Cup 2026 Final is scheduled for Sunday July 19 2026 at MetLife Stadium in East Rutherford New Jersey — officially known as New York New Jersey Stadium for the tournament. Kickoff is at 3pm ET. The tournament runs from June 11 to July 19 2026 across 16 cities in the United States Canada and Mexico.'
+          question: 'How many days until the next World Cup?',
+          answer: 'The next FIFA World Cup is in 2030. The live countdown on this page runs to the opening matches on June 13 2030. The dates are reported but FIFA has not released the full match schedule, so they could still change.',
         },
         {
-          question: 'Where is the 2026 World Cup being held?',
-          answer: 'The 2026 FIFA World Cup is being hosted across 16 cities — 11 in the United States 3 in Mexico and 2 in Canada. It is the first World Cup hosted by three nations. The final will be played at MetLife Stadium in East Rutherford New Jersey. Other US host cities include Los Angeles Dallas Miami Houston Boston Philadelphia Seattle Atlanta Kansas City and San Francisco Bay Area.'
+          question: 'When is the 2030 World Cup final?',
+          answer: 'The 2030 World Cup final is reported for Sunday July 21 2030. FIFA has not released the full match schedule, so treat this date as provisional until it does.',
         },
         {
-          question: 'How many teams are in the 2026 World Cup?',
-          answer: 'The 2026 FIFA World Cup is the first to feature 48 teams — up from 32 in previous tournaments. The teams are divided into 12 groups of 4. The top two teams from each group plus the eight best third-place teams advance to a new round of 32 knockout stage making this the largest World Cup in history.'
+          question: 'Where will the 2030 World Cup be held?',
+          answer: 'Spain, Portugal and Morocco host the 2030 World Cup, the first on three continents. Uruguay, Argentina and Paraguay each host one centenary match to mark 100 years since the first World Cup in 1930.',
         },
         {
-          question: 'Who is hosting the 2026 World Cup?',
-          answer: 'The 2026 FIFA World Cup is jointly hosted by the United States Canada and Mexico — making it the first World Cup hosted by three nations. The United States is hosting 78 of the 104 matches including all knockout stage matches from the quarterfinals onward. This is the first World Cup in the USA since 1994.'
+          question: 'When were the 2026 World Cup and its final?',
+          answer: 'The 2026 FIFA World Cup ran from June 11 to July 19 2026 across the United States, Canada and Mexico. The final was played on July 19 2026 at MetLife Stadium in East Rutherford, New Jersey. It was the first World Cup with 48 teams.',
         },
         {
-          question: 'How many days until the World Cup Final?',
-          answer: 'The live countdown on this page shows the exact number of days hours minutes and seconds until the FIFA World Cup 2026 Final on July 19 2026. The countdown updates every second in real time.'
+          question: 'When are the 2030 World Cup centenary matches?',
+          answer: 'Centenary matches are reported for June 8 and 9 2030 in Uruguay, Argentina and Paraguay, before the opening matches in Spain, Portugal and Morocco on June 13 2030.',
         },
         {
-          question: 'When did the 2026 World Cup start?',
-          answer: 'The 2026 FIFA World Cup began on June 11 2026 with the opening match between Mexico and South Africa at Estadio Azteca in Mexico City. The tournament runs for 39 days — the longest World Cup in history due to the expanded 48-team format — concluding with the final on July 19 2026.'
-        }
+          question: 'How often is the World Cup held?',
+          answer: 'The men\'s FIFA World Cup is held every 4 years. The 2026 tournament was followed by the 2030 edition, and the 2034 World Cup is scheduled for Saudi Arabia.',
+        },
       ]}
       relatedSlugs={['super-bowl', 'world-series', 'nba-finals']}
     />

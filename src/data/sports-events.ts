@@ -8,7 +8,7 @@
 // - World Series: MLB.com (announced ~October each year)
 // - March Madness: NCAA.com (announced ~March each year)
 // - NBA Finals: NBA.com (announced ~May each year)
-// Last updated: June 2026
+// Last updated: October 2026 (World Cup moved to 2030, World Series date confirmed, March Madness dates confirmed)
 
 export interface SportEvent {
   slug: string
@@ -40,29 +40,29 @@ export const SPORTS_EVENTS: SportEvent[] = [
   },
   {
     slug: 'world-cup',
-    name: 'FIFA World Cup 2026 Final',
-    shortName: 'World Cup Final',
-    date: '2026-07-19',
-    venue: 'MetLife Stadium',
-    location: 'East Rutherford, New Jersey',
-    description: 'The FIFA World Cup Final — the most watched sporting event on the planet, held in the USA for the first time since 1994.',
+    name: 'FIFA World Cup 2030',
+    shortName: 'World Cup 2030',
+    date: '2030-06-13',
+    venue: 'Multiple venues across Spain, Portugal and Morocco',
+    location: 'Spain, Portugal and Morocco',
+    description: 'The next FIFA World Cup, hosted by Spain, Portugal and Morocco, with centenary matches in Uruguay, Argentina and Paraguay.',
     emoji: '⚽',
     sport: 'Soccer / Football',
-    notes: 'Officially confirmed. Tournament runs June 11 to July 19 2026 across USA Canada and Mexico.',
-    confirmed: true
+    notes: 'Dates reported but not final. Centenary matches June 8 to 9 2030, opening matches June 13 2030, final July 21 2030. FIFA has not released the full match schedule.',
+    confirmed: false
   },
   {
     slug: 'world-series',
     name: '2026 World Series',
     shortName: 'World Series',
-    date: '2026-10-27',
+    date: '2026-10-23',
     venue: 'TBD — home field of AL/NL pennant winner',
     location: 'TBD',
     description: 'The MLB championship series — the best of seven games between the American League and National League champions.',
     emoji: '⚾',
     sport: 'MLB Baseball',
-    notes: 'Approximate date — Game 1 typically late October. Exact date confirmed after pennant races.',
-    confirmed: false
+    notes: 'Game 1 is Friday October 23 2026 per the MLB schedule. A Game 7, if needed, is Saturday October 31. Venue set after the League Championship Series.',
+    confirmed: true
   },
   {
     slug: 'march-madness',
@@ -74,8 +74,8 @@ export const SPORTS_EVENTS: SportEvent[] = [
     description: 'The NCAA college basketball tournament — 68 teams competing for the national championship over three weekends.',
     emoji: '🏀',
     sport: 'College Basketball',
-    notes: 'Approximate date — First Four typically second Tuesday of March. Exact bracket announced in mid-March.',
-    confirmed: false
+    notes: 'First Four is March 16 and 17 2027 per the NCAA. Selection Sunday is March 14, the Final Four is April 3 and the championship game is April 5, both at Ford Field in Detroit.',
+    confirmed: true
   },
   {
     slug: 'nba-finals',
