@@ -12,7 +12,7 @@ export default function MarchMadnessPage() {
       faqItems={[
         {
           question: 'When does March Madness 2027 start?',
-          answer: 'March Madness 2027 typically begins in mid-March with the First Four play-in games followed by the Round of 64 the following Thursday and Friday. The exact dates are announced by the NCAA in early March after conference tournaments conclude. The national championship game is typically the first Monday of April.'
+          answer: 'March Madness 2027 begins with the First Four on Tuesday March 16 and Wednesday March 17 2027, per the NCAA. The first round follows on Thursday March 18 and Friday March 19. The national championship game is Monday April 5 2027 at Ford Field in Detroit.'
         },
         {
           question: 'What is March Madness?',
@@ -28,11 +28,11 @@ export default function MarchMadnessPage() {
         },
         {
           question: 'When is Selection Sunday for March Madness 2027?',
-          answer: 'Selection Sunday for the 2027 NCAA Tournament will be in mid-March 2027 — typically the second Sunday of March. This is when the full 68-team bracket is announced by the NCAA selection committee on live television. The exact date will be confirmed by the NCAA in advance of the 2026-2027 college basketball season.'
+          answer: 'Selection Sunday for the 2027 NCAA Tournament is Sunday March 14 2027. This is when the full 68-team bracket is announced by the NCAA selection committee on live television.'
         },
         {
           question: 'What is the Final Four?',
-          answer: 'The Final Four refers to the four teams that advance to the national semifinals of the NCAA Tournament. The Final Four games are played on a Saturday with the national championship game the following Monday. The Final Four is hosted at a pre-selected neutral site stadium and typically draws over 70,000 fans.'
+          answer: 'The Final Four refers to the four teams that advance to the national semifinals of the NCAA Tournament. The Final Four games are played on a Saturday with the national championship game the following Monday. The 2027 Final Four is Saturday April 3 at Ford Field in Detroit, with the championship game on Monday April 5. The Final Four is hosted at a pre-selected neutral site stadium and typically draws over 70,000 fans.'
         }
       ]}
       relatedSlugs={['super-bowl', 'nba-finals', 'world-series']}
