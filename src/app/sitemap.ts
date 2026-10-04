@@ -3,6 +3,7 @@ import holidaysData from "@/data/holidays.json";
 import { getAllSalarySlugs, getSalaryBySlug, SALARY_DATA } from "@/data/salary-data";
 import { cities } from "@/data/cost-of-living";
 import { INDEXED_CITY_PAIRS, INDEXED_JOB_PAIRS } from "@/data/compare-index";
+import { LASTMOD } from "@/data/lastmod";
 
 const BASE     = "https://www.dayblip.com";
 const holidays = holidaysData as Array<{ slug: string }>;
@@ -36,7 +37,12 @@ function p(
   priority: number,
   changeFrequency: SitemapEntry["changeFrequency"] = MONTHLY,
 ): SitemapEntry {
-  return { url: `${BASE}${path}`, lastModified: new Date(), changeFrequency, priority };
+  return {
+    url: `${BASE}${path}`,
+    lastModified: changeFrequency === DAILY ? new Date() : LASTMOD.static,
+    changeFrequency,
+    priority,
+  };
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -52,7 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // ── Dynamic: born-in 1940–2020 (81 pages) ────────────────────────────────
   const bornInUrls: MetadataRoute.Sitemap = Array.from({ length: 81 }, (_, i) => ({
     url:             `${BASE}/born-in/${1940 + i}`,
-    lastModified:    new Date(),
+    lastModified:    LASTMOD.bornIn,
     changeFrequency: MONTHLY,
     priority:        0.8,
   }));
@@ -66,7 +72,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   const otdSpotlight: MetadataRoute.Sitemap = OTD_SPOTLIGHT.map((d) => ({
     url:             `${BASE}/on-this-day/${d}`,
-    lastModified:    new Date(),
+    lastModified:    LASTMOD.static,
     changeFrequency: WEEKLY,
     priority:        0.8,
   }));
@@ -465,7 +471,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       }
       return slugs.map((slug) => ({
         url:             `${BASE}/compare/${slug}`,
-        lastModified:    new Date(),
+        lastModified:    LASTMOD.compare,
         changeFrequency: MONTHLY,
         priority:        0.8,
       }))
@@ -490,7 +496,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       })
       .map((slug) => ({
         url:             `${BASE}/salary/${slug}`,
-        lastModified:    new Date(),
+        lastModified:    LASTMOD.salary,
         changeFrequency: MONTHLY,
         priority:        0.8,
       })),

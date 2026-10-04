@@ -7,9 +7,10 @@
 
 // dayblip.com redirects (307) to www.dayblip.com, so IndexNow must use www
 // as the host so it can verify the key file without following redirects.
-// The urlList still uses the non-www canonical URLs as seen by users.
+// The urlList uses the same www host, matching the canonical tag on every page.
+// (It previously submitted non-www URLs that redirect, which IndexNow ignores.)
 const HOST        = "www.dayblip.com";          // where key file is reachable (no redirect)
-const URL_BASE    = "https://dayblip.com";      // canonical user-facing URLs
+const URL_BASE    = "https://www.dayblip.com";  // canonical URLs (www is the canonical host in every page)
 const KEY         = "272eea5409654b49b404dee73c5f0bfb";
 const KEY_LOC     = `https://${HOST}/${KEY}.txt`;
 const ENDPOINT    = "https://api.indexnow.org/indexnow";
