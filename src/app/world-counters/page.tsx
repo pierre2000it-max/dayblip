@@ -7,9 +7,9 @@ import Link from "next/link"
 
 // ── Annual baselines ──────────────────────────────────────────────────────────
 const WORLD_POP        = 8_200_000_000
-const ANNUAL_BIRTHS    = 140_000_000       // UN 2024
-const ANNUAL_DEATHS    = 58_000_000        // WHO
-const ANNUAL_NET       = ANNUAL_BIRTHS - ANNUAL_DEATHS   // 82M
+const ANNUAL_BIRTHS    = 132_400_000       // UN WPP 2024, 2025 estimate (132.4M)
+const ANNUAL_DEATHS    = 63_100_000        // UN WPP 2024, 2025 estimate (63.1M)
+const ANNUAL_NET       = ANNUAL_BIRTHS - ANNUAL_DEATHS   // 69.3M
 const DEBT_JAN1_2026   = 36_400_000_000_000
 const DEBT_PER_SEC     = 72_920            // ~$2.3T / yr
 const WORLD_GDP_ANNUAL = 105_000_000_000_000
@@ -26,9 +26,9 @@ const CIGS_ANNUAL      = 5_600_000_000_000
 const SECS_YEAR        = 365.25 * 86_400  // 31,557,600
 const SECS_DAY         = 86_400
 
-const BIRTHS_PER_SEC   = ANNUAL_BIRTHS  / SECS_YEAR   // ~4.434
-const DEATHS_PER_SEC   = ANNUAL_DEATHS  / SECS_YEAR   // ~1.838
-const NET_PER_SEC      = ANNUAL_NET     / SECS_YEAR   // ~2.597
+const BIRTHS_PER_SEC   = ANNUAL_BIRTHS  / SECS_YEAR   // ~4.196
+const DEATHS_PER_SEC   = ANNUAL_DEATHS  / SECS_YEAR   // ~2.000
+const NET_PER_SEC      = ANNUAL_NET     / SECS_YEAR   // ~2.196
 const GDP_PER_SEC      = WORLD_GDP_ANNUAL / SECS_YEAR
 const GOOGLE_PER_SEC   = GOOGLE_ANNUAL  / SECS_YEAR
 const TREES_CUT_PER_SEC = TREES_CUT_ANNUAL / SECS_YEAR
@@ -130,8 +130,8 @@ export default function WorldCountersPage() {
     "@type": "FAQPage",
     "mainEntity": [
       { "@type": "Question", "name": "How many people are in the world right now?", "acceptedAnswer": { "@type": "Answer", "text": "The world population is approximately 8.3 billion people as of 2026. It grows by roughly 70 million people per year, or about 0.85% annually, based on United Nations estimates." } },
-      { "@type": "Question", "name": "How many babies are born every second?", "acceptedAnswer": { "@type": "Answer", "text": "About 4.3 babies are born every second worldwide — roughly 259 births per minute, 15,500 per hour, and 372,000 per day, based on UN World Population Prospects data." } },
-      { "@type": "Question", "name": "How many people die every day?", "acceptedAnswer": { "@type": "Answer", "text": "Approximately 170,000 people die every day worldwide, which is about 2 deaths per second. The world still grows because births outpace deaths by roughly 2 to 1." } },
+      { "@type": "Question", "name": "How many babies are born every second?", "acceptedAnswer": { "@type": "Answer", "text": "About 4.2 babies are born every second worldwide — roughly 252 births per minute, 15,100 per hour, and 363,000 per day, based on UN World Population Prospects 2024 data." } },
+      { "@type": "Question", "name": "How many people die every day?", "acceptedAnswer": { "@type": "Answer", "text": "Approximately 173,000 people die every day worldwide, which is about 2 deaths per second. The world still grows because births outpace deaths by roughly 2 to 1." } },
       { "@type": "Question", "name": "What is the US national debt right now?", "acceptedAnswer": { "@type": "Answer", "text": "The US national debt updates daily and is displayed live on this page using data from the US Treasury Fiscal Data service. It increases by tens of thousands of dollars every second." } },
       { "@type": "Question", "name": "How fast is the world population growing?", "acceptedAnswer": { "@type": "Answer", "text": "The world population grows by about 70 million people per year as of 2026. The growth rate is around 0.85% annually and declining — projected to reach zero around 2084 according to UN projections." } },
       { "@type": "Question", "name": "Where does the data for these counters come from?", "acceptedAnswer": { "@type": "Answer", "text": "The counters use data from the United Nations Population Division, the World Health Organization, the US Census Bureau, and the US Treasury. Figures are statistically modeled estimates updated every second from the latest annual data." } },
@@ -183,7 +183,7 @@ export default function WorldCountersPage() {
         <div className="mx-auto max-w-[800px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">The world population is approximately 8.3 billion people as of 2026, growing by about 70 million per year. Roughly 4.3 babies are born and 2 people die every second worldwide. These live counters update every second using the latest annual data and growth rates from the United Nations, WHO, and US Treasury.</p>
+            <p className="text-[#e2e8f0]">The world population is approximately 8.3 billion people as of 2026, growing by about 70 million per year. Roughly 4.2 babies are born and 2 people die every second worldwide. These live counters update every second using the latest annual data and growth rates from the United Nations, WHO, and US Treasury.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Live world counters show global statistics updating in real time every second based on current annual rates from organizations including the UN, World Health Organization and US Treasury. The counters show world births, deaths and net population change today alongside the US national debt counter and your personal birth statistics.</p>
           <div className="mt-4"><AuthorByline variant="tool" /></div>
@@ -364,8 +364,8 @@ export default function WorldCountersPage() {
           {/* ── FAQ ────────────────────────────────────────────────────────── */}
           <FAQAccordion items={[
             { q: "How many people are in the world right now?", a: "The world population is approximately 8.3 billion people as of 2026. It grows by roughly 70 million people per year, or about 0.85% annually, based on United Nations estimates." },
-            { q: "How many babies are born every second?", a: "About 4.3 babies are born every second worldwide — roughly 259 births per minute, 15,500 per hour, and 372,000 per day, based on UN World Population Prospects data." },
-            { q: "How many people die every day?", a: "Approximately 170,000 people die every day worldwide, which is about 2 deaths per second. The world still grows because births outpace deaths by roughly 2 to 1." },
+            { q: "How many babies are born every second?", a: "About 4.2 babies are born every second worldwide — roughly 252 births per minute, 15,100 per hour, and 363,000 per day, based on UN World Population Prospects 2024 data." },
+            { q: "How many people die every day?", a: "Approximately 173,000 people die every day worldwide, which is about 2 deaths per second. The world still grows because births outpace deaths by roughly 2 to 1." },
             { q: "What is the US national debt right now?", a: "The US national debt updates daily and is displayed live on this page using data from the US Treasury Fiscal Data service. It increases by tens of thousands of dollars every second." },
             { q: "How fast is the world population growing?", a: "The world population grows by about 70 million people per year as of 2026. The growth rate is around 0.85% annually and declining — projected to reach zero around 2084 according to UN projections." },
             { q: "Where does the data for these counters come from?", a: "The counters use data from the United Nations Population Division, the World Health Organization, the US Census Bureau, and the US Treasury. Figures are statistically modeled estimates updated every second from the latest annual data." },
@@ -383,8 +383,8 @@ export default function WorldCountersPage() {
               <div className="px-6 pb-6 text-sm text-[#a8a8b3] space-y-1.5 border-t border-[#0f3460]">
                 <p className="pt-4 font-semibold text-white">Annual baselines used for calculations:</p>
                 {[
-                  ["World births",          "140 million/year (→ 4.43/sec)",               "UN World Population Prospects 2024"],
-                  ["World deaths",          "58 million/year (→ 1.84/sec)",                "WHO Global Health Estimates"],
+                  ["World births",          "132.4 million/year (→ 4.20/sec)",             "UN World Population Prospects 2024 (2025 estimate)"],
+                  ["World deaths",          "63.1 million/year (→ 2.00/sec)",              "UN World Population Prospects 2024 (2025 estimate)"],
                   ["US National Debt growth","~$2.3 trillion/year ($72,920/sec)",            "US Treasury, Congressional Budget Office"],
                   ["World GDP",             "$105 trillion/year",                           "World Bank 2024"],
                   ["Global email volume",   "347 billion/day (→ 4.01M/sec)",               "Statista 2024"],

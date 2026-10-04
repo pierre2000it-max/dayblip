@@ -8,10 +8,10 @@ import AuthorByline from "@/components/AuthorByline"
 
 export const metadata: Metadata = {
   title: "How Popular Was Your Name the Year You Were Born?",
-  description: "The year you were born, how many other babies shared your name? Using 144 years of SSA data, here is what your birth year number actually tells you.",
+  description: "The year you were born, how many other babies shared your name? Using 146 years of SSA data, here is what your birth year number actually tells you.",
   openGraph: {
     title: "How Popular Was Your Name the Year You Were Born?",
-    description: "The year you were born, how many other babies shared your name? Using 144 years of SSA data, here is what your birth year number actually tells you.",
+    description: "The year you were born, how many other babies shared your name? Using 146 years of SSA data, here is what your birth year number actually tells you.",
     url: "https://www.dayblip.com/blog/name-popularity",
     type: "article",
     publishedTime: "2026-06-12T00:00:00.000Z",
@@ -25,7 +25,7 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "How Popular Was Your Name the Year You Were Born?",
-  description: "The year you were born, how many other babies shared your name? Using 144 years of SSA data, here is what your birth year number actually tells you.",
+  description: "The year you were born, how many other babies shared your name? Using 146 years of SSA data, here is what your birth year number actually tells you.",
   url: "https://www.dayblip.com/blog/name-popularity",
   publisher: {
     "@type": "Organization",
@@ -94,7 +94,7 @@ export default function NamePopularityBlogPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              The SSA has recorded every name given to five or more American babies since 1880 — 144 years of actual Social Security applications. The 1-in-X figure divides total US births in your birth year by the number of babies who received your name that year. It tells you your actual density among the people who grew up alongside you.
+              The SSA has recorded every name given to five or more American babies since 1880 — 146 years of actual Social Security applications. The 1-in-X figure divides total US births in your birth year by the number of babies who received your name that year. It tells you your actual density among the people who grew up alongside you.
             </p>
           </div>
         </section>
@@ -102,7 +102,7 @@ export default function NamePopularityBlogPage() {
         {/* Share — above article */}
         <div className="mb-8">
           <ShareButtons
-            text="The year you were born, how many other babies shared your name? 144 years of SSA data tells you: www.dayblip.com/blog/name-popularity"
+            text="The year you were born, how many other babies shared your name? 146 years of SSA data tells you: www.dayblip.com/blog/name-popularity"
             url="https://www.dayblip.com/blog/name-popularity"
             title="How Popular Was Your Name the Year You Were Born?"
           />
@@ -126,7 +126,7 @@ export default function NamePopularityBlogPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What the Data Actually Is</h2>
 
           <p>
-            The Social Security Administration has recorded every name given to five or more American babies since 1880. Not estimates. Actual Social Security card applications — 144 years of them. For each year, the data shows how many babies received each name and where it ranked among all names that year.
+            The Social Security Administration has recorded every name given to five or more American babies since 1880. Not estimates. Actual Social Security card applications — 146 years of them. For each year, the data shows how many babies received each name and where it ranked among all names that year.
           </p>
 
           <p>
@@ -223,7 +223,7 @@ export default function NamePopularityBlogPage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="The year you were born, how many other babies shared your name? 144 years of SSA data tells you: www.dayblip.com/blog/name-popularity"
+            text="The year you were born, how many other babies shared your name? 146 years of SSA data tells you: www.dayblip.com/blog/name-popularity"
             url="https://www.dayblip.com/blog/name-popularity"
             title="How Popular Was Your Name the Year You Were Born?"
           />

@@ -3,11 +3,16 @@ import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import Link from "next/link"
 
-const ANNUAL_BIRTHS = 140_000_000
-const ANNUAL_DEATHS = 58_000_000
+// UN World Population Prospects 2024, 2025 estimates
+const ANNUAL_BIRTHS = 132_400_000
+const ANNUAL_DEATHS = 63_100_000
 const ANNUAL_NET    = ANNUAL_BIRTHS - ANNUAL_DEATHS
 const SECS_YEAR     = 365.25 * 86_400   // 31,557,600
-const WORLD_POP_NOW = 8_200_000_000
+// Anchor: estimated world population at Jan 1, 2026 (UN WPP 2024 medium variant, about 8.2 billion).
+// The counter grows from this fixed date, so it keeps rising through New Year instead of resetting.
+// Re-anchor each January with the new UN estimate (see CLAUDE.md annual update).
+const WORLD_POP_ANCHOR = 8_200_000_000
+const ANCHOR_DATE_MS   = Date.UTC(2026, 0, 1, 0, 0, 0, 0)
 
 function fmtWhole(n: number) { return Math.floor(n).toLocaleString() }
 function fmtBig(n: number) {
@@ -37,7 +42,8 @@ export default function PopulationCounterPage() {
 
   void tick  // consumed to force re-render each second
 
-  const currentPop  = Math.floor(WORLD_POP_NOW + secThisYr * NET_PER_SEC)
+  const secSinceAnchor = Math.max(0, Math.floor((now.getTime() - ANCHOR_DATE_MS) / 1000))
+  const currentPop  = Math.floor(WORLD_POP_ANCHOR + secSinceAnchor * NET_PER_SEC)
   const birthsToday = secToday * BIRTHS_PER_SEC
   const deathsToday = secToday * DEATHS_PER_SEC
 
@@ -119,7 +125,7 @@ export default function PopulationCounterPage() {
             title="World Population Live Counter"
           />
 
-          <p className="text-xs text-[#a8a8b3]/60">Sources: UN World Population Prospects 2024 — 140M births/year, 58M deaths/year. Figures are estimates.</p>
+          <p className="text-xs text-[#a8a8b3]/60">Sources: UN World Population Prospects 2024 (2025 estimates) — 132.4M births/year, 63.1M deaths/year. Figures are estimates. Updated October 2026.</p>
         </div>
       </section>
     </div>

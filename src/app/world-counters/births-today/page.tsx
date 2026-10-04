@@ -3,8 +3,9 @@ import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import Link from "next/link"
 
-const ANNUAL_BIRTHS   = 140_000_000
-const ANNUAL_DEATHS   = 58_000_000
+// UN World Population Prospects 2024, 2025 estimates
+const ANNUAL_BIRTHS   = 132_400_000
+const ANNUAL_DEATHS   = 63_100_000
 const BIRTHS_PER_SEC  = ANNUAL_BIRTHS / 31_557_600
 const BIRTHS_PER_MIN  = BIRTHS_PER_SEC * 60
 const BIRTHS_PER_HOUR = BIRTHS_PER_SEC * 3600
@@ -118,12 +119,12 @@ export default function BirthdaysTodayPage() {
           </div>
 
           <ShareButtons
-            text={`${fmtWhole(birthsToday)} babies have been born today so far! A new baby arrives every 0.44 seconds. Watch it tick live:`}
+            text={`${fmtWhole(birthsToday)} babies have been born today so far! A new baby arrives every 0.24 seconds. Watch it tick live:`}
             url="https://dayblip.com/world-counters/births-today"
             title="Babies Born Today — Live Counter"
           />
 
-          <p className="text-xs text-[#a8a8b3]/60">Source: UN World Population Prospects 2024 — 140 million births per year. Figures are estimates. Resets at midnight local time.</p>
+          <p className="text-xs text-[#a8a8b3]/60">Source: UN World Population Prospects 2024 (2025 estimates) — 132.4 million births and 63.1 million deaths per year. Figures are estimates. Resets at midnight local time. Updated October 2026.</p>
         </div>
       </section>
     </div>
