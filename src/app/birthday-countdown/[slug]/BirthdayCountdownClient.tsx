@@ -23,8 +23,8 @@ function calcTimeLeft(month: number, day: number): TimeLeft {
 
 // ── Birthday stats with real CDC birth distribution data ──────────────────────
 const WORLD_POP     = 8_200_000_000;
-const ANNUAL_BIRTHS = 140_000_000;
-const WEEKLY_BIRTHS = Math.round(ANNUAL_BIRTHS / 52); // ~2,692,308 — constant
+const ANNUAL_BIRTHS = 132_400_000; // UN WPP 2024, 2025 estimate
+const WEEKLY_BIRTHS = Math.round(ANNUAL_BIRTHS / 52); // ~2,546,154 — constant
 
 // CDC National Vital Statistics — actual US birth frequency by month
 const MONTH_DIST: Record<number, number> = {
@@ -41,7 +41,7 @@ function getBirthdayStats(month: number, day: number) {
   // Special case: Feb 29 (leap day)
   if (month === 2 && day === 29) {
     const sharing = Math.round(WORLD_POP / (365.25 * 4));          // ~5,616,000
-    const annual  = Math.round(ANNUAL_BIRTHS / (365.25 * 4));      // ~96,000
+    const annual  = Math.round(ANNUAL_BIRTHS / (365.25 * 4));      // ~90,600
     return {
       sharing,
       annual,
@@ -196,7 +196,7 @@ export default function BirthdayCountdownClient({ slug }: { slug: string }) {
                 {bdParts && (
                   <div className="flex gap-2"><span className="text-[#4FC3F7]">💡</span><span className="text-[#a8a8b3] text-sm">{monthContext(bdParts.month)}</span></div>
                 )}
-                <p className="text-xs text-[#a8a8b3]/60 pt-1">Based on CDC birth distribution data, world population of 8.2 billion and ~140 million annual global births.</p>
+                <p className="text-xs text-[#a8a8b3]/60 pt-1">Based on CDC birth distribution data, world population of 8.2 billion and about 132 million annual global births (UN).</p>
               </div>
             );
           })()}

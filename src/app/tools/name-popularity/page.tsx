@@ -139,7 +139,7 @@ export default function NamePopularityPage() {
             total count, decade-by-decade breakdown, and more.
           </p>
           <p className="mt-3 text-sm text-[#a8a8b3]">
-            Powered by official SSA data · 1880–2023
+            Powered by official SSA data · 1880–2025
           </p>
         </div>
       </section>

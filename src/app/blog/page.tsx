@@ -120,7 +120,7 @@ const articles = [
     category: "Life",
     title: "How Popular Was Your Name the Year You Were Born?",
     excerpt:
-      "The SSA has recorded every name given to five or more American babies since 1880 — 144 years of data. Your 1-in-X number tells you your actual density among the people who grew up alongside you.",
+      "The SSA has recorded every name given to five or more American babies since 1880 — 146 years of data. Your 1-in-X number tells you your actual density among the people who grew up alongside you.",
     readTime: "5 min read",
     href: "/blog/name-popularity",
   },

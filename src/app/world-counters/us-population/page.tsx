@@ -10,15 +10,19 @@ import FAQAccordion from "@/components/FAQAccordion"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import Link from "next/link"
 
-// US Census Bureau population clock rates (as of 2024–2025):
-// 1 birth every 9 seconds, 1 death every 9.5 seconds, 1 net international migrant every 28 seconds
-const BIRTHS_PER_SEC   = 1 / 9        // 0.11111
-const DEATHS_PER_SEC   = 1 / 9.5      // 0.10526
-const MIGRANTS_PER_SEC = 1 / 28       // 0.03571
-const NET_PER_SEC      = BIRTHS_PER_SEC - DEATHS_PER_SEC + MIGRANTS_PER_SEC // ~0.04157
+// US Census Bureau population clock rates, from its Dec 30 2024 New Year's Day release:
+// 1 birth every 9.0 seconds, 1 death every 9.4 seconds, 1 international migrant every 23.2 seconds
+const BIRTHS_PER_SEC   = 1 / 9.0
+const DEATHS_PER_SEC   = 1 / 9.4
+const MIGRANTS_PER_SEC = 1 / 23.2
+const NET_PER_SEC      = BIRTHS_PER_SEC - DEATHS_PER_SEC + MIGRANTS_PER_SEC // ~0.0478
 
-// US Census Bureau projection for Jan 1, 2026
-const US_POP_JAN1_2026  = 335_893_238
+// US Census Bureau projection for Jan 1, 2025: 341,145,670 (census.gov, Dec 30 2024).
+// The counter grows from this fixed date, so it never resets at New Year.
+// The previous value here, 335,893,238, was the Census figure for Jan 1, 2024.
+// Re-anchor each January when Census publishes its New Year's Day projection.
+const US_POP_JAN1_2025  = 341_145_670
+const ANCHOR_DATE_MS    = Date.UTC(2025, 0, 1, 0, 0, 0, 0)
 
 const PAGE_URL = "https://www.dayblip.com/world-counters/us-population"
 
@@ -31,7 +35,7 @@ function fmtBig(n: number) {
 const faqItems = [
   {
     question: "What is the current US population in 2026?",
-    answer: "As of mid-2026 the US population is approximately 336 million, based on US Census Bureau projections. This counter uses the Census Bureau's Jan 1, 2026 estimate of 335,893,238 and adds the official net change rates: 1 birth every 9 seconds, 1 death every 9.5 seconds, and 1 net international migrant every 24 seconds."
+    answer: "In late 2026 the US population is approximately 344 million, based on US Census Bureau data. This counter starts from the Census Bureau's Jan 1, 2025 projection of 341,145,670 and adds its published rates: 1 birth every 9.0 seconds, 1 death every 9.4 seconds, and 1 international migrant every 23.2 seconds. It is an estimate and will be re-anchored to the Census Bureau's next New Year's Day projection."
   },
   {
     question: "How fast is the US population growing?",
@@ -69,7 +73,7 @@ const schemas = [
     "@context": "https://schema.org",
     "@type": "Dataset",
     "name": "US Population Live Estimate — Dayblip",
-    "description": "Real-time US population estimate calculated from US Census Bureau birth, death, and migration rates applied to the Jan 1, 2026 baseline projection.",
+    "description": "Real-time US population estimate calculated from US Census Bureau birth, death, and migration rates applied to the Census Bureau's Jan 1, 2025 baseline projection of 341,145,670.",
     "url": PAGE_URL,
     "creator": { "@type": "Organization", "name": "Dayblip", "url": "https://www.dayblip.com" },
     "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -104,20 +108,21 @@ export default function USPopulationPage() {
   }, [])
 
   const now        = new Date()
-  const jan1_2026  = new Date(Date.UTC(2026, 0, 1, 0, 0, 0, 0))
+  const jan1       = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
   const sod        = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
-  const secSince2026 = Math.max(0, Math.floor((now.getTime() - jan1_2026.getTime()) / 1000))
+  const secSinceAnchor = Math.max(0, Math.floor((now.getTime() - ANCHOR_DATE_MS) / 1000))
+  const secThisYear    = Math.max(0, Math.floor((now.getTime() - jan1.getTime()) / 1000))
   const secToday     = Math.floor((now.getTime() - sod.getTime()) / 1000)
 
   void tick
 
-  const currentPop     = Math.floor(US_POP_JAN1_2026 + secSince2026 * NET_PER_SEC)
+  const currentPop     = Math.floor(US_POP_JAN1_2025 + secSinceAnchor * NET_PER_SEC)
   const birthsToday    = secToday * BIRTHS_PER_SEC
   const deathsToday    = secToday * DEATHS_PER_SEC
   const migrantsToday  = secToday * MIGRANTS_PER_SEC
-  const birthsThisYear   = secSince2026 * BIRTHS_PER_SEC
-  const deathsThisYear   = secSince2026 * DEATHS_PER_SEC
-  const migrantsThisYear = secSince2026 * MIGRANTS_PER_SEC
+  const birthsThisYear   = secThisYear * BIRTHS_PER_SEC
+  const deathsThisYear   = secThisYear * DEATHS_PER_SEC
+  const migrantsThisYear = secThisYear * MIGRANTS_PER_SEC
   const netGrowthThisYear = birthsThisYear - deathsThisYear + migrantsThisYear
 
   return (
@@ -244,14 +249,14 @@ export default function USPopulationPage() {
           />
 
           <div>
-            <MethodologyNote text="Population estimate uses the US Census Bureau Jan 1, 2026 projection of 335,893,238 as the baseline, then adds net change at Census Bureau Population Clock rates: 1 birth every 9 seconds, 1 death every 9.5 seconds, 1 net international migrant every 24 seconds. The counter increments in real time from page load using these rates. Figures are estimates; the Census Bureau revises rates periodically." />
+            <MethodologyNote text="Population estimate uses the US Census Bureau Jan 1, 2025 projection of 341,145,670 as the baseline, then adds net change at Census Bureau Population Clock rates: 1 birth every 9.0 seconds, 1 death every 9.4 seconds, 1 international migrant every 23.2 seconds. The counter increments in real time from page load using these rates. Figures are estimates; the Census Bureau revises rates periodically." />
             <LastUpdated />
           </div>
 
           <RelatedTools tools={relatedTools} />
 
           <p className="text-xs text-[#a8a8b3]/60">
-            Sources: US Census Bureau Population Clock (census.gov/popclock) — Jan 1, 2026 projection and vital rates. US Census Bureau 2020 Decennial Census.
+            Sources: US Census Bureau Population Clock (census.gov/popclock) — Jan 1, 2025 projection and vital rates (published Dec 30, 2024). US Census Bureau 2020 Decennial Census.
           </p>
         </div>
       </section>

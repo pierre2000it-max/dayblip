@@ -168,7 +168,7 @@ function NameShareCard({ stats }: { stats: NameStats }) {
         {displayName}
       </div>
       <div style={{ fontSize: "14px", color: "#a8a8b3", marginBottom: "20px" }}>
-        {gLabel} · US data 1880–2023
+        {gLabel} · US data 1880–2025
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
         {[
@@ -312,7 +312,7 @@ export default function NamePopularityClient() {
                 <p className="text-[#a8a8b3] text-sm mb-2">📛 Name popularity result</p>
                 <h2 className="text-4xl font-black text-white mb-1">{displayName}</h2>
                 <p className="text-[#a8a8b3] text-sm mb-5">
-                  {stats.gender === "F" ? "Female" : "Male"} · US SSA records 1880–2023
+                  {stats.gender === "F" ? "Female" : "Male"} · US SSA records 1880–2025
                 </p>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                   {[
