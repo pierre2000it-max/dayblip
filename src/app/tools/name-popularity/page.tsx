@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
+import DataLink from "@/components/DataLink"
 import AdUnit from "@/components/AdUnit";
 import NamePopularityClient from "./NamePopularityClient";
 
@@ -175,6 +176,7 @@ export default function NamePopularityPage() {
               </div>
             ))}
           </div>
+          <DataLink slug="name-popularity" label="Want the top 10 names for every decade in one table?" />
         </div>
       </section>
 

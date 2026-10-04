@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
+import DataLink from "@/components/DataLink"
 import Link from "next/link"
 
 // UN World Population Prospects 2024, 2025 estimates
@@ -124,6 +125,8 @@ export default function PopulationCounterPage() {
             url="https://dayblip.com/world-counters/population"
             title="World Population Live Counter"
           />
+
+          <DataLink slug="world-population" label="Want the births and deaths rates behind this counter?" />
 
           <p className="text-xs text-[#a8a8b3]/60">Sources: UN World Population Prospects 2024 (2025 estimates) — 132.4M births/year, 63.1M deaths/year. Figures are estimates. Updated October 2026.</p>
         </div>

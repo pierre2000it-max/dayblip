@@ -4,6 +4,7 @@ import SchemaMarkup from "@/components/SchemaMarkup";
 import Breadcrumb from "@/components/Breadcrumb";
 import RelatedTools from "@/components/RelatedTools";
 import LastUpdated from "@/components/LastUpdated";
+import DataLink from "@/components/DataLink"
 import MethodologyNote from "@/components/MethodologyNote";
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 
@@ -152,6 +153,7 @@ export default function PriceHistoryPage() {
           <div>
             <MethodologyNote text="Past prices are rounded U.S. national averages for each year. The 2026 prices are estimates, so treat percentage changes as approximate. Inflation adjustments use CPI-U annual averages with a 2026 projection of 325.0." />
             <LastUpdated date="October 2026" />
+            <DataLink slug="price-history" label="Want every price and CPI value in one table?" />
           </div>
 
           <RelatedTools

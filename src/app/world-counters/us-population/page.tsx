@@ -4,6 +4,7 @@ import ShareButtons from "@/components/ShareButtons"
 import AuthorByline from "@/components/AuthorByline"
 import Breadcrumb from "@/components/Breadcrumb"
 import LastUpdated from "@/components/LastUpdated"
+import DataLink from "@/components/DataLink"
 import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import FAQAccordion from "@/components/FAQAccordion"
@@ -251,6 +252,7 @@ export default function USPopulationPage() {
           <div>
             <MethodologyNote text="Population estimate uses the US Census Bureau Jan 1, 2025 projection of 341,145,670 as the baseline, then adds net change at Census Bureau Population Clock rates: 1 birth every 9.0 seconds, 1 death every 9.4 seconds, 1 international migrant every 23.2 seconds. The counter increments in real time from page load using these rates. Figures are estimates; the Census Bureau revises rates periodically." />
             <LastUpdated />
+            <DataLink slug="us-population" label="Want the yearly totals behind this counter?" />
           </div>
 
           <RelatedTools tools={relatedTools} />
