@@ -28,8 +28,13 @@ const ITEMS: { key: PriceKey; emoji: string; label: string; fmt: (n: number) => 
   { key:"coffee",      emoji:"☕", label:"Cup of Coffee",    fmt: n => `$${n.toFixed(2)}` },
 ];
 
-// Approximate CPI multipliers (year → multiply to get 2026 dollars)
-const CPI_MULT: Record<number, number> = { 1950:12.5, 1960:10.2, 1970:7.9, 1980:3.7, 1990:2.3, 2000:1.8, 2010:1.4, 2020:1.25 };
+// CPI-U annual averages. Multiplier = 2026 projection / year value.
+// Update CPI_2026 each January with the BLS actual (same value as finance/inflation).
+const CPI_2026 = 325.0;
+const CPI_BY_YEAR: Record<number, number> = { 1950:24.1, 1960:29.6, 1970:38.8, 1980:82.4, 1990:130.7, 2000:172.2, 2010:218.1, 2020:258.8 };
+const CPI_MULT: Record<number, number> = Object.fromEntries(
+  Object.entries(CPI_BY_YEAR).map(([y, v]) => [Number(y), CPI_2026 / v])
+);
 
 const YEARS = [1950,1960,1970,1980,1990,2000,2010,2020];
 
@@ -49,17 +54,7 @@ export default function PriceHistoryTool() {
   };
 
   return (
-    <div className="min-h-screen bg-[#1a1a2e]">
-      <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)" }}>
-        <div className="mx-auto max-w-[800px]">
-          <div className="mb-4 text-5xl">💰</div>
-          <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Historical Price Comparison</h1>
-          <p className="text-lg text-[#a8a8b3]">See what things cost in the past vs what they cost today</p>
-        </div>
-      </section>
-
-      <section className="bg-[#16213e] px-6 py-14">
-        <div className="mx-auto max-w-[900px] space-y-8">
+    <div className="space-y-8">
           {/* Year selector */}
           <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-5 flex flex-wrap items-center gap-3">
             <span className="text-white font-semibold">Select year:</span>
@@ -94,7 +89,7 @@ export default function PriceHistoryTool() {
 
           <ShareButtons
             text="Check out how prices have changed since the 1950s! Free price history calculator."
-            url="https://dayblip.com/price-history"
+            url="https://www.dayblip.com/price-history"
             title="Price History Calculator"
           />
 
@@ -118,8 +113,6 @@ export default function PriceHistoryTool() {
               </div>
             )}
           </div>
-        </div>
-      </section>
     </div>
   );
 }
