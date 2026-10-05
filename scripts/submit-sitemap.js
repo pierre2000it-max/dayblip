@@ -160,25 +160,6 @@ const urls = [
   "https://www.dayblip.com/tools/reading-time",
   "https://www.dayblip.com/tools/password-strength",
 
-  // Embed Phase 6 — 5 new embeddable tools
-  "https://www.dayblip.com/embed/gpa-calculator",
-  "https://www.dayblip.com/embed/overtime-tax",
-  "https://www.dayblip.com/embed/tip-calculator",
-  "https://www.dayblip.com/embed/paycheck-calculator",
-  "https://www.dayblip.com/embed/due-date-calculator",
-
-  // Embed Tier 2 — 5 more embeddable tools
-  "https://www.dayblip.com/embed/currency-converter",
-  "https://www.dayblip.com/embed/percentage-calculator",
-  "https://www.dayblip.com/embed/sleep-calculator",
-  "https://www.dayblip.com/embed/calorie-calculator",
-  "https://www.dayblip.com/embed/body-fat",
-  "https://www.dayblip.com/embed/overtime-calculator",
-  "https://www.dayblip.com/embed/unit-converter",
-  "https://www.dayblip.com/embed/bmi-calculator",
-  "https://www.dayblip.com/embed/grade-calculator",
-  "https://www.dayblip.com/embed/water-intake",
-
   // Phase 4 — Curiosity viral calculators
   "https://www.dayblip.com/curiosity/numerology",
   "https://www.dayblip.com/curiosity/chinese-zodiac",
@@ -235,10 +216,6 @@ const urls = [
   "https://www.dayblip.com/day-of-year",
   "https://www.dayblip.com/week-number",
   "https://www.dayblip.com/birthday-now",
-
-  // Embed pages
-  "https://www.dayblip.com/embed",
-  "https://www.dayblip.com/embed/for-educators",
 
   // Games & history
   "https://www.dayblip.com/history-quiz",
