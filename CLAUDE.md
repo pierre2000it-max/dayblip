@@ -131,7 +131,7 @@ Pace needed: 1.8 articles per week.
 - 8ae20a7: OG image routes fixed (display flex, try/catch)
 
 ## Site Counts (as of June 13 2026)
-- Total URLs in sitemap: 316
+- Total URLs in sitemap: 1,413 (verified Oct 2026 by running sitemap.ts)
 - Total tool pages: ~175+
 - Blog articles: 21
 - Embed tools: 25
