@@ -43,6 +43,12 @@ const nextConfig = {
         permanent: true,
       },
       {
+        // Salary Ceiling Calculator removed Oct 2026. Closest remaining page.
+        source: "/tools/salary-ceiling-calculator",
+        destination: "/tools/corporate-salary-ceiling-calculator",
+        permanent: true,
+      },
+      {
         source: "/contact-us/",
         destination: "/contact",
         permanent: true,

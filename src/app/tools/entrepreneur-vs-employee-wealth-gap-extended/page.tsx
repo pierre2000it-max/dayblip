@@ -595,7 +595,6 @@ export default function EntrepreneurVsEmployeeExtendedPage() {
                 <RelatedTools tools={[
                   { emoji: "🏢", title: "Entrepreneur vs Employee Wealth Gap",       desc: "The original side-by-side wealth comparison",                   href: "/tools/entrepreneur-vs-employee-wealth-gap" },
                   { emoji: "💼", title: "Corporate Salary Ceiling Calculator",       desc: "What your corporate career is actually building",               href: "/tools/corporate-salary-ceiling-calculator" },
-                  { emoji: "💰", title: "Salary Ceiling Calculator",                 desc: "See the lifetime limit a salary puts on your wealth",           href: "/tools/salary-ceiling-calculator" },
                   { emoji: "📅", title: "Wealth Transfer Timeline",                  desc: "Project your wealth at 65 and 75 and generational impact",      href: "/tools/wealth-transfer-timeline" },
                 ]} />
               </div>

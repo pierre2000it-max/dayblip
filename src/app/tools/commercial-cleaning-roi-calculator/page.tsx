@@ -626,7 +626,6 @@ export default function CommercialCleaningROICalculatorPage() {
               <RelatedTools tools={[
                 { emoji: "🏠", title: "Home Cleaning Cost Calculator",    desc: "Estimate residential cleaning costs by size and type",           href: "/tools/home-cleaning-cost-calculator" },
                 { emoji: "⏱️", title: "Lead Response Time Cost Calculator", desc: "The cost of slow follow-up on inbound leads",                  href: "/tools/lead-response-cost-calculator" },
-                { emoji: "💰", title: "Salary Ceiling Calculator",          desc: "See the lifetime limit a salary puts on your wealth",           href: "/tools/salary-ceiling-calculator" },
                 { emoji: "📦", title: "Moving Stress Calculator",           desc: "How much is your move actually weighing on you?",              href: "/tools/moving-stress-calculator" },
               ]} />
             </div>

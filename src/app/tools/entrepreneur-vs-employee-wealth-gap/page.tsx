@@ -457,7 +457,6 @@ export default function EntrepreneurVsEmployeeWealthGapPage() {
             {/* ── Related Tools ─────────────────────────────────────────── */}
             <div className="mt-10">
               <RelatedTools tools={[
-                { emoji: "📊", title: "Salary Ceiling Calculator",        desc: "See the gap between salary and invested wealth",          href: "/tools/salary-ceiling-calculator" },
                 { emoji: "🆓", title: "Financial Independence Date",       desc: "Find the exact date you could stop working",             href: "/tools/fi-date" },
                 { emoji: "💼", title: "Job Offer Comparison",              desc: "Compare two job offers side by side",                    href: "/tools/job-offer-comparison" },
                 { emoji: "📈", title: "Stock Market Calculator",           desc: "Project investment returns over time",                   href: "/tools/stock-calculator" },
