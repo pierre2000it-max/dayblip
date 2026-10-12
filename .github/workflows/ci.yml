@@ -32,5 +32,10 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      # Placeholders only. src/lib/supabase.ts calls createClient() at import
+      # time, which throws if these are empty. Real values stay in Vercel.
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder-anon-key
