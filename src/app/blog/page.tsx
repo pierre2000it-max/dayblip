@@ -316,6 +316,14 @@ const articles = [
     readTime: "6 min read",
     href: "/blog/federal-tax-brackets-2026",
   },
+  {
+    category: "Retirement",
+    title: "When to Claim Social Security: Age 62, 67 or 70?",
+    excerpt:
+      "Claiming at 62 pays 70% of your full benefit and 70 pays 124%. The break-even ages, the SSA rules and what the math leaves out.",
+    readTime: "6 min read",
+    href: "/blog/when-to-claim-social-security",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]
