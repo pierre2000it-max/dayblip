@@ -156,6 +156,13 @@ Salary Ceiling Calculator (retire by 50) removed Oct 10 2026, commit ae6dfb1. Re
   - src/app/tools/wealth-transfer-timeline/page.tsx
 - Do not count it in the tool total until it returns.
 
+## Never-Built Pages Referenced Elsewhere
+Home Cleaning Cost Calculator (/tools/home-cleaning-cost-calculator) was linked from 3 pages but was never built, so every link was a 404. The 3 links were removed Oct 13 2026. Build candidate (fits EcoClean MKE). Restore the "Home Cleaning Cost Calculator" card on each when it ships:
+- src/app/tools/move-in-out-cleaning-cost-calculator/page.tsx
+- src/app/tools/commercial-cleaning-roi-calculator/page.tsx
+- src/app/tools/auto-detailing-cost-calculator/page.tsx
+`src/lib/internalLinks.test.ts` fails the build if any hardcoded internal href points to a route that does not exist. Add a 301 in next.config.mjs when you rename a route.
+
 ## Critical CSS Fixes — DO NOT REMOVE
 In src/app/globals.css:
 ins.adsbygoogle { background: transparent !important }

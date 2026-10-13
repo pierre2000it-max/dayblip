@@ -477,7 +477,6 @@ export default function AutoDetailingCostCalculatorPage() {
             {/* Related Tools */}
             <div style={{ marginTop: 40 }}>
               <RelatedTools tools={[
-                { emoji: "🏠", title: "Home Cleaning Cost Calculator",            desc: "Estimate regular residential cleaning costs",         href: "/tools/home-cleaning-cost-calculator" },
                 { emoji: "📦", title: "Move-In/Out Cleaning Cost Calculator",     desc: "What should you pay for a move clean?",             href: "/tools/move-in-out-cleaning-cost-calculator" },
                 { emoji: "🏢", title: "Commercial Cleaning ROI Calculator",       desc: "The business case for professional office cleaning", href: "/tools/commercial-cleaning-roi-calculator" },
                 { emoji: "💸", title: "Corporate Salary Ceiling Calculator",      desc: "What is your career actually building?",            href: "/tools/corporate-salary-ceiling-calculator" },

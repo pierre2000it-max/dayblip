@@ -47,8 +47,8 @@ const faqSchema = {
 }
 
 const relatedTools = [
-  { title: "Debt Payoff Calculator", href: "/tools/debt-payoff", description: "See your exact student loan payoff timeline" },
-  { title: "Compound Interest", href: "/tools/compound-interest", description: "See what loan payments invested would become" },
+  { title: "Debt Payoff Calculator", href: "/finance/debt-payoff", description: "See your exact student loan payoff timeline" },
+  { title: "Compound Interest", href: "/finance/compound-interest", description: "See what loan payments invested would become" },
   { title: "College ROI", href: "/tools/college-roi", description: "Calculate the return on your degree investment" },
   { title: "Net Worth Calculator", href: "/finance/net-worth", description: "Track total assets minus liabilities" },
 ]
@@ -243,7 +243,7 @@ export default function TrueCostOfStudentLoansPage() {
           <div style={{ background: "#1e2d4a", borderRadius: "8px", padding: "24px", textAlign: "center", margin: "32px 0" }}>
             <p className="text-[#a8a8b3] mb-4 text-sm">Calculate your exact student loan payoff timeline and total interest paid on any balance:</p>
             <Link
-              href="/tools/debt-payoff"
+              href="/finance/debt-payoff"
               style={{ display: "inline-block", background: "#e94560", color: "white", padding: "12px 24px", borderRadius: "6px", fontWeight: 600, textDecoration: "none", fontSize: "15px" }}
             >
               Debt Payoff Calculator &rarr;

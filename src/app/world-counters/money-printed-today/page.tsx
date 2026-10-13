@@ -77,7 +77,7 @@ const schemas = [
 
 const relatedTools = [
   { emoji: "🌍", title: "World Counters", desc: "Live global statistics", href: "/world-counters" },
-  { emoji: "💰", title: "US National Debt", desc: "Live US debt clock", href: "/world-counters/us-national-debt" },
+  { emoji: "💰", title: "US National Debt", desc: "Live US debt clock", href: "/world-counters/us-debt" },
   { emoji: "📈", title: "Inflation Calculator", desc: "What money was worth in any year", href: "/finance/inflation" },
   { emoji: "💹", title: "Compound Interest", desc: "How money grows over time", href: "/finance/compound-interest" },
 ]

@@ -49,7 +49,7 @@ const faqSchema = {
 const relatedTools = [
   { title: "FI Date Calculator", href: "/tools/fi-date", description: "See your exact financial independence date" },
   { title: "Retirement Savings", href: "/finance/retirement-savings", description: "Are you on track for retirement?" },
-  { title: "Compound Interest", href: "/tools/compound-interest", description: "See how investments grow over time" },
+  { title: "Compound Interest", href: "/finance/compound-interest", description: "See how investments grow over time" },
   { title: "Net Worth Calculator", href: "/finance/net-worth", description: "Track total assets minus liabilities" },
 ]
 

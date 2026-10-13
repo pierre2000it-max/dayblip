@@ -47,7 +47,7 @@ const faqSchema = {
 
 const relatedTools = [
   { title: "401k Calculator", href: "/finance/401k-calculator", description: "Calculate how your retirement contributions grow over time." },
-  { title: "Compound Interest Calculator", href: "/tools/compound-interest", description: "See how tax-free growth compounds over decades." },
+  { title: "Compound Interest Calculator", href: "/finance/compound-interest", description: "See how tax-free growth compounds over decades." },
   { title: "FI Date Calculator", href: "/tools/fi-date", description: "Calculate when your investments reach financial independence." },
   { title: "Retirement Savings Calculator", href: "/finance/retirement-savings", description: "Model your complete retirement savings picture." },
 ]

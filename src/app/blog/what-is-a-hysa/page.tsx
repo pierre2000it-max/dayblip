@@ -46,8 +46,8 @@ const faqSchema = {
 }
 
 const relatedTools = [
-  { title: "Compound Interest Calculator", href: "/tools/compound-interest", description: "Calculate how your savings grow over time at different rates." },
-  { title: "Savings Calculator", href: "/finance/savings-calculator", description: "Model your savings growth with regular contributions." },
+  { title: "Compound Interest Calculator", href: "/finance/compound-interest", description: "Calculate how your savings grow over time at different rates." },
+  { title: "Savings Calculator", href: "/finance/savings-goal", description: "Model your savings growth with regular contributions." },
   { title: "Net Worth Calculator", href: "/finance/net-worth", description: "Track your complete financial picture." },
   { title: "FI Date Calculator", href: "/tools/fi-date", description: "Calculate your financial independence date." },
 ]
@@ -179,7 +179,7 @@ export default function WhatIsAHysaPage() {
           <div style={{ background: "#1e2d4a", borderRadius: "8px", padding: "20px", margin: "32px 0", textAlign: "center" }}>
             <p className="text-[#a8a8b3] mb-4 text-sm">Calculate how much your savings earn over time at different rates:</p>
             <Link
-              href="/tools/compound-interest"
+              href="/finance/compound-interest"
               style={{ display: "inline-block", color: "#e94560", fontWeight: 600, textDecoration: "none", fontSize: "16px", border: "1px solid #e94560", borderRadius: "6px", padding: "10px 24px" }}
             >
               Compound Interest Calculator →

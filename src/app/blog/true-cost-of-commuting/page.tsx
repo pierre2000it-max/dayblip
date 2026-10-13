@@ -38,9 +38,9 @@ const faqSchema = {
 }
 
 const relatedTools = [
-  { title: "WFH Financial Value Calculator", href: "/career/wfh-value", description: "Calculate the full financial value of working from home vs. commuting." },
-  { title: "True Hourly Wage Calculator", href: "/career/true-hourly-wage", description: "What your salary really pays per hour after work-related costs." },
-  { title: "Job Offer Comparison", href: "/career/job-offer-comparison", description: "Compare total compensation across two job offers including commute." },
+  { title: "WFH Financial Value Calculator", href: "/tools/wfh-calculator", description: "Calculate the full financial value of working from home vs. commuting." },
+  { title: "True Hourly Wage Calculator", href: "/tools/true-hourly-wage", description: "What your salary really pays per hour after work-related costs." },
+  { title: "Job Offer Comparison", href: "/tools/job-offer-comparison", description: "Compare total compensation across two job offers including commute." },
   { title: "Take Home Pay Calculator", href: "/finance/take-home-pay", description: "Calculate your exact net pay after taxes and deductions." },
 ]
 
