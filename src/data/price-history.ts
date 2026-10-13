@@ -14,9 +14,9 @@ export const PRICE_DATA: Record<number, Record<PriceKey, number>> = {
 
 export const CURRENT: Record<PriceKey, number> = { gas:3.20,bread:4.50,milk:4.29,movieTicket:14.00,house:420000,car:48000,stamp:0.73,coffee:5.50 };
 
-// CPI-U annual averages. Multiplier = 2026 projection / year value.
-// Update CPI_2026 each January with the BLS actual (same value as finance/inflation).
-export const CPI_2026 = 325.0;
+// CPI-U annual averages. Multiplier = 2026 value / year value.
+// CPI_2026 = Jan-Aug 2026 BLS average (331.7). Update each January with the full-year BLS average (same value as finance/inflation).
+export const CPI_2026 = 331.7;
 export const CPI_BY_YEAR: Record<number, number> = { 1950:24.1, 1960:29.6, 1970:38.8, 1980:82.4, 1990:130.7, 2000:172.2, 2010:218.1, 2020:258.8 };
 export const CPI_MULT: Record<number, number> = Object.fromEntries(
   Object.entries(CPI_BY_YEAR).map(([y, v]) => [Number(y), CPI_2026 / v])
