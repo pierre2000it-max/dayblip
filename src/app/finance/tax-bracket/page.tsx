@@ -8,51 +8,18 @@ import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
+import { BRACKETS, STANDARD_DEDUCTION as STD_DEDUCTION, type Filing } from "@/lib/tax2026"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
-type Filing = "single" | "mfj" | "mfs" | "hoh"
+const BRACKET_COLORS = ["#4ade80", "#86efac", "#F9A825", "#fb923c", "#f97316", "#ef4444", "#dc2626"]
 
-const STD_DEDUCTION: Record<Filing, number> = { single: 16100, mfj: 32200, mfs: 16100, hoh: 24150 }
-
-const BRACKET_DEFS: Record<Filing, [number, number, string][]> = {
-  single: [
-    [12400, 0.10, "#4ade80"],
-    [50400, 0.12, "#86efac"],
-    [105700, 0.22, "#F9A825"],
-    [201775, 0.24, "#fb923c"],
-    [256225, 0.32, "#f97316"],
-    [640600, 0.35, "#ef4444"],
-    [Infinity, 0.37, "#dc2626"],
-  ],
-  mfj: [
-    [24800, 0.10, "#4ade80"],
-    [100800, 0.12, "#86efac"],
-    [211400, 0.22, "#F9A825"],
-    [403550, 0.24, "#fb923c"],
-    [512450, 0.32, "#f97316"],
-    [768700, 0.35, "#ef4444"],
-    [Infinity, 0.37, "#dc2626"],
-  ],
-  mfs: [
-    [12400, 0.10, "#4ade80"],
-    [50400, 0.12, "#86efac"],
-    [105700, 0.22, "#F9A825"],
-    [201775, 0.24, "#fb923c"],
-    [256225, 0.32, "#f97316"],
-    [384350, 0.35, "#ef4444"],
-    [Infinity, 0.37, "#dc2626"],
-  ],
-  hoh: [
-    [17700, 0.10, "#4ade80"],
-    [67450, 0.12, "#86efac"],
-    [105700, 0.22, "#F9A825"],
-    [201775, 0.24, "#fb923c"],
-    [256200, 0.32, "#f97316"],
-    [640600, 0.35, "#ef4444"],
-    [Infinity, 0.37, "#dc2626"],
-  ],
-}
+const BRACKET_DEFS = Object.fromEntries(
+  (Object.keys(BRACKETS) as Filing[]).map((f) => [
+    f,
+    BRACKETS[f].map(([limit, rate], i) => [limit, rate, BRACKET_COLORS[i]]),
+  ]),
+) as Record<Filing, [number, number, string][]>
 
 export default function TaxBracketPage() {
   const [income, setIncome] = useState("75000")

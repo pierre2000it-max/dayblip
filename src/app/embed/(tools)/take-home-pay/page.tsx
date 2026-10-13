@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react"
+import { STANDARD_DEDUCTION, federalTax, medicareTax, socialSecurityTax } from "@/lib/tax2026"
 
 function fmt(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })
@@ -28,30 +29,6 @@ const STATES = [
   ["WI", "Wisconsin"], ["WY", "Wyoming"],
 ]
 
-const BRACKETS_SINGLE = [
-  { limit: 12400, rate: 0.10 },
-  { limit: 50400, rate: 0.12 },
-  { limit: 105700, rate: 0.22 },
-  { limit: 201775, rate: 0.24 },
-  { limit: 256225, rate: 0.32 },
-  { limit: 640600, rate: 0.35 },
-  { limit: Infinity, rate: 0.37 },
-]
-
-function calcFederalTax(income: number, married: boolean): number {
-  const multiplier = married ? 2 : 1
-  const brackets = BRACKETS_SINGLE.map(b => ({ limit: b.limit * multiplier, rate: b.rate }))
-  let tax = 0
-  let prev = 0
-  for (const bracket of brackets) {
-    if (income <= prev) break
-    const taxable = Math.min(income, bracket.limit) - prev
-    tax += taxable * bracket.rate
-    prev = bracket.limit
-  }
-  return tax
-}
-
 export default function EmbedTakeHomePay() {
   const [salary, setSalary] = useState("75000")
   const [state, setState] = useState("TX")
@@ -62,10 +39,11 @@ export default function EmbedTakeHomePay() {
 
   function calc() {
     const s = parseFloat(salary) || 0
-    const federal = calcFederalTax(s, married)
+    const filing = married ? "mfj" : "single"
+    const federal = federalTax(Math.max(0, s - STANDARD_DEDUCTION[filing]), filing)
     const stateRate = STATE_TAX[state] ?? 0.05
     const stateTax = s * stateRate
-    const fica = Math.min(s, 184500) * 0.0765 + Math.max(0, s - 184500) * 0.0145
+    const fica = socialSecurityTax(s) + medicareTax(s)
     const takeHome = s - federal - stateTax - fica
     const monthly = takeHome / 12
     const effectiveRate = s > 0 ? ((federal + stateTax + fica) / s) * 100 : 0

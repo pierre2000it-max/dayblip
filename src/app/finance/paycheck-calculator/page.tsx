@@ -7,6 +7,7 @@ import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
+import { federalTax as calcFederalTax, medicareTax, socialSecurityTax, taxableAfterStandardDeduction, type Filing as TaxFiling } from "@/lib/tax2026"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 function fmt0(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -24,24 +25,7 @@ const STATES: [string, number][] = [
   ["CA – up to 13.3%", 0.133],["OR – 9.9%", 0.099], ["HI – 11.0%", 0.11],
 ]
 
-type Filing = "single" | "mfj" | "hoh"
-
-const BRACKETS: Record<Filing, [number, number][]> = {
-  single: [[12400,0.10],[50400,0.12],[105700,0.22],[201775,0.24],[256225,0.32],[640600,0.35],[Infinity,0.37]],
-  mfj:    [[24800,0.10],[100800,0.12],[211400,0.22],[403550,0.24],[512450,0.32],[768700,0.35],[Infinity,0.37]],
-  hoh:    [[17700,0.10],[67450,0.12],[105700,0.22],[201775,0.24],[256200,0.32],[640600,0.35],[Infinity,0.37]],
-}
-
-function calcFedTax(income: number, filing: Filing): number {
-  let tax = 0, prev = 0
-  for (const [ceiling, rate] of BRACKETS[filing]) {
-    if (income <= prev) break
-    tax += (Math.min(income, ceiling) - prev) * rate
-    prev = ceiling
-    if (ceiling === Infinity) break
-  }
-  return Math.max(0, tax)
-}
+type Filing = Extract<TaxFiling, "single" | "mfj" | "hoh">
 
 const PAY_PERIODS: Record<string, number> = {
   weekly: 52, biweekly: 26, semimonthly: 24, monthly: 12,
@@ -110,17 +94,17 @@ export default function PaycheckCalculatorPage() {
     const annualPreTax = preTaxPerPeriod * periods
     const taxableAnnual = Math.max(0, annual - annualPreTax)
 
-    const annualFederal = calcFedTax(taxableAnnual, filing)
+    // Federal tax is on income after the standard deduction (IRS Rev. Proc. 2025-32).
+    const annualFederal = calcFederalTax(taxableAfterStandardDeduction(annual, filing, annualPreTax), filing)
     const federalTax = annualFederal / periods
 
     const stateRate = STATES[stateIdx][1]
     const annualState = taxableAnnual * stateRate
     const stateTax = annualState / periods
 
-    // FICA: cap SS at $184,500 annual (2026 SSA wage base)
-    const ssCap = 184500
-    const annualSS = Math.min(annual, ssCap) * 0.062
-    const annualMedicare = annual * 0.0145
+    // FICA: Social Security is capped at the 2026 SSA wage base (see tax2026.ts)
+    const annualSS = socialSecurityTax(annual)
+    const annualMedicare = medicareTax(annual)
     const socialSecurity = annualSS / periods
     const medicare = annualMedicare / periods
 
