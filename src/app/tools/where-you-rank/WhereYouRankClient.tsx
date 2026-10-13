@@ -450,7 +450,7 @@ export default function WhereYouRankClient() {
               incomeMessage = `Your income is in the ${ordinal(ip)} percentile — top quarter of American earners. At this level lifestyle inflation is the primary risk. People who reach the 75th-90th percentile and maintain their pre-raise lifestyle accumulate wealth at dramatically higher rates than those who expand spending to match income.`
             } else if (ip < 99) {
               incomeTier = 'top10'
-              incomeMessage = `Your income is in the top 10% of American earners. At this level tax optimization becomes one of the highest-ROI financial activities — maximizing 401k ($23,500 in 2026), HSA ($4,300 single), and backdoor Roth IRA contributions can reduce your effective tax rate meaningfully. The gap between gross and net income is large at your level.`
+              incomeMessage = `Your income is in the top 10% of American earners. At this level tax optimization becomes one of the highest-ROI financial activities — maximizing 401k ($24,500 in 2026), HSA ($4,400 single), and backdoor Roth IRA contributions can reduce your effective tax rate meaningfully. The gap between gross and net income is large at your level.`
             } else {
               incomeTier = 'top1'
               incomeMessage = `Your income is in the top 1% of American earners. At this level the primary financial risks are lifestyle creep, tax drag, and concentration risk (over-reliance on a single income source). Diversification of income streams and aggressive tax-advantaged investing are the highest priorities.`
@@ -505,14 +505,14 @@ export default function WhereYouRankClient() {
               ]
             } else if (incomeTier === 'upper-middle') {
               nextActions = [
-                'Max 401k ($23,500 in 2026) and HSA ($4,300 single) before taxable investing — significant tax drag reduction',
+                'Max 401k ($24,500 in 2026) and HSA ($4,400 single) before taxable investing — significant tax drag reduction',
                 'Calculate your true savings rate — income at your level often creates unconscious lifestyle inflation',
                 'Model the FI date impact of keeping expenses flat for the next 3 years while income grows',
-                'Consider backdoor Roth IRA if income exceeds direct contribution limits ($161,000 single in 2026)',
+                'Consider backdoor Roth IRA if income exceeds direct contribution limits ($168,000 single in 2026)',
               ]
             } else if (incomeTier === 'top10') {
               nextActions = [
-                'Max all tax-advantaged accounts first — 401k $23,500, HSA $4,300, backdoor Roth $7,000',
+                'Max all tax-advantaged accounts first — 401k $24,500, HSA $4,400, backdoor Roth $7,500',
                 'Review your effective tax rate — top 10% earners frequently overpay through poor timing of deductions',
                 'Ensure investment portfolio is not concentrated — employer stock, single sector, or single geography',
                 'Model sequence-of-returns risk if FI is within 10 years — bond tent or cash buffer strategy',

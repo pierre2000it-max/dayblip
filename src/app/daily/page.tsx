@@ -94,7 +94,7 @@ const PUZZLES: Puzzle[] = [
     question: "What is the current annual contribution limit for a Roth IRA (2024–2026)?",
     options: ["$5,500", "$6,500", "$7,000", "$8,000"],
     answer: 2,
-    explanation: "The 2024–2026 Roth IRA contribution limit is $7,000 per year ($8,000 if you are age 50 or older). Roth IRA contributions are made with after-tax dollars but grow tax-free, and qualified withdrawals in retirement are completely tax-free.",
+    explanation: "The 2026 Roth IRA contribution limit is $7,500 per year ($8,600 if you are age 50 or older). Roth IRA contributions are made with after-tax dollars but grow tax-free, and qualified withdrawals in retirement are completely tax-free.",
   },
   {
     question: "Which state has the highest average property tax burden?",
@@ -139,9 +139,9 @@ const PUZZLES: Puzzle[] = [
   },
   {
     question: "What is the maximum 401k contribution limit for 2026?",
-    options: ["$19,500", "$22,500", "$23,500", "$25,000"],
+    options: ["$19,500", "$22,500", "$24,500", "$25,000"],
     answer: 2,
-    explanation: "The 2026 401k contribution limit is $23,500 for employees ($31,000 if age 50 or older, including the $7,500 catch-up contribution). This limit applies to traditional and Roth 401k combined. Employer matching contributions do not count toward this limit.",
+    explanation: "The 2026 401k contribution limit is $24,500 for employees ($32,500 if age 50 or older, including the $8,000 catch-up contribution). This limit applies to traditional and Roth 401k combined. Employer matching contributions do not count toward this limit.",
   },
   {
     question: "What is compound interest often called?",
@@ -507,7 +507,7 @@ const PUZZLES: Puzzle[] = [
       "A self-directed IRA with alternative investments",
     ],
     answer: 1,
-    explanation: "High earners above Roth IRA income limits ($161,000 single, $240,000 married in 2024) can use a backdoor Roth: contribute to a non-deductible traditional IRA then immediately convert it to a Roth. This legal strategy preserves access to tax-free retirement growth despite income limits.",
+    explanation: "High earners above Roth IRA income limits ($168,000 single, $252,000 married in 2026) can use a backdoor Roth: contribute to a non-deductible traditional IRA then immediately convert it to a Roth. This legal strategy preserves access to tax-free retirement growth despite income limits.",
   },
   {
     question: "What percentage of Americans live paycheck to paycheck?",
@@ -573,15 +573,15 @@ const PUZZLES: Puzzle[] = [
     explanation: "The average US household carrying credit card debt owes approximately $6,200 according to Federal Reserve data. At a 21% interest rate, that costs about $1,300 per year in interest alone. Total US consumer credit card debt surpassed $1.1 trillion in 2024 — the first time it crossed that threshold.",
   },
   {
-    question: "What is a Roth IRA income limit for single filers in 2024?",
+    question: "What is a Roth IRA income limit for single filers in 2026?",
     options: [
       "You earn over $100,000 annually",
-      "You earn over $146,000 (phase-out begins)",
+      "You earn over $153,000 (phase-out begins)",
       "You earn over $200,000",
       "There is no income limit for Roth IRAs",
     ],
     answer: 1,
-    explanation: "In 2024 the Roth IRA contribution phase-out begins at $146,000 for single filers and eliminates eligibility completely at $161,000. Married filers phase out between $230,000 and $240,000. Above these limits use the backdoor Roth strategy: contribute to a non-deductible traditional IRA then convert to Roth.",
+    explanation: "In 2026 the Roth IRA contribution phase-out begins at $153,000 for single filers and eliminates eligibility completely at $168,000. Married filers phase out between $242,000 and $252,000. Above these limits use the backdoor Roth strategy: contribute to a non-deductible traditional IRA then convert to Roth.",
   },
   {
     question: "What is the difference between good debt and bad debt?",

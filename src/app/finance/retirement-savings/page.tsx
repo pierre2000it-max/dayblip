@@ -210,7 +210,7 @@ export default function RetirementSavingsPage() {
 
             let timelineMessage: string
             if (timelineTier === 'urgent') {
-              timelineMessage = `With ${yearsToRetirement} years to retirement your most powerful levers are: maximize catch-up contributions (401k $31,000 if age 50+, IRA $8,000 if age 50+), eliminate discretionary expenses to boost monthly savings, and review whether your retirement date can flex 2-3 years — each extra year of work adds both contributions and delays withdrawals.`
+              timelineMessage = `With ${yearsToRetirement} years to retirement your most powerful levers are: maximize catch-up contributions (401k $32,500 if age 50+, IRA $8,600 if age 50+), eliminate discretionary expenses to boost monthly savings, and review whether your retirement date can flex 2-3 years — each extra year of work adds both contributions and delays withdrawals.`
             } else if (timelineTier === 'moderate') {
               timelineMessage = `With ${yearsToRetirement} years to retirement compounding still works strongly in your favor. Increasing monthly contributions by $200-500 now produces dramatically larger results than waiting 5 years. The highest-leverage action: automate a 1% savings increase every 6 months — you will not feel the reduction in take-home pay but the long-term impact is significant.`
             } else if (timelineTier === 'comfortable') {
@@ -225,7 +225,7 @@ export default function RetirementSavingsPage() {
             } else if (monthly < 500) {
               savingsMessage = `You are contributing $${monthly.toLocaleString()}/month. This is a start but likely below what is needed for a comfortable retirement. Target increasing to $${Math.min(monthly + 300, 1000).toLocaleString()}/month — find one expense to cut or redirect your next raise entirely to retirement savings.`
             } else if (monthly < 1500) {
-              savingsMessage = `You are contributing $${monthly.toLocaleString()}/month — a solid foundation. Verify you are maximizing employer match first (free money), then consider increasing to the 401k limit ($23,500 in 2026) over the next few years through incremental raises.`
+              savingsMessage = `You are contributing $${monthly.toLocaleString()}/month — a solid foundation. Verify you are maximizing employer match first (free money), then consider increasing to the 401k limit ($24,500 in 2026) over the next few years through incremental raises.`
             } else {
               savingsMessage = `You are contributing $${monthly.toLocaleString()}/month ($${(monthly * 12).toLocaleString()}/year) — a strong savings rate. Ensure contributions are going into tax-advantaged accounts first (401k, IRA, HSA) before taxable accounts. At this level asset allocation and sequence-of-returns risk management become increasingly important.`
             }
@@ -241,7 +241,7 @@ export default function RetirementSavingsPage() {
             } else if (surplusTier === 'small-surplus') {
               nextActions = [
                 `Protect your savings rate through income changes — when you get a raise, immediately redirect half to retirement before lifestyle adjusts`,
-                `Max your 401k ($23,500 in 2026) if not already there — tax-deferred growth at your timeline is significant`,
+                `Max your 401k ($24,500 in 2026) if not already there — tax-deferred growth at your timeline is significant`,
                 `Review this projection annually — rerun with actual returns, updated savings, and any major life changes`,
                 `Build a 6-12 month emergency fund to avoid raiding retirement savings during unexpected expenses`
               ]
@@ -256,7 +256,7 @@ export default function RetirementSavingsPage() {
               nextActions = [
                 `Close the gap in steps: target adding $${Math.round(extraMonthly * 0.4).toLocaleString()}/month now (40% of needed increase) and the rest over 3 years`,
                 `Review your desired retirement income ($${parseFloat(desiredIncome).toLocaleString()}/month) — reducing by 10-15% significantly changes the required target`,
-                `Max all tax-advantaged accounts: 401k $23,500, IRA $7,000, HSA $4,300 single ($8,550 family) in 2026`,
+                `Max all tax-advantaged accounts: 401k $24,500, IRA $7,500, HSA $4,400 single ($8,750 family) in 2026`,
                 `Consider working 2-3 years longer — each additional year adds contributions AND delays withdrawals, dramatically improving outcomes`
               ]
             }

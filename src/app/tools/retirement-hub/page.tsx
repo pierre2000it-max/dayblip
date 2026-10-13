@@ -18,7 +18,7 @@ const faqItems = [
   },
   {
     question: "What is the maximum I can contribute to my 401k in 2026?",
-    answer: "The 2026 401k employee contribution limit is $23,500 per year. If you are age 50 or older you can contribute an additional $7,500 catch-up contribution for a total of $31,000. The combined limit including employer contributions is $70,000. Contributing the maximum from age 30 at 7% average returns would produce approximately $2.2 million by age 65."
+    answer: "The 2026 401k employee contribution limit is $24,500 per year. If you are age 50 or older you can contribute an additional $8,000 catch-up contribution for a total of $32,500. The combined limit including employer contributions is $70,000. Contributing the maximum from age 30 at 7% average returns would produce approximately $2.2 million by age 65."
   }
 ]
 

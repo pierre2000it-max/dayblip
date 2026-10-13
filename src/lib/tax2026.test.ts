@@ -5,6 +5,7 @@ import {
   BRACKETS, STANDARD_DEDUCTION, SS_WAGE_BASE, federalTax, marginalRate,
   medicareTax, socialSecurityTax, taxableAfterStandardDeduction, toFiling,
   LTCG_LIMITS, ltcgTax, selfEmploymentTax,
+  K401_LIMIT, K401_CATCHUP, IRA_LIMIT, IRA_CATCHUP, HSA_SELF, HSA_FAMILY, ROTH_PHASEOUT, TRAD_IRA_DEDUCTION_PHASEOUT,
 } from "./tax2026"
 
 // Anchor values computed from IRS Rev. Proc. 2025-32 bracket tables.
@@ -93,8 +94,18 @@ describe("self-employment tax", () => {
   })
 })
 
+describe("2026 retirement limits (IRS Notice 2025-67)", () => {
+  it("matches the IRS", () => {
+    expect([K401_LIMIT, K401_CATCHUP, IRA_LIMIT, IRA_CATCHUP]).toEqual([24500, 8000, 7500, 1100])
+    expect([HSA_SELF, HSA_FAMILY]).toEqual([4400, 8750])
+    expect(ROTH_PHASEOUT.single).toEqual([153000, 168000])
+    expect(ROTH_PHASEOUT.mfj).toEqual([242000, 252000])
+    expect(TRAD_IRA_DEDUCTION_PHASEOUT.single).toEqual([81000, 91000])
+  })
+})
+
 describe("no copies of tax constants anywhere else in src", () => {
-  const banned = /\b(11925|48475|103350|197300|23850|96950|206700|394600|50400|105700|201775|256225|640600|184500|176100|168600)\b/
+  const banned = /\b(11925|48475|103350|197300|23850|96950|206700|394600|50400|105700|201775|256225|640600|184500|176100|168600|23500)\b/
   function walk(dir: string): string[] {
     return readdirSync(dir).flatMap((name) => {
       const full = join(dir, name)

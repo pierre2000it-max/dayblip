@@ -6,7 +6,7 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "What Is a Roth IRA and Who Should Open One?",
-  description: "A Roth IRA is an individual retirement account funded with after-tax dollars. Contributions grow tax-free and qualified withdrawals in retirement are completely tax-free. In 2026 the contribution limit is $7,000 per year ($8,000 if age 50 or older).",
+  description: "A Roth IRA is an individual retirement account funded with after-tax dollars. Contributions grow tax-free and qualified withdrawals in retirement are completely tax-free. In 2026 the contribution limit is $7,500 per year ($8,600 if age 50 or older).",
   url: "https://www.dayblip.com/blog/what-is-a-roth-ira",
   datePublished: "2026-06-24",
   dateModified: "2026-06-24",
@@ -23,7 +23,7 @@ const faqSchema = {
       name: "What is the 2026 Roth IRA contribution limit?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The 2026 Roth IRA contribution limit is $7,000 per year for those under age 50 and $8,000 for those age 50 or older (with the $1,000 catch-up contribution). Single filers can contribute the full amount if their modified adjusted gross income is under $150,000. The contribution limit phases out between $150,000 and $165,000 for single filers. Source: IRS Revenue Procedure 2025-32.",
+        text: "The 2026 Roth IRA contribution limit is $7,500 per year for those under age 50 and $8,600 for those age 50 or older (with the $1,100 catch-up contribution). Single filers can contribute the full amount if their modified adjusted gross income is under $153,000. The contribution limit phases out between $153,000 and $168,000 for single filers. Source: IRS Notice 2025-67.",
       },
     },
     {
@@ -31,7 +31,7 @@ const faqSchema = {
       name: "What is the income limit for a Roth IRA in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In 2026, single filers earning under $150,000 MAGI can contribute the full $7,000 to a Roth IRA. The contribution phases out between $150,000 and $165,000. Single filers earning over $165,000 cannot contribute directly — but the Backdoor Roth IRA strategy (non-deductible traditional IRA contribution followed by conversion) is available. Married filing jointly filers can contribute in full under $236,000, phasing out through $246,000.",
+        text: "In 2026, single filers earning under $153,000 MAGI can contribute the full $7,500 to a Roth IRA. The contribution phases out between $153,000 and $168,000. Single filers earning over $168,000 cannot contribute directly — but the Backdoor Roth IRA strategy (non-deductible traditional IRA contribution followed by conversion) is available. Married filing jointly filers can contribute in full under $242,000, phasing out through $252,000.",
       },
     },
     {
@@ -84,14 +84,14 @@ export default function WhatIsARothIraPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              A Roth IRA is an individual retirement account funded with after-tax dollars. Contributions grow tax-free and qualified withdrawals in retirement are completely tax-free. In 2026 the contribution limit is $7,000 per year ($8,000 if age 50 or older) per IRS Revenue Procedure 2025-32. Single filers earning under $150,000 can contribute the full amount — the limit phases out between $150,000 and $165,000. The Roth IRA is most advantageous for workers who expect to be in a higher tax bracket in retirement than they are today — which includes most people in their 20s and 30s.
+              A Roth IRA is an individual retirement account funded with after-tax dollars. Contributions grow tax-free and qualified withdrawals in retirement are completely tax-free. In 2026 the contribution limit is $7,500 per year ($8,600 if age 50 or older) per IRS Notice 2025-67. Single filers earning under $153,000 can contribute the full amount — the limit phases out between $153,000 and $168,000. The Roth IRA is most advantageous for workers who expect to be in a higher tax bracket in retirement than they are today — which includes most people in their 20s and 30s.
             </p>
           </div>
         </section>
 
         <div className="mb-8">
           <ShareButtons
-            text="$7,000/year in a Roth IRA at 7% average return for 30 years grows to ~$706,000 — completely tax-free. The 2026 limit is confirmed. Income limit for single filers is $150,000. Everything you need to know: www.dayblip.com/blog/what-is-a-roth-ira"
+            text="$7,500/year in a Roth IRA at 7% average return for 30 years grows to ~$708,000 — completely tax-free. The 2026 limit is confirmed. Income limit for single filers is $153,000. Everything you need to know: www.dayblip.com/blog/what-is-a-roth-ira"
             url="https://www.dayblip.com/blog/what-is-a-roth-ira"
             title="What Is a Roth IRA and Who Should Open One?"
           />
@@ -139,20 +139,20 @@ export default function WhatIsARothIraPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">2026 Contribution Limits and Income Phase-Out Rules</h2>
 
           <p>
-            Per IRS Revenue Procedure 2025-32:
+            Per IRS Notice 2025-67:
           </p>
 
           <div className="bg-[#16213e] rounded-xl p-6 my-4 border border-[#2d3748] text-sm space-y-2">
-            <div className="flex justify-between"><span className="text-[#a8a8b3]">Under age 50 — annual limit</span><span className="text-[#F9A825] font-semibold">$7,000</span></div>
+            <div className="flex justify-between"><span className="text-[#a8a8b3]">Under age 50 — annual limit</span><span className="text-[#F9A825] font-semibold">$7,500</span></div>
             <div className="flex justify-between"><span className="text-[#a8a8b3]">Age 50+ — annual limit (with catch-up)</span><span className="text-[#F9A825] font-semibold">$8,000</span></div>
-            <div className="flex justify-between border-t border-[#2d3748] pt-2"><span className="text-white">Single filer — full contribution limit</span><span className="text-white font-semibold">Under $150,000 MAGI</span></div>
-            <div className="flex justify-between"><span className="text-[#a8a8b3]">Single filer — phase-out range</span><span className="text-[#a8a8b3]">$150,000 to $165,000</span></div>
-            <div className="flex justify-between"><span className="text-[#a8a8b3]">Married filing jointly — full contribution</span><span className="text-[#a8a8b3]">Under $236,000 MAGI</span></div>
-            <div className="flex justify-between"><span className="text-[#a8a8b3]">Married filing jointly — phase-out range</span><span className="text-[#a8a8b3]">$236,000 to $246,000</span></div>
+            <div className="flex justify-between border-t border-[#2d3748] pt-2"><span className="text-white">Single filer — full contribution limit</span><span className="text-white font-semibold">Under $153,000 MAGI</span></div>
+            <div className="flex justify-between"><span className="text-[#a8a8b3]">Single filer — phase-out range</span><span className="text-[#a8a8b3]">$153,000 to $168,000</span></div>
+            <div className="flex justify-between"><span className="text-[#a8a8b3]">Married filing jointly — full contribution</span><span className="text-[#a8a8b3]">Under $242,000 MAGI</span></div>
+            <div className="flex justify-between"><span className="text-[#a8a8b3]">Married filing jointly — phase-out range</span><span className="text-[#a8a8b3]">$242,000 to $252,000</span></div>
           </div>
 
           <p>
-            Single filers earning over $165,000 cannot contribute directly to a Roth IRA — however the Backdoor Roth IRA strategy is available, which involves contributing to a non-deductible traditional IRA then immediately converting to Roth. This strategy is widely used and legal per current IRS guidance.
+            Single filers earning over $168,000 cannot contribute directly to a Roth IRA — however the Backdoor Roth IRA strategy is available, which involves contributing to a non-deductible traditional IRA then immediately converting to Roth. This strategy is widely used and legal per current IRS guidance.
           </p>
 
           <p>
@@ -170,7 +170,7 @@ export default function WhatIsARothIraPage() {
           </p>
 
           <p>
-            <strong className="text-white">Tax-free compounding at its full power:</strong> Every dollar of growth inside the Roth IRA will never be taxed. $7,000 per year at 7% average return for 30 years grows to approximately $706,000 — all of it tax-free on qualified withdrawal. The equivalent pre-tax growth in a traditional IRA would result in a meaningful tax bill in retirement.
+            <strong className="text-white">Tax-free compounding at its full power:</strong> Every dollar of growth inside the Roth IRA will never be taxed. $7,500 per year at 7% average return for 30 years grows to approximately $708,000 — all of it tax-free on qualified withdrawal. The equivalent pre-tax growth in a traditional IRA would result in a meaningful tax bill in retirement.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">How to Open a Roth IRA in 2026 (It Takes About 15 Minutes)</h2>
@@ -184,7 +184,7 @@ export default function WhatIsARothIraPage() {
           </p>
 
           <p>
-            <strong className="text-white">Step 3: Fund the account.</strong> You can contribute up to $7,000 for the 2026 tax year. Importantly, you have until the tax filing deadline — April 15, 2027 — to make 2026 contributions. You do not need to fund it by December 31.
+            <strong className="text-white">Step 3: Fund the account.</strong> You can contribute up to $7,500 for the 2026 tax year. Importantly, you have until the tax filing deadline — April 15, 2027 — to make 2026 contributions. You do not need to fund it by December 31.
           </p>
 
           <p>
@@ -214,7 +214,7 @@ export default function WhatIsARothIraPage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="$7,000/year in a Roth IRA at 7% average return for 30 years grows to ~$706,000 — completely tax-free. The 2026 limit is confirmed. Income limit for single filers is $150,000. Everything you need to know: www.dayblip.com/blog/what-is-a-roth-ira"
+            text="$7,500/year in a Roth IRA at 7% average return for 30 years grows to ~$708,000 — completely tax-free. The 2026 limit is confirmed. Income limit for single filers is $153,000. Everything you need to know: www.dayblip.com/blog/what-is-a-roth-ira"
             url="https://www.dayblip.com/blog/what-is-a-roth-ira"
             title="What Is a Roth IRA and Who Should Open One?"
           />

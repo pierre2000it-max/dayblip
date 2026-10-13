@@ -6,7 +6,7 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "How Much to Save in Your 401(k): By Income Tier, 2026",
-  description: "The 2026 401(k) limit is $23,500. Maxing it for 30 years at 7% grows to $2.22M. But the right contribution rate depends on your income tier.",
+  description: "The 2026 401(k) limit is $24,500. Maxing it for 30 years at 7% grows to $2.31M. But the right contribution rate depends on your income tier.",
   url: "https://www.dayblip.com/blog/how-much-to-save-in-401k",
   datePublished: "2026-06-13",
   dateModified: "2026-06-13",
@@ -23,7 +23,7 @@ const faqSchema = {
       name: "What is the 2026 401(k) contribution limit?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The IRS 2026 401(k) elective deferral limit is $23,500 for employees under age 50. Workers aged 50 and older can contribute an additional $7,500 catch-up contribution, for a total of $31,000. These limits apply to both traditional and Roth 401(k) accounts. Source: IRS Notice 2025-70.",
+        text: "The IRS 2026 401(k) elective deferral limit is $24,500 for employees under age 50. Workers aged 50 and older can contribute an additional $8,000 catch-up contribution, for a total of $32,500. These limits apply to both traditional and Roth 401(k) accounts. Source: IRS Notice 2025-67.",
       },
     },
     {
@@ -31,7 +31,7 @@ const faqSchema = {
       name: "How much will I have if I max out my 401(k) for 30 years?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Contributing $23,500 per year for 30 years at a 7% average annual return produces approximately $2.22 million. The formula is: FV = $23,500 × ((1.07³⁰ − 1) / 0.07) = $23,500 × 94.461 = $2,219,832. This assumes consistent annual contributions, no employer match, and a 7% annual return — consistent with long-run S&P 500 historical averages. Individual results vary. Past performance does not guarantee future results.",
+        text: "Contributing $24,500 per year for 30 years at a 7% average annual return produces approximately $2.31 million. The formula is: FV = $24,500 × ((1.07³⁰ − 1) / 0.07) = $24,500 × 94.461 = $2,314,295. This assumes consistent annual contributions, no employer match, and a 7% annual return — consistent with long-run S&P 500 historical averages. Individual results vary. Past performance does not guarantee future results.",
       },
     },
   ],
@@ -69,21 +69,21 @@ export default function HowMuchToSaveIn401kPage() {
         </h1>
 
         <p className="text-[#a8a8b3] text-lg leading-relaxed mb-8">
-          The 2026 contribution limit is $23,500. Maxing it for 30 years at 7% produces $2.22 million. But the right number for you depends on your income tier.
+          The 2026 contribution limit is $24,500. Maxing it for 30 years at 7% produces $2.31 million. But the right number for you depends on your income tier.
         </p>
 
         <section className="mb-10">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              Step 1: Always contribute enough to capture the full employer match — that is an immediate 50–100% return. Step 2: The 2026 IRS limit is <strong>$23,500</strong> ($31,000 at 50+). Maxing it for 30 years at 7% = <strong>$2.22M</strong> (formula: $23,500 × ((1.07³⁰ − 1) / 0.07) = $2,219,832). Step 3: If you cannot max out, aim for the Fidelity benchmarks: 1× salary saved by 30, 3× by 40, 6× by 50, 10× by 67.
+              Step 1: Always contribute enough to capture the full employer match — that is an immediate 50–100% return. Step 2: The 2026 IRS limit is <strong>$24,500</strong> ($32,500 at 50+). Maxing it for 30 years at 7% = <strong>$2.31M</strong> (formula: $24,500 × ((1.07³⁰ − 1) / 0.07) = $2,314,295). Step 3: If you cannot max out, aim for the Fidelity benchmarks: 1× salary saved by 30, 3× by 40, 6× by 50, 10× by 67.
             </p>
           </div>
         </section>
 
         <div className="mb-8">
           <ShareButtons
-            text="2026 401(k) limit: $23,500. Max it for 30 years at 7% = $2.22M. Always capture the full employer match first. Income-tier breakdown: www.dayblip.com/blog/how-much-to-save-in-401k"
+            text="2026 401(k) limit: $24,500. Max it for 30 years at 7% = $2.31M. Always capture the full employer match first. Income-tier breakdown: www.dayblip.com/blog/how-much-to-save-in-401k"
             url="https://www.dayblip.com/blog/how-much-to-save-in-401k"
             title="How Much to Save in Your 401(k): By Income Tier, 2026"
           />
@@ -94,7 +94,7 @@ export default function HowMuchToSaveIn401kPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The 2026 IRS Contribution Limits</h2>
 
           <p>
-            The IRS adjusts 401(k) contribution limits annually for inflation. For 2026, the elective deferral limit is $23,500 per year (Source: IRS Notice 2025-70). Workers 50 and older may contribute an additional $7,500 as a catch-up contribution, for a total of $31,000.
+            The IRS adjusts 401(k) contribution limits annually for inflation. For 2026, the elective deferral limit is $24,500 per year (Source: IRS Notice 2025-67). Workers 50 and older may contribute an additional $8,000 as a catch-up contribution, for a total of $32,500.
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-6">
@@ -108,8 +108,8 @@ export default function HowMuchToSaveIn401kPage() {
               </thead>
               <tbody>
                 {[
-                  { age: "Under 50", limit: "$23,500", monthly: "$1,958" },
-                  { age: "50 and older (with catch-up)", limit: "$31,000", monthly: "$2,583" },
+                  { age: "Under 50", limit: "$24,500", monthly: "$2,042" },
+                  { age: "50 and older (with catch-up)", limit: "$32,500", monthly: "$2,708" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.age}</td>
@@ -128,15 +128,15 @@ export default function HowMuchToSaveIn401kPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What 30 Years of Maxing Out Actually Produces</h2>
 
           <p>
-            Contributing $23,500 per year for 30 years at a 7% average annual return:
+            Contributing $24,500 per year for 30 years at a 7% average annual return:
           </p>
 
           <div className="bg-[#16213e] rounded-xl p-6 my-4 border border-[#2d3748] text-sm space-y-3">
-            <div className="font-mono text-[#4FC3F7] text-base mb-2">FV = $23,500 × ((1.07³⁰ − 1) / 0.07)</div>
-            <div className="font-mono text-[#4FC3F7]">FV = $23,500 × 94.461 = $2,219,832</div>
+            <div className="font-mono text-[#4FC3F7] text-base mb-2">FV = $24,500 × ((1.07³⁰ − 1) / 0.07)</div>
+            <div className="font-mono text-[#4FC3F7]">FV = $24,500 × 94.461 = $2,314,295</div>
             <div className="flex justify-between border-t border-[#2d3748] pt-3"><span className="text-[#a8a8b3]">Total contributions over 30 years</span><span className="text-white">$705,000</span></div>
             <div className="flex justify-between"><span className="text-[#a8a8b3]">Investment growth (at 7%)</span><span className="text-[#F9A825]">$1,514,832</span></div>
-            <div className="flex justify-between border-t border-[#2d3748] pt-3"><span className="text-white font-bold">Total balance at year 30</span><span className="text-[#F9A825] font-bold text-base">$2,219,832</span></div>
+            <div className="flex justify-between border-t border-[#2d3748] pt-3"><span className="text-white font-bold">Total balance at year 30</span><span className="text-[#F9A825] font-bold text-base">$2,314,295</span></div>
           </div>
 
           <p>
@@ -163,8 +163,8 @@ export default function HowMuchToSaveIn401kPage() {
                 {[
                   { income: "Under $50,000", rate: "At minimum, full match", amount: "varies", note: "Employer match first; 10–15% if possible" },
                   { income: "$50,000–$100,000", rate: "15%", amount: "$7,500–$15,000", note: "Captures most employer matches; manageable" },
-                  { income: "$100,000–$200,000", rate: "Max if possible", amount: "up to $23,500", note: "Meaningful tax deferral; Roth 401k worth considering" },
-                  { income: "Over $200,000", rate: "Max + backdoor Roth", amount: "$23,500+", note: "Add backdoor Roth IRA ($7,000/yr); consider HSA" },
+                  { income: "$100,000–$200,000", rate: "Max if possible", amount: "up to $24,500", note: "Meaningful tax deferral; Roth 401k worth considering" },
+                  { income: "Over $200,000", rate: "Max + backdoor Roth", amount: "$24,500+", note: "Add backdoor Roth IRA ($7,500/yr); consider HSA" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.income}</td>
@@ -223,7 +223,7 @@ export default function HowMuchToSaveIn401kPage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="2026 401(k) limit: $23,500. Max it for 30 years at 7% = $2.22M. Always capture the full employer match first. Income-tier breakdown: www.dayblip.com/blog/how-much-to-save-in-401k"
+            text="2026 401(k) limit: $24,500. Max it for 30 years at 7% = $2.31M. Always capture the full employer match first. Income-tier breakdown: www.dayblip.com/blog/how-much-to-save-in-401k"
             url="https://www.dayblip.com/blog/how-much-to-save-in-401k"
             title="How Much to Save in Your 401(k): By Income Tier, 2026"
           />
