@@ -308,6 +308,14 @@ const articles = [
     readTime: "6 min read",
     href: "/blog/self-employment-tax-2026",
   },
+  {
+    category: "Finance",
+    title: "How Federal Tax Brackets Work in 2026: Marginal vs Effective Rate",
+    excerpt:
+      "Each slice of income is taxed at its own rate, so a raise never cuts your pay. The 2026 brackets for single and joint filers and a slice-by-slice $80,000 example.",
+    readTime: "6 min read",
+    href: "/blog/federal-tax-brackets-2026",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]

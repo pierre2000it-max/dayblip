@@ -227,6 +227,7 @@ export default function TaxBracketPage() {
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Does not include credits, AMT, or other adjustments. Consult a tax professional or use IRS.gov for accurate calculations.</p>
           <RelatedTools tools={[
             { emoji: "🏛️", title: "No Tax on Overtime 2026", desc: "Calculate your overtime tax savings under new law", href: "/finance/overtime-tax" },
+            { emoji: "📖", title: "How Tax Brackets Work", desc: "Marginal vs effective rate, with a worked example", href: "/blog/federal-tax-brackets-2026" },
             { emoji: "🧾", title: "Paycheck Calculator", desc: "Exact net pay per period after all deductions", href: "/finance/paycheck-calculator" },
             { emoji: "💰", title: "Take Home Pay Calculator", desc: "Annual take-home salary after all taxes", href: "/finance/take-home-pay" },
             { emoji: "⏱️", title: "Overtime Pay Calculator", desc: "How much do you earn working extra hours?", href: "/finance/overtime-calculator" },
