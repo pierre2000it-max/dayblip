@@ -2,19 +2,7 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/RelatedTools"
-
-const stateTaxRates: Record<string, number> = {
-  "Alaska": 0, "Florida": 0, "Nevada": 0, "New Hampshire": 0, "South Dakota": 0, "Tennessee": 0,
-  "Texas": 0, "Washington": 0, "Wyoming": 0, "Arizona": 0.025, "Colorado": 0.044, "Indiana": 0.0315,
-  "Kentucky": 0.04, "Michigan": 0.0425, "Mississippi": 0.047, "North Carolina": 0.045,
-  "Pennsylvania": 0.0307, "Utah": 0.0465, "Georgia": 0.0549, "Missouri": 0.0495, "Ohio": 0.0399,
-  "Virginia": 0.0575, "Alabama": 0.05, "Louisiana": 0.0425, "New Mexico": 0.059, "Arkansas": 0.059,
-  "Montana": 0.0675, "West Virginia": 0.065, "Maryland": 0.0575, "Illinois": 0.0495,
-  "Massachusetts": 0.05, "Nebraska": 0.0664, "Delaware": 0.066, "Idaho": 0.058, "Kansas": 0.057,
-  "Oklahoma": 0.0475, "South Carolina": 0.065, "Wisconsin": 0.0765, "Connecticut": 0.069,
-  "Iowa": 0.06, "Maine": 0.0715, "Rhode Island": 0.0599, "Vermont": 0.0875, "Hawaii": 0.11,
-  "New Jersey": 0.1075, "Minnesota": 0.0985, "Oregon": 0.099, "California": 0.133, "New York": 0.109,
-}
+import { STATE_TAX, stateIncomeTax } from "@/lib/stateTax"
 
 const propertyTaxRates: Record<string, number> = {
   "Hawaii": 0.0028, "Alabama": 0.004, "Colorado": 0.0051, "Nevada": 0.0053, "South Carolina": 0.0057,
@@ -30,13 +18,22 @@ const propertyTaxRates: Record<string, number> = {
   "New Jersey": 0.0247,
 }
 
-const STATES = Object.keys(stateTaxRates).sort()
+const STATES = STATE_TAX.map(s => s.name)
+
+function stateTaxOn(stateName: string, income: number): number {
+  const st = STATE_TAX.find(x => x.name === stateName)
+  return st ? stateIncomeTax(st.code, income, "single") : 0
+}
+
+function isKnownState(stateName: string): boolean {
+  return STATE_TAX.some(x => x.name === stateName)
+}
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
 const DISCLAIMER = (
   <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
-    ⚠️ <strong>Tax estimates are educational approximations using flat rates.</strong> Actual taxes depend on deductions, filing status and other factors. Consult a tax professional.
+    ⚠️ <strong>Tax estimates are educational estimates from 2026 state brackets and standard deductions for a single filer.</strong> Actual taxes depend on credits, local taxes, filing status and other factors. Consult a tax professional.
   </div>
 )
 
@@ -55,8 +52,8 @@ export default function TaxMigrationPage() {
   const [result, setResult] = useState<Result | null>(null)
 
   function compute(f: string, t: string, inc: number, hv: number): Result {
-    const currentTax = inc * stateTaxRates[f]
-    const targetTax = inc * stateTaxRates[t]
+    const currentTax = stateTaxOn(f, inc)
+    const targetTax = stateTaxOn(t, inc)
     const savings = currentTax - targetTax
     const currentProp = hv * (propertyTaxRates[f] ?? 0)
     const targetProp = hv * (propertyTaxRates[t] ?? 0)
@@ -64,7 +61,7 @@ export default function TaxMigrationPage() {
     return {
       from: f, to: t, income: inc, home: hv, currentTax, targetTax, savings,
       currentProp, targetProp, propSavings, combined: savings + propSavings,
-      fromRate: stateTaxRates[f] * 100, toRate: stateTaxRates[t] * 100,
+      fromRate: inc > 0 ? (currentTax / inc) * 100 : 0, toRate: inc > 0 ? (targetTax / inc) * 100 : 0,
     }
   }
 
@@ -82,7 +79,7 @@ export default function TaxMigrationPage() {
     if (typeof window === "undefined") return
     const p = new URLSearchParams(window.location.search)
     const f = p.get("from"); const t = p.get("to"); const inc = p.get("income"); const hv = p.get("home")
-    if (f && stateTaxRates[f] !== undefined && t && stateTaxRates[t] !== undefined && inc) {
+    if (f && isKnownState(f) && t && isKnownState(t) && inc) {
       setFrom(f); setTo(t); setIncome(inc); if (hv) setHome(hv)
       runCalc(f, t, Number(inc), hv ? Number(hv) : 0, false)
     }
@@ -193,7 +190,7 @@ export default function TaxMigrationPage() {
                 </ul>
               </div>
 
-              {stateTaxRates[result.to] === 0 && (
+              {result.targetTax === 0 && (
                 <div className="rounded-xl border border-[#4ade80]/40 bg-[#4ade80]/10 p-5 text-sm text-white">
                   <strong className="text-[#4ade80]">{result.to} has NO state income tax!</strong> You save 100% of your state income tax.
                 </div>

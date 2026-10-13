@@ -7,6 +7,7 @@ import Breadcrumb from "@/components/Breadcrumb"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
 import { federalTax as federalTaxOn, medicareTax, socialSecurityTax, taxableAfterStandardDeduction } from "@/lib/tax2026"
+import { STATE_TAX, stateIncomeTax } from "@/lib/stateTax"
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -49,41 +50,6 @@ interface OfferResult {
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-const STATE_TAX: Record<string, number> = {
-  Texas: 0,
-  Florida: 0,
-  Nevada: 0,
-  Washington: 0,
-  "South Dakota": 0,
-  Wyoming: 0,
-  Alaska: 0,
-  Tennessee: 0,
-  "New Hampshire": 0,
-  California: 0.093,
-  "New York": 0.0685,
-  "New Jersey": 0.055,
-  Illinois: 0.0495,
-  Massachusetts: 0.05,
-  Virginia: 0.0575,
-  Georgia: 0.0549,
-  "North Carolina": 0.045,
-  Arizona: 0.025,
-  Colorado: 0.044,
-  Ohio: 0.0375,
-  Michigan: 0.0425,
-}
-
-const ALL_STATES = [
-  "Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut",
-  "Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa",
-  "Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan",
-  "Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire",
-  "New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio",
-  "Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota",
-  "Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia",
-  "Wisconsin","Wyoming",
-]
-
 const WORK_DAYS: Record<WorkArrangement, number> = {
   "Fully in-office": 250,
   "Hybrid (1-2 days remote)": 210,
@@ -93,8 +59,9 @@ const WORK_DAYS: Record<WorkArrangement, number> = {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function getStateTaxRate(state: string): number {
-  return STATE_TAX[state] ?? 0.05
+function stateTaxOn(stateName: string, income: number): number {
+  const st = STATE_TAX.find((x) => x.name === stateName)
+  return st ? stateIncomeTax(st.code, income, "single") : 0
 }
 
 function fmt(n: number): string {
@@ -107,12 +74,11 @@ function fmtPct(n: number): string {
 
 function calcOffer(inputs: OfferInputs): OfferResult {
   const grossSalary = inputs.salary + inputs.bonus
-  const stateRate = getStateTaxRate(inputs.state)
-
   // Single filer, standard deduction, 2026 brackets. Effective rate is shown.
   const federalTax = federalTaxOn(taxableAfterStandardDeduction(grossSalary, "single"), "single")
   const federalRate = grossSalary > 0 ? federalTax / grossSalary : 0
-  const stateTax = grossSalary * stateRate
+  const stateTax = stateTaxOn(inputs.state, grossSalary)
+  const stateRate = grossSalary > 0 ? stateTax / grossSalary : 0
   const fica = socialSecurityTax(grossSalary) + medicareTax(grossSalary)
   const healthAnnual = inputs.healthPremium * 12
 
@@ -279,9 +245,9 @@ function OfferColumn({ label, inputs, onChange }: OfferColumnProps) {
           value={inputs.state}
           onChange={(e) => set("state", e.target.value)}
         >
-          {ALL_STATES.map((s) => (
-            <option key={s} value={s}>
-              {s}
+          {STATE_TAX.map((s) => (
+            <option key={s.code} value={s.name}>
+              {s.name}
             </option>
           ))}
         </select>

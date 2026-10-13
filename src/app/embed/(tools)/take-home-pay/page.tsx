@@ -1,33 +1,11 @@
 "use client"
 import { useState } from "react"
 import { STANDARD_DEDUCTION, federalTax, medicareTax, socialSecurityTax } from "@/lib/tax2026"
+import { STATE_TAX, stateIncomeTax, stateLabel } from "@/lib/stateTax"
 
 function fmt(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })
 }
-
-const STATE_TAX: Record<string, number> = {
-  TX: 0, FL: 0, NV: 0, WA: 0, SD: 0, WY: 0, AK: 0, NH: 0, TN: 0,
-  CA: 0.093, NY: 0.0685, IL: 0.0495, MA: 0.05, NJ: 0.0637,
-  OH: 0.0399, PA: 0.0307, GA: 0.0549, NC: 0.0475, VA: 0.0575,
-  MI: 0.0425, MN: 0.0785, CO: 0.044, OR: 0.0875, WI: 0.0765,
-}
-
-const STATES = [
-  ["AL", "Alabama"], ["AK", "Alaska"], ["AZ", "Arizona"], ["AR", "Arkansas"],
-  ["CA", "California"], ["CO", "Colorado"], ["CT", "Connecticut"], ["DE", "Delaware"],
-  ["FL", "Florida"], ["GA", "Georgia"], ["HI", "Hawaii"], ["ID", "Idaho"],
-  ["IL", "Illinois"], ["IN", "Indiana"], ["IA", "Iowa"], ["KS", "Kansas"],
-  ["KY", "Kentucky"], ["LA", "Louisiana"], ["ME", "Maine"], ["MD", "Maryland"],
-  ["MA", "Massachusetts"], ["MI", "Michigan"], ["MN", "Minnesota"], ["MS", "Mississippi"],
-  ["MO", "Missouri"], ["MT", "Montana"], ["NE", "Nebraska"], ["NV", "Nevada"],
-  ["NH", "New Hampshire"], ["NJ", "New Jersey"], ["NM", "New Mexico"], ["NY", "New York"],
-  ["NC", "North Carolina"], ["ND", "North Dakota"], ["OH", "Ohio"], ["OK", "Oklahoma"],
-  ["OR", "Oregon"], ["PA", "Pennsylvania"], ["RI", "Rhode Island"], ["SC", "South Carolina"],
-  ["SD", "South Dakota"], ["TN", "Tennessee"], ["TX", "Texas"], ["UT", "Utah"],
-  ["VT", "Vermont"], ["VA", "Virginia"], ["WA", "Washington"], ["WV", "West Virginia"],
-  ["WI", "Wisconsin"], ["WY", "Wyoming"],
-]
 
 export default function EmbedTakeHomePay() {
   const [salary, setSalary] = useState("75000")
@@ -41,8 +19,7 @@ export default function EmbedTakeHomePay() {
     const s = parseFloat(salary) || 0
     const filing = married ? "mfj" : "single"
     const federal = federalTax(Math.max(0, s - STANDARD_DEDUCTION[filing]), filing)
-    const stateRate = STATE_TAX[state] ?? 0.05
-    const stateTax = s * stateRate
+    const stateTax = stateIncomeTax(state, s, filing)
     const fica = socialSecurityTax(s) + medicareTax(s)
     const takeHome = s - federal - stateTax - fica
     const monthly = takeHome / 12
@@ -73,8 +50,8 @@ export default function EmbedTakeHomePay() {
             onChange={e => setState(e.target.value)}
             style={{ ...inputStyle, appearance: "none" }}
           >
-            {STATES.map(([abbr, name]) => (
-              <option key={abbr} value={abbr}>{name}</option>
+            {STATE_TAX.map(st => (
+              <option key={st.code} value={st.code}>{stateLabel(st)}</option>
             ))}
           </select>
         </label>
