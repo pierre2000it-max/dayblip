@@ -782,8 +782,8 @@ const PUZZLES: Puzzle[] = [
   {
     question: "What is the historical inflation rate for US college tuition over the past 30 years?",
     options: ["3% per year (matching overall inflation)", "5% per year", "8% per year", "College inflation has actually been negative"],
-    answer: 2,
-    explanation: "US college tuition has increased approximately 8% per year over the past 30 years — more than double the general inflation rate of about 3%. A 4-year degree at a public university cost an average of $10,000 in 1994. By 2024 that same degree costs approximately $110,000+. This is why student loan debt has ballooned to $1.7 trillion.",
+    answer: 1,
+    explanation: "Average in-state tuition at public 4-year colleges rose from $2,681 in 1994-95 (NCES) to $11,950 in tuition and fees in 2025-26 (College Board). That is about 4.9% per year, roughly double the 2.5% general inflation rate over the same period. Four years of tuition and fees went from about $10,700 to about $47,800, before room and board.",
   },
   {
     question: "What is a mutual fund?",

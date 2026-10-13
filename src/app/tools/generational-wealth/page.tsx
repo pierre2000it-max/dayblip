@@ -2,11 +2,16 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/RelatedTools"
+import { CPI_2026 } from "@/data/price-history"
 
-const cpiAdjustment: Record<number, number> = {
-  1970: 7.8, 1975: 5.8, 1980: 3.7, 1985: 2.9, 1990: 2.4, 1995: 2.0,
-  2000: 1.75, 2005: 1.54, 2010: 1.37, 2015: 1.19, 2020: 1.06, 2024: 1.0,
+// BLS CPI-U annual averages. Multiplier converts that year's dollars to 2026 dollars (CPI_2026 / year value).
+const CPI_ANNUAL: Record<number, number> = {
+  1970: 38.8, 1975: 53.8, 1980: 82.4, 1985: 107.6, 1990: 130.7, 1995: 152.4,
+  2000: 172.2, 2005: 195.3, 2010: 218.1, 2015: 237.0, 2020: 258.8, 2024: 313.7,
 }
+const cpiAdjustment: Record<number, number> = Object.fromEntries(
+  Object.entries(CPI_ANNUAL).map(([y, v]) => [Number(y), CPI_2026 / v])
+)
 const CPI_YEARS = Object.keys(cpiAdjustment).map(Number).sort((a, b) => a - b)
 function cpiFor(year: number): number {
   let closest = CPI_YEARS[0]
