@@ -231,7 +231,7 @@ IRS publishes new brackets in November (Revenue Procedure). Changes take effect 
 | `src/app/finance/tax-bracket/layout.tsx` | Year in title and description | e.g. "2026" → "2027" |
 | `src/app/finance/tax-bracket/page.tsx`, `take-home-pay/page.tsx`, `paycheck-calculator/page.tsx`, `src/app/embed/(tools)/take-home-pay/page.tsx` | Nothing | They import from `tax2026.ts`. Only FAQ/prose text with year or dollar figures may need edits |
 | `src/lib/stateTax.ts` | State brackets, standard deductions, exemptions (all 50 states) | Tax Foundation "State Individual Income Tax Rates and Brackets, [year]" | Single source for every paycheck, freelancer, job-offer and tax-migration calculator. Edit here only, then run `npm test` (top-rate parity test) |
-| `src/app/daily/page.tsx` | 401k limit question (amount + year label) + SS wage base in FICA explanation + annual gift exclusion question ($19,000 for 2026, literal) | Standard deduction and top-bracket questions read from `tax2026.ts`. Roth IRA, gift exclusion, and 401k are literals to update |
+| `src/app/daily/page.tsx` | 401k limit question (amount + year label) + SS wage base in FICA explanation + annual gift exclusion question ($19,000 for 2026, literal) + federal student loan rate question (6.52% undergrad for 2026-27, set each June from the May Treasury auction) | Standard deduction and top-bracket questions read from `tax2026.ts`. Roth IRA, gift exclusion, student loan rate, and 401k are literals to update |
 | `src/app/blog/roth-ira-vs-traditional-ira/page.tsx` | IRA phase-out income thresholds | Check IRS Notice for Roth/trad limits |
 | `src/app/blog/how-much-saved-by-age/page.tsx` | 401k/IRA contribution limits | Verify against IRS Notice |
 

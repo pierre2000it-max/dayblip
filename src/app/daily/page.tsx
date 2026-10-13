@@ -519,10 +519,10 @@ const PUZZLES: Puzzle[] = [
     explanation: "Approximately 61% of Americans reported living paycheck to paycheck according to LendingClub research in 2023. This spans income levels — 44% of those earning $100,000 or more also live paycheck to paycheck. It reflects both the pressure of rising costs and spending behavior at higher income levels.",
   },
   {
-    question: "What is the average interest rate on federal student loans in 2024?",
+    question: "What is the interest rate on new federal undergraduate student loans for 2026-27?",
     options: ["3.5%", "5.5%", "6.5%", "8%"],
     answer: 2,
-    explanation: "Federal student loan interest rates for undergraduates were approximately 6.53% for 2024–2025. Graduate loans are higher at 8.08%. These rates reset annually based on 10-year Treasury note auctions. Total US student loan debt exceeded $1.7 trillion in 2024, the second-largest consumer debt category after mortgages.",
+    explanation: "Federal Direct loans first disbursed between July 1, 2026 and June 30, 2027 carry a fixed 6.52% rate for undergraduates, 8.07% for graduate and professional unsubsidized loans, and 9.07% for PLUS loans (U.S. Department of Education). Rates reset each year from the May 10-year Treasury note auction, which came in at 4.468% in 2026, then stay fixed for the life of each loan.",
   },
   {
     question: "What is dollar-for-dollar 401k matching?",
