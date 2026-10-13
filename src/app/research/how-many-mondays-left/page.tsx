@@ -51,17 +51,17 @@ const datasetSchema = {
 }
 
 const tableData = [
-  { age: 22, mondays: "2,150", years: 43, valuePerMonday: "$1,145", totalValue: "$2,461,750" },
-  { age: 25, mondays: "2,000", years: 40, valuePerMonday: "$1,145", totalValue: "$2,290,000" },
-  { age: 30, mondays: "1,750", years: 35, valuePerMonday: "$1,145", totalValue: "$2,003,750" },
-  { age: 35, mondays: "1,500", years: 30, valuePerMonday: "$1,145", totalValue: "$1,717,500" },
-  { age: 40, mondays: "1,250", years: 25, valuePerMonday: "$1,145", totalValue: "$1,431,250" },
-  { age: 45, mondays: "1,000", years: 20, valuePerMonday: "$1,145", totalValue: "$1,145,000" },
-  { age: 50, mondays: "750",   years: 15, valuePerMonday: "$1,145", totalValue: "$858,750"   },
-  { age: 55, mondays: "500",   years: 10, valuePerMonday: "$1,145", totalValue: "$572,500"   },
-  { age: 60, mondays: "250",   years: 5,  valuePerMonday: "$1,145", totalValue: "$286,250"   },
-  { age: 62, mondays: "150",   years: 3,  valuePerMonday: "$1,145", totalValue: "$171,750"   },
-  { age: 64, mondays: "50",    years: 1,  valuePerMonday: "$1,145", totalValue: "$57,250"    },
+  { age: 22, mondays: "2,150", years: 43, valuePerMonday: "$1,251", totalValue: "$2,689,650" },
+  { age: 25, mondays: "2,000", years: 40, valuePerMonday: "$1,251", totalValue: "$2,502,000" },
+  { age: 30, mondays: "1,750", years: 35, valuePerMonday: "$1,251", totalValue: "$2,189,250" },
+  { age: 35, mondays: "1,500", years: 30, valuePerMonday: "$1,251", totalValue: "$1,876,500" },
+  { age: 40, mondays: "1,250", years: 25, valuePerMonday: "$1,251", totalValue: "$1,563,750" },
+  { age: 45, mondays: "1,000", years: 20, valuePerMonday: "$1,251", totalValue: "$1,251,000" },
+  { age: 50, mondays: "750",   years: 15, valuePerMonday: "$1,251", totalValue: "$938,250"   },
+  { age: 55, mondays: "500",   years: 10, valuePerMonday: "$1,251", totalValue: "$625,500"   },
+  { age: 60, mondays: "250",   years: 5,  valuePerMonday: "$1,251", totalValue: "$312,750"   },
+  { age: 62, mondays: "150",   years: 3,  valuePerMonday: "$1,251", totalValue: "$187,650"   },
+  { age: 64, mondays: "50",    years: 1,  valuePerMonday: "$1,251", totalValue: "$62,550"    },
 ]
 
 const relatedTools = [
@@ -132,7 +132,7 @@ export default function HowManyMondaysLeftPage() {
           </p>
 
           <p>
-            We also calculated the dollar value of each remaining Monday using Bureau of Labor Statistics data. Median weekly earnings for full-time US workers hit $1,145 in Q4 2024. Each Monday starts a week worth approximately that.
+            We also calculated the dollar value of each remaining Monday using Bureau of Labor Statistics data. Median weekly earnings for full-time US workers reached $1,251 in Q2 2026. Each Monday starts a week worth approximately that.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What the Numbers Actually Show</h2>
@@ -230,7 +230,7 @@ export default function HowManyMondaysLeftPage() {
               </tbody>
             </table>
             <p style={{ color: "#a8a8b3", fontSize: "13px", marginTop: "16px", lineHeight: "1.6" }}>
-              Mondays remaining calculated assuming retirement at age 65 and 50 working weeks per year. Value per Monday based on Bureau of Labor Statistics Q4 2024 median weekly earnings for full-time US workers ($1,145). Total remaining career value is a gross earnings estimate before tax. Dayblip original analysis.
+              Mondays remaining calculated assuming retirement at age 65 and 50 working weeks per year. Value per Monday based on Bureau of Labor Statistics Q2 2026 median weekly earnings for full-time US workers ($1,251). Total remaining career value is a gross earnings estimate before tax. Dayblip original analysis.
             </p>
           </div>
         </article>

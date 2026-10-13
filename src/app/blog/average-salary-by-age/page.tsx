@@ -6,10 +6,10 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "Average American Salary by Age: What BLS Data Actually Shows",
-  description: "Median weekly earnings peak at $1,220 for workers 45–54. The gender pay gap of 16.3% reflects occupation mix alongside career interruptions. Full BLS breakdown.",
+  description: "Median weekly earnings peak at $1,436 for workers 35–44, with 45–54 within 1%. The 18.0% gender pay gap reflects occupation mix and career interruptions.",
   url: "https://www.dayblip.com/blog/average-salary-by-age",
   datePublished: "2026-06-13",
-  dateModified: "2026-06-13",
+  dateModified: "2026-10-12",
   author: { "@type": "Organization", name: "Dayblip" },
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
 }
@@ -23,7 +23,7 @@ const faqSchema = {
       name: "At what age do American workers earn the most?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "According to Bureau of Labor Statistics Q4 2023 data, median weekly earnings peak at $1,220 per week ($63,440 annually) for workers aged 45 to 54. Earnings decline slightly after 54, falling to $1,154 per week at 55–64 and $1,048 at 65+. The peak earnings window for most workers is roughly age 40–55.",
+        text: "According to Bureau of Labor Statistics Q2 2026 data, median weekly earnings peak at $1,436 per week ($74,672 annually) for workers aged 35 to 44. Workers aged 45 to 54 are within 1% at $1,421. Earnings decline after 54, falling to $1,367 per week at 55–64 and $1,233 at 65+. The peak earnings window for most workers is roughly age 35–54.",
       },
     },
     {
@@ -31,7 +31,7 @@ const faqSchema = {
       name: "What drives the gender pay gap in median earnings?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The 16.3% median earnings gap between men and women (BLS Q4 2023) reflects two main factors: occupation and industry mix (women are more concentrated in lower-paying occupations as a group) and career interruptions (women are more likely to take parental leave, work part-time, or leave the workforce temporarily for caregiving). Within the same occupation, controlled pay gaps are substantially smaller but still present. Both factors are documented in peer-reviewed research including NBER working papers.",
+        text: "The 18.0% median earnings gap between men and women (BLS Q2 2026) reflects two main factors: occupation and industry mix (women are more concentrated in lower-paying occupations as a group) and career interruptions (women are more likely to take parental leave, work part-time, or leave the workforce temporarily for caregiving). Within the same occupation, controlled pay gaps are substantially smaller but still present. Both factors are documented in peer-reviewed research including NBER working papers.",
       },
     },
   ],
@@ -76,14 +76,14 @@ export default function AverageSalaryByAgePage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              Median weekly earnings peak at <strong>$1,220/week ($63,440/year)</strong> for workers aged 45–54, per BLS Q4 2023. Entry-level workers aged 16–24 earn a median of $685/week ($35,620/year). The overall gender pay gap in median weekly earnings is <strong>16.3%</strong> — driven by occupation mix as well as career interruptions. Within the same occupation and hours worked, the gap is substantially smaller but not zero.
+              Median weekly earnings peak at <strong>$1,436/week ($74,672/year)</strong> for workers aged 35–44, per BLS Q2 2026. Workers aged 45–54 are within 1%. Workers aged 16–24 earn a median of $806/week ($41,912/year). The overall gender pay gap in median weekly earnings is <strong>18.0%</strong> — driven by occupation mix as well as career interruptions. Within the same occupation and hours worked, the gap is substantially smaller but not zero.
             </p>
           </div>
         </section>
 
         <div className="mb-8">
           <ShareButtons
-            text="Peak US salary is $63,440/year at age 45–54 per BLS. Entry-level: $35,620. The 16.3% gender pay gap reflects both occupation mix and career interruptions. Full breakdown: www.dayblip.com/blog/average-salary-by-age"
+            text="Peak US salary is $74,672/year at age 35–44 per BLS. Ages 16–24: $41,912. The 18.0% gender pay gap reflects both occupation mix and career interruptions. Full breakdown: www.dayblip.com/blog/average-salary-by-age"
             url="https://www.dayblip.com/blog/average-salary-by-age"
             title="Average American Salary by Age: What BLS Data Actually Shows"
           />
@@ -91,10 +91,10 @@ export default function AverageSalaryByAgePage() {
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
 
-          <h2 className="text-white text-xl font-bold mt-8 mb-3">Median Weekly Earnings by Age Group — BLS Q4 2023</h2>
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">Median Weekly Earnings by Age Group — BLS Q2 2026</h2>
 
           <p>
-            The Bureau of Labor Statistics publishes median usual weekly earnings for full-time wage and salary workers by age group each quarter. The Q4 2023 data (the most recent full-year benchmark available) shows a clear earnings arc across the career.
+            The Bureau of Labor Statistics publishes median usual weekly earnings for full-time wage and salary workers by age group each quarter. The Q2 2026 release (published July 21, 2026) shows a clear earnings arc across the career. The overall median is $1,251 per week, up 4.6% from a year earlier.
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-6">
@@ -109,12 +109,12 @@ export default function AverageSalaryByAgePage() {
               </thead>
               <tbody>
                 {[
-                  { age: "16–24", weekly: "$685", annual: "$35,620", vs: "−44%" },
-                  { age: "25–34", weekly: "$1,070", annual: "$55,640", vs: "−12%" },
-                  { age: "35–44", weekly: "$1,207", annual: "$62,764", vs: "−1%" },
-                  { age: "45–54", weekly: "$1,220", annual: "$63,440", vs: "Peak", peak: true },
-                  { age: "55–64", weekly: "$1,154", annual: "$59,992", vs: "−5%" },
-                  { age: "65+",   weekly: "$1,048", annual: "$54,496", vs: "−14%" },
+                  { age: "16–24", weekly: "$806", annual: "$41,912", vs: "−44%" },
+                  { age: "25–34", weekly: "$1,160", annual: "$60,320", vs: "−19%" },
+                  { age: "35–44", weekly: "$1,436", annual: "$74,672", vs: "Peak", peak: true },
+                  { age: "45–54", weekly: "$1,421", annual: "$73,892", vs: "−1%" },
+                  { age: "55–64", weekly: "$1,367", annual: "$71,084", vs: "−5%" },
+                  { age: "65+",   weekly: "$1,233", annual: "$64,116", vs: "−14%" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: row.peak ? "#1e2d4a" : i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.age}</td>
@@ -128,23 +128,23 @@ export default function AverageSalaryByAgePage() {
           </div>
 
           <p className="text-sm text-[#a8a8b3]">
-            Source: Bureau of Labor Statistics, Usual Weekly Earnings of Wage and Salary Workers, Q4 2023 (BLS.gov). Full-time workers only. Medians; not averages — average earnings are higher due to high earner skew.
+            Source: Bureau of Labor Statistics, Usual Weekly Earnings of Wage and Salary Workers, Q2 2026 (BLS.gov). Full-time workers only. Medians; not averages — average earnings are higher due to high earner skew.
           </p>
 
-          <h2 className="text-white text-xl font-bold mt-8 mb-3">Why Earnings Peak in the 45–54 Band</h2>
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">Why Earnings Peak Between 35 and 54</h2>
 
           <p>
-            The 45–54 peak reflects the compounding of several factors over a 20–25 year career: accumulated industry expertise, management seniority, professional networks, and credential advancement. Workers in this band are typically in mid-to-senior individual contributor or management roles rather than entry-level or junior positions.
+            The peak, which sits at 35–44 with 45–54 within 1%, reflects the compounding of several factors over a 15–25 year career: accumulated industry expertise, management seniority, professional networks, and credential advancement. Workers in these bands are typically in mid-to-senior individual contributor or management roles rather than entry-level or junior positions.
           </p>
 
           <p>
             The slight decline from 55 onward does not necessarily mean older workers are paid less — it reflects composition effects. High earners in high-cost metropolitan areas often retire earlier, leaving the 55–64 working population weighted toward workers in lower-cost areas or less-senior roles. Additionally, some workers voluntarily step back to part-time arrangements, which BLS excludes, or to bridge employment before retirement.
           </p>
 
-          <h2 className="text-white text-xl font-bold mt-8 mb-3">The Gender Pay Gap — What the 16.3% Reflects</h2>
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">The Gender Pay Gap — What the 18.0% Reflects</h2>
 
           <p>
-            In Q4 2023, women working full-time earned a median of $1,017 per week; men earned $1,214 per week — a gap of $197, or 16.3% (Source: BLS, Table 1). This is the headline gap in median earnings, not a controlled within-occupation comparison.
+            In Q2 2026, women working full-time earned a median of $1,131 per week; men earned $1,380 per week — a gap of $249, or 18.0% (Source: BLS, Usual Weekly Earnings release, July 21, 2026). The gap is narrower among younger workers: women ages 16–24 earn 91.1% of what men that age earn, versus 78.5% for workers 55 and over. This is the headline gap in median earnings, not a controlled within-occupation comparison.
           </p>
 
           <p>
@@ -166,7 +166,7 @@ export default function AverageSalaryByAgePage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What These Numbers Mean for Career Planning</h2>
 
           <p>
-            The BLS data is a useful benchmark, not a ceiling. The 25–34 median of $1,070/week ($55,640 annually) is a midpoint — roughly half of 25-to-34-year-old full-time workers earn more, half earn less. Field, employer, geographic market, and education level create significant variance around these medians.
+            The BLS data is a useful benchmark, not a ceiling. The 25–34 median of $1,160/week ($60,320 annually) is a midpoint — roughly half of 25-to-34-year-old full-time workers earn more, half earn less. Field, employer, geographic market, and education level create significant variance around these medians.
           </p>
 
           <p>
@@ -180,7 +180,7 @@ export default function AverageSalaryByAgePage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="Peak US salary is $63,440/year at age 45–54 per BLS. Entry-level: $35,620. The 16.3% gender pay gap reflects both occupation mix and career interruptions. Full breakdown: www.dayblip.com/blog/average-salary-by-age"
+            text="Peak US salary is $74,672/year at age 35–44 per BLS. Ages 16–24: $41,912. The 18.0% gender pay gap reflects both occupation mix and career interruptions. Full breakdown: www.dayblip.com/blog/average-salary-by-age"
             url="https://www.dayblip.com/blog/average-salary-by-age"
             title="Average American Salary by Age: What BLS Data Actually Shows"
           />

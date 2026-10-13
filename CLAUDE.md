@@ -329,9 +329,9 @@ BLS OES (Occupational Employment Statistics) releases annually in May.
 
 | File | Current data | What to update |
 |---|---|---|
-| `src/app/research/how-many-mondays-left/page.tsx` | BLS Q4 2024 — $1,145/week | Update median weekly earnings + label |
-| `src/app/blog/average-salary-by-age/page.tsx` | BLS Q4 2023 — $1,220/week peak | **Highest priority** — currently 2+ years stale |
-| `src/app/daily/page.tsx` | "median US household income $74,580 in 2022–2023" | Update to latest Census ACS release |
+| `src/app/research/how-many-mondays-left/page.tsx` | BLS Q2 2026 — $1,251/week (updated Oct 2026) | Update median weekly earnings, the 11 table rows (mondays x median), and the label |
+| `src/app/blog/average-salary-by-age/page.tsx` | BLS Q2 2026 — $1,436/week peak (35-44), updated Oct 2026 | Table, FAQ, quick answer, gender gap (18.0%), layout.tsx and blog/page.tsx teasers |
+| `src/app/daily/page.tsx`, `src/app/tools/american-dream-calculator/page.tsx` | Census median household income $87,460 (2025, released Sep 15 2026) | Update each September from census.gov Income in the United States |
 
 **Files with annual BLS OES data (update each May/June after release):**
 

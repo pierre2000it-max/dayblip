@@ -208,7 +208,7 @@ const articles = [
     category: "Career",
     title: "Average American Salary by Age: What BLS Data Actually Shows",
     excerpt:
-      "Median weekly earnings peak at $1,220 ($63,440/year) for workers aged 45–54. The 16.3% gender pay gap reflects occupation mix alongside career interruptions. Full BLS breakdown.",
+      "Median weekly earnings peak at $1,436 ($74,672/year) for workers aged 35–44. The 18.0% gender pay gap reflects occupation mix alongside career interruptions. Full BLS breakdown.",
     readTime: "6 min read",
     href: "/blog/average-salary-by-age",
   },
