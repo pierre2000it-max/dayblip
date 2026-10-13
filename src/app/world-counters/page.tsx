@@ -1,4 +1,5 @@
 "use client"
+import { US_DEBT_JAN1_2026, US_DEBT_PER_SEC } from "@/data/usDebt"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import AuthorByline from "@/components/AuthorByline"
@@ -10,8 +11,8 @@ const WORLD_POP        = 8_200_000_000
 const ANNUAL_BIRTHS    = 132_400_000       // UN WPP 2024, 2025 estimate (132.4M)
 const ANNUAL_DEATHS    = 63_100_000        // UN WPP 2024, 2025 estimate (63.1M)
 const ANNUAL_NET       = ANNUAL_BIRTHS - ANNUAL_DEATHS   // 69.3M
-const DEBT_JAN1_2026   = 36_400_000_000_000
-const DEBT_PER_SEC     = 72_920            // ~$2.3T / yr
+const DEBT_JAN1_2026   = US_DEBT_JAN1_2026
+const DEBT_PER_SEC     = US_DEBT_PER_SEC
 const WORLD_GDP_ANNUAL = 105_000_000_000_000
 const EMAILS_PER_DAY   = 347_000_000_000  // Statista — per DAY not per year
 const GOOGLE_ANNUAL    = 8_500_000_000_000
@@ -212,7 +213,7 @@ export default function WorldCountersPage() {
                 <CounterCard emoji="❤️" label="Times your heart has beaten"    value={fmtWhole(birthStats.heartbeats)} color="#f87171" />
                 <CounterCard emoji="👟" label="Steps you have taken (est.)"    value={fmtWhole(birthStats.steps)}     color="#4ade80" sublabel="Based on 8,000 avg steps/day" />
                 <CounterCard emoji="👶" label="Babies born since you"          value={fmtBig(birthStats.babiesBorn)}  color="#4ade80" />
-                <CounterCard emoji="📈" label="US debt growth since you"       value={fmtDebt(birthStats.debtGrowth)} color="#fbbf24" sublabel="$72,920 per second" />
+                <CounterCard emoji="📈" label="US debt growth since you"       value={fmtDebt(birthStats.debtGrowth)} color="#fbbf24" sublabel="$76,000 per second" />
                 <CounterCard emoji="🌏" label="World population grew by"       value={fmtBig(birthStats.popGrowth)}   color="#2dd4bf" sublabel="Net births minus deaths" />
                 <CounterCard emoji="☕" label="Cups of coffee consumed worldwide" value={fmtBig(birthStats.coffeeCups)} color="#fb923c" />
               </div>
@@ -271,7 +272,7 @@ export default function WorldCountersPage() {
                   <div className="text-2xl mb-2">🇺🇸</div>
                   <div className="text-3xl font-black tabular-nums text-[#fbbf24]">{fmtDebt(currentDebt)}</div>
                   <div className="text-sm text-[#a8a8b3] mt-1">US National Debt right now</div>
-                  <div className="text-xs text-[#a8a8b3]/70 mt-0.5">Growing at $72,920 per second</div>
+                  <div className="text-xs text-[#a8a8b3]/70 mt-0.5">Growing at $76,000 per second</div>
                 </div>
                 <CounterCard emoji="💹" label="World GDP generated today"
                   value={fmtBig(secToday * GDP_PER_SEC, "$")}
@@ -385,7 +386,7 @@ export default function WorldCountersPage() {
                 {[
                   ["World births",          "132.4 million/year (→ 4.20/sec)",             "UN World Population Prospects 2024 (2025 estimate)"],
                   ["World deaths",          "63.1 million/year (→ 2.00/sec)",              "UN World Population Prospects 2024 (2025 estimate)"],
-                  ["US National Debt growth","~$2.3 trillion/year ($72,920/sec)",            "US Treasury, Congressional Budget Office"],
+                  ["US National Debt growth","~$2.4 trillion/year ($76,000/sec)",            "US Treasury, Congressional Budget Office"],
                   ["World GDP",             "$105 trillion/year",                           "World Bank 2024"],
                   ["Global email volume",   "347 billion/day (→ 4.01M/sec)",               "Statista 2024"],
                   ["Google searches",       "8.5 trillion/year (→ 269K/sec)",              "Google, Statista 2024"],
