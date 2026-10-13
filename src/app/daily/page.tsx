@@ -40,10 +40,10 @@ const PUZZLES: Puzzle[] = [
     explanation: "FICO stands for Fair Isaac Corporation — the company that created the credit scoring model. Your FICO score ranges from 300–850. A score above 670 is considered good. Above 740 is very good and qualifies for the best mortgage rates.",
   },
   {
-    question: "The US national debt crossed $36 trillion in 2024. If divided equally among all Americans, what would each person owe?",
-    options: ["About $47,000", "About $87,000", "About $107,000", "About $127,000"],
+    question: "The US national debt passed $40 trillion in August 2026. If divided equally among all Americans, what would each person owe?",
+    options: ["About $57,000", "About $87,000", "About $117,000", "About $147,000"],
     answer: 2,
-    explanation: "$36 trillion divided by approximately 336 million Americans equals about $107,000 per person. That is more than the median US household income of $87,460 per year. The debt has grown from $5 trillion in 2000 to $36 trillion in 2024.",
+    explanation: "$40.3 trillion divided by approximately 343 million Americans equals about $117,000 per person. That is more than the median US household income of $87,460 per year. The debt has grown from about $5.7 trillion in 2000 to over $40 trillion in 2026 (US Treasury, Debt to the Penny).",
   },
   {
     question: "What percentage of Americans have less than $1,000 in savings?",

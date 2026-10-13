@@ -2,10 +2,11 @@
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import Link from "next/link"
+import { US_DEBT_JAN1_2026, US_DEBT_PER_SEC, US_POPULATION_2026 } from "@/data/usDebt"
 
-const DEBT_JAN1_2026   = 36_400_000_000_000
-const DEBT_PER_SEC     = 72_920
-const US_POPULATION    = 335_000_000
+const DEBT_JAN1_2026   = US_DEBT_JAN1_2026
+const DEBT_PER_SEC     = US_DEBT_PER_SEC
+const US_POPULATION    = US_POPULATION_2026
 const US_TAXPAYERS     = 150_000_000
 const SECS_YEAR        = 31_557_600
 
@@ -46,7 +47,7 @@ export default function USDebtPage() {
         <div className="mx-auto max-w-[700px]">
           <div className="mb-4 text-5xl">💸</div>
           <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">US National Debt Live Counter</h1>
-          <p className="text-[#a8a8b3]">The US national debt ticking up in real time — $72,920 every second</p>
+          <p className="text-[#a8a8b3]">The US national debt ticking up in real time — $76,000 every second</p>
           <Link href="/world-counters" className="mt-4 inline-block text-sm text-[#4FC3F7] hover:underline">← All World Counters</Link>
         </div>
       </section>
@@ -61,7 +62,7 @@ export default function USDebtPage() {
             <div className="text-lg font-bold text-[#f87171] mt-2 tabular-nums">
               ${Math.floor(totalDebt).toLocaleString()}
             </div>
-            <p className="text-[#a8a8b3]/70 text-sm mt-2">Growing at <span className="text-[#fbbf24] font-bold">$72,920</span> per second · <span className="text-[#fbbf24] font-bold">$4.4 million</span> per minute</p>
+            <p className="text-[#a8a8b3]/70 text-sm mt-2">Growing at <span className="text-[#fbbf24] font-bold">$76,000</span> per second · <span className="text-[#fbbf24] font-bold">$4.6 million</span> per minute</p>
           </div>
 
           {/* Per person */}
@@ -104,21 +105,21 @@ export default function USDebtPage() {
           <div className="rounded-xl border border-[#0f3460] bg-[#0d1b2a] p-5">
             <h2 className="font-bold text-white mb-3">📊 Context</h2>
             <div className="space-y-2 text-sm text-[#a8a8b3]">
-              <div>• The US national debt surpassed <span className="text-white">$36 trillion</span> in late 2025</div>
-              <div>• At $72,920/sec the debt grows by roughly <span className="text-white">$2.3 trillion per year</span></div>
+              <div>• The US national debt passed <span className="text-white">$40 trillion</span> in August 2026</div>
+              <div>• At $76,000/sec the debt grows by roughly <span className="text-white">$2.4 trillion per year</span></div>
               <div>• Interest payments alone exceed <span className="text-white">$1 trillion per year</span></div>
               <div>• The debt-to-GDP ratio is approximately <span className="text-white">120%</span></div>
-              <div>• Baseline: $36.4 trillion on January 1, 2026 (US Treasury)</div>
+              <div>• Reading: $40.31 trillion on October 8, 2026 (US Treasury, Debt to the Penny)</div>
             </div>
           </div>
 
           <ShareButtons
-            text={`The US national debt is currently ${fmtDollars(totalDebt)} and growing at $72,920 every second! Watch it tick live:`}
+            text={`The US national debt is currently ${fmtDollars(totalDebt)} and growing at $76,000 every second! Watch it tick live:`}
             url="https://dayblip.com/world-counters/us-debt"
             title="US National Debt Live Counter"
           />
 
-          <p className="text-xs text-[#a8a8b3]/60">Sources: US Treasury, Congressional Budget Office. Baseline: $36.4T on Jan 1, 2026. Rate: ~$2.3T/year ($72,920/sec). Educational purposes only.</p>
+          <p className="text-xs text-[#a8a8b3]/60">Sources: US Treasury, Congressional Budget Office. Anchored to the $40.31T Treasury reading of Oct 8, 2026. Rate: ~$2.4T/year ($76,000/sec). Educational purposes only.</p>
         </div>
       </section>
     </div>

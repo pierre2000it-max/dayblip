@@ -1,4 +1,5 @@
 "use client"
+import { US_DEBT_PER_SEC } from "@/data/usDebt"
 import { useState, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/RelatedTools"
@@ -80,7 +81,7 @@ export default function LifeInNumbersPage() {
   const world: Stat[] = [
     { label: "Babies born since you", value: secBorn * 4.44 },
     { label: "People died since you", value: secBorn * 1.84 },
-    { label: "US debt increase since born", value: secBorn * 72920, prefix: "$" },
+    { label: "US debt increase since born", value: secBorn * US_DEBT_PER_SEC, prefix: "$" },
   ]
 
   const heartbeats = f(secBorn * 1.1667)
