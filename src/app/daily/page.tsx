@@ -43,7 +43,7 @@ const PUZZLES: Puzzle[] = [
     question: "The US national debt crossed $36 trillion in 2024. If divided equally among all Americans, what would each person owe?",
     options: ["About $47,000", "About $87,000", "About $107,000", "About $127,000"],
     answer: 2,
-    explanation: "$36 trillion divided by approximately 336 million Americans equals about $107,000 per person. That is more than the median US household income of $74,580 per year. The debt has grown from $5 trillion in 2000 to $36 trillion in 2024.",
+    explanation: "$36 trillion divided by approximately 336 million Americans equals about $107,000 per person. That is more than the median US household income of $87,460 per year. The debt has grown from $5 trillion in 2000 to $36 trillion in 2024.",
   },
   {
     question: "What percentage of Americans have less than $1,000 in savings?",
@@ -241,10 +241,10 @@ const PUZZLES: Puzzle[] = [
     explanation: "A credit score of 760 or higher typically qualifies for the best mortgage interest rates. The difference between a 700 and 760 score on a $400,000 30-year mortgage can be 0.5% in rate — about $120 per month or $43,000 over the life of the loan.",
   },
   {
-    question: "What is the median US household income as of 2023?",
-    options: ["$56,900", "$68,700", "$74,580", "$82,400"],
+    question: "What was the median US household income in 2025?",
+    options: ["$68,700", "$74,580", "$87,460", "$96,300"],
     answer: 2,
-    explanation: "The median US household income was $74,580 in 2022–2023 according to the US Census Bureau. This means half of US households earn more and half earn less. Median is a better measure than average because it is not skewed by the very wealthy. The average (mean) household income is approximately $105,000.",
+    explanation: "The median US household income was $87,460 in 2025 according to the US Census Bureau (released September 15, 2026), up from $85,210 in 2024. This means half of US households earn more and half earn less. Median is a better measure than average because it is not skewed by the very wealthy.",
   },
   {
     question: "What is the difference between a traditional IRA and a Roth IRA?",

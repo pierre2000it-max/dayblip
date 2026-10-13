@@ -77,7 +77,7 @@ function calcDream(income: number, age: number, state: string, savings: number, 
 const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none w-full"
 
 export default function AmericanDreamPage() {
-  const [income, setIncome] = useState("74580")
+  const [income, setIncome] = useState("87460")
   const [age, setAge] = useState("30")
   const [state, setState] = useState("TX")
   const [savings, setSavings] = useState("5000")
@@ -96,25 +96,25 @@ export default function AmericanDreamPage() {
   }, [income, age, state, savings, savingsRate, ownHome, haveKids])
 
   const txResult = useMemo(() => {
-    const inc = parseFloat(income) || 74580
+    const inc = parseFloat(income) || 87460
     const a = parseInt(age) || 30
     return calcDream(inc, a, "TX", 5000, 15, false, false)
   }, [income, age])
 
   const caResult = useMemo(() => {
-    const inc = parseFloat(income) || 74580
+    const inc = parseFloat(income) || 87460
     const a = parseInt(age) || 30
     return calcDream(inc, a, "CA", 5000, 15, false, false)
   }, [income, age])
 
   const msResult = useMemo(() => {
-    const inc = parseFloat(income) || 74580
+    const inc = parseFloat(income) || 87460
     const a = parseInt(age) || 30
     return calcDream(inc, a, "MS", 5000, 15, false, false)
   }, [income, age])
 
   const hiResult = useMemo(() => {
-    const inc = parseFloat(income) || 74580
+    const inc = parseFloat(income) || 87460
     const a = parseInt(age) || 30
     return calcDream(inc, a, "HI", 5000, 15, false, false)
   }, [income, age])
@@ -162,7 +162,7 @@ export default function AmericanDreamPage() {
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Tools", href: "/tools" }, { label: "American Dream Calculator" }]} />
           <div className="mt-6" style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase" style={{ color: "#e94560", letterSpacing: "2px" }}>Quick Answer</div>
-            <p style={{ color: "#e8e8e8", fontSize: "15px" }}>The traditional American Dream — homeownership two cars two children and a comfortable retirement — costs an estimated $1.7 million over a lifetime. At the median US household income of $74,580 per year it takes approximately 24 years of disciplined saving to achieve all four pillars. In California it takes 31 years. In Texas it takes 19 years. The gap between states is 12 years of your life.</p>
+            <p style={{ color: "#e8e8e8", fontSize: "15px" }}>The traditional American Dream — homeownership two cars two children and a comfortable retirement — costs an estimated $1.7 million over a lifetime. At the 2025 median US household income of $87,460 and a 15% savings rate, saving the 20% down payment takes about 5 years in Texas and 13 in California. Retirement security at the 4% rule is the longest pillar, about 33 years from age 30 in every state. The gap between Texas and California is 8 years on the down payment alone.</p>
           </div>
           <p className="mt-4 leading-relaxed" style={{ color: "#a8a8b3", fontSize: "14px" }}>The American Dream is defined here as the four traditional pillars: owning a median-priced home in your state purchasing two vehicles raising two children to adulthood and saving enough for a comfortable retirement. This calculator shows how long each pillar takes to achieve based on your specific income and location using current median costs from the US Census Bureau USDA and Federal Reserve data.</p>
         </div>
