@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'New Year Resolution Cost Calculator — What Will Your Goals Actually Cost?',
-  description: 'Calculate the real annual cost of your New Year\'s resolutions — gym, meal prep, therapy, courses, apps, and more. See total cost and ROI before you commit. Free.',
+  description: "Calculate the yearly cost of your New Year resolutions: gym, meal prep, courses, apps, and more. See total cost and ROI first. Free — no signup required.",
   alternates: {
     canonical: 'https://www.dayblip.com/tools/new-year-resolution-cost'
   },

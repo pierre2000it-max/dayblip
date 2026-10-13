@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import OlderThanTool from "./OlderThanTool";
 export const metadata: Metadata = {
   title: "Are You Older Than the iPhone? Age Comparison Calculator",
-  description: "Find out if you are older or younger than famous inventions, websites and world events. Compare your age to history.",
+  description: "Find out if you are older or younger than famous inventions, websites, and world events. Compare your age to history. Free — no signup required.",
   keywords: ["am I older than the internet", "older than the iphone", "age comparison", "older than calculator"],
   alternates: { canonical: "https://www.dayblip.com/older-than" },
 };

@@ -3,7 +3,7 @@ import WorldCountdownsTool from "./WorldCountdownsTool";
 
 export const metadata: Metadata = {
   title: "Live World Countdowns — Real-Time Timers",
-  description: "Live real-time countdowns to Christmas, New Year, Halloween and all major world events. Updates every second.",
+  description: "Live countdowns to Christmas, New Year, Halloween, and all major world events, updating every second. Free world countdowns — no signup required.",
   keywords: ["live countdown", "world countdowns", "real time countdown", "countdown to christmas", "countdown to new year"],
   alternates: { canonical: "https://www.dayblip.com/world-countdowns" },
   openGraph: {

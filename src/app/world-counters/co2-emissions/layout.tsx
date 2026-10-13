@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'US CO2 Emissions Today — Live Counter',
-  description: 'Watch US CO2 emissions update in real time. Live counter based on EIA data showing tons of carbon dioxide emitted today by the United States. Free — no signup.',
+  description: "Watch US CO2 emissions update in real time. Live counter based on EIA data showing tons of carbon dioxide emitted today. Free — no signup required.",
   alternates: {
     canonical: 'https://www.dayblip.com/world-counters/co2-emissions'
   },

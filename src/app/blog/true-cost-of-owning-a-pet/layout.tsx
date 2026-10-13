@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "The True Annual Cost of Owning a Dog or Cat in 2026 | Dayblip",
   description:
-    "Dog ownership costs $1,390-$5,295 per year and $34,550 over a lifetime per Rover 2025 data. Cat ownership costs $760-$3,495 per year and $32,170 over a lifetime. The full breakdown including the costs most new owners miss.",
+    "Dog ownership costs $1,390 to $5,295 a year and cats $760 to $3,495, per Rover 2025 data. See the lifetime totals and the costs new owners miss.",
   alternates: {
     canonical: "https://www.dayblip.com/blog/true-cost-of-owning-a-pet",
   },

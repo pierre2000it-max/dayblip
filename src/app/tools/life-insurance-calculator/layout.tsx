@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Life Insurance Calculator — How Much Life Insurance Do I Need?",
   description:
-    "Calculate exactly how much life insurance coverage you need based on income dependents debts and future expenses. Free life insurance need calculator. No signup ever.",
+    "Calculate how much life insurance you need based on income, dependents, debts, and future expenses. Free life insurance calculator — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/tools/life-insurance-calculator" },
   openGraph: {
     title: "Life Insurance Calculator",

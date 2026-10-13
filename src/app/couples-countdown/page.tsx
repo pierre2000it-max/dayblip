@@ -3,7 +3,7 @@ import CouplesCountdownTool from "./CouplesCountdownTool";
 
 export const metadata: Metadata = {
   title: "Couples Countdown — How Long Have You Been Together?",
-  description: "Calculate how many days you have been with your partner. Find your relationship milestones and anniversary countdown.",
+  description: "Calculate how many days you have been with your partner and find your relationship milestones and anniversary countdown. Free — no signup required.",
   keywords: ["how long have we been together", "relationship days calculator", "couples countdown", "anniversary countdown"],
   alternates: { canonical: "https://www.dayblip.com/couples-countdown" },
 };

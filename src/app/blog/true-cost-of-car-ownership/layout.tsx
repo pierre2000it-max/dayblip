@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "True Cost of Car Ownership — The Number Nobody Calculates",
   description:
-    "The sticker price is the least important number when buying a car. A $25,000 car costs $1,211 per month when you include insurance, fuel, maintenance and depreciation.",
+    "The sticker price is the least important number when buying a car. A $25,000 car costs $1,211 a month with insurance, fuel, upkeep, and depreciation.",
   alternates: {
     canonical: "https://www.dayblip.com/blog/true-cost-of-car-ownership",
   },

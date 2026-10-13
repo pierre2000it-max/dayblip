@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import holidaysData from "@/data/holidays.json";
 import CountdownDisplay from "./CountdownDisplay";
+import { holidayFallbackDescription } from "@/lib/metaDescriptions";
 import {
   generateCountdownSchema,
   generateBreadcrumbSchema,
@@ -156,9 +157,7 @@ export async function generateMetadata({
     : params.slug === "summer-break"
     ? "How many days until summer break 2026? Live countdown for students showing exact days, hours, minutes and seconds until school lets out. Free — no signup."
     : HOLIDAY_META_DESCRIPTIONS[params.slug]
-    ?? (intro
-      ? intro.length > 160 ? `${intro.slice(0, 157).trimEnd()}...` : intro
-      : `How many days until ${holiday.name}? Live countdown to ${holiday.name} ${year}. Updated in real time.`);
+    ?? holidayFallbackDescription(holiday.name, year);
   const description = descriptionText;
   const url = `https://www.dayblip.com/days-until/${params.slug}`;
   return {

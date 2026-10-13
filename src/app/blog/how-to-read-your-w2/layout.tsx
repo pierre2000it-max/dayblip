@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "How to Read Your W-2 Form — Every Box Explained in Plain English",
   description:
-    "Box 1 is not what you earned. Box 3 is not the same as Box 1. Box 12 has 30+ codes most people ignore. Here is every W-2 box explained clearly using an example.",
+    "Box 1 is not what you earned, and Box 3 is not the same as Box 1. Box 12 has 30+ codes. Every W-2 box explained with a worked example.",
   alternates: { canonical: "https://www.dayblip.com/blog/how-to-read-your-w2" },
   openGraph: {
     title: "How to Read Your W-2 Form — Every Box Explained",

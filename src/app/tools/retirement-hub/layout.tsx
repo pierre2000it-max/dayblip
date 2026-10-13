@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Retirement Planning Calculators — Hub',
-  description: 'All the retirement calculators you need in one place. FI date, compound interest, Social Security, retirement savings, and early vs late investing. Free — no signup.',
+  description: "Every retirement calculator in one place: FI date, compound interest, Social Security, savings, and early vs late investing. Free — no signup required.",
   alternates: { canonical: 'https://www.dayblip.com/tools/retirement-hub' },
   openGraph: {
     title: 'Retirement Planning Calculators — Hub',

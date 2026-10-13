@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Screen Time Calculator — What Could You Learn?",
-  description: "Calculate how much time you spend on screens and discover what skills you could have learned instead.",
+  description: "Calculate how much time you spend on screens and discover which skills you could have learned instead. Free time wasted calculator — no signup required.",
   keywords: "screen time calculator, what could I learn with my screen time, time wasted calculator",
   alternates: { canonical: "https://www.dayblip.com/tools/time-wasted" },
 }

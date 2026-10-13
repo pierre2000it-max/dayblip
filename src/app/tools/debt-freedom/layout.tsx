@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Debt Freedom Date Calculator — When Will I Be Debt Free?",
-  description: "Find the exact date you will be completely debt free. Includes live countdown timer to your debt freedom date.",
+  description: "Find the exact date you will be debt free, with a live countdown to your debt freedom date. Free debt freedom calculator — no signup required.",
   keywords: "debt freedom date, when will I be debt free, debt payoff countdown",
   alternates: { canonical: "https://www.dayblip.com/tools/debt-freedom" },
   openGraph: {

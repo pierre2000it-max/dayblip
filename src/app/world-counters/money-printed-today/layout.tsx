@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Money Printed Today — Live US Dollar Counter',
-  description: 'Watch how much money the US Federal Reserve has printed today. Live counter based on M2 money supply growth data. See dollars created this year in real time. Free.',
+  description: "Watch how much money the Federal Reserve has printed today. Live counter based on M2 money supply growth. Free — no signup required.",
   alternates: {
     canonical: 'https://www.dayblip.com/world-counters/money-printed-today'
   },

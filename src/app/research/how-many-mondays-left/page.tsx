@@ -7,7 +7,7 @@ import AuthorByline from "@/components/AuthorByline"
 export const metadata: Metadata = {
   title: "How Many Mondays Do You Have Left in Your Career?",
   description:
-    "At 35 you have roughly 1,500 Mondays left before retirement at 65. At 45 you have 1,000. The data behind the number that reframes how you think about every work week.",
+    "At 35 you have about 1,500 Mondays left before retirement at 65. At 45 you have 1,000. See the data behind the number and your own count.",
   alternates: { canonical: "https://www.dayblip.com/research/how-many-mondays-left" },
   openGraph: {
     title: "How Many Mondays Do You Have Left in Your Career?",

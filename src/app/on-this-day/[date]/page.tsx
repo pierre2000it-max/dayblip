@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { onThisDayDescription } from "@/lib/metaDescriptions";
 import { Suspense } from "react";
 import Link from "next/link";
 import DateNav from "./DateNav";
@@ -171,7 +172,7 @@ export async function generateMetadata({
   const parsed = parseSlug(params.date);
   const label  = parsed ? `${MONTH_DISPLAY[parsed.month - 1]} ${ordinal(parsed.day)}` : params.date;
   const title  = `What Happened on ${label}? Historical Events`;
-  const desc   = `Discover what happened on ${label} in history. Famous birthdays, major events and historical facts.`;
+  const desc   = onThisDayDescription(label);
   const url    = `https://www.dayblip.com/on-this-day/${params.date}`;
   const robots = INDEXED_DATES.has(params.date)
     ? undefined

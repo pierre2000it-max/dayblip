@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: "Is It Worth It? Financial Decision Calculators",
-  description: "Free calculators that give you a clear yes or no on life's biggest financial decisions. Buy vs rent, lease vs buy, degree vs bootcamp, gym membership, and more.",
+  description: "Free calculators that give a clear yes or no on big money decisions: buy vs rent, lease vs buy, degree vs bootcamp, gym membership, and more.",
   alternates: {
     canonical: 'https://www.dayblip.com/tools/is-it-worth-it'
   },

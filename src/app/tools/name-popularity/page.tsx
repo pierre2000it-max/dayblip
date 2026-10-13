@@ -9,7 +9,7 @@ import NamePopularityClient from "./NamePopularityClient";
 export const metadata: Metadata = {
   title: "Name Popularity — How Many People Share Your Name?",
   description:
-    "Discover how popular your name has been across every decade since 1880. See peak year, total count, 1-in-X rarity, trend, and decade-by-decade breakdown — powered by official SSA data.",
+    "See how popular your name has been every decade since 1880: peak year, total count, rarity, and trend, from official SSA data. Free — no signup required.",
   alternates: {
     canonical: "https://www.dayblip.com/tools/name-popularity",
   },

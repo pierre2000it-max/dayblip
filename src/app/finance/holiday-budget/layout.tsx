@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Holiday Budget Planner 2026 — How Much Should I Spend on Gifts?',
-  description: 'Plan your holiday gift budget by recipient. See your total vs budget, cost per person, and the true cost if you put it on a credit card. Free — no signup required.',
+  description: "Plan your holiday gift budget by recipient. See total vs budget, cost per person, and the true cost on a credit card. Free — no signup required.",
   alternates: {
     canonical: 'https://www.dayblip.com/finance/holiday-budget'
   },

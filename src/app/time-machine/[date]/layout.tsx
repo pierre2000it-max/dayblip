@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { timeMachineDescription } from "@/lib/metaDescriptions"
 
 export async function generateMetadata({ params }: { params: { date: string } }): Promise<Metadata> {
   const { date } = params
@@ -11,7 +12,7 @@ export async function generateMetadata({ params }: { params: { date: string } })
   const label = `${monthName} ${parseInt(day, 10)}, ${year}`
   return {
     title: `What Happened on ${label}? — Historical Time Machine`,
-    description: `See what life was like on ${label}. Gas prices, food costs, world events, #1 songs and more. Free historical date lookup.`,
+    description: timeMachineDescription(label),
     alternates: { canonical: `https://www.dayblip.com/time-machine/${date}` },
     openGraph: {
       title: `${label} — Historical Time Machine`,
