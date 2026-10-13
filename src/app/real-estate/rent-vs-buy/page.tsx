@@ -171,7 +171,7 @@ export default function RentVsBuyPage() {
           <RelatedTools tools={[
             { emoji: "🏠", title: "Mortgage Calculator", desc: "Calculate payments", href: "/finance/mortgage-calculator" },
             { emoji: "📊", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
-            { emoji: "📋", title: "Rent vs Buy Guide", desc: "Deep dive analysis", href: "/blog/rent-vs-buy-calculator" },
+            { emoji: "📋", title: "Rent vs Buy Guide", desc: "Deep dive analysis", href: "/blog/renting-vs-buying-2026" },
             { emoji: "🏡", title: "American Dream Calculator", desc: "Can you afford it?", href: "/tools/american-dream-calculator" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">For educational purposes only. Not financial advice. Many factors affect the rent vs buy decision beyond financial costs. Consult a real estate professional.</p>

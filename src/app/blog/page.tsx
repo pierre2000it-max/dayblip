@@ -22,14 +22,6 @@ const articles = [
   },
   {
     category: "Finance",
-    title: "Paying the Minimum on Your Credit Card Is One of the Most Expensive Decisions You Can Make",
-    excerpt:
-      "On an $8,000 balance at 19.99% the minimum payment takes 27 years and costs $16,247 in interest. Adding $100 per month saves $13,400.",
-    readTime: "5 min read",
-    href: "/blog/minimum-payment-true-cost",
-  },
-  {
-    category: "Finance",
     title: "The Math Behind Starting Early Is More Brutal Than You Think",
     excerpt:
       "Saving $200 per month from 25 to 35 then stopping completely often outperforms $500 per month from 35 to 65. The numbers explain why.",
@@ -109,14 +101,6 @@ const articles = [
     href: "/blog/debt-avalanche-vs-snowball",
   },
   {
-    category: "Finance",
-    title: "Buying a Home Is Not Always Better Than Renting. Here Is the Math.",
-    excerpt:
-      "The break-even point where buying beats renting is typically 5-7 years. On a $400,000 home the true monthly cost is $3,400-$3,800 — not the $2,661 mortgage payment.",
-    readTime: "6 min read",
-    href: "/blog/rent-vs-buy-calculator",
-  },
-  {
     category: "Life",
     title: "How Popular Was Your Name the Year You Were Born?",
     excerpt:
@@ -139,22 +123,6 @@ const articles = [
       "The formula is simple: assets minus liabilities. The errors people make when applying it are consistent — and they compound. Median US household net worth was $192,700 per the Federal Reserve's 2022 survey.",
     readTime: "5 min read",
     href: "/blog/what-is-net-worth",
-  },
-  {
-    category: "Real Estate",
-    title: "How Much House Can You Actually Afford? The Number Banks Give You Is Not the Answer",
-    excerpt:
-      "Lenders approve based on what you can technically repay. A $400,000 home at 7% has a principal and interest payment of $2,129 — but true monthly cost including taxes, insurance, and maintenance is closer to $3,000.",
-    readTime: "6 min read",
-    href: "/blog/how-much-house-can-you-afford",
-  },
-  {
-    category: "Retirement",
-    title: "The 4% Rule: The Simple Math Behind Retirement That Changed How People Think About Work",
-    excerpt:
-      "One number derived from 75 years of market data became the foundation for retirement planning. It says you need 25x your annual expenses. On $50,000 per year that is $1,250,000.",
-    readTime: "6 min read",
-    href: "/blog/the-4-percent-rule",
   },
   {
     category: "Retirement",
@@ -248,7 +216,7 @@ const articles = [
     category: "Finance",
     title: "The True Cost of Credit Card Minimum Payments",
     excerpt:
-      "A $5,000 balance at 19.99% APR costs $6,270 in interest on minimum payments. Paying $200/month instead saves $5,108 and 12.5 years.",
+      "A $5,000 balance at 19.99% APR costs $7,313 in interest on minimum payments. Paying $200/month instead saves $5,792 and 16 years.",
     readTime: "5 min read",
     href: "/blog/true-cost-of-minimum-payments",
   },

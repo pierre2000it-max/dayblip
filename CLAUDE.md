@@ -114,11 +114,17 @@ Embed pages have noindex (intentional)
 Embed pages NOT in sitemap (intentional)
 Educator page: /embed/for-educators
 
-## Blog Status (as of June 13 2026)
-21 articles live.
+## Blog Status (as of Oct 13 2026)
+37 articles live (counted from src/app/blog directories; the old "21" figure was stale).
 Target: 114 articles by June 2027.
-Remaining: 93 articles to write.
-Pace needed: 1.8 articles per week.
+Remaining: 77 articles to write.
+Pace needed: about 2.1 articles per week.
+Oct 13 2026: 4 overlapping pairs consolidated into one URL each, with 301s in next.config.mjs (do not delete the redirects):
+- /blog/how-much-house-can-you-afford -> /blog/how-much-house-can-i-afford
+- /blog/the-4-percent-rule -> /blog/what-is-the-4-percent-rule
+- /blog/rent-vs-buy-calculator -> /blog/renting-vs-buying-2026
+- /blog/minimum-payment-true-cost -> /blog/true-cost-of-minimum-payments
+Before writing a new article, grep src/app/blog for the topic to avoid a second page on the same query.
 
 ## Key Recent Commits
 - b500874: Fixed Google indexing issues (canonical tags, embed noindex)
@@ -131,9 +137,9 @@ Pace needed: 1.8 articles per week.
 - 8ae20a7: OG image routes fixed (display flex, try/catch)
 
 ## Site Counts (as of June 13 2026)
-- Total URLs in sitemap: 1,413 (verified Oct 2026 by running sitemap.ts)
+- Total URLs in sitemap: 1,414 (verified Oct 13 2026 by running sitemap.ts, after the 4 blog consolidations)
 - Total tool pages: 200+ (recounted Oct 10 2026: 209 interactive pages, ~200 after near-duplicates)
-- Blog articles: 21
+- Blog articles: 37 (Oct 13 2026)
 - Embed tools: 25
 - Born-in pages: 81 (1940-2020)
 

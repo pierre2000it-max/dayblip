@@ -9,7 +9,7 @@ const articleSchema = {
   description: "Banks will approve housing costs up to 28% of gross income (front-end DTI) and 43% total debt (back-end DTI). Most financial planners recommend keeping housing at 25% of net income or below. At a $75,000 salary those are very different numbers.",
   url: "https://www.dayblip.com/blog/how-much-house-can-i-afford",
   datePublished: "2026-06-24",
-  dateModified: "2026-06-24",
+  dateModified: "2026-10-13",
   author: { "@type": "Organization", name: "Dayblip" },
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
 }
@@ -38,6 +38,7 @@ const faqSchema = {
 }
 
 const relatedTools = [
+  { title: "Home Affordability Calculator", href: "/real-estate/affordability", description: "Find your comfortable price range based on income, debts and down payment." },
   { title: "Mortgage Calculator", href: "/finance/mortgage-calculator", description: "Calculate your exact monthly mortgage payment at any rate and term." },
   { title: "Take Home Pay Calculator", href: "/finance/take-home-pay", description: "Calculate your actual net income after taxes." },
   { title: "Net Worth Calculator", href: "/finance/net-worth", description: "Track your complete financial picture." },
@@ -198,6 +199,24 @@ export default function HowMuchHouseCanIAffordPage() {
 
           <p>
             At a $75,000 salary, saving $1,000 per month specifically for a down payment produces: $50,000 in 4.2 years, and $70,000 in 5.8 years. This timeline is why many first-time buyers use lower down payment programs rather than wait — in some markets the home appreciates faster than the savings accumulate, making the waiting strategy counterproductive.
+          </p>
+
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">The Costs Pre-Approval Ignores</h2>
+
+          <p>
+            Pre-approval tests ratios on gross income. It does not test what is left after the house. A household earning $100,000 gross takes home roughly $72,000 to $78,000 after federal tax, state tax and FICA, depending on state and filing status. A payment that is 36% of gross income can be close to 50% of take-home pay.
+          </p>
+
+          <p>
+            Three costs sit outside the bank&apos;s math. <strong className="text-white">Maintenance:</strong> a common rule of thumb is 1% of the home&apos;s value per year, which is about $292 per month on a $350,000 home. <strong className="text-white">Closing costs:</strong> typically 2% to 5% of the loan amount, or $6,300 to $15,750 on a $315,000 loan, due at the closing table. <strong className="text-white">Moving and setup:</strong> a local move can run $1,000 to $5,000, and most buyers spend more on furnishings, appliances and early repairs.
+          </p>
+
+          <p>
+            Arriving at closing with exactly enough for the down payment and closing costs, and no emergency fund left, is the most common source of first-year stress. Keep a cash reserve on top of the down payment.
+          </p>
+
+          <p>
+            The interest rate moves your ceiling more than almost any other variable. A $1,800 monthly principal and interest payment supports about a $377,000 loan at 4% and about $271,000 at 7%. Same payment, $106,000 less house.
           </p>
 
           <div style={{ background: "#1e2d4a", borderRadius: "8px", padding: "20px", margin: "32px 0", textAlign: "center" }}>

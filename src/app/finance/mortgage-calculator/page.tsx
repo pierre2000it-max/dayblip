@@ -340,8 +340,8 @@ export default function MortgagePage() {
             title="Mortgage Payment Calculator"
           />
           <RelatedTools tools={[
-            { emoji: "🏠", title: "Rent vs Buy Calculator", desc: "Should you rent or buy in your city?", href: "/blog/rent-vs-buy-calculator" },
-            { emoji: "💰", title: "How Much House Can You Afford?", desc: "The 28/36 rule explained", href: "/blog/how-much-house-can-you-afford" },
+            { emoji: "🏠", title: "Rent vs Buy Calculator", desc: "Should you rent or buy in your city?", href: "/blog/renting-vs-buying-2026" },
+            { emoji: "💰", title: "How Much House Can You Afford?", desc: "The 28/36 rule explained", href: "/blog/how-much-house-can-i-afford" },
             { emoji: "📊", title: "Net Worth Calculator", desc: "Calculate your total net worth", href: "/finance/net-worth" },
             { emoji: "💸", title: "Debt Payoff Calculator", desc: "Avalanche vs snowball method", href: "/finance/debt-payoff" },
           ]} />
