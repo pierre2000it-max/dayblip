@@ -88,3 +88,44 @@ export function socialSecurityTax(wages: number): number {
 export function medicareTax(wages: number): number {
   return Math.max(0, wages) * MEDICARE_RATE
 }
+
+// Long-term capital gains: top of the 0% and 15% zones, in taxable income.
+// Source: IRS Rev. Proc. 2025-32 (tax year 2026). Above the 15% limit is 20%.
+export const LTCG_LIMITS: Record<Filing, readonly [number, number]> = {
+  single: [49450, 545500],
+  mfj: [98900, 613700],
+  mfs: [49450, 306850],
+  hoh: [66200, 579600],
+}
+
+/**
+ * Tax on long-term gains stacked on top of ordinary taxable income.
+ * Pass taxable ordinary income (after the standard deduction), not gross income.
+ */
+export function ltcgTax(gain: number, ordinaryTaxable: number, filing: Filing): number {
+  if (gain <= 0) return 0
+  const [zeroTop, fifteenTop] = LTCG_LIMITS[filing]
+  const base = Math.max(0, ordinaryTaxable)
+  const at0 = Math.max(0, Math.min(gain, zeroTop - base))
+  const room15 = Math.max(0, fifteenTop - Math.max(base, zeroTop))
+  const at15 = Math.min(gain - at0, room15)
+  const at20 = gain - at0 - at15
+  return at15 * 0.15 + at20 * 0.20
+}
+
+export const SE_NET_FACTOR = 0.9235
+export const SE_SS_RATE = 0.124
+export const SE_MEDICARE_RATE = 0.029
+
+/**
+ * Self-employment tax. otherWages (W-2 pay) uses up the Social Security
+ * wage base first. Excludes the 0.9% additional Medicare tax.
+ */
+export function selfEmploymentTax(netEarnings: number, otherWages = 0) {
+  const base = Math.max(0, netEarnings) * SE_NET_FACTOR
+  const ssRoom = Math.max(0, SS_WAGE_BASE - Math.max(0, otherWages))
+  const ss = Math.min(base, ssRoom) * SE_SS_RATE
+  const medicare = base * SE_MEDICARE_RATE
+  const total = ss + medicare
+  return { base, ss, medicare, total, deduction: total / 2 }
+}

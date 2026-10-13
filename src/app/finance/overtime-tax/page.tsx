@@ -7,38 +7,16 @@ import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
+import { federalTax, taxableAfterStandardDeduction } from "@/lib/tax2026"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
 type Filing = "single" | "married" | "hoh"
 
-const BRACKETS: Record<Filing, [number, number][]> = {
-  single: [
-    [11925, 0.10], [48475, 0.12], [103350, 0.22],
-    [197300, 0.24], [250525, 0.32], [626350, 0.35], [Infinity, 0.37],
-  ],
-  married: [
-    [23850, 0.10], [96950, 0.12], [206700, 0.22],
-    [394600, 0.24], [501050, 0.32], [751600, 0.35], [Infinity, 0.37],
-  ],
-  hoh: [
-    [17000, 0.10], [64850, 0.12], [103350, 0.22],
-    [197300, 0.24], [250500, 0.32], [626350, 0.35], [Infinity, 0.37],
-  ],
-}
-
+// Federal tax after the standard deduction, 2026 brackets (src/lib/tax2026.ts).
 function calcFederalTax(income: number, filing: Filing): number {
-  const brackets = BRACKETS[filing]
-  let tax = 0
-  let prev = 0
-  for (const [ceiling, rate] of brackets) {
-    if (income <= prev) break
-    const taxable = Math.min(income, ceiling) - prev
-    tax += taxable * rate
-    prev = ceiling
-    if (ceiling === Infinity) break
-  }
-  return Math.max(0, tax)
+  const status = filing === "married" ? "mfj" : filing
+  return federalTax(taxableAfterStandardDeduction(income, status), status)
 }
 
 interface Result {

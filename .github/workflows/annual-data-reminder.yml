@@ -38,33 +38,22 @@ jobs:
 
             ### Files to update:
 
-            **\`src/app/finance/take-home-pay/page.tsx\`**
-            - [ ] \`STD_DEDUCTION\` object — single, mfj, mfs, hoh values
-            - [ ] \`BRACKETS_SINGLE\`, \`BRACKETS_MFJ\`, \`BRACKETS_HOH\` arrays
-            - [ ] Any year references in FAQ text
+            **\`src/lib/tax2026.ts\`** (single source for every calculator)
+            - [ ] \`STANDARD_DEDUCTION\` — single, mfj, mfs, hoh
+            - [ ] \`BRACKETS\` — all 4 filing statuses
+            - [ ] \`LTCG_LIMITS\` — capital gains 0% and 15% limits
+            - [ ] Rename the file to match the year if you want, then update imports
+            - [ ] Update expected values in \`src/lib/tax2026.test.ts\`, then run \`npm test\`
 
-            **\`src/app/finance/tax-bracket/page.tsx\`**
-            - [ ] Tax bracket threshold values
-            - [ ] Standard deduction values
-            - [ ] Year in page title and meta description (layout.tsx)
-
-            **\`src/app/finance/paycheck-calculator/page.tsx\`**
-            - [ ] \`const ssCap = XXXXXX\` — SS wage base (from SSA, not IRS)
-            - [ ] Federal bracket arrays
-            - [ ] FAQ text mentioning year
-
-            **\`src/app/embed/(tools)/take-home-pay/page.tsx\`**
-            - [ ] \`Math.min(s, XXXXXX)\` — SS wage base
-            - [ ] ⚠️ This file has historically been 2+ years stale — prioritize
+            **\`src/app/finance/tax-bracket/layout.tsx\`**
+            - [ ] Year in page title and meta description
 
             **\`src/app/daily/page.tsx\`**
             - [ ] 401k contribution limit label (IRS)
             - [ ] SS wage base in FICA explanation text (two locations)
 
-            **\`src/app/tools/tax-refund-estimator/page.tsx\`**
-            - [ ] \`STD_DEDUCTION\` object
-            - [ ] \`BRACKETS\` object — all 4 filing statuses
-            - [ ] Meta title year (layout.tsx)
+            **\`src/app/tools/tax-refund-estimator/layout.tsx\`**
+            - [ ] Meta title year
 
             ---
 
@@ -72,10 +61,9 @@ jobs:
             Source: https://www.ssa.gov/oact/cola/cbb.html
             Announced each October for the following year.
 
-            - [ ] \`src/app/finance/paycheck-calculator/page.tsx\` — \`ssCap\`
-            - [ ] \`src/app/finance/take-home-pay/page.tsx\` — \`Math.min(annual, XXXXXX)\`
-            - [ ] \`src/app/embed/(tools)/take-home-pay/page.tsx\` — \`Math.min(s, XXXXXX)\`
+            - [ ] \`src/lib/tax2026.ts\` — \`SS_WAGE_BASE\`
             - [ ] \`src/app/daily/page.tsx\` — text "on wages up to $X in 20XX"
+            - [ ] Blog and FAQ prose that quotes the cap: \`grep -rn "wage base" src\`
 
             ---
 
@@ -188,7 +176,7 @@ jobs:
             \`\`\`bash
             # Search for stale year references
             grep -rn "2025\\|2024" src/data/ --include="*.ts"
-            grep -rn "ssCap\\|STD_DEDUCTION\\|BRACKETS" src/app/finance/ --include="*.tsx"
+            npm test
 
             # Build must pass clean
             npm run build

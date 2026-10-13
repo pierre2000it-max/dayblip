@@ -1,8 +1,10 @@
-import { readFileSync } from "node:fs"
+import { readdirSync, readFileSync, statSync } from "node:fs"
+import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 import {
   BRACKETS, STANDARD_DEDUCTION, SS_WAGE_BASE, federalTax, marginalRate,
   medicareTax, socialSecurityTax, taxableAfterStandardDeduction, toFiling,
+  LTCG_LIMITS, ltcgTax, selfEmploymentTax,
 } from "./tax2026"
 
 // Anchor values computed from IRS Rev. Proc. 2025-32 bracket tables.
@@ -60,19 +62,50 @@ describe("FICA", () => {
   })
 })
 
-describe("no copies of tax constants in calculator pages", () => {
-  const pages = [
-    "src/app/finance/tax-bracket/page.tsx",
-    "src/app/finance/take-home-pay/page.tsx",
-    "src/app/finance/paycheck-calculator/page.tsx",
-    "src/app/embed/(tools)/take-home-pay/page.tsx",
-  ]
-  for (const page of pages) {
-    it(page, () => {
-      const src = readFileSync(page, "utf8")
-      expect(src).not.toMatch(/\b184500\b|\b176100\b|\b168600\b/)
-      expect(src).not.toMatch(/\b16100\b[^%]*:/)
-      expect(src).not.toMatch(/\[\s*12400\s*,/)
+describe("long-term capital gains", () => {
+  it("is 0% when gain fits under the 0% limit", () => {
+    expect(ltcgTax(10000, 30000, "single")).toBe(0)
+  })
+  it("splits a gain across the 0% and 15% zones", () => {
+    // 49,450 limit, 40,000 ordinary: 9,450 at 0%, 10,550 at 15%
+    expect(ltcgTax(20000, 40000, "single")).toBeCloseTo(10550 * 0.15, 2)
+  })
+  it("reaches 20% above the 15% limit", () => {
+    expect(ltcgTax(100000, 545500, "single")).toBeCloseTo(20000, 2)
+  })
+  it("matches the IRS limits", () => {
+    expect(LTCG_LIMITS.mfj).toEqual([98900, 613700])
+  })
+})
+
+describe("self-employment tax", () => {
+  it("is 15.3% of 92.35% below the wage base", () => {
+    const r = selfEmploymentTax(80000)
+    expect(r.total).toBeCloseTo(80000 * 0.9235 * 0.153, 2)
+    expect(r.deduction).toBeCloseTo(r.total / 2, 2)
+  })
+  it("caps Social Security at the wage base", () => {
+    const r = selfEmploymentTax(400000)
+    expect(r.ss).toBeCloseTo(184500 * 0.124, 2)
+  })
+  it("uses up the base with W-2 wages first", () => {
+    expect(selfEmploymentTax(50000, 184500).ss).toBe(0)
+  })
+})
+
+describe("no copies of tax constants anywhere else in src", () => {
+  const banned = /\b(11925|48475|103350|197300|23850|96950|206700|394600|50400|105700|201775|256225|640600|184500|176100|168600)\b/
+  function walk(dir: string): string[] {
+    return readdirSync(dir).flatMap((name) => {
+      const full = join(dir, name)
+      if (statSync(full).isDirectory()) return walk(full)
+      return /\.(ts|tsx)$/.test(name) ? [full] : []
     })
   }
+  const files = walk("src").filter((f) => !/tax2026(\.test)?\.ts$/.test(f))
+  it("scans files", () => expect(files.length).toBeGreaterThan(100))
+  it("finds no bracket or wage-base literals", () => {
+    const offenders = files.filter((f) => banned.test(readFileSync(f, "utf8")))
+    expect(offenders).toEqual([])
+  })
 })

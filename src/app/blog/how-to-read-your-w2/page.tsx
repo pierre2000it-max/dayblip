@@ -149,7 +149,7 @@ export default function HowToReadYourW2Page() {
           </p>
 
           <p>
-            <strong className="text-white">Box 3 — Social Security Wages:</strong> Wages subject to Social Security tax. For most workers this equals gross salary. Some pre-tax deductions that reduce Box 1 do not reduce Box 3 — meaning Box 3 can be higher than Box 1. The 2025 Social Security wage base was $176,100 per IRS instructions. Wages above $176,100 are not subject to Social Security tax.
+            <strong className="text-white">Box 3 — Social Security Wages:</strong> Wages subject to Social Security tax. For most workers this equals gross salary. Some pre-tax deductions that reduce Box 1 do not reduce Box 3 — meaning Box 3 can be higher than Box 1. The 2026 Social Security wage base is $184,500 (it was $176,100 in 2025). Wages above the base are not subject to Social Security tax.
           </p>
 
           <p>

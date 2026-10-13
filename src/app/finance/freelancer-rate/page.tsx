@@ -5,6 +5,12 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
+import { STANDARD_DEDUCTION, federalTax as bracketTax, selfEmploymentTax } from "@/lib/tax2026"
+
+// Single filer, standard deduction.
+function federalTax(income: number): number {
+  return bracketTax(Math.max(0, income - STANDARD_DEDUCTION.single), "single")
+}
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtDec(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
@@ -22,20 +28,6 @@ const STATES: [string, number][] = [
   ["MA", 0.09], ["NY", 0.109], ["NJ", 0.1075], ["CA", 0.133],
   ["OR", 0.099], ["HI", 0.11], ["ME", 0.0715], ["VT", 0.0875],
 ]
-
-function federalTax(income: number): number {
-  const brackets: [number, number][] = [
-    [11925, 0.10], [48475, 0.12], [103350, 0.22],
-    [197300, 0.24], [250525, 0.32], [626350, 0.35], [Infinity, 0.37],
-  ]
-  let tax = 0; let prev = 0
-  for (const [limit, rate] of brackets) {
-    if (income <= prev) break
-    tax += (Math.min(income, limit) - prev) * rate
-    prev = limit
-  }
-  return tax
-}
 
 const BENCHMARKS = [
   { title: "Web Developer", range: "$75–150/hr" },
@@ -84,13 +76,11 @@ export default function FreelancerRatePage() {
     const grossNeeded = income + annualBiz + annualHI + annualRet
 
     // SE tax on 92.35% of net earnings
-    const seTaxRate = 0.153
-    const seAdj = 0.9235
-    const seDeduct = grossNeeded * seAdj * (seTaxRate / 2)
-    const taxableIncome = grossNeeded - seDeduct
+    const seBase = selfEmploymentTax(grossNeeded)
+    const taxableIncome = grossNeeded - seBase.deduction
     const fedTax = federalTax(taxableIncome)
     const stateTax = taxableIncome * stateRate
-    const seTax = grossNeeded * seAdj * seTaxRate
+    const seTax = seBase.total
 
     const totalNeeded = grossNeeded + fedTax + stateTax + seTax
     const baseRate = totalBillableHours > 0 ? totalNeeded / totalBillableHours : 0
@@ -107,7 +97,7 @@ export default function FreelancerRatePage() {
     const scenarios = [-20, 0, 20, 40].map(delta => {
       const r = Math.max(1, baseRate + delta)
       const annualRevenue = r * totalBillableHours
-      const se = annualRevenue * seAdj * seTaxRate
+      const se = selfEmploymentTax(annualRevenue).total
       const fed = federalTax(annualRevenue - se / 2)
       const st = (annualRevenue - se / 2) * stateRate
       const afterTax = annualRevenue - se - fed - st - annualBiz - annualHI - annualRet

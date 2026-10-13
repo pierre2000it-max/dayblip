@@ -1,31 +1,15 @@
 "use client"
 import { useState } from "react"
+import { federalTax, taxableAfterStandardDeduction } from "@/lib/tax2026"
 
 function fmt(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })
 }
 
-// 2026 federal tax brackets (single). Married doubles thresholds.
-const BRACKETS_SINGLE = [
-  { max: 11925,  rate: 0.10 },
-  { max: 48475,  rate: 0.12 },
-  { max: 103350, rate: 0.22 },
-  { max: 197300, rate: 0.24 },
-  { max: Infinity, rate: 0.32 },
-]
-
-function federalTax(taxableIncome: number, married: boolean): number {
-  const multiplier = married ? 2 : 1
-  let tax = 0
-  let prev = 0
-  for (const { max, rate } of BRACKETS_SINGLE) {
-    const bracketMax = max * multiplier
-    if (taxableIncome <= prev) break
-    const taxable = Math.min(taxableIncome, bracketMax) - prev
-    tax += taxable * rate
-    prev = bracketMax
-  }
-  return tax
+// Single or married filing jointly, standard deduction, 2026 brackets (src/lib/tax2026.ts).
+function federalTaxFor(income: number, married: boolean): number {
+  const status = married ? "mfj" : "single"
+  return federalTax(taxableAfterStandardDeduction(income, status), status)
 }
 
 export default function EmbedOvertimeTax() {
@@ -55,8 +39,8 @@ export default function EmbedOvertimeTax() {
     const deductionCap = married ? 25000 : 12500
     const deductibleAmount = Math.min(overtimePremium, deductionCap)
 
-    const taxWithout = federalTax(totalIncome, married)
-    const taxWith = federalTax(totalIncome - deductibleAmount, married)
+    const taxWithout = federalTaxFor(totalIncome, married)
+    const taxWith = federalTaxFor(totalIncome - deductibleAmount, married)
     const taxSavings = taxWithout - taxWith
 
     const effectiveRate = overtimeGross > 0 ? ((taxWithout - taxSavings) / overtimeGross) * 100 : 0

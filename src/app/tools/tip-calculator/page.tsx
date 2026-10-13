@@ -5,26 +5,15 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
+import { federalTax, medicareTax, socialSecurityTax } from "@/lib/tax2026"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 function fmt0(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
 type WorkerFiling = "single" | "married"
 
-const WORKER_BRACKETS: Record<WorkerFiling, [number, number][]> = {
-  single:  [[11925, 0.10],[48475, 0.12],[103350, 0.22],[197300, 0.24],[250525, 0.32],[626350, 0.35],[Infinity, 0.37]],
-  married: [[23850, 0.10],[96950, 0.12],[206700, 0.22],[394600, 0.24],[501050, 0.32],[751600, 0.35],[Infinity, 0.37]],
-}
-
 function calcFederalTax(income: number, filing: WorkerFiling): number {
-  let tax = 0, prev = 0
-  for (const [ceiling, rate] of WORKER_BRACKETS[filing]) {
-    if (income <= prev) break
-    tax += (Math.min(income, ceiling) - prev) * rate
-    prev = ceiling
-    if (ceiling === Infinity) break
-  }
-  return Math.max(0, tax)
+  return federalTax(income, filing === "married" ? "mfj" : "single")
 }
 
 interface BillResult {
@@ -66,7 +55,7 @@ export default function TipCalculatorPage() {
   function calcWorker() {
     const wt = parseFloat(weeklyTips) || 500
     const annualTips = wt * 52
-    const ficaOnTips = annualTips * 0.0765
+    const ficaOnTips = socialSecurityTax(annualTips) + medicareTax(annualTips)
     const tipIncomeKept = annualTips - ficaOnTips
     const takeHomePct = (tipIncomeKept / annualTips) * 100
     // Old law: tips taxed as income; estimate savings at ~12% bracket
