@@ -6,6 +6,9 @@ import RelatedTools from "@/components/RelatedTools"
 import Breadcrumb from "@/components/Breadcrumb"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
+import { BRACKETS, STANDARD_DEDUCTION } from "@/lib/tax2026"
+
+const usd = (n: number) => "$" + n.toLocaleString("en-US")
 
 // ── Puzzle bank ───────────────────────────────────────────────────────────────
 
@@ -212,10 +215,10 @@ const PUZZLES: Puzzle[] = [
     explanation: "Approximately 28% of Americans have no retirement savings according to Federal Reserve surveys. Among those 55–64 — within a decade of typical retirement age — the median retirement account balance is $134,000, which would generate only about $5,000 per year using the 4% rule.",
   },
   {
-    question: "What is the standard deduction for a single filer in 2024?",
-    options: ["$10,500", "$12,550", "$14,600", "$16,200"],
+    question: "What is the standard deduction for a single filer in 2026?",
+    options: ["$14,600", "$15,000", usd(STANDARD_DEDUCTION.single), "$17,500"],
     answer: 2,
-    explanation: "The standard deduction for a single filer in 2024 is $14,600. For married filing jointly it is $29,200. The standard deduction reduces your taxable income dollar for dollar. About 90% of Americans take the standard deduction rather than itemizing.",
+    explanation: `The standard deduction for a single filer in 2026 is ${usd(STANDARD_DEDUCTION.single)} (IRS Rev. Proc. 2025-32). For married filing jointly it is ${usd(STANDARD_DEDUCTION.mfj)}. The standard deduction reduces your taxable income dollar for dollar. About 90% of Americans take the standard deduction rather than itemizing.`,
   },
   {
     question: "What is the typical down payment percentage for a conventional mortgage?",
@@ -336,10 +339,10 @@ const PUZZLES: Puzzle[] = [
     explanation: "A bond is essentially a loan you make to a government or corporation. They promise to pay you regular interest (the coupon) and return your principal at maturity. Bonds are generally less volatile than stocks but provide lower long-term returns. They are used to stabilize portfolios as investors approach retirement.",
   },
   {
-    question: "What is the highest marginal federal income tax rate in the US as of 2024?",
+    question: "What is the highest marginal federal income tax rate in the US as of 2026?",
     options: ["32%", "35%", "37%", "39.6%"],
     answer: 2,
-    explanation: "The highest federal marginal income tax rate is 37% on income above $609,350 for single filers and $731,200 for married filing jointly in 2024. Remember: marginal rates apply only to the income in each bracket — not all of your income. The effective tax rate (average rate paid) is always lower than your marginal rate.",
+    explanation: `The highest federal marginal income tax rate is 37% on taxable income above ${usd(BRACKETS.single[5][0])} for single filers and ${usd(BRACKETS.mfj[5][0])} for married filing jointly in 2026. Remember: marginal rates apply only to the income in each bracket, not all of your income. The effective tax rate (average rate paid) is always lower than your marginal rate.`,
   },
   {
     question: "What is the typical US 30-year fixed mortgage rate range in 2024?",
@@ -533,10 +536,10 @@ const PUZZLES: Puzzle[] = [
     explanation: "Dollar-for-dollar 401k matching means your employer adds $1 to your 401k for every $1 you contribute up to a set limit (often 3–6% of salary). This is a 100% immediate return on your contribution — the single highest-return financial move available to most employees. Always contribute at least enough to get the full match.",
   },
   {
-    question: "What is the maximum annual gift you can give someone without filing a gift tax return (2024)?",
-    options: ["$10,000", "$15,000", "$18,000", "$25,000"],
+    question: "What is the maximum annual gift you can give someone without filing a gift tax return (2026)?",
+    options: ["$15,000", "$18,000", "$19,000", "$25,000"],
     answer: 2,
-    explanation: "The annual gift tax exclusion for 2024 is $18,000 per recipient. You can give $18,000 to as many people as you want without filing a gift tax return. Married couples can combine their exclusions to give $36,000 per recipient. Gifts above the annual exclusion use up your lifetime estate and gift tax exemption.",
+    explanation: "The annual gift tax exclusion for 2026 is $19,000 per recipient, unchanged from 2025 (IRS Rev. Proc. 2025-32). You can give $19,000 to as many people as you want without filing a gift tax return. Married couples can combine their exclusions to give $38,000 per recipient. Gifts above the annual exclusion use up your lifetime estate and gift tax exemption.",
   },
   {
     question: "What was the worst single-day percentage drop in US stock market history?",
