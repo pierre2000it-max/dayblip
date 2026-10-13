@@ -309,7 +309,7 @@ export default function HomePage() {
       <section className="bg-[#1a1a2e] px-6 py-16">
         <div className="mx-auto max-w-[1200px]">
           <h2 className="mb-1 text-2xl font-bold text-white">
-            Today is {todayDisplay}. Here&apos;s what happened...
+            {todayDisplay ? `Today is ${todayDisplay}.` : "On this day."} Here&apos;s what happened...
           </h2>
           <p className="mb-8 text-sm text-[#a8a8b3]">
             Historical facts for {historyDateLabel}

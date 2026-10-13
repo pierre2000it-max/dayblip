@@ -1,0 +1,26 @@
+# Dayblip
+
+> Free calculators and tools for personal finance, career decisions, life visualization, date math and birth-year facts. No signup, no email and no paywall.
+
+## What is on the site
+- Date tools: age calculator, date calculator, days between dates, countdowns
+- Finance and money calculators
+- Life and money insights
+- Health and lifestyle, real estate, and productivity tools
+- Born-in pages for 1940 to 2020 and On This Day pages
+- Games, quizzes and live world counters
+- 200+ free tools in total
+- Blog articles that explain the numbers behind the tools
+
+## Notes
+Some links are affiliate links, and Dayblip may earn a commission on sign-ups or purchases. See https://www.dayblip.com/disclosure
+
+## Key pages
+- Finance tools: https://www.dayblip.com/finance
+- Countdowns: https://www.dayblip.com/countdown
+- Born in: https://www.dayblip.com/born-in
+- Daily: https://www.dayblip.com/daily
+- Blog: https://www.dayblip.com/blog
+- About: https://www.dayblip.com/about
+- Research: https://www.dayblip.com/research
+- Contact: https://www.dayblip.com/contact
