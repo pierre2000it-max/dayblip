@@ -272,6 +272,7 @@ const urls = [
   "https://www.dayblip.com/blog/cost-of-raising-a-child-2026",
   "https://www.dayblip.com/blog/debt-avalanche-vs-snowball",
   "https://www.dayblip.com/blog/true-cost-of-owning-a-pet",
+  "https://www.dayblip.com/blog/self-employment-tax-2026",
   "https://www.dayblip.com/blog/what-is-the-4-percent-rule",
   "https://www.dayblip.com/blog/how-much-does-a-wedding-cost",
   "https://www.dayblip.com/blog/how-to-compare-job-offers",
