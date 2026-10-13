@@ -77,7 +77,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:        0.8,
   }));
 
-  return [
+  const entries: MetadataRoute.Sitemap = [
 
     // ═══════════════════════════════════════════════════════════════════════
     // CORE LANDING PAGES  (priority 1.0, daily)
@@ -506,4 +506,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority:        0.8,
       })),
   ];
+
+  // Dedupe by URL. First entry wins, so hand-picked priorities beat the
+  // generic holidays.json loop (10 holiday URLs were listed twice).
+  const seen = new Set<string>();
+  return entries.filter((e) => {
+    if (seen.has(e.url)) return false;
+    seen.add(e.url);
+    return true;
+  });
 }
