@@ -5,21 +5,9 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
+import { STANDARD_DEDUCTION, federalTax, selfEmploymentTax, toFiling } from "@/lib/tax2026"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
-
-function calcFedTax(taxable: number, filing: string): number {
-  const brackets = filing === "mfj"
-    ? [[23850,0.10],[96950,0.12],[206700,0.22],[394600,0.24],[501050,0.32],[751600,0.35],[Infinity,0.37]] as [number,number][]
-    : [[11925,0.10],[48475,0.12],[103350,0.22],[197300,0.24],[250525,0.32],[626350,0.35],[Infinity,0.37]] as [number,number][]
-  let tax = 0; let prev = 0
-  for (const [limit, rate] of brackets) {
-    if (taxable <= prev) break
-    tax += (Math.min(taxable, limit) - prev) * rate
-    prev = limit
-  }
-  return tax
-}
 
 export default function SelfEmploymentTaxPage() {
   const [netIncome, setNetIncome] = useState("80000")
@@ -39,16 +27,13 @@ export default function SelfEmploymentTaxPage() {
   const calc = useMemo(() => {
     const net = (parseFloat(netIncome) || 0) - (parseFloat(bizExpenses) || 0)
     const w2 = parseFloat(w2Income) || 0
-    const seBase = Math.max(0, net) * 0.9235
-    const seTax = seBase * 0.153
-    const ss = seBase * 0.124
-    const medicare = seBase * 0.029
-    const seDeduction = seTax / 2
+    const status = toFiling(filing)
+    const se = selfEmploymentTax(net, w2)
+    const { base: seBase, total: seTax, ss, medicare, deduction: seDeduction } = se
 
-    const stdDed = filing === "mfj" ? 30000 : 15000
     const totalIncome = Math.max(0, net) + w2
-    const taxable = Math.max(0, totalIncome - seDeduction - stdDed)
-    const fedTax = calcFedTax(taxable, filing)
+    const taxable = Math.max(0, totalIncome - seDeduction - STANDARD_DEDUCTION[status])
+    const fedTax = federalTax(taxable, status)
     const totalTax = seTax + fedTax
     const effectiveRate = totalIncome > 0 ? (totalTax / totalIncome * 100).toFixed(1) : "0"
     const setAsidePct = totalIncome > 0 ? Math.ceil(totalTax / totalIncome * 100) : 0

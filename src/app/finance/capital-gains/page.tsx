@@ -5,39 +5,9 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
+import { STANDARD_DEDUCTION, federalTax, ltcgTax, marginalRate, toFiling } from "@/lib/tax2026"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
-
-function calcOrdinaryTax(taxable: number, filing: string): number {
-  const brackets = filing === "mfj"
-    ? [[23850,0.10],[96950,0.12],[206700,0.22],[394600,0.24],[501050,0.32],[751600,0.35],[Infinity,0.37]] as [number,number][]
-    : [[11925,0.10],[48475,0.12],[103350,0.22],[197300,0.24],[250525,0.32],[626350,0.35],[Infinity,0.37]] as [number,number][]
-  let tax = 0; let prev = 0
-  for (const [limit, rate] of brackets) {
-    if (taxable <= prev) break
-    tax += (Math.min(taxable, limit) - prev) * rate
-    prev = limit
-  }
-  return tax
-}
-
-function getLTCGRate(income: number, filing: string): number {
-  const thresholds = filing === "mfj"
-    ? [94050, 583750] : [47025, 518900]
-  if (income <= thresholds[0]) return 0
-  if (income <= thresholds[1]) return 0.15
-  return 0.20
-}
-
-function getOrdinaryRate(taxable: number, filing: string): number {
-  const brackets = filing === "mfj"
-    ? [[23850,0.10],[96950,0.12],[206700,0.22],[394600,0.24],[501050,0.32],[751600,0.35],[Infinity,0.37]] as [number,number][]
-    : [[11925,0.10],[48475,0.12],[103350,0.22],[197300,0.24],[250525,0.32],[626350,0.35],[Infinity,0.37]] as [number,number][]
-  for (const [limit, rate] of brackets) {
-    if (taxable <= limit) return rate
-  }
-  return 0.37
-}
 
 export default function CapitalGainsPage() {
   const [purchasePrice, setPurchasePrice] = useState("10000")
@@ -62,29 +32,28 @@ export default function CapitalGainsPage() {
     const gain = sp - pp
     const income = parseFloat(annualIncome) || 0
 
-    const stdDed = filing === "mfj" ? 30000 : 15000
-    const taxableIncome = Math.max(0, income - stdDed)
+    const status = toFiling(filing)
+    const taxableIncome = Math.max(0, income - STANDARD_DEDUCTION[status])
 
     let taxRate: number
     let taxOwed: number
     let rateLabel: string
 
     if (holding === "short") {
-      taxRate = getOrdinaryRate(taxableIncome + Math.max(0, gain), filing)
-      taxOwed = gain > 0 ? calcOrdinaryTax(taxableIncome + gain, filing) - calcOrdinaryTax(taxableIncome, filing) : 0
+      taxRate = marginalRate(taxableIncome + Math.max(0, gain), status)
+      taxOwed = gain > 0 ? federalTax(taxableIncome + gain, status) - federalTax(taxableIncome, status) : 0
       rateLabel = `${(taxRate * 100).toFixed(0)}% (ordinary income)`
     } else {
-      taxRate = getLTCGRate(income, filing)
-      taxOwed = gain > 0 ? gain * taxRate : 0
-      rateLabel = `${(taxRate * 100).toFixed(0)}% (long-term)`
+      taxOwed = ltcgTax(gain, taxableIncome, status)
+      taxRate = gain > 0 ? taxOwed / gain : 0
+      rateLabel = `${(taxRate * 100).toFixed(1).replace(/\.0$/, "")}% (long-term, blended)`
     }
 
     const afterTaxProfit = gain - Math.max(0, taxOwed)
 
     // Short-term comparison (if currently long-term)
-    const stTax = gain > 0 ? calcOrdinaryTax(taxableIncome + gain, filing) - calcOrdinaryTax(taxableIncome, filing) : 0
-    const ltRate = getLTCGRate(income, filing)
-    const ltTax = gain > 0 ? gain * ltRate : 0
+    const stTax = gain > 0 ? federalTax(taxableIncome + gain, status) - federalTax(taxableIncome, status) : 0
+    const ltTax = ltcgTax(gain, taxableIncome, status)
     const savedByWaiting = stTax - ltTax
 
     // NIIT
@@ -225,7 +194,7 @@ export default function CapitalGainsPage() {
                 <th className="py-2 text-right text-[#a8a8b3]">MFJ Income</th>
               </tr></thead>
               <tbody>
-                {[["0%","Up to $47,025","Up to $94,050"],["15%","$47,026–$518,900","$94,051–$583,750"],["20%","Over $518,900","Over $583,750"]].map(r => (
+                {[["0%","Up to $49,450","Up to $98,900"],["15%","$49,451–$545,500","$98,901–$613,700"],["20%","Over $545,500","Over $613,700"]].map(r => (
                   <tr key={r[0]} className="border-b border-[#0f3460]/50">
                     <td className="py-2 font-bold text-[#4ade80]">{r[0]}</td>
                     <td className="py-2 text-right text-[#a8a8b3]">{r[1]}</td>

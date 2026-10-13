@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react"
+import { STANDARD_DEDUCTION, federalTax, medicareTax, socialSecurityTax } from "@/lib/tax2026"
 
 function fmt(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 })
@@ -25,27 +26,6 @@ const STATES = [
   "SD","TN","TX","UT","VT","VA","WA","WV","WI","WY",
 ]
 
-const BRACKETS_SINGLE = [
-  { max: 11925,    rate: 0.10 },
-  { max: 48475,    rate: 0.12 },
-  { max: 103350,   rate: 0.22 },
-  { max: 197300,   rate: 0.24 },
-  { max: Infinity, rate: 0.32 },
-]
-
-function annualFederalTax(taxable: number, married: boolean): number {
-  const m = married ? 2 : 1
-  let tax = 0
-  let prev = 0
-  for (const { max, rate } of BRACKETS_SINGLE) {
-    const bracketMax = max * m
-    if (taxable <= prev) break
-    tax += (Math.min(taxable, bracketMax) - prev) * rate
-    prev = bracketMax
-  }
-  return tax
-}
-
 export default function EmbedPaycheckCalculator() {
   const [salary, setSalary] = useState("75000")
   const [periodLabel, setPeriodLabel] = useState("Biweekly (26)")
@@ -70,13 +50,14 @@ export default function EmbedPaycheckCalculator() {
     const annualHealth = perHealth * period.n
     const federalTaxable = Math.max(0, annualSalary - annualK401 - annualHealth)
 
-    const annualFederal = annualFederalTax(federalTaxable, married)
+    const status = married ? "mfj" : "single"
+    const annualFederal = federalTax(Math.max(0, federalTaxable - STANDARD_DEDUCTION[status]), status)
     const federalPerCheck = annualFederal / period.n
 
     const stateRate = NO_TAX_STATES.has(state) ? 0 : (STATE_RATES[state] ?? 0.05)
     const statePerCheck = (federalTaxable / period.n) * stateRate
 
-    const ficaPerCheck = grossPerCheck * 0.0765
+    const ficaPerCheck = (socialSecurityTax(annualSalary) + medicareTax(annualSalary)) / period.n
     const netPerCheck = grossPerCheck - federalPerCheck - statePerCheck - ficaPerCheck - perK401 - perHealth
 
     setResult({
