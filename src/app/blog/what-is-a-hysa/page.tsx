@@ -6,10 +6,10 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "What Is a High-Yield Savings Account (HYSA) and Should You Open One?",
-  description: "A high-yield savings account is a federally insured savings account that pays significantly more interest than a traditional savings account. As of June 2026 the best HYSAs pay 3.80-4.50% APY compared to the national average of 0.38% per the FDIC.",
+  description: "A high-yield savings account is a federally insured savings account that pays significantly more interest than a traditional savings account. As of early October 2026 top HYSAs pay 4.25-5.00% APY compared to a national average savings rate of 0.37%.",
   url: "https://www.dayblip.com/blog/what-is-a-hysa",
   datePublished: "2026-06-24",
-  dateModified: "2026-06-24",
+  dateModified: "2026-10-13",
   author: { "@type": "Organization", name: "Dayblip" },
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
 }
@@ -23,7 +23,7 @@ const faqSchema = {
       name: "What is a high-yield savings account?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A high-yield savings account (HYSA) is a federally insured savings account that pays significantly more interest than a traditional savings account. As of June 2026 the best HYSAs pay 3.80-4.50% APY per Bankrate and NerdWallet tracking, compared to the national average of 0.38% per the FDIC. Both account types are FDIC-insured up to $250,000 per depositor.",
+        text: "A high-yield savings account (HYSA) is a federally insured savings account that pays significantly more interest than a traditional savings account. As of early October 2026 top HYSAs pay 4.25-5.00% APY, compared to a national average savings rate of 0.37%. Both account types are FDIC-insured up to $250,000 per depositor.",
       },
     },
     {
@@ -69,7 +69,7 @@ export default function WhatIsAHysaPage() {
 
         <div className="mb-4 flex items-center gap-3">
           <span className="text-xs font-semibold uppercase tracking-wider bg-blue-900/40 text-blue-300 rounded px-2 py-1">Finance</span>
-          <span className="text-[#a8a8b3] text-sm">5 min read · June 2026</span>
+          <span className="text-[#a8a8b3] text-sm">5 min read · Published June 2026, updated October 2026</span>
         </div>
 
         <h1 className="text-white text-3xl md:text-4xl font-bold leading-tight mb-4">
@@ -84,14 +84,14 @@ export default function WhatIsAHysaPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              A high-yield savings account (HYSA) is a federally insured savings account that pays significantly more interest than a traditional savings account. As of June 2026 the best HYSAs pay 3.80-4.50% APY per Bankrate and NerdWallet tracking compared to the national average of 0.38% per the FDIC. On a $20,000 emergency fund that difference is approximately $774 per year in additional interest — earning $850 at 4.25% APY versus $76 at the 0.38% national average — with no additional risk, since both account types are FDIC-insured up to $250,000 per depositor. For anyone keeping more than $1,000 in a traditional savings account the answer to &apos;should I open one&apos; is almost always yes.
+              A high-yield savings account (HYSA) is a federally insured savings account that pays significantly more interest than a traditional savings account. As of early October 2026 top HYSAs pay 4.25-5.00% APY compared to a national average savings rate of 0.37%. On a $20,000 emergency fund that difference is approximately $826 per year in additional interest — earning $900 at 4.50% APY versus $74 at the 0.37% national average — with no additional risk, since both account types are FDIC-insured up to $250,000 per depositor. For anyone keeping more than $1,000 in a traditional savings account the answer to &apos;should I open one&apos; is almost always yes.
             </p>
           </div>
         </section>
 
         <div className="mb-8">
           <ShareButtons
-            text="The best HYSAs pay 4.10-4.50% APY in June 2026. The national average savings account pays 0.38%. On a $20,000 emergency fund that's $774/year you're leaving on the table. Everything you need to know: www.dayblip.com/blog/what-is-a-hysa"
+            text="Top HYSAs pay 4.25-5.00% APY in October 2026. The national average savings account pays 0.37%. On a $20,000 emergency fund that's about $826/year you're leaving on the table. Everything you need to know: www.dayblip.com/blog/what-is-a-hysa"
             url="https://www.dayblip.com/blog/what-is-a-hysa"
             title="What Is a High-Yield Savings Account (HYSA) and Should You Open One?"
           />
@@ -102,7 +102,7 @@ export default function WhatIsAHysaPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">HYSA vs Traditional Savings Account — The Real Dollar Difference</h2>
 
           <p>
-            As of June 23, 2026: national average savings rate is 0.38% per FDIC published data. Best HYSA rates are 3.80 to 4.50% APY per Bankrate and NerdWallet tracking. Here is what that difference means on common balances:
+            As of October 5, 2026: the national average savings rate is 0.37%. Top HYSA rates are 4.25 to 5.00% APY, and some of the highest rates are introductory. The table uses 4.50% as a round example. Here is what that difference means on common balances:
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-6">
@@ -110,16 +110,16 @@ export default function WhatIsAHysaPage() {
               <thead>
                 <tr style={{ background: "#1e2d4a" }}>
                   <th className="text-left px-4 py-3 text-white font-semibold">Balance</th>
-                  <th className="text-center px-4 py-3 text-white font-semibold">Traditional (0.38%)</th>
-                  <th className="text-center px-4 py-3 text-white font-semibold">HYSA (4.25%)</th>
+                  <th className="text-center px-4 py-3 text-white font-semibold">Traditional (0.37%)</th>
+                  <th className="text-center px-4 py-3 text-white font-semibold">HYSA (4.50%)</th>
                   <th className="text-right px-4 py-3 text-white font-semibold">Annual Gain</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  { balance: "$5,000", trad: "$19/year", hysa: "$213/year", gain: "$194" },
-                  { balance: "$15,000", trad: "$57/year", hysa: "$638/year", gain: "$581" },
-                  { balance: "$30,000", trad: "$114/year", hysa: "$1,275/year", gain: "$1,161" },
+                  { balance: "$5,000", trad: "$19/year", hysa: "$225/year", gain: "$206" },
+                  { balance: "$15,000", trad: "$56/year", hysa: "$675/year", gain: "$619" },
+                  { balance: "$30,000", trad: "$111/year", hysa: "$1,350/year", gain: "$1,239" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 font-semibold text-white">{row.balance}</td>
@@ -133,7 +133,7 @@ export default function WhatIsAHysaPage() {
           </div>
 
           <p>
-            The risk is identical. Both account types are FDIC-insured up to $250,000 per depositor. The money is equally safe at a top-rated online bank offering 4.25% as it is at the traditional bank offering 0.38%. The only difference is which bank captures the interest.
+            The risk is identical. Both account types are FDIC-insured up to $250,000 per depositor. The money is equally safe at a top-rated online bank offering 4.50% as it is at the traditional bank offering 0.37%. The only difference is which bank captures the interest.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Why Online Banks Pay More</h2>
@@ -149,17 +149,17 @@ export default function WhatIsAHysaPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What HYSA Rates Look Like in 2026</h2>
 
           <p>
-            The Federal Reserve held rates steady at 3.50-3.75% throughout the first half of 2026 per the June 17, 2026 FOMC decision. HYSA rates in June 2026 per Bankrate and NerdWallet:
+            The Federal Reserve held its target range at 3.50-3.75% from December 2025 until September 16, 2026, when it raised the range by 0.25 points to 3.75-4.00%. HYSA rates in early October 2026:
           </p>
 
           <div className="bg-[#16213e] rounded-xl p-6 my-4 border border-[#2d3748] text-sm space-y-2">
-            <div className="flex justify-between"><span className="text-[#a8a8b3]">Top end (some with conditions)</span><span className="text-[#F9A825] font-semibold">4.10-4.50% APY</span></div>
-            <div className="flex justify-between"><span className="text-[#a8a8b3]">Mid-range (widely available)</span><span className="text-[#F9A825] font-semibold">3.80-4.25% APY</span></div>
-            <div className="flex justify-between border-t border-[#2d3748] pt-2"><span className="text-white font-bold">National average savings rate (FDIC)</span><span className="text-[#FF6B6B] font-bold text-base">0.38% APY</span></div>
+            <div className="flex justify-between"><span className="text-[#a8a8b3]">Top end (some introductory)</span><span className="text-[#F9A825] font-semibold">4.25-5.00% APY</span></div>
+            <div className="flex justify-between"><span className="text-[#a8a8b3]">Widely available</span><span className="text-[#F9A825] font-semibold">4.00% APY and up</span></div>
+            <div className="flex justify-between border-t border-[#2d3748] pt-2"><span className="text-white font-bold">National average savings rate</span><span className="text-[#FF6B6B] font-bold text-base">0.37% APY</span></div>
           </div>
 
           <p>
-            Rates are variable — they move with Federal Reserve policy. When the Fed cuts rates, HYSA rates typically fall within weeks. When the Fed raises rates, HYSA rates typically rise quickly. The stable rate environment since late 2025 means rates have held reasonably steady heading into mid-2026.
+            Rates are variable — they move with Federal Reserve policy. When the Fed cuts rates, HYSA rates typically fall within weeks. When the Fed raises rates, HYSA rates typically rise quickly. The September 2026 Fed hike is already pushing savings rates up, so check current offers before you open an account.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">When a HYSA Makes Sense and When It Does Not</h2>
@@ -173,7 +173,7 @@ export default function WhatIsAHysaPage() {
           </p>
 
           <p>
-            The single most common HYSA mistake: using it as the primary vehicle for retirement savings. A HYSA earning 4.25% does not beat inflation over 30 years in a meaningful way. Investing in diversified index funds historically has, despite the short-term volatility that comes with it.
+            The single most common HYSA mistake: using it as the primary vehicle for retirement savings. A HYSA earning 4.50% does not beat inflation over 30 years in a meaningful way. Investing in diversified index funds historically has, despite the short-term volatility that comes with it.
           </p>
 
           <div style={{ background: "#1e2d4a", borderRadius: "8px", padding: "20px", margin: "32px 0", textAlign: "center" }}>
@@ -199,7 +199,7 @@ export default function WhatIsAHysaPage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="The best HYSAs pay 4.10-4.50% APY in June 2026. The national average savings account pays 0.38%. On a $20,000 emergency fund that's $774/year you're leaving on the table. Everything you need to know: www.dayblip.com/blog/what-is-a-hysa"
+            text="Top HYSAs pay 4.25-5.00% APY in October 2026. The national average savings account pays 0.37%. On a $20,000 emergency fund that's about $826/year you're leaving on the table. Everything you need to know: www.dayblip.com/blog/what-is-a-hysa"
             url="https://www.dayblip.com/blog/what-is-a-hysa"
             title="What Is a High-Yield Savings Account (HYSA) and Should You Open One?"
           />
