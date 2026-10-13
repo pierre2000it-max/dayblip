@@ -9,7 +9,7 @@ const articleSchema = {
   description: "At 7% mortgage rate on a $350,000 home, the true monthly ownership cost including mortgage, taxes, insurance, maintenance, and PMI is approximately $2,800-3,200 per month. The break-even point where buying produces more wealth than renting is typically 5-8 years in most US markets.",
   url: "https://www.dayblip.com/blog/renting-vs-buying-2026",
   datePublished: "2026-06-24",
-  dateModified: "2026-06-24",
+  dateModified: "2026-10-13",
   author: { "@type": "Organization", name: "Dayblip" },
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
 }
@@ -147,6 +147,16 @@ export default function RentingVsBuying2026Page() {
 
           <p>
             What renting gives you: flexibility to move without transaction costs, no exposure to maintenance costs and repair risk, and capital flexibility — the down payment stays invested. A $35,000 down payment invested at 7% average annual return for 10 years grows to approximately $68,800.
+          </p>
+
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">Where Your First Mortgage Payments Actually Go</h2>
+
+          <p>
+            Calling rent &quot;throwing money away&quot; skips how a mortgage works in the early years. On a $315,000 loan at 7%, the monthly principal and interest payment is $2,096. In the first month, $1,838 of that is interest and $258 reduces the loan balance. The owner builds equity at about $258 a month and pays the bank about $1,838 a month for borrowing.
+          </p>
+
+          <p>
+            Rent buys housing and nothing else. A mortgage buys housing, a slow equity build and a set of costs that never build equity, such as interest, property taxes and insurance. Neither is automatically &quot;wasted.&quot; The comparison has to include all of it.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Break-Even Calculation Most Real Estate Articles Skip</h2>

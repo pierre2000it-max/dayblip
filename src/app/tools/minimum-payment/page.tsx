@@ -57,12 +57,12 @@ function compute(balance: number, rate: number, minPct: number, extra: number): 
 export default function MinimumPaymentPage() {
   const [balance, setBalance] = useState("8000")
   const [rate,    setRate]    = useState("19.99")
-  const [minPct,  setMinPct]  = useState("2")
+  const [minPct,  setMinPct]  = useState("3")
   const [extra,   setExtra]   = useState("0")
   const [result,  setResult]  = useState<Result | null>(null)
 
   function runCalc(push = true, b = balance, r = rate, mp = minPct, ex = extra) {
-    const res = compute(parseFloat(b) || 0, parseFloat(r) || 0, parseFloat(mp) || 2, parseFloat(ex) || 0)
+    const res = compute(parseFloat(b) || 0, parseFloat(r) || 0, parseFloat(mp) || 3, parseFloat(ex) || 0)
     setResult(res)
     if (push && typeof window !== "undefined") {
       window.history.pushState({}, "", `?balance=${b}&rate=${r}&minpct=${mp}&extra=${ex}`)
@@ -90,9 +90,9 @@ export default function MinimumPaymentPage() {
       <SchemaMarkup schemas={[
         webApplicationSchema("Minimum Payment True Cost Calculator", "See the shocking true cost of only paying credit card minimums. Calculate exactly how long it takes and how much interest you pay.", "https://www.dayblip.com/tools/minimum-payment", "FinanceApplication"),
         faqSchema([
-          { question: "How long does it take to pay off credit card debt paying minimums only?", answer: "On $8,000 of credit card debt at 19.99% interest paying minimums only, it takes approximately 27 years and costs over $16,000 in interest — more than double the original debt." },
-          { question: "How much interest do I pay on minimum payments?", answer: "On a typical credit card balance paying minimums only, total interest often exceeds the original balance. You can end up paying 200-300% of what you originally borrowed." },
-          { question: "How can I pay off credit card debt faster?", answer: "Adding even $50-100 extra per month to your payment dramatically reduces payoff time and total interest. Adding $100/month to an $8,000 balance at 19.99% saves over $13,000 in interest." },
+          { question: "How long does it take to pay off credit card debt paying minimums only?", answer: "On $8,000 of credit card debt at 19.99% interest with a 3% minimum payment (and a $25 floor), paying the minimum only takes about 17 years and 8 months and costs $9,017 in interest. A 2% minimum stretches that past 50 years." },
+          { question: "How much interest do I pay on minimum payments?", answer: "On a typical credit card balance paying minimums only, total interest can match or exceed the original balance. On $8,000 at 19.99% with a 3% minimum, you repay about $17,000, or 2.1 times what you borrowed." },
+          { question: "How can I pay off credit card debt faster?", answer: "Adding even $50-100 extra per month to your payment dramatically reduces payoff time and total interest. Adding $100/month to an $8,000 balance at 19.99% with a 3% minimum cuts the payoff to 4 years and 5 months and saves $5,828 in interest." },
         ]),
         howToSchema("How to Calculate True Cost of Minimum Payments", "See the full cost of paying only the minimum", [
           "Enter your credit card balance",
@@ -111,7 +111,7 @@ export default function MinimumPaymentPage() {
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">What Is Your Minimum Payment Really Costing You?</h1>
           <p className="text-[#a8a8b3]">See the shocking true cost of only paying minimums on your debt</p>
-          <a href="/blog/minimum-payment-true-cost" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: The True Cost of Minimum Payments →</a>
+          <a href="/blog/true-cost-of-minimum-payments" style={{ fontSize: "13px", color: "#e94560", marginTop: "8px", display: "inline-block" }}>Read: The True Cost of Minimum Payments →</a>
         </div>
       </section>
 
@@ -119,7 +119,7 @@ export default function MinimumPaymentPage() {
         <div className="mx-auto max-w-[800px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">Paying only the minimum on $8,000 of credit card debt at 19.99% interest takes 27 years and costs $16,247 in interest — more than double the original balance. You pay back $24,247 total on an $8,000 debt. Adding just $100 per month extra reduces payoff time to 4 years and saves $13,400 in interest.</p>
+            <p className="text-[#e2e8f0]">Paying only the minimum on $8,000 of credit card debt at 19.99% interest with a 3% minimum takes 17 years and 8 months and costs $9,017 in interest. You pay back $17,017 total on an $8,000 debt. Adding $100 per month extra cuts the payoff to 4 years and 5 months and saves $5,828 in interest.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Minimum credit card payments are designed to maximize interest charged to the borrower. Most minimum payments cover only 1–3% of the balance, meaning the majority of each payment goes to interest rather than reducing principal. This calculator shows the true total cost and compares multiple payoff strategies side by side.</p>
         </div>

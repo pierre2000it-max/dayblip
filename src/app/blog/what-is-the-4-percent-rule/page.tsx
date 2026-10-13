@@ -8,7 +8,7 @@ const articleSchema = {
   "headline": "What Is the 4% Rule and Does It Still Work in 2026?",
   "description": "The 4% rule was first proposed by William Bengen in 1994 and further analyzed in the 1998 Trinity Study by Cooley Hubbard and Walz. Multiply annual retirement spending by 25. At $50,000/year spending you need $1,250,000.",
   "datePublished": "2026-07-25",
-  "dateModified": "2026-07-25",
+  "dateModified": "2026-10-13",
   "author": { "@type": "Organization", "name": "Dayblip", "url": "https://www.dayblip.com" },
   "publisher": { "@type": "Organization", "name": "Dayblip", "url": "https://www.dayblip.com" },
   "url": "https://www.dayblip.com/blog/what-is-the-4-percent-rule",
@@ -222,6 +222,16 @@ export default function WhatIsThe4PercentRulePage() {
 
           <p>
             <strong className="text-white">3. Geographic flexibility changes everything and the rule ignores it.</strong> The same $60,000 per year buys a fundamentally different lifestyle depending on where you spend it. A retiree in rural Portugal or Mexico City or Chattanooga Tennessee lives very differently than a retiree in Manhattan or San Francisco on the same annual withdrawal. For people with flexibility on location the effective safe withdrawal rate can increase significantly because the lifestyle can be maintained on less. The rule does not know where you live. You do.
+          </p>
+
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">Why the Rule Stuck</h2>
+
+          <p>
+            Before the 4% rule entered popular planning, most retirement conversations meant saving as much as possible and hoping it lasted. The rule gave people a specific target and a way to measure progress toward it.
+          </p>
+
+          <p>
+            It also separated retirement from age. If financial independence is a portfolio size, 25 times your annual expenses, then reaching it depends on how much you save and invest, not how many years you have worked. That reframing helped drive the modern financial independence movement, which treats early retirement as a math problem instead of a date on a calendar.
           </p>
 
           <div style={{ background: "#1e2d4a", borderRadius: "8px", padding: "24px", textAlign: "center", margin: "32px 0" }}>

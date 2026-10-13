@@ -237,7 +237,7 @@ export default function Footer() {
                 { label: "All Articles", href: "/blog" },
                 { label: "True Hourly Wage", href: "/blog/true-hourly-wage" },
                 { label: "Will AI Replace My Job?", href: "/blog/will-ai-replace-my-job" },
-                { label: "Minimum Payment Cost", href: "/blog/minimum-payment-true-cost" },
+                { label: "Minimum Payment Cost", href: "/blog/true-cost-of-minimum-payments" },
                 { label: "Starting Early vs Late", href: "/blog/compound-interest-early-saver" },
                 { label: "Market Timing Cost", href: "/blog/market-timing-cost" },
                 { label: "Financial Independence", href: "/blog/financial-independence-date" },
