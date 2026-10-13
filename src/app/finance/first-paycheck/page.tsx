@@ -7,6 +7,7 @@ import Breadcrumb from '@/components/Breadcrumb'
 import RelatedTools from '@/components/RelatedTools'
 import LastUpdated from '@/components/LastUpdated'
 import MethodologyNote from '@/components/MethodologyNote'
+import { STANDARD_DEDUCTION, federalTax, marginalRate as marginalRateFor, medicareTax, socialSecurityTax, toFiling } from '@/lib/tax2026'
 
 // 2026 values per IRS Rev. Proc. 2025-32
 const STATES: [string, number][] = [
@@ -35,38 +36,6 @@ const STATES: [string, number][] = [
   ['Oregon', 0.099],
   ['Hawaii', 0.11],
 ]
-
-const BRACKETS_SINGLE: [number, number][] = [
-  [12400, 0.10], [50400, 0.12], [105700, 0.22],
-  [201775, 0.24], [256225, 0.32], [640600, 0.35], [Infinity, 0.37],
-]
-const BRACKETS_MFJ: [number, number][] = [
-  [24800, 0.10], [100800, 0.12], [211400, 0.22],
-  [403550, 0.24], [512450, 0.32], [768700, 0.35], [Infinity, 0.37],
-]
-const BRACKETS_HOH: [number, number][] = [
-  [17700, 0.10], [67450, 0.12], [105700, 0.22],
-  [201775, 0.24], [256200, 0.32], [640600, 0.35], [Infinity, 0.37],
-]
-const STD_DEDUCTION: Record<string, number> = {
-  single: 16100, mfj: 32200, mfs: 16100, hoh: 24150,
-}
-
-function calcFedTax(taxableIncome: number, filing: string): number {
-  if (taxableIncome <= 0) return 0
-  const brackets =
-    filing === 'mfj' ? BRACKETS_MFJ :
-    filing === 'hoh' ? BRACKETS_HOH :
-    BRACKETS_SINGLE
-  let tax = 0
-  let prev = 0
-  for (const [limit, rate] of brackets) {
-    if (taxableIncome <= prev) break
-    tax += (Math.min(taxableIncome, limit) - prev) * rate
-    prev = limit
-  }
-  return tax
-}
 
 const PAY_PERIODS: Record<string, { label: string; periods: number }> = {
   biweekly:    { label: 'Biweekly (every 2 weeks)', periods: 26 },
@@ -113,22 +82,22 @@ export default function FirstPaycheckPage() {
     const healthInsAnnual = healthIns * periods
     const k401Annual = annual * (k401pct / 100)
 
-    const stdDed = STD_DEDUCTION[filing] ?? 16100
+    const filingStatus = toFiling(filing)
     const preTaxDeductions = healthInsAnnual + k401Annual
     const agi = Math.max(0, annual - preTaxDeductions)
-    const taxableIncome = Math.max(0, agi - stdDed)
+    const taxableIncome = Math.max(0, agi - STANDARD_DEDUCTION[filingStatus])
 
-    const annualFedTax = calcFedTax(taxableIncome, filing)
+    const annualFedTax = federalTax(taxableIncome, filingStatus)
 
     const stateRate = STATES[stateIdx]?.[1] ?? 0
     const annualStateTax = taxableIncome * stateRate
     const stateName = STATES[stateIdx]?.[0] ?? 'No state tax'
 
-    const annualSs = Math.min(annual, 184500) * 0.062
-    const annualMedicare = annual * 0.0145
+    const annualSs = socialSecurityTax(annual)
+    const annualMedicare = medicareTax(annual)
 
-    const employerSs = Math.min(annual, 184500) * 0.062
-    const employerMedicare = annual * 0.0145
+    const employerSs = socialSecurityTax(annual)
+    const employerMedicare = medicareTax(annual)
     const totalEmployerCost = annual + employerSs + employerMedicare
 
     const grossPaycheck = annual / periods
@@ -143,14 +112,7 @@ export default function FirstPaycheckPage() {
     const annualNet = netPaycheck * periods
     const effectiveRate = annual > 0 ? ((annual - annualNet) / annual) * 100 : 0
 
-    const bkts = filing === 'mfj' ? BRACKETS_MFJ : filing === 'hoh' ? BRACKETS_HOH : BRACKETS_SINGLE
-    let marginalRate = 10
-    let prev = 0
-    for (const [limit, rate] of bkts) {
-      if (taxableIncome > prev) marginalRate = rate * 100
-      if (taxableIncome <= limit) break
-      prev = limit
-    }
+    const marginalRate = marginalRateFor(taxableIncome, filingStatus) * 100
 
     setResult({
       grossPaycheck: Math.round(grossPaycheck * 100) / 100,

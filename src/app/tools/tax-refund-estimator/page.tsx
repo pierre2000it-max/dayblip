@@ -7,46 +7,7 @@ import Breadcrumb from '@/components/Breadcrumb'
 import RelatedTools from '@/components/RelatedTools'
 import LastUpdated from '@/components/LastUpdated'
 import MethodologyNote from '@/components/MethodologyNote'
-
-const STD_DEDUCTION: Record<string, number> = {
-  single: 16100,
-  mfj: 32200,
-  mfs: 16100,
-  hoh: 24150
-}
-
-const BRACKETS: Record<string, [number, number][]> = {
-  single: [
-    [12400, 0.10], [50400, 0.12], [105700, 0.22],
-    [201775, 0.24], [256225, 0.32], [640600, 0.35], [Infinity, 0.37]
-  ],
-  mfj: [
-    [24800, 0.10], [100800, 0.12], [211400, 0.22],
-    [403550, 0.24], [512450, 0.32], [768700, 0.35], [Infinity, 0.37]
-  ],
-  mfs: [
-    [12400, 0.10], [50400, 0.12], [105700, 0.22],
-    [201775, 0.24], [256225, 0.32], [384350, 0.35], [Infinity, 0.37]
-  ],
-  hoh: [
-    [17700, 0.10], [67450, 0.12], [105700, 0.22],
-    [201775, 0.24], [256200, 0.32], [640600, 0.35], [Infinity, 0.37]
-  ]
-}
-
-function calcFedTax(taxableIncome: number, status: string): number {
-  if (taxableIncome <= 0) return 0
-  const brackets = BRACKETS[status] ?? BRACKETS.single
-  let tax = 0
-  let prev = 0
-  for (const [limit, rate] of brackets) {
-    if (taxableIncome <= prev) break
-    const taxable = Math.min(taxableIncome, limit) - prev
-    tax += taxable * rate
-    prev = limit
-  }
-  return tax
-}
+import { STANDARD_DEDUCTION as STD, federalTax, marginalRate as marginalRateFor, toFiling } from '@/lib/tax2026'
 
 export default function TaxRefundEstimatorPage() {
   const [filingStatus, setFilingStatus] = useState('single')
@@ -80,12 +41,13 @@ export default function TaxRefundEstimatorPage() {
 
     const agi = Math.max(0, gross - preTax)
 
-    const stdDed = STD_DEDUCTION[filingStatus] ?? STD_DEDUCTION.single
+    const status = toFiling(filingStatus)
+    const stdDed = STD[status]
     const itemized = parseFloat(itemizedAmount) || 0
     const deduction = deductionType === 'itemized' ? Math.max(itemized, stdDed) : stdDed
 
     const taxableIncome = Math.max(0, agi - deduction)
-    const taxBeforeCredits = calcFedTax(taxableIncome, filingStatus)
+    const taxBeforeCredits = federalTax(taxableIncome, status)
     const totalTax = Math.max(0, taxBeforeCredits - credits)
 
     const diff = withheld - totalTax
@@ -94,14 +56,7 @@ export default function TaxRefundEstimatorPage() {
 
     const effectiveRate = gross > 0 ? (totalTax / gross) * 100 : 0
 
-    const brackets = BRACKETS[filingStatus] ?? BRACKETS.single
-    let marginalRate = 10
-    let prev = 0
-    for (const [limit, rate] of brackets) {
-      if (taxableIncome > prev) marginalRate = rate * 100
-      if (taxableIncome <= limit) break
-      prev = limit
-    }
+    const marginalRate = marginalRateFor(taxableIncome, status) * 100
 
     setResult({
       verdict,
@@ -305,7 +260,7 @@ export default function TaxRefundEstimatorPage() {
                 }}
               >
                 {type === 'standard'
-                  ? `Standard ($${(STD_DEDUCTION[filingStatus] ?? 16100).toLocaleString()})`
+                  ? `Standard ($${STD[toFiling(filingStatus)].toLocaleString()})`
                   : 'Itemized'
                 }
               </button>

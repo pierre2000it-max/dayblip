@@ -2,22 +2,13 @@
 import { useState, useMemo, useEffect } from "react"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/RelatedTools"
+import { federalTax, taxableAfterStandardDeduction } from "@/lib/tax2026"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 
 function calcFederalTax(annual: number, filing: string): number {
-  const brackets = filing === "married"
-    ? [[24800, 0.10], [100800, 0.12], [211400, 0.22], [403550, 0.24], [Infinity, 0.32]]
-    : [[12400, 0.10], [50400, 0.12], [105700, 0.22], [201775, 0.24], [Infinity, 0.32]]
-  let tax = 0
-  let prev = 0
-  for (const [limit, rate] of brackets as [number, number][]) {
-    if (annual <= prev) break
-    const taxable = Math.min(annual, limit) - prev
-    tax += taxable * rate
-    prev = limit
-  }
-  return tax
+  const status = filing === "married" ? "mfj" : "single"
+  return federalTax(taxableAfterStandardDeduction(annual, status), status)
 }
 
 const PERIODS = [

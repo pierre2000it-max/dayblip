@@ -102,7 +102,7 @@ export default function SelfEmploymentTaxPage() {
         <div className="mx-auto max-w-[700px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">Self-employed workers pay 15.3% self-employment tax on net earnings up to $168,600 in 2025 — this covers Social Security and Medicare that employers normally split with employees. On $80,000 of freelance income the self-employment tax alone is $11,304 before any income tax. You can deduct half of SE tax from your income.</p>
+            <p className="text-[#e2e8f0]">Self-employed workers pay 15.3% self-employment tax on net earnings up to $184,500 in 2026 — this covers Social Security and Medicare that employers normally split with employees. On $80,000 of freelance income the self-employment tax alone is $11,304 before any income tax. You can deduct half of SE tax from your income.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Self-employment tax is paid by freelancers, independent contractors and business owners in place of the payroll taxes shared between employees and employers. It consists of 12.4% for Social Security and 2.9% for Medicare. This calculator shows your total SE tax liability and estimated quarterly payment amounts to avoid IRS underpayment penalties.</p>
         </div>

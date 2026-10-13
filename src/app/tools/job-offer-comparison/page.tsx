@@ -6,6 +6,7 @@ import RelatedTools from "@/components/RelatedTools"
 import Breadcrumb from "@/components/Breadcrumb"
 import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
+import { federalTax as federalTaxOn, medicareTax, socialSecurityTax, taxableAfterStandardDeduction } from "@/lib/tax2026"
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -92,13 +93,6 @@ const WORK_DAYS: Record<WorkArrangement, number> = {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function getFederalRate(salary: number): number {
-  if (salary <= 50400) return 0.12
-  if (salary <= 105700) return 0.22
-  if (salary <= 201775) return 0.24
-  return 0.32
-}
-
 function getStateTaxRate(state: string): number {
   return STATE_TAX[state] ?? 0.05
 }
@@ -113,12 +107,13 @@ function fmtPct(n: number): string {
 
 function calcOffer(inputs: OfferInputs): OfferResult {
   const grossSalary = inputs.salary + inputs.bonus
-  const federalRate = getFederalRate(grossSalary)
   const stateRate = getStateTaxRate(inputs.state)
 
-  const federalTax = grossSalary * federalRate
+  // Single filer, standard deduction, 2026 brackets. Effective rate is shown.
+  const federalTax = federalTaxOn(taxableAfterStandardDeduction(grossSalary, "single"), "single")
+  const federalRate = grossSalary > 0 ? federalTax / grossSalary : 0
   const stateTax = grossSalary * stateRate
-  const fica = grossSalary * 0.0765
+  const fica = socialSecurityTax(grossSalary) + medicareTax(grossSalary)
   const healthAnnual = inputs.healthPremium * 12
 
   const takehome = grossSalary - federalTax - stateTax - fica - healthAnnual
@@ -562,7 +557,7 @@ export default function JobOfferComparisonPage() {
             {
               question: "How do I compare two job offers?",
               answer:
-                "To properly compare two job offers calculate the true annual value of each: start with base salary subtract federal and state income taxes and FICA (7.65%) subtract annual commute costs and the value of commute time then add 401k match value and benefits. A $90,000 offer in California nets approximately $61,000 after taxes. The same salary in Texas nets $69,000 — an $8,000 difference from state taxes alone.",
+                "To properly compare two job offers calculate the true annual value of each: start with base salary subtract federal and state income taxes and FICA (7.65%) subtract annual commute costs and the value of commute time then add 401k match value and benefits. A $90,000 offer in California nets approximately $63,800 after federal tax, state tax, and FICA. The same salary in Texas nets about $72,100, an $8,400 difference from state taxes alone.",
             },
             {
               question: "Is a higher salary always better?",

@@ -49,7 +49,7 @@ export default function WhatYourPaycheckShowsYouPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              A typical pay stub shows gross pay, federal and state income tax withheld, Social Security tax (6.2% of wages up to $176,100 in 2025), Medicare tax (1.45% of all wages), pre-tax benefit deductions (health insurance, 401k), and post-tax deductions. The difference between gross pay and net pay is made up of these deductions. Your effective tax rate — total taxes divided by gross pay — is almost always lower than your marginal rate.
+              A typical pay stub shows gross pay, federal and state income tax withheld, Social Security tax (6.2% of wages up to $184,500 in 2026), Medicare tax (1.45% of all wages), pre-tax benefit deductions (health insurance, 401k), and post-tax deductions. The difference between gross pay and net pay is made up of these deductions. Your effective tax rate — total taxes divided by gross pay — is almost always lower than your marginal rate.
             </p>
           </div>
         </section>
@@ -95,7 +95,7 @@ export default function WhatYourPaycheckShowsYouPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">FICA: The Two Lines Labeled Social Security and Medicare</h2>
 
           <p>
-            FICA taxes fund Social Security and Medicare. Employees pay 6.2% of wages for Social Security (on wages up to $176,100 in 2025, which is the wage base limit) and 1.45% for Medicare on all wages. Employers match these amounts.
+            FICA taxes fund Social Security and Medicare. Employees pay 6.2% of wages for Social Security (on wages up to $184,500 in 2026, which is the wage base limit) and 1.45% for Medicare on all wages. Employers match these amounts.
           </p>
 
           <p>
