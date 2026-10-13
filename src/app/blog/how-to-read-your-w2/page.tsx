@@ -31,7 +31,7 @@ const faqSchema = {
       name: "What does Code D mean in Box 12 of my W-2?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Code D in Box 12 represents your traditional 401k contributions for the year. This amount was excluded from Box 1, which is why it does not appear in your federal taxable income. The 2025 contribution limit was $23,500 per IRS Revenue Procedure 2025-32.",
+        text: "Code D in Box 12 represents your traditional 401k contributions for the year. This amount was excluded from Box 1, which is why it does not appear in your federal taxable income. The 2026 employee contribution limit is $24,500 per IRS Notice 2025-67 (it was $23,500 in 2025). Workers 50 and older can add an $8,000 catch-up.",
       },
     },
     {
@@ -180,7 +180,7 @@ export default function HowToReadYourW2Page() {
               </thead>
               <tbody>
                 {[
-                  { code: "D", meaning: "Traditional 401k contributions. Excluded from Box 1. 2025 limit: $23,500." },
+                  { code: "D", meaning: "Traditional 401k contributions. Excluded from Box 1. 2026 limit: $24,500 (2025: $23,500)." },
                   { code: "W", meaning: "Employer + employee HSA contributions. Both types appear here." },
                   { code: "DD", meaning: "Cost of employer-sponsored health insurance. Informational only — not taxable, not deductible." },
                   { code: "AA", meaning: "Roth 401k contributions. These were NOT excluded from Box 1 — you already paid tax. Withdrawals in retirement are tax-free." },
