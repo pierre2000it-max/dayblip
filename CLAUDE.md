@@ -234,6 +234,7 @@ IRS publishes new brackets in November (Revenue Procedure). Changes take effect 
 | `src/app/daily/page.tsx` | 401k limit question (amount + year label) + SS wage base in FICA explanation + annual gift exclusion question ($19,000 for 2026, literal) + federal student loan rate question (6.52% undergrad for 2026-27, set each June from the May Treasury auction) | Standard deduction and top-bracket questions read from `tax2026.ts`. Roth IRA, gift exclusion, student loan rate, and 401k are literals to update |
 | `src/app/blog/roth-ira-vs-traditional-ira/page.tsx` | IRA phase-out income thresholds | Check IRS Notice for Roth/trad limits |
 | `src/app/blog/how-much-saved-by-age/page.tsx` | 401k/IRA contribution limits | Verify against IRS Notice |
+| `src/app/blog/how-to-read-your-w2/page.tsx` | 401k limit in Box 12 Code D (FAQ text + table row) | Verify against IRS Notice. Cite the Notice, not the Rev. Proc. |
 
 **Key annual figures to update:**
 - Standard deduction (single / MFJ / MFS / HOH)
