@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'First Paycheck Calculator 2026 — What Will I Actually Take Home?',
-  description: 'Calculate exactly what your first paycheck will look like after federal tax, state tax, Social Security, Medicare, and deductions. No more paycheck shock. Free — no signup.',
+  description: "See what your first paycheck looks like after federal tax, state tax, Social Security, Medicare, and deductions. Skip the shock. Free — no signup required.",
   alternates: {
     canonical: 'https://www.dayblip.com/finance/first-paycheck'
   },

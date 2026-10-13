@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Calorie Calculator — Daily Calorie Needs for Your Goals",
   description:
-    "Calculate your daily calorie needs based on age weight height activity level and goal. Uses the Mifflin-St Jeor equation — the most accurate calorie formula available.",
+    "Calculate your daily calorie needs from age, weight, height, activity, and goal using the Mifflin-St Jeor equation. Free — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/health/calorie-calculator" },
   openGraph: {
     title: "Calorie Calculator — Daily Calorie Needs for Your Goals",

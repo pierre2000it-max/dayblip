@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Freelancer Financial Tools — Calculator Hub',
-  description: 'All the financial calculators freelancers need in one place. True hourly wage, freelancer rate, self-employment tax, WFH savings, and side hustle potential. Free.',
+  description: "Every calculator freelancers need: true hourly wage, freelancer rate, self-employment tax, WFH savings, and side hustles. Free — no signup required.",
   alternates: { canonical: 'https://www.dayblip.com/tools/freelancer-hub' },
   openGraph: {
     title: 'Freelancer Financial Tools — Calculator Hub',

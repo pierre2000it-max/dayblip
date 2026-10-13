@@ -3,15 +3,17 @@ import { TOOL_COUNT } from "@/data/tool-count"
 import { DAYBLIP_ORG } from "@/lib/authorSchema"
 import Link from "next/link"
 
+const ABOUT_DESCRIPTION = `Dayblip was built by Pierre, an MBA, business strategist and AI consultant. ${TOOL_COUNT} free tools. No signup, no paywall, no email.`
+
 export const metadata: Metadata = {
   title: "Meet Pierre — Founder of Dayblip",
   description:
-    `Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — ${TOOL_COUNT} free tools. No signup, no paywall, no email.`,
+    ABOUT_DESCRIPTION,
   alternates: { canonical: "https://www.dayblip.com/about" },
   openGraph: {
     title: "Meet Pierre — Founder of Dayblip",
     description:
-      `Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — ${TOOL_COUNT} free tools. No signup, no paywall, no email.`,
+      ABOUT_DESCRIPTION,
     type: "website",
     url: "https://www.dayblip.com/about",
     images: [{ url: "/api/og?title=Meet+Pierre&emoji=👋&subtitle=Founder+of+Dayblip", width: 1200, height: 630, alt: "Meet Pierre — Founder of Dayblip" }],
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Meet Pierre — Founder of Dayblip",
     description:
-      `Dayblip was built by Pierre — MBA, Business Strategist & AI Consultant, author, and entrepreneur — ${TOOL_COUNT} free tools. No signup, no paywall, no email.`,
+      ABOUT_DESCRIPTION,
   },
 }
 

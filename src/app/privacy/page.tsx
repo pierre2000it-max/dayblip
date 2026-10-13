@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Dayblip privacy policy — how we collect, use and protect your data.",
+  description: "Read the Dayblip privacy policy: what data we collect, how we use cookies and analytics, how we protect your information, and your choices.",
   alternates: {
     canonical: "https://www.dayblip.com/privacy",
   },

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with the Dayblip team.",
+  description: "Contact the Dayblip team with questions, feedback, bug reports, or tool ideas. We read every message and reply as soon as we can. No signup required.",
   alternates: { canonical: "https://www.dayblip.com/contact" },
 };
 

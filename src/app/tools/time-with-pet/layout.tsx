@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Time Left With Your Pet Calculator',
-  description: 'Calculate how many years, walks, and cuddles you have left with your dog or cat based on their age and breed. Cherish every moment. Free — no signup required.',
+  description: "Calculate how many years, walks, and cuddles you have left with your dog or cat based on age and breed. Free — no signup required.",
   alternates: {
     canonical: 'https://www.dayblip.com/tools/time-with-pet'
   },

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import seoPages from "@/data/seo-pages.json";
+import { marketDescription } from "@/lib/metaDescriptions";
 
 interface SeoPage {
   zip: string;
@@ -55,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return { title: "Market Score — Dayblip" };
   return {
     title: `${page.headline} — Dayblip`,
-    description: page.direct_answer,
+    description: marketDescription(page.zip, page.state_name, page.category_display, page.band_low, page.band_high),
   };
 }
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
-  description: "Dayblip terms of use — the rules governing use of dayblip.com.",
+  description: "Read the Dayblip terms of use: the rules for using dayblip.com, our free tools and calculators, content ownership, and limits of liability.",
   alternates: {
     canonical: "https://www.dayblip.com/terms",
   },

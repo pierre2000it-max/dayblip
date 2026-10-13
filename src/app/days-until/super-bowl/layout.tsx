@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Days Until Super Bowl 2027 — Live Countdown',
-  description: "How many days until Super Bowl LXI? Live countdown to February 14 2027 at SoFi Stadium in Inglewood California. The first Super Bowl on Valentine's Day. Free.",
+  description: "How many days until Super Bowl LXI? Live countdown to February 14, 2027 at SoFi Stadium in Inglewood, California. Free — no signup required.",
   alternates: { canonical: 'https://www.dayblip.com/days-until/super-bowl' },
   openGraph: {
     title: 'Days Until Super Bowl 2027 — Live Countdown',

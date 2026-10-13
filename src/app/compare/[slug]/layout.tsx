@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { cities } from '@/data/cost-of-living'
 import { SALARY_DATA } from '@/data/salary-data'
+import { cityPairDescription, jobPairDescription } from '@/lib/metaDescriptions'
 
 function parseSlug(slug: string): {
   type: 'city' | 'job' | null
@@ -30,7 +31,7 @@ export async function generateMetadata(
     const cityA = cities.find(c => c.slug === aSlug)!
     const cityB = cities.find(c => c.slug === bSlug)!
     const title = `${cityA.name} vs ${cityB.name} — Cost of Living Comparison`
-    const description = `Compare cost of living between ${cityA.name} and ${cityB.name}. Housing, groceries, transport, healthcare side by side. COLI: ${cityA.name} ${cityA.coliIndex} vs ${cityB.name} ${cityB.coliIndex}. Free.`.slice(0, 155)
+    const description = cityPairDescription(cityA.name, cityA.coliIndex, cityB.name, cityB.coliIndex)
     return {
       title,
       description,
@@ -54,7 +55,7 @@ export async function generateMetadata(
     const jobA = SALARY_DATA.find(j => j.slug === aSlug)!
     const jobB = SALARY_DATA.find(j => j.slug === bSlug)!
     const title = `${jobA.job} vs ${jobB.job} Salary Comparison`
-    const description = `Compare ${jobA.job} and ${jobB.job} salaries nationwide. National median: ${jobA.job} $${jobA.national.toLocaleString()} vs ${jobB.job} $${jobB.national.toLocaleString()}. BLS 2024-2025. Free.`.slice(0, 155)
+    const description = jobPairDescription(jobA.job, jobA.national, jobB.job, jobB.national)
     return {
       title,
       description,

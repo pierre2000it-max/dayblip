@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "American Dream Calculator — How Long Until You Can Afford It?",
-  description: "Calculate how long it will take you to achieve the American Dream based on your income and state. House cars kids retirement — see the real timeline. Free. No signup.",
+  description: "Find out how long the American Dream takes based on your income and state. See the timeline for a house, kids, and retirement. Free — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/tools/american-dream-calculator" },
   openGraph: {
     title: "American Dream Calculator",

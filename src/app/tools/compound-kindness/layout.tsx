@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Compound Kindness Calculator — What Is Your Ripple Effect?",
-  description: "Calculate the ripple effect of daily acts of kindness. See how your small actions could impact thousands.",
+  description: "Calculate the ripple effect of daily acts of kindness and see how small actions could reach thousands of people. Free — no signup required.",
   keywords: "kindness ripple effect calculator, compound kindness, acts of kindness calculator",
   alternates: { canonical: "https://www.dayblip.com/tools/compound-kindness" },
 }

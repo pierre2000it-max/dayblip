@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Rent vs Buy — Is Buying Always Better? Here Is the Math",
   description:
-    "Buying a home is not always better than renting financially. The break-even point is typically 5-7 years. Here is how to calculate which is right for your situation.",
+    "Buying is not always better than renting. The break-even point is typically 5 to 7 years. Learn how to work out which one fits your situation.",
   alternates: {
     canonical: "https://www.dayblip.com/blog/rent-vs-buy-calculator",
   },

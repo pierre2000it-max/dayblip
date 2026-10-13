@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BORN_IN_DESCRIPTIONS } from "@/data/bornInDescriptions";
 import bornInRaw from "@/data/bornIn.json";
 import { generateBornInSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { faqSchema } from "@/lib/schema";
@@ -84,9 +85,8 @@ export async function generateMetadata({
   const title = data
     ? `Born in ${label}? ${data.worldEvent} | What The World Was Like`
     : `Born in ${label} | What Was The World Like?`;
-  const desc  = data
-    ? `In ${label}, ${data.worldEvent.replace(/\.\s*$/, "")}. "${splitSong(data.number1Song).song}" topped the charts, gas cost ${data.gasPrice} a gallon and the world population was ${data.population}. See every fact from the year you were born.`
-    : `Discover what the world looked like in ${label}. The #1 song, top movies, gas prices and major events from the year you were born.`;
+  const desc  = (data && BORN_IN_DESCRIPTIONS[data.year])
+    ?? `Discover what the world looked like in ${label}. The #1 song, top movies, gas prices and major events from the year you were born.`;
   const url   = `https://www.dayblip.com/born-in/${label}`;
   return {
     title,

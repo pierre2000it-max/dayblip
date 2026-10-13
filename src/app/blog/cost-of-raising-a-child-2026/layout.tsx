@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "How Much Does It Actually Cost to Raise a Child in 2026? | Dayblip",
-  description: "The inflation-adjusted cost of raising a child from birth to 18 is approximately $310,000 for a middle-income family in 2026 per USDA data adjusted by BLS inflation. The full annual breakdown by category.",
+  description: "Raising a child from birth to 18 costs about $310,000 for a middle-income family in 2026, per USDA data adjusted for inflation. See the annual breakdown.",
   alternates: {
     canonical: "https://www.dayblip.com/blog/cost-of-raising-a-child-2026",
   },

@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Generation Salary Comparison — Compare Your Salary to Your Parents at the Same Age",
   description:
-    "Compare your salary and financial situation to your parents at the same age. See if your generation is doing better or worse adjusted for inflation and cost of living. Free. No signup.",
+    "Compare your salary to your parents' at your age, adjusted for inflation and cost of living. See which generation did better. Free — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/tools/generation-compare" },
   openGraph: {
     title: "Generation Salary Comparison",

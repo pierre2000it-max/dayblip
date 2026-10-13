@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Earthquakes Today — Live Counter",
-  description: "See every earthquake happening right now worldwide. Live data from USGS updated every 60 seconds. Magnitude, location, and count of today's earthquakes. Free.",
+  description: "See every earthquake happening worldwide right now. Live USGS data updated every 60 seconds with magnitude, location, and count. Free — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/world-counters/earthquakes-today" },
   openGraph: {
     title: "Earthquakes Today — Live Counter",

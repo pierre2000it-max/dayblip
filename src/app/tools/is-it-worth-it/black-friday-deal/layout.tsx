@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Black Friday Deal Analyzer — Is It a Real Deal?',
-  description: 'Is that Black Friday deal actually worth it? Enter the original price and sale price to find out if the discount is real or inflated. Includes opportunity cost and financing true cost. Free.',
+  description: "Is that Black Friday deal worth it? Enter the original and sale price to see if the discount is real, with opportunity cost. Free — no signup required.",
   alternates: {
     canonical: 'https://www.dayblip.com/tools/is-it-worth-it/black-friday-deal'
   },

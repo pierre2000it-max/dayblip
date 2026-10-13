@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import holidaysData from "@/data/holidays.json";
 import CountdownDisplay from "./CountdownDisplay";
+import { holidayFallbackDescription } from "@/lib/metaDescriptions";
 import {
   generateCountdownSchema,
   generateBreadcrumbSchema,
@@ -150,15 +151,12 @@ export async function generateMetadata({
   if (!holiday) return { title: "Not Found" };
   const year = new Date().getFullYear();
   const title = HOLIDAY_TITLE_OVERRIDES[params.slug] ?? `Days Until ${holiday.name} ${year}`;
-  const intro = HOLIDAY_INTROS[params.slug];
   const descriptionText = params.slug === "christmas"
     ? "How many days until Christmas 2026? Live countdown to December 25 showing exact days, hours, minutes and seconds remaining. Free — no signup required."
     : params.slug === "summer-break"
     ? "How many days until summer break 2026? Live countdown for students showing exact days, hours, minutes and seconds until school lets out. Free — no signup."
     : HOLIDAY_META_DESCRIPTIONS[params.slug]
-    ?? (intro
-      ? intro.length > 160 ? `${intro.slice(0, 157).trimEnd()}...` : intro
-      : `How many days until ${holiday.name}? Live countdown to ${holiday.name} ${year}. Updated in real time.`);
+    ?? holidayFallbackDescription(holiday.name, year);
   const description = descriptionText;
   const url = `https://www.dayblip.com/days-until/${params.slug}`;
   return {

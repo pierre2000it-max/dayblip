@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import CountdownClient from "./CountdownClient";
+import { countdownDescription } from "@/lib/metaDescriptions";
 
 interface Props {
   params: { slug: string };
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const title = `Countdown to ${data.event_name} | Dayblip`;
-  const description = `See how many days, hours, and minutes are left until ${data.event_name} on ${data.event_date}.`;
+  const description = countdownDescription(data.event_name, data.event_date);
 
   return {
     title,

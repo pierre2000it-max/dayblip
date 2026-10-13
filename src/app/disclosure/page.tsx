@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Affiliate Disclosure",
-  description: "Dayblip affiliate disclosure — how we earn commissions and how it affects you.",
+  description: "Read the Dayblip affiliate disclosure: how we earn commissions from some links, what that means for you, and why it never affects our tools.",
   alternates: { canonical: "https://www.dayblip.com/disclosure" },
 };
 

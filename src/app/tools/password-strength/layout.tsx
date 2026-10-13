@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Password Strength Checker — How Long to Crack Your Password?",
-  description: "Check your password strength and see how long it would take to crack. Get specific tips to make your password stronger. All checking happens in your browser. Free.",
+  description: "Check your password strength and see how long it would take to crack. Get tips to make it stronger. Checks run in your browser. Free — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/tools/password-strength" },
 }
 

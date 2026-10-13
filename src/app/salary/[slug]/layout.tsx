@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getSalaryBySlug } from '@/data/salary-data'
+import { salaryDescription } from '@/lib/metaDescriptions'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -11,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const formatted = '$' + stateSalary.toLocaleString()
   return {
     title: `${entry.job} Salary in ${state.name} 2026`,
-    description: `The average ${entry.job.toLowerCase()} salary in ${state.name} is ${formatted} per year (BLS OES 2024-2025). See how ${state.name} compares to the national median of $${entry.national.toLocaleString()}.`,
+    description: salaryDescription(entry.job, state.name, formatted, entry.national),
     alternates: { canonical: `https://www.dayblip.com/salary/${slug}` },
     openGraph: {
       title: `${entry.job} Salary in ${state.name} 2026`,

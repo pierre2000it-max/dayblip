@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: '2026 Tax Refund Estimator — How Big Will My Refund Be?',
-  description: 'Estimate your 2026 federal tax refund or amount owed. Enter your income, filing status, withholding, and deductions for an instant estimate. Free — no signup required.',
+  description: "Estimate your 2026 federal tax refund or amount owed from income, filing status, withholding, and deductions. Free — no signup required.",
   alternates: {
     canonical: 'https://www.dayblip.com/tools/tax-refund-estimator'
   },

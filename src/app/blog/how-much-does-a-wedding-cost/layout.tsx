@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "How Much Does a Wedding Actually Cost in 2026? | Dayblip",
   description:
-    "The average US wedding costs $34,200 in 2026 per The Knot Real Weddings Study of 10,474 couples. The median is closer to $20,000-$25,000. Here is the full breakdown by category and by region.",
+    "The average US wedding costs $34,200 in 2026 per The Knot study of 10,474 couples. The median is closer to $20,000 to $25,000. See costs by category.",
   alternates: {
     canonical: "https://www.dayblip.com/blog/how-much-does-a-wedding-cost",
   },

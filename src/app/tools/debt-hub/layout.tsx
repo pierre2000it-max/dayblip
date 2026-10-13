@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Debt Payoff Calculators — Hub',
-  description: 'All the debt calculators you need in one place. Debt payoff date, minimum payment true cost, debt freedom tracker, and budget planner. Free — no signup required.',
+  description: "Every debt calculator in one place: payoff date, true cost of minimum payments, debt freedom tracker, and budget planner. Free — no signup required.",
   alternates: { canonical: 'https://www.dayblip.com/tools/debt-hub' },
   openGraph: {
     title: 'Debt Payoff Calculators — Hub',

@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "How to Compare Two Job Offers the Right Way in 2026 | Dayblip",
   description:
-    "Comparing job offers by gross salary is the most common mistake in career decision-making. A $90,000 California in-office job can be worth less than an $82,000 remote Texas job after full calculation.",
+    "Comparing job offers by gross salary is a costly mistake. A $90,000 California office job can be worth less than an $82,000 remote Texas job.",
   alternates: {
     canonical: "https://www.dayblip.com/blog/how-to-compare-job-offers",
   },

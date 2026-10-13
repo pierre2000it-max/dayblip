@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Countdown Timers — Days Until Holidays and Sports Events',
   description:
-    'Free countdown timers to every major holiday and sports event. Days until Christmas, New Year, Super Bowl, World Cup, NBA Finals, and more. Updated live. Free.',
+    "Free countdown timers to every major holiday and sports event: Christmas, New Year, Super Bowl, World Cup, NBA Finals, and more. Updated live.",
   alternates: { canonical: 'https://www.dayblip.com/days-until' },
   openGraph: {
     title: 'Countdown Timers — Days Until Holidays and Sports',
