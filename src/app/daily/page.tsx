@@ -91,8 +91,8 @@ const PUZZLES: Puzzle[] = [
     explanation: "An ETF (Exchange Traded Fund) is a basket of securities that trades on a stock exchange like a single stock. ETFs often track an index like the S&P 500. They offer diversification at low cost — a broad market ETF can have an expense ratio as low as 0.03%.",
   },
   {
-    question: "What is the current annual contribution limit for a Roth IRA (2024–2026)?",
-    options: ["$5,500", "$6,500", "$7,000", "$8,000"],
+    question: "What is the annual contribution limit for a Roth IRA in 2026 (under age 50)?",
+    options: ["$6,500", "$7,000", "$7,500", "$8,600"],
     answer: 2,
     explanation: "The 2026 Roth IRA contribution limit is $7,500 per year ($8,600 if you are age 50 or older). Roth IRA contributions are made with after-tax dollars but grow tax-free, and qualified withdrawals in retirement are completely tax-free.",
   },
@@ -457,7 +457,7 @@ const PUZZLES: Puzzle[] = [
     question: "What is the current federal minimum wage in the US?",
     options: ["$7.25", "$8.00", "$9.50", "$10.00"],
     answer: 0,
-    explanation: "The federal minimum wage has been $7.25 per hour since 2009 — over 15 years without a federal increase, the longest stretch in US history. However, 30+ states and many cities have higher minimum wages. California's minimum wage reached $16/hour in 2024. Full-time at $7.25/hour yields about $15,080 per year before taxes.",
+    explanation: "The federal minimum wage has been $7.25 per hour since 2009 — over 17 years without a federal increase, the longest stretch in US history. However, 30+ states and many cities have higher minimum wages. California's minimum wage reached $16/hour in 2024. Full-time at $7.25/hour yields about $15,080 per year before taxes.",
   },
   {
     question: "What is a required minimum distribution (RMD)?",
@@ -597,7 +597,7 @@ const PUZZLES: Puzzle[] = [
   {
     question: "What is the average Social Security monthly benefit in 2024?",
     options: ["$1,050", "$1,350", "$1,900", "$2,400"],
-    answer: 1,
+    answer: 2,
     explanation: "The average Social Security retirement benefit was approximately $1,907 per month in 2024 according to the Social Security Administration. The maximum benefit for someone retiring at full retirement age in 2024 is $3,822/month. Social Security replaces about 40% of pre-retirement income for average earners — far below the 70-80% recommended replacement rate.",
   },
   {
@@ -652,10 +652,10 @@ const PUZZLES: Puzzle[] = [
     explanation: "A debt-to-income ratio below 36% is considered healthy by most financial planners, with the mortgage payment accounting for no more than 28% of gross income. Above 43% most mortgage lenders will not approve you. Above 50% indicates financial stress — most of your income is servicing debt leaving little room for saving or emergencies.",
   },
   {
-    question: "What is the average cost of a 4-year public college education in 2024?",
-    options: ["$25,000 total", "$45,000 total", "$46,400 per year", "$88,000 total"],
+    question: "What is the average published tuition and fees at a 4-year public college for in-state students in 2025-26?",
+    options: ["$5,500", "$8,500", "$11,950", "$18,000"],
     answer: 2,
-    explanation: "The average cost of attending a 4-year public college in 2024 is approximately $27,000 per year for in-state students including tuition, room, board, and fees — about $108,000 total for four years. Out-of-state costs average about $45,000 per year. Private non-profit colleges average $59,000 per year.",
+    explanation: "The College Board reports average published tuition and fees of $11,950 in 2025-26 for in-state students at public four-year colleges, up from $11,610 in 2024-25. Out-of-state students pay about $31,880 and private nonprofit colleges average $45,000. These are tuition and fees only. Room, board, books and transportation add thousands more per year, and financial aid lowers what many families actually pay.",
   },
   {
     question: "What is passive income?",
