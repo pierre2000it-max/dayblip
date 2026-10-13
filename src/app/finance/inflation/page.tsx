@@ -13,9 +13,11 @@ const CPI: Record<number, number> = {
   1913: 9.9, 1920: 20.0, 1930: 16.7, 1940: 14.0, 1950: 24.1,
   1960: 29.6, 1970: 38.8, 1975: 53.8, 1980: 82.4, 1985: 107.6,
   1990: 130.7, 1995: 152.4, 2000: 172.2, 2005: 195.3, 2010: 218.1,
-  2015: 237.0, 2020: 258.8, 2024: 314.0, 2026: 325.0,
-  // Projections at ~2% annual inflation — replace with BLS actuals each January
-  2027: 331.5, 2028: 338.1, 2029: 344.9, 2030: 351.8,
+  2015: 237.0, 2020: 258.8, 2024: 313.7, 2025: 321.9, 2026: 331.7,
+  // 2024 = BLS annual average. 2025 = average of 11 months (Oct missing, 2025 funding lapse).
+  // 2026 = Jan-Aug 2026 average (BLS, Aug 2026 index 334.98). Replace with the full-year average each January.
+  // Projections at ~2% annual inflation, replace with BLS actuals each January
+  2027: 338.3, 2028: 345.1, 2029: 352.0, 2030: 359.0,
 }
 
 const YEARS = Object.keys(CPI).map(Number).sort((a, b) => a - b)

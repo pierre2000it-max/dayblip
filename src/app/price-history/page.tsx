@@ -31,7 +31,7 @@ const FAQS = [
   {
     question: "How much is $100 in 1990 worth today?",
     answer:
-      "About $249 in 2026 dollars. The calculator divides a 2026 CPI projection of 325.0 by the 1990 CPI-U annual average of 130.7, which gives a multiplier of about 2.49.",
+      "About $254 in 2026 dollars. The calculator divides the 2026 CPI-U average to date of 331.7 by the 1990 CPI-U annual average of 130.7, which gives a multiplier of about 2.54.",
   },
   {
     question: "How much did the average house cost in 1980?",
@@ -89,7 +89,7 @@ export default function PriceHistoryPage() {
               Quick Answer
             </div>
             <p style={{ color: "#ffffff", fontSize: "16px", lineHeight: 1.6, margin: 0 }}>
-              $100 in 1990 buys what about $249 buys in 2026. Over the same years a gallon of gas went from $1.16 to about $3.20,
+              $100 in 1990 buys what about $254 buys in 2026. Over the same years a gallon of gas went from $1.16 to about $3.20,
               a new car from $16,012 to about $48,000, and the average house from $149,800 to about $420,000. Pick a year below to
               compare 8 everyday items.
             </p>
@@ -104,14 +104,14 @@ export default function PriceHistoryPage() {
             <p style={{ margin: "0 0 16px" }}>
               A gallon of gas cost about $0.27 in 1950 and about $3.20 today, a 12x rise. A loaf of bread went from $0.14 to
               $4.50, a 32x rise. A postage stamp went from 3 cents to 73 cents. The average house went from about $7,354 to
-              about $420,000, a 57x rise. The general price level, measured by CPI-U, rose about 13.5x across the same period.
+              about $420,000, a 57x rise. The general price level, measured by CPI-U, rose about 13.8x across the same period.
             </p>
 
             <h2 style={{ color: "#ffffff", fontSize: "22px", fontWeight: 700, margin: "24px 0 12px" }}>
               Which items beat inflation
             </h2>
             <p style={{ margin: "0 0 16px" }}>
-              Compare each item with the 13.5x rise in the general price level since 1950. Houses (57x), bread (32x), new cars
+              Compare each item with the 13.8x rise in the general price level since 1950. Houses (57x), bread (32x), new cars
               (32x) and movie tickets (30x) rose faster. Gas (12x) and milk (5x) rose slower. Coffee shows the biggest jump
               because a cup cost a nickel in 1950 and a café price is far higher now. A price that beats inflation means the item
               got more expensive in real terms, not only in dollars.
@@ -122,7 +122,7 @@ export default function PriceHistoryPage() {
             </h2>
             <p style={{ margin: "0 0 16px" }}>
               Inflation lowers what a dollar buys each year. CPI-U tracks the cost of a fixed basket of goods and services. If the
-              index was 130.7 in 1990 and is projected at 325.0 in 2026, the same basket costs about 2.49 times as much. The
+              index was 130.7 in 1990 and has averaged 331.7 so far in 2026, the same basket costs about 2.54 times as much. The
               inflation calculator above applies that ratio to any amount and any of the 8 decades.
             </p>
 
@@ -151,7 +151,7 @@ export default function PriceHistoryPage() {
           </section>
 
           <div>
-            <MethodologyNote text="Past prices are rounded U.S. national averages for each year. The 2026 prices are estimates, so treat percentage changes as approximate. Inflation adjustments use CPI-U annual averages with a 2026 projection of 325.0." />
+            <MethodologyNote text="Past prices are rounded U.S. national averages for each year. The 2026 prices are estimates, so treat percentage changes as approximate. Inflation adjustments use CPI-U annual averages with the Jan-Aug 2026 average of 331.7." />
             <LastUpdated date="October 2026" />
             <DataLink slug="price-history" label="Want every price and CPI value in one table?" />
           </div>

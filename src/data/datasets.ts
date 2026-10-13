@@ -159,7 +159,7 @@ const priceHistory: Dataset = {
   metaDescription:
     "Average US prices for gas, bread, milk, movie tickets, houses and cars from 1950 to 2026, with CPI-U and a CSV download. Free, no signup required.",
   keyFinding:
-    "A gallon of gas cost about $0.27 in 1950 and about $3.20 in 2026, while the average house rose from $7,354 to about $420,000. CPI-U rose about 13.5x over the same period.",
+    "A gallon of gas cost about $0.27 in 1950 and about $3.20 in 2026, while the average house rose from $7,354 to about $420,000. CPI-U rose about 13.8x over the same period.",
   intro:
     "Rounded US average prices for 8 everyday items, one row per benchmark year. The CPI-U column lets you adjust any price for inflation.",
   columns: [
@@ -183,7 +183,7 @@ const priceHistory: Dataset = {
     "Item prices: rounded national averages compiled by Dayblip from public U.S. government price series",
   ],
   method:
-    "Past prices are rounded national averages for each benchmark year. The 2026 prices are Dayblip estimates and the 2026 CPI-U is a projection of 325.0, so percentage changes are approximate. To adjust a price for inflation, multiply it by 325.0 divided by the CPI-U for its year.",
+    "Past prices are rounded national averages for each benchmark year. The 2026 prices are Dayblip estimates and the 2026 CPI-U is the Jan-Aug 2026 average of 331.7, so percentage changes are approximate. To adjust a price for inflation, multiply it by 331.7 divided by the CPI-U for its year.",
   updated: "October 2026",
   updatedISO: "2026-10-04",
   toolHref: "/price-history",
