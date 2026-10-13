@@ -273,6 +273,7 @@ const urls = [
   "https://www.dayblip.com/blog/debt-avalanche-vs-snowball",
   "https://www.dayblip.com/blog/true-cost-of-owning-a-pet",
   "https://www.dayblip.com/blog/self-employment-tax-2026",
+  "https://www.dayblip.com/blog/federal-tax-brackets-2026",
   "https://www.dayblip.com/blog/what-is-the-4-percent-rule",
   "https://www.dayblip.com/blog/how-much-does-a-wedding-cost",
   "https://www.dayblip.com/blog/how-to-compare-job-offers",
@@ -360,6 +361,7 @@ async function main() {
   );
   console.log();
 
+  const results = [];
   for (const endpoint of INDEXNOW_ENDPOINTS) {
     const domain = new URL(endpoint).hostname;
     let successCount = 0;
@@ -400,6 +402,7 @@ async function main() {
       }
     }
 
+    results.push({ domain, successCount, failCount })
     const icon = failCount === 0 ? "✅" : successCount > 0 ? "⚠️" : "❌";
     console.log(`${successCount} submitted  ${failCount} failed  ${icon}`);
   }
@@ -416,8 +419,12 @@ async function main() {
   console.log(`  Finance pages        : 26`);
   console.log(`  Holiday countdowns   : 14`);
   console.log();
-  console.log("  Sitemap pings        : Google ✓  Bing ✓");
-  console.log("  IndexNow endpoints   : 4");
+  console.log("  Sitemap pings        : skipped (Google and Bing retired their ping endpoints)");
+  console.log("  IndexNow results     :");
+  for (const r of results) {
+    const mark = r.failCount === 0 ? "OK    " : r.successCount > 0 ? "PARTIAL" : "FAILED ";
+    console.log(`    ${mark} ${r.domain}  ${r.successCount} accepted, ${r.failCount} rejected`);
+  }
   console.log("  Batches per endpoint : " + batches.length);
   console.log();
   console.log("  Run this script any time you add new pages:");
