@@ -76,7 +76,7 @@ const relatedTools = [
   { emoji: "🌍", title: "World Counters", desc: "Live global statistics", href: "/world-counters" },
   { emoji: "🌊", title: "Plastic in Ocean", desc: "Live ocean plastic counter", href: "/world-counters/plastic-in-ocean" },
   { emoji: "🌳", title: "Trees Cut Today", desc: "Live deforestation counter", href: "/world-counters/trees-cut-today" },
-  { emoji: "💰", title: "US National Debt", desc: "Live US debt clock", href: "/world-counters/us-national-debt" },
+  { emoji: "💰", title: "US National Debt", desc: "Live US debt clock", href: "/world-counters/us-debt" },
 ]
 
 export default function Co2EmissionsPage() {

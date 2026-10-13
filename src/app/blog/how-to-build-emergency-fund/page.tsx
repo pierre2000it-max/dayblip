@@ -38,8 +38,8 @@ const faqSchema = {
 }
 
 const relatedTools = [
-  { title: "Compound Interest Calculator", href: "/tools/compound-interest", description: "See how your savings grow over time at different rates." },
-  { title: "Debt Payoff Calculator", href: "/tools/debt-payoff", description: "Build a plan to eliminate debt while building savings." },
+  { title: "Compound Interest Calculator", href: "/finance/compound-interest", description: "See how your savings grow over time at different rates." },
+  { title: "Debt Payoff Calculator", href: "/finance/debt-payoff", description: "Build a plan to eliminate debt while building savings." },
   { title: "FI Date Calculator", href: "/tools/fi-date", description: "Calculate your financial independence date." },
   { title: "Net Worth Calculator", href: "/finance/net-worth", description: "Track your complete financial picture." },
 ]
@@ -226,7 +226,7 @@ export default function HowToBuildEmergencyFundPage() {
           <div style={{ background: "#1e2d4a", borderRadius: "8px", padding: "20px", margin: "32px 0", textAlign: "center" }}>
             <p className="text-[#a8a8b3] mb-4 text-sm">Calculate your exact emergency fund target based on your essential expenses:</p>
             <Link
-              href="/finance/savings-calculator"
+              href="/finance/savings-goal"
               style={{ display: "inline-block", color: "#e94560", fontWeight: 600, textDecoration: "none", fontSize: "16px", border: "1px solid #e94560", borderRadius: "6px", padding: "10px 24px" }}
             >
               Savings Calculator →

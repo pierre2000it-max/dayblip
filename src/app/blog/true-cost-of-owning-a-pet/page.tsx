@@ -48,7 +48,7 @@ const faqSchema = {
 
 const relatedTools = [
   { title: "Financial Life Score", href: "/tools/financial-life-score", description: "10-question financial health assessment" },
-  { title: "Compound Interest", href: "/tools/compound-interest", description: "See how money grows over time" },
+  { title: "Compound Interest", href: "/finance/compound-interest", description: "See how money grows over time" },
   { title: "Net Worth Calculator", href: "/finance/net-worth", description: "Track total assets minus liabilities" },
   { title: "FI Date Calculator", href: "/tools/fi-date", description: "See your financial independence date" },
 ]

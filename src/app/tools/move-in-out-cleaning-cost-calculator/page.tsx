@@ -527,7 +527,6 @@ export default function MoveInOutCleaningCostCalculatorPage() {
             {/* Related Tools */}
             <div style={{ marginTop: 40 }}>
               <RelatedTools tools={[
-                { emoji: "🏠", title: "Home Cleaning Cost Calculator",    desc: "Estimate regular residential cleaning costs",                    href: "/tools/home-cleaning-cost-calculator" },
                 { emoji: "📦", title: "Moving Stress Calculator",          desc: "How much is your move actually weighing on you?",              href: "/tools/moving-stress-calculator" },
                 { emoji: "🏢", title: "Commercial Cleaning ROI Calculator", desc: "The business case for professional office cleaning",           href: "/tools/commercial-cleaning-roi-calculator" },
                 { emoji: "🏠", title: "Family Mental Load Score",           desc: "How much of your household are you carrying alone?",          href: "/tools/family-mental-load-score" },

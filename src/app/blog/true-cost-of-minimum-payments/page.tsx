@@ -41,7 +41,7 @@ const relatedTools = [
   { title: "Minimum Payment Calculator", href: "/tools/minimum-payment", description: "See the payoff time and total interest on your own balance and rate." },
   { title: "Debt Payoff Calculator", href: "/finance/debt-payoff", description: "Calculate your exact payoff timeline and interest savings for any balance." },
   { title: "Net Worth Calculator", href: "/finance/net-worth", description: "Track your complete financial picture including all debts." },
-  { title: "Compound Interest Calculator", href: "/tools/compound-interest", description: "See how money grows when working for you instead of against you." },
+  { title: "Compound Interest Calculator", href: "/finance/compound-interest", description: "See how money grows when working for you instead of against you." },
   { title: "Financial Life Score", href: "/tools/financial-life-score", description: "Get a comprehensive score across all areas of your finances." },
 ]
 

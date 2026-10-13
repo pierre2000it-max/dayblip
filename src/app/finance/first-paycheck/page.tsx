@@ -628,7 +628,7 @@ export default function FirstPaycheckPage() {
 
         <RelatedTools tools={[
           { emoji: '💵', title: 'Take-Home Pay Calculator', desc: 'Full paycheck calculator for any situation', href: '/finance/take-home-pay' },
-          { emoji: '📊', title: 'Tax Bracket Calculator', desc: 'Your marginal and effective tax rates', href: '/finance/tax-brackets' },
+          { emoji: '📊', title: 'Tax Bracket Calculator', desc: 'Your marginal and effective tax rates', href: '/finance/tax-bracket' },
           { emoji: '🏦', title: '401k Calculator', desc: 'How much your contributions will grow', href: '/finance/401k-calculator' },
           { emoji: '💼', title: 'Salary by Job and State', desc: 'Is your offer competitive?', href: '/salary' }
         ]} />

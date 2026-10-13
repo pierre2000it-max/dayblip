@@ -38,10 +38,10 @@ const faqSchema = {
 }
 
 const relatedTools = [
-  { title: "401(k) Calculator", href: "/retirement/401k-calculator", description: "Project your 401(k) balance at any contribution rate and timeline." },
-  { title: "Retirement Savings Rate", href: "/retirement/savings-rate", description: "Find the right savings rate for your target retirement age." },
+  { title: "401(k) Calculator", href: "/finance/401k-calculator", description: "Project your 401(k) balance at any contribution rate and timeline." },
+  { title: "Retirement Savings Rate", href: "/finance/retirement-savings", description: "Find the right savings rate for your target retirement age." },
   { title: "Compound Interest Calculator", href: "/finance/compound-interest", description: "Model any investment over time with variable return rates." },
-  { title: "FI Date Calculator", href: "/retirement/fi-date", description: "Calculate your financial independence date at your current savings rate." },
+  { title: "FI Date Calculator", href: "/tools/fi-date", description: "Calculate your financial independence date at your current savings rate." },
 ]
 
 export default function HowMuchToSaveIn401kPage() {

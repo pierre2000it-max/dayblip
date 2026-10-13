@@ -38,10 +38,10 @@ const faqSchema = {
 }
 
 const relatedTools = [
-  { title: "College ROI Calculator", href: "/finance/college-roi", description: "Calculate the break-even point and lifetime ROI for your specific college and major." },
-  { title: "Salary Comparison Tool", href: "/career/salary-comparison", description: "Compare starting salaries by field and degree level." },
-  { title: "Debt Freedom Date", href: "/finance/debt-freedom", description: "Calculate when you will pay off student loans under different payment strategies." },
-  { title: "Career Timeline Planner", href: "/career/career-timeline", description: "Model your career earnings trajectory with and without a degree." },
+  { title: "College ROI Calculator", href: "/tools/college-roi", description: "Calculate the break-even point and lifetime ROI for your specific college and major." },
+  { title: "Salary Comparison Tool", href: "/tools/salary-checker", description: "Compare starting salaries by field and degree level." },
+  { title: "Debt Freedom Date", href: "/tools/debt-freedom", description: "Calculate when you will pay off student loans under different payment strategies." },
+  { title: "Career Timeline Planner", href: "/tools/career-timeline", description: "Model your career earnings trajectory with and without a degree." },
 ]
 
 export default function IsCollegeWorthItPage() {

@@ -38,10 +38,10 @@ const faqSchema = {
 }
 
 const relatedTools = [
-  { title: "Salary Comparison Tool", href: "/career/salary-comparison", description: "See how your salary compares to peers in your field and region." },
-  { title: "True Hourly Wage Calculator", href: "/career/true-hourly-wage", description: "Calculate what you actually earn per hour after work-related costs." },
-  { title: "Career Timeline Planner", href: "/career/career-timeline", description: "Model your earnings trajectory over a full career." },
-  { title: "Job Offer Comparison", href: "/career/job-offer-comparison", description: "Compare total compensation across two job offers." },
+  { title: "Salary Comparison Tool", href: "/tools/salary-checker", description: "See how your salary compares to peers in your field and region." },
+  { title: "True Hourly Wage Calculator", href: "/tools/true-hourly-wage", description: "Calculate what you actually earn per hour after work-related costs." },
+  { title: "Career Timeline Planner", href: "/tools/career-timeline", description: "Model your earnings trajectory over a full career." },
+  { title: "Job Offer Comparison", href: "/tools/job-offer-comparison", description: "Compare total compensation across two job offers." },
 ]
 
 export default function AverageSalaryByAgePage() {

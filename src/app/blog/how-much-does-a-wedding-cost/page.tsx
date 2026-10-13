@@ -48,9 +48,9 @@ const faqSchema = {
 
 const relatedTools = [
   { title: "FI Date Calculator", href: "/tools/fi-date", description: "See how big purchases affect your financial independence date" },
-  { title: "Compound Interest", href: "/tools/compound-interest", description: "See what wedding costs invested would become over time" },
+  { title: "Compound Interest", href: "/finance/compound-interest", description: "See what wedding costs invested would become over time" },
   { title: "Net Worth Calculator", href: "/finance/net-worth", description: "Track total assets minus liabilities" },
-  { title: "Savings Calculator", href: "/finance/savings-calculator", description: "Plan your wedding savings timeline" },
+  { title: "Savings Calculator", href: "/finance/savings-goal", description: "Plan your wedding savings timeline" },
 ]
 
 export default function HowMuchDoesAWeddingCostPage() {

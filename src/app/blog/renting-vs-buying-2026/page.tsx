@@ -40,7 +40,7 @@ const faqSchema = {
 const relatedTools = [
   { title: "Mortgage Calculator", href: "/finance/mortgage-calculator", description: "Calculate the total cost of a mortgage at any rate and price." },
   { title: "Net Worth Calculator", href: "/finance/net-worth", description: "Track your complete financial picture." },
-  { title: "Compound Interest Calculator", href: "/tools/compound-interest", description: "See how the down payment would grow if invested instead." },
+  { title: "Compound Interest Calculator", href: "/finance/compound-interest", description: "See how the down payment would grow if invested instead." },
   { title: "American Dream Calculator", href: "/tools/american-dream-calculator", description: "Model the full financial picture of homeownership." },
 ]
 
