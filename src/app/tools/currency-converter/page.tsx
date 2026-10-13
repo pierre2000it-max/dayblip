@@ -20,11 +20,12 @@ const CURRENCIES: [string, string][] = [
   ["TRY", "Turkish Lira"],
 ]
 
+// Offline fallback only. Live rates load from open.er-api.com. Snapshot: Oct 12 2026.
 const FALLBACK: Record<string, number> = {
-  USD: 1, EUR: 0.93, GBP: 0.79, JPY: 149, CAD: 1.36, AUD: 1.55,
-  CHF: 0.90, CNY: 7.24, INR: 83.5, MXN: 17.2, BRL: 5.1, KRW: 1320,
-  SGD: 1.34, HKD: 7.82, NOK: 10.5, SEK: 10.4, DKK: 6.89, NZD: 1.63,
-  ZAR: 18.4, AED: 3.67, SAR: 3.75, THB: 35.1, PHP: 56.2, IDR: 15700, TRY: 32.1,
+  USD: 1, EUR: 0.89, GBP: 0.76, JPY: 158, CAD: 1.43, AUD: 1.43,
+  CHF: 0.83, CNY: 6.70, INR: 97.0, MXN: 18.4, BRL: 5.0, KRW: 1341,
+  SGD: 1.28, HKD: 7.85, NOK: 9.56, SEK: 9.99, DKK: 6.67, NZD: 1.78,
+  ZAR: 16.5, AED: 3.67, SAR: 3.75, THB: 33.5, PHP: 62.8, IDR: 17893, TRY: 49.3,
 }
 
 const QUICK_PAIRS = [
@@ -77,7 +78,7 @@ export default function CurrencyConverterPage() {
       <SchemaMarkup schemas={[
         webApplicationSchema("Currency Converter", "Convert between 150+ currencies with live exchange rates", "https://www.dayblip.com/tools/currency-converter", "FinanceApplication"),
         faqSchema([
-          { question: "What is today's USD to EUR exchange rate?", answer: "The US Dollar to Euro exchange rate fluctuates daily. As of mid-2026 one US Dollar equals approximately 0.93 Euros. Exchange rates change based on Federal Reserve and European Central Bank decisions, economic data releases and market conditions. Always check live rates before making transfers." },
+          { question: "What is today's USD to EUR exchange rate?", answer: "The US Dollar to Euro exchange rate fluctuates daily. As of October 2026 one US Dollar equals approximately 0.89 Euros. Exchange rates change based on Federal Reserve and European Central Bank decisions, economic data releases and market conditions. Always check live rates before making transfers." },
           { question: "Why is the currency converter rate different from my bank?", answer: "This converter shows the mid-market rate — the midpoint between buy and sell rates. Banks and transfer services add a markup called a spread typically 1-3% above mid-market rate. This is how they make money on currency exchange. Services like Wise often offer rates closer to mid-market." },
         ]),
         breadcrumbSchema([
@@ -100,7 +101,7 @@ export default function CurrencyConverterPage() {
 
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div style={{ color: "#e94560", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "8px" }}>Quick Answer</div>
-            <p style={{ color: "#e8e8e8", fontSize: "15px", lineHeight: "1.6" }}>One US Dollar equals approximately 0.93 Euros, 0.79 British Pounds, 149 Japanese Yen, 1.36 Canadian Dollars and 1.55 Australian Dollars as of mid-2026. Exchange rates change every business day based on central bank decisions, economic data and global trade activity. Always check current rates before making international transfers.</p>
+            <p style={{ color: "#e8e8e8", fontSize: "15px", lineHeight: "1.6" }}>One US Dollar equals approximately 0.89 Euros, 0.76 British Pounds, 158 Japanese Yen, 1.43 Canadian Dollars and 1.43 Australian Dollars as of October 2026. Exchange rates change every business day based on central bank decisions, economic data and global trade activity. Always check current rates before making international transfers.</p>
           </div>
 
           <p style={{ color: "#a8a8b3", fontSize: "14px", lineHeight: "1.7" }}>Currency exchange rates represent the price of one currency in terms of another. Rates fluctuate constantly based on interest rate decisions by central banks, economic indicators, political events and market sentiment. This converter uses live rates from the ExchangeRate-API free tier which updates daily. For large transfers always verify rates with your bank or transfer service.</p>
