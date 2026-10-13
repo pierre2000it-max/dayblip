@@ -12,6 +12,8 @@ import {
   timeMachineDescription, onThisDayDescription, countdownDescription, holidayFallbackDescription,
 } from './metaDescriptions'
 
+type MarketRow = { zip: string; state_name: string; category_display: string; band_low: number; band_high: number }
+
 const bad = (arr: string[]) => arr.filter((s) => !fitsMeta(s))
 
 function walk(dir: string, out: string[] = []): string[] {
@@ -66,7 +68,7 @@ describe('dynamic metadata descriptions', () => {
     expect(new Set(c).size).toBe(c.length); expect(new Set(j).size).toBe(j.length)
   })
   it('market pages', () => {
-    const all = (seoPages as any[]).map((p) => marketDescription(p.zip, p.state_name, p.category_display, p.band_low, p.band_high))
+    const all = (seoPages as MarketRow[]).map((p) => marketDescription(p.zip, p.state_name, p.category_display, p.band_low, p.band_high))
     expect(bad(all)).toEqual([]); expect(new Set(all).size).toBe(all.length)
   })
   it('born-in pages', () => {
