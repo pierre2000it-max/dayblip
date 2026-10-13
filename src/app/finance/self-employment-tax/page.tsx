@@ -180,6 +180,7 @@ export default function SelfEmploymentTaxPage() {
             { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
             { emoji: "💼", title: "Side Hustle Calculator", desc: "Value your side income", href: "/tools/side-hustle" },
             { emoji: "📋", title: "Overtime Tax Calculator", desc: "Tax on extra hours", href: "/finance/overtime-tax" },
+            { emoji: "📖", title: "Self-Employment Tax Guide", desc: "Worked examples and what to set aside", href: "/blog/self-employment-tax-2026" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Does not include all deductions, credits, or state taxes. Consult a CPA for accurate tax advice.</p>
         </div>

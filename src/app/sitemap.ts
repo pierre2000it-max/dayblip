@@ -430,6 +430,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/blog/cost-of-raising-a-child-2026",       0.8, MONTHLY),
     p("/blog/debt-avalanche-vs-snowball",          0.8, MONTHLY),
     p("/blog/true-cost-of-owning-a-pet",          0.8, MONTHLY),
+    p("/blog/self-employment-tax-2026",           0.8, MONTHLY),
     p("/blog/what-is-the-4-percent-rule",         0.8, MONTHLY),
     p("/blog/how-much-does-a-wedding-cost",       0.8, MONTHLY),
     p("/blog/how-to-compare-job-offers",          0.8, MONTHLY),

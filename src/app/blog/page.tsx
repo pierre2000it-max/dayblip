@@ -300,6 +300,14 @@ const articles = [
     readTime: "6 min read",
     href: "/blog/true-cost-of-student-loans",
   },
+  {
+    category: "Finance",
+    title: "Self-Employment Tax in 2026: What You Owe and How Much to Set Aside",
+    excerpt:
+      "Self-employment tax is about 14.1% of net profit on top of income tax. Worked 2026 examples from $30,000 to $200,000 and the four quarterly payment dates.",
+    readTime: "6 min read",
+    href: "/blog/self-employment-tax-2026",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]

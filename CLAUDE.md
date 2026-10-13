@@ -115,9 +115,9 @@ Embed pages NOT in sitemap (intentional)
 Educator page: /embed/for-educators
 
 ## Blog Status (as of Oct 13 2026)
-37 articles live (counted from src/app/blog directories; the old "21" figure was stale).
+38 articles live (counted from src/app/blog directories; the old "21" figure was stale). Article 38: self-employment-tax-2026 (Oct 13 2026).
 Target: 114 articles by June 2027.
-Remaining: 77 articles to write.
+Remaining: 76 articles to write.
 Pace needed: about 2.1 articles per week.
 Oct 13 2026: 4 overlapping pairs consolidated into one URL each, with 301s in next.config.mjs (do not delete the redirects):
 - /blog/how-much-house-can-you-afford -> /blog/how-much-house-can-i-afford
@@ -137,9 +137,9 @@ Before writing a new article, grep src/app/blog for the topic to avoid a second 
 - 8ae20a7: OG image routes fixed (display flex, try/catch)
 
 ## Site Counts (as of June 13 2026)
-- Total URLs in sitemap: 1,414 (verified Oct 13 2026 by running sitemap.ts, after the 4 blog consolidations)
+- Total URLs in sitemap: 1,415 (verified Oct 13 2026 by running sitemap.ts, after the 4 blog consolidations and article 38)
 - Total tool pages: 200+ (recounted Oct 10 2026: 209 interactive pages, ~200 after near-duplicates)
-- Blog articles: 37 (Oct 13 2026)
+- Blog articles: 38 (Oct 13 2026)
 - Embed tools: 25
 - Born-in pages: 81 (1940-2020)
 
@@ -247,6 +247,7 @@ IRS publishes new brackets in November (Revenue Procedure). Changes take effect 
 | `src/app/daily/page.tsx` | 401k limit question (amount + year label) + SS wage base in FICA explanation + annual gift exclusion question ($19,000 for 2026, literal) + federal student loan rate question (6.52% undergrad for 2026-27, set each June from the May Treasury auction) | Standard deduction and top-bracket questions read from `tax2026.ts`. Roth IRA, gift exclusion, student loan rate, and 401k are literals to update |
 | `src/app/blog/roth-ira-vs-traditional-ira/page.tsx` | IRA phase-out income thresholds | Check IRS Notice for Roth/trad limits |
 | `src/app/blog/how-much-saved-by-age/page.tsx` | 401k/IRA contribution limits | Verify against IRS Notice |
+| `src/app/blog/self-employment-tax-2026/page.tsx` | Dollar tables are computed from `tax2026.ts`. Re-check literals: $400 SE threshold, $1,000 estimated-tax trigger, $150,000 AGI safe-harbor test, $200,000 additional Medicare threshold, payment dates | IRS Topic 554 and irs.gov/faqs/estimated-tax |
 | `src/app/blog/how-to-read-your-w2/page.tsx` | 401k limit in Box 12 Code D (FAQ text + table row) | Verify against IRS Notice. Cite the Notice, not the Rev. Proc. |
 
 **Key annual figures to update:**
