@@ -227,11 +227,9 @@ IRS publishes new brackets in November (Revenue Procedure). Changes take effect 
 
 | File | What to change | Notes |
 |---|---|---|
-| `src/app/finance/tax-bracket/page.tsx` | `STD_DEDUCTION` object + all bracket thresholds | All 4 filing statuses |
+| `src/lib/tax2026.ts` | `STANDARD_DEDUCTION`, `BRACKETS`, `SS_WAGE_BASE` | Single source of truth. All 4 filing statuses. Edit here only, then run `npm test` |
 | `src/app/finance/tax-bracket/layout.tsx` | Year in title and description | e.g. "2026" → "2027" |
-| `src/app/finance/take-home-pay/page.tsx` | Same bracket thresholds + `STD_DEDUCTION` | Also check SS wage base |
-| `src/app/finance/paycheck-calculator/page.tsx` | Bracket thresholds + `ssCap` constant | Also update FAQ text mentioning $168,600 etc |
-| `src/app/embed/(tools)/take-home-pay/page.tsx` | `Math.min(s, XXXXXX)` SS wage base | This file has lagged 2+ years before — check carefully |
+| `src/app/finance/tax-bracket/page.tsx`, `take-home-pay/page.tsx`, `paycheck-calculator/page.tsx`, `src/app/embed/(tools)/take-home-pay/page.tsx` | Nothing | They import from `tax2026.ts`. Only FAQ/prose text with year or dollar figures may need edits |
 | `src/app/daily/page.tsx` | 401k limit question (amount + year label) + SS wage base in FICA explanation | Two separate locations |
 | `src/app/blog/roth-ira-vs-traditional-ira/page.tsx` | IRA phase-out income thresholds | Check IRS Notice for Roth/trad limits |
 | `src/app/blog/how-much-saved-by-age/page.tsx` | 401k/IRA contribution limits | Verify against IRS Notice |
@@ -253,16 +251,14 @@ IRS publishes new brackets in November (Revenue Procedure). Changes take effect 
 Social Security Administration publishes the new wage base each October for the following year.
 
 **Source:** ssa.gov/news/press/factsheets/colafacts-alt.pdf (published each October)
-**2026 value:** $176,100
-**Pattern to find:** `176100` or `168600` or `160200` — any of these in paycheck/FICA logic is the SS wage cap
+**2026 value:** $184,500 (verified on ssa.gov/oact/cola/cbb.html Oct 2026). $176,100 was the 2025 value.
+**Where it lives:** `SS_WAGE_BASE` in `src/lib/tax2026.ts`. A test fails if `184500`, `176100` or `168600` appears in a calculator page.
 
 **Files to update:**
 
 | File | Pattern | Notes |
 |---|---|---|
-| `src/app/finance/paycheck-calculator/page.tsx` | `const ssCap = XXXXXX` | Also update FAQ text |
-| `src/app/finance/take-home-pay/page.tsx` | `Math.min(annual, XXXXXX)` | |
-| `src/app/embed/(tools)/take-home-pay/page.tsx` | `Math.min(s, XXXXXX)` | Historically lagged — always check |
+| `src/lib/tax2026.ts` | `SS_WAGE_BASE` | Then update FAQ text mentioning the cap |
 | `src/app/daily/page.tsx` | Text: "on wages up to $X in 20XX" | Around line 825 |
 
 ---

@@ -32,6 +32,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Unit tests
+        run: npm test
+
       # Placeholders only. src/lib/supabase.ts calls createClient() at import
       # time, which throws if these are empty. Real values stay in Vercel.
       - name: Build

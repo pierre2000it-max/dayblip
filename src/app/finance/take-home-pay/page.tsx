@@ -10,6 +10,7 @@ import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
+import { federalTax, marginalRate, medicareTax, socialSecurityTax, taxableAfterStandardDeduction, toFiling } from "@/lib/tax2026"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 function fmtK(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
@@ -24,42 +25,6 @@ const STATES: [string, number][] = [
   ["MA – 9.0%", 0.09], ["NY – 10.9%", 0.109], ["NJ – 10.75%", 0.1075],
   ["CA – up to 13.3%", 0.133], ["OR – 9.9%", 0.099], ["HI – 11.0%", 0.11],
 ]
-
-const BRACKETS_SINGLE: [number, number][] = [
-  [12400, 0.10], [50400, 0.12], [105700, 0.22],
-  [201775, 0.24], [256225, 0.32], [640600, 0.35], [Infinity, 0.37],
-]
-const BRACKETS_MFJ: [number, number][] = [
-  [24800, 0.10], [100800, 0.12], [211400, 0.22],
-  [403550, 0.24], [512450, 0.32], [768700, 0.35], [Infinity, 0.37],
-]
-const BRACKETS_HOH: [number, number][] = [
-  [17700, 0.10], [67450, 0.12], [105700, 0.22],
-  [201775, 0.24], [256200, 0.32], [640600, 0.35], [Infinity, 0.37],
-]
-
-const STD_DEDUCTION: Record<string, number> = {
-  single: 16100, mfj: 32200, mfs: 16100, hoh: 24150,
-}
-
-function calcFedTax(taxable: number, filing: string): number {
-  const brackets = filing === "mfj" ? BRACKETS_MFJ : filing === "hoh" ? BRACKETS_HOH : BRACKETS_SINGLE
-  let tax = 0; let prev = 0
-  for (const [limit, rate] of brackets) {
-    if (taxable <= prev) break
-    tax += (Math.min(taxable, limit) - prev) * rate
-    prev = limit
-  }
-  return tax
-}
-
-function marginalRate(taxable: number, filing: string): number {
-  const brackets = filing === "mfj" ? BRACKETS_MFJ : filing === "hoh" ? BRACKETS_HOH : BRACKETS_SINGLE
-  for (const [limit, rate] of brackets) {
-    if (taxable <= limit) return rate
-  }
-  return 0.37
-}
 
 const PAY_FREQS: [string, string, number][] = [
   ["weekly", "Weekly", 52],
@@ -95,26 +60,26 @@ export default function TakeHomePayPage() {
     const annual = wageType === "salary" ? a : a * (parseFloat(hoursPerWeek) || 40) * 52
     const grossPerCheck = annual / freq
 
-    const stdDed = STD_DEDUCTION[filing] || 16100
+    const filingStatus = toFiling(filing)
     const k401AnnualPct = (parseFloat(fourOhOneK) || 0) / 100
     const k401Annual = annual * k401AnnualPct
     const hiAnnual = (parseFloat(healthIns) || 0) * freq
     const otherAnnual = (parseFloat(otherDeductions) || 0) * freq
 
     const preTaxDeductions = k401Annual + hiAnnual + otherAnnual
-    const taxableIncome = Math.max(0, annual - preTaxDeductions - stdDed)
-    const fedTax = calcFedTax(taxableIncome, filing)
+    const taxableIncome = taxableAfterStandardDeduction(annual, filingStatus, preTaxDeductions)
+    const fedTax = federalTax(taxableIncome, filingStatus)
     const stateRate = STATES[stateIdx][1]
     const stateTax = taxableIncome * stateRate
-    const ss = Math.min(annual, 184500) * 0.062
-    const medicare = annual * 0.0145
+    const ss = socialSecurityTax(annual)
+    const medicare = medicareTax(annual)
 
     const totalTax = fedTax + stateTax + ss + medicare
     const totalDeductions = k401Annual + hiAnnual + otherAnnual
     const annualTakeHome = annual - totalTax - totalDeductions
     const perCheckTakeHome = annualTakeHome / freq
     const effectiveRate = annual > 0 ? (totalTax / annual * 100).toFixed(1) : "0"
-    const marginal = marginalRate(taxableIncome, filing)
+    const marginal = marginalRate(taxableIncome, filingStatus)
 
     const perCheckBreakdown = {
       gross: grossPerCheck,
