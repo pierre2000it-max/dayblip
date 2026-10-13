@@ -515,7 +515,6 @@ export default function WealthTransferTimelinePage() {
             {results && (
               <div style={{ marginTop: 40 }}>
                 <RelatedTools tools={[
-                  { emoji: "💰", title: "Salary Ceiling Calculator",                  desc: "See the lifetime limit a salary puts on your wealth",         href: "/tools/salary-ceiling-calculator" },
                   { emoji: "🏢", title: "Entrepreneur vs Employee Wealth Gap",         desc: "The financial difference between a salary and a business",   href: "/tools/entrepreneur-vs-employee-wealth-gap" },
                   { emoji: "📈", title: "Procrastination Cost Calculator",             desc: "The financial cost of putting decisions off",                href: "/tools/procrastination-cost" },
                   { emoji: "🏠", title: "Family Mental Load Score",                    desc: "How much of your household are you carrying alone?",         href: "/tools/family-mental-load-score" },

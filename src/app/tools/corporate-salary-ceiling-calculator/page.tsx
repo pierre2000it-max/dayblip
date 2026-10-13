@@ -567,7 +567,6 @@ export default function CorporateSalaryCeilingCalculatorPage() {
             {results && (
               <div style={{ marginTop: 40 }}>
                 <RelatedTools tools={[
-                  { emoji: "💰", title: "Salary Ceiling Calculator",                desc: "The original salary ceiling calculation",                         href: "/tools/salary-ceiling-calculator" },
                   { emoji: "🏢", title: "Entrepreneur vs Employee Wealth Gap",      desc: "The financial difference between a salary and a business",        href: "/tools/entrepreneur-vs-employee-wealth-gap" },
                   { emoji: "📅", title: "Wealth Transfer Timeline",                 desc: "Project your wealth at 65 and 75 and your generational impact",   href: "/tools/wealth-transfer-timeline" },
                   { emoji: "🏛️", title: "Financial Legacy Score",                  desc: "How ready is your family for what you leave behind?",             href: "/tools/financial-legacy-score" },

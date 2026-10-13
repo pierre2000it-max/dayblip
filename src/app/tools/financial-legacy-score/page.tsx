@@ -654,7 +654,6 @@ export default function FinancialLegacyScorePage() {
               <div style={{ marginTop: 40 }}>
                 <RelatedTools tools={[
                   { emoji: "📅", title: "Wealth Transfer Timeline",              desc: "Project your wealth at 65 and 75 and your generational impact",   href: "/tools/wealth-transfer-timeline" },
-                  { emoji: "💰", title: "Salary Ceiling Calculator",              desc: "See the lifetime limit a salary puts on your wealth",             href: "/tools/salary-ceiling-calculator" },
                   { emoji: "🏢", title: "Entrepreneur vs Employee Wealth Gap",    desc: "The financial difference between a salary and a business",        href: "/tools/entrepreneur-vs-employee-wealth-gap" },
                   { emoji: "🏠", title: "Family Mental Load Score",               desc: "How much of your household are you carrying alone?",             href: "/tools/family-mental-load-score" },
                 ]} />

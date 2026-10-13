@@ -132,10 +132,23 @@ Pace needed: 1.8 articles per week.
 
 ## Site Counts (as of June 13 2026)
 - Total URLs in sitemap: 1,413 (verified Oct 2026 by running sitemap.ts)
-- Total tool pages: ~175+
+- Total tool pages: 200+ (recounted Oct 10 2026: 209 interactive pages, ~200 after near-duplicates)
 - Blog articles: 21
 - Embed tools: 25
 - Born-in pages: 81 (1940-2020)
+
+## Removed Pages — To Be Re-Added Later
+Salary Ceiling Calculator (retire by 50) removed Oct 10 2026, commit ae6dfb1. Rebuild planned, no date set.
+- Removed: src/app/tools/salary-ceiling-calculator/ (layout.tsx + page.tsx)
+- 301 added in next.config.mjs: /tools/salary-ceiling-calculator → /tools/corporate-salary-ceiling-calculator. Delete this redirect when the page returns.
+- Related-tools link ("Salary Ceiling Calculator", href /tools/salary-ceiling-calculator) removed from these 6 pages. Restore it on each when the page returns:
+  - src/app/tools/corporate-salary-ceiling-calculator/page.tsx
+  - src/app/tools/entrepreneur-vs-employee-wealth-gap/page.tsx
+  - src/app/tools/entrepreneur-vs-employee-wealth-gap-extended/page.tsx
+  - src/app/tools/commercial-cleaning-roi-calculator/page.tsx
+  - src/app/tools/financial-legacy-score/page.tsx
+  - src/app/tools/wealth-transfer-timeline/page.tsx
+- Do not count it in the tool total until it returns.
 
 ## Critical CSS Fixes — DO NOT REMOVE
 In src/app/globals.css:
