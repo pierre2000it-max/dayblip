@@ -103,7 +103,7 @@ export default function TaxRefundEstimatorPage() {
     },
     {
       question: 'What reduces my taxable income the most?',
-      answer: 'The most impactful deductions and adjustments are pre-tax retirement contributions (401k up to $23,500 in 2026, or $31,000 if age 50+), HSA contributions ($4,300 single or $8,550 family in 2026), the standard deduction ($16,100 single, $32,200 MFJ), and itemized deductions if they exceed the standard deduction. Tax credits — which directly reduce your tax liability dollar for dollar rather than reducing taxable income — are even more valuable. The Child Tax Credit ($2,200 per qualifying child in 2026) is the most widely claimed.'
+      answer: 'The most impactful deductions and adjustments are pre-tax retirement contributions (401k up to $24,500 in 2026, or $32,500 if age 50+), HSA contributions ($4,400 single or $8,750 family in 2026), the standard deduction ($16,100 single, $32,200 MFJ), and itemized deductions if they exceed the standard deduction. Tax credits — which directly reduce your tax liability dollar for dollar rather than reducing taxable income — are even more valuable. The Child Tax Credit ($2,200 per qualifying child in 2026) is the most widely claimed.'
     },
     {
       question: 'Should I adjust my W-4 after using this calculator?',
@@ -486,7 +486,7 @@ export default function TaxRefundEstimatorPage() {
               } else if (effectiveRate < 15) {
                 rateMessage = `Your ${effectiveRate}% effective federal rate is moderate. Pre-tax 401k contributions and HSA deposits are your most powerful tools to reduce this further — each dollar contributed reduces your taxable income dollar-for-dollar.`
               } else if (effectiveRate < 22) {
-                rateMessage = `Your ${effectiveRate}% effective federal rate is in the upper-middle range. At this level maxing tax-advantaged accounts (401k $23,500, HSA $4,300 single in 2026) has meaningful impact on your effective rate and long-term wealth accumulation.`
+                rateMessage = `Your ${effectiveRate}% effective federal rate is in the upper-middle range. At this level maxing tax-advantaged accounts (401k $24,500, HSA $4,400 single in 2026) has meaningful impact on your effective rate and long-term wealth accumulation.`
               } else {
                 rateMessage = `Your ${effectiveRate}% effective federal rate is high. At this level tax optimization is a high-ROI activity. Maxing all pre-tax accounts, reviewing itemized vs standard deduction, and timing income and deductions strategically can each save thousands annually.`
               }
@@ -506,7 +506,7 @@ export default function TaxRefundEstimatorPage() {
               if (refundTier === 'large-refund') {
                 nextActions = [
                   `Update your W-4 — add a deduction of approximately $${Math.round(amount / 12).toLocaleString()}/month in Step 4(c) to recapture that money in each paycheck`,
-                  `Invest your refund immediately — do not let it sit in a checking account. Put it in your Roth IRA ($7,000 limit), emergency fund, or brokerage account`,
+                  `Invest your refund immediately — do not let it sit in a checking account. Put it in your Roth IRA ($7,500 limit), emergency fund, or brokerage account`,
                   `Check if you missed any deductions — charitable contributions, student loan interest, educator expenses, or HSA contributions may reduce next year's bill`,
                   `Model the compounding impact — $${amount.toLocaleString()} invested at 7% for 10 years grows to $${Math.round(amount * Math.pow(1.07, 10)).toLocaleString()}`
                 ]
@@ -514,7 +514,7 @@ export default function TaxRefundEstimatorPage() {
                 nextActions = [
                   `Your withholding is close to optimal — no W-4 change needed unless income or filing status changes`,
                   `Invest your refund rather than spending it — even a small amount compounds meaningfully over time`,
-                  `Review your tax-advantaged account contributions for next year — 401k $23,500 limit, IRA $7,000 limit in 2026`,
+                  `Review your tax-advantaged account contributions for next year — 401k $24,500 limit, IRA $7,500 limit in 2026`,
                   `Check if you qualify for any credits you may have missed — Child Tax Credit, Earned Income Credit, education credits`
                 ]
               } else if (refundTier === 'large-owe') {
@@ -535,7 +535,7 @@ export default function TaxRefundEstimatorPage() {
                 nextActions = [
                   `Maintain your current withholding elections — your W-4 is well-calibrated`,
                   `Review annually — update W-4 if income, filing status, or major deductions change`,
-                  `Focus on tax-advantaged investing for next year: 401k $23,500, HSA $4,300 single, IRA $7,000`,
+                  `Focus on tax-advantaged investing for next year: 401k $24,500, HSA $4,400 single, IRA $7,500`,
                   `Consider a tax professional review if your situation becomes more complex (freelance, investments, rental income)`
                 ]
               }

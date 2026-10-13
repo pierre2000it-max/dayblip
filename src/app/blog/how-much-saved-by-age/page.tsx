@@ -139,7 +139,7 @@ export default function HowMuchSavedByAgePage() {
           </p>
 
           <p>
-            The catch-up contribution provision recognizes this: IRA contributions for those 50 and older were $8,000 in 2025, compared to $7,000 for those under 50. 401k catch-up contributions allowed an additional $7,500 annually for those 50 and older, on top of the $23,500 standard limit.
+            The catch-up contribution provision recognizes this: IRA contributions for those 50 and older are $8,600 in 2026, compared to $7,500 for those under 50. 401k catch-up contributions allow an additional $8,000 annually for those 50 and older, on top of the $24,500 standard limit.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">A More Personalized Framework</h2>

@@ -369,9 +369,9 @@ export default function TakeHomePayPage() {
             } else if (k401Pct < 6) {
               k401Message = `You are contributing ${k401Pct}% to your 401k ($${Math.round(annualK401).toLocaleString()}/year). If your employer matches up to 6% and you contribute less, you are leaving money unclaimed. Verify your employer match threshold and contribute at least that amount.`
             } else if (k401Pct < 15) {
-              k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) to your 401k — a solid start. The 2026 limit is $23,500 ($31,000 if age 50+). Increasing to the maximum adds significant tax-deferred compounding over a career.`
+              k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) to your 401k — a solid start. The 2026 limit is $24,500 ($32,500 if age 50+). Increasing to the maximum adds significant tax-deferred compounding over a career.`
             } else {
-              k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) to your 401k — strong contribution rate. If not already at the $23,500 limit consider increasing further. Next priority: HSA ($4,300 single, $8,550 family in 2026) if you have a high-deductible health plan.`
+              k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) to your 401k — strong contribution rate. If not already at the $24,500 limit consider increasing further. Next priority: HSA ($4,400 single, $8,750 family in 2026) if you have a high-deductible health plan.`
             }
 
             // Next actions by rate tier
@@ -380,19 +380,19 @@ export default function TakeHomePayPage() {
               nextActions = [
                 `Savings rate is your highest lever — target investing 20-30% of your $${Math.round(calc.annualTakeHome).toLocaleString()} take-home`,
                 `Contribute at least enough to 401k to capture full employer match — instant 50-100% return`,
-                `Open a Roth IRA if income is below $161,000 single ($240,000 MFJ) — $7,000/year tax-free growth`,
+                `Open a Roth IRA if income is below $168,000 single ($252,000 MFJ) — $7,500/year tax-free growth`,
                 `Build 3-6 month emergency fund before aggressive investing — $${Math.round(calc.annualTakeHome / 12 * 4).toLocaleString()} target`,
               ]
             } else if (rateTier === 'moderate') {
               nextActions = [
-                `Max your 401k ($23,500 in 2026) — reduces taxable income and lowers your effective rate`,
+                `Max your 401k ($24,500 in 2026) — reduces taxable income and lowers your effective rate`,
                 `Open or max an HSA if you have a high-deductible plan — triple tax advantage, best account available`,
                 `Consider traditional vs Roth 401k — at ${marginalRate}% marginal rate traditional pre-tax usually wins`,
                 `Model the impact of increasing 401k contribution by 2% — use the calculator above to see take-home change`,
               ]
             } else if (rateTier === 'high') {
               nextActions = [
-                `Max 401k ($23,500) and HSA ($4,300 single) before any taxable investing — significant effective rate reduction`,
+                `Max 401k ($24,500) and HSA ($4,400 single) before any taxable investing — significant effective rate reduction`,
                 `Review itemized vs standard deduction ($16,100 single in 2026) — mortgage interest + state taxes may exceed standard`,
                 `Consider backdoor Roth IRA if income exceeds direct contribution limits`,
                 `Model after-tax take-home in lower-tax states — at your income the difference can exceed $10,000/year`,
@@ -400,7 +400,7 @@ export default function TakeHomePayPage() {
             } else {
               nextActions = [
                 `Consult a fee-only fiduciary CFP — at your effective rate professional tax strategy is worth the cost`,
-                `Max all tax-advantaged accounts: 401k $23,500, HSA $4,300, backdoor Roth $7,000`,
+                `Max all tax-advantaged accounts: 401k $24,500, HSA $4,400, backdoor Roth $7,500`,
                 `Review compensation structure — equity, deferred compensation, or bonus timing can shift tax years`,
                 `Model relocation to a no-income-tax state if remote work is possible — savings can exceed $15,000/year`,
               ]

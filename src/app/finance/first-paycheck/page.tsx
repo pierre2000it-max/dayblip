@@ -507,9 +507,9 @@ export default function FirstPaycheckPage() {
               } else if (k401Pct < 6) {
                 k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) to your 401k. Good start — but verify your employer match threshold. Most employers match up to 3-6%. If your employer matches 6% and you contribute ${k401Pct}% you are leaving ${6 - k401Pct}% of your salary in unclaimed matching funds.`
               } else if (k401Pct < 15) {
-                k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) — a strong start for your first job. The 2026 limit is $23,500. If you increase contributions by 1% per year you will reach the maximum within a few years without feeling a significant paycheck impact. Time in market at your age is your greatest asset.`
+                k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) — a strong start for your first job. The 2026 limit is $24,500. If you increase contributions by 1% per year you will reach the maximum within a few years without feeling a significant paycheck impact. Time in market at your age is your greatest asset.`
               } else {
-                k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) — exceptional for a first job. If not already at the $23,500 annual limit consider increasing further. Next priority: open a Roth IRA ($7,000/year) while your income is likely below the phase-out threshold ($161,000 single in 2026).`
+                k401Message = `You are contributing ${k401Pct}% ($${Math.round(annualK401).toLocaleString()}/year) — exceptional for a first job. If not already at the $24,500 annual limit consider increasing further. Next priority: open a Roth IRA ($7,500/year) while your income is likely below the phase-out threshold ($168,000 single in 2026).`
               }
 
               let nextActions: string[]
@@ -529,7 +529,7 @@ export default function FirstPaycheckPage() {
                 ]
               } else {
                 nextActions = [
-                  `Max tax-advantaged accounts: 401k ($23,500 in 2026) and HSA ($4,300 single) — at your income these are essential, not optional`,
+                  `Max tax-advantaged accounts: 401k ($24,500 in 2026) and HSA ($4,400 single) — at your income these are essential, not optional`,
                   `Understand your marginal rate (${marginalRate}%) — every raise, bonus, or side income is taxed at this rate, not your effective rate`,
                   `Consider traditional 401k over Roth 401k at your income level — pre-tax contributions save more at a ${marginalRate}% marginal rate`,
                   `Track your net worth from day one — knowing your starting number makes every future milestone more meaningful`

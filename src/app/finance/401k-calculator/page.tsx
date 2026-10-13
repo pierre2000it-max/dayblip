@@ -7,6 +7,7 @@ import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
+import { K401_LIMIT } from "@/lib/tax2026"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -101,7 +102,7 @@ export default function FourOhOneKPage() {
         <div className="mx-auto max-w-[700px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">The 2025 401k contribution limit is $23,500 per year ($31,000 if age 50+). Contributing enough to get the full employer match is always the first priority — it is a 50-100% instant return. $500 per month in a 401k at 7% return from age 25 becomes approximately $1.37 million at age 65.</p>
+            <p className="text-[#e2e8f0]">The 2026 401k contribution limit is $24,500 per year ($32,500 if age 50+). Contributing enough to get the full employer match is always the first priority — it is a 50-100% instant return. $500 per month in a 401k at 7% return from age 25 becomes approximately $1.37 million at age 65.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A 401k is an employer-sponsored retirement savings account where contributions are made pre-tax, reducing your taxable income today. Many employers match contributions up to a percentage of salary — this match is free money that should always be captured first before any other investing. This calculator projects your 401k balance at retirement.</p>
         </div>
@@ -178,7 +179,7 @@ export default function FourOhOneKPage() {
 
             let tier: 'no-match' | 'below-match' | 'at-match' | 'above-match' | 'maxed'
             let tierMessage: string
-            const limit2026 = 23500
+            const limit2026 = K401_LIMIT
 
             if (yourPctNum === 0) {
               tier = 'no-match'
@@ -194,7 +195,7 @@ export default function FourOhOneKPage() {
               tierMessage = `You are contributing above the employer match — strong financial discipline. Your ${fmt(Math.round(calc.yourAnnual))}/year contribution grows to a projected ${fmt(Math.round(calc.projected))} over ${Math.round(yearsToRetire)} years. You have room to increase toward the 2026 limit of $${limit2026.toLocaleString()} for additional tax-deferred growth.`
             } else {
               tier = 'maxed'
-              tierMessage = `You are at or near the 2026 401k limit of $${limit2026.toLocaleString()} — exceptional retirement discipline. Your projected ${fmt(Math.round(calc.projected))} balance generates approximately ${fmt(Math.round(calc.monthlyIncome))}/month in retirement income. Next priority: overflow into a backdoor Roth IRA ($7,000) or taxable brokerage account.`
+              tierMessage = `You are at or near the 2026 401k limit of $${limit2026.toLocaleString()} — exceptional retirement discipline. Your projected ${fmt(Math.round(calc.projected))} balance generates approximately ${fmt(Math.round(calc.monthlyIncome))}/month in retirement income. Next priority: overflow into a backdoor Roth IRA ($7,500) or taxable brokerage account.`
             }
 
             let incomeMessage: string
@@ -219,12 +220,12 @@ export default function FourOhOneKPage() {
                 `Increase contribution by 2% — the take-home pay impact is smaller than you expect due to pre-tax reduction in federal and state taxes`,
                 `Verify your investment allocation — default fund selections are often too conservative for a ${Math.round(yearsToRetire)}-year timeline`,
                 `Check your vesting status — ensure you understand when employer contributions become 100% yours`,
-                `Open a Roth IRA ($7,000/year) if your income is below the phase-out threshold — complementary tax-free growth`
+                `Open a Roth IRA ($7,500/year) if your income is below the phase-out threshold — complementary tax-free growth`
               ]
             } else {
               nextActions = [
                 tier === 'maxed'
-                  ? `Max is reached — next priority is backdoor Roth IRA ($7,000/year) if income exceeds direct contribution limits`
+                  ? `Max is reached — next priority is backdoor Roth IRA ($7,500/year) if income exceeds direct contribution limits`
                   : `Push toward the $${limit2026.toLocaleString()} limit — each additional $1,000/year at ${parseFloat(returnPct) || 7}% for ${Math.round(yearsToRetire)} years adds ${fmt(Math.round(1000 * (Math.pow(1 + (parseFloat(returnPct) || 7) / 100, yearsToRetire) - 1) / ((parseFloat(returnPct) || 7) / 100)))} to your balance`,
                 `Review asset allocation — at your contribution level a 1% return drag from poor fund selection is thousands over ${Math.round(yearsToRetire)} years`,
                 `Model Social Security claiming age — delaying from 62 to 70 increases benefit by approximately 77%, dramatically changing total retirement income`,
@@ -307,7 +308,7 @@ export default function FourOhOneKPage() {
           ]} />
           <p className="text-xs text-[#a8a8b3]">401(k) contribution limits and employer match rules vary. Consult your plan documents and a financial advisor. For educational purposes only.</p>
           <FAQAccordion items={[
-            { q: "What is the 401k contribution limit for 2026?", a: "The IRS 401k contribution limit for 2026 is $23,500 for employees under 50. Workers aged 50 and over can make an additional catch-up contribution of $7,500 bringing their total to $31,000. These limits adjust annually for inflation." },
+            { q: "What is the 401k contribution limit for 2026?", a: "The IRS 401k contribution limit for 2026 is $24,500 for employees under 50. Workers aged 50 and over can make an additional catch-up contribution of $8,000 bringing their total to $32,500. These limits adjust annually for inflation." },
             { q: "Should I contribute to a traditional or Roth 401k?", a: "Traditional 401k contributions reduce taxable income now and are taxed on withdrawal. Roth 401k contributions are made with after-tax dollars and withdrawals are tax-free. If you expect to be in a higher tax bracket in retirement than now, Roth is generally better." },
             { q: "What happens to my 401k if I change jobs?", a: "You can roll your 401k balance to your new employer's plan, roll it to an IRA, leave it with the former employer if the balance is above $7,000, or cash it out which triggers taxes and a 10 percent early withdrawal penalty if under age 59 and a half." },
             { q: "How does employer matching work?", a: "Common match structures include 50 percent of contributions up to 6 percent of salary or 100 percent of contributions up to 3 percent of salary. Always contribute at least enough to get the full employer match — it is an immediate 50 to 100 percent return on that portion." },

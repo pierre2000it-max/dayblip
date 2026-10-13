@@ -18,7 +18,7 @@ const faqItems = [
   },
   {
     question: "How do freelancers save for retirement?",
-    answer: "Freelancers have several retirement account options. A Solo 401k allows contributions up to $69,000 per year (2026) — both employee contributions up to $23,500 and employer contributions up to 25% of net self-employment income. A SEP-IRA allows up to 25% of net self-employment income up to $69,000. Both reduce taxable income significantly."
+    answer: "Freelancers have several retirement account options. A Solo 401k allows contributions up to $72,000 per year (2026) — both employee contributions up to $24,500 and employer contributions up to 25% of net self-employment income. A SEP-IRA allows up to 25% of net self-employment income up to $72,000. Both reduce taxable income significantly."
   }
 ]
 

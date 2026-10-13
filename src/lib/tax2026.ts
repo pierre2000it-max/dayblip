@@ -129,3 +129,14 @@ export function selfEmploymentTax(netEarnings: number, otherWages = 0) {
   const total = ss + medicare
   return { base, ss, medicare, total, deduction: total / 2 }
 }
+
+// Retirement and savings limits for 2026.
+// Source: IRS Notice 2025-67 (IR-2025-111); HSA from Rev. Proc. 2025-19.
+export const K401_LIMIT = 24500
+export const K401_CATCHUP = 8000
+export const IRA_LIMIT = 7500
+export const IRA_CATCHUP = 1100
+export const HSA_SELF = 4400
+export const HSA_FAMILY = 8750
+export const ROTH_PHASEOUT = { single: [153000, 168000], mfj: [242000, 252000] } as const
+export const TRAD_IRA_DEDUCTION_PHASEOUT = { single: [81000, 91000], mfj: [129000, 149000] } as const

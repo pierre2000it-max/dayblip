@@ -75,7 +75,7 @@ export default function RothVsTraditionalIraPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Traditional IRA: The Basics</h2>
 
           <p>
-            Contributions to a traditional IRA may be tax-deductible depending on your income and whether you have access to a workplace retirement plan. If you or your spouse are covered by a workplace plan like a 401k, the deductibility of your traditional IRA contribution phases out at higher income levels. For 2025, that phase-out began at $77,000 for single filers and $123,000 for married filing jointly (for the spouse covered by the workplace plan).
+            Contributions to a traditional IRA may be tax-deductible depending on your income and whether you have access to a workplace retirement plan. If you or your spouse are covered by a workplace plan like a 401k, the deductibility of your traditional IRA contribution phases out at higher income levels. For 2026, that phase-out begins at $81,000 for single filers and $129,000 for married filing jointly (for the spouse covered by the workplace plan).
           </p>
 
           <p>
@@ -93,7 +93,7 @@ export default function RothVsTraditionalIraPage() {
           </p>
 
           <p>
-            Roth IRAs have income limits for contributions. For 2025, eligibility to contribute the full amount phased out above $150,000 for single filers and $236,000 for married filing jointly. Above those limits, direct Roth contributions are reduced or eliminated.
+            Roth IRAs have income limits for contributions. For 2026, eligibility to contribute the full amount phases out between $153,000 and $168,000 for single filers and between $242,000 and $252,000 for married filing jointly. Above those limits, direct Roth contributions are reduced or eliminated.
           </p>
 
           <p>
@@ -122,10 +122,10 @@ export default function RothVsTraditionalIraPage() {
             If you genuinely do not know, Roth provides one additional benefit: tax diversification. Having both pre-tax and after-tax retirement accounts in retirement gives you the ability to manage your taxable income strategically — drawing from Roth in years when additional taxable income would push you into a higher bracket.
           </p>
 
-          <h2 className="text-white text-xl font-bold mt-8 mb-3">Contribution Limits for 2025</h2>
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">Contribution Limits for 2026</h2>
 
           <p>
-            The IRA contribution limit for 2025 was $7,000 per year, with an additional $1,000 catch-up contribution allowed for those 50 and older. This limit applies to the total of all IRA contributions combined — traditional and Roth together cannot exceed $7,000 (or $8,000 if you qualify for catch-up).
+            The IRA contribution limit for 2026 is $7,500 per year, with an additional $1,100 catch-up contribution allowed for those 50 and older. This limit applies to the total of all IRA contributions combined — traditional and Roth together cannot exceed $7,500 (or $8,600 if you qualify for catch-up).
           </p>
 
           <p>

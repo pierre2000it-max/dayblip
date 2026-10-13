@@ -224,7 +224,7 @@ const articles = [
     category: "Retirement",
     title: "How Much to Save in Your 401(k): By Income Tier, 2026",
     excerpt:
-      "The 2026 limit is $23,500. Maxing it for 30 years at 7% grows to $2.22M. Always capture the full employer match first. The right rate for everyone else depends on income tier.",
+      "The 2026 limit is $24,500. Maxing it for 30 years at 7% grows to $2.31M. Always capture the full employer match first. The right rate for everyone else depends on income tier.",
     readTime: "5 min read",
     href: "/blog/how-much-to-save-in-401k",
   },
@@ -280,7 +280,7 @@ const articles = [
     category: "Retirement",
     title: "What Is a Roth IRA and Who Should Open One?",
     excerpt:
-      "$7,000/year at 7% for 30 years = ~$706,000 tax-free. The 2026 contribution limit, income rules, and how to open one in 15 min.",
+      "$7,500/year at 7% for 30 years = ~$708,000 tax-free. The 2026 contribution limit, income rules, and how to open one in 15 min.",
     readTime: "6 min read",
     href: "/blog/what-is-a-roth-ira",
   },
