@@ -113,7 +113,7 @@ describe("no copies of tax constants anywhere else in src", () => {
       return /\.(ts|tsx)$/.test(name) ? [full] : []
     })
   }
-  const files = walk("src").filter((f) => !/tax2026(\.test)?\.ts$/.test(f))
+  const files = walk("src").filter((f) => !/(tax2026|stateTax)(\.test)?\.ts$/.test(f))
   it("scans files", () => expect(files.length).toBeGreaterThan(100))
   it("finds no bracket or wage-base literals", () => {
     const offenders = files.filter((f) => banned.test(readFileSync(f, "utf8")))

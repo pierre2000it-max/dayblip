@@ -8,35 +8,9 @@ import RelatedTools from '@/components/RelatedTools'
 import LastUpdated from '@/components/LastUpdated'
 import MethodologyNote from '@/components/MethodologyNote'
 import { STANDARD_DEDUCTION, federalTax, marginalRate as marginalRateFor, medicareTax, socialSecurityTax, toFiling } from '@/lib/tax2026'
+import { STATE_TAX, getState, stateIncomeTax, stateLabel } from '@/lib/stateTax'
 
 // 2026 values per IRS Rev. Proc. 2025-32
-const STATES: [string, number][] = [
-  ['No state income tax (TX, FL, NV, WA, etc.)', 0],
-  ['Colorado', 0.044],
-  ['Arizona', 0.025],
-  ['Indiana', 0.0305],
-  ['Kentucky', 0.04],
-  ['Georgia', 0.0549],
-  ['Virginia', 0.0575],
-  ['North Carolina', 0.0450],
-  ['Missouri', 0.048],
-  ['Ohio', 0.035],
-  ['Pennsylvania', 0.0307],
-  ['Michigan', 0.0425],
-  ['Wisconsin', 0.0530],
-  ['Minnesota', 0.0985],
-  ['Illinois', 0.0495],
-  ['Utah', 0.0465],
-  ['Maryland', 0.0575],
-  ['Connecticut', 0.0699],
-  ['Massachusetts', 0.05],
-  ['New York', 0.0685],
-  ['New Jersey', 0.0637],
-  ['California', 0.093],
-  ['Oregon', 0.099],
-  ['Hawaii', 0.11],
-]
-
 const PAY_PERIODS: Record<string, { label: string; periods: number }> = {
   biweekly:    { label: 'Biweekly (every 2 weeks)', periods: 26 },
   weekly:      { label: 'Weekly', periods: 52 },
@@ -48,7 +22,7 @@ export default function FirstPaycheckPage() {
   const [salary, setSalary] = useState('')
   const [payFreq, setPayFreq] = useState('biweekly')
   const [filing, setFiling] = useState('single')
-  const [stateIdx, setStateIdx] = useState(0)
+  const [stateCode, setStateCode] = useState('TX')
   const [healthInsurance, setHealthInsurance] = useState('0')
   const [fourOhOneK, setFourOhOneK] = useState('0')
   const [result, setResult] = useState<{
@@ -89,9 +63,8 @@ export default function FirstPaycheckPage() {
 
     const annualFedTax = federalTax(taxableIncome, filingStatus)
 
-    const stateRate = STATES[stateIdx]?.[1] ?? 0
-    const annualStateTax = taxableIncome * stateRate
-    const stateName = STATES[stateIdx]?.[0] ?? 'No state tax'
+    const annualStateTax = stateIncomeTax(stateCode, agi, filingStatus)
+    const stateName = getState(stateCode)?.name ?? 'No state tax'
 
     const annualSs = socialSecurityTax(annual)
     const annualMedicare = medicareTax(annual)
@@ -282,12 +255,12 @@ export default function FirstPaycheckPage() {
             State you will work in
           </label>
           <select
-            value={stateIdx}
-            onChange={e => setStateIdx(Number(e.target.value))}
+            value={stateCode}
+            onChange={e => setStateCode(e.target.value)}
             style={{ ...inputStyle, cursor: 'pointer' }}
           >
-            {STATES.map(([name], i) => (
-              <option key={i} value={i}>{name}</option>
+            {STATE_TAX.map(st => (
+              <option key={st.code} value={st.code}>{stateLabel(st)}</option>
             ))}
           </select>
         </div>

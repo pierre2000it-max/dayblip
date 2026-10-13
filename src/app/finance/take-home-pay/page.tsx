@@ -11,20 +11,10 @@ import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
 import { federalTax, marginalRate, medicareTax, socialSecurityTax, taxableAfterStandardDeduction, toFiling } from "@/lib/tax2026"
+import { STATE_TAX, getState, stateIncomeTax, stateLabel } from "@/lib/stateTax"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 function fmtK(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
-
-const STATES: [string, number][] = [
-  ["No state tax (TX/FL/NV/WA/SD/WY/AK/NH/TN)", 0],
-  ["CO – 4.4%", 0.044], ["AZ – 2.5%", 0.025], ["IN – 3.1%", 0.031], ["KY – 4.5%", 0.045],
-  ["GA – 5.5%", 0.055], ["VA – 5.8%", 0.058], ["NC – 5.25%", 0.0525], ["MO – 5.4%", 0.054],
-  ["OH – 4.0%", 0.04], ["PA – 3.07%", 0.0307], ["MI – 4.25%", 0.0425],
-  ["WI – 7.65%", 0.0765], ["MN – 9.85%", 0.0985], ["IL – 4.95%", 0.0495],
-  ["UT – 4.85%", 0.0485], ["MD – 5.75%", 0.0575], ["CT – 7.0%", 0.07],
-  ["MA – 9.0%", 0.09], ["NY – 10.9%", 0.109], ["NJ – 10.75%", 0.1075],
-  ["CA – up to 13.3%", 0.133], ["OR – 9.9%", 0.099], ["HI – 11.0%", 0.11],
-]
 
 const PAY_FREQS: [string, string, number][] = [
   ["weekly", "Weekly", 52],
@@ -39,7 +29,7 @@ export default function TakeHomePayPage() {
   const [hoursPerWeek, setHoursPerWeek] = useState("40")
   const [payFreq, setPayFreq] = useState("biweekly")
   const [filing, setFiling] = useState("single")
-  const [stateIdx, setStateIdx] = useState(0)
+  const [stateCode, setStateCode] = useState("TX")
   const [fourOhOneK, setFourOhOneK] = useState("6")
   const [healthIns, setHealthIns] = useState("0")
   const [otherDeductions, setOtherDeductions] = useState("0")
@@ -48,7 +38,8 @@ export default function TakeHomePayPage() {
     if (typeof window === "undefined") return
     const p = new URLSearchParams(window.location.search)
     if (p.get("salary")) setAmount(p.get("salary")!)
-    if (p.get("state")) setStateIdx(Number(p.get("state")))
+    const st = p.get("state")?.toUpperCase()
+    if (st && getState(st)) setStateCode(st)
     if (p.get("filing")) setFiling(p.get("filing")!)
     if (p.get("type")) setWageType(p.get("type") as "salary" | "hourly")
     if (p.get("retirement")) setFourOhOneK(p.get("retirement")!)
@@ -69,8 +60,7 @@ export default function TakeHomePayPage() {
     const preTaxDeductions = k401Annual + hiAnnual + otherAnnual
     const taxableIncome = taxableAfterStandardDeduction(annual, filingStatus, preTaxDeductions)
     const fedTax = federalTax(taxableIncome, filingStatus)
-    const stateRate = STATES[stateIdx][1]
-    const stateTax = taxableIncome * stateRate
+    const stateTax = stateIncomeTax(stateCode, annual - preTaxDeductions, filingStatus)
     const ss = socialSecurityTax(annual)
     const medicare = medicareTax(annual)
 
@@ -97,7 +87,7 @@ export default function TakeHomePayPage() {
     const hourlyTakeHome = annualTakeHome / hoursPerYear
 
     return { perCheckBreakdown, annualTakeHome, totalTax, totalDeductions, effectiveRate, marginal, hourlyTakeHome, annual, freq }
-  }, [wageType, amount, hoursPerWeek, payFreq, filing, stateIdx, fourOhOneK, healthIns, otherDeductions])
+  }, [wageType, amount, hoursPerWeek, payFreq, filing, stateCode, fourOhOneK, healthIns, otherDeductions])
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
   const sel = inp
@@ -123,7 +113,7 @@ export default function TakeHomePayPage() {
         ),
         faqSchema([
           { question: "What gets deducted from my paycheck?", answer: "The calculator subtracts federal income tax, state income tax, Social Security (6.2% up to the wage cap), Medicare (1.45%), and any pre-tax deductions like 401(k) contributions and health insurance to arrive at your net take-home pay." },
-          { question: "How does my state affect take-home pay?", answer: "State income tax varies a lot. Nine states have no income tax while California tops out near 13.3%. Select your state and the tool applies its rate to your taxable income, changing your net paycheck accordingly." },
+          { question: "How does my state affect take-home pay?", answer: "State income tax varies a lot. Nine states have no wage income tax, while California's top bracket reaches 13.3% above $1 million. Select your state and the tool applies its 2026 brackets and standard deduction to your income, changing your net paycheck accordingly." },
           { question: "How do 401(k) contributions change my paycheck?", answer: "Traditional 401(k) contributions come out before income tax, so they lower both your taxable income and your federal and state tax — your paycheck drops by less than the amount you contribute." },
           { question: "What is the difference between marginal and effective tax rate?", answer: "Your marginal rate is the rate on your last dollar of income (your top bracket). Your effective rate is total tax divided by income, which is always lower because earlier dollars are taxed at lower bracket rates." },
         ]),
@@ -152,7 +142,7 @@ export default function TakeHomePayPage() {
 
       <section className="px-6 pt-8 pb-0 bg-[#1a1a2e]">
         <div className="mx-auto max-w-[700px]">
-          <GeoAnswerBlock answer="To calculate take-home pay: subtract federal income tax, state income tax, Social Security (6.2%), Medicare (1.45%), and any pre-tax deductions from gross salary. A $75,000 gross salary in California results in approximately $53,000 in annual take-home pay after all taxes and deductions. Use the interactive tool below." />
+          <GeoAnswerBlock answer="To calculate take-home pay: subtract federal income tax, state income tax, Social Security (6.2%), Medicare (1.45%), and any pre-tax deductions from gross salary. A $75,000 gross salary in California results in approximately $58,800 in annual take-home pay after all taxes, with no pre-tax deductions. Use the interactive tool below." />
         </div>
       </section>
 
@@ -160,7 +150,7 @@ export default function TakeHomePayPage() {
         <div className="mx-auto max-w-[700px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">A $100,000 salary in New York takes home approximately $64,650 after federal tax, state tax and FICA — 35% less than the stated salary. The same salary in Texas takes home $72,400 because Texas has no state income tax. State of residence can make a $7,750 annual difference on identical salaries.</p>
+            <p className="text-[#e2e8f0]">A $100,000 salary in New York takes home approximately $74,300 after federal tax, state tax and FICA, about 26% less than the stated salary. The same salary in Texas takes home about $79,200 because Texas has no state income tax. State of residence can make a $4,900 annual difference on identical salaries.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Your take home pay is your salary after federal income tax, state income tax and FICA (Social Security and Medicare) deductions. Pre-tax contributions to 401k, health insurance and HSA further reduce your taxable income. This calculator shows your exact net pay for any salary in any US state.</p>
         </div>
@@ -202,8 +192,8 @@ export default function TakeHomePayPage() {
                 <option value="hoh">Head of Household</option>
               </select></label>
             <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">State</span>
-              <select value={stateIdx} onChange={e => setStateIdx(Number(e.target.value))} className={sel}>
-                {STATES.map(([name], i) => <option key={i} value={i}>{name}</option>)}
+              <select value={stateCode} onChange={e => setStateCode(e.target.value)} className={sel}>
+                {STATE_TAX.map(st => <option key={st.code} value={st.code}>{stateLabel(st)}</option>)}
               </select></label>
             <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">401(k) Contribution (%)</span>
               <input type="number" step="0.5" value={fourOhOneK} onChange={e => setFourOhOneK(e.target.value)} className={inp} /></label>
@@ -237,9 +227,7 @@ export default function TakeHomePayPage() {
                 <span className="text-[#4ade80] text-xl">{fmt(calc.perCheckBreakdown.net)}</span>
               </div>
             </div>
-            {stateIdx === 21 && (
-              <p className="mt-3 text-xs text-[#a8a8b3]">* California uses a progressive rate schedule. The 13.3% top rate applies only to income above $1,000,000. Your effective state rate is lower than this figure.</p>
-            )}
+            <p className="mt-3 text-xs text-[#a8a8b3]">State tax is an estimate from 2026 state brackets and the state standard deduction. Local taxes and state payroll taxes such as SDI are not included.</p>
           </div>
 
           {/* Annual summary */}
@@ -480,11 +468,11 @@ export default function TakeHomePayPage() {
 
           <ShareButtons
             text={`My salary take-home is ${fmtK(calc.annualTakeHome)}/year after taxes. Effective rate: ${calc.effectiveRate}% (Educational only)`}
-            url={`https://www.dayblip.com/finance/take-home-pay?salary=${amount}&state=${stateIdx}&filing=${filing}&type=${wageType}&retirement=${fourOhOneK}`}
+            url={`https://www.dayblip.com/finance/take-home-pay?salary=${amount}&state=${stateCode}&filing=${filing}&type=${wageType}&retirement=${fourOhOneK}`}
             title="Take Home Pay Calculator"
           />
           <p className="text-xs text-[#a8a8b3]">Tax calculations are estimates for educational purposes. Does not include all deductions or credits. Use IRS.gov or a tax professional for exact figures.</p>
-          <MethodologyNote text="Based on 2026 IRS federal tax brackets, FICA rates (6.2% Social Security, 1.45% Medicare), and state income tax tables from each state's revenue department." />
+          <MethodologyNote text="Based on 2026 IRS federal tax brackets, FICA rates (6.2% Social Security, 1.45% Medicare), and 2026 state income tax brackets and standard deductions for a single filer, from the Tax Foundation's state tax tables. Married filing jointly doubles the thresholds." />
           <RelatedTools tools={[
             { emoji: "🏛️", title: "No Tax on Overtime 2026", desc: "Calculate your overtime tax savings under new law", href: "/finance/overtime-tax" },
             { emoji: "🧾", title: "Paycheck Calculator", desc: "Exact net pay per period after all deductions", href: "/finance/paycheck-calculator" },

@@ -6,6 +6,7 @@ import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
 import { STANDARD_DEDUCTION, federalTax as bracketTax, selfEmploymentTax } from "@/lib/tax2026"
+import { STATE_TAX, getState, stateIncomeTax, stateLabel } from "@/lib/stateTax"
 
 // Single filer, standard deduction.
 function federalTax(income: number): number {
@@ -14,20 +15,6 @@ function federalTax(income: number): number {
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtDec(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
-
-const STATES: [string, number][] = [
-  ["TX – No income tax", 0], ["FL – No income tax", 0], ["NV – No income tax", 0],
-  ["WA – No income tax", 0], ["SD – No income tax", 0], ["WY – No income tax", 0],
-  ["AK – No income tax", 0], ["NH – No income tax", 0], ["TN – No income tax", 0],
-  ["CO", 0.044], ["AZ", 0.025], ["IN", 0.031], ["KY", 0.045],
-  ["GA", 0.055], ["VA", 0.058], ["NC", 0.0525], ["MO", 0.054],
-  ["OH", 0.04], ["PA", 0.0307], ["MI", 0.0425], ["AL", 0.05],
-  ["WI", 0.0765], ["MN", 0.0985], ["IL", 0.0495], ["UT", 0.0485],
-  ["IA", 0.06], ["AR", 0.055], ["LA", 0.0425], ["MS", 0.05],
-  ["SC", 0.07], ["MD", 0.0575], ["CT", 0.07], ["DE", 0.066],
-  ["MA", 0.09], ["NY", 0.109], ["NJ", 0.1075], ["CA", 0.133],
-  ["OR", 0.099], ["HI", 0.11], ["ME", 0.0715], ["VT", 0.0875],
-]
 
 const BENCHMARKS = [
   { title: "Web Developer", range: "$75–150/hr" },
@@ -45,7 +32,7 @@ export default function FreelancerRatePage() {
   const [bizExpenses, setBizExpenses] = useState("200")
   const [healthIns, setHealthIns] = useState("400")
   const [retirement, setRetirement] = useState("500")
-  const [stateIdx, setStateIdx] = useState(0)
+  const [stateCode, setStateCode] = useState("TX")
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -56,7 +43,8 @@ export default function FreelancerRatePage() {
     if (p.get("expenses")) setBizExpenses(p.get("expenses")!)
     if (p.get("health")) setHealthIns(p.get("health")!)
     if (p.get("retirement")) setRetirement(p.get("retirement")!)
-    if (p.get("state")) setStateIdx(Number(p.get("state")))
+    const st = p.get("state")?.toUpperCase()
+    if (st && getState(st)) setStateCode(st)
   }, [])
 
   const calc = useMemo(() => {
@@ -66,7 +54,6 @@ export default function FreelancerRatePage() {
     const biz = parseFloat(bizExpenses) || 0
     const hi = parseFloat(healthIns) || 0
     const ret = parseFloat(retirement) || 0
-    const stateRate = STATES[stateIdx][1]
 
     const workWeeks = 52 - vw
     const totalBillableHours = bh * workWeeks
@@ -79,7 +66,7 @@ export default function FreelancerRatePage() {
     const seBase = selfEmploymentTax(grossNeeded)
     const taxableIncome = grossNeeded - seBase.deduction
     const fedTax = federalTax(taxableIncome)
-    const stateTax = taxableIncome * stateRate
+    const stateTax = stateIncomeTax(stateCode, taxableIncome)
     const seTax = seBase.total
 
     const totalNeeded = grossNeeded + fedTax + stateTax + seTax
@@ -99,13 +86,13 @@ export default function FreelancerRatePage() {
       const annualRevenue = r * totalBillableHours
       const se = selfEmploymentTax(annualRevenue).total
       const fed = federalTax(annualRevenue - se / 2)
-      const st = (annualRevenue - se / 2) * stateRate
+      const st = stateIncomeTax(stateCode, annualRevenue - se / 2)
       const afterTax = annualRevenue - se - fed - st - annualBiz - annualHI - annualRet
       return { rate: r, annualRevenue, afterTax, delta }
     })
 
     return { baseRate, totalBillableHours, workWeeks, breakdown, scenarios }
-  }, [targetIncome, vacationWeeks, billableHours, bizExpenses, healthIns, retirement, stateIdx])
+  }, [targetIncome, vacationWeeks, billableHours, bizExpenses, healthIns, retirement, stateCode])
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
 
@@ -190,9 +177,9 @@ export default function FreelancerRatePage() {
           <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6 space-y-4">
             <h2 className="font-bold text-white text-lg">🧾 Tax</h2>
             <label className="flex flex-col gap-1"><span className="text-sm text-[#a8a8b3]">State</span>
-              <select value={stateIdx} onChange={e => setStateIdx(Number(e.target.value))}
+              <select value={stateCode} onChange={e => setStateCode(e.target.value)}
                 className="rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none">
-                {STATES.map(([name], i) => <option key={i} value={i}>{name}</option>)}
+                {STATE_TAX.map(st => <option key={st.code} value={st.code}>{stateLabel(st)}</option>)}
               </select></label>
             <RelatedTools tools={[
             { emoji: "⏰", title: "True Hourly Wage", desc: "What you really earn", href: "/tools/true-hourly-wage" },
@@ -302,7 +289,7 @@ export default function FreelancerRatePage() {
 
           <ShareButtons
             text={`To earn $${targetIncome}/year freelancing I need to charge at least ${fmtDec(calc.baseRate)}/hour! (Educational only)`}
-            url={`https://www.dayblip.com/finance/freelancer-rate?income=${targetIncome}&vacation=${vacationWeeks}&billable=${billableHours}&expenses=${bizExpenses}&health=${healthIns}&retirement=${retirement}&state=${stateIdx}`}
+            url={`https://www.dayblip.com/finance/freelancer-rate?income=${targetIncome}&vacation=${vacationWeeks}&billable=${billableHours}&expenses=${bizExpenses}&health=${healthIns}&retirement=${retirement}&state=${stateCode}`}
             title="Freelancer Rate Calculator"
           />
           <p className="text-xs text-[#a8a8b3]">Educational estimate only. Tax calculations are approximate and do not account for all deductions. Consult a CPA for accurate figures.</p>

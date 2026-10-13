@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react"
 import { STANDARD_DEDUCTION, federalTax, medicareTax, socialSecurityTax } from "@/lib/tax2026"
+import { STATE_TAX, stateIncomeTax, stateLabel } from "@/lib/stateTax"
 
 function fmt(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 })
@@ -11,19 +12,6 @@ const PERIODS: { label: string; n: number }[] = [
   { label: "Biweekly (26)", n: 26 },
   { label: "Semi-monthly (24)", n: 24 },
   { label: "Monthly (12)", n: 12 },
-]
-
-const NO_TAX_STATES = new Set(["AK","FL","NH","NV","SD","TN","TX","WA","WY"])
-const STATE_RATES: Record<string, number> = {
-  CA: 0.093, NY: 0.0685, IL: 0.0495,
-}
-
-const STATES = [
-  "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA",
-  "HI","ID","IL","IN","IA","KS","KY","LA","ME","MD",
-  "MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ",
-  "NM","NY","NC","ND","OH","OK","OR","PA","RI","SC",
-  "SD","TN","TX","UT","VT","VA","WA","WV","WI","WY",
 ]
 
 export default function EmbedPaycheckCalculator() {
@@ -54,8 +42,7 @@ export default function EmbedPaycheckCalculator() {
     const annualFederal = federalTax(Math.max(0, federalTaxable - STANDARD_DEDUCTION[status]), status)
     const federalPerCheck = annualFederal / period.n
 
-    const stateRate = NO_TAX_STATES.has(state) ? 0 : (STATE_RATES[state] ?? 0.05)
-    const statePerCheck = (federalTaxable / period.n) * stateRate
+    const statePerCheck = stateIncomeTax(state, federalTaxable, status) / period.n
 
     const ficaPerCheck = (socialSecurityTax(annualSalary) + medicareTax(annualSalary)) / period.n
     const netPerCheck = grossPerCheck - federalPerCheck - statePerCheck - ficaPerCheck - perK401 - perHealth
@@ -108,7 +95,7 @@ export default function EmbedPaycheckCalculator() {
         <label style={{ display: "flex", flexDirection: "column", gap: 3 }}>
           <span style={{ fontSize: 12, color: "#a8a8b3" }}>State</span>
           <select value={state} onChange={e => setState(e.target.value)} style={inputStyle}>
-            {STATES.map(s => <option key={s}>{s}</option>)}
+            {STATE_TAX.map(st => <option key={st.code} value={st.code}>{stateLabel(st)}</option>)}
           </select>
         </label>
 

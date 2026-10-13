@@ -8,22 +8,12 @@ import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
 import { federalTax as calcFederalTax, medicareTax, socialSecurityTax, taxableAfterStandardDeduction, type Filing as TaxFiling } from "@/lib/tax2026"
+import { STATE_TAX, stateIncomeTax, stateLabel } from "@/lib/stateTax"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 function fmt0(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
 // ── Tax data ───────────────────────────────────────────────────────────────────
-
-const STATES: [string, number][] = [
-  ["No state tax (TX/FL/NV/WA/SD/WY/AK/NH/TN)", 0],
-  ["CO – 4.4%", 0.044], ["AZ – 2.5%", 0.025], ["IN – 3.1%", 0.031], ["KY – 4.5%", 0.045],
-  ["GA – 5.5%", 0.055], ["VA – 5.8%", 0.058], ["NC – 5.25%", 0.0525], ["MO – 5.4%", 0.054],
-  ["OH – 4.0%", 0.04],  ["PA – 3.07%", 0.0307], ["MI – 4.25%", 0.0425],
-  ["WI – 7.65%", 0.0765], ["MN – 9.85%", 0.0985], ["IL – 4.95%", 0.0495],
-  ["UT – 4.85%", 0.0485], ["MD – 5.75%", 0.0575], ["CT – 7.0%", 0.07],
-  ["MA – 9.0%", 0.09],  ["NY – 10.9%", 0.109], ["NJ – 10.75%", 0.1075],
-  ["CA – up to 13.3%", 0.133],["OR – 9.9%", 0.099], ["HI – 11.0%", 0.11],
-]
 
 type Filing = Extract<TaxFiling, "single" | "mfj" | "hoh">
 
@@ -65,7 +55,7 @@ export default function PaycheckCalculatorPage() {
   const [hoursPerWeek, setHoursPerWeek] = useState("40")
   const [payFrequency, setPayFrequency] = useState("biweekly")
   const [filing, setFiling] = useState<Filing>("single")
-  const [stateIdx, setStateIdx] = useState(0)
+  const [stateCode, setStateCode] = useState("TX")
 
   const [k401, setK401] = useState("0")
   const [healthIns, setHealthIns] = useState("0")
@@ -98,8 +88,7 @@ export default function PaycheckCalculatorPage() {
     const annualFederal = calcFederalTax(taxableAfterStandardDeduction(annual, filing, annualPreTax), filing)
     const federalTax = annualFederal / periods
 
-    const stateRate = STATES[stateIdx][1]
-    const annualState = taxableAnnual * stateRate
+    const annualState = stateIncomeTax(stateCode, taxableAnnual, filing)
     const stateTax = annualState / periods
 
     // FICA: Social Security is capped at the 2026 SSA wage base (see tax2026.ts)
@@ -144,7 +133,7 @@ export default function PaycheckCalculatorPage() {
         ),
         faqSchema([
           { question: "How do I calculate my net paycheck?", answer: "Divide your annual salary by your number of pay periods to get gross pay. Then subtract federal income tax, state income tax, FICA (7.65%) and any pre-tax deductions like 401k and health insurance. A $75,000 salary paid biweekly has a gross paycheck of $2,884 and nets approximately $2,087 after taxes in an average state." },
-          { question: "Does 401k reduce my paycheck taxes?", answer: "Yes. Traditional 401k contributions are pre-tax meaning they reduce your taxable income before federal and state taxes are calculated. A $200 biweekly 401k contribution reduces your gross paycheck by $200 but only reduces take-home by $156 because you save $44 in taxes." },
+          { question: "Does 401k reduce my paycheck taxes?", answer: "Yes. Traditional 401k contributions are pre-tax meaning they reduce your taxable income before federal and state taxes are calculated. A $200 biweekly 401k contribution reduces your gross paycheck by $200 but only reduces take-home by $156 because you save $44 in federal tax, plus any state tax savings." },
           { question: "What is FICA tax on my paycheck?", answer: "FICA is 7.65% of gross wages — 6.2% for Social Security and 1.45% for Medicare. Social Security only applies to the first $184,500 of annual earnings. Medicare applies to all earnings. On a $2,884 gross paycheck FICA is approximately $221." },
         ]),
         breadcrumbSchema([
@@ -174,7 +163,7 @@ export default function PaycheckCalculatorPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div style={{ color: "#e94560", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "8px" }}>Quick Answer</div>
             <p style={{ color: "#e8e8e8", fontSize: "15px", lineHeight: "1.6" }}>
-              A $75,000 annual salary paid biweekly gives a gross paycheck of $2,884 before deductions. After federal tax ($432), state tax ($144 in an average state) and FICA ($221) the net paycheck is approximately $2,087. Adding a $200 401k contribution reduces take-home to $1,931 but saves $44 in taxes because 401k is pre-tax.
+              A $75,000 annual salary paid biweekly gives a gross paycheck of $2,885 before deductions. After federal tax ($295) and FICA ($221), the net paycheck is approximately $2,369 in a state with no income tax, such as Texas. In California, state tax takes about $107 more, for a net of about $2,262. Adding a $200 401k contribution reduces take-home in Texas to $2,213 but saves $44 in federal tax because 401k is pre-tax.
             </p>
           </div>
 
@@ -231,8 +220,8 @@ export default function PaycheckCalculatorPage() {
 
           <label className="block">
             <span className="mb-1 block text-sm font-semibold text-white">State</span>
-            <select value={stateIdx} onChange={e => setStateIdx(parseInt(e.target.value))} className="w-full rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-2.5 text-white focus:border-[#e94560] focus:outline-none">
-              {STATES.map(([name], i) => <option key={i} value={i}>{name}</option>)}
+            <select value={stateCode} onChange={e => setStateCode(e.target.value)} className="w-full rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-2.5 text-white focus:border-[#e94560] focus:outline-none">
+              {STATE_TAX.map(st => <option key={st.code} value={st.code}>{stateLabel(st)}</option>)}
             </select>
           </label>
 
@@ -321,7 +310,7 @@ export default function PaycheckCalculatorPage() {
             </div>
           )}
 
-          <MethodologyNote text="Uses 2026 FICA rates, federal income tax withholding tables (IRS Publication 15-T), and state payroll tax rates." />
+          <MethodologyNote text="Uses 2026 FICA rates, 2026 federal brackets and standard deduction (IRS Rev. Proc. 2025-32), and 2026 state income tax brackets and standard deductions for a single filer from the Tax Foundation. Married filing jointly doubles the state thresholds. Local taxes and state payroll taxes such as SDI are not included." />
           <RelatedTools tools={[
             { emoji: "💰", title: "Take Home Pay Calculator", desc: "Annual take-home by state", href: "/finance/take-home-pay" },
             { emoji: "🏛️", title: "No Tax on Overtime 2026", desc: "Save on overtime under new law", href: "/finance/overtime-tax" },
