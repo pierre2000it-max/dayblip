@@ -151,7 +151,6 @@ export async function generateMetadata({
   if (!holiday) return { title: "Not Found" };
   const year = new Date().getFullYear();
   const title = HOLIDAY_TITLE_OVERRIDES[params.slug] ?? `Days Until ${holiday.name} ${year}`;
-  const intro = HOLIDAY_INTROS[params.slug];
   const descriptionText = params.slug === "christmas"
     ? "How many days until Christmas 2026? Live countdown to December 25 showing exact days, hours, minutes and seconds remaining. Free — no signup required."
     : params.slug === "summer-break"
