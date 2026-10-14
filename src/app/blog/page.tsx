@@ -348,6 +348,14 @@ const articles = [
     readTime: "6 min read",
     href: "/blog/hsa-vs-401k",
   },
+  {
+    category: "Finance",
+    title: "Capital Gains Tax in 2026: Rates, Thresholds, Examples",
+    excerpt:
+      "Hold more than 1 year and the rate is 0%, 15% or 20%. Sell sooner and it is your income tax rate. Worked 2026 examples at 4 incomes.",
+    readTime: "6 min read",
+    href: "/blog/capital-gains-tax-2026",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]
