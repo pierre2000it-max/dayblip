@@ -340,6 +340,14 @@ const articles = [
     readTime: "6 min read",
     href: "/blog/roth-vs-traditional-401k",
   },
+  {
+    category: "Finance",
+    title: "HSA vs 401k in 2026: Which to Fund First?",
+    excerpt:
+      "Fund the 401k match first, then the HSA. A payroll HSA skips income tax and the 7.65% payroll tax. Worked 2026 examples at 3 salaries.",
+    readTime: "6 min read",
+    href: "/blog/hsa-vs-401k",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]
