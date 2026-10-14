@@ -5,13 +5,8 @@ import SchemaMarkup from "@/components/SchemaMarkup"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
-import { STANDARD_DEDUCTION, federalTax as bracketTax, selfEmploymentTax } from "@/lib/tax2026"
-import { STATE_TAX, getState, stateIncomeTax, stateLabel } from "@/lib/stateTax"
-
-// Single filer, standard deduction.
-function federalTax(income: number): number {
-  return bracketTax(Math.max(0, income - STANDARD_DEDUCTION.single), "single")
-}
+import { STATE_TAX, getState, stateLabel } from "@/lib/stateTax"
+import { freelanceRate } from "@/lib/freelanceRate"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 function fmtDec(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
@@ -48,50 +43,15 @@ export default function FreelancerRatePage() {
   }, [])
 
   const calc = useMemo(() => {
-    const income = parseFloat(targetIncome) || 0
-    const vw = parseFloat(vacationWeeks) || 0
-    const bh = parseFloat(billableHours) || 1
-    const biz = parseFloat(bizExpenses) || 0
-    const hi = parseFloat(healthIns) || 0
-    const ret = parseFloat(retirement) || 0
-
-    const workWeeks = 52 - vw
-    const totalBillableHours = bh * workWeeks
-    const annualBiz = biz * 12
-    const annualHI = hi * 12
-    const annualRet = ret * 12
-    const grossNeeded = income + annualBiz + annualHI + annualRet
-
-    // SE tax on 92.35% of net earnings
-    const seBase = selfEmploymentTax(grossNeeded)
-    const taxableIncome = grossNeeded - seBase.deduction
-    const fedTax = federalTax(taxableIncome)
-    const stateTax = stateIncomeTax(stateCode, taxableIncome)
-    const seTax = seBase.total
-
-    const totalNeeded = grossNeeded + fedTax + stateTax + seTax
-    const baseRate = totalBillableHours > 0 ? totalNeeded / totalBillableHours : 0
-
-    const breakdown = {
-      incomeHr: income / totalBillableHours,
-      bizHr: annualBiz / totalBillableHours,
-      hiHr: annualHI / totalBillableHours,
-      retHr: annualRet / totalBillableHours,
-      seHr: seTax / totalBillableHours,
-      taxHr: (fedTax + stateTax) / totalBillableHours,
-    }
-
-    const scenarios = [-20, 0, 20, 40].map(delta => {
-      const r = Math.max(1, baseRate + delta)
-      const annualRevenue = r * totalBillableHours
-      const se = selfEmploymentTax(annualRevenue).total
-      const fed = federalTax(annualRevenue - se / 2)
-      const st = stateIncomeTax(stateCode, annualRevenue - se / 2)
-      const afterTax = annualRevenue - se - fed - st - annualBiz - annualHI - annualRet
-      return { rate: r, annualRevenue, afterTax, delta }
+    return freelanceRate({
+      income: parseFloat(targetIncome) || 0,
+      vacationWeeks: parseFloat(vacationWeeks) || 0,
+      billablePerWeek: parseFloat(billableHours) || 1,
+      bizMonthly: parseFloat(bizExpenses) || 0,
+      healthMonthly: parseFloat(healthIns) || 0,
+      retirementMonthly: parseFloat(retirement) || 0,
+      state: stateCode,
     })
-
-    return { baseRate, totalBillableHours, workWeeks, breakdown, scenarios }
   }, [targetIncome, vacationWeeks, billableHours, bizExpenses, healthIns, retirement, stateCode])
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
@@ -186,6 +146,7 @@ export default function FreelancerRatePage() {
             { emoji: "🧾", title: "Self-Employment Tax", desc: "Know your tax burden", href: "/finance/self-employment-tax" },
             { emoji: "💼", title: "Side Hustle Calculator", desc: "Value your side income", href: "/tools/side-hustle" },
             { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
+            { emoji: "📖", title: "How to Set a Freelance Rate", desc: "The math behind the number", href: "/blog/how-to-set-freelance-rate" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">Self-employment tax (15.3%) and federal income tax are calculated automatically.</p>
           </div>
@@ -220,6 +181,9 @@ export default function FreelancerRatePage() {
                 <span className="text-[#e94560]">{fmtDec(calc.baseRate)}/hr</span>
               </div>
             </div>
+            <p className="mt-3 text-xs leading-relaxed text-[#a8a8b3]">
+              Assumes a single filer taking the standard deduction. Take-home is what you keep after every cost above. Taxes are figured on the revenue you bill, after business expenses and the health insurance deduction. Retirement savings are treated as after-tax, so deductible contributions such as a SEP-IRA would lower your rate.
+            </p>
           </div>
 
           {/* Scenarios */}

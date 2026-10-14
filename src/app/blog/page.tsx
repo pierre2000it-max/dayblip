@@ -324,6 +324,14 @@ const articles = [
     readTime: "6 min read",
     href: "/blog/when-to-claim-social-security",
   },
+  {
+    category: "Career",
+    title: "How to Set Your Freelance Hourly Rate in 2026",
+    excerpt:
+      "To take home $75,000 billing 30 hours a week you need about $82 an hour, not $36. The full cost breakdown and how billable hours move the rate.",
+    readTime: "6 min read",
+    href: "/blog/how-to-set-freelance-rate",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]
