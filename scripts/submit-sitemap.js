@@ -282,6 +282,22 @@ const urls = [
   "https://www.dayblip.com/blog/true-cost-of-student-loans",
 ];
 
+// Blog articles: add every article folder in src/app/blog so new posts are
+// never left out of the submission. The hard-coded list above stays as is.
+const fs = require("fs");
+const path = require("path");
+const blogDir = path.join(__dirname, "..", "src", "app", "blog");
+let blogAdded = 0;
+for (const entry of fs.readdirSync(blogDir, { withFileTypes: true })) {
+  if (!entry.isDirectory()) continue;
+  if (!fs.existsSync(path.join(blogDir, entry.name, "page.tsx"))) continue;
+  const url = `https://www.dayblip.com/blog/${entry.name}`;
+  if (!urls.includes(url)) {
+    urls.push(url);
+    blogAdded++;
+  }
+}
+
 // Born-in pages 1940–2020
 for (let year = 1940; year <= 2020; year++) {
   urls.push(`https://www.dayblip.com/born-in/${year}`);
@@ -415,6 +431,7 @@ async function main() {
   console.log("  Summary");
   console.log("=".repeat(48));
   console.log(`  Total URLs submitted : ${urls.length}`);
+  console.log(`  Blog articles added  : ${blogAdded} (found in src/app/blog, not in the fixed list)`);
   console.log(`  Born-in pages        : 81  (1940–2020)`);
   console.log(`  On-this-day pages    : ${onThisDayPages.length}`);
   console.log(`  Tool pages           : 37`);
