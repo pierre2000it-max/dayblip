@@ -434,6 +434,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/blog/federal-tax-brackets-2026",          0.8, MONTHLY),
     p("/blog/when-to-claim-social-security",      0.8, MONTHLY),
     p("/blog/how-to-set-freelance-rate",          0.8, MONTHLY),
+    p("/blog/roth-vs-traditional-401k",           0.8, MONTHLY),
     p("/blog/what-is-the-4-percent-rule",         0.8, MONTHLY),
     p("/blog/how-much-does-a-wedding-cost",       0.8, MONTHLY),
     p("/blog/how-to-compare-job-offers",          0.8, MONTHLY),
