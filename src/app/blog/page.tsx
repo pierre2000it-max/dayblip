@@ -332,6 +332,14 @@ const articles = [
     readTime: "6 min read",
     href: "/blog/how-to-set-freelance-rate",
   },
+  {
+    category: "Retirement",
+    title: "Roth 401k vs Traditional 401k in 2026: Which Wins?",
+    excerpt:
+      "Traditional wins when your tax rate falls in retirement, Roth wins when it rises. Worked 2026 examples at 3 salaries, the limits and the new Roth catch-up rule.",
+    readTime: "6 min read",
+    href: "/blog/roth-vs-traditional-401k",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]
