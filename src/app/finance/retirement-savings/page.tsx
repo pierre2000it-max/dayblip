@@ -104,7 +104,7 @@ export default function RetirementSavingsPage() {
         <div className="mx-auto max-w-[800px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">The general retirement savings guideline suggests having 1× salary saved by 30, 3× by 40, 6× by 50, 8× by 60 and 10× by 67. To retire comfortably at 65 most Americans need $1–$1.5 million saved. At a 7% average return saving $500 per month from age 25 results in approximately $1.37 million by age 65.</p>
+            <p className="text-[#e2e8f0]">The general retirement savings guideline suggests having 1× salary saved by 30, 3× by 40, 6× by 50, 8× by 60 and 10× by 67. To retire comfortably at 65 most Americans need $1–$1.5 million saved. At a 7% average return saving $500 per month from age 25 results in approximately $1.31 million by age 65.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">Retirement savings calculators project how much your current savings and contributions will grow by retirement using compound interest. The calculation accounts for your current age, savings balance, monthly contributions and expected investment return to show whether you are on track to meet your retirement income goals.</p>
         </div>

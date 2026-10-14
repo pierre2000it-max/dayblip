@@ -10,7 +10,7 @@ import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
-import { federalTax, marginalRate, medicareTax, socialSecurityTax, taxableAfterStandardDeduction, toFiling } from "@/lib/tax2026"
+import { K401_CATCHUP, K401_LIMIT, additionalMedicareTax, federalTax, marginalRate, medicareTax, socialSecurityTax, taxableAfterStandardDeduction, toFiling } from "@/lib/tax2026"
 import { STATE_TAX, getState, stateIncomeTax, stateLabel } from "@/lib/stateTax"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
@@ -53,7 +53,9 @@ export default function TakeHomePayPage() {
 
     const filingStatus = toFiling(filing)
     const k401AnnualPct = (parseFloat(fourOhOneK) || 0) / 100
-    const k401Annual = annual * k401AnnualPct
+    const k401Requested = annual * k401AnnualPct
+    const k401Annual = Math.min(k401Requested, K401_LIMIT)
+    const k401Capped = k401Requested > K401_LIMIT
     const hiAnnual = (parseFloat(healthIns) || 0) * freq
     const otherAnnual = (parseFloat(otherDeductions) || 0) * freq
 
@@ -61,8 +63,10 @@ export default function TakeHomePayPage() {
     const taxableIncome = taxableAfterStandardDeduction(annual, filingStatus, preTaxDeductions)
     const fedTax = federalTax(taxableIncome, filingStatus)
     const stateTax = stateIncomeTax(stateCode, annual - preTaxDeductions, filingStatus)
-    const ss = socialSecurityTax(annual)
-    const medicare = medicareTax(annual)
+    // Health premiums paid through a cafeteria plan are exempt from FICA; 401(k) deferrals are not.
+    const ficaWages = Math.max(0, annual - hiAnnual)
+    const ss = socialSecurityTax(ficaWages)
+    const medicare = medicareTax(ficaWages) + additionalMedicareTax(ficaWages, filingStatus)
 
     const totalTax = fedTax + stateTax + ss + medicare
     const totalDeductions = k401Annual + hiAnnual + otherAnnual
@@ -86,7 +90,7 @@ export default function TakeHomePayPage() {
     const hoursPerYear = wageType === "hourly" ? (parseFloat(hoursPerWeek) || 40) * 52 : 2080
     const hourlyTakeHome = annualTakeHome / hoursPerYear
 
-    return { perCheckBreakdown, annualTakeHome, totalTax, totalDeductions, effectiveRate, marginal, hourlyTakeHome, annual, freq }
+    return { perCheckBreakdown, annualTakeHome, totalTax, totalDeductions, effectiveRate, marginal, hourlyTakeHome, annual, freq, k401Capped }
   }, [wageType, amount, hoursPerWeek, payFreq, filing, stateCode, fourOhOneK, healthIns, otherDeductions])
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
@@ -352,7 +356,9 @@ export default function TakeHomePayPage() {
 
             // 401k advice
             let k401Message: string
-            if (k401Pct === 0) {
+            if (calc.k401Capped) {
+              k401Message = `${k401Pct}% of your pay is above the 2026 401k limit of $${K401_LIMIT.toLocaleString()}, so this calculator caps your contribution at the limit. Workers age 50 and over can add an $${K401_CATCHUP.toLocaleString()} catch-up, which is not modeled here.`
+            } else if (k401Pct === 0) {
               k401Message = `You are contributing 0% to your 401k. If your employer matches any amount you are leaving free compensation on the table. At a $${Math.round(calc.annual).toLocaleString()} salary a 3% employer match = $${Math.round(calc.annual * 0.03).toLocaleString()}/year in free money. Start here before any other investment.`
             } else if (k401Pct < 6) {
               k401Message = `You are contributing ${k401Pct}% to your 401k ($${Math.round(annualK401).toLocaleString()}/year). If your employer matches up to 6% and you contribute less, you are leaving money unclaimed. Verify your employer match threshold and contribute at least that amount.`

@@ -89,6 +89,21 @@ export function medicareTax(wages: number): number {
   return Math.max(0, wages) * MEDICARE_RATE
 }
 
+// Additional Medicare Tax: 0.9% on wages above a filing-status threshold. The
+// employee pays it; the employer does not match it. The thresholds are set by
+// statute and are not indexed for inflation (IRS Form 8959).
+export const ADDL_MEDICARE_RATE = 0.009
+export const ADDL_MEDICARE_THRESHOLD: Record<Filing, number> = {
+  single: 200000,
+  hoh: 200000,
+  mfj: 250000,
+  mfs: 125000,
+}
+
+export function additionalMedicareTax(wages: number, filing: Filing): number {
+  return Math.max(0, wages - ADDL_MEDICARE_THRESHOLD[filing]) * ADDL_MEDICARE_RATE
+}
+
 // Long-term capital gains: top of the 0% and 15% zones, in taxable income.
 // Source: IRS Rev. Proc. 2025-32 (tax year 2026). Above the 15% limit is 20%.
 export const LTCG_LIMITS: Record<Filing, readonly [number, number]> = {
@@ -134,6 +149,11 @@ export function selfEmploymentTax(netEarnings: number, otherWages = 0) {
 // Source: IRS Notice 2025-67 (IR-2025-111); HSA from Rev. Proc. 2025-19.
 export const K401_LIMIT = 24500
 export const K401_CATCHUP = 8000
+
+/** Employee 401(k) deferral limit, with the catch-up added at age 50 and over. */
+export function k401Limit(age?: number): number {
+  return K401_LIMIT + (age !== undefined && age >= 50 ? K401_CATCHUP : 0)
+}
 export const IRA_LIMIT = 7500
 export const IRA_CATCHUP = 1100
 export const HSA_SELF = 4400
