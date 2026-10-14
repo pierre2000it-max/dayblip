@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import ShareButtons from "@/components/ShareButtons";
 import FinanceCTA from "@/components/FinanceCTA";
+import { getSportEvent } from "@/data/sports-events";
 
 // ── Date helpers ──────────────────────────────────────────────────────────────
 
@@ -31,6 +32,18 @@ function nextFixed(month: number, day: number): Date {
   return nextDate(y => new Date(y, month-1, day));
 }
 
+// Super Bowl date comes from src/data/sports-events.ts (single source).
+// After that date passes, fall back to the 2nd Sunday of February next year.
+function getSuperBowlTarget(): Date {
+  const iso = getSportEvent("super-bowl")?.date ?? "2027-02-14";
+  const [y, m, d] = iso.split("-").map(Number);
+  const target = new Date(y, m - 1, d);
+  const now = new Date();
+  if (target > now) return target;
+  const feb1 = new Date(now.getFullYear() + 1, 1, 1);
+  return new Date(feb1.getFullYear(), 1, 1 + ((7 - feb1.getDay()) % 7) + 7);
+}
+
 // ── Events definition ─────────────────────────────────────────────────────────
 
 interface WorldEvent {
@@ -43,7 +56,7 @@ const EVENTS: WorldEvent[] = [
   { name: "Christmas",       emoji: "🎄", getTarget: () => nextFixed(12, 25) },
   { name: "New Year's",      emoji: "🎆", getTarget: () => nextFixed(1,  1)  },
   { name: "Halloween",       emoji: "🎃", getTarget: () => nextFixed(10, 31) },
-  { name: "Super Bowl",      emoji: "🏈", getTarget: () => new Date(2027,1,7) > new Date() ? new Date(2027,1,7) : new Date(2028,1,6) },
+  { name: "Super Bowl",      emoji: "🏈", getTarget: getSuperBowlTarget },
   { name: "Earth Day",       emoji: "🌍", getTarget: () => nextFixed(4,  22) },
   { name: "Mother's Day",    emoji: "👩‍👧", getTarget: () => nextDate(getMothersDay) },
   { name: "Father's Day",    emoji: "👨‍👧", getTarget: () => nextDate(getFathersDay) },
