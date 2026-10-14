@@ -295,11 +295,13 @@ Social Security Administration publishes the new wage base each October for the 
 
 | File | Constant | Source | Notes |
 |---|---|---|---|
-| `src/app/world-counters/us-population/page.tsx` | `US_POP_JAN1_2026` → `US_POP_JAN1_2027` | census.gov/popclock (Jan 1 reading) | Also update birth/death/migrant rates if Census revises |
+| `src/app/world-counters/us-population/Counter.tsx` | `US_POP_JAN1_2026` → `US_POP_JAN1_2027` | census.gov/popclock (Jan 1 reading) | Also update birth/death/migrant rates if Census revises |
 | `src/data/usDebt.ts` | `US_DEBT_JAN1_2026` → `US_DEBT_JAN1_2027` + `US_DEBT_PER_SEC` + `US_POPULATION_2026` | fiscaldata.treasury.gov (Jan 1 reading) | Single source. Used by world-counters hub, us-debt, life-in-numbers. Also update the daily quiz debt question and the $ text in us-debt/page.tsx and layout.tsx |
-| `src/app/world-counters/plastic-in-ocean/page.tsx` | `CUMULATIVE_MT_JAN1_2026` → `CUMULATIVE_MT_JAN1_2027` | Calculated: prior value + (PLASTIC_MT_PER_YEAR × 1) | Add one year of plastic at current rate |
-| `src/app/world-counters/population/page.tsx` | `WORLD_POP_NOW`, `ANNUAL_BIRTHS`, `ANNUAL_DEATHS` | UN Population Division (population.un.org) | Check World Population Prospects update |
-| `src/app/world-counters/births-today/page.tsx` | `ANNUAL_BIRTHS`, `ANNUAL_DEATHS` | Same UN source | Must match population page |
+| `src/app/world-counters/plastic-in-ocean/Counter.tsx` | `CUMULATIVE_MT_JAN1_2026` → `CUMULATIVE_MT_JAN1_2027` | Calculated: prior value + (PLASTIC_MT_PER_YEAR × 1) | Add one year of plastic at current rate |
+| `src/app/world-counters/population/Counter.tsx` | `WORLD_POP_NOW`, `ANNUAL_BIRTHS`, `ANNUAL_DEATHS` | UN Population Division (population.un.org) | Check World Population Prospects update |
+| `src/app/world-counters/births-today/Counter.tsx` | `ANNUAL_BIRTHS`, `ANNUAL_DEATHS` | Same UN source | Must match population page |
+
+**Counter page structure (Oct 14 2026):** each world-counter route is a server `page.tsx` (revalidate 60, passes `Date.now()`) plus a client `Counter.tsx`. Constants live in `Counter.tsx`. Never call `new Date()` in render: use `useNow(initialNow)` from `src/lib/useNow.ts`. `src/lib/worldCounters.test.ts` fails the build if you do.
 
 **How to calculate new anchor values:**
 1. Note the Jan 1 actual value from the official source
