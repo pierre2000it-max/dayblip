@@ -120,3 +120,16 @@ describe("no copies of tax constants anywhere else in src", () => {
     expect(offenders).toEqual([])
   })
 })
+
+describe("additional Medicare tax and 401(k) limit", () => {
+  it("applies 0.9% only above the filing-status threshold", async () => {
+    const { additionalMedicareTax, k401Limit, K401_LIMIT, K401_CATCHUP } = await import("./tax2026")
+    expect(additionalMedicareTax(200000, "single")).toBe(0)
+    expect(additionalMedicareTax(300000, "single")).toBeCloseTo(900, 6)
+    expect(additionalMedicareTax(300000, "mfj")).toBeCloseTo(450, 6)
+    expect(additionalMedicareTax(150000, "mfs")).toBeCloseTo(225, 6)
+    expect(additionalMedicareTax(50000, "single")).toBe(0)
+    expect(k401Limit(40)).toBe(K401_LIMIT)
+    expect(k401Limit(50)).toBe(K401_LIMIT + K401_CATCHUP)
+  })
+})

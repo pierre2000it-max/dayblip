@@ -7,7 +7,7 @@ import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
-import { K401_LIMIT } from "@/lib/tax2026"
+import { K401_LIMIT, k401Limit } from "@/lib/tax2026"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
 
@@ -42,8 +42,10 @@ export default function FourOhOneKPage() {
     const ret = (parseFloat(returnPct) || 0) / 100 / 12
     const years = Math.max(0, ra - ca)
     const months = years * 12
-    const yourAnnual = sal * yp / 100
-    const matchAnnual = sal * Math.min(yp, mp) / 100
+    // Your deferral stops at the IRS limit (higher at 50 and over), and the match only applies to what you actually contribute.
+    const cap = k401Limit(ca)
+    const yourAnnual = Math.min(sal * yp / 100, cap)
+    const matchAnnual = Math.min(yourAnnual, sal * mp / 100)
     const totalMonthly = (yourAnnual + matchAnnual) / 12
     const projected = ret === 0
       ? bal + totalMonthly * months
@@ -51,7 +53,8 @@ export default function FourOhOneKPage() {
     const monthlyIncome = projected * 0.04 / 12
     const leavingMoney = yp < mp
     const scenarios = [3, 6, 10, 15].map(pct => {
-      const m = (sal * (pct + Math.min(pct, mp)) / 100) / 12
+      const mine = Math.min(sal * pct / 100, cap)
+      const m = (mine + Math.min(mine, sal * mp / 100)) / 12
       const b = ret === 0 ? bal + m * months : bal * Math.pow(1 + ret, months) + m * ((Math.pow(1 + ret, months) - 1) / ret)
       return { pct, balance: b, monthly: b * 0.04 / 12 }
     })
@@ -102,7 +105,7 @@ export default function FourOhOneKPage() {
         <div className="mx-auto max-w-[700px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">The 2026 401k contribution limit is $24,500 per year ($32,500 if age 50+). Contributing enough to get the full employer match is always the first priority — it is a 50-100% instant return. $500 per month in a 401k at 7% return from age 25 becomes approximately $1.37 million at age 65.</p>
+            <p className="text-[#e2e8f0]">The 2026 401k contribution limit is $24,500 per year ($32,500 if age 50+). Contributing enough to get the full employer match is always the first priority, it is a 50-100% instant return. $500 per month in a 401k at 7% return from age 25 becomes approximately $1.31 million at age 65.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A 401k is an employer-sponsored retirement savings account where contributions are made pre-tax, reducing your taxable income today. Many employers match contributions up to a percentage of salary — this match is free money that should always be captured first before any other investing. This calculator projects your 401k balance at retirement.</p>
         </div>

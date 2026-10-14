@@ -143,6 +143,9 @@ Before writing a new article, grep src/app/blog for the topic to avoid a second 
 - Embed tools: 25
 - Born-in pages: 81 (1940-2020)
 
+## Calculator Audit (Oct 13 2026)
+Audited take-home pay, paycheck, 401k, retirement savings, mortgage. Fixed: Additional Medicare tax, 401k deferral cap, FICA wage base, stale static figures. Known gaps: no PMI in mortgage calculator; SS calculator prose still has 2025-labeled average and max benefit.
+
 ## Removed Pages — To Be Re-Added Later
 Salary Ceiling Calculator (retire by 50) removed Oct 10 2026, commit ae6dfb1. Rebuild planned, no date set.
 - Removed: src/app/tools/salary-ceiling-calculator/ (layout.tsx + page.tsx)
@@ -241,6 +244,8 @@ IRS publishes new brackets in November (Revenue Procedure). Changes take effect 
 | File | What to change | Notes |
 |---|---|---|
 | `src/lib/tax2026.ts` | `STANDARD_DEDUCTION`, `BRACKETS`, `SS_WAGE_BASE` | Single source of truth. All 4 filing statuses. Edit here only, then run `npm test` |
+| `src/lib/tax2026.ts` (Additional Medicare, 401k cap) | `ADDL_MEDICARE_THRESHOLD` (statutory, unindexed, rarely changes), `K401_LIMIT`, `K401_CATCHUP` | Used by take-home-pay, paycheck-calculator, 401k-calculator. FICA wages exclude health, FSA and payroll HSA, not 401k deferrals |
+| `src/lib/calculatorClaims.test.ts` | Nothing | Fails if the hard-coded headline figures ($1.31 million FV, mortgage $1,996 / $418,527, extra-payment $98,500 / 6 years) drift from the math. Fix the page text if inputs change |
 | `src/app/finance/tax-bracket/layout.tsx` | Year in title and description | e.g. "2026" → "2027" |
 | `src/app/finance/tax-bracket/page.tsx`, `take-home-pay/page.tsx`, `paycheck-calculator/page.tsx`, `src/app/embed/(tools)/take-home-pay/page.tsx` | Nothing | They import from `tax2026.ts`. Only FAQ/prose text with year or dollar figures may need edits |
 | `src/lib/stateTax.ts` | State brackets, standard deductions, exemptions (all 50 states) | Tax Foundation "State Individual Income Tax Rates and Brackets, [year]" | Single source for every paycheck, freelancer, job-offer and tax-migration calculator. Edit here only, then run `npm test` (top-rate parity test) |

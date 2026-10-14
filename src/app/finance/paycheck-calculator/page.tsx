@@ -7,7 +7,7 @@ import LastUpdated from "@/components/LastUpdated"
 import MethodologyNote from "@/components/MethodologyNote"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, breadcrumbSchema } from "@/lib/schema"
-import { federalTax as calcFederalTax, medicareTax, socialSecurityTax, taxableAfterStandardDeduction, type Filing as TaxFiling } from "@/lib/tax2026"
+import { K401_LIMIT, additionalMedicareTax, federalTax as calcFederalTax, medicareTax, socialSecurityTax, taxableAfterStandardDeduction, toFiling, type Filing as TaxFiling } from "@/lib/tax2026"
 import { STATE_TAX, stateIncomeTax, stateLabel } from "@/lib/stateTax"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
@@ -74,8 +74,10 @@ export default function PaycheckCalculatorPage() {
 
     const grossPerPaycheck = annual / periods
 
+    // 401(k) deferrals stop at the annual IRS limit.
+    const k401PerPeriod = Math.min((parseFloat(k401) || 0) * periods, K401_LIMIT) / periods
     const preTaxPerPeriod =
-      (parseFloat(k401) || 0) +
+      k401PerPeriod +
       (parseFloat(healthIns) || 0) +
       (parseFloat(hsa) || 0) +
       (parseFloat(fsa) || 0) +
@@ -92,12 +94,14 @@ export default function PaycheckCalculatorPage() {
     const stateTax = annualState / periods
 
     // FICA: Social Security is capped at the 2026 SSA wage base (see tax2026.ts)
-    const annualSS = socialSecurityTax(annual)
-    const annualMedicare = medicareTax(annual)
+    // Health premiums, HSA and FSA paid through a cafeteria plan are exempt from FICA; 401(k) deferrals are not.
+    const ficaWages = Math.max(0, annual - ((parseFloat(healthIns) || 0) + (parseFloat(hsa) || 0) + (parseFloat(fsa) || 0)) * periods)
+    const annualSS = socialSecurityTax(ficaWages)
+    const annualMedicare = medicareTax(ficaWages) + additionalMedicareTax(ficaWages, toFiling(filing))
     const socialSecurity = annualSS / periods
     const medicare = annualMedicare / periods
 
-    const retirement401k = parseFloat(k401) || 0
+    const retirement401k = k401PerPeriod
     const healthInsurance = parseFloat(healthIns) || 0
     const hsaFsa = (parseFloat(hsa) || 0) + (parseFloat(fsa) || 0)
     const otherPreTax = parseFloat(otherPre) || 0
@@ -132,7 +136,7 @@ export default function PaycheckCalculatorPage() {
           "FinanceApplication",
         ),
         faqSchema([
-          { question: "How do I calculate my net paycheck?", answer: "Divide your annual salary by your number of pay periods to get gross pay. Then subtract federal income tax, state income tax, FICA (7.65%) and any pre-tax deductions like 401k and health insurance. A $75,000 salary paid biweekly has a gross paycheck of $2,884 and nets approximately $2,087 after taxes in an average state." },
+          { question: "How do I calculate my net paycheck?", answer: "Divide your annual salary by your number of pay periods to get gross pay. Then subtract federal income tax, state income tax, FICA (7.65%) and any pre-tax deductions like 401k and health insurance. A $75,000 salary paid biweekly has a gross paycheck of $2,884 and nets about $2,369 after federal and payroll taxes in a state with no income tax, such as Texas, and about $2,262 in California." },
           { question: "Does 401k reduce my paycheck taxes?", answer: "Yes. Traditional 401k contributions are pre-tax meaning they reduce your taxable income before federal and state taxes are calculated. A $200 biweekly 401k contribution reduces your gross paycheck by $200 but only reduces take-home by $156 because you save $44 in federal tax, plus any state tax savings." },
           { question: "What is FICA tax on my paycheck?", answer: "FICA is 7.65% of gross wages — 6.2% for Social Security and 1.45% for Medicare. Social Security only applies to the first $184,500 of annual earnings. Medicare applies to all earnings. On a $2,884 gross paycheck FICA is approximately $221." },
         ]),

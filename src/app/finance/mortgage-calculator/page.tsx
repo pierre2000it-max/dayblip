@@ -119,7 +119,7 @@ export default function MortgagePage() {
         <div className="mx-auto max-w-[800px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">A $300,000 mortgage at 7% interest over 30 years costs $418,527 in total interest — more than the original loan amount. Monthly payment is $1,996. Total amount paid is $718,527 on a $300,000 loan. Making one extra monthly payment per year saves approximately $64,000 in interest and pays off the loan 4 years early.</p>
+            <p className="text-[#e2e8f0]">A $300,000 mortgage at 7% interest over 30 years costs $418,527 in total interest, more than the original loan amount. Monthly payment is $1,996. Total amount paid is $718,527 on a $300,000 loan. Making one extra monthly payment per year saves approximately $98,500 in interest and pays off the loan about 6 years early.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A mortgage calculator shows the true total cost of a home loan including all interest paid over the loan term. Most homebuyers focus on the monthly payment without realizing the total interest cost often exceeds the original purchase price over a 30-year term. Understanding this helps evaluate whether extra payments are worth making.</p>
         </div>
@@ -315,7 +315,7 @@ export default function MortgagePage() {
                     💡 Total interest cost: {totalInterestStr} over {termNum} years —
                     {interestRatio}% of your original loan amount.
                     Making one extra mortgage payment per year reduces a 30-year mortgage
-                    by approximately 4-6 years and saves tens of thousands in interest.
+                    by roughly 4 to 6 years and saves tens of thousands of dollars in interest.
                   </p>
                 </div>
                 <div>
