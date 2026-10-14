@@ -7,30 +7,9 @@ import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "
 import RelatedTools from "@/components/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
 import FAQAccordion from "@/components/FAQAccordion"
+import { claimFactorAtAge, fraLabel } from "@/lib/socialSecurity"
 
 function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }) }
-
-function getFRA(birthYear: number): number {
-  if (birthYear <= 1954) return 66
-  if (birthYear === 1955) return 66 + 2 / 12
-  if (birthYear === 1956) return 66 + 4 / 12
-  if (birthYear === 1957) return 66 + 6 / 12
-  if (birthYear === 1958) return 66 + 8 / 12
-  if (birthYear === 1959) return 66 + 10 / 12
-  return 67
-}
-
-function getMultiplier(claimAge: number, fra: number): number {
-  if (claimAge <= 62) return 0.70
-  if (claimAge >= 70) return 1.32
-  const diff = claimAge - fra
-  if (diff < 0) {
-    // Early claiming reduction
-    return Math.max(0.70, 1 + diff * 0.0667)
-  }
-  // Delayed credits: 8% per year
-  return Math.min(1.32, 1 + diff * 0.08)
-}
 
 export default function SocialSecurityPage() {
   const [birthYear, setBirthYear] = useState("1965")
@@ -50,12 +29,12 @@ export default function SocialSecurityPage() {
   const calc = useMemo(() => {
     const by = parseInt(birthYear) || 1965
     const b62 = parseFloat(benefitAt62) || 0
-    const fra = getFRA(by)
+    const fra = fraLabel(by)
     // monthly benefit at 62
-    const fraBenefit = b62 / getMultiplier(62, fra)
+    const fraBenefit = b62 / claimFactorAtAge(62, by)
     const ages = [62, 63, 64, 65, 66, 67, 68, 69, 70]
     const rows = ages.map(age => {
-      const mult = getMultiplier(age, fra)
+      const mult = claimFactorAtAge(age, by)
       const monthly = fraBenefit * mult
       const annual = monthly * 12
       const lifeMonths = Math.max(0, (85 - age) * 12)
@@ -147,7 +126,7 @@ export default function SocialSecurityPage() {
           </div>
 
           <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-4 text-sm text-[#a8a8b3]">
-            Your Full Retirement Age (FRA): <span className="text-white font-bold">{calc.fra.toFixed(1)} years</span>
+            Your Full Retirement Age (FRA): <span className="text-white font-bold">{calc.fra}</span>
           </div>
 
           <div className="overflow-x-auto rounded-xl border border-[#0f3460]">
@@ -202,6 +181,7 @@ export default function SocialSecurityPage() {
             { emoji: "🏖️", title: "FI Date Calculator", desc: "When can you stop working?", href: "/tools/fi-date" },
             { emoji: "📊", title: "401(k) Calculator", desc: "Maximize your 401k", href: "/finance/401k-calculator" },
             { emoji: "📈", title: "Net Worth Calculator", desc: "Track your net worth", href: "/finance/net-worth" },
+            { emoji: "📖", title: "When to Claim Social Security", desc: "Break-even ages for 62, 67 and 70", href: "/blog/when-to-claim-social-security" },
           ]} />
           <p className="text-xs text-[#a8a8b3]">⚠️ This is an estimate. Visit ssa.gov for your actual Social Security benefit statement. Not financial advice.</p>
           <FAQAccordion items={[
