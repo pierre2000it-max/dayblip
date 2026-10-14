@@ -356,6 +356,14 @@ const articles = [
     readTime: "6 min read",
     href: "/blog/capital-gains-tax-2026",
   },
+  {
+    category: "Career",
+    title: "Is My Salary Fair for My Area? A 3-Step Check",
+    excerpt:
+      "Pull 3 benchmarks, adjust for cost of living, then check the 10% band. A $80,000 Chicago benchmark is $71,028 in Milwaukee.",
+    readTime: "5 min read",
+    href: "/blog/is-my-salary-fair",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]
