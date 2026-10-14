@@ -115,9 +115,9 @@ Embed pages NOT in sitemap (intentional)
 Educator page: /embed/for-educators
 
 ## Blog Status (as of Oct 13 2026)
-42 articles live (counted from src/app/blog directories; the old "21" figure was stale). Articles 38-41 (Oct 13 2026): self-employment-tax-2026, federal-tax-brackets-2026, when-to-claim-social-security, how-to-set-freelance-rate. Article 42 (Oct 13 2026): roth-vs-traditional-401k (all figures computed from tax2026.ts).
+43 articles live (counted from src/app/blog directories; the old "21" figure was stale). Articles 38-41 (Oct 13 2026): self-employment-tax-2026, federal-tax-brackets-2026, when-to-claim-social-security, how-to-set-freelance-rate. Article 42 (Oct 13 2026): roth-vs-traditional-401k (all figures computed from tax2026.ts). Article 43 (Oct 13 2026): hsa-vs-401k (computed from tax2026.ts; HSA $1,000 catch-up at 55+ and the CA/NJ state-tax note are literals).
 Target: 114 articles by June 2027.
-Remaining: 72 articles to write.
+Remaining: 71 articles to write.
 Pace needed: about 2.1 articles per week.
 Oct 13 2026: 4 overlapping pairs consolidated into one URL each, with 301s in next.config.mjs (do not delete the redirects):
 - /blog/how-much-house-can-you-afford -> /blog/how-much-house-can-i-afford
@@ -137,9 +137,9 @@ Before writing a new article, grep src/app/blog for the topic to avoid a second 
 - 8ae20a7: OG image routes fixed (display flex, try/catch)
 
 ## Site Counts (as of June 13 2026)
-- Total URLs in sitemap: 1,419 (verified Oct 13 2026 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
+- Total URLs in sitemap: 1,420 (verified Oct 13 2026 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
 - Total tool pages: 200+ (recounted Oct 10 2026: 209 interactive pages, ~200 after near-duplicates)
-- Blog articles: 42 (Oct 13 2026)
+- Blog articles: 43 (Oct 13 2026)
 - Embed tools: 25
 - Born-in pages: 81 (1940-2020)
 
