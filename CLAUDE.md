@@ -144,7 +144,7 @@ Before writing a new article, grep src/app/blog for the topic to avoid a second 
 - Born-in pages: 81 (1940-2020)
 
 ## Calculator Audit (Oct 13 2026)
-Audited take-home pay, paycheck, 401k, retirement savings, mortgage. Fixed: Additional Medicare tax, 401k deferral cap, FICA wage base, stale static figures. Known gaps: no PMI in mortgage calculator; SS calculator prose still has 2025-labeled average and max benefit.
+Audited take-home pay, paycheck, 401k, retirement savings, mortgage. Fixed: Additional Medicare tax, 401k deferral cap, FICA wage base, stale static figures. Known gaps: no PMI in mortgage calculator. SS calculator average and max benefit figures updated to 2026 on Oct 20 2026.
 
 ## Removed Pages — To Be Re-Added Later
 Salary Ceiling Calculator (retire by 50) removed Oct 10 2026, commit ae6dfb1. Rebuild planned, no date set.
@@ -263,7 +263,7 @@ IRS publishes new brackets in November (Revenue Procedure). Changes take effect 
 | `src/app/blog/roth-ira-vs-traditional-ira/page.tsx` | IRA phase-out income thresholds | Check IRS Notice for Roth/trad limits |
 | `src/app/blog/how-much-saved-by-age/page.tsx` | 401k/IRA contribution limits | Verify against IRS Notice |
 | `src/lib/freelanceRate.ts` (used by `finance/freelancer-rate` and `blog/how-to-set-freelance-rate`) | Nothing. Taxes come from `tax2026.ts` and `stateTax.ts`. The model assumes single filer, standard deduction, after-tax retirement saving. `freelanceRate.test.ts` checks that take-home at the solved rate equals the target. The blog meta description and blog/page.tsx teaser hard-code "$82" and "$36": re-check after the tax update | Same as IRS TAX DATA |
-| `src/lib/socialSecurity.ts` (used by `finance/social-security` and `blog/when-to-claim-social-security`) | Rules rarely change. Re-verify the FRA table, early-claim reduction and 8% delayed credit against ssa.gov/benefits/retirement/planner. `socialSecurity.test.ts` pins the SSA reduction table. The calculator page prose still has 2025-labeled average and maximum benefit figures: update each January | SSA COLA fact sheet (October) |
+| `src/lib/socialSecurity.ts` (used by `finance/social-security` and `blog/when-to-claim-social-security`) | Rules rarely change. Re-verify the FRA table, early-claim reduction and 8% delayed credit against ssa.gov/benefits/retirement/planner. `socialSecurity.test.ts` pins the SSA reduction table. The calculator page Quick Answer shows the 2026 average ($2,071) and maximum at FRA ($4,152) from ssa.gov (verified Oct 20 2026): update each January | SSA COLA fact sheet (October) |
 | `src/app/blog/federal-tax-brackets-2026/page.tsx` | Nothing. Brackets, standard deduction and every example are computed from `tax2026.ts`. Only the "7.65%" payroll rate is a literal | Same as IRS TAX DATA |
 | `src/app/blog/self-employment-tax-2026/page.tsx` | Dollar tables are computed from `tax2026.ts`. Re-check literals: $400 SE threshold, $1,000 estimated-tax trigger, $150,000 AGI safe-harbor test, $200,000 additional Medicare threshold, payment dates | IRS Topic 554 and irs.gov/faqs/estimated-tax |
 | `src/app/blog/how-to-read-your-w2/page.tsx` | 401k limit in Box 12 Code D (FAQ text + table row) | Verify against IRS Notice. Cite the Notice, not the Rev. Proc. |
