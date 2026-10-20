@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Generation Salary Comparison — Compare Your Salary to Your Parents at the Same Age",
+  title: "Generation Salary Comparison: You vs Your Parents",
   description:
     "Compare your salary to your parents' at your age, adjusted for inflation and cost of living. See which generation did better. Free — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/tools/generation-compare" },

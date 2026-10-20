@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "How to Compare Two Job Offers the Right Way in 2026 | Dayblip",
+  title: "How to Compare Two Job Offers the Right Way in 2026",
   description:
     "Comparing job offers by gross salary is a costly mistake. A $90,000 California office job can be worth less than an $82,000 remote Texas job.",
   alternates: {

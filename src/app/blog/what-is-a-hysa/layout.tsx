@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "What Is a High-Yield Savings Account (HYSA) and Should You Open One in 2026?",
+  title: "What Is a High-Yield Savings Account (HYSA) in 2026?",
   description:
     "High-yield savings accounts pay far more than the 0.37% national average. On a $20,000 emergency fund that gap is hundreds of dollars a year.",
   alternates: { canonical: "https://www.dayblip.com/blog/what-is-a-hysa" },

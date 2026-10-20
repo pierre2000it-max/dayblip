@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Live World Counters — Real Time Global Stats Updating Every Second",
+  title: "Live World Counters: Real-Time Global Stats",
   description: "Watch world population, births, deaths, and US national debt update live every second. Real-time global statistics from UN and US Treasury data. Free.",
   alternates: { canonical: "https://www.dayblip.com/world-counters" },
 }

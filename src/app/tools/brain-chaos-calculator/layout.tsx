@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Brain Chaos Calculator — How Loud Is Your Head on a Typical Day?",
+  title: "Brain Chaos Calculator: How Loud Is Your Head?",
   description: "7 questions. Find out how much mental noise you are carrying and whether your current system is built for how your brain actually works. Free tool.",
   keywords: "brain chaos quiz, mental noise calculator, racing thoughts quiz, brain overload test, busy brain quiz",
   alternates: { canonical: "https://www.dayblip.com/tools/brain-chaos-calculator" },
   openGraph: {
-    title: "Brain Chaos Calculator — How Loud Is Your Head on a Typical Day?",
+    title: "Brain Chaos Calculator: How Loud Is Your Head?",
     description: "7 questions. Find out how much mental noise you are carrying and whether your current system is built for how your brain actually works.",
     url: "https://www.dayblip.com/tools/brain-chaos-calculator",
     siteName: "Dayblip",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Brain Chaos Calculator — How Loud Is Your Head on a Typical Day?",
+    title: "Brain Chaos Calculator: How Loud Is Your Head?",
     description: "7 questions. Find out how much mental noise you are carrying and whether your current system is built for how your brain actually works.",
   },
 }

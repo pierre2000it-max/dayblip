@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Money Transfer Comparison — Find the Cheapest Way to Send Money",
+  title: "Money Transfer Comparison: Cheapest Way to Send Money",
   description:
     "Compare Wise, Western Union, Remitly, PayPal, and MoneyGram to 60 countries. See total cost including exchange rate markup. Free — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/tools/money-transfer-comparison" },

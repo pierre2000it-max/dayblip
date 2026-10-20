@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "What Is the 4% Rule and Does It Still Work in 2026? | Dayblip",
+  title: "What Is the 4% Rule and Does It Still Work in 2026?",
   description:
     "The 4% rule: multiply annual retirement spending by 25 to find your number. At $50,000 a year you need $1,250,000. Bengen's 1994 study explained.",
   alternates: {

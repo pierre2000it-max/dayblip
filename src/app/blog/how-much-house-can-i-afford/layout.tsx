@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "How Much House Can I Actually Afford? The Calculation Banks Use vs What You Should Use",
+  title: "How Much House Can I Afford? Bank Math vs Smart Math",
   description:
     "Banks lend up to 43% of gross income. Planners say keep housing at 28% or less. Learn how to find the number that fits your own budget.",
   alternates: { canonical: "https://www.dayblip.com/blog/how-much-house-can-i-afford" },

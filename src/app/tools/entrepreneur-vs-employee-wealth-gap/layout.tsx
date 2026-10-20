@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Entrepreneur vs Employee Wealth Gap — What Is the Real Cost of Staying Employed?",
+  title: "Entrepreneur vs Employee Wealth Gap: The Cost of Staying",
   description: "Compare your lifetime earnings as an employee versus building your own business. See the wealth gap the math reveals over your working years. Free tool.",
   keywords: "entrepreneur vs employee calculator, wealth gap calculator, cost of staying employed, business owner vs salary, entrepreneurship wealth comparison",
   alternates: { canonical: "https://www.dayblip.com/tools/entrepreneur-vs-employee-wealth-gap" },
   openGraph: {
-    title: "Entrepreneur vs Employee Wealth Gap — What Is the Real Cost of Staying Employed?",
+    title: "Entrepreneur vs Employee Wealth Gap: The Cost of Staying",
     description: "Compare your lifetime earnings as an employee versus building your own business. See the wealth gap the math reveals over your working years.",
     url: "https://www.dayblip.com/tools/entrepreneur-vs-employee-wealth-gap",
     siteName: "Dayblip",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Entrepreneur vs Employee Wealth Gap — What Is the Real Cost of Staying Employed?",
+    title: "Entrepreneur vs Employee Wealth Gap: The Cost of Staying",
     description: "Compare your lifetime earnings as an employee versus building your own business. See the wealth gap the math reveals over your working years.",
   },
 }

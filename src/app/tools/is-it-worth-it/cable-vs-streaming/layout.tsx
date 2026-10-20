@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Is It Worth It to Cut the Cord? Cable vs Streaming Calculator',
+  title: 'Cut the Cord? Cable vs Streaming Calculator',
   description: 'Compare your total monthly streaming bill to cable TV. Find out if cutting the cord actually saves money when you add up all your subscriptions. Free.',
   alternates: { canonical: 'https://www.dayblip.com/tools/is-it-worth-it/cable-vs-streaming' },
   openGraph: {

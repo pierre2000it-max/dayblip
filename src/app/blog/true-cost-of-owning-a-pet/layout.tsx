@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "The True Annual Cost of Owning a Dog or Cat in 2026 | Dayblip",
+  title: "The True Annual Cost of Owning a Dog or Cat in 2026",
   description:
     "Dog ownership costs $1,390 to $5,295 a year and cats $760 to $3,495, per Rover 2025 data. See the lifetime totals and the costs new owners miss.",
   alternates: {

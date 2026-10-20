@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "What If I Had Invested Calculator — See What $10,000 Would Be Worth Today",
+  title: "What If I Had Invested? What $10,000 Is Worth Today",
   description: "What if you had invested $1,000 in Apple in 2001? Calculate what any past investment would be worth today. Free investment calculator.",
   alternates: { canonical: "https://www.dayblip.com/finance/what-if-i-invested" },
   openGraph: {

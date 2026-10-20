@@ -1,7 +1,7 @@
 ﻿import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Dayblip Daily — Financial Puzzle of the Day | Free Daily Money Quiz",
+  title: "Dayblip Daily: Free Financial Puzzle of the Day",
   description:
     "One financial puzzle every day. Test your money knowledge in under 2 minutes. Free daily financial trivia challenge. No signup ever. Share your score.",
   alternates: { canonical: "https://www.dayblip.com/daily" },

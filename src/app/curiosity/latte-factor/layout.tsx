@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Latte Factor Calculator — What Is Your Coffee Really Costing?",
+  title: "Latte Factor Calculator: What Your Coffee Costs Long Term",
   description: "Calculate the latte factor — what your daily coffee could be worth if invested over 30 years. Includes balanced perspective. Educational only.",
   alternates: { canonical: "https://www.dayblip.com/curiosity/latte-factor" },
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Historical Date Calculator — What Did the World Look Like on Any Date in History?",
+  title: "Historical Date Calculator: The World on Any Date",
   description: "Enter any date from 1920 to today. See what things cost, gas prices, the #1 song, and major events from that day. Free time machine.",
   alternates: { canonical: "https://www.dayblip.com/time-machine" },
   openGraph: {

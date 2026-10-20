@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "GPA Calculator — Calculate Your Grade Point Average Instantly",
+  title: "GPA Calculator: Calculate Your Grade Point Average",
   description: "Calculate your semester and cumulative GPA instantly. Supports weighted and unweighted grades. Free GPA calculator — no signup required.",
   alternates: { canonical: "https://www.dayblip.com/education/gpa-calculator" },
   openGraph: {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "The True Cost of Making Only Minimum Credit Card Payments — The Numbers Most People Never See",
+  title: "The True Cost of Paying Only the Minimum on Credit Cards",
   description:
     "A $5,000 card balance at 19.99% APR takes 18 years 10 months on minimum payments and costs $7,313 in interest. Paying $200 a month saves $5,792. Free math.",
   alternates: { canonical: "https://www.dayblip.com/blog/true-cost-of-minimum-payments" },
