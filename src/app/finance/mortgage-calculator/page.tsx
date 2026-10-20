@@ -20,6 +20,7 @@ export default function MortgagePage() {
   const [rate, setRate] = useState("7.0")
   const [taxRate, setTaxRate] = useState("1.2")
   const [insurance, setInsurance] = useState("150")
+  const [pmiRate, setPmiRate] = useState("0.7")
   const [income, setIncome] = useState("")
 
   useEffect(() => {
@@ -29,11 +30,12 @@ export default function MortgagePage() {
     if (p.get("down")) setDownPayment(p.get("down")!)
     if (p.get("rate")) setRate(p.get("rate")!)
     if (p.get("term")) setTerm(Number(p.get("term")))
+    if (p.get("pmi")) setPmiRate(p.get("pmi")!)
   }, [])
 
   const pushUrl = () => {
     if (typeof window === "undefined") return
-    const url = `${window.location.pathname}?price=${homePrice}&down=${downPayment}&rate=${rate}&term=${term}`
+    const url = `${window.location.pathname}?price=${homePrice}&down=${downPayment}&rate=${rate}&term=${term}&pmi=${pmiRate}`
     window.history.replaceState(null, "", url)
   }
 
@@ -46,8 +48,22 @@ export default function MortgagePage() {
     const pi = mr === 0 ? (n > 0 ? loan / n : 0) : loan * (mr * Math.pow(1 + mr, n)) / (Math.pow(1 + mr, n) - 1)
     const tax = hp * (parseFloat(taxRate) || 0) / 100 / 12
     const ins = parseFloat(insurance) || 0
-    const total = pi + tax + ins
-    const totalPaid = total * n + dp
+    // PMI applies when the down payment is under 20% of the price. It is charged on the
+    // original loan amount and stops once the balance reaches 80% of the home price
+    // (borrowers can request removal at 80%; lenders must drop it at 78%).
+    const pmiApplies = hp > 0 && dp < hp * 0.2 && loan > 0
+    const pmi = pmiApplies ? loan * (parseFloat(pmiRate) || 0) / 100 / 12 : 0
+    let pmiMonths = 0
+    if (pmiApplies && pmi > 0) {
+      let b = loan
+      while (pmiMonths < n && b > hp * 0.8) {
+        b -= pi - b * mr
+        pmiMonths++
+      }
+    }
+    const pmiTotal = pmi * pmiMonths
+    const total = pi + tax + ins + pmi
+    const totalPaid = (pi + tax + ins) * n + pmiTotal + dp
     const totalInterest = Math.max(0, pi * n - loan)
     const inc = parseFloat(income) || 0
     const affordable = inc > 0 ? total <= inc / 12 * 0.28 : null
@@ -65,8 +81,8 @@ export default function MortgagePage() {
       }
       return { year: y, balance: Math.max(0, bal), principalPaid: totP, interestPaid: totI }
     })
-    return { pi, tax, ins, total, totalPaid, totalInterest, affordable, amort }
-  }, [homePrice, downPayment, term, rate, taxRate, insurance, income])
+    return { pi, tax, ins, pmi, pmiApplies, pmiMonths, pmiTotal, total, totalPaid, totalInterest, affordable, amort }
+  }, [homePrice, downPayment, term, rate, taxRate, insurance, pmiRate, income])
 
   const inp = "rounded-lg border border-[#0f3460] bg-[#1a1a2e] px-4 py-3 text-white focus:border-[#e94560] focus:outline-none"
 
@@ -80,7 +96,7 @@ export default function MortgagePage() {
           "FinanceApplication"
         ),
         faqSchema([
-          { question: "What does this mortgage calculator include in the monthly payment?", answer: "It adds principal and interest, monthly property tax (from the home price and tax rate you enter) and home insurance to show your full monthly housing cost, not just the loan payment." },
+          { question: "What does this mortgage calculator include in the monthly payment?", answer: "It adds principal and interest, monthly property tax (from the home price and tax rate you enter) and home insurance to show your full monthly housing cost, not just the loan payment. If your down payment is under 20%, it also adds private mortgage insurance (PMI) at the rate you enter and drops it when your balance reaches 80% of the home price." },
           { question: "How is total interest on a mortgage calculated?", answer: "The calculator uses standard amortization: each month interest accrues on the remaining balance, the rest of your payment reduces principal, and the interest paid over the full loan term is summed. A $320,000 loan at 7% over 30 years pays roughly $446,000 in interest." },
           { question: "What is the 28% housing ratio rule?", answer: "Lenders often suggest your total housing payment stay at or below 28% of your gross monthly income. Enter your income and the calculator flags whether your payment fits within that guideline." },
           { question: "How much does a shorter loan term save?", answer: "A 15-year mortgage has higher monthly payments than a 30-year but dramatically less total interest because you borrow for half the time. The amortization table lets you compare remaining balance at 5, 10, 15, 20, 25 and 30 years." },
@@ -141,6 +157,8 @@ export default function MortgagePage() {
               <input type="number" step="0.1" value={taxRate} onChange={e => setTaxRate(e.target.value)} className={inp} /></label>
             <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Home Insurance ($/mo)</span>
               <input type="number" value={insurance} onChange={e => setInsurance(e.target.value)} className={inp} /></label>
+            <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">PMI Rate (%/yr, applies under 20% down)</span>
+              <input type="number" step="0.1" value={pmiRate} onChange={e => setPmiRate(e.target.value)} className={inp} /></label>
             <div className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Loan Term</span>
               <div className="flex gap-2">
                 {[30, 20, 15].map(t => (
@@ -157,11 +175,19 @@ export default function MortgagePage() {
             <div className="text-4xl font-black text-[#e94560] text-center">
               {fmt(calc.total)}<span className="text-xl font-normal text-[#a8a8b3]">/month</span>
             </div>
-            <div className="mt-4 grid grid-cols-3 gap-3 text-center text-sm">
+            <div className={`mt-4 grid gap-3 text-center text-sm ${calc.pmiApplies ? "grid-cols-2 md:grid-cols-4" : "grid-cols-3"}`}>
               <div><div className="font-bold text-white">{fmt(calc.pi)}</div><div className="text-[#a8a8b3]">Principal & Interest</div></div>
               <div><div className="font-bold text-white">{fmt(calc.tax)}</div><div className="text-[#a8a8b3]">Property Tax</div></div>
               <div><div className="font-bold text-white">{fmt(calc.ins)}</div><div className="text-[#a8a8b3]">Insurance</div></div>
+              {calc.pmiApplies && (
+                <div><div className="font-bold text-white">{fmt(calc.pmi)}</div><div className="text-[#a8a8b3]">PMI</div></div>
+              )}
             </div>
+            {calc.pmiApplies && calc.pmi > 0 && (
+              <p className="mt-3 text-center text-sm text-[#a8a8b3]">
+                Your down payment is under 20%, so PMI is included. It ends after {Math.floor(calc.pmiMonths / 12)} years{calc.pmiMonths % 12 ? ` and ${calc.pmiMonths % 12} months` : ""}, when your balance reaches 80% of the home price. Total PMI paid: {fmt(calc.pmiTotal)}.
+              </p>
+            )}
             <div className="mt-4 grid grid-cols-2 gap-3 text-center text-sm">
               <div><div className="font-bold text-white">{fmt(calc.totalPaid)}</div><div className="text-[#a8a8b3]">Total Paid</div></div>
               <div><div className="font-bold text-[#e94560]">{fmt(calc.totalInterest)}</div><div className="text-[#a8a8b3]">Total Interest</div></div>
@@ -220,7 +246,7 @@ export default function MortgagePage() {
               Get the free embed code →
             </a>
           </div>
-          <MethodologyNote text="Standard amortization formula. Interest compounds monthly on the outstanding principal balance." />
+          <MethodologyNote text="Standard amortization formula. Interest compounds monthly on the outstanding principal balance. When the down payment is under 20%, PMI is charged on the original loan amount and ends once the balance reaches 80% of the home price. Real PMI rates vary with credit score and down payment." />
           {/* ── NOW WHAT? Interpretation Layer ── */}
           {(() => {
             const homePriceAmt = parseFloat(homePrice) || 0

@@ -144,7 +144,7 @@ Before writing a new article, grep src/app/blog for the topic to avoid a second 
 - Born-in pages: 81 (1940-2020)
 
 ## Calculator Audit (Oct 13 2026)
-Audited take-home pay, paycheck, 401k, retirement savings, mortgage. Fixed: Additional Medicare tax, 401k deferral cap, FICA wage base, stale static figures. Known gaps: no PMI in mortgage calculator. SS calculator average and max benefit figures updated to 2026 on Oct 20 2026.
+Audited take-home pay, paycheck, 401k, retirement savings, mortgage. Fixed: Additional Medicare tax, 401k deferral cap, FICA wage base, stale static figures. Mortgage calculator now includes PMI (Oct 20 2026): applies when down payment is under 20%, charged on the original loan, ends at 80% of home price; default inputs (20% down) are unchanged so calculatorClaims.test still holds. SS calculator average and max benefit figures updated to 2026 on Oct 20 2026.
 
 ## Removed Pages — To Be Re-Added Later
 Salary Ceiling Calculator (retire by 50) removed Oct 10 2026, commit ae6dfb1. Rebuild planned, no date set.
