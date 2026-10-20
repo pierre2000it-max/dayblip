@@ -298,7 +298,7 @@ export default function DueDateCalculatorPage() {
             </div>
           )}
 
-          <LastUpdated date="June 2026" />
+          <LastUpdated date="October 2026" />
           <MethodologyNote text="Due date calculated using Naegele's Rule: first day of last menstrual period plus 280 days (40 weeks), adjusted for cycle length deviation from 28-day baseline. Conception date method adds 266 days (38 weeks) from estimated conception date. Trimester boundaries: first trimester weeks 1-12, second trimester weeks 13-26, third trimester weeks 27-40. Full term defined as 39-40 weeks per American College of Obstetricians and Gynecologists (ACOG) guidelines. Weekly milestones sourced from ACOG and Mayo Clinic pregnancy week-by-week data. This calculator is for informational and planning purposes only — not a substitute for medical advice. Always consult your healthcare provider for clinical due date determination." />
 
           <RelatedTools tools={[

@@ -347,7 +347,7 @@ export default function TimeWithPetPage() {
           { emoji: '📆', title: 'Life in Numbers', desc: 'Your life by the numbers', href: '/tools/life-in-numbers' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
 
         <MethodologyNote text="Dog life expectancy figures are based on data from the American Kennel Club and Journal of Veterinary Internal Medicine studies on size-based canine longevity. Cat life expectancy of 15 years reflects average indoor cat lifespan from American Veterinary Medical Association data. Walk counts assume consistent daily walks for the life of the pet. Cuddle hours assume 1 hour per day average of close contact time. Individual pet health, breed, diet, and veterinary care significantly affect actual longevity." />
       </div>

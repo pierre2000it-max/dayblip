@@ -249,7 +249,7 @@ export default function DegreeVsBootcampPage() {
           { emoji: '📅', title: 'FI Date', desc: 'When could you stop working?', href: '/tools/fi-date' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
         <MethodologyNote text="Salary growth modeled at 3% annually based on BLS Employment Cost Index historical average. Opportunity cost for 4-year degree calculated as 4 years of bootcamp starting salary. Opportunity cost for bootcamp calculated as 6 months of bootcamp starting salary. All calculations in nominal dollars — not inflation adjusted. Average bootcamp cost from Course Report 2024 annual survey. Average degree cost from College Board Trends in College Pricing 2024. Not financial advice." />
       </div>
     </main>

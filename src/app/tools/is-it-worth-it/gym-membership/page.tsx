@@ -232,7 +232,7 @@ export default function GymMembershipPage() {
           { emoji: '💰', title: 'True Hourly Wage', desc: 'What your time is actually worth', href: '/tools/true-hourly-wage' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
         <MethodologyNote text="Cost per visit calculated as total annual membership cost divided by total annual visits. Breakeven visit threshold set at $10 per visit — a commonly cited benchmark for fitness facility value. Home gym maintenance assumed at 5% of equipment cost annually. 5-year comparison includes initiation fee in year 1 for gym membership. Home gym assumes no monthly ongoing costs beyond maintenance. Sources: IHRSA Health Club Consumer Report 2024; Journal of Health Economics gym attendance research." />
       </div>
     </main>

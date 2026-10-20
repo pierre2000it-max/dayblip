@@ -549,7 +549,7 @@ export default function NewYearResolutionCostPage() {
         { emoji: '📅', title: 'Days Until New Year', desc: 'How many days until 2027?', href: '/days-until/new-years-day' }
       ]} />
 
-      <LastUpdated date="June 2026" />
+      <LastUpdated date="October 2026" />
       <MethodologyNote text="Resolution cost defaults based on published pricing from major service providers as of June 2026. Gym membership range from IHRSA 2024 Health Club Consumer Report. Meal kit pricing from HelloFresh, Blue Apron, and Green Chef published rates June 2026. Therapy costs from Mental Health America 2024 cost survey. App pricing from published subscription rates — subject to change. Resolution success rate from University of Scranton Journal of Clinical Psychology research. Popular resolution data from YouGov New Year Survey 2024. All costs are estimates — actual prices vary by provider, location, and plan." />
     </div>
   )

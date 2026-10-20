@@ -359,7 +359,7 @@ export default function TimeWithParentsPage() {
           { emoji: '📆', title: 'Days Alive', desc: 'How many days have you lived', href: '/days-alive' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
 
         <MethodologyNote text="Life expectancy baseline of 80 years is based on CDC National Center for Health Statistics data for US life expectancy. Individual longevity varies significantly based on health, genetics, and lifestyle. This tool provides a statistical estimate for reflection purposes only — not a medical or actuarial prediction. Sources: CDC NCHS, Wait But Why 'Your Life in Weeks' by Tim Urban (2014)." />
       </div>

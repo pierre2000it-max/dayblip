@@ -507,7 +507,7 @@ export default function BlackFridayDealPage() {
           { emoji: '💰', title: 'Compound Interest', desc: 'What your savings could grow to', href: '/finance/compound-interest' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
         <MethodologyNote text="Deal authenticity assessed by comparing advertised discount to calculated real discount from prices entered. Inflation flagged when discrepancy exceeds 5 percentage points. Category thresholds (electronics 20%, appliances 25%, clothing 40%, toys 30%, furniture 35%, tools 25%) based on typical Black Friday deal quality benchmarks from Consumer Reports and NerdWallet annual Black Friday analysis. Opportunity cost calculated at 7% annual return — the long-term historical average annual return of the S&P 500 (source: NYU Stern School of Business). Financing calculated using standard amortization formula. Average store card APR of 28–32% from Federal Reserve Consumer Credit data 2024. This tool provides estimates for informational purposes — actual deal value depends on individual circumstances and normal price history of specific items." />
       </div>
     </main>

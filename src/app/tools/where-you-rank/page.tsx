@@ -169,7 +169,7 @@ export default function WhereYouRankPage() {
 
             <AdUnit slot="2847591036" format="leaderboard" className="mt-8" />
             <AuthorByline variant="tool" />
-            <LastUpdated date="June 2026" />
+            <LastUpdated date="October 2026" />
             <MethodologyNote text="Income percentile calculated using US Census Bureau Current Population Survey data. Net worth percentile calculated using Federal Reserve Survey of Consumer Finances 2022 data. Percentiles are estimated via linear interpolation between published distribution breakpoints. Approximately 258 million adults used as the US adult population base. All figures are estimates — actual percentiles vary with annual data updates. Income and wealth distributions are for US residents only." />
           </div>
         </section>

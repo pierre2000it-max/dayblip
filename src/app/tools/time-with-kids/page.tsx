@@ -298,7 +298,7 @@ export default function TimeWithKidsPage() {
           { emoji: '🏖️', title: 'Weekends Left', desc: 'How many weekends until retirement', href: '/weekends-left' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
 
         <MethodologyNote text="Leaving-home age of 18 is based on US Census Bureau data showing the median age of first independent living for American children. Weekend and weeknight calculations assume full-year residence. Holiday count of 6 per year includes Thanksgiving, Christmas/Hanukkah, New Year, Spring Break, Summer, and one additional family holiday. Individual family circumstances vary significantly." />
       </div>

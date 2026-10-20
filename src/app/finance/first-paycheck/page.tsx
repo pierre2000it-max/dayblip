@@ -633,7 +633,7 @@ export default function FirstPaycheckPage() {
           { emoji: '💼', title: 'Salary by Job and State', desc: 'Is your offer competitive?', href: '/salary' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
         <MethodologyNote text="Federal income tax calculated using 2026 brackets per IRS Revenue Procedure 2025-32. Standard deduction: $16,100 single, $32,200 married filing jointly, $24,150 head of household. Social Security tax: 6.2% on wages up to $184,500 (2026 wage base per SSA). Medicare tax: 1.45% on all wages (additional 0.9% on wages above $200,000 not included). State income tax applied as flat rate on federal taxable income — rates are approximations based on top marginal rates and may differ from actual liability for some income levels. Health insurance deduction treated as pre-tax (Section 125 cafeteria plan). 401k contribution treated as pre-tax traditional contribution. Roth 401k, HSA, FSA, and other deductions not included. This calculator provides an estimate — actual withholding depends on W-4 elections, additional income sources, and employer-specific payroll processing. Always verify with your employer's HR or payroll department. Sources: IRS Rev. Proc. 2025-32, SSA 2026 COLA announcement, state revenue department rate schedules." />
       </div>
     </main>

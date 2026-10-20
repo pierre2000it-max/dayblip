@@ -297,7 +297,7 @@ export default function BuyVsRentPage() {
           { emoji: '📅', title: 'FI Date', desc: 'When could you stop working?', href: '/tools/fi-date' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
         <MethodologyNote text="Home appreciation assumed at 3% annually based on historical US national average (Federal Housing Finance Agency HPI). Investment return on down payment assumed at 7% annually based on long-term S&P 500 historical average. Property tax at 1.2% of home value — US national median (Tax Foundation). Homeowner's insurance at 0.5% of home value. Maintenance at 1% of home value annually. Mortgage uses standard 30-year fixed amortization formula. Rent increases assumed at 3% annually. These are averages — actual results vary significantly by location and market conditions. Not financial advice." />
       </div>
     </main>

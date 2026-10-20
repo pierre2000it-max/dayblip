@@ -169,7 +169,7 @@ export default function ThisYearProgressPage() {
 
             <AdUnit slot="2847591036" format="leaderboard" className="mt-8" />
             <AuthorByline variant="tool" />
-            <LastUpdated date="June 2026" />
+            <LastUpdated date="October 2026" />
             <MethodologyNote text="Year progress calculated as elapsed days since January 1 2026 divided by 365 total days (2026 is not a leap year). Day of year is the number of days elapsed plus one. Weeks remaining calculated as floor division of remaining days by 7. Milestone dates are fixed calendar dates for Q1 end (April 1), year midpoint (July 2), Q3 end (October 1), final quarter start (November 30), and year end (December 31). Progress bar updates every second using JavaScript setInterval." />
           </div>
         </section>

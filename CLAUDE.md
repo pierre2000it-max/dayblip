@@ -51,7 +51,7 @@ Label: "QUICK ANSWER" in #e94560 11px uppercase letter-spacing 2px
 7. Canonical URL: https://www.dayblip.com/[route]
 8. LastUpdated component
 9. MethodologyNote component (where applicable)
-10. Zero external links
+10. Zero external links, except links to Pierre's own brand sites (apexaipilot.com, noova.app, checkbloom.app, generationalwealth360.com, ecocleanwis.com) and the Spotify/YouTube search links on music-of-your-year. Pierre approved these Oct 20 2026. Do not remove them in audits.
 
 ## Every New Blog Article Must Have
 1. Quick Answer box
@@ -173,6 +173,7 @@ AdSense rejected the site twice (Jun 7, Jun 18 2026). Search Console showed 638 
 - Born-in: only years in src/data/bornInIndexed.ts are indexable and in the sitemap (20 years). Others render with noindex.
 - This is a deliberate exception to "never add noindex" (that rule covers tool and blog pages only).
 - Do not click AdSense "Request review" until Search Console shows these pages dropping out and core pages indexed.
+- LastUpdated default is "October 2026" (set Oct 20 2026). Update it, and the explicit date= overrides, only after a real content review. Blog "N min read · Month Year" lines are publish dates, leave them.
 - AdUnit.tsx still uses placeholder slot "1234567890" in 12 files. Replace with real ad unit IDs after approval.
 
 ## Critical CSS Fixes — DO NOT REMOVE
@@ -455,7 +456,7 @@ After all updates:
 
 ## What Never to Do
 - Never use Tailwind (not installed)
-- Never add external links to tool or blog pages
+- Never add external links to tool or blog pages (own-brand links and the music-of-your-year search links are the approved exceptions)
 - Never remove the AdSense CSS fixes from globals.css
 - Never add noindex to tool or blog pages
 - Never skip the Quick Answer box on a new tool

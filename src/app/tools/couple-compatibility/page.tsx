@@ -171,7 +171,7 @@ export default function CoupleCompatibilityPage() {
 
             <AdUnit slot="2847591036" format="leaderboard" className="mt-8" />
             <AuthorByline variant="tool" />
-            <LastUpdated date="June 2026" />
+            <LastUpdated date="October 2026" />
             <MethodologyNote text="Days alive together calculated from the younger person's birthdate to today. Shared weekends remaining calculated assuming both partners live to age 80 — this is a statistical estimate, not a prediction. Generation categories based on Pew Research Center generational definitions: Gen Alpha born 2013+, Gen Z born 1997-2012, Millennial born 1981-1996, Gen X born 1965-1980, Baby Boomer born 1946-1964, Silent Generation born 1928-1945. Milestone dates calculated by adding exact day counts to the younger partner's birthdate." />
           </div>
         </section>

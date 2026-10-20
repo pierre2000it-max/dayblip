@@ -133,7 +133,7 @@ export default function TaxRefundEstimatorPage() {
               {
                 '@type': 'Question',
                 name: 'What are the 2026 federal tax brackets?',
-                acceptedAnswer: { '@type': 'Answer', text: '2026 single filer brackets: 10% to $12,400; 12% to $47,150; 22% to $100,525; 24% to $191,950; 32% to $243,725; 35% to $609,350; 37% above. Per IRS Rev. Proc. 2025-32.' }
+                acceptedAnswer: { '@type': 'Answer', text: '2026 single filer brackets: 10% to $12,400; 12% to $50,400; 22% to $105,700; 24% to $201,775; 32% to $256,225; 35% to $640,600; 37% above. Per IRS Rev. Proc. 2025-32.' }
               }
             ]
           })
@@ -623,7 +623,7 @@ export default function TaxRefundEstimatorPage() {
           { emoji: '💰', title: 'Where You Rank', desc: 'Your income percentile nationally', href: '/tools/where-you-rank' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
 
         <MethodologyNote text="Tax calculations use 2026 federal income tax brackets and standard deductions per IRS Revenue Procedure 2025-32. Federal withholding entered by the user is used directly — FICA taxes (Social Security and Medicare) are not included in this estimate as they are not refundable through income tax returns. State income taxes are not included. Credits are treated as non-refundable (cannot reduce tax below zero). This tool provides an estimate only — actual refunds depend on additional factors including other income sources, AMT, self-employment tax, and specific IRS calculations. Always consult a tax professional for advice specific to your situation. Source: IRS Rev. Proc. 2025-32; IRS Publication 505 (2026)." />
       </div>

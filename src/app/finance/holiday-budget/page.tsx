@@ -560,7 +560,7 @@ export default function HolidayBudgetPage() {
         { emoji: '🛍️', title: 'Black Friday Deal Analyzer', desc: 'Is that deal actually real?', href: '/tools/is-it-worth-it/black-friday-deal' }
       ]} />
 
-      <LastUpdated date="June 2026" />
+      <LastUpdated date="October 2026" />
       <MethodologyNote text="Average American holiday spending from National Retail Federation 2024 Holiday Spending Survey. Credit card interest calculated using standard amortization formula. Average credit card APR of 21-24% from Federal Reserve Consumer Credit G.19 release 2026. Budget recommendations based on general financial planning guidelines — 1-1.5% of gross annual income for total holiday gift spending. Individual circumstances vary significantly. This tool provides estimates for planning purposes only." />
     </div>
   )

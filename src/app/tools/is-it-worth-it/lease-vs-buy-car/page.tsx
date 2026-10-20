@@ -242,7 +242,7 @@ export default function LeaseVsBuyCarPage() {
           { emoji: '💳', title: 'Debt Payoff', desc: 'Pay off your car loan faster', href: '/finance/debt-payoff' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
         <MethodologyNote text="Car depreciation modeled at 15% per year for the first three years based on Edmunds and Kelley Blue Book historical depreciation data. Mileage overage fee of $0.15 per mile above 12,000 per year — typical industry rate. Loan uses standard amortization formula. Residual value calculated from depreciation model. This calculator compares costs over the lease term only — buying becomes more advantageous the longer you keep the vehicle. Not financial advice." />
       </div>
     </main>

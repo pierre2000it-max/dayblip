@@ -289,7 +289,7 @@ function CityComparison({ cityA, cityB, slug }: {
           { emoji: '📊', title: 'Where You Rank', desc: 'Your income percentile nationally', href: '/tools/where-you-rank' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
         <MethodologyNote text="Cost of living indices from C2ER Cost of Living Index 2024-2025. Rent data from Zillow December 2024. Home price data from Zillow Home Value Index December 2024. Household income from US Census Bureau ACS 2023. National average COLI = 100. Data updated annually." />
       </div>
     </main>
@@ -533,7 +533,7 @@ function JobComparison({ jobA, jobB, slug }: {
           { emoji: '📊', title: 'Where You Rank', desc: 'Your income percentile nationally', href: '/tools/where-you-rank' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
         <MethodologyNote text="Salary data from Bureau of Labor Statistics Occupational Employment and Wage Statistics (OEWS) 2024-2025. Figures represent median annual wages for wage and salary workers. Self-employed excluded. Hourly rates calculated at 2,080 hours per year. State salary figures from same BLS OES dataset. Updated annually." />
       </div>
     </main>

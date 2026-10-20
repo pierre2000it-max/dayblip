@@ -40,7 +40,7 @@ export default function ToolsMisconceptionsPage() {
             { label: 'Money Misconceptions' }
           ]} />
           <AuthorByline variant="tool" />
-          <LastUpdated date="June 2026" />
+          <LastUpdated date="October 2026" />
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {tools.map(t => (
               <Link key={t.href} href={t.href} className="flex items-start gap-4 rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-6 transition-all hover:border-[#e94560]">

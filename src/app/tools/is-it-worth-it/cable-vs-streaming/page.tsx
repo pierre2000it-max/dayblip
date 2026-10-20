@@ -262,7 +262,7 @@ export default function CableVsStreamingPage() {
           { emoji: '💰', title: 'Compound Interest', desc: 'What saved money grows to', href: '/finance/compound-interest' }
         ]} />
 
-        <LastUpdated date="June 2026" />
+        <LastUpdated date="October 2026" />
         <MethodologyNote text="Average streaming service costs reflect published pricing as of June 2026. Streaming service prices change frequently — verify current pricing at each provider's website. Internet cost differential accounts for the potential need to upgrade from a bundled internet+cable package to a standalone internet plan. Average American streaming spend from JD Power 2024 Streaming Video Services Satisfaction Study. Not financial advice." />
       </div>
     </main>

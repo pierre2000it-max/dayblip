@@ -1,4 +1,6 @@
-export const SITE_LAST_UPDATED = "June 2026"
+// Site-wide default stamp. Change it only when pages are actually reviewed.
+// Last reviewed: October 20 2026 (titles, metadata, data claims, indexing cleanup).
+export const SITE_LAST_UPDATED = "October 2026"
 
 export default function LastUpdated({ date = SITE_LAST_UPDATED }: { date?: string }) {
   return (
