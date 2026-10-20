@@ -372,7 +372,7 @@ BLS OES (Occupational Employment Statistics) releases annually in May.
 
 | File | Notes |
 |---|---|
-| `src/app/tools/salary-negotiation/page.tsx` | Salary ranges for 80+ job titles — cite "BLS OES [year]" |
+| `src/app/tools/salary-negotiation/page.tsx` | Salary ranges for 80+ job titles. Hand-set experience-band ranges, NOT BLS data (relabeled "educational estimates" Oct 20 2026). Do not cite BLS unless the numbers are replaced with real OES values |
 | `src/app/tools/salary-checker/page.tsx` | Same salary ranges — keep in sync with above |
 | `src/app/embed/(tools)/salary-check/page.tsx` | Same data — no year label currently; add one |
 

@@ -8,7 +8,7 @@ const articles = [
     category: "Career",
     title: "What Your Salary Actually Pays Per Hour",
     excerpt:
-      "Most people know their salary. Almost nobody knows what their job actually costs them after commuting, work food and clothing. The real number is usually 20% lower.",
+      "Most people know their salary. Almost nobody knows what their job actually costs them after commuting, work food and clothing. In our worked example it drops 12.5%, and longer commutes widen the gap.",
     readTime: "5 min read",
     href: "/blog/true-hourly-wage",
   },

@@ -576,6 +576,39 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* MONEY GUIDES: internal links to the strongest blog posts */}
+      <section className="px-6 py-16" style={{ background: "#0d1f3c" }}>
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="mb-3 text-center text-3xl font-bold text-white">Money Guides</h2>
+          <p className="mb-10 text-center text-[#a8a8b3]">
+            Plain-English guides with the math shown, built on 2026 tax rules
+          </p>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { title: "What Is the 4 Percent Rule?", desc: "How much you need to retire, and where the rule breaks", href: "/blog/what-is-the-4-percent-rule" },
+              { title: "How Much House Can I Afford?", desc: "A realistic budget from income, debt and rates", href: "/blog/how-much-house-can-i-afford" },
+              { title: "When to Claim Social Security", desc: "What claiming at 62, 67 or 70 changes", href: "/blog/when-to-claim-social-security" },
+              { title: "Roth vs Traditional 401k", desc: "Which one wins at your tax bracket", href: "/blog/roth-vs-traditional-401k" },
+              { title: "HSA vs 401k", desc: "Where the next dollar of savings should go", href: "/blog/hsa-vs-401k" },
+              { title: "Self-Employment Tax 2026", desc: "What freelancers owe and when", href: "/blog/self-employment-tax-2026" },
+              { title: "Capital Gains Tax 2026", desc: "Rates, thresholds and the home-sale exclusion", href: "/blog/capital-gains-tax-2026" },
+              { title: "Renting vs Buying in 2026", desc: "The break-even point, with real numbers", href: "/blog/renting-vs-buying-2026" },
+              { title: "True Cost of Car Ownership", desc: "What a car costs per year beyond the payment", href: "/blog/true-cost-of-car-ownership" },
+              { title: "Debt Avalanche vs Snowball", desc: "Which payoff order saves more", href: "/blog/debt-avalanche-vs-snowball" },
+            ].map(g => (
+              <Link key={g.href} href={g.href}
+                className="flex flex-col gap-2 rounded-xl border border-[#0f3460] bg-[#16213e] p-5 transition-all duration-200 hover:border-[#e94560]">
+                <span className="text-base font-bold text-white">{g.title}</span>
+                <span className="text-sm text-[#a8a8b3] leading-snug">{g.desc}</span>
+              </Link>
+            ))}
+          </div>
+          <p className="mt-8 text-center">
+            <Link href="/blog" className="font-semibold text-[#e94560] hover:underline">See all guides</Link>
+          </p>
+        </div>
+      </section>
+
       {/* ════════════════════════════════════════════════════════════════
           MORE FUN TOOLS
       ════════════════════════════════════════════════════════════════ */}

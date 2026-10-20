@@ -6,7 +6,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "What Your Salary Actually Pays Per Hour",
-  description: "Your true hourly wage after commute time and work costs is usually 15–25% lower than your stated salary.",
+  description: "In our worked example, a $25.00 take-home hourly rate falls 12.5% to $21.87 after commute time and work costs.",
   url: "https://www.dayblip.com/blog/true-hourly-wage",
   datePublished: "2026-06-07",
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
@@ -49,7 +49,7 @@ export default function TrueHourlyWagePage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              A $75,000 salary appears to pay $36.06 per hour. After accounting for a 30-minute daily commute, three bought lunches per week and basic work clothing costs, the true hourly rate drops to approximately $27–29 per hour — 20–22% less than the stated salary.
+              A $75,000 salary appears to pay $36.06 per hour before tax, or $25.00 per hour on a $52,000 take-home. Subtract $2,400 in work food and clothing, add a 45-minute round-trip commute, and the true rate is $21.87 per hour. That is 12.5% less, and longer commutes widen the gap.
             </p>
           </div>
         </section>
@@ -57,7 +57,7 @@ export default function TrueHourlyWagePage() {
         {/* Share — Location 1: above article */}
         <div className="mb-8">
           <ShareButtons
-            text="Your $75,000 salary actually pays around $28/hr after commute and work costs. Calculate yours free: www.dayblip.com/tools/true-hourly-wage"
+            text="A $25/hr take-home rate drops to $21.87/hr after commute and work costs. Calculate yours free: www.dayblip.com/tools/true-hourly-wage"
             url="https://www.dayblip.com/blog/true-hourly-wage"
             title="What Your Salary Actually Pays Per Hour"
           />
@@ -107,7 +107,7 @@ export default function TrueHourlyWagePage() {
           </div>
 
           <p>
-            The stated rate was $25 per hour after tax. The true rate is $21.87. That is a 12% gap — and this is a relatively modest commute with moderate work expenses. Add longer commutes or higher food and clothing costs and the gap widens further.
+            The stated rate was $25 per hour after tax. The true rate is $21.87. That is a 12.5% gap — and this is a relatively modest commute with moderate work expenses. Add longer commutes or higher food and clothing costs and the gap widens further.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Why This Changes Everything</h2>
@@ -144,7 +144,7 @@ export default function TrueHourlyWagePage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="Your $75,000 salary actually pays around $28/hr after commute and work costs. Calculate yours free: www.dayblip.com/tools/true-hourly-wage"
+            text="A $25/hr take-home rate drops to $21.87/hr after commute and work costs. Calculate yours free: www.dayblip.com/tools/true-hourly-wage"
             url="https://www.dayblip.com/blog/true-hourly-wage"
             title="What Your Salary Actually Pays Per Hour"
           />

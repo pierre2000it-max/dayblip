@@ -3,11 +3,11 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "What Your Salary Actually Pays Per Hour",
   description:
-    "Your true hourly wage accounts for commute time, work food and clothing costs. For most workers it is 15–25% lower than the stated rate.",
+    "Your true hourly wage counts commute time and work costs. In our worked example, a $25.00 take-home rate falls to $21.87. Free, no signup.",
   alternates: { canonical: "https://www.dayblip.com/blog/true-hourly-wage" },
   openGraph: {
     title: "What Your Salary Actually Pays Per Hour",
-    description: "Your true hourly wage is usually 15–25% lower than your stated salary. Here is how to calculate it.",
+    description: "A $25.00 take-home rate falls to $21.87 after commute time and work costs. Here is how to calculate yours.",
     url: "https://www.dayblip.com/blog/true-hourly-wage",
   },
 }

@@ -149,7 +149,7 @@ function fmt(n: number) { return n.toLocaleString("en-US", { style: "currency", 
 
 const DISCLAIMER = (
   <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
-    ⚠️ <strong>Salary estimates are educational approximations based on national data.</strong> Actual salaries vary by company, industry and individual performance. Sources: BLS, Glassdoor, LinkedIn Salary.
+    ⚠️ <strong>Salary estimates are educational approximations based on national data.</strong> Actual salaries vary by company, industry and individual performance. These are not official BLS figures.
   </div>
 )
 
@@ -245,13 +245,13 @@ export default function SalaryCheckerPage() {
     ? `https://www.dayblip.com/tools/salary-checker?role=${encodeURIComponent(jobInput)}&exp=${result.exp}&state=${result.state}${result.current ? `&current=${result.current}` : ""}`
     : ""
   const shareText = result
-    ? `The market rate for a ${jobInput} with ${result.expLabel} experience in ${result.stateName} is ${fmt(result.low)}-${fmt(result.high)}/year! Are you being paid fairly? (Educational — BLS 2025 data)`
+    ? `The market rate for a ${jobInput} with ${result.expLabel} experience in ${result.stateName} is ${fmt(result.low)}-${fmt(result.high)}/year! Are you being paid fairly? (Educational estimate)`
     : ""
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Salary Checker — Am I Underpaid?","url":"https://www.dayblip.com/tools/salary-checker","description":"Check your salary against market rates for your job title, experience level, and location to see if you are underpaid.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is market salary data calculated?","acceptedAnswer":{"@type":"Answer","text":"Market salary data comes from Bureau of Labor Statistics Occupational Employment Statistics, employer salary surveys, and self-reported compensation databases. This tool uses aggregated national median data by job title and experience level."}},{"@type":"Question","name":"What does the 25th and 75th percentile salary mean?","acceptedAnswer":{"@type":"Answer","text":"The 25th percentile means 25 percent of people in that role earn less than that amount. The 75th percentile means 75 percent earn less. Your target negotiation range is typically between the median and 75th percentile."}},{"@type":"Question","name":"How do I know if I am underpaid?","acceptedAnswer":{"@type":"Answer","text":"Compare your current salary to market median for your role, experience level, industry, and geography. If you are below the 25th percentile you are likely underpaid. Cost of living varies significantly by city — $70,000 in Austin differs greatly from $70,000 in San Francisco."}},{"@type":"Question","name":"How often should I check my market salary?","acceptedAnswer":{"@type":"Answer","text":"Check annually at minimum before your review cycle so you have data to support a negotiation. Also check when you receive a job offer, after a promotion, or if you take on significantly more responsibility."}}]}) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is market salary data calculated?","acceptedAnswer":{"@type":"Answer","text":"Market salary figures here are educational estimates, set by job title and experience level and adjusted by state. They are not an official government dataset. Check employer offers and published salary surveys before negotiating or accepting a job."}},{"@type":"Question","name":"What does the 25th and 75th percentile salary mean?","acceptedAnswer":{"@type":"Answer","text":"The 25th percentile means 25 percent of people in that role earn less than that amount. The 75th percentile means 75 percent earn less. Your target negotiation range is typically between the median and 75th percentile."}},{"@type":"Question","name":"How do I know if I am underpaid?","acceptedAnswer":{"@type":"Answer","text":"Compare your current salary to market median for your role, experience level, industry, and geography. If you are below the 25th percentile you are likely underpaid. Cost of living varies significantly by city — $70,000 in Austin differs greatly from $70,000 in San Francisco."}},{"@type":"Question","name":"How often should I check my market salary?","acceptedAnswer":{"@type":"Answer","text":"Check annually at minimum before your review cycle so you have data to support a negotiation. Also check when you receive a job offer, after a promotion, or if you take on significantly more responsibility."}}]}) }} />
       <section className="px-6 py-16 text-center" style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)" }}>
         <div className="mx-auto max-w-[700px]">
           <h1 className="mb-3 text-4xl font-bold text-white">Salary Checker — Am I Being Paid Fairly for My Role?</h1>
@@ -264,7 +264,7 @@ export default function SalaryCheckerPage() {
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0]">54% of employees are paid below the market median for their role and location according to compensation data. The pay gap between the 25th and 75th percentile for the same role in the same city can exceed 40%. Knowing your market rate is the first step — employees who negotiate earn an average of $5,000 more annually than those who accept initial offers.</p>
           </div>
-          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A salary checker compares your current compensation against market rate data for your specific job title, experience level and geographic location. This tool uses BLS 2025 Occupational Employment and Wage Statistics covering 80+ job titles across all 50 US states to show whether your salary is below, at or above market rate.</p>
+          <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">A salary checker compares your current compensation against market rate data for your specific job title, experience level and geographic location. This tool uses educational estimates covering 80+ job titles, adjusted for all 50 US states, to show whether your salary is below, at or above market rate.</p>
         </div>
       </section>
 
@@ -381,7 +381,7 @@ export default function SalaryCheckerPage() {
               )}
 
               <div className="rounded-xl border border-[#4FC3F7]/20 bg-[#1a1a2e] p-4 text-xs text-[#a8a8b3]">
-                Salary ranges based on BLS Occupational Employment and Wage Statistics (OES) 2025 data. Educational estimates only.
+                Salary ranges are educational estimates, not official BLS figures.
               </div>
 
               {/* Embed this tool */}
@@ -415,7 +415,7 @@ export default function SalaryCheckerPage() {
             { emoji: "💵", title: "Take-Home Pay", desc: "See your net paycheck", href: "/finance/take-home-pay" },
           ]} />
           <FAQAccordion items={[
-            { q: "How is market salary data calculated?", a: "Market salary data comes from Bureau of Labor Statistics Occupational Employment Statistics, employer salary surveys, and self-reported compensation databases. This tool uses aggregated national median data by job title and experience level." },
+            { q: "How is market salary data calculated?", a: "Market salary figures here are educational estimates, set by job title and experience level and adjusted by state. They are not an official government dataset. Check employer offers and published salary surveys before negotiating or accepting a job." },
             { q: "What does the 25th and 75th percentile salary mean?", a: "The 25th percentile means 25 percent of people in that role earn less than that amount. The 75th percentile means 75 percent earn less. Your target negotiation range is typically between the median and 75th percentile." },
             { q: "How do I know if I am underpaid?", a: "Compare your current salary to market median for your role, experience level, industry, and geography. If you are below the 25th percentile you are likely underpaid. Cost of living varies significantly by city — $70,000 in Austin differs greatly from $70,000 in San Francisco." },
             { q: "How often should I check my market salary?", a: "Check annually at minimum before your review cycle so you have data to support a negotiation. Also check when you receive a job offer, after a promotion, or if you take on significantly more responsibility." },

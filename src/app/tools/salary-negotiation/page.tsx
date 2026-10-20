@@ -6,7 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb"
 import RelatedTools from "@/components/RelatedTools"
 import { webApplicationSchema, faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema"
 
-// ─── Salary data (source: BLS OES 2025, educational estimates) ───────────────
+// ─── Salary data (educational estimates, not official BLS figures) ───────────────
 const salaryData: Record<string, Record<string, [number, number]>> = {
   "Software Engineer":      { "0-1":[75000,95000],"2-4":[95000,130000],"5-9":[130000,170000],"10-14":[160000,210000],"15+":[190000,250000] },
   "Software Developer":     { "0-1":[70000,90000],"2-4":[90000,125000],"5-9":[120000,160000],"10-14":[150000,200000],"15+":[180000,240000] },
@@ -206,7 +206,7 @@ export default function SalaryNegotiationPage() {
 
   const shareUrl = result ? `https://www.dayblip.com/tools/salary-negotiation?role=${encodeURIComponent(jobInput)}&exp=${exp}&state=${state}&offered=${+offered || 0}` : ""
   const shareText = result
-    ? `Not negotiating your salary costs ${fmt(result.lifetimeImpact)} over a career! 😮\nMarket rate for ${result.role} in ${result.stateName}: ${fmt(result.marketLow)}–${fmt(result.marketHigh)}\nFree negotiation calculator + script:\n(Educational — BLS 2025 data)`
+    ? `Not negotiating your salary costs ${fmt(result.lifetimeImpact)} over a career! 😮\nMarket rate for ${result.role} in ${result.stateName}: ${fmt(result.marketLow)}–${fmt(result.marketHigh)}\nFree negotiation calculator + script:\n(Educational estimate)`
     : ""
 
   return (
@@ -259,7 +259,7 @@ export default function SalaryNegotiationPage() {
             { label: "Salary Negotiation Guide" }
           ]} />
           <div className="rounded-xl border border-yellow-500/30 bg-yellow-900/20 p-4 text-sm text-yellow-200">
-            ⚠️ <strong>Educational estimates only.</strong> Market data based on BLS OES 2025 national data. Actual salaries vary by company, industry and individual performance. Not financial advice.
+            ⚠️ <strong>Educational estimates only.</strong> Market data is estimated, not taken from official BLS figures. Actual salaries vary by company, industry and individual performance. Not financial advice.
           </div>
 
           <div className="space-y-4">
@@ -370,7 +370,7 @@ export default function SalaryNegotiationPage() {
                   ))}
                 </div>
 
-                <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-3 text-xs text-[#a8a8b3]">Market data: BLS OES 2025 data. Educational estimates only. Actual salaries vary by company, industry and individual factors.</div>
+                <div className="rounded-xl border border-[#0f3460] bg-[#1a1a2e] p-3 text-xs text-[#a8a8b3]">Market data: educational estimates, not official BLS figures. Actual salaries vary by company, industry and individual factors.</div>
 
                 <ShareButtons
                   text={shareText} url={shareUrl}

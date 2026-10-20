@@ -239,7 +239,7 @@ export default function EmbedSalaryCheck() {
             </a>
           </div>
           <div style={{ marginTop: 10, fontSize: 11, color: "#a8a8b3", textAlign: "center" }}>
-            Educational estimates based on BLS OES data. Results vary by company and location.
+            Educational estimates, not official BLS figures. Results vary by company and location.
           </div>
         </div>
       )}
