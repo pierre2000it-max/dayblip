@@ -265,9 +265,10 @@ export default function AboutPage() {
           Recognition
         </h2>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          Dayblip&apos;s financial education resources have been approved by the Jump$tart Coalition for
-          Personal Financial Literacy — a national nonprofit dedicated to improving financial literacy
-          among students and consumers across the United States.
+          A Dayblip resource was approved for the Jump$tart Clearinghouse in June 2026. The Clearinghouse
+          is the directory of financial education resources run by the Jump$tart Coalition for Personal
+          Financial Literacy, a national nonprofit dedicated to improving financial literacy among
+          students and consumers across the United States.
         </p>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
           <a
