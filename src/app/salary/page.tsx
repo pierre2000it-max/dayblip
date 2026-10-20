@@ -16,7 +16,7 @@ export default function SalaryHubPage() {
           Average Salary by Job and State 2024
         </h1>
         <p style={{ color: '#a8a8b3', fontSize: '18px', margin: '0 0 24px 0' }}>
-          BLS OES May 2024 data — 20 occupations across all 50 US states
+          Estimated salary figures for 40 occupations across all 50 US states
         </p>
 
         <div style={{ background: '#1e2d4a', borderLeft: '4px solid #e94560', borderRadius: '8px', padding: '20px 24px', margin: '0 0 28px 0' }}>
@@ -78,7 +78,7 @@ export default function SalaryHubPage() {
         </div>
 
         <p style={{ color: '#6b7280', fontSize: '13px', borderTop: '1px solid #2a3a5c', paddingTop: '20px' }}>
-          Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics (OES), May 2024. Data represents mean annual wages. Individual salaries vary based on experience, education, employer, and local market conditions.
+          State figures are estimates for comparison and planning, not official BLS state-level values. For official numbers, check the BLS Occupational Employment and Wage Statistics tables. Individual salaries vary based on experience, education, employer, and local market conditions.
         </p>
       </div>
     </main>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BORN_IN_DESCRIPTIONS } from "@/data/bornInDescriptions";
 import bornInRaw from "@/data/bornIn.json";
+import { BORN_IN_INDEXED_YEARS } from "@/data/bornInIndexed";
 import { generateBornInSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { faqSchema } from "@/lib/schema";
 import AdUnit from "@/components/AdUnit";
@@ -92,6 +93,9 @@ export async function generateMetadata({
     title,
     description: desc,
     alternates: { canonical: url },
+    robots: BORN_IN_INDEXED_YEARS.has(year)
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
     openGraph: {
       title, description: desc, type: "article", url,
     },

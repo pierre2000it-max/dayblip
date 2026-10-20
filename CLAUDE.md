@@ -137,7 +137,7 @@ Before writing a new article, grep src/app/blog for the topic to avoid a second 
 - 8ae20a7: OG image routes fixed (display flex, try/catch)
 
 ## Site Counts (as of June 13 2026)
-- Total URLs in sitemap: 1,422 (verified Oct 13 2026 at 1,421, +1 for article 45 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
+- Total URLs in sitemap: about 400 after the Oct 20 2026 indexing cleanup (was 1,422; verify by running sitemap.ts). Previously: 1,422 (verified Oct 13 2026 at 1,421, +1 for article 45 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
 - Total tool pages: 200+ (recounted Oct 10 2026: 209 interactive pages, ~200 after near-duplicates)
 - Blog articles: 45 (Oct 14 2026)
 - Embed tools: 25
@@ -165,6 +165,15 @@ Home Cleaning Cost Calculator (/tools/home-cleaning-cost-calculator) was linked 
 - src/app/tools/commercial-cleaning-roi-calculator/page.tsx
 - src/app/tools/auto-detailing-cost-calculator/page.tsx
 `src/lib/internalLinks.test.ts` fails the build if any hardcoded internal href points to a route that does not exist. Add a 301 in next.config.mjs when you rename a route.
+
+## Oct 2026 Indexing Cleanup (AdSense "Low value content")
+AdSense rejected the site twice (Jun 7, Jun 18 2026). Search Console showed 638 indexed vs 2.9K not indexed. Cuts made Oct 20 2026:
+- Salary: all /salary/[job]-in-[state] pages are noindex and out of the sitemap. Only the /salary hub is listed. The state figures in src/data/salary-data.ts look estimated (96% of values share one 3-digit ending per job), so page copy now says "estimates", not "BLS OES". Do NOT re-index until figures are verified against real BLS OES. Planned: 27 job-level pages with all-50-state tables.
+- Compare: all /compare/[slug] pairs are noindex. Hub /compare stays in the sitemap. src/data/compare-index.ts is now unused by the sitemap.
+- Born-in: only years in src/data/bornInIndexed.ts are indexable and in the sitemap (20 years). Others render with noindex.
+- This is a deliberate exception to "never add noindex" (that rule covers tool and blog pages only).
+- Do not click AdSense "Request review" until Search Console shows these pages dropping out and core pages indexed.
+- AdUnit.tsx still uses placeholder slot "1234567890" in 12 files. Replace with real ad unit IDs after approval.
 
 ## Critical CSS Fixes — DO NOT REMOVE
 In src/app/globals.css:

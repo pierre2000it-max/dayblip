@@ -1,29 +1,10 @@
 import type { MetadataRoute } from "next";
 import holidaysData from "@/data/holidays.json";
-import { getAllSalarySlugs, getSalaryBySlug, SALARY_DATA } from "@/data/salary-data";
-import { cities } from "@/data/cost-of-living";
-import { INDEXED_CITY_PAIRS, INDEXED_JOB_PAIRS } from "@/data/compare-index";
+import { BORN_IN_INDEXED_YEARS } from "@/data/bornInIndexed";
 import { LASTMOD } from "@/data/lastmod";
 
 const BASE     = "https://www.dayblip.com";
 const holidays = holidaysData as Array<{ slug: string }>;
-
-// ── Salary indexing tiers (mirrors salary/[slug]/page.tsx) ───────────────────
-const SALARY_TIER_1 = new Set([
-  'nurse', 'registered-nurse', 'teacher', 'software-engineer',
-  'doctor', 'surgeon', 'lawyer', 'pharmacist', 'dentist',
-  'police-officer', 'firefighter', 'electrician', 'plumber', 'accountant',
-])
-const SALARY_TIER_2 = new Set([
-  'truck-driver', 'project-manager', 'data-analyst', 'financial-advisor',
-  'physical-therapist', 'web-developer', 'cybersecurity-analyst', 'pilot',
-  'it-manager', 'marketing-manager', 'construction-manager',
-  'real-estate-agent', 'veterinarian',
-])
-const SALARY_TIER_2_STATES = new Set([
-  'ca','ny','tx','fl','il','wa','co','ma','pa','ga',
-  'az','nj','va','oh','mi','nc','mn','md','or','tn',
-])
 
 const DAILY   = "daily"   as const;
 const WEEKLY  = "weekly"  as const;
@@ -55,9 +36,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:        0.9,
   }));
 
-  // ── Dynamic: born-in 1940–2020 (81 pages) ────────────────────────────────
-  const bornInUrls: MetadataRoute.Sitemap = Array.from({ length: 81 }, (_, i) => ({
-    url:             `${BASE}/born-in/${1940 + i}`,
+  // ── Dynamic: born-in, indexable years only (see data/bornInIndexed.ts) ────
+  const bornInUrls: MetadataRoute.Sitemap = Array.from({ length: 81 }, (_, i) => 1940 + i)
+    .filter((y) => BORN_IN_INDEXED_YEARS.has(y))
+    .map((y) => ({
+    url:             `${BASE}/born-in/${y}`,
     lastModified:    LASTMOD.bornIn,
     changeFrequency: MONTHLY,
     priority:        0.8,
@@ -459,56 +442,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...bornInUrls,      // born-in/1940 through born-in/2020 (monthly, 0.8)
     ...otdSpotlight,    // 16 indexed spotlight dates (weekly, 0.8)
 
-    // ═══════════════════════════════════════════════════════════════════════
-    // COMPARE PAGES  (priority 0.8, monthly)
-    // Only whitelisted city pairs and job pairs are indexed.
+    // COMPARE PAGES: hub only. All pair pages are noindex (Oct 2026).
     // ═══════════════════════════════════════════════════════════════════════
     p("/compare", 0.8, MONTHLY),
-    ...(() => {
-      const slugs: string[] = []
-      for (let i = 0; i < cities.length; i++) {
-        for (let j = i + 1; j < cities.length; j++) {
-          const slug = `${cities[i].slug}-vs-${cities[j].slug}`
-          if (INDEXED_CITY_PAIRS.has(slug)) slugs.push(slug)
-        }
-      }
-      for (let i = 0; i < SALARY_DATA.length; i++) {
-        for (let j = i + 1; j < SALARY_DATA.length; j++) {
-          const slug = `${SALARY_DATA[i].slug}-vs-${SALARY_DATA[j].slug}`
-          if (INDEXED_JOB_PAIRS.has(slug)) slugs.push(slug)
-        }
-      }
-      return slugs.map((slug) => ({
-        url:             `${BASE}/compare/${slug}`,
-        lastModified:    LASTMOD.compare,
-        changeFrequency: MONTHLY,
-        priority:        0.8,
-      }))
-    })(),
 
-    // ═══════════════════════════════════════════════════════════════════════
-    // SALARY PAGES  (priority 0.8, monthly)
-    // Tier 1 (14 jobs): all 50 states = 700 slugs
-    // Tier 2 (13 jobs): top-20 states = 260 slugs
-    // Tier 3 (13 jobs): noindex — excluded
+    // SALARY: hub only. State pages are noindex (Oct 2026) until the state figures
+    // are verified against BLS OES. See CLAUDE.md "Oct 2026 indexing cleanup".
     // ═══════════════════════════════════════════════════════════════════════
     p("/salary", 0.8, MONTHLY),
-    ...getAllSalarySlugs()
-      .filter((slug) => {
-        const data = getSalaryBySlug(slug)
-        if (!data) return false
-        const jobSlug = data.entry.slug
-        const stateAbbr = data.state.abbreviation.toLowerCase()
-        if (SALARY_TIER_1.has(jobSlug)) return true
-        if (SALARY_TIER_2.has(jobSlug)) return SALARY_TIER_2_STATES.has(stateAbbr)
-        return false
-      })
-      .map((slug) => ({
-        url:             `${BASE}/salary/${slug}`,
-        lastModified:    LASTMOD.salary,
-        changeFrequency: MONTHLY,
-        priority:        0.8,
-      })),
   ];
 
   // Dedupe by URL. First entry wins, so hand-picked priorities beat the

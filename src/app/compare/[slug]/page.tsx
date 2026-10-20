@@ -546,11 +546,11 @@ function isIndexed(slug: string): boolean {
 }
 
 export async function generateMetadata({ params }: Props) {
-  const { slug } = await params
-  if (!isIndexed(slug)) {
-    return { robots: { index: false, follow: false } }
-  }
-  return {}
+  // Oct 2026: every pair is noindex. 2,000+ templated pairs earned almost no
+  // impressions and dragged the site toward a "low value content" verdict.
+  // Pages stay live for users and internal links. Revisit per pair when data shows demand.
+  await params
+  return { robots: { index: false, follow: true } }
 }
 
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
