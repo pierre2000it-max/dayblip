@@ -546,7 +546,7 @@ export default function NewYearResolutionCostPage() {
         { emoji: '🎁', title: 'Holiday Budget Planner', desc: 'Plan your gift spending by recipient', href: '/finance/holiday-budget' },
         { emoji: '💪', title: 'Gym Membership Worth It?', desc: 'Calculate your cost per visit', href: '/tools/is-it-worth-it/gym-membership' },
         { emoji: '💰', title: 'Budget Calculator', desc: 'Monthly budget planning', href: '/finance/budget-calculator' },
-        { emoji: '📅', title: 'Days Until New Year', desc: 'How many days until 2027?', href: '/days-until/new-years-day' }
+        { emoji: '📅', title: 'Days Until New Year', desc: 'How many days until 2027?', href: '/days-until/new-years' }
       ]} />
 
       <LastUpdated date="October 2026" />

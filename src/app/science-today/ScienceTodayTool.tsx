@@ -36,7 +36,13 @@ export default function ScienceTodayTool() {
 
   useEffect(() => { setToday(new Date()); }, []);
 
-  if (!today) return null;
+  if (!today) return (
+    <div className="min-h-screen bg-[#1a1a2e]">
+      <section className="px-6 py-16 text-center">
+        <h1 className="text-4xl font-bold text-white md:text-5xl mb-3">This Day in Science</h1>
+      </section>
+    </div>
+  );
 
   const slug = `${MONTH_SLUG[today.getMonth()]}-${today.getDate()}`;
   const events = SCIENCE_DB[slug] ?? null;

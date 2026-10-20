@@ -28,7 +28,13 @@ export default function WeekNumberTool() {
 
   useEffect(() => { setToday(new Date()); }, []);
 
-  if (!today) return null;
+  if (!today) return (
+    <div className="min-h-screen bg-[#1a1a2e]">
+      <section className="px-6 py-16 text-center">
+        <h1 className="text-2xl font-bold text-white mb-3">What Week Number Is It?</h1>
+      </section>
+    </div>
+  );
 
   const week    = getWeekNumber(today);
   const year    = today.getFullYear();

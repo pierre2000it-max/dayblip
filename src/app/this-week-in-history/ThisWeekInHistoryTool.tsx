@@ -42,7 +42,13 @@ export default function ThisWeekInHistoryTool() {
 
   useEffect(() => { setToday(new Date()); }, []);
 
-  if (!today) return null;
+  if (!today) return (
+    <div className="min-h-screen bg-[#1a1a2e]">
+      <section className="px-6 py-16 text-center">
+        <h1 className="text-4xl font-bold text-white md:text-5xl mb-3">This Week in History</h1>
+      </section>
+    </div>
+  );
 
   const monday = getMonday(today);
   const days   = Array.from({ length: 7 }, (_, i) => {

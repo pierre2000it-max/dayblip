@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 const BASE = "https://www.dayblip.com";
 const DEFAULT_DESCRIPTION =
-  `Dayblip — ${TOOL_COUNT} free interactive calculators for personal finance, career decisions, life in weeks, born in year facts and more. No signup. No email. Free forever.`;
+  `Dayblip: ${TOOL_COUNT} free calculators for personal finance, career decisions, life in weeks and born-in facts. No signup. No email. Free forever.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE),

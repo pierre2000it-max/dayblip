@@ -137,7 +137,7 @@ Before writing a new article, grep src/app/blog for the topic to avoid a second 
 - 8ae20a7: OG image routes fixed (display flex, try/catch)
 
 ## Site Counts (as of June 13 2026)
-- Total URLs in sitemap: 326 after the Oct 20 2026 indexing cleanup (verified by running sitemap.ts; was 1,422). Previously: 1,422 (verified Oct 13 2026 at 1,421, +1 for article 45 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
+- Total URLs in sitemap: 323 after the Oct 20 2026 indexing cleanup and crawl (every URL crawled locally: all 200, no title over 60, no description outside 120-155, canonical matches URL; was 1,422). Previously: 1,422 (verified Oct 13 2026 at 1,421, +1 for article 45 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
 - Total tool pages: 200+ (recounted Oct 10 2026: 209 interactive pages, ~200 after near-duplicates)
 - Blog articles: 45 (Oct 14 2026)
 - Embed tools: 25
@@ -173,6 +173,7 @@ AdSense rejected the site twice (Jun 7, Jun 18 2026). Search Console showed 638 
 - Born-in: only years in src/data/bornInIndexed.ts are indexable and in the sitemap (20 years). Others render with noindex.
 - This is a deliberate exception to "never add noindex" (that rule covers tool and blog pages only).
 - Do not click AdSense "Request review" until Search Console shows these pages dropping out and core pages indexed.
+- Oct 20 2026 local crawl fixes: memorial-day, labor-day, fathers-day, new-years-eve countdown pages were soft 404s (page text existed, holidays.json entries did not). Entries added with date logic in src/lib/seo.ts, CountdownDisplay.tsx and opengraph-image.tsx (keep the 3 copies in sync). Holiday page titles now use the year of the NEXT occurrence. Four client-only tool pages (day-of-year, week-number, science-today, this-week-in-history) now server-render their h1. Sitemap must list only canonical, indexable URLs: never add a URL whose canonical points elsewhere or that is noindex.
 - LastUpdated default is "October 2026" (set Oct 20 2026). Update it, and the explicit date= overrides, only after a real content review. Blog "N min read · Month Year" lines are publish dates, leave them.
 - AdUnit.tsx still uses placeholder slot "1234567890" in 12 files. Replace with real ad unit IDs after approval.
 

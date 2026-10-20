@@ -35,7 +35,13 @@ export default function DayOfYearTool() {
 
   useEffect(() => { setToday(new Date()); }, []);
 
-  if (!today) return null;
+  if (!today) return (
+    <div className="min-h-screen bg-[#1a1a2e]">
+      <section className="px-6 py-16 text-center">
+        <h1 className="text-2xl font-bold text-white md:text-3xl mb-3">What Day of the Year Is It?</h1>
+      </section>
+    </div>
+  );
 
   const dayNum    = getDayOfYear(today);
   const year      = today.getFullYear();

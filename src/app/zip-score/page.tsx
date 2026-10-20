@@ -3,7 +3,7 @@ import ZipScoreTool from "./ZipScoreTool";
 
 const TITLE = "Free ZIP Market Score — Is Your Business Idea Viable?";
 const DESC =
-  "Enter a business category and US ZIP code. Get a free market viability score band in seconds. Powered by Ziplicit.";
+  "Enter a business category and US ZIP code. Get a free market viability score band in seconds. Powered by Ziplicit. No signup required.";
 
 const OG_IMAGE =
   "https://www.dayblip.com/api/og?title=Free+ZIP+Market+Score&emoji=%F0%9F%93%8A&subtitle=Is+Your+ZIP+a+Winner%3F";

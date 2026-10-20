@@ -14,11 +14,26 @@
       "The 12 Days of Christmas refers to Dec 25 to Jan 5"
     ],
     "faqs": [
-      { "q": "When is Christmas?", "a": "Christmas is always on December 25th every year." },
-      { "q": "How many days until Christmas?", "a": "Use the live countdown above to see the exact number of days until Christmas." },
-      { "q": "What day of the week is Christmas this year?", "a": "Check the countdown above for the exact date and day of the week." },
-      { "q": "How many weeks until Christmas?", "a": "Divide the days shown above by 7 to get the number of weeks." },
-      { "q": "How many sleeps until Christmas?", "a": "The number of sleeps is the same as the number of days shown above." }
+      {
+        "q": "When is Christmas?",
+        "a": "Christmas is always on December 25th every year."
+      },
+      {
+        "q": "How many days until Christmas?",
+        "a": "Use the live countdown above to see the exact number of days until Christmas."
+      },
+      {
+        "q": "What day of the week is Christmas this year?",
+        "a": "Check the countdown above for the exact date and day of the week."
+      },
+      {
+        "q": "How many weeks until Christmas?",
+        "a": "Divide the days shown above by 7 to get the number of weeks."
+      },
+      {
+        "q": "How many sleeps until Christmas?",
+        "a": "The number of sleeps is the same as the number of days shown above."
+      }
     ]
   },
   {
@@ -36,9 +51,18 @@
       "Halloween is the second largest commercial holiday in the US"
     ],
     "faqs": [
-      { "q": "When is Halloween?", "a": "Halloween is always on October 31st every year." },
-      { "q": "How many days until Halloween?", "a": "Use the live countdown above to see the exact number of days." },
-      { "q": "What day of the week is Halloween this year?", "a": "Check the countdown above for the exact day of the week." }
+      {
+        "q": "When is Halloween?",
+        "a": "Halloween is always on October 31st every year."
+      },
+      {
+        "q": "How many days until Halloween?",
+        "a": "Use the live countdown above to see the exact number of days."
+      },
+      {
+        "q": "What day of the week is Halloween this year?",
+        "a": "Check the countdown above for the exact day of the week."
+      }
     ]
   },
   {
@@ -56,8 +80,14 @@
       "About 1 billion people watch the Times Square ball drop"
     ],
     "faqs": [
-      { "q": "When is New Year's Day?", "a": "New Year's Day is always January 1st." },
-      { "q": "How many days until New Year's?", "a": "Use the live countdown above for the exact count." }
+      {
+        "q": "When is New Year's Day?",
+        "a": "New Year's Day is always January 1st."
+      },
+      {
+        "q": "How many days until New Year's?",
+        "a": "Use the live countdown above for the exact count."
+      }
     ]
   },
   {
@@ -75,8 +105,14 @@
       "About $24 billion is spent on Valentine's Day in the US annually"
     ],
     "faqs": [
-      { "q": "When is Valentine's Day?", "a": "Valentine's Day is always February 14th." },
-      { "q": "How many days until Valentine's Day?", "a": "Use the live countdown above for the exact count." }
+      {
+        "q": "When is Valentine's Day?",
+        "a": "Valentine's Day is always February 14th."
+      },
+      {
+        "q": "How many days until Valentine's Day?",
+        "a": "Use the live countdown above for the exact count."
+      }
     ]
   },
   {
@@ -94,8 +130,14 @@
       "Canada celebrates Thanksgiving on the second Monday of October"
     ],
     "faqs": [
-      { "q": "When is Thanksgiving?", "a": "Thanksgiving falls on the fourth Thursday of November each year." },
-      { "q": "How many days until Thanksgiving?", "a": "Use the live countdown above for the exact count." }
+      {
+        "q": "When is Thanksgiving?",
+        "a": "Thanksgiving falls on the fourth Thursday of November each year."
+      },
+      {
+        "q": "How many days until Thanksgiving?",
+        "a": "Use the live countdown above for the exact count."
+      }
     ]
   },
   {
@@ -113,8 +155,14 @@
       "Three US presidents died on July 4th"
     ],
     "faqs": [
-      { "q": "When is Independence Day?", "a": "Independence Day is always July 4th." },
-      { "q": "How many days until July 4th?", "a": "Use the live countdown above for the exact count." }
+      {
+        "q": "When is Independence Day?",
+        "a": "Independence Day is always July 4th."
+      },
+      {
+        "q": "How many days until July 4th?",
+        "a": "Use the live countdown above for the exact count."
+      }
     ]
   },
   {
@@ -132,8 +180,14 @@
       "Blue was originally associated with St. Patrick, not green"
     ],
     "faqs": [
-      { "q": "When is St. Patrick's Day?", "a": "St. Patrick's Day is always March 17th." },
-      { "q": "How many days until St. Patrick's Day?", "a": "Use the live countdown above for the exact count." }
+      {
+        "q": "When is St. Patrick's Day?",
+        "a": "St. Patrick's Day is always March 17th."
+      },
+      {
+        "q": "How many days until St. Patrick's Day?",
+        "a": "Use the live countdown above for the exact count."
+      }
     ]
   },
   {
@@ -151,8 +205,14 @@
       "The word Easter may come from the Anglo-Saxon goddess Eostre"
     ],
     "faqs": [
-      { "q": "When is Easter?", "a": "Easter falls on the first Sunday after the first full moon after March 21st." },
-      { "q": "How many days until Easter?", "a": "Use the live countdown above for the exact count." }
+      {
+        "q": "When is Easter?",
+        "a": "Easter falls on the first Sunday after the first full moon after March 21st."
+      },
+      {
+        "q": "How many days until Easter?",
+        "a": "Use the live countdown above for the exact count."
+      }
     ]
   },
   {
@@ -170,8 +230,14 @@
       "Some stores now open on Thanksgiving evening"
     ],
     "faqs": [
-      { "q": "When is Black Friday?", "a": "Black Friday falls the day after Thanksgiving, the fourth Thursday of November." },
-      { "q": "How many days until Black Friday?", "a": "Use the live countdown above for the exact count." }
+      {
+        "q": "When is Black Friday?",
+        "a": "Black Friday falls the day after Thanksgiving, the fourth Thursday of November."
+      },
+      {
+        "q": "How many days until Black Friday?",
+        "a": "Use the live countdown above for the exact count."
+      }
     ]
   },
   {
@@ -189,8 +255,14 @@
       "Carnations are the traditional Mother's Day flower"
     ],
     "faqs": [
-      { "q": "When is Mother's Day?", "a": "Mother's Day falls on the second Sunday of May each year." },
-      { "q": "How many days until Mother's Day?", "a": "Use the live countdown above for the exact count." }
+      {
+        "q": "When is Mother's Day?",
+        "a": "Mother's Day falls on the second Sunday of May each year."
+      },
+      {
+        "q": "How many days until Mother's Day?",
+        "a": "Use the live countdown above for the exact count."
+      }
     ]
   },
   {
@@ -208,9 +280,166 @@
       "Over 53 million K-12 students in the US look forward to summer break each year"
     ],
     "faqs": [
-      { "q": "When is the first day of summer?", "a": "The first day of summer falls on the summer solstice, June 20 or 21 each year." },
-      { "q": "How many days until summer break?", "a": "Use the live countdown above to see the exact number of days, hours, minutes and seconds until the first day of summer." },
-      { "q": "What day of the week is the first day of summer this year?", "a": "Check the countdown above for the exact date and day of the week." }
+      {
+        "q": "When is the first day of summer?",
+        "a": "The first day of summer falls on the summer solstice, June 20 or 21 each year."
+      },
+      {
+        "q": "How many days until summer break?",
+        "a": "Use the live countdown above to see the exact number of days, hours, minutes and seconds until the first day of summer."
+      },
+      {
+        "q": "What day of the week is the first day of summer this year?",
+        "a": "Check the countdown above for the exact date and day of the week."
+      }
+    ]
+  },
+  {
+    "slug": "memorial-day",
+    "name": "Memorial Day",
+    "emoji": "🇺🇸",
+    "date": "dynamic-memorialday",
+    "description": "Memorial Day is observed on the last Monday of May to honor US military personnel who died while serving.",
+    "color": "#b22234",
+    "facts": [
+      "Memorial Day was originally called Decoration Day",
+      "It was first widely observed after the Civil War",
+      "It became a federal holiday observed on a Monday in 1971",
+      "A National Moment of Remembrance is observed at 3:00 p.m. local time",
+      "Volunteers place small flags on graves at Arlington National Cemetery"
+    ],
+    "faqs": [
+      {
+        "q": "When is Memorial Day?",
+        "a": "Memorial Day is the last Monday of May each year."
+      },
+      {
+        "q": "How many days until Memorial Day?",
+        "a": "Use the live countdown above for the exact count."
+      },
+      {
+        "q": "Why is Memorial Day on a Monday?",
+        "a": "Congress moved the observance to the last Monday of May in 1971 to create a three-day weekend."
+      },
+      {
+        "q": "What is the difference between Memorial Day and Veterans Day?",
+        "a": "Memorial Day honors service members who died in service. Veterans Day on November 11 honors all who served."
+      },
+      {
+        "q": "What is the National Moment of Remembrance?",
+        "a": "It is a request that Americans pause at 3:00 p.m. local time on Memorial Day for a moment of silence."
+      }
+    ]
+  },
+  {
+    "slug": "labor-day",
+    "name": "Labor Day",
+    "emoji": "🛠️",
+    "date": "dynamic-laborday",
+    "description": "Labor Day is celebrated on the first Monday of September to honor American workers and the labor movement.",
+    "color": "#1f4e8c",
+    "facts": [
+      "The first Labor Day parade was held in New York City in 1882",
+      "Oregon was the first state to make Labor Day an official holiday in 1887",
+      "Congress made Labor Day a federal holiday in 1894",
+      "It falls on the first Monday of September",
+      "Many Americans treat it as the unofficial end of summer"
+    ],
+    "faqs": [
+      {
+        "q": "When is Labor Day?",
+        "a": "Labor Day is the first Monday of September each year."
+      },
+      {
+        "q": "How many days until Labor Day?",
+        "a": "Use the live countdown above for the exact count."
+      },
+      {
+        "q": "Why do we celebrate Labor Day?",
+        "a": "It honors the contributions of American workers and the labor movement."
+      },
+      {
+        "q": "Is Labor Day a federal holiday?",
+        "a": "Yes. It has been a federal holiday since 1894."
+      },
+      {
+        "q": "How many sleeps until Labor Day?",
+        "a": "The number of sleeps equals the number of days shown above."
+      }
+    ]
+  },
+  {
+    "slug": "fathers-day",
+    "name": "Father's Day",
+    "emoji": "👔",
+    "date": "dynamic-fathersday",
+    "description": "Father's Day is celebrated on the third Sunday of June to honor fathers and father figures.",
+    "color": "#2e6da4",
+    "facts": [
+      "The first Father's Day celebration was held in Spokane, Washington on June 19, 1910",
+      "Sonora Smart Dodd pushed for the holiday to honor her father",
+      "President Lyndon Johnson signed a proclamation honoring fathers in 1966",
+      "Father's Day became a permanent national holiday in 1972",
+      "It falls on the third Sunday of June"
+    ],
+    "faqs": [
+      {
+        "q": "When is Father's Day?",
+        "a": "Father's Day is the third Sunday of June each year."
+      },
+      {
+        "q": "How many days until Father's Day?",
+        "a": "Use the live countdown above for the exact count."
+      },
+      {
+        "q": "Who started Father's Day?",
+        "a": "Sonora Smart Dodd of Spokane, Washington started the first celebration in 1910."
+      },
+      {
+        "q": "When did Father's Day become a national holiday?",
+        "a": "It became a permanent national holiday in 1972."
+      },
+      {
+        "q": "How many weeks until Father's Day?",
+        "a": "Divide the days shown above by 7 to get the number of weeks."
+      }
+    ]
+  },
+  {
+    "slug": "new-years-eve",
+    "name": "New Year's Eve",
+    "emoji": "🥂",
+    "date": "12-31",
+    "description": "New Year's Eve falls on December 31, the last day of the year, and is celebrated with countdowns and gatherings.",
+    "color": "#6a1b9a",
+    "facts": [
+      "The Times Square ball drop has taken place since 1907",
+      "The Times Square ball is 12 feet across and weighs about 11,875 pounds",
+      "Auld Lang Syne is the traditional song sung at midnight",
+      "Midnight arrives first in the Pacific islands and last in a few uninhabited US territories",
+      "New Year's Eve always falls on December 31"
+    ],
+    "faqs": [
+      {
+        "q": "When is New Year's Eve?",
+        "a": "New Year's Eve is always December 31."
+      },
+      {
+        "q": "How many days until New Year's Eve?",
+        "a": "Use the live countdown above for the exact count."
+      },
+      {
+        "q": "What day of the week is New Year's Eve this year?",
+        "a": "Check the countdown above for the exact date and day of the week."
+      },
+      {
+        "q": "How many sleeps until New Year's Eve?",
+        "a": "The number of sleeps equals the number of days shown above."
+      },
+      {
+        "q": "What is the difference between New Year's Eve and New Year's Day?",
+        "a": "New Year's Eve is December 31. New Year's Day is January 1."
+      }
     ]
   }
 ]

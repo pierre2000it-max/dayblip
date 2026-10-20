@@ -32,12 +32,30 @@ function getMothersDay(year: number): Date {
   return new Date(year, 4, 1 + daysToFirstSun + 7);
 }
 
+function getMemorialDay(year: number): Date {
+  const may31 = new Date(year, 4, 31);
+  return new Date(year, 4, 31 - ((may31.getDay() + 6) % 7));
+}
+
+function getLaborDay(year: number): Date {
+  const sep1 = new Date(year, 8, 1);
+  return new Date(year, 8, 1 + ((1 - sep1.getDay() + 7) % 7));
+}
+
+function getFathersDay(year: number): Date {
+  const jun1 = new Date(year, 5, 1);
+  return new Date(year, 5, 1 + ((7 - jun1.getDay()) % 7) + 14);
+}
+
 function getHolidayDate(date: string, year: number): Date {
   switch (date) {
     case "dynamic-thanksgiving": return getThanksgiving(year);
     case "dynamic-easter":       return getEaster(year);
     case "dynamic-blackfriday":  return getBlackFriday(year);
     case "dynamic-mothersday":   return getMothersDay(year);
+    case "dynamic-memorialday":  return getMemorialDay(year);
+    case "dynamic-laborday":     return getLaborDay(year);
+    case "dynamic-fathersday":   return getFathersDay(year);
     default: {
       const parts = date.split("-").map(Number);
       return new Date(year, parts[0] - 1, parts[1]);

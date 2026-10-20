@@ -126,7 +126,7 @@ export default function CountdownHubPage() {
               { emoji: "🎃", label: "Days Until Halloween",    href: "/days-until/halloween" },
               { emoji: "🦃", label: "Days Until Thanksgiving", href: "/days-until/thanksgiving" },
               { emoji: "💝", label: "Days Until Valentine's",  href: "/days-until/valentines-day" },
-              { emoji: "🏖️", label: "Days Until Summer",       href: "/days-until/summer" },
+              { emoji: "🏖️", label: "Days Until Summer",       href: "/days-until/summer-break" },
             ].map(({ emoji, label, href }) => (
               <Link
                 key={href}

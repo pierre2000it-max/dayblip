@@ -81,7 +81,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/zip-score",    0.9, WEEKLY),
     p("/countdown",    0.6, MONTHLY),
     p("/embed",                0.8),
-    p("/embed/for-educators",  0.7),
 
     // ═══════════════════════════════════════════════════════════════════════
     // CORE DATE & AGE TOOLS  (priority 0.9, weekly)
@@ -105,10 +104,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/days-until/independence-day",0.9, DAILY),
     p("/days-until/black-friday",    0.9, DAILY),
     p("/days-until/mothers-day",     0.9, DAILY),
-    p("/days-until/fathers-day",     0.85, WEEKLY),
-    p("/days-until/labor-day",       0.85, WEEKLY),
-    p("/days-until/memorial-day",    0.85, WEEKLY),
-    p("/days-until/new-years-eve",   0.85, WEEKLY),
 
     // ═══════════════════════════════════════════════════════════════════════
     // SPORTS COUNTDOWNS  (priority 0.8, weekly)
@@ -288,7 +283,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ═══════════════════════════════════════════════════════════════════════
     p("/curiosity/subscriptions",      0.85),
     p("/curiosity/latte-factor",       0.85),
-    p("/curiosity/smoking-investment", 0.85),
     p("/curiosity/dining-out",         0.85),
     p("/curiosity/lottery",            0.85),
     p("/curiosity/car-upgrade",        0.85),
@@ -349,7 +343,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/time-spent",          0.8),
     p("/day-of-year",         0.8),
     p("/week-number",         0.8),
-    p("/what-generation",     0.8),
 
     // ═══════════════════════════════════════════════════════════════════════
     // HISTORY & WORLD  (priority 0.8, monthly/weekly)

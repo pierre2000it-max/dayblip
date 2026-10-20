@@ -84,8 +84,8 @@ export async function generateMetadata({
   const data  = isNaN(year) ? null : bornInData.find((d) => d.year === year) ?? null;
 
   const title = data
-    ? `Born in ${label}? ${data.worldEvent} | What The World Was Like`
-    : `Born in ${label} | What Was The World Like?`;
+    ? `Born in ${label}? #1 Song, Gas Prices and World Events`
+    : `Born in ${label}: What Was the World Like?`;
   const desc  = (data && BORN_IN_DESCRIPTIONS[data.year])
     ?? `Discover what the world looked like in ${label}. The #1 song, top movies, gas prices and major events from the year you were born.`;
   const url   = `https://www.dayblip.com/born-in/${label}`;

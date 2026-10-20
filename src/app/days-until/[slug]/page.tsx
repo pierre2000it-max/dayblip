@@ -122,13 +122,13 @@ const HOLIDAY_META_DESCRIPTIONS: Record<string, string> = {
   "easter":
     "How many days until Easter 2027? Live countdown to Easter Sunday with exact days, hours, minutes and seconds remaining. Free tool.",
   "independence-day":
-    "How many days until Independence Day 2026? Live countdown to July 4 with exact days, hours, minutes and seconds remaining. Free.",
+    "How many days until Independence Day 2027? Live countdown to July 4 with exact days, hours, minutes and seconds remaining. Free.",
   "labor-day":
-    "How many days until Labor Day 2026? Live countdown to the first Monday in September with exact days, hours and minutes. Free tool.",
+    "How many days until Labor Day 2027? Live countdown to the first Monday in September with exact days, hours and minutes. Free tool.",
   "memorial-day":
-    "How many days until Memorial Day 2026? Live countdown to the last Monday in May with exact days, hours, minutes and seconds. Free.",
+    "How many days until Memorial Day 2027? Live countdown to the last Monday in May with exact days, hours, minutes and seconds. Free.",
   "fathers-day":
-    "How many days until Father's Day 2026? Live countdown to the third Sunday in June with exact days, hours, minutes and seconds. Free.",
+    "How many days until Father's Day 2027? Live countdown to the third Sunday in June with exact days, hours, minutes and seconds. Free.",
   "mothers-day":
     "How many days until Mother's Day 2027? Live countdown to the second Sunday in May with exact days, hours, minutes and seconds. Free.",
   "black-friday":
@@ -149,7 +149,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const holiday = holidays.find((h) => h.slug === params.slug);
   if (!holiday) return { title: "Not Found" };
-  const year = new Date().getFullYear();
+  // Label the page with the year of the next occurrence, so a holiday that already passed this year says next year.
+  const year = getNextHolidayDate(holiday.date).getFullYear();
   const title = HOLIDAY_TITLE_OVERRIDES[params.slug] ?? `Days Until ${holiday.name} ${year}`;
   const descriptionText = params.slug === "christmas"
     ? "How many days until Christmas 2026? Live countdown to December 25 showing exact days, hours, minutes and seconds remaining. Free — no signup required."

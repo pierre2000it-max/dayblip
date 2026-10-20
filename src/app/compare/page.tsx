@@ -125,7 +125,7 @@ export default function CompareHubPage() {
           Browse All Cities
         </h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', margin: '0 0 48px' }}>
-          {cities.map(city => (
+          {cities.filter(city => city.slug !== 'chicago').map(city => (
             <Link
               key={city.slug}
               href={`/compare/${city.slug}-vs-chicago`}
@@ -147,7 +147,7 @@ export default function CompareHubPage() {
           Browse All Jobs
         </h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', margin: '0 0 48px' }}>
-          {SALARY_DATA.map(entry => (
+          {SALARY_DATA.filter(entry => entry.slug !== 'nurse').map(entry => (
             <Link
               key={entry.slug}
               href={`/compare/${entry.slug}-vs-nurse`}
