@@ -150,7 +150,7 @@ export default function HowManyMondaysLeftPage() {
           </p>
 
           <p>
-            The total career earnings picture shifts too. At 35 with 1,500 Mondays left at median wages, total remaining career value is approximately $1.7 million gross. At 55 with 500 Mondays it is $572,500. Same wages. Different count.
+            The total career earnings picture shifts too. At 35 with 1,500 Mondays left at median wages, total remaining career value is approximately $1.88 million gross. At 55 with 500 Mondays it is $625,500. Same wages. Different count.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What Each Monday Is Worth</h2>
@@ -184,7 +184,7 @@ export default function HowManyMondaysLeftPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Buyback Calculation</h2>
 
           <p>
-            Every percentage point increase in savings rate buys back Mondays. Someone who saves aggressively enough to retire at 55 instead of 65 eliminates 500 Mondays from their mandatory total. At median wages that is roughly $572,500 in labor they no longer have to perform.
+            Every percentage point increase in savings rate buys back Mondays. Someone who saves aggressively enough to retire at 55 instead of 65 eliminates 500 Mondays from their mandatory total. At median wages that is roughly $625,500 in labor they no longer have to perform.
           </p>
 
           <p>
