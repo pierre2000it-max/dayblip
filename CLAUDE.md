@@ -137,7 +137,7 @@ Before writing a new article, grep src/app/blog for the topic to avoid a second 
 - 8ae20a7: OG image routes fixed (display flex, try/catch)
 
 ## Site Counts (as of June 13 2026)
-- Total URLs in sitemap: about 400 after the Oct 20 2026 indexing cleanup (was 1,422; verify by running sitemap.ts). Previously: 1,422 (verified Oct 13 2026 at 1,421, +1 for article 45 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
+- Total URLs in sitemap: 326 after the Oct 20 2026 indexing cleanup (verified by running sitemap.ts; was 1,422). Previously: 1,422 (verified Oct 13 2026 at 1,421, +1 for article 45 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
 - Total tool pages: 200+ (recounted Oct 10 2026: 209 interactive pages, ~200 after near-duplicates)
 - Blog articles: 45 (Oct 14 2026)
 - Embed tools: 25
