@@ -229,9 +229,7 @@ export default function AboutPage() {
           you&apos;d never seen before — that&apos;s the entire point. That&apos;s the thing I set out to build.
         </p>
         <p style={{ color: "#a8a8b3", fontSize: "16px", lineHeight: 1.8, margin: "0 0 20px 0" }}>
-          Every calculator and tool on Dayblip is free and always will be. Optional upgrades like custom
-          designs and exports are available for those who want them — but the tools themselves never cost
-          anything.
+          Every calculator and tool on Dayblip is free and always will be.
         </p>
 
         {/* Our Mission */}

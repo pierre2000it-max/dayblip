@@ -129,7 +129,7 @@ export default function MortgagePage() {
         <div className="mx-auto max-w-[800px] space-y-8">
           <AuthorByline variant="tool" />
           <Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Finance", href: "/finance" }, { label: "Mortgage Calculator" }]} />
-          <LastUpdated />
+          <LastUpdated date="October 2026" />
           <div className="grid gap-4 md:grid-cols-2">
             <label className="flex flex-col gap-1"><span className="text-sm font-semibold text-white">Home Price ($)</span>
               <input type="number" value={homePrice} onChange={e => setHomePrice(e.target.value)} className={inp} /></label>

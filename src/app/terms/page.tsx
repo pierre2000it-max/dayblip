@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.dayblip.com/terms",
   },
-  robots: { index: false, follow: false },
+  robots: { index: true, follow: true },
 };
 
 const SECTIONS = [
