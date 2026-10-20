@@ -19,39 +19,13 @@ export async function generateStaticParams() {
 
 type Props = { params: Promise<{ slug: string }> }
 
-// ─── INDEXING TIERS ───────────────────────────────────────────────────────────
-// Tier 1: high-demand jobs → index all 50 states
-// Tier 2: mid-demand jobs  → index top 20 states only
-// Tier 3: low-demand jobs  → noindex all 50 states
-
-const TIER_1_JOBS = new Set([
-  'nurse', 'registered-nurse', 'teacher', 'software-engineer',
-  'doctor', 'surgeon', 'lawyer', 'pharmacist', 'dentist',
-  'police-officer', 'firefighter', 'electrician', 'plumber', 'accountant',
-])
-
-const TIER_2_JOBS = new Set([
-  'truck-driver', 'project-manager', 'data-analyst', 'financial-advisor',
-  'physical-therapist', 'web-developer', 'cybersecurity-analyst', 'pilot',
-  'it-manager', 'marketing-manager', 'construction-manager',
-  'real-estate-agent', 'veterinarian',
-])
-
-const TIER_2_STATES = new Set([
-  'CA', 'NY', 'TX', 'FL', 'IL', 'WA', 'CO', 'MA', 'PA', 'GA',
-  'AZ', 'NJ', 'VA', 'OH', 'MI', 'NC', 'MN', 'MD', 'OR', 'TN',
-])
+// Oct 2026: all state pages are noindex. The old tier lists (14 Tier 1 jobs, 13 Tier 2 jobs,
+// top-20 states) are in git history at commit 0c219f3 for the revisit.
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params
-  const data = getSalaryBySlug(slug)
-  if (!data) return {}
-
-  const { entry, state } = data
-
-  // Oct 2026: all state pages are noindex until the state figures are verified
-  // against BLS OES. Old tiers (TIER_1_JOBS etc.) kept below for the revisit.
-  void entry; void state
+  if (!getSalaryBySlug(slug)) return {}
+  // Oct 2026: all state pages are noindex until the state figures are verified against BLS OES.
   return { robots: { index: false, follow: true } }
 }
 

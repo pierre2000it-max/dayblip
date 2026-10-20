@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import { cities, CityData } from '@/data/cost-of-living'
 import { SALARY_DATA, SalaryEntry, STATES } from '@/data/salary-data'
-import { INDEXED_CITY_PAIRS, INDEXED_JOB_PAIRS } from '@/data/compare-index'
 import { CitySelector, JobSelector } from './Selectors'
 import Breadcrumb from '@/components/Breadcrumb'
 import AuthorByline from '@/components/AuthorByline'
@@ -539,10 +538,6 @@ function JobComparison({ jobA, jobB, slug }: {
       </div>
     </main>
   )
-}
-
-function isIndexed(slug: string): boolean {
-  return INDEXED_CITY_PAIRS.has(slug) || INDEXED_JOB_PAIRS.has(slug)
 }
 
 export async function generateMetadata({ params }: Props) {
