@@ -114,8 +114,8 @@ Embed pages have noindex (intentional)
 Embed pages NOT in sitemap (intentional)
 Educator page: /embed/for-educators
 
-## Blog Status (as of Oct 20 2026)
-46 articles live (counted from src/app/blog directories; the old "21" figure was stale). Articles 38-41 (Oct 13 2026): self-employment-tax-2026, federal-tax-brackets-2026, when-to-claim-social-security, how-to-set-freelance-rate. Article 42 (Oct 13 2026): roth-vs-traditional-401k (all figures computed from tax2026.ts). Article 43 (Oct 13 2026): hsa-vs-401k (computed from tax2026.ts; HSA $1,000 catch-up at 55+ and the CA/NJ state-tax note are literals). Article 44 (Oct 13 2026): capital-gains-tax-2026 (computed from tax2026.ts; literals: NIIT 3.8% and $200,000 threshold, $3,000 loss limit, $250,000/$500,000 home-sale exclusion). Article 46 (Oct 20 2026): standard-deduction-vs-itemizing-2026 (computed from tax2026.ts and itemizing.ts; literals: 35% benefit cap above the 37% bracket start, $750,000 mortgage debt limit, the senior deduction and non-itemizer charity rules, all in itemizing.ts header). Article 45 (Oct 14 2026): is-my-salary-fair (computed from salaryFairness.ts and cost-of-living.ts, which is 2024 data: refresh it in January; literal: states with pay-range posting laws CO, CA, WA, NY).
+## Blog Status (as of Oct 21 2026)
+45 articles live (46 minus true-cost-of-commuting, merged into wfh-financial-value Oct 21 2026) (counted from src/app/blog directories; the old "21" figure was stale). Articles 38-41 (Oct 13 2026): self-employment-tax-2026, federal-tax-brackets-2026, when-to-claim-social-security, how-to-set-freelance-rate. Article 42 (Oct 13 2026): roth-vs-traditional-401k (all figures computed from tax2026.ts). Article 43 (Oct 13 2026): hsa-vs-401k (computed from tax2026.ts; HSA $1,000 catch-up at 55+ and the CA/NJ state-tax note are literals). Article 44 (Oct 13 2026): capital-gains-tax-2026 (computed from tax2026.ts; literals: NIIT 3.8% and $200,000 threshold, $3,000 loss limit, $250,000/$500,000 home-sale exclusion). Article 46 (Oct 20 2026): standard-deduction-vs-itemizing-2026 (computed from tax2026.ts and itemizing.ts; literals: 35% benefit cap above the 37% bracket start, $750,000 mortgage debt limit, the senior deduction and non-itemizer charity rules, all in itemizing.ts header). Article 45 (Oct 14 2026): is-my-salary-fair (computed from salaryFairness.ts and cost-of-living.ts, which is 2024 data: refresh it in January; literal: states with pay-range posting laws CO, CA, WA, NY).
 Target: 114 articles by June 2027.
 Remaining: 68 articles to write.
 Pace needed: about 2.1 articles per week.
@@ -124,6 +124,7 @@ Oct 13 2026: 4 overlapping pairs consolidated into one URL each, with 301s in ne
 - /blog/the-4-percent-rule -> /blog/what-is-the-4-percent-rule
 - /blog/rent-vs-buy-calculator -> /blog/renting-vs-buying-2026
 - /blog/minimum-payment-true-cost -> /blog/true-cost-of-minimum-payments
+- /blog/true-cost-of-commuting -> /blog/wfh-financial-value (Oct 21 2026)
 Before writing a new article, grep src/app/blog for the topic to avoid a second page on the same query.
 
 ## Key Recent Commits
@@ -137,9 +138,9 @@ Before writing a new article, grep src/app/blog for the topic to avoid a second 
 - 8ae20a7: OG image routes fixed (display flex, try/catch)
 
 ## Site Counts (as of June 13 2026)
-- Total URLs in sitemap: 324 (323 plus article 46 on Oct 20 2026) after the Oct 20 2026 indexing cleanup and crawl (every URL crawled locally: all 200, no title over 60, no description outside 120-155, canonical matches URL; was 1,422). Previously: 1,422 (verified Oct 13 2026 at 1,421, +1 for article 45 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
+- Total URLs in sitemap: 323 after the Oct 21 2026 commuting merge (was 324; 323 plus article 46 on Oct 20 2026) after the Oct 20 2026 indexing cleanup and crawl (every URL crawled locally: all 200, no title over 60, no description outside 120-155, canonical matches URL; was 1,422). Previously: 1,422 (verified Oct 13 2026 at 1,421, +1 for article 45 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
 - Total tool pages: 200+ (recounted Oct 10 2026: 209 interactive pages, ~200 after near-duplicates)
-- Blog articles: 46 (Oct 20 2026)
+- Blog articles: 45 (Oct 21 2026)
 - Embed tools: 25
 - Born-in pages: 81 (1940-2020)
 
@@ -465,3 +466,10 @@ After all updates:
 - Never skip layout.tsx with canonical on a new blog article
 - Never forget display: 'flex' on divs inside OG image routes
 - Never break the build — fix all TypeScript errors before pushing
+
+## Oct 21 2026 Blog Accuracy Audit
+Rule: every number in an article is either computed from a src/lib source (tax2026.ts, stateTax.ts, itemizing.ts), cited to a primary source with the year, or labeled as an assumption/illustration. No unsourced statistics, no invented first-person anecdotes.
+- Rewritten/recomputed: wfh-financial-value (computed model, IRS 72.5 cents/mile), how-to-compare-job-offers (computed from tax libs), moving-states-tax-savings (computed from stateTax.ts), cost-of-raising-a-child-2026 (CPI-adjusted USDA, Child Care Aware 2024, College Board 2025-26), no-tax-on-overtime-2026 (now law: OBBBA deduction, $12,500/$25,000 cap, W-2 Box 12 code TT), true-cost-of-student-loans (2026-27 rates 6.52/8.07/9.07), true-cost-of-smoking (investment math was wrong: $758,000 not $640,000).
+- Updated: true-cost-of-car-ownership (AAA 2026), true-cost-of-owning-a-pet (Rover 2026), how-much-does-a-wedding-cost, what-is-net-worth (2025 SCF median $215,900, mean $1.24M; age tables still 2022 and labeled), how-much-saved-by-age (2022 SCF labeled), how-to-build-emergency-fund and what-is-a-hysa (top HYSA ~4.25-4.35%, FDIC national avg ~0.38%, mid-Oct 2026), is-college-worth-it (College Board 2025-26 tuition and fees; salary ranges labeled illustrative), how-much-house-can-i-afford (removed unverified median price; Freddie Mac 7.40% on Oct 15 2026 noted), salary-negotiation-guide (3% raise gap $380,600; removed unsourced 55-60% stat), paycheck-by-state-2026 (Rev. Proc. 2025-32), how-to-read-your-w2 (overtime is Box 12 code TT).
+- Still open: first-person anecdotes in born-in-your-year need Pierre's confirmation; how-much-saved-by-age and what-is-net-worth age tables need the 2025 SCF release tables; salary-data.ts unverified; cost-of-living.ts is 2024 data.
+- January additions: refresh HYSA/FDIC rates, Freddie Mac rate, AAA/Rover/Knot/College Board figures, student loan rates (each June), overtime deduction rules if the law changes.

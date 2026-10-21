@@ -111,7 +111,7 @@ export default function SmokingCostPage() {
         webApplicationSchema("True Cost of Smoking Calculator", "Calculate the full financial cost of smoking including what your cigarette money could have been worth if invested instead.", "https://www.dayblip.com/tools/smoking-cost", "HealthApplication"),
         faqSchema([
           { question: "How much does smoking cost per year?", answer: "At $9.50 per pack and 10 cigarettes per day, smoking costs approximately $1,731 per year. Heavy smokers spending on a pack daily spend $3,468 or more annually." },
-          { question: "How much money would I save if I quit smoking?", answer: "A pack-a-day smoker quitting saves approximately $3,468 per year. Invested at 7% annual return, that becomes $47,000 after 10 years and $148,000 after 20 years." },
+          { question: "How much money would I save if I quit smoking?", answer: "A pack-a-day smoker quitting saves approximately $3,468 per year. Invested at 7% annual return, that becomes about $50,000 after 10 years and $150,500 after 20 years." },
           { question: "What is the lifetime cost of smoking?", answer: "A pack-a-day smoker from age 20 to 65 spends approximately $156,060 on cigarettes alone. If invested instead at 7% return that money would grow to over $1 million." },
         ]),
         howToSchema("How to Calculate True Cost of Smoking", "See the full lifetime cost of smoking", [
@@ -145,7 +145,7 @@ export default function SmokingCostPage() {
         <div className="mx-auto max-w-[700px]">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
-            <p className="text-[#e2e8f0]">A pack-a-day smoker at $9.50 per pack spends $3,468 per year on cigarettes. Over 20 years that is $69,360 spent. If invested instead at 7% annual return that money would grow to $193,000. A smoker from age 20 to 65 spends approximately $156,000 on cigarettes alone — over $600,000 in lost investment opportunity.</p>
+            <p className="text-[#e2e8f0]">A pack-a-day smoker at $9.50 per pack spends $3,468 per year on cigarettes. Over 20 years that is $69,360 spent. If invested instead at 7% annual return that money would grow to about $150,500. A smoker from age 20 to 65 spends approximately $156,000 on cigarettes alone, with more than $1 million in lost investment opportunity at 7%.</p>
           </div>
           <p className="mt-4 text-sm text-[#a8a8b3] leading-relaxed">The true cost of smoking includes the direct spending on cigarettes plus the compounding opportunity cost of that money not being invested. This calculator shows both the total amount spent and what that money would be worth today if invested instead. It also calculates the time cost of smoking — hours spent per year just on the act of smoking.</p>
         </div>

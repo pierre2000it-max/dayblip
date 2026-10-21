@@ -20,6 +20,7 @@ const nextConfig = {
       { source: "/blog/the-4-percent-rule", destination: "/blog/what-is-the-4-percent-rule", permanent: true },
       { source: "/blog/rent-vs-buy-calculator", destination: "/blog/renting-vs-buying-2026", permanent: true },
       { source: "/blog/minimum-payment-true-cost", destination: "/blog/true-cost-of-minimum-payments", permanent: true },
+      { source: "/blog/true-cost-of-commuting", destination: "/blog/wfh-financial-value", permanent: true },
       {
         source: "/:path*",
         has: [{ type: "host", value: "dayblip.com" }],

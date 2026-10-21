@@ -197,7 +197,7 @@ export default function HowToReadYourW2Page() {
           </div>
 
           <p>
-            New in 2026 per IRS instructions: Box 14 has been split into Box 14a and Box 14b. Employers now separately report overtime compensation in Box 14a to align with the 2025 OBBBA overtime deduction provisions.
+            New for 2026 wages: employers report qualified overtime compensation (the premium part of FLSA overtime, tied to the 2025 OBBBA overtime deduction) in Box 12 with code TT.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Box 13 and Box 14 — Checkboxes and Everything Else</h2>
@@ -207,7 +207,7 @@ export default function HowToReadYourW2Page() {
           </p>
 
           <p>
-            <strong className="text-white">Box 14a — Other:</strong> Employers report miscellaneous information here. Common items include union dues, educational assistance, state disability insurance premiums, and health insurance premiums. New in 2026: overtime pay deduction information must be reported separately here per updated IRS instructions.
+            <strong className="text-white">Box 14a — Other:</strong> Employers report miscellaneous information here. Common items include union dues, educational assistance, state disability insurance premiums, and health insurance premiums. Overtime now has its own place: Box 12, code TT, for 2026 wages.
           </p>
 
           <p>

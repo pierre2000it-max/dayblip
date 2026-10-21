@@ -31,7 +31,7 @@ const faqSchema = {
       name: "How much house can I afford on a $75,000 salary?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "At a $75,000 salary, the bank's 28% front-end DTI maximum allows approximately $1,750 per month in total housing costs (principal, interest, taxes, insurance). At 7% rate on a 30-year mortgage, after subtracting taxes and insurance, this supports a loan of approximately $199,000. With a 10% down payment, that is a home price of approximately $221,000. Financial planners typically recommend keeping housing at 25% of net take-home pay, which on a $75,000 salary is approximately $1,279 per month — supporting a loan of roughly $193,000.",
+        text: "At a $75,000 salary, the bank's 28% front-end DTI maximum allows approximately $1,750 per month in total housing costs (principal, interest, taxes, insurance). At 7% rate on a 30-year mortgage, after subtracting taxes and insurance, this supports a loan of approximately $199,000. With a 10% down payment, that is a home price of approximately $221,000. Financial planners typically recommend keeping housing at 25% of net take-home pay, which on a $75,000 salary is approximately $1,283 per month, which after the same taxes and insurance supports a loan of roughly $129,000.",
       },
     },
   ],
@@ -137,7 +137,7 @@ export default function HowMuchHouseCanIAffordPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What $1,750 Per Month Actually Buys at 7% in 2026</h2>
 
           <p>
-            Working backwards from the front-end DTI ceiling at a $75,000 salary, with the maximum PITI (principal, interest, taxes, insurance) at $1,750 per month:
+            Working backwards from the front-end DTI ceiling at a $75,000 salary, with the maximum PITI (principal, interest, taxes, insurance) at $1,750 per month. The table uses a 7% rate as a round example. Freddie Mac&apos;s weekly average for a 30-year fixed loan was 7.40% on October 15, 2026, so check today&apos;s rate before you rely on these figures:
           </p>
 
           <div className="bg-[#16213e] rounded-xl p-6 my-4 border border-[#2d3748] text-sm space-y-2">
@@ -151,13 +151,13 @@ export default function HowMuchHouseCanIAffordPage() {
           </div>
 
           <p>
-            The median US home price was $420,700 per St. Louis Federal Reserve data for Q1 2026. At this salary level, buying a median-priced home requires either a larger down payment, a dual income, or a salary higher than $75,000 in most markets.
+            Home prices in many US metros sit well above $249,000. At this salary level, buying a typical home in those markets requires either a larger down payment, a dual income, or a salary higher than $75,000 in most markets.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The 28% Rule vs Reality — A More Honest Framework</h2>
 
           <p>
-            The 28% front-end ratio is the bank&apos;s rule for their risk — not a recommendation for your financial life. The problem with 28% of gross is that it ignores taxes. At $75,000 gross, the take-home pay is approximately $61,390 in a no-income-tax state per 2026 IRS data — $5,116 per month net.
+            The 28% front-end ratio is the bank&apos;s rule for their risk — not a recommendation for your financial life. The problem with 28% of gross is that it ignores taxes. At $75,000 gross, the take-home pay is approximately $61,590 in a no-income-tax state under 2026 federal rules and FICA, which is about $5,130 per month net.
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-6">
@@ -171,8 +171,8 @@ export default function HowMuchHouseCanIAffordPage() {
               <tbody>
                 {[
                   { label: "28% of $75K gross (bank maximum)", amount: "$1,750" },
-                  { label: "28% of $5,116 net (actual take-home)", amount: "$1,432" },
-                  { label: "25% of $5,116 net (planner recommendation)", amount: "$1,279" },
+                  { label: "28% of $5,133 net (actual take-home)", amount: "$1,437" },
+                  { label: "25% of $5,133 net (planner recommendation)", amount: "$1,283" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.label}</td>

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.dayblip.com/blog/what-is-net-worth" },
   openGraph: {
     title: "What Is Net Worth and How to Calculate Yours",
-    description: "Median US household net worth was $192,700 per the Federal Reserve's 2022 survey. Here is how to calculate yours correctly.",
+    description: "Median US family net worth was $215,900 per the Federal Reserve's 2025 survey. Here is how to calculate yours correctly.",
     url: "https://www.dayblip.com/blog/what-is-net-worth",
   },
 }

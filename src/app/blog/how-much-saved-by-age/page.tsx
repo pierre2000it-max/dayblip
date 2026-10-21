@@ -113,7 +113,7 @@ export default function HowMuchSavedByAgePage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What the Federal Reserve Data Actually Shows</h2>
 
           <p>
-            The 2022 Survey of Consumer Finances provides the most comprehensive picture of where American families actually stand. For retirement accounts specifically — 401k, IRA, and similar — the median balances by age group were:
+            The Federal Reserve&apos;s 2022 Survey of Consumer Finances (the 2025 survey, released October 2026, had not published age tables at the time of writing) provides the most comprehensive picture of where American families actually stand. These figures are in 2022 dollars. For retirement accounts specifically — 401k, IRA, and similar — the median balances by age group were:
           </p>
 
           <p>

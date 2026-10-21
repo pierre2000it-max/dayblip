@@ -6,9 +6,9 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "How Much Does It Actually Cost to Raise a Child in 2026?",
-  "description": "The inflation-adjusted USDA estimate is approximately $310,000 from birth to 18 for a middle-income family. Housing is 29%. Childcare can run $17,836/year. The full breakdown.",
+  "description": "The inflation-adjusted USDA estimate is approximately $325,000 from birth to 18 for a middle-income family. Housing is 29%. The full breakdown.",
   "datePublished": "2026-07-05",
-  "dateModified": "2026-07-05",
+  "dateModified": "2026-10-21",
   "author": { "@type": "Organization", "name": "Dayblip", "url": "https://www.dayblip.com" },
   "publisher": { "@type": "Organization", "name": "Dayblip", "url": "https://www.dayblip.com" },
   "url": "https://www.dayblip.com/blog/cost-of-raising-a-child-2026",
@@ -24,7 +24,7 @@ const faqSchema = {
       "name": "How much does it cost to raise a child in 2026?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The last published USDA Expenditures on Children by Families report estimated $233,610 for a middle-income family from birth through age 17 (2015 dollars). Adjusted to 2026 dollars using BLS CPI data (approximately 33% cumulative inflation from 2015 to 2026) the figure reaches approximately $310,500. This does not include college costs.",
+        "text": "The last published USDA Expenditures on Children by Families report estimated $233,610 for a middle-income family from birth through age 17 (2015 dollars). Adjusted to 2026 dollars using BLS CPI-U data (233.707 in January 2015 and 325.252 in January 2026, a 39.2% increase) the figure reaches approximately $325,100. This does not include college costs.",
       },
     },
     {
@@ -32,7 +32,7 @@ const faqSchema = {
       "name": "What is the biggest single cost of raising a child?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Housing is the largest category at approximately 29% of total child-rearing costs per USDA methodology. The USDA calculates this as the marginal cost of child-related housing — the additional space required — rather than total housing cost. For a middle-income family this represents approximately $90,000 of the total across 18 years.",
+        "text": "Housing is the largest category at approximately 29% of total child-rearing costs per USDA methodology. The USDA calculates this as the marginal cost of child-related housing — the additional space required — rather than total housing cost. For a middle-income family this represents approximately $94,300 of the 2026-adjusted total across 18 years.",
       },
     },
     {
@@ -40,7 +40,7 @@ const faqSchema = {
       "name": "How much does childcare cost per year in 2026?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The national average cost of full-time center-based childcare for an infant is $17,836 per year per the Economic Policy Institute 2023 childcare cost data (the most recent comprehensive national survey). In high-cost metro areas including San Francisco, New York, and Boston annual infant childcare exceeds $25,000. This is typically the largest single line item for families with children under age 5.",
+        "text": "Child Care Aware of America reports a national average child care price of $13,128 for 2024, averaged across 49 states and Washington DC. Prices vary widely by state and by child age. Infant care at a center cost more than in-state public university tuition in 41 states and DC. Childcare is typically the largest single line item for families with children under age 5.",
       },
     },
   ],
@@ -79,21 +79,21 @@ export default function CostOfRaisingAChildPage() {
         </h1>
 
         <p className="text-[#a8a8b3] text-lg leading-relaxed mb-8">
-          The number most people quote is $233,610. That is from a 2015 government study. Adjusted for 2026 inflation the real figure is approximately $310,000 &mdash; and that still excludes college.
+          The number most people quote is $233,610. That is from a 2015 government study. Adjusted for inflation to 2026 the figure is approximately $325,000, and that still excludes college.
         </p>
 
         <section className="mb-10">
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              The USDA&rsquo;s Expenditures on Children by Families report &mdash; the most comprehensive government study of child-rearing costs in the US &mdash; put the figure at $233,610 for a middle-income two-parent family from birth through age 17 in 2015 dollars. Using BLS CPI data showing approximately 33% cumulative inflation from 2015 to 2026, the inflation-adjusted figure is approximately $310,500. The three largest categories: housing (29%, ~$90,000), food (18%, ~$56,000), and childcare/education (16%, ~$50,000). This does not include college tuition, which per College Board data adds $110,000&ndash;$240,000 for four years depending on institution type. Source: USDA ERS Report Number 1528 (2015 data, most recent published), BLS CPI Inflation Calculator.
+              The USDA&rsquo;s Expenditures on Children by Families report &mdash; the most comprehensive government study of child-rearing costs in the US &mdash; put the figure at $233,610 for a middle-income two-parent family from birth through age 17 in 2015 dollars. Using BLS CPI-U data (233.707 in January 2015, 325.252 in January 2026, a 39.2% increase), the inflation-adjusted figure is approximately $325,100. The three largest categories: housing (29%, ~$94,300), food (18%, ~$58,500), and childcare/education (16%, ~$52,000). This does not include college. College Board data puts 2025&ndash;26 tuition and fees alone at $11,950 a year at public four-year in-state schools and $45,000 at private nonprofit schools. Source: USDA ERS Report Number 1528 (2015 data), BLS CPI-U.
             </p>
           </div>
         </section>
 
         <div className="mb-8">
           <ShareButtons
-            text="The inflation-adjusted cost of raising a child to age 18 in 2026 is approximately $310,000 — not the $233,610 figure most people quote, which was from 2015. Housing alone is $90,000. Childcare can run $17,836/year:"
+            text="The inflation-adjusted cost of raising a child to age 18 in 2026 is approximately $325,000, not the $233,610 figure most people quote, which was from 2015. Housing alone is about $94,000:"
             url="https://www.dayblip.com/blog/cost-of-raising-a-child-2026"
             title="How Much Does It Actually Cost to Raise a Child in 2026?"
           />
@@ -108,7 +108,7 @@ export default function CostOfRaisingAChildPage() {
           </p>
 
           <p>
-            The USDA has not published an updated version since. That 2015 figure, quoted constantly, represents purchasing power from over a decade ago. The BLS CPI Calculator shows cumulative inflation from January 2015 to January 2026 of approximately 33.2%. Applied to $233,610:
+            We could not find a newer USDA report. That 2015 figure, quoted constantly, represents purchasing power from over a decade ago. BLS CPI-U rose from 233.707 in January 2015 to 325.252 in January 2026, a 39.2% increase. Applied to $233,610:
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-4">
@@ -122,9 +122,9 @@ export default function CostOfRaisingAChildPage() {
               <tbody>
                 {[
                   { label: "USDA original figure (2015 dollars)", amount: "$233,610" },
-                  { label: "CPI adjustment factor (Jan 2015 → Jan 2026)", amount: "× 1.332" },
-                  { label: "2026-adjusted estimate", amount: "~$311,169" },
-                  { label: "Rounded for presentation", amount: "~$310,000" },
+                  { label: "CPI-U adjustment factor (233.707 → 325.252)", amount: "× 1.392" },
+                  { label: "2026-adjusted estimate", amount: "~$325,117" },
+                  { label: "Rounded for presentation", amount: "~$325,100" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i === 3 ? "#1e2d4a" : i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.label}</td>
@@ -136,13 +136,13 @@ export default function CostOfRaisingAChildPage() {
           </div>
 
           <p className="text-sm text-[#a8a8b3]">
-            Sources: USDA ERS Report Number 1528 (Mark Lino et al., 2017), BLS CPI Inflation Calculator (data.bls.gov/cgi-bin/cpicalc.pl). Cross-check: Federal Reserve Bank of Minneapolis inflation calculator independently confirms ~33% cumulative CPI growth 2015&ndash;2026.
+            Sources: USDA ERS Report Number 1528 (Mark Lino et al., 2017); BLS Consumer Price Index release for January 2026 (index 325.252, up 2.4% from January 2025). The January 2015 CPI-U index was 233.707.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Annual Cost Broken Down by Category</h2>
 
           <p>
-            The $310,000 figure spans 18 years &mdash; birth through age 17. Annual average: approximately $17,222. But the annual figure is not uniform. Costs are highest in the infant and toddler years (childcare is the single largest line item for families with children under 5) and again in the teenage years (food, transportation, activities).
+            The $325,100 figure spans 18 years, birth through age 17. The annual average is approximately $18,062. The annual figure is not uniform. Childcare pushes costs up in the early years, and food, transportation and activities push them up again in the teenage years.
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-4">
@@ -156,13 +156,13 @@ export default function CostOfRaisingAChildPage() {
               </thead>
               <tbody>
                 {[
-                  { cat: "Housing (marginal cost)", pct: "29%", total: "~$89,900" },
-                  { cat: "Food", pct: "18%", total: "~$55,800" },
-                  { cat: "Childcare & education", pct: "16%", total: "~$49,600" },
-                  { cat: "Transportation", pct: "15%", total: "~$46,500" },
-                  { cat: "Healthcare", pct: "9%", total: "~$27,900" },
-                  { cat: "Clothing", pct: "6%", total: "~$18,600" },
-                  { cat: "Miscellaneous", pct: "7%", total: "~$21,700" },
+                  { cat: "Housing (marginal cost)", pct: "29%", total: "~$94,284" },
+                  { cat: "Food", pct: "18%", total: "~$58,521" },
+                  { cat: "Childcare & education", pct: "16%", total: "~$52,019" },
+                  { cat: "Transportation", pct: "15%", total: "~$48,768" },
+                  { cat: "Healthcare", pct: "9%", total: "~$29,261" },
+                  { cat: "Clothing", pct: "6%", total: "~$19,507" },
+                  { cat: "Miscellaneous", pct: "7%", total: "~$22,758" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.cat}</td>
@@ -175,55 +175,26 @@ export default function CostOfRaisingAChildPage() {
           </div>
 
           <p className="text-sm text-[#a8a8b3]">
-            Category percentages from USDA Report 1528. Dollar totals calculated by applying those percentages to the $310,000 CPI-adjusted figure.
+            Category percentages from USDA Report 1528. Dollar totals calculated by applying those percentages to the $325,117 CPI-adjusted figure.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Childcare Problem: Year Zero to Five</h2>
 
           <p>
-            The USDA category labeled &ldquo;childcare and education&rdquo; represents a 16% average across all 18 years. In years zero to four that average collapses and is replaced by something dramatically larger: full-time childcare.
-          </p>
+            The USDA category labeled &ldquo;childcare and education&rdquo; is a 16% average across all 18 years. In the early years it can be far larger, because full-time childcare is often the biggest line in the budget.</p>
 
           <p>
-            The Economic Policy Institute&rsquo;s 2023 childcare costs data &mdash; the most recent comprehensive national survey &mdash; shows average annual cost of full-time center-based childcare for an infant at $17,836. For a toddler (age 1&ndash;2), $15,417. For a 4-year-old, $12,280.
+            Child Care Aware of America reports a national average child care price of <strong className="text-white">$13,128 for 2024</strong>, averaged across 49 states and Washington DC. Prices differ widely by state, by child age and by type of care. Infant care at a center cost more than in-state public university tuition in 41 states and DC.
           </p>
-
-          <div className="rounded-xl border border-[#0f3460] overflow-hidden my-4">
-            <table className="w-full text-sm">
-              <thead>
-                <tr style={{ background: "#0f3460" }}>
-                  <th className="px-4 py-3 text-left text-[#a8a8b3] font-semibold">Age</th>
-                  <th className="px-4 py-3 text-right text-[#a8a8b3] font-semibold">Annual Childcare Cost (national avg.)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { age: "Infant (under 1)", cost: "$17,836" },
-                  { age: "Toddler (1–2)", cost: "$15,417" },
-                  { age: "Preschool (3–4)", cost: "$12,280" },
-                  { age: "School-age before/after care", cost: "$8,212" },
-                ].map((row, i) => (
-                  <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
-                    <td className="px-4 py-3 text-[#c9d1d9]">{row.age}</td>
-                    <td className="px-4 py-3 text-right font-semibold text-[#F9A825]">{row.cost}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
 
           <p className="text-sm text-[#a8a8b3]">
-            Source: Economic Policy Institute, &ldquo;Child Care Costs in the United States&rdquo; (October 2023). National averages for center-based care. State-level variation is significant: Massachusetts average infant care $28,354/year; Mississippi $6,552/year.
-          </p>
-
-          <p>
-            In high-cost metro areas the infant care figure exceeds $25,000 annually in San Francisco, New York City, Boston, Seattle, and Washington DC. For dual-income households paying full-market infant care rates in these cities, childcare alone can represent 20&ndash;30% of one parent&rsquo;s pre-tax income.
+            Source: Child Care Aware of America, Price Landscape 2024. Check your own state&rsquo;s price report for local figures.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">How Income Level Changes the Total</h2>
 
           <p>
-            The $310,000 figure represents the middle-income tier. The USDA calculates costs across three income bands. Applied to the 2026 CPI adjustment:
+            The $325,100 figure represents the middle-income tier. The USDA calculates costs across three income bands. Applied to the 2026 CPI adjustment:
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-4">
@@ -237,9 +208,9 @@ export default function CostOfRaisingAChildPage() {
               </thead>
               <tbody>
                 {[
-                  { band: "Low income (under $59,200/yr)", usda: "$174,690", adj: "~$232,688" },
-                  { band: "Middle income ($59,200–$107,400/yr)", usda: "$233,610", adj: "~$311,169" },
-                  { band: "High income (above $107,400/yr)", usda: "$372,210", adj: "~$495,584" },
+                  { band: "Low income (under $59,200/yr)", usda: "$174,690", adj: "~$243,118" },
+                  { band: "Middle income ($59,200–$107,400/yr)", usda: "$233,610", adj: "~$325,117" },
+                  { band: "High income (above $107,400/yr)", usda: "$372,210", adj: "~$518,008" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.band}</td>
@@ -252,7 +223,7 @@ export default function CostOfRaisingAChildPage() {
           </div>
 
           <p className="text-sm text-[#a8a8b3]">
-            2015 figures from USDA ERS Report Number 1528 Table ES1. 2026 estimates calculated using 1.332 CPI multiplier (BLS, Jan 2015 &rarr; Jan 2026).
+            2015 figures from USDA ERS Report Number 1528 Table ES1. 2026 estimates calculated with a 1.392 CPI-U multiplier (BLS, January 2015 &rarr; January 2026).
           </p>
 
           <p>
@@ -262,40 +233,38 @@ export default function CostOfRaisingAChildPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What the Number Does Not Include</h2>
 
           <p>
-            The $310,000 figure stops at age 17. It does not include:
+            The $325,100 figure stops at age 17. It does not include:
           </p>
 
           <p>
-            <strong className="text-white">College costs:</strong> Per the College Board&rsquo;s 2024&ndash;25 Trends in College Pricing report, average published tuition and fees plus room and board for four years total approximately $116,920 at a public four-year in-state institution and $239,120 at a private nonprofit four-year institution. These are before financial aid or scholarship offsets.
+            <strong className="text-white">College costs:</strong> The College Board&rsquo;s 2025&ndash;26 figures put average published tuition and fees at $11,950 a year at public four-year in-state schools ($47,800 over 4 years) and $45,000 a year at private nonprofit four-year schools ($180,000 over 4 years). Room and board are extra. These are before financial aid.
           </p>
 
           <p>
-            <strong className="text-white">Young adult support:</strong> Pew Research Center data (2024) shows 32% of adults aged 18&ndash;29 live with parents &mdash; the highest share since the 1940s. Many families continue providing some financial support through the mid-20s.
+            <strong className="text-white">Young adult support:</strong> Many families keep helping with housing, insurance or tuition into a child&rsquo;s 20s. None of that is in the USDA number.
           </p>
 
           <p>
-            <strong className="text-white">Lost income or career interruption:</strong> The Federal Reserve Bank of St. Louis has published research showing significant earnings reductions for parents &mdash; particularly mothers &mdash; following the birth of a first child. This indirect cost does not appear in any published child-rearing study but represents a real economic impact.
+            <strong className="text-white">Lost income or career interruption:</strong> Time out of work or reduced hours does not appear in the USDA estimate. For many families it is a real cost.
           </p>
 
           <p>
-            <strong className="text-white">Geographic variation:</strong> The USDA figures are national averages. Costs in high-cost metros (New York, San Francisco, Boston) can run 20&ndash;40% above the national figure. Costs in rural areas of low-cost states can run 20&ndash;30% below.
+            <strong className="text-white">Geographic variation:</strong> The USDA figures are national averages. Costs in high-cost metros run above them, and costs in low-cost areas run below them.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Per-Year and Per-Month Breakdown</h2>
 
           <p>
-            On the $310,000 middle-income estimate spread across 18 years:
+            On the $325,100 middle-income estimate spread across 18 years:
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-4">
             <table className="w-full text-sm">
               <tbody>
                 {[
-                  { label: "Total birth through 17", amount: "~$310,000" },
-                  { label: "Average per year", amount: "~$17,222" },
-                  { label: "Average per month", amount: "~$1,435" },
-                  { label: "Highest-cost phase: infant year (with childcare)", amount: "~$25,000–$30,000" },
-                  { label: "Lower-cost phase: ages 6–10 (school-age, no full-time childcare)", amount: "~$13,000–$15,000" },
+                  { label: "Total birth through 17", amount: "~$325,100" },
+                  { label: "Average per year", amount: "~$18,062" },
+                  { label: "Average per month", amount: "~$1,505" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: i > 0 ? "1px solid #1e2d4a" : undefined, background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.label}</td>
@@ -329,7 +298,7 @@ export default function CostOfRaisingAChildPage() {
         <div style={{ borderTop: "1px solid #2a3f5f", paddingTop: "32px", marginTop: "32px" }}>
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="The inflation-adjusted cost of raising a child to age 18 in 2026 is approximately $310,000 — not the $233,610 figure most people quote, which was from 2015. Housing alone is $90,000. Childcare can run $17,836/year:"
+            text="The inflation-adjusted cost of raising a child to age 18 in 2026 is approximately $325,000, not the $233,610 figure most people quote, which was from 2015. Housing alone is about $94,000:"
             url="https://www.dayblip.com/blog/cost-of-raising-a-child-2026"
             title="How Much Does It Actually Cost to Raise a Child in 2026?"
           />

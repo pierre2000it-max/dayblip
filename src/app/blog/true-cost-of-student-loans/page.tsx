@@ -6,7 +6,7 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "The True Cost of Student Loans — What You Actually Pay Back",
-  "description": "Federal undergraduate student loan rate for 2025-26 is 6.39% per the US Department of Education. A $30,000 loan at 6.39% on standard 10-year repayment costs $10,800 in interest and $40,800 total. Extended to 20 years: $53,280.",
+  "description": "Federal undergraduate student loan rate for 2026-27 is 6.52% per the US Department of Education. A $30,000 loan at 6.52% on standard 10-year repayment costs $10,914 in interest and $40,914 total. Extended to 20 years: $53,766.",
   "datePublished": "2026-07-25",
   "dateModified": "2026-07-25",
   "author": { "@type": "Organization", "name": "Dayblip", "url": "https://www.dayblip.com" },
@@ -21,10 +21,10 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What are federal student loan interest rates in 2025-2026?",
+      "name": "What are federal student loan interest rates in 2026-27?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Federal student loan interest rates for loans disbursed July 1 2025 through June 30 2026 per the US Department of Education are: 6.39% fixed for Direct Subsidized and Unsubsidized Loans for undergraduates 7.94% fixed for Direct Unsubsidized Loans for graduate students and 8.94% fixed for Direct PLUS Loans for parents and graduate students. Rates are fixed for the life of each loan and apply only to loans disbursed in that academic year.",
+        "text": "Federal student loan interest rates for loans first disbursed July 1 2026 through June 30 2027 per the US Department of Education are: 6.52% fixed for Direct Subsidized and Unsubsidized Loans for undergraduates 8.07% fixed for Direct Unsubsidized Loans for graduate students and 9.07% fixed for Direct PLUS Loans for parents (Grad PLUS closed to new borrowers on July 1 2026). Rates are fixed for the life of each loan and apply only to loans disbursed in that academic year.",
       },
     },
     {
@@ -32,7 +32,7 @@ const faqSchema = {
       "name": "How much interest do you pay on a $30,000 student loan?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A $30,000 federal student loan at the 2025-26 undergraduate rate of 6.39% on the standard 10-year repayment plan has a monthly payment of approximately $340 and total interest paid of approximately $10,800 meaning you repay approximately $40,800 on a $30,000 loan. Extended to a 20-year repayment term the monthly payment drops to approximately $222 but total interest paid increases to approximately $23,280 and total repaid becomes approximately $53,280.",
+        "text": "A $30,000 federal student loan at the 2026-27 undergraduate rate of 6.52% on the standard 10-year repayment plan has a monthly payment of approximately $341 and total interest paid of approximately $10,914 meaning you repay approximately $40,914 on a $30,000 loan. Extended to a 20-year repayment term the monthly payment drops to approximately $222 but total interest paid increases to approximately $23,766 and total repaid becomes approximately $53,766.",
       },
     },
     {
@@ -40,7 +40,7 @@ const faqSchema = {
       "name": "Is it better to pay off student loans quickly or use income-driven repayment?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The standard 10-year plan minimizes total interest paid. On a $30,000 loan at 6.39% the difference in total interest between 10-year and 20-year repayment is approximately $12,480. Income-driven repayment plans make sense primarily in two situations: when income is genuinely too low to afford standard payments in the early career years or when pursuing Public Service Loan Forgiveness where working in government or nonprofit for 10 years while making income-driven payments results in the remaining balance being forgiven.",
+        "text": "The standard 10-year plan minimizes total interest paid. On a $30,000 loan at 6.52% the difference in total interest between 10-year and 20-year repayment is approximately $12,852. Income-driven repayment plans make sense primarily in two situations: when income is genuinely too low to afford standard payments in the early career years or when pursuing Public Service Loan Forgiveness where working in government or nonprofit for 10 years while making income-driven payments results in the remaining balance being forgiven.",
       },
     },
   ],
@@ -86,14 +86,14 @@ export default function TrueCostOfStudentLoansPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              Federal student loan rates for loans disbursed July 1 2025 through June 30 2026 per the US Department of Education: 6.39% for undergraduate Direct Loans 7.94% for graduate Direct Unsubsidized Loans and 8.94% for PLUS Loans. On a $30,000 undergraduate loan at 6.39% on the standard 10-year repayment plan the monthly payment is approximately $340 and total interest paid is approximately $10,800 &mdash; meaning you repay $40,800 on a $30,000 loan. At $50,000 balance total interest on standard repayment is approximately $17,920. Extending to a 20-year income-driven term reduces monthly payments but significantly increases total interest paid &mdash; on the same $30,000 loan total interest grows to approximately $23,280.
+              Federal student loan rates for loans first disbursed July 1 2026 through June 30 2027 per the US Department of Education: 6.52% for undergraduate Direct Loans 8.07% for graduate Direct Unsubsidized Loans and 9.07% for PLUS Loans. On a $30,000 undergraduate loan at 6.52% on the standard 10-year repayment plan the monthly payment is approximately $341 and total interest paid is approximately $10,914 &mdash; meaning you repay $40,914 on a $30,000 loan. At $50,000 balance total interest on standard repayment is approximately $18,190. Extending to a 20-year income-driven term reduces monthly payments but significantly increases total interest paid &mdash; on the same $30,000 loan total interest grows to approximately $23,766.
             </p>
           </div>
         </section>
 
         <div className="mb-8">
           <ShareButtons
-            text="A $30,000 student loan at 6.39% (2025-26 federal rate) costs $10,800 in interest on standard 10-year repayment. Extended to 20 years: $23,280 in interest. At $50,000 the opportunity cost of those payments not invested adds $97,000+ in forgone growth. The full calculation:"
+            text="A $30,000 student loan at 6.52% (2026-27 federal rate) costs $10,914 in interest on standard 10-year repayment. Extended to 20 years: $23,766 in interest. At $50,000 the opportunity cost of those payments not invested adds $98,000 in forgone growth. The full calculation:"
             url="https://www.dayblip.com/blog/true-cost-of-student-loans"
             title="The True Cost of Student Loans — What You Actually Pay Back"
           />
@@ -111,29 +111,29 @@ export default function TrueCostOfStudentLoansPage() {
             Federal student loan rates are set annually by Congress based on the yield of the 10-year Treasury note from May plus a fixed add-on that depends on the loan type. The rates are fixed for the life of each loan. What you borrow at in your freshman year stays at that rate for the entire repayment period regardless of what rates do afterward.
           </p>
 
-          <p>For loans disbursed July 1 2025 through June 30 2026 per the US Department of Education:</p>
+          <p>For loans first disbursed July 1 2026 through June 30 2027 per the US Department of Education:</p>
 
-          <p><strong className="text-white">Direct Subsidized Loans for undergraduates:</strong> 6.39% fixed.</p>
-          <p><strong className="text-white">Direct Unsubsidized Loans for undergraduates:</strong> 6.39% fixed.</p>
-          <p><strong className="text-white">Direct Unsubsidized Loans for graduate or professional students:</strong> 7.94% fixed.</p>
-          <p><strong className="text-white">Direct PLUS Loans for parents and graduate students:</strong> 8.94% fixed.</p>
+          <p><strong className="text-white">Direct Subsidized Loans for undergraduates:</strong> 6.52% fixed.</p>
+          <p><strong className="text-white">Direct Unsubsidized Loans for undergraduates:</strong> 6.52% fixed.</p>
+          <p><strong className="text-white">Direct Unsubsidized Loans for graduate or professional students:</strong> 8.07% fixed.</p>
+          <p><strong className="text-white">Direct PLUS Loans for parents (Grad PLUS closed to new borrowers on July 1 2026):</strong> 9.07% fixed.</p>
 
           <p>
             One distinction that matters for undergraduates: subsidized loans do not accrue interest while you are enrolled at least half-time. Unsubsidized loans accrue interest from the day they are disbursed &mdash; even while you are still in school. Interest that accrues during enrollment capitalizes meaning it is added to the principal balance when repayment begins. A $10,000 unsubsidized loan taken out in freshman year may have a balance of $10,900 or more by the time payments start.
           </p>
 
           <p className="text-sm text-[#a8a8b3]">
-            Source: US Department of Education Federal Student Aid 2025-26 interest rate announcement.
+            Source: US Department of Education Federal Student Aid 2026-27 interest rate announcement.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What Common Balances Actually Cost to Repay</h2>
 
           <p>
-            All examples below use the standard 10-year repayment plan at the 2025&ndash;26 undergraduate rate of 6.39%.
+            All examples below use the standard 10-year repayment plan at the 2026&ndash;27 undergraduate rate of 6.52%.
           </p>
 
           <p className="text-sm text-[#a8a8b3]">
-            Monthly payment formula: P &times; (r &times; (1+r)^n) / ((1+r)^n &minus; 1) &mdash; Monthly rate r = 0.0639/12 = 0.005325 &mdash; n = 120 months for 10-year plan
+            Monthly payment formula: P &times; (r &times; (1+r)^n) / ((1+r)^n &minus; 1) &mdash; Monthly rate r = 0.0652/12 = 0.005433 &mdash; n = 120 months for 10-year plan
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-4">
@@ -148,10 +148,10 @@ export default function TrueCostOfStudentLoansPage() {
               </thead>
               <tbody>
                 {[
-                  { balance: "$20,000", payment: "~$227", interest: "$7,240", total: "$27,240" },
-                  { balance: "$30,000", payment: "~$340", interest: "$10,800", total: "$40,800" },
-                  { balance: "$50,000", payment: "~$566", interest: "$17,920", total: "$67,920" },
-                  { balance: "$100,000 (7.94%)", payment: "~$1,210", interest: "$45,200", total: "$145,200" },
+                  { balance: "$20,000", payment: "~$227", interest: "$7,276", total: "$27,276" },
+                  { balance: "$30,000", payment: "~$341", interest: "$10,914", total: "$40,914" },
+                  { balance: "$50,000", payment: "~$568", interest: "$18,190", total: "$68,190" },
+                  { balance: "$100,000 (8.07%)", payment: "~$1,217", interest: "$46,037", total: "$146,037" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9] font-semibold">{row.balance}</td>
@@ -171,10 +171,10 @@ export default function TrueCostOfStudentLoansPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">How Income-Driven Plans Change the Total Cost</h2>
 
           <p>
-            Income-driven repayment plans lower monthly payments by extending the repayment period. This is genuinely helpful when income is genuinely low. The trade-off is substantially more total interest paid over the life of the loan.
+            Longer repayment terms, including income-driven plans, lower monthly payments by stretching the repayment period. The 20-year row below is an illustration of the math at a fixed rate, not a specific federal plan. This is genuinely helpful when income is genuinely low. The trade-off is substantially more total interest paid over the life of the loan.
           </p>
 
-          <p>$30,000 at 6.39% &mdash; comparison by plan:</p>
+          <p>$30,000 at 6.52% &mdash; comparison by plan:</p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-4">
             <table className="w-full text-sm">
@@ -188,8 +188,8 @@ export default function TrueCostOfStudentLoansPage() {
               </thead>
               <tbody>
                 {[
-                  { plan: "Standard 10-year", payment: "$340", interest: "$10,800", total: "$40,800" },
-                  { plan: "Extended 20-year", payment: "~$222", interest: "~$23,280", total: "~$53,280" },
+                  { plan: "Standard 10-year", payment: "$341", interest: "$10,914", total: "$40,914" },
+                  { plan: "20-year term", payment: "~$224", interest: "~$23,766", total: "~$53,766" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.plan}</td>
@@ -203,7 +203,7 @@ export default function TrueCostOfStudentLoansPage() {
           </div>
 
           <p>
-            The difference: a $118 reduction in monthly payment costs $12,480 in additional lifetime interest &mdash; a 115% increase in interest cost to reduce the payment by about 35%.
+            The difference: a $117 reduction in monthly payment costs $12,852 in additional lifetime interest &mdash; a 118% increase in interest cost to reduce the payment by about 35%.
           </p>
 
           <p>
@@ -221,12 +221,12 @@ export default function TrueCostOfStudentLoansPage() {
           </p>
 
           <p>
-            The $340 monthly payment on a $30,000 loan over 10 years is not only $40,800 in repayment. It is also $340 per month that cannot go toward a Roth IRA a brokerage account or an emergency fund during the same ten years.
+            The $341 monthly payment on a $30,000 loan over 10 years is not only $40,914 in repayment. It is also $341 per month that cannot go toward a Roth IRA a brokerage account or an emergency fund during the same ten years.
           </p>
 
-          <p>$340 per month invested at 7% average annual return over 10 years grows to approximately $58,800.</p>
+          <p>$341 per month invested at 7% average annual return over 10 years grows to approximately $59,000.</p>
 
-          <p>At $50,000 in loans the $566 monthly payment over 10 years at 7% would have grown to approximately $98,000.</p>
+          <p>At $50,000 in loans the $568 monthly payment over 10 years at 7% would have grown to approximately $98,400.</p>
 
           <p>
             That is the opportunity cost: not the interest paid but the compound growth foregone on those payments during the repayment window.
@@ -263,7 +263,7 @@ export default function TrueCostOfStudentLoansPage() {
         <div style={{ borderTop: "1px solid #2a3f5f", paddingTop: "32px", marginTop: "32px" }}>
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="A $30,000 student loan at 6.39% (2025-26 federal rate) costs $10,800 in interest on standard 10-year repayment. Extended to 20 years: $23,280 in interest. At $50,000 the opportunity cost of those payments not invested adds $97,000+ in forgone growth. The full calculation:"
+            text="A $30,000 student loan at 6.52% (2026-27 federal rate) costs $10,914 in interest on standard 10-year repayment. Extended to 20 years: $23,766 in interest. At $50,000 the opportunity cost of those payments not invested adds $98,000 in forgone growth. The full calculation:"
             url="https://www.dayblip.com/blog/true-cost-of-student-loans"
             title="The True Cost of Student Loans — What You Actually Pay Back"
           />

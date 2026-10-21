@@ -6,7 +6,7 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "How to Build a 6-Month Emergency Fund — Step by Step",
-  description: "A fully-funded emergency fund covers 3 to 6 months of essential expenses. For the average American household that means $14,400 to $28,800, kept in a high-yield savings account earning 4.25-5.00% APY in 2026.",
+  description: "A fully-funded emergency fund covers 3 to 6 months of essential expenses. For a household with $4,600 of monthly essentials that means $13,800 to $27,600, kept in a high-yield savings account paying about 4.25% APY in October 2026.",
   url: "https://www.dayblip.com/blog/how-to-build-emergency-fund",
   datePublished: "2026-06-24",
   dateModified: "2026-10-13",
@@ -23,7 +23,7 @@ const faqSchema = {
       name: "How much should an emergency fund cover?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "An emergency fund should cover 3 to 6 months of essential expenses — not total income or total spending. Essential expenses include rent or mortgage, utilities, groceries, health insurance premiums, minimum debt payments, and transportation to work. For the average American household spending $4,800 per month on essentials, a 6-month fund equals $28,800.",
+        text: "An emergency fund should cover 3 to 6 months of essential expenses — not total income or total spending. Essential expenses include rent or mortgage, utilities, groceries, health insurance premiums, minimum debt payments, and transportation to work. For a household spending $4,600 per month on essentials (an example, not a national average), a 6-month fund equals $27,600.",
       },
     },
     {
@@ -31,7 +31,7 @@ const faqSchema = {
       name: "Where should I keep my emergency fund in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A high-yield savings account (HYSA) at an online bank is the right place for an emergency fund in 2026. Top HYSAs pay 4.25-5.00% APY compared to a national average savings rate of 0.37%. Both account types are FDIC-insured up to $250,000. The fund should not be in the stock market, CDs, or your checking account.",
+        text: "A high-yield savings account (HYSA) at an online bank is the right place for an emergency fund in 2026. Top HYSAs pay about 4.25% to 4.35% APY in October 2026 (some include short-term promotional boosts), compared to a national average savings rate of about 0.38% per the FDIC. Both account types are FDIC-insured up to $250,000. The fund should not be in the stock market, CDs, or your checking account.",
       },
     },
   ],
@@ -76,14 +76,14 @@ export default function HowToBuildEmergencyFundPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              A fully-funded emergency fund covers 3 to 6 months of essential expenses — not total income. For the average American household spending $4,800 per month on essentials, that means $14,400 for 3 months or $28,800 for 6 months. The fund belongs in a high-yield savings account earning 4.25-5.00% APY in 2026, not a traditional savings account paying the national average of 0.37%. The right target depends on your job stability, number of income sources, and whether you have dependents. Source: FDIC national savings rate average, Bankrate 2026.
+              A fully-funded emergency fund covers 3 to 6 months of essential expenses — not total income. For a household spending $4,600 per month on essentials (an example, not a national average), that means $13,800 for 3 months or $27,600 for 6 months. The fund belongs in a high-yield savings account paying about 4.25% APY in October 2026, not a traditional savings account paying the national average of about 0.38%. The right target depends on your job stability, number of income sources, and whether you have dependents. Rates move often: check current offers before you open an account.
             </p>
           </div>
         </section>
 
         <div className="mb-8">
           <ShareButtons
-            text="The average American needs $14,400-$28,800 in an emergency fund. In 2026 a HYSA earns 4.25-5.00% APY vs 0.37% at a traditional bank — a $1,000+ annual difference on a full fund. The step-by-step build plan: www.dayblip.com/blog/how-to-build-emergency-fund"
+            text="A household with $4,600 of monthly essentials needs $13,800-$27,600 in an emergency fund. In October 2026 a top HYSA pays about 4.25% APY vs about 0.38% at the average bank, a $1,000+ annual difference on a full fund. The step-by-step build plan: www.dayblip.com/blog/how-to-build-emergency-fund"
             url="https://www.dayblip.com/blog/how-to-build-emergency-fund"
             title="How to Build a 6-Month Emergency Fund — Step by Step"
           />
@@ -94,7 +94,7 @@ export default function HowToBuildEmergencyFundPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Why 3 Months Is Not Enough for Most People</h2>
 
           <p>
-            The standard advice is 3 to 6 months of expenses. For most people, the right number is 6 months — and the data explains why. Bureau of Labor Statistics data from 2025 shows the average duration of unemployment is 21.7 weeks. That is over 5 months for the average displaced worker before finding new employment.
+            The standard advice is 3 to 6 months of expenses. For most people, the right number is 6 months — and the data explains why. The Bureau of Labor Statistics reported that 27.1% of unemployed people in September 2026 had been out of work 27 weeks or longer, which is more than 6 months. A 6-month fund covers that tail; a 3-month fund does not.
           </p>
 
           <p>
@@ -146,17 +146,17 @@ export default function HowToBuildEmergencyFundPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Where to Keep an Emergency Fund in 2026</h2>
 
           <p>
-            The fund must meet three criteria: liquid (accessible within 1 to 2 days), safe (FDIC-insured up to $250,000), and earning a real return — not 0.37%. As of October 2026, top high-yield savings accounts pay 4.25 to 5.00% APY, and some of the highest rates are introductory. The national average savings account rate is 0.37%.
+            The fund must meet three criteria: liquid (accessible within 1 to 2 days), safe (FDIC-insured up to $250,000), and earning a real return, not 0.38%. As of October 2026, top high-yield savings accounts pay about 4.25% to 4.35% APY, and some of the highest rates are introductory. The national average savings account rate is about 0.38% per the FDIC.
           </p>
 
           <div className="bg-[#16213e] rounded-xl p-6 my-4 border border-[#2d3748] text-sm space-y-2">
-            <div className="flex justify-between"><span className="text-[#a8a8b3]">$27,600 fund at 0.37% APY</span><span className="text-[#FF6B6B] font-semibold">$102/year</span></div>
+            <div className="flex justify-between"><span className="text-[#a8a8b3]">$27,600 fund at 0.38% APY</span><span className="text-[#FF6B6B] font-semibold">$105/year</span></div>
             <div className="flex justify-between"><span className="text-[#a8a8b3]">$27,600 fund at 4.25% APY</span><span className="text-[#F9A825] font-semibold">$1,173/year</span></div>
-            <div className="flex justify-between border-t border-[#2d3748] pt-2"><span className="text-white font-bold">Annual difference</span><span className="text-[#e94560] font-bold text-base">$1,071/year</span></div>
+            <div className="flex justify-between border-t border-[#2d3748] pt-2"><span className="text-white font-bold">Annual difference</span><span className="text-[#e94560] font-bold text-base">$1,068/year</span></div>
           </div>
 
           <p>
-            That $1,071 annual difference requires no additional risk. Both account types are FDIC-insured up to $250,000 per depositor. Providers currently offering competitive rates include SoFi, Marcus by Goldman Sachs, Ally Bank, and American Express HYSA among others. Rates move with Federal Reserve policy decisions, so the specific rate available will vary over time.
+            That $1,068 annual difference requires no additional risk. Both account types are FDIC-insured up to $250,000 per depositor. Many online banks offer competitive rates, so compare current APYs and check for promotional boosts that expire. Rates move with Federal Reserve policy decisions, so the specific rate available will vary over time.
           </p>
 
           <p>
@@ -205,10 +205,10 @@ export default function HowToBuildEmergencyFundPage() {
               </thead>
               <tbody>
                 {[
-                  { amount: "$300/month", time: "~8 years" },
-                  { amount: "$500/month", time: "~4.5 years" },
-                  { amount: "$750/month", time: "~3 years" },
-                  { amount: "$1,000/month", time: "~2.3 years" },
+                  { amount: "$300/month", time: "~6.6 years" },
+                  { amount: "$500/month", time: "~4.2 years" },
+                  { amount: "$750/month", time: "~2.9 years" },
+                  { amount: "$1,000/month", time: "~2.2 years" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.amount}</td>
@@ -246,7 +246,7 @@ export default function HowToBuildEmergencyFundPage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="The average American needs $14,400-$28,800 in an emergency fund. In 2026 a HYSA earns 4.25-5.00% APY vs 0.37% at a traditional bank — a $1,000+ annual difference on a full fund. The step-by-step build plan: www.dayblip.com/blog/how-to-build-emergency-fund"
+            text="A household with $4,600 of monthly essentials needs $13,800-$27,600 in an emergency fund. In October 2026 a top HYSA pays about 4.25% APY vs about 0.38% at the average bank, a $1,000+ annual difference on a full fund. The step-by-step build plan: www.dayblip.com/blog/how-to-build-emergency-fund"
             url="https://www.dayblip.com/blog/how-to-build-emergency-fund"
             title="How to Build a 6-Month Emergency Fund — Step by Step"
           />

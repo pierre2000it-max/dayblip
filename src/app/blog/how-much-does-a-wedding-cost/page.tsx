@@ -6,9 +6,9 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "How Much Does a Wedding Actually Cost in 2026?",
-  "description": "The Knot's 2026 Real Weddings Study of 10,474 couples married in 2025 found the average wedding costs $34,200 at approximately $292 per guest. The median is closer to $20,000-$25,000. The full breakdown by category and region.",
+  "description": "The Knot's 2026 Real Weddings Study of 10,474 couples married in 2025 found the average wedding costs $34,200 at approximately $292 per guest. The full breakdown by category and planning tips.",
   "datePublished": "2026-07-25",
-  "dateModified": "2026-07-25",
+  "dateModified": "2026-10-21",
   "author": { "@type": "Organization", "name": "Dayblip", "url": "https://www.dayblip.com" },
   "publisher": { "@type": "Organization", "name": "Dayblip", "url": "https://www.dayblip.com" },
   "url": "https://www.dayblip.com/blog/how-much-does-a-wedding-cost",
@@ -24,7 +24,7 @@ const faqSchema = {
       "name": "How much does the average US wedding cost in 2026?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "According to The Knot's 2026 Real Weddings Study which surveyed 10,474 couples married in 2025 the average US wedding costs $34,200 at approximately $292 per guest. The median — the point where half of couples spend more and half spend less — is closer to $20,000 to $25,000 making it a more useful benchmark for most couples than the average which is pulled up by a smaller number of very expensive events.",
+        "text": "According to The Knot's 2026 Real Weddings Study which surveyed 10,474 couples married in 2025 the average US wedding costs $34,200 at approximately $292 per guest. The Knot reports it as an average, and averages are pulled up by expensive events, so many couples spend less. Treat $34,200 as a ceiling for a typical budget, not a target.",
       },
     },
     {
@@ -86,14 +86,14 @@ export default function HowMuchDoesAWeddingCostPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              According to The Knot&rsquo;s 2026 Real Weddings Study &mdash; which surveyed 10,474 US couples married in 2025 and is one of the most comprehensive annual wedding surveys conducted &mdash; the average US wedding costs $34,200 at approximately $292 per guest. The median cost is closer to $20,000 to $25,000 making it a more representative benchmark for most couples since the average is pulled up by a smaller number of very expensive events. Geography is the single largest driver of cost variation: the same 150-guest wedding can cost twice as much in a major northeastern city as in the Midwest or South. The venue is the largest individual expense representing approximately 28 to 32 percent of the total budget. The venue choice determines the catering minimum which together account for roughly 40 to 50 percent of total spend.
+              According to The Knot&rsquo;s 2026 Real Weddings Study &mdash; which surveyed 10,474 US couples married in 2025 and is one of the most comprehensive annual wedding surveys conducted &mdash; the average US wedding costs $34,200 at approximately $292 per guest. The average is pulled up by a smaller number of very expensive events, so many couples spend less. Geography is the single largest driver of cost variation: the same guest count can cost far more in a major city than in a smaller market. The venue is typically the largest single expense, and the venue choice often sets the catering minimum.
             </p>
           </div>
         </section>
 
         <div className="mb-8">
           <ShareButtons
-            text="The average US wedding costs $34,200 in 2026 per The Knot (10,474 couples surveyed). The median is closer to $20,000-$25,000. At $292/guest cutting 30 people saves ~$8,760. The venue is the single biggest cost driver. Full breakdown by category and region:"
+            text="The average US wedding costs $34,200 in 2026 per The Knot (10,474 couples surveyed). The Knot reports an average, so many couples spend less. At $292/guest cutting 30 people saves ~$8,760. The venue is the single biggest cost driver. Full breakdown by category and region:"
             url="https://www.dayblip.com/blog/how-much-does-a-wedding-cost"
             title="How Much Does a Wedding Actually Cost in 2026?"
           />
@@ -101,22 +101,18 @@ export default function HowMuchDoesAWeddingCostPage() {
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
 
-          <h2 className="text-white text-xl font-bold mt-8 mb-3">The Average vs the Median &mdash; Why One Number Matters More</h2>
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">What the $34,200 Average Does and Does Not Tell You</h2>
 
           <p>
             When The Knot reports that the average wedding costs $34,200 that number is accurate. It is also not the most useful number for most people planning a wedding.
           </p>
 
           <p>
-            The mean &mdash; the arithmetic average &mdash; is pulled upward by a relatively small number of very expensive events. A handful of $150,000 galas in Manhattan or $200,000 destination weddings in the Hamptons shift the national average considerably. The couples spending that amount are real but they are not representative of what most people actually spend.
+            An average is pulled upward by a small number of very expensive events, so many couples spend less than $34,200. The Knot&rsquo;s published headline is an average. It does not publish a median in the figures we reviewed, so we do not quote one.
           </p>
 
           <p>
-            The median &mdash; the point where exactly half of couples spend more and half spend less &mdash; tells a more useful story. Based on The Knot&rsquo;s 2026 data the median US wedding cost is closer to $20,000 to $25,000.
-          </p>
-
-          <p>
-            That is still a significant amount of money. But it is different from $34,200 and it is different from the six-figure numbers that appear in some wedding coverage.
+            Use the average as a ceiling for a typical budget and set your own number first. Your guest count, your region and your venue matter more than any national figure.
           </p>
 
           <p>
@@ -128,13 +124,13 @@ export default function HowMuchDoesAWeddingCostPage() {
           </p>
 
           <p className="text-sm text-[#a8a8b3]">
-            Source: The Knot 2026 Real Weddings Study. 10,474 couples married in 2025.
+            Source: The Knot 2026 Real Weddings Study, 10,474 couples married in 2025. Average $34,200, average 117 guests, about $292 per guest. The vendor price ranges further down are general planning ranges, not study results.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Where the Money Goes &mdash; The Six Biggest Cost Categories</h2>
 
           <p>
-            <strong className="text-white">Venue:</strong> The single largest expense in most wedding budgets representing 28 to 32 percent of total spend. Venue costs vary more dramatically by geography than any other category. A hotel ballroom in a major northeastern city can run $8,000 to $20,000 or more for the space rental alone. A barn venue outside a mid-size midwestern city might be $2,000 to $5,000. The most important financial advice about venues is also the simplest one: set the total budget before you tour a single venue. Once you tour a venue you fall in love with a price point and every subsequent decision gets more expensive to match it.
+            <strong className="text-white">Venue:</strong> The single largest expense in most wedding budgets and the one that varies most by region. A hotel ballroom in a major northeastern city can run $8,000 to $20,000 or more for the space rental alone. A barn venue outside a mid-size midwestern city might be $2,000 to $5,000. The most important financial advice about venues is also the simplest one: set the total budget before you tour a single venue. Once you tour a venue you fall in love with a price point and every subsequent decision gets more expensive to match it.
           </p>
 
           <p>
@@ -164,7 +160,7 @@ export default function HowMuchDoesAWeddingCostPage() {
           </p>
 
           <p>
-            A ballroom wedding for 150 guests in New York City can cost $80,000 to $100,000 or more. The same guest count the same food quality the same band in a mid-sized Midwestern city might cost $35,000 to $55,000.
+            A ballroom wedding for 150 guests in a major city can cost far more than the same guest count, food quality and band in a mid-sized city.
           </p>
 
           <p>
@@ -172,7 +168,7 @@ export default function HowMuchDoesAWeddingCostPage() {
           </p>
 
           <p>
-            Based on available regional data: Northeast and New England: average $46,000 to $48,000. South: approximately 15 to 20 percent below the national average. Midwest: approximately 20 to 25 percent below the national average.
+            The Knot reports regional averages in its study, so check its current regional breakdown for your area. Our vendor ranges in this section are general planning ranges that vary by market, not figures from the study.
           </p>
 
           <p>
@@ -228,7 +224,7 @@ export default function HowMuchDoesAWeddingCostPage() {
         <div style={{ borderTop: "1px solid #2a3f5f", paddingTop: "32px", marginTop: "32px" }}>
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="The average US wedding costs $34,200 in 2026 per The Knot (10,474 couples surveyed). The median is closer to $20,000-$25,000. At $292/guest cutting 30 people saves ~$8,760. The venue is the single biggest cost driver. Full breakdown by category and region:"
+            text="The average US wedding costs $34,200 in 2026 per The Knot (10,474 couples surveyed). The Knot reports an average, so many couples spend less. At $292/guest cutting 30 people saves ~$8,760. The venue is the single biggest cost driver. Full breakdown by category and region:"
             url="https://www.dayblip.com/blog/how-much-does-a-wedding-cost"
             title="How Much Does a Wedding Actually Cost in 2026?"
           />

@@ -1,6 +1,35 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
 import ShareButtons from "@/components/ShareButtons"
+import { STANDARD_DEDUCTION, federalTax, medicareTax, socialSecurityTax } from "@/lib/tax2026"
+import { stateIncomeTax } from "@/lib/stateTax"
+
+// The worked example is computed from the site's tax libraries (tax2026.ts, stateTax.ts)
+// and the IRS 2026 business mileage rate (72.5 cents per mile). Insurance, match and
+// commute inputs are stated assumptions.
+const usd = (n: number) => "$" + Math.round(n).toLocaleString("en-US")
+const takeHome = (gross: number, state: string) =>
+  gross -
+  federalTax(Math.max(0, gross - STANDARD_DEDUCTION.single), "single") -
+  socialSecurityTax(gross) -
+  medicareTax(gross) -
+  stateIncomeTax(state, gross, "single")
+const MILE_RATE = 0.725
+const A_GROSS = 90000
+const B_GROSS = 82000
+const A_NET = takeHome(A_GROSS, "CA")
+const B_NET = takeHome(B_GROSS, "TX")
+const CA_VS_TX = takeHome(A_GROSS, "TX") - A_NET
+const COMMUTE_COST = 40 * MILE_RATE * 250
+const HOURLY = A_GROSS / 2080
+const TIME_VALUE = 250 * HOURLY
+const A_INS = 8000
+const B_INS = 4000
+const A_MATCH = A_GROSS * 0.04
+const B_MATCH = B_GROSS * 0.03
+const A_REAL = A_NET - COMMUTE_COST - TIME_VALUE - A_INS + A_MATCH
+const B_REAL = B_NET - B_INS + B_MATCH
+const A_CASH = A_REAL + TIME_VALUE
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -24,7 +53,7 @@ const faqSchema = {
       "name": "What should I compare when evaluating two job offers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A complete job offer comparison should include: after-tax take-home pay in each state not gross salary since a $90,000 salary in California takes home approximately $7,800 less per year than the same salary in Texas, commute cost at the IRS 2026 mileage rate of $0.67 per mile plus the time value of commute hours, health insurance premium differences between plans which can vary by $3,000 to $7,000 per year, 401k match value which is guaranteed additional compensation, equity and bonus structure, and remote work flexibility value.",
+        "text": "A complete job offer comparison should include: after-tax take-home pay in each state not gross salary since a $90,000 salary in California takes home about $4,140 less per year than the same salary in Texas under 2026 rules, commute cost at the IRS 2026 mileage rate of 72.5 cents per mile plus the time value of commute hours, health insurance premium differences between plans, which can add up to thousands of dollars per year, 401k match value which is guaranteed additional compensation, equity and bonus structure, and remote work flexibility value.",
       },
     },
     {
@@ -40,7 +69,7 @@ const faqSchema = {
       "name": "How do I calculate the value of remote work when comparing job offers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Calculate vehicle commute cost using the IRS 2026 mileage rate of $0.67 per mile multiplied by your round-trip distance multiplied by approximately 250 work days per year. A 40-mile round trip costs approximately $6,700 per year in vehicle expenses. Add the time value of commute hours at your effective hourly rate. The combined financial value of remote work frequently exceeds $10,000 to $15,000 per year for average commuters.",
+        "text": "Calculate vehicle commute cost using the IRS 2026 mileage rate of 72.5 cents per mile multiplied by your round-trip distance multiplied by approximately 250 work days per year. A 40-mile round trip costs approximately $7,250 per year in vehicle expenses. Add the time value of commute hours at your effective hourly rate. For many commuters the combined financial value of remote work runs into five figures a year.",
       },
     },
   ],
@@ -86,7 +115,7 @@ export default function HowToCompareJobOffersPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              Comparing job offers by gross salary is the most common and costly mistake in career decision-making. A complete comparison requires six factors: after-tax take-home pay in each state (a $90,000 salary in California takes home approximately $7,800 less per year than the same salary in Texas due to state income tax), commute cost at the IRS 2026 mileage rate of $0.67 per mile plus the time value of commute hours, health insurance premium differences between the two plans which can vary by $3,000 to $7,000 per year, 401k match value (a 4% match on $75,000 is $3,000 in guaranteed annual compensation), equity and bonus structure, and remote versus in-office flexibility. A job paying $8,000 more in gross salary can be worth significantly less after these factors are properly accounted for.
+              Comparing job offers by gross salary is the most common and costly mistake in career decision-making. A complete comparison requires six factors: after-tax take-home pay in each state (a $90,000 salary in California takes home about $4,140 less per year than the same salary in Texas under 2026 rules due to state income tax), commute cost at the IRS 2026 mileage rate of 72.5 cents per mile plus the time value of commute hours, health insurance premium differences between the two plans, which can add up to thousands of dollars per year, 401k match value (a 4% match on $75,000 is $3,000 in guaranteed annual compensation), equity and bonus structure, and remote versus in-office flexibility. A job paying $8,000 more in gross salary can be worth significantly less after these factors are properly accounted for.
             </p>
           </div>
         </section>
@@ -120,19 +149,19 @@ export default function HowToCompareJobOffersPage() {
           <p>Here is what actually happens when you run the full calculation.</p>
 
           <p>
-            <strong className="text-white">After-tax take-home pay:</strong> A salary of $90,000 in California at a roughly 7.8% effective state rate produces approximately $63,700 in after-state-tax income. The same $90,000 gross in Texas &mdash; no state income tax &mdash; would produce approximately $67,500. Since Offer B is in Texas at $82,000 its after-state-tax income is approximately $61,600. So Offer A has slightly higher after-tax income than Offer B on the salary alone.
+            <strong className="text-white">After-tax take-home pay:</strong> Using 2026 federal rules, FICA and each state&apos;s tax for a single filer, {usd(A_GROSS)} in California leaves {usd(A_NET)} after tax. The same {usd(A_GROSS)} in Texas would leave {usd(takeHome(A_GROSS, "TX"))}, which is {usd(CA_VS_TX)} more. Offer B is in Texas at {usd(B_GROSS)} and leaves {usd(B_NET)}. So Offer A has {usd(A_NET - B_NET)} more take-home pay on salary alone.
           </p>
 
           <p>
-            <strong className="text-white">Commute cost on Offer A:</strong> 40 miles &times; $0.67 IRS rate &times; 250 days = $6,700 per year in vehicle costs. Commute time: 60 minutes round trip &times; 250 days = 250 hours per year. At $90,000 salary that is an effective hourly rate of approximately $43. 250 hours &times; $43 = $10,750 in time value. Total commute real cost: $17,450 per year.
+            <strong className="text-white">Commute cost on Offer A:</strong> 40 miles &times; 72.5 cents (IRS 2026 rate) &times; 250 days = {usd(COMMUTE_COST)} per year in vehicle costs. Commute time: 60 minutes round trip &times; 250 days = 250 hours per year. At {usd(A_GROSS)} a year that is an effective hourly rate of about {usd(HOURLY)}, so 250 hours is {usd(TIME_VALUE)} in time value. Time is not cash, so the table shows the result both ways.
           </p>
 
           <p>
-            <strong className="text-white">Health insurance premium difference:</strong> Assume the family plan costs $20,000 per year total. Offer A at 60% employer coverage: employee pays $8,000. Offer B at 80% employer coverage: employee pays $4,000. Advantage to Offer B: $4,000 per year.
+            <strong className="text-white">Health insurance premium difference:</strong> Assume the family plan costs $20,000 per year total. Offer A at 60% employer coverage: employee pays {usd(A_INS)}. Offer B at 80% employer coverage: employee pays {usd(B_INS)}. Advantage to Offer B: {usd(A_INS - B_INS)} per year.
           </p>
 
           <p>
-            <strong className="text-white">401k match value:</strong> Offer A: $90,000 &times; 4% = $3,600. Offer B: $82,000 &times; 3% = $2,460. Advantage to Offer A: $1,140.
+            <strong className="text-white">401k match value:</strong> Offer A: {usd(A_GROSS)} &times; 4% = {usd(A_MATCH)}. Offer B: {usd(B_GROSS)} &times; 3% = {usd(B_MATCH)}. Advantage to Offer A: {usd(A_MATCH - B_MATCH)}.
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-4">
@@ -146,17 +175,18 @@ export default function HowToCompareJobOffersPage() {
               </thead>
               <tbody>
                 {[
-                  { label: "After-tax income", a: "~$63,700", b: "~$61,600" },
-                  { label: "Commute cost", a: "−$6,700", b: "$0" },
-                  { label: "Commute time value", a: "−$10,750", b: "$0" },
-                  { label: "Employee insurance premium", a: "−$8,000", b: "−$4,000" },
-                  { label: "401k match", a: "+$3,600", b: "+$2,460" },
-                  { label: "Net real annual value", a: "~$43,250", b: "~$60,160" },
+                  { label: "After-tax income", a: usd(A_NET), b: usd(B_NET) },
+                  { label: "Commute cost", a: "−" + usd(COMMUTE_COST), b: "$0" },
+                  { label: "Employee insurance premium", a: "−" + usd(A_INS), b: "−" + usd(B_INS) },
+                  { label: "401k match", a: "+" + usd(A_MATCH), b: "+" + usd(B_MATCH) },
+                  { label: "Net value in cash terms", a: usd(A_CASH), b: usd(B_REAL) },
+                  { label: "Commute time value (250 hours)", a: "−" + usd(TIME_VALUE), b: "$0" },
+                  { label: "Net real annual value", a: usd(A_REAL), b: usd(B_REAL) },
                 ].map((row, i) => (
-                  <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i === 5 ? "#1e2d4a" : i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
+                  <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i === 6 || i === 4 ? "#1e2d4a" : i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.label}</td>
-                    <td className="px-4 py-3 text-right" style={{ color: i === 5 ? "#FF6B6B" : "#c9d1d9" }}>{row.a}</td>
-                    <td className="px-4 py-3 text-right font-semibold" style={{ color: i === 5 ? "#F9A825" : "#c9d1d9" }}>{row.b}</td>
+                    <td className="px-4 py-3 text-right" style={{ color: i === 6 ? "#FF6B6B" : "#c9d1d9" }}>{row.a}</td>
+                    <td className="px-4 py-3 text-right font-semibold" style={{ color: i === 6 ? "#F9A825" : "#c9d1d9" }}>{row.b}</td>
                   </tr>
                 ))}
               </tbody>
@@ -164,10 +194,10 @@ export default function HowToCompareJobOffersPage() {
           </div>
 
           <p>
-            Offer B &mdash; the one that pays $8,000 less &mdash; delivers approximately $16,900 more in real annual value.
+            Offer B, the one that pays {usd(A_GROSS - B_GROSS)} less, delivers about {usd(B_REAL - A_REAL)} more in real annual value. Without counting commute time at all, it still comes out {usd(B_REAL - A_CASH)} ahead.
           </p>
 
-          <p>The math is not close.</p>
+          <p>On these assumptions the gap is large. Change the inputs and the answer can flip, so run your own numbers.</p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Six Factors That Actually Determine Which Offer Pays More</h2>
 
@@ -176,7 +206,7 @@ export default function HowToCompareJobOffersPage() {
           </p>
 
           <p>
-            <strong className="text-white">2. Commute cost and time.</strong> Vehicle cost: miles &times; $0.67 IRS 2026 rate &times; 250 work days. This rate already accounts for fuel depreciation maintenance and insurance &mdash; it is not just gas. Time value: round-trip hours &times; your effective hourly rate. Most people dramatically underestimate how large this number is. An hour-per-day commute at a $75,000 effective hourly rate costs more than $9,000 in time value annually. That is real money that is not on any pay stub.
+            <strong className="text-white">2. Commute cost and time.</strong> Vehicle cost: miles &times; 72.5 cents (IRS 2026 rate) &times; 250 work days. This rate already accounts for fuel depreciation maintenance and insurance &mdash; it is not just gas. Time value: round-trip hours &times; your effective hourly rate. Most people dramatically underestimate how large this number is. An hour-per-day commute at a $75,000 effective hourly rate costs more than $9,000 in time value annually. That is real money that is not on any pay stub.
           </p>
 
           <p>

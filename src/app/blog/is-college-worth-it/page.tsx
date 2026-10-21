@@ -23,7 +23,7 @@ const faqSchema = {
       name: "Is college worth it financially in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "It depends heavily on the major. Georgetown University's Center on Education and the Workforce estimates a bachelor's degree produces a $1.2 million lifetime earnings premium on average over a high school diploma. But this average conceals enormous variation: engineering and CS degrees often deliver very high ROI, while some arts and humanities majors may not recoup tuition costs for decades. The average student debt for bachelor's graduates in 2023 was $29,400 (College Board). The right calculation compares the specific major's expected starting salary against the cost of the specific institution.",
+        text: "It depends heavily on the major. Research from Georgetown University's Center on Education and the Workforce and others generally finds a large lifetime earnings premium for a bachelor's degree, but the size depends on the study, the major and the year. The average conceals enormous variation: engineering and CS degrees often deliver very high ROI, while some arts and humanities majors may not recoup tuition costs for decades. The right calculation compares the specific major's expected starting salary against the cost of the specific institution.",
       },
     },
     {
@@ -76,14 +76,14 @@ export default function IsCollegeWorthItPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              Computer science bachelor&apos;s graduates start at <strong>$75,000–$100,000+</strong>. Coding bootcamp graduates typically start at <strong>$55,000–$70,000</strong>. Average student debt for bachelor&apos;s graduates: <strong>$29,400</strong> (College Board 2023). Georgetown CEW estimates a $1.2 million lifetime earnings premium for a bachelor&apos;s degree on average — but this average hides dramatic variation by major and institution. The ROI of college is a math problem, not a philosophy debate.
+              Computer science bachelor&apos;s graduates start at <strong>$75,000–$100,000+</strong>. Coding bootcamp graduates typically start at <strong>$55,000–$70,000</strong>. The salary figures here are illustrative ranges, not survey data. Research generally finds a large lifetime earnings premium for a bachelor&apos;s degree, but that average hides dramatic variation by major and institution. The ROI of college is a math problem, not a philosophy debate.
             </p>
           </div>
         </section>
 
         <div className="mb-8">
           <ShareButtons
-            text="CS degree: $75K–$100K+ starting. Bootcamp: $55K–$70K. Avg student debt: $29,400. Whether college is worth it is a math problem. Most people never run the numbers: www.dayblip.com/blog/is-college-worth-it"
+            text="CS degree: $75K–$100K+ starting. Bootcamp: $55K–$70K (illustrative ranges). Whether college is worth it is a math problem. Most people never run the numbers: www.dayblip.com/blog/is-college-worth-it"
             url="https://www.dayblip.com/blog/is-college-worth-it"
             title="Is College Worth It in 2026? The ROI Calculation Most People Never Run"
           />
@@ -94,7 +94,7 @@ export default function IsCollegeWorthItPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Cost Baseline — What College Actually Charges in 2026</h2>
 
           <p>
-            The College Board&apos;s 2023–24 Trends in College Pricing report puts the average published annual cost at:
+            The College Board&apos;s 2025-26 Trends in College Pricing report puts the average published annual tuition and fees at:
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-6">
@@ -102,16 +102,16 @@ export default function IsCollegeWorthItPage() {
               <thead>
                 <tr style={{ background: "#1e2d4a" }}>
                   <th className="text-left px-4 py-3 text-white font-semibold">Institution type</th>
-                  <th className="text-right px-4 py-3 text-white font-semibold">Avg annual cost</th>
+                  <th className="text-right px-4 py-3 text-white font-semibold">Avg tuition and fees</th>
                   <th className="text-right px-4 py-3 text-white font-semibold">4-year total</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  { type: "Private four-year", annual: "$58,600", total: "$234,400" },
-                  { type: "Public four-year (out-of-state)", annual: "$44,150", total: "$176,600" },
-                  { type: "Public four-year (in-state)", annual: "$28,840", total: "$115,360" },
-                  { type: "Community college (in-district)", annual: "$10,700", total: "$21,400 (2yr)" },
+                  { type: "Private nonprofit four-year", annual: "$45,000", total: "$180,000" },
+                  { type: "Public four-year (out-of-state)", annual: "$31,880", total: "$127,520" },
+                  { type: "Public four-year (in-state)", annual: "$11,950", total: "$47,800" },
+                  { type: "Community college (in-district)", annual: "$4,150", total: "$8,300 (2yr)" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.type}</td>
@@ -124,13 +124,13 @@ export default function IsCollegeWorthItPage() {
           </div>
 
           <p className="text-sm text-[#a8a8b3]">
-            Source: College Board, Trends in College Pricing 2023–24. Costs include tuition, fees, room, and board. Does not include opportunity cost (foregone income during enrollment).
+            Source: College Board, Trends in College Pricing 2025-26, average published tuition and fees. Room, board, books and transportation add thousands more per year. Does not include opportunity cost (foregone income during enrollment).
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">ROI by Major — Starting Salary vs. Cost</h2>
 
           <p>
-            The same four-year degree at the same tuition produces radically different ROI depending on the major. Georgetown University&apos;s Center on Education and the Workforce publishes major-by-major earnings data. The following ranges reflect median early-career earnings:
+            The same four-year degree at the same tuition produces radically different ROI depending on the major. Georgetown University&apos;s Center on Education and the Workforce publishes major-by-major earnings data. The following are illustrative, hand-set ranges for early-career pay, not published survey medians. Check current figures for your major and region:
           </p>
 
           <div className="rounded-xl border border-[#0f3460] overflow-hidden my-6">
@@ -162,13 +162,13 @@ export default function IsCollegeWorthItPage() {
           </div>
 
           <p className="text-sm text-[#a8a8b3]">
-            Debt payoff estimates assume $29,400 average debt at 5.5% on a standard 10-year repayment plan, adjusted proportionally by income. Source: Georgetown University Center on Education and the Workforce; College Board; National Center for Education Statistics.
+            Payoff estimates are rough illustrations. They assume a $29,400 balance at 5.5% on a standard 10-year plan, scaled by income, and are not drawn from a published dataset.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Coding Bootcamp vs. CS Degree: The Honest Comparison</h2>
 
           <p>
-            A coding bootcamp costs roughly $10,000–$20,000 and takes 3–6 months. A CS bachelor&apos;s degree costs $115,000–$235,000 over four years at in-state public vs. private tuition, plus four years of foregone income.
+            A coding bootcamp costs roughly $10,000–$20,000 and takes 3–6 months. A CS bachelor&apos;s degree costs roughly $48,000 to $180,000 in tuition and fees over four years at average in-state public vs. private nonprofit prices (College Board, 2025-26), before room and board and four years of foregone income.
           </p>
 
           <p>
@@ -178,7 +178,7 @@ export default function IsCollegeWorthItPage() {
           <div className="bg-[#16213e] rounded-xl p-6 my-4 border border-[#2d3748] text-sm">
             <div className="font-semibold text-white mb-3">Break-even comparison (in-state public CS degree vs. bootcamp)</div>
             <div className="space-y-2">
-              <div className="flex justify-between"><span className="text-[#a8a8b3]">CS degree: 4-year cost (in-state public)</span><span className="text-[#FF6B6B]">$115,000</span></div>
+              <div className="flex justify-between"><span className="text-[#a8a8b3]">CS degree: 4-year tuition and fees (in-state public)</span><span className="text-[#FF6B6B]">$47,800</span></div>
               <div className="flex justify-between"><span className="text-[#a8a8b3]">CS degree: foregone income (4y @ $35K)</span><span className="text-[#FF6B6B]">$140,000</span></div>
               <div className="flex justify-between"><span className="text-[#a8a8b3]">Bootcamp: cost</span><span className="text-[#FF6B6B]">$15,000</span></div>
               <div className="flex justify-between"><span className="text-[#a8a8b3]">Bootcamp: foregone income (6 months)</span><span className="text-[#FF6B6B]">$17,500</span></div>
@@ -194,11 +194,11 @@ export default function IsCollegeWorthItPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The $1.2 Million Lifetime Premium — And What It Hides</h2>
 
           <p>
-            Georgetown CEW&apos;s widely cited $1.2 million lifetime earnings premium for a bachelor&apos;s degree over a high school diploma is a real finding — but it is an average across all majors and all workers over a 40-year career. It includes high-earning engineers and doctors who significantly raise the average.
+            The lifetime earnings premium for a bachelor&apos;s degree over a high school diploma is a real finding in the research, but it is an average across all majors and all workers over a 40-year career. It includes high-earning engineers and doctors who significantly raise the average.
           </p>
 
           <p>
-            For specific low-ROI major / high-cost-institution combinations, the math does not support the investment at current tuition levels. A fine arts degree from a $58,600/year private institution, producing $38,000 in starting salary and $180,000 in debt, may not achieve a positive NPV in any reasonable timeframe compared to entering the workforce at 18 and investing the equivalent funds.
+            For specific low-ROI major / high-cost-institution combinations, the math does not support the investment at current tuition levels. A fine arts degree from a private institution with all-in costs near $60,000 a year, producing $38,000 in starting salary and $180,000 in debt, may not achieve a positive NPV in any reasonable timeframe compared to entering the workforce at 18 and investing the equivalent funds.
           </p>
 
           <p>
@@ -216,7 +216,7 @@ export default function IsCollegeWorthItPage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="CS degree: $75K–$100K+ starting. Bootcamp: $55K–$70K. Avg student debt: $29,400. Whether college is worth it is a math problem. Most people never run the numbers: www.dayblip.com/blog/is-college-worth-it"
+            text="CS degree: $75K–$100K+ starting. Bootcamp: $55K–$70K (illustrative ranges). Whether college is worth it is a math problem. Most people never run the numbers: www.dayblip.com/blog/is-college-worth-it"
             url="https://www.dayblip.com/blog/is-college-worth-it"
             title="Is College Worth It in 2026? The ROI Calculation Most People Never Run"
           />

@@ -129,7 +129,7 @@ export default function PaycheckByState2026Page() {
           </div>
 
           <p>
-            Sources: IRS Revenue Procedure 2025-28 (2026 federal brackets and standard deduction); SSA Fact Sheet 2026 (FICA rates). The $61,390 figure is the maximum possible take-home — achieved only in states with no income tax.
+            Sources: IRS Revenue Procedure 2025-32 (2026 federal brackets and standard deduction); SSA Fact Sheet 2026 (FICA rates). The $61,390 figure is the maximum possible take-home — achieved only in states with no income tax.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Nine No-Income-Tax States — $61,390 Take-Home</h2>
@@ -200,7 +200,7 @@ export default function PaycheckByState2026Page() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Methodology Note</h2>
 
           <p>
-            All figures use a $75,000 gross annual salary, single filing status, 2026 standard deduction ($16,100), no pre-tax deductions, no dependents. Federal brackets per IRS Revenue Procedure 2025-28. FICA per SSA Fact Sheet 2026. State income tax rates sourced from individual state revenue department publications and the Tax Foundation&apos;s 2026 State Individual Income Tax Rates and Brackets report. Local income taxes not included.
+            All figures use a $75,000 gross annual salary, single filing status, 2026 standard deduction ($16,100), no pre-tax deductions, no dependents. Federal brackets per IRS Revenue Procedure 2025-32. FICA per SSA Fact Sheet 2026. State income tax rates sourced from individual state revenue department publications and the Tax Foundation&apos;s 2026 State Individual Income Tax Rates and Brackets report. Local income taxes not included.
           </p>
 
           <div style={{ background: "#1e2d4a", borderRadius: "8px", padding: "20px", margin: "32px 0", textAlign: "center" }}>

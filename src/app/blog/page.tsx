@@ -48,7 +48,7 @@ const articles = [
     category: "Career",
     title: "The 10-Minute Conversation Most People Never Have — And What It Costs Them",
     excerpt:
-      "Between 55% and 60% of workers never negotiate their starting salary. Starting $8,000 below market compounds to a $300,000 career earnings gap.",
+      "Starting $8,000 below market compounds to a $380,000 pre-tax career earnings gap over 30 years at 3% raises.",
     readTime: "5 min read",
     href: "/blog/salary-negotiation-guide",
   },
@@ -72,7 +72,7 @@ const articles = [
     category: "Finance",
     title: "The Number Most Smokers Have Never Calculated",
     excerpt:
-      "Not the health cost. The financial one. A pack-a-day habit invested instead grows to $640,000 over 40 years. Most smokers have never seen that number.",
+      "Not the health cost. The financial one. A pack-a-day habit invested instead grows to $758,000 over 40 years. Most smokers have never seen that number.",
     readTime: "5 min read",
     href: "/blog/true-cost-of-smoking",
   },
@@ -88,7 +88,7 @@ const articles = [
     category: "Finance",
     title: "How Much Does It Actually Cost to Raise a Child in 2026?",
     excerpt:
-      "The inflation-adjusted USDA estimate is approximately $310,000 from birth to 18 for a middle-income family. Housing is 29%. Childcare can run $17,836/year. The full breakdown.",
+      "The inflation-adjusted USDA estimate is approximately $325,000 from birth to 18 for a middle-income family. Housing is 29%. The full breakdown.",
     readTime: "7 min read",
     href: "/blog/cost-of-raising-a-child-2026",
   },
@@ -120,7 +120,7 @@ const articles = [
     category: "Finance",
     title: "What Is Net Worth and Why the Number Most People Know Is Wrong",
     excerpt:
-      "The formula is simple: assets minus liabilities. The errors people make when applying it are consistent — and they compound. Median US household net worth was $192,700 per the Federal Reserve's 2022 survey.",
+      "The formula is simple: assets minus liabilities. The errors people make when applying it are consistent — and they compound. Median US family net worth was $215,900 per the Federal Reserve's 2025 survey.",
     readTime: "5 min read",
     href: "/blog/what-is-net-worth",
   },
@@ -152,7 +152,7 @@ const articles = [
     category: "Career",
     title: "The True Financial Value of Working From Home",
     excerpt:
-      "Remote work saves the average car commuter $12,317 per year in commute costs, work meals, clothing, and parking. Over 30 years invested at 7%, that difference is $1.2 million.",
+      "A car commuter can save about $12,700 a year on commute, meals, clothing and parking, using the IRS 2026 rate of 72.5 cents per mile. Every assumption is stated.",
     readTime: "5 min read",
     href: "/blog/wfh-financial-value",
   },
@@ -168,7 +168,7 @@ const articles = [
     category: "Finance",
     title: "The Tax Case for Moving States: What Relocating Actually Saves You",
     excerpt:
-      "Moving from California to Texas saves $4,285 per year on a $75,000 salary. Over 30 years at 7%, that gap compounds to $429,000. The break-even on a $7,000 move: under two years.",
+      "Moving from California to Texas saves about $2,800 a year in state income tax on a $75,000 salary. Over 30 years at a constant 7%, that grows to about $263,000. The move cost break-even is about 31 months.",
     readTime: "5 min read",
     href: "/blog/moving-states-tax-savings",
   },
@@ -184,7 +184,7 @@ const articles = [
     category: "Finance",
     title: "Is College Worth It in 2026? The ROI Calculation Most People Never Run",
     excerpt:
-      "CS degrees start at $75K–$100K+. Bootcamp graduates start at $55K–$70K. Average student debt: $29,400. Whether college is worth it is a math problem — here is how to run it.",
+      "CS degrees start at $75K–$100K+. Bootcamp graduates start at $55K–$70K. Whether college is worth it is a math problem — here is how to run it.",
     readTime: "6 min read",
     href: "/blog/is-college-worth-it",
   },
@@ -197,18 +197,10 @@ const articles = [
     href: "/blog/how-much-to-save-in-401k",
   },
   {
-    category: "Career",
-    title: "The True Cost of Your Commute in 2026: What AAA Data Shows",
-    excerpt:
-      "AAA estimates the average car commuter spends $8,466 per year on vehicle costs alone. Add 225 lost hours per year and the real annual cost of a 5-day commute tops $16,000.",
-    readTime: "5 min read",
-    href: "/blog/true-cost-of-commuting",
-  },
-  {
     category: "Finance",
     title: "How to Build a 6-Month Emergency Fund — Step by Step",
     excerpt:
-      "The average American household needs $14,400-$28,800. Where to keep it in 2026, how much to save monthly, and the exact step-by-step build plan.",
+      "A household with $4,600 of monthly essentials needs $13,800 to $27,600. Where to keep it in 2026, how much to save monthly, and the exact step-by-step build plan.",
     readTime: "6 min read",
     href: "/blog/how-to-build-emergency-fund",
   },
@@ -224,7 +216,7 @@ const articles = [
     category: "Finance",
     title: "What Is a HYSA and Should You Open One in 2026?",
     excerpt:
-      "Top HYSAs pay 4.25-5.00% APY vs 0.37% national average. On $20,000 that is about $826 more per year with identical risk.",
+      "Top HYSAs pay about 4.25% APY vs about 0.38% national average. On $20,000 that is about $774 more per year with identical risk.",
     readTime: "5 min read",
     href: "/blog/what-is-a-hysa",
   },
@@ -264,7 +256,7 @@ const articles = [
     category: "Finance",
     title: "The True Annual Cost of Owning a Dog or Cat in 2026",
     excerpt:
-      "Dog ownership costs $1,390–$5,295 per year and $34,550 over a lifetime per Rover 2025. Cat: $760–$3,495 per year. Vet fees rose 11% in 2025. The full breakdown by category.",
+      "An adult dog costs $1,930–$5,305 per year per Rover 2026, and about $34,550 over a lifetime. Vet fees rose 11% in 2025. The full breakdown by category.",
     readTime: "6 min read",
     href: "/blog/true-cost-of-owning-a-pet",
   },
@@ -280,7 +272,7 @@ const articles = [
     category: "Finance",
     title: "How Much Does a Wedding Actually Cost in 2026?",
     excerpt:
-      "The average US wedding costs $34,200 per The Knot 2026 study of 10,474 couples. The median is closer to $20,000–$25,000. At $292 per guest cutting 30 people saves $8,760.",
+      "The average US wedding costs $34,200 per The Knot 2026 study of 10,474 couples. Averages run high, so many couples spend less. At $292 per guest cutting 30 people saves $8,760.",
     readTime: "6 min read",
     href: "/blog/how-much-does-a-wedding-cost",
   },

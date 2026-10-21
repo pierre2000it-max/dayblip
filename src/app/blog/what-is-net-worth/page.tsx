@@ -49,7 +49,7 @@ export default function WhatIsNetWorthPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              Net worth = total assets minus total liabilities. The median US household net worth was $192,700 as of the Federal Reserve&apos;s 2022 Survey of Consumer Finances. The mean was $1,059,470 — pulled dramatically upward by high-wealth households. Median is the number that describes where most people actually are.
+              Net worth = total assets minus total liabilities. The median US family net worth was $215,900 in the Federal Reserve&apos;s 2025 Survey of Consumer Finances, released October 9, 2026. The mean was about $1.24 million, pulled dramatically upward by high-wealth households. Median is the number that describes where most people actually are.
             </p>
           </div>
         </section>
@@ -103,11 +103,11 @@ export default function WhatIsNetWorthPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What the Federal Reserve Data Shows</h2>
 
           <p>
-            The Federal Reserve&apos;s Survey of Consumer Finances, published every three years, provides the most comprehensive picture of American household wealth. The 2022 survey found median family net worth of $192,700 — up from $121,700 in 2019, largely driven by home equity appreciation and retirement account growth.
+            The Federal Reserve&apos;s Survey of Consumer Finances, published every three years, provides the most comprehensive picture of American household wealth. The 2025 survey, released October 9, 2026, found median family net worth of $215,900, up 2% from 2022 after adjusting for inflation. The mean rose 7% to about $1.24 million, which shows how much the top of the distribution pulls the average away from the typical family.
           </p>
 
           <p>
-            Broken down by age, the median figures show a clear trajectory. Families under 35 had median net worth of $39,000. Ages 35–44: $135,300. Ages 45–54: $247,200. Ages 55–64: $364,500. Ages 65–74: $409,900. Ages 75 and older: $335,600.
+            Broken down by age, the median figures show a clear trajectory. The age breakdown below comes from the earlier 2022 survey (in 2022 dollars), because the Fed had not published the 2025 age tables at the time of writing. Families under 35 had median net worth of $39,000. Ages 35–44: $135,300. Ages 45–54: $247,200. Ages 55–64: $364,500. Ages 65–74: $409,900. Ages 75 and older: $335,600.
           </p>
 
           <p>

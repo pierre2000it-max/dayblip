@@ -6,7 +6,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "The Number Most Smokers Have Never Calculated",
-  description: "A pack-a-day habit invested at 7% grows to $640,000 over 40 years.",
+  description: "A pack-a-day habit invested at 7% grows to $758,000 over 40 years.",
   url: "https://www.dayblip.com/blog/true-cost-of-smoking",
   datePublished: "2026-06-07",
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
@@ -46,7 +46,7 @@ export default function TrueCostOfSmokingPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              A pack-a-day smoker at $9.50 per pack spends $3,468 per year on cigarettes. Invested at 7% annual return over 40 years that money grows to $640,000. The habit also costs approximately 608 hours per year — 25 full days — spent in the act of smoking.
+              A pack-a-day smoker at $9.50 per pack spends $3,468 per year on cigarettes. Invested at 7% annual return over 40 years that money grows to $758,000. The habit also costs approximately 608 hours per year — 25 full days — spent in the act of smoking.
             </p>
           </div>
         </section>
@@ -54,7 +54,7 @@ export default function TrueCostOfSmokingPage() {
         {/* Share — Location 1: above article */}
         <div className="mb-8">
           <ShareButtons
-            text="A pack-a-day smoking habit invested instead at 7% return grows to $640,000 over 40 years. Calculate the full financial cost: www.dayblip.com/tools/smoking-cost"
+            text="A pack-a-day smoking habit invested instead at 7% return grows to $758,000 over 40 years. Calculate the full financial cost: www.dayblip.com/tools/smoking-cost"
             url="https://www.dayblip.com/blog/true-cost-of-smoking"
             title="The Financial Cost of Smoking"
           />
@@ -72,7 +72,7 @@ export default function TrueCostOfSmokingPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Baseline Number</h2>
 
           <p>
-            The national average price of a pack of cigarettes in the United States is approximately $9.50 as of 2024, with significant variation by state. New York averages $12.85 per pack. Missouri averages $7.05. A pack-a-day smoker spends:
+            This article uses $9.50 a pack as a round example. Published 2026 state averages range from about $8 in Missouri to about $15 in New York (World Population Review, January 2026 data), so your own number will differ. A pack-a-day smoker at $9.50 spends:
           </p>
 
           <div className="bg-[#16213e] rounded-xl p-6 my-4 border border-[#2d3748]">
@@ -102,7 +102,7 @@ export default function TrueCostOfSmokingPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What That Money Does If Invested Instead</h2>
 
           <p>
-            The $289 per month spent on cigarettes, invested instead in a broadly diversified index fund earning 7% average annual return:
+            The $289 per month spent on cigarettes, invested instead in a broadly diversified index fund earning a constant 7% a year, compounded monthly (an assumption, not a forecast):
           </p>
 
           <div className="bg-[#16213e] rounded-xl p-6 my-4 border border-[#2d3748]">
@@ -116,10 +116,10 @@ export default function TrueCostOfSmokingPage() {
               </thead>
               <tbody>
                 {[
-                  ["10 years", "$34,680", "$49,800"],
-                  ["20 years", "$69,360", "$161,800"],
-                  ["30 years", "$104,040", "$348,600"],
-                  ["40 years", "$138,720", "$640,000"],
+                  ["10 years", "$34,680", "$50,000"],
+                  ["20 years", "$69,360", "$150,500"],
+                  ["30 years", "$104,040", "$352,500"],
+                  ["40 years", "$138,720", "$758,500"],
                 ].map(([period, spent, invested]) => (
                   <tr key={period} className="border-b border-[#2d3748]/50">
                     <td className="text-white py-2">{period}</td>
@@ -132,7 +132,7 @@ export default function TrueCostOfSmokingPage() {
           </div>
 
           <p>
-            $640,000 from a pack-a-day habit, invested at 7% over 40 years. Most smokers have never seen this number. Not because they are avoiding it — because nobody has presented it to them. The conversation about smoking almost always ends at health consequences. The financial calculation is sitting there, waiting to be run.
+            $758,000 from a pack-a-day habit, invested at 7% over 40 years. Most smokers have never seen this number. Not because they are avoiding it — because nobody has presented it to them. The conversation about smoking almost always ends at health consequences. The financial calculation is sitting there, waiting to be run.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Time Cost</h2>
@@ -158,7 +158,7 @@ export default function TrueCostOfSmokingPage() {
           </p>
 
           <p>
-            The point is that the financial cost of the habit is almost never presented clearly, and people make better decisions with better information. A $640,000 opportunity cost over 40 years deserves to be part of the conversation — alongside the health consequences that receive far more attention.
+            The point is that the financial cost of the habit is almost never presented clearly, and people make better decisions with better information. A $758,000 opportunity cost over 40 years deserves to be part of the conversation — alongside the health consequences that receive far more attention.
           </p>
 
           <p>
@@ -171,7 +171,7 @@ export default function TrueCostOfSmokingPage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="A pack-a-day smoking habit invested instead at 7% return grows to $640,000 over 40 years. Calculate the full financial cost: www.dayblip.com/tools/smoking-cost"
+            text="A pack-a-day smoking habit invested instead at 7% return grows to $758,000 over 40 years. Calculate the full financial cost: www.dayblip.com/tools/smoking-cost"
             url="https://www.dayblip.com/blog/true-cost-of-smoking"
             title="The Financial Cost of Smoking"
           />

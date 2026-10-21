@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.dayblip.com/blog/how-to-build-emergency-fund" },
   openGraph: {
     title: "How to Build a 6-Month Emergency Fund — Step by Step",
-    description: "The average American household needs $14,400-$28,800. Where to keep it in 2026, how much to save monthly, and the exact build plan.",
+    description: "A household with $4,600 of monthly essentials needs $13,800 to $27,600. Where to keep it in 2026, how much to save monthly, and the build plan.",
     url: "https://www.dayblip.com/blog/how-to-build-emergency-fund",
   },
 }

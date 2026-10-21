@@ -6,7 +6,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "The 10-Minute Conversation Most People Never Have — And What It Costs Them",
-  description: "Starting $8,000 below market rate compounds to a $300,000 career earnings gap over 30 years.",
+  description: "Starting $8,000 below market rate compounds to a $380,000 pre-tax career earnings gap over 30 years at 3% raises.",
   url: "https://www.dayblip.com/blog/salary-negotiation-guide",
   datePublished: "2026-06-07",
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
@@ -46,7 +46,7 @@ export default function SalaryNegotiationGuidePage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              Starting a job $8,000 below market rate and accepting the same annual raises as a properly paid peer produces a career earnings gap of $300,000 to $400,000 over 30 years. Virtually no legitimate job offers are rescinded due to reasonable salary negotiation.
+              Starting a job $8,000 below market rate and accepting the same annual raises as a properly paid peer produces a pre-tax career earnings gap of about $380,000 over 30 years, assuming 3% annual raises. A polite, specific counteroffer rarely costs you the job, though no one can promise it never will.
             </p>
           </div>
         </section>
@@ -54,7 +54,7 @@ export default function SalaryNegotiationGuidePage() {
         {/* Share — Location 1: above article */}
         <div className="mb-8">
           <ShareButtons
-            text="55-60% of workers never negotiate their first salary. Starting $8,000 below market costs $300,000 over a career. Get your negotiation script: www.dayblip.com/tools/salary-negotiation"
+            text="Starting $8,000 below market costs about $380,000 in pre-tax pay over a 30-year career at 3% raises. Get your negotiation script: www.dayblip.com/tools/salary-negotiation"
             url="https://www.dayblip.com/blog/salary-negotiation-guide"
             title="How to Negotiate Your Salary — And Why Most People Never Do"
           />
@@ -62,7 +62,7 @@ export default function SalaryNegotiationGuidePage() {
 
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
           <p>
-            The average person accepts the first salary offer they receive. Not always — but most of the time. Research from Salary.com and hiring surveys consistently finds that between 55% and 60% of workers do not negotiate their starting salary. Of those who do negotiate, most accept the first counter-offer.
+            The average person accepts the first salary offer they receive. Not always — but most of the time. Many workers never negotiate their starting salary, and plenty of those who do stop at the first counteroffer.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">How the Gap Compounds</h2>
@@ -84,10 +84,10 @@ export default function SalaryNegotiationGuidePage() {
               <tbody>
                 {[
                   ["Year 1", "$72,000", "$80,000", "$8,000"],
-                  ["Year 10", "$94,200", "$104,700", "$10,500"],
-                  ["Year 20", "$126,500", "$140,600", "$14,100"],
-                  ["Year 30", "$169,800", "$188,700", "$18,900"],
-                  ["Cumulative gap", "—", "—", "~$340,000"],
+                  ["Year 10", "$93,944", "$104,382", "$10,438"],
+                  ["Year 20", "$126,252", "$140,280", "$14,028"],
+                  ["Year 30", "$169,673", "$188,525", "$18,853"],
+                  ["Cumulative gap", "—", "—", "~$380,600"],
                 ].map(([yr, a, b, gap]) => (
                   <tr key={yr} className="border-b border-[#2d3748]/50">
                     <td className="text-[#a8a8b3] py-2">{yr}</td>
@@ -101,7 +101,7 @@ export default function SalaryNegotiationGuidePage() {
           </div>
 
           <p>
-            This figure does not include the compounding effect on retirement savings. If both save 10% of income, the higher earner is contributing more to their portfolio every year. Including investment returns on that difference, the total lifetime wealth gap from a single negotiation can exceed $500,000.
+            This figure does not include the compounding effect on retirement savings. If both save 10% of income, the higher earner is contributing more to their portfolio every year. Invested, that difference grows the gap further.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Why Most People Do Not Negotiate</h2>
@@ -145,7 +145,7 @@ export default function SalaryNegotiationGuidePage() {
           </p>
 
           <p>
-            The reason not to negotiate is anxiety. The reason to negotiate is $300,000 in career earnings. Use the calculator below to see the current market rate for your specific role and location — having the actual number is the first step toward having the conversation.
+            The reason not to negotiate is anxiety. The reason to negotiate is about $380,000 in career pre-tax earnings. Use the calculator below to see the current market rate for your specific role and location — having the actual number is the first step toward having the conversation.
           </p>
         </article>
 
@@ -154,7 +154,7 @@ export default function SalaryNegotiationGuidePage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="55-60% of workers never negotiate their first salary. Starting $8,000 below market costs $300,000 over a career. Get your negotiation script: www.dayblip.com/tools/salary-negotiation"
+            text="Starting $8,000 below market costs about $380,000 in pre-tax pay over a 30-year career at 3% raises. Get your negotiation script: www.dayblip.com/tools/salary-negotiation"
             url="https://www.dayblip.com/blog/salary-negotiation-guide"
             title="How to Negotiate Your Salary — And Why Most People Never Do"
           />

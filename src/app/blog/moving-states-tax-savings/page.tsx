@@ -1,15 +1,36 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
 import ShareButtons from "@/components/ShareButtons"
+import { stateIncomeTax } from "@/lib/stateTax"
+
+// All state-tax figures are computed from src/lib/stateTax.ts (single filer, standard deduction).
+const SALARY = 75000
+const MOVE_COST = 7000 // assumption, not a national average
+const FV_FACTOR = (Math.pow(1.07, 30) - 1) / 0.07
+const usd = (n: number) => "$" + Math.round(n).toLocaleString("en-US")
+const tax = (st: string) => stateIncomeTax(st, SALARY, "single")
+const CA = tax("CA")
+const OR = tax("OR")
+const HI = tax("HI")
+const CA_FV = CA * FV_FACTOR
+const CA_MONTHS = Math.ceil((MOVE_COST / CA) * 12)
+const ROWS = [
+  { from: "Oregon", st: "OR", to: "Washington / Texas / Florida" },
+  { from: "Hawaii", st: "HI", to: "Florida / Texas / WY" },
+  { from: "Minnesota", st: "MN", to: "South Dakota / WY" },
+  { from: "Illinois", st: "IL", to: "Florida / Texas" },
+  { from: "New York", st: "NY", to: "Florida / Texas" },
+  { from: "California", st: "CA", to: "Texas / Nevada / WY" },
+].map((r) => ({ ...r, save: tax(r.st), future: tax(r.st) * FV_FACTOR }))
 
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "The Tax Case for Moving States: What Relocating Actually Saves You",
-  description: "Moving from California to Texas saves $4,285 per year on a $75,000 salary. Over 30 years at 7%, that gap compounds to $429,000.",
+  description: `Moving from California to Texas saves ${usd(CA)} a year in state income tax on a $75,000 salary. Invested at 7% for 30 years, that grows to ${usd(CA_FV)}.`,
   url: "https://www.dayblip.com/blog/moving-states-tax-savings",
   datePublished: "2026-06-13",
-  dateModified: "2026-06-13",
+  dateModified: "2026-10-21",
   author: { "@type": "Organization", name: "Dayblip" },
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
 }
@@ -23,7 +44,7 @@ const faqSchema = {
       name: "How much do you save by moving from California to Texas?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "On a $75,000 salary, moving from California to Texas saves approximately $4,285 per year in state income tax. California taxes wages above $66,295 at 9.3%. Texas has no state income tax. The break-even point on a $7,000 move cost is under two years. Over 30 years invested at 7%, the annual savings compound to approximately $429,000.",
+        text: `On a $75,000 salary and a single filer with the standard deduction, moving from California to Texas saves about ${usd(CA)} per year in state income tax. Texas has no state income tax. On an assumed $7,000 move cost, the break-even is about ${CA_MONTHS} months. Over 30 years invested at a constant 7%, the annual savings would grow to about ${usd(CA_FV)}, an illustration rather than a forecast.`,
       },
     },
     {
@@ -76,14 +97,14 @@ export default function MovingStatesTaxSavingsPage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              Moving from California to Texas on a $75,000 salary saves <strong>$4,285 per year</strong> in state income tax. Oregon to Wyoming: $4,099/year. Hawaii to Florida: $4,418/year. A typical $7,000 move cost breaks even in under two years. Invested at 7% over 30 years, the California-to-Texas savings compounds to approximately <strong>$429,000</strong>.
+              Moving from California to Texas on a $75,000 salary saves <strong>{usd(CA)} per year</strong> in state income tax (single filer, 2026 rules). Oregon to Washington saves {usd(OR)}, and Hawaii to Florida saves {usd(HI)}. An assumed $7,000 move breaks even in about {CA_MONTHS} months for California to Texas. Invested at a constant 7% for 30 years, the California-to-Texas savings would grow to about <strong>{usd(CA_FV)}</strong>.
             </p>
           </div>
         </section>
 
         <div className="mb-8">
           <ShareButtons
-            text="Moving CA → TX saves $4,285/year on a $75K salary. That compounds to $429K over 30 years. The break-even on a $7K move: under 2 years. Full breakdown: www.dayblip.com/blog/moving-states-tax-savings"
+            text={`Moving CA → TX saves about ${usd(CA)}/year in state tax on a $75K salary. Invested at 7% for 30 years that is about ${usd(CA_FV)}. Full breakdown: www.dayblip.com/blog/moving-states-tax-savings`}
             url="https://www.dayblip.com/blog/moving-states-tax-savings"
             title="The Tax Case for Moving States: What Relocating Actually Saves You"
           />
@@ -108,19 +129,12 @@ export default function MovingStatesTaxSavingsPage() {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  { from: "Hawaii", to: "Florida / Texas / WY", save: "$4,418", future: "~$418,000" },
-                  { from: "California", to: "Texas / Nevada / WY", save: "$4,285", future: "~$405,000" },
-                  { from: "Oregon", to: "Wyoming / Washington", save: "$4,099", future: "~$387,000" },
-                  { from: "New Jersey", to: "Florida / Tennessee", save: "$3,582", future: "~$338,000" },
-                  { from: "Minnesota", to: "South Dakota / WY", save: "$3,532", future: "~$334,000" },
-                  { from: "Iowa", to: "Texas / Florida", save: "$2,740", future: "~$259,000" },
-                ].map((row, i) => (
+                {ROWS.map((row, i) => (
                   <tr key={i} style={{ borderTop: "1px solid #1e2d4a", background: i % 2 === 0 ? "#16213e" : "#1a1a2e" }}>
                     <td className="px-4 py-3 text-[#c9d1d9]">{row.from}</td>
                     <td className="px-4 py-3 text-[#a8a8b3]">{row.to}</td>
-                    <td className="px-4 py-3 text-right text-[#F9A825] font-semibold">{row.save}</td>
-                    <td className="px-4 py-3 text-right text-[#4FC3F7]">{row.future}</td>
+                    <td className="px-4 py-3 text-right text-[#F9A825] font-semibold">{usd(row.save)}</td>
+                    <td className="px-4 py-3 text-right text-[#4FC3F7]">~{usd(Math.round(row.future / 1000) * 1000)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -128,32 +142,32 @@ export default function MovingStatesTaxSavingsPage() {
           </div>
 
           <p className="text-sm text-[#a8a8b3]">
-            Methodology: $75,000 gross salary, single filer, 2026 standard deduction ($16,100). Federal tax identical in all cases. State tax per Tax Foundation 2026 individual income tax data and state revenue department publications. 30-year figure uses FV = annual savings × ((1.07³⁰ − 1)/0.07).
+            Methodology: $75,000 gross salary, single filer, 2026 standard deduction ($16,100). Federal tax identical in all cases. State tax computed from DayblipState tax is computed from Dayblip&apos;s 2026 state tax tables (standard deduction only; credits and local taxes not included).apos;s 2026 state tax tables (standard deduction only; credits and local taxes not included). 30-year figure uses FV = annual savings × ((1.07³⁰ − 1)/0.07).
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">California to Texas: The Numbers in Detail</h2>
 
           <p>
-            California taxes income above $66,295 at 9.3% in 2026 (for single filers; Source: California Franchise Tax Board). On $75,000, a California resident pays approximately $4,285 in state income tax. A Texas resident on the same salary pays $0. That difference is $357 per month.
+            On $75,000, a California resident filing as single with the standard deduction pays about {usd(CA)} in state income tax under the site&apos;s 2026 state tax tables. A Texas resident on the same salary pays $0. That difference is about {usd(CA / 12)} per month. California&apos;s top brackets are steep, but at this income most of the salary falls in the lower and middle brackets, which is why the saving is smaller than many headlines suggest.
           </p>
 
           <p>
-            The average cost to move within the contiguous US runs roughly $5,000–$8,000 for a one-bedroom (Source: American Moving and Storage Association). At $7,000 average move cost and $4,285/year in savings, the break-even point is 1.6 years — or about 20 months. Every year after that is net positive.
+            Move costs vary widely with distance, home size and whether an employer pays. This article assumes $7,000 as a round figure, so substitute your own quote. At {usd(MOVE_COST)} and {usd(CA)} a year in savings, the break-even point is {(MOVE_COST / CA).toFixed(1)} years, or about {CA_MONTHS} months. Every year after that is a net positive, before cost-of-living differences.
           </p>
 
           <div className="bg-[#16213e] rounded-xl p-6 my-4 border border-[#2d3748] text-sm space-y-2">
             <div className="font-semibold text-white mb-3">CA → TX break-even analysis ($75,000 salary)</div>
-            <div className="flex justify-between"><span className="text-[#a8a8b3]">Annual state income tax savings</span><span className="text-[#F9A825] font-semibold">$4,285</span></div>
-            <div className="flex justify-between"><span className="text-[#a8a8b3]">Estimated move cost</span><span className="text-[#FF6B6B]">$7,000</span></div>
-            <div className="flex justify-between border-t border-[#2d3748] pt-2"><span className="text-[#a8a8b3]">Break-even point</span><span className="text-white font-semibold">~20 months</span></div>
-            <div className="flex justify-between"><span className="text-[#a8a8b3]">Cumulative savings at year 5</span><span className="text-[#F9A825] font-semibold">$14,425</span></div>
-            <div className="flex justify-between"><span className="text-white font-bold">Invested 30y at 7%</span><span className="text-[#4FC3F7] font-bold">~$429,000</span></div>
+            <div className="flex justify-between"><span className="text-[#a8a8b3]">Annual state income tax savings</span><span className="text-[#F9A825] font-semibold">{usd(CA)}</span></div>
+            <div className="flex justify-between"><span className="text-[#a8a8b3]">Assumed move cost</span><span className="text-[#FF6B6B]">{usd(MOVE_COST)}</span></div>
+            <div className="flex justify-between border-t border-[#2d3748] pt-2"><span className="text-[#a8a8b3]">Break-even point</span><span className="text-white font-semibold">~{CA_MONTHS} months</span></div>
+            <div className="flex justify-between"><span className="text-[#a8a8b3]">Cumulative savings at year 5</span><span className="text-[#F9A825] font-semibold">{usd(CA * 5)}</span></div>
+            <div className="flex justify-between"><span className="text-white font-bold">Invested 30y at 7%</span><span className="text-[#4FC3F7] font-bold">~{usd(Math.round(CA_FV / 1000) * 1000)}</span></div>
           </div>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Cost-of-Living Caveat</h2>
 
           <p>
-            Tax savings are only one part of the equation. Moving to a no-tax state in a high-cost metro can eliminate the savings entirely. Austin, Texas median home prices have risen from $300,000 in 2019 to over $530,000 in 2025 (Source: Austin Board of Realtors). The rent premium in Austin versus Sacramento, for example, may partially or fully offset the $4,285 tax saving at moderate income levels.
+            Tax savings are only one part of the equation. Moving to a no-tax state in a high-cost metro can shrink the savings or erase them. A rent or mortgage difference of a few hundred dollars a month is the same size as the tax saving. Compare housing in the specific cities you are weighing, not state averages, and run the numbers before you commit.
           </p>
 
           <p>
@@ -167,15 +181,15 @@ export default function MovingStatesTaxSavingsPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What the 30-Year Compounding Number Actually Means</h2>
 
           <p>
-            The $429,000 figure for California-to-Texas at 7% assumes the annual $4,285 tax saving is invested consistently each year. It does not assume a lump-sum investment. The formula is a standard future value of an annuity:
+            The {usd(Math.round(CA_FV / 1000) * 1000)} figure for California-to-Texas at 7% assumes the annual {usd(CA)} tax saving is invested consistently each year. It does not assume a lump-sum investment. The formula is a standard future value of an annuity:
           </p>
 
           <p className="bg-[#16213e] rounded-lg p-4 font-mono text-sm text-[#4FC3F7]">
-            FV = $4,285 × ((1.07³⁰ − 1) / 0.07) = $4,285 × 94.46 = $404,962 ≈ $405,000
+            FV = {usd(CA)} × ((1.07³⁰ − 1) / 0.07) = {usd(CA)} × {FV_FACTOR.toFixed(2)} ≈ {usd(Math.round(CA_FV / 1000) * 1000)}
           </p>
 
           <p>
-            The 7% return is consistent with long-run historical S&P 500 returns inflation-adjusted over 30-year windows (Source: FRED, Federal Reserve Bank of St. Louis). Individual results vary. This is illustrative; consult a financial advisor before making relocation decisions based on investment projections.
+            A constant 7% a year is an assumption, not a forecast. Real returns vary year to year and can be negative. This is illustrative; consult a financial advisor before making relocation decisions based on investment projections.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">Tax Residency Rules: What Counts as Leaving</h2>
@@ -195,7 +209,7 @@ export default function MovingStatesTaxSavingsPage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="Moving CA → TX saves $4,285/year on a $75K salary. That compounds to $429K over 30 years. The break-even on a $7K move: under 2 years. Full breakdown: www.dayblip.com/blog/moving-states-tax-savings"
+            text={`Moving CA → TX saves about ${usd(CA)}/year in state tax on a $75K salary. Invested at 7% for 30 years that is about ${usd(CA_FV)}. Full breakdown: www.dayblip.com/blog/moving-states-tax-savings`}
             url="https://www.dayblip.com/blog/moving-states-tax-savings"
             title="The Tax Case for Moving States: What Relocating Actually Saves You"
           />

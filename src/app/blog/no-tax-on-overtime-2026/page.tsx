@@ -6,7 +6,8 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "No Tax on Overtime in 2026: What It Actually Means for Your Paycheck",
-  description: "The proposed overtime tax exemption explained in plain terms — what qualifies, how much you could keep, and what the catch is.",
+  description: "The federal overtime deduction is law for 2025 through 2028. See what qualifies, the $12,500 cap, who phases out, and what it saves you.",
+  dateModified: "2026-10-21",
   url: "https://www.dayblip.com/blog/no-tax-on-overtime-2026",
   datePublished: "2026-06-13",
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
@@ -49,14 +50,14 @@ export default function NoTaxOnOvertimePage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              Under the proposed overtime tax exemption, hours worked beyond 40 per week would be excluded from federal income tax — but not from FICA (Social Security and Medicare). For a worker earning $22 per hour who regularly works 10 overtime hours per week, the annual federal income tax savings would be approximately $1,200 to $1,800 depending on their tax bracket.
+              Overtime is not tax free, but a federal deduction now exists. Under the 2025 OBBBA law, you can deduct up to $12,500 ($25,000 on a joint return) of the premium part of your overtime pay, the extra half in time-and-a-half. The deduction shrinks above $150,000 of modified adjusted gross income ($300,000 joint). Social Security and Medicare tax still apply. A worker in the 12% bracket with $5,000 of qualifying premium pay saves about $600.
             </p>
           </div>
         </section>
 
         <div className="mb-8">
           <ShareButtons
-            text="The overtime tax exemption explained: what it actually means for your paycheck in 2026. dayblip.com/blog/no-tax-on-overtime-2026"
+            text="The federal overtime deduction explained: what it covers, the cap, and what it saves in 2026. dayblip.com/blog/no-tax-on-overtime-2026"
             url="https://www.dayblip.com/blog/no-tax-on-overtime-2026"
             title="No Tax on Overtime in 2026: What It Actually Means for Your Paycheck"
           />
@@ -65,87 +66,65 @@ export default function NoTaxOnOvertimePage() {
         <article className="space-y-5 text-[#c9d1d9] leading-relaxed">
 
           <p>
-            The phrase &ldquo;no tax on overtime&rdquo; has circulated broadly enough that a lot of workers assume it already applies to them. It does not — at least not yet, and not in the way most people picture it.
+            &ldquo;No tax on overtime&rdquo; is a slogan, and the law behind it is narrower than the slogan. The One Big Beautiful Bill Act, signed in July 2025, created a federal income tax deduction for qualified overtime compensation. It does not make overtime pay tax free, and it does not change your paycheck withholding by itself. You claim it on your tax return.
+          </p>
+
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">What the Deduction Covers</h2>
+
+          <p>
+            Only overtime required by the Fair Labor Standards Act counts, and only the premium portion. If you earn $20 an hour and get $30 an hour for overtime, the extra $10 is what qualifies. The first $20 of each overtime hour is ordinary pay and stays fully taxable. Overtime paid under a union contract or state rule that goes beyond the federal requirement generally does not qualify.
           </p>
 
           <p>
-            What the proposal actually describes is an exemption from federal income tax on overtime wages — the premium pay you earn for hours worked beyond 40 in a workweek. FICA taxes (Social Security at 6.2% and Medicare at 1.45%) would still apply. State income taxes would depend entirely on where you live and whether your state adopts a conforming rule.
+            The deduction is capped at $12,500 per year, or $25,000 on a joint return. It phases out by $100 for every $1,000 of modified adjusted gross income above $150,000 ($300,000 joint). The statute covers tax years 2025 through 2028. It lowers your income tax only. FICA (Social Security at 6.2% and Medicare at 1.45%) still applies to every overtime dollar, and the IRS confirmed that employment taxes are not reduced.
           </p>
 
-          <h2 className="text-white text-xl font-bold mt-8 mb-3">Who Overtime Pay Rules Apply To</h2>
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">Who Overtime Rules Apply To</h2>
 
           <p>
-            The Fair Labor Standards Act requires overtime pay — at least 1.5 times the regular rate — for nonexempt employees who work more than 40 hours in a workweek. Exempt employees, which generally means salaried workers in executive, administrative, or professional roles earning above a certain salary threshold, are not covered by the federal overtime requirement.
-          </p>
-
-          <p>
-            As of 2025, the salary threshold for FLSA overtime exemption was $684 per week ($35,568 annualized). Workers below that threshold are nonexempt regardless of job title. Workers above it may be exempt depending on their job duties.
-          </p>
-
-          <p>
-            This matters for the tax exemption discussion because the proposal is specifically about overtime pay as defined under the FLSA. If you are an exempt salaried employee who works long hours, you likely do not have separately tracked overtime pay — and would not benefit from an exemption even if enacted.
+            The FLSA requires overtime at 1.5 times the regular rate for nonexempt employees who work more than 40 hours in a workweek. Exempt employees, generally salaried workers in executive, administrative or professional roles above the salary threshold, are not covered. If you are exempt and work long weeks with no separate overtime pay, you have no qualified overtime to deduct.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Numbers for a Typical Hourly Worker</h2>
 
           <p>
-            Consider a warehouse worker earning $20 per hour who regularly works 10 hours of overtime per week. Their overtime rate is $30 per hour. Over 50 weeks, that is $15,000 in overtime wages annually.
+            Take a warehouse worker who earns $20 an hour, works 40 regular hours a week and 10 overtime hours a week for 50 weeks. Regular pay is $40,000. Overtime pay at $30 an hour is $15,000, so total pay is $55,000.
           </p>
 
           <p>
-            Currently, that $15,000 is subject to federal income tax at whatever marginal rate applies — for most hourly workers this is 12% or 22%. At 22%, the federal income tax on $15,000 is $3,300. An exemption would save that full amount.
+            Of that $15,000, the premium part is $10 &times; 500 hours = $5,000. That $5,000 is the deduction. A single filer with $55,000 of pay lands in the 12% bracket after the $16,100 standard deduction. Using the 2026 brackets, federal income tax drops from $4,420 to $3,820, a saving of $600.
           </p>
 
           <p>
-            FICA remains. On $15,000 in wages, employee FICA is $1,143 (7.65%). That would not change under the proposal as currently structured.
+            FICA on the full $55,000 is $4,208 and does not change. So the worker keeps $600 more at tax time, not an extra $15,000.
+          </p>
+
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">How to Find Your Own Number</h2>
+
+          <p>
+            Step 1: multiply your regular hourly rate by 0.5 to get the premium per overtime hour. Step 2: multiply by your overtime hours for the year. Step 3: cap the result at $12,500 ($25,000 joint) and reduce it if your income is over the phase-out line. Step 4: multiply by your marginal federal rate.
           </p>
 
           <p>
-            So for this worker: potential federal income tax savings of $3,300 per year, with FICA unchanged. Not nothing — but meaningfully different from &ldquo;your overtime is tax free.&rdquo;
+            The hourly worker above hits only $5,000 of the $12,500 cap. To reach the cap, a worker at $30 an hour would need roughly 833 overtime hours in a year, about 16 extra hours every week. Most people who benefit see a deduction well under the cap, so the real value is usually in the hundreds of dollars, or low thousands at the high end.
+          </p>
+
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">How It Shows Up on Your W-2</h2>
+
+          <p>
+            Starting with 2026 wages, employers report qualified overtime compensation in Box 12 with code TT. The amount reported is the premium portion, even if part of it is not deductible because of the cap or the phase-out. For 2025 wages, many employers reported it in Box 14 or provided a separate statement, so check your year-end paperwork. Keep your pay stubs: if your W-2 does not break out the premium, they are how you support the number.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The State Tax Question</h2>
 
           <p>
-            Federal law does not compel states to follow federal income tax rules. Nine states have no income tax at all (Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, Wyoming) — for workers in those states, there is nothing additional to exempt because the state tax does not exist.
+            Federal law does not force states to follow it. Nine states have no wage income tax (Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington and Wyoming), so there is nothing to deduct there. In the other states, whether overtime gets the same break depends on whether your state conforms to the federal change. Many do not. Check your state revenue department before you assume a state saving.
           </p>
 
-          <p>
-            For workers in the 41 states that do levy income tax, whether overtime becomes exempt at the state level depends on whether the state legislature passes conforming legislation. Some states conform automatically to federal tax changes; most do not. This is a meaningful unknown for the full picture of what any worker might save.
-          </p>
-
-          <h2 className="text-white text-xl font-bold mt-8 mb-3">How to Calculate Your Own Number</h2>
+          <h2 className="text-white text-xl font-bold mt-8 mb-3">Planning Around It</h2>
 
           <p>
-            The inputs you need: your overtime hourly rate (your regular rate times 1.5), your average weekly overtime hours, and your marginal federal income tax rate.
-          </p>
-
-          <p>
-            Annual overtime wages = overtime rate × overtime hours per week × weeks worked per year. Federal income tax currently paid on that amount = annual overtime wages × marginal rate. That result is your potential saving if the exemption passes in full and applies to your situation.
-          </p>
-
-          <p>
-            If you are in the 12% bracket and earn $10,000 in overtime annually, potential federal savings would be $1,200. If you are in the 22% bracket on the same amount, potential savings would be $2,200. The higher your bracket and the more overtime you work, the larger the potential benefit — up to the limit of your actual federal income tax on those earnings.
-          </p>
-
-          <h2 className="text-white text-xl font-bold mt-8 mb-3">What Has Not Changed Yet</h2>
-
-          <p>
-            As of the date this article was published, no federal overtime income tax exemption had been signed into law and applied to paychecks. Legislation moves through multiple stages before it affects withholding tables. Your employer&apos;s payroll system does not change until the IRS issues new guidance and updated withholding tables reflecting any new law.
-          </p>
-
-          <p>
-            If you see social posts or articles claiming overtime is already tax free, verify against a current IRS source. Tax law changes on a specific effective date — it does not apply retroactively to past pay unless the law specifically says so.
-          </p>
-
-          <h2 className="text-white text-xl font-bold mt-8 mb-3">What This Means for Your Financial Planning</h2>
-
-          <p>
-            Planning around a potential tax change before it is law is reasonable — but keep the math conservative. Assume FICA still applies. Assume your state does not conform unless you verify otherwise. Assume the effective date is whatever the final legislation specifies.
-          </p>
-
-          <p>
-            For workers who regularly depend on overtime income, understanding the full tax picture on those earnings is useful regardless of any pending legislation. Overtime wages are ordinary income under current law and taxed at your marginal rate. Knowing that number helps you set withholding, plan estimated taxes if needed, and evaluate whether taking overtime makes sense after taxes at your current rate.
+            Do not count on a bigger paycheck. Withholding tables did not change, so the benefit arrives as a larger refund or a smaller bill when you file. If you take on extra shifts to chase the deduction, run the after-tax math first: the deduction offsets income tax on the premium half only, and FICA, state tax and the loss of other income-based benefits can still shrink what you keep.
           </p>
 
         </article>
@@ -156,7 +135,7 @@ export default function NoTaxOnOvertimePage() {
         >
           <h2 className="text-white text-2xl font-bold mb-3">Calculate Your Overtime Take-Home Pay</h2>
           <p className="text-[#a8a8b3] mb-6 leading-relaxed">
-            Enter your hourly rate and overtime hours to see exactly what you keep after federal tax, state tax, and FICA under current law — and compare what changes under different scenarios.
+            Enter your hourly rate and overtime hours to see exactly what you keep after federal tax, state tax, and FICA with and without the overtime deduction.
           </p>
           <Link
             href="/finance/overtime-tax"
@@ -179,7 +158,7 @@ export default function NoTaxOnOvertimePage() {
         <div className="mt-8 pt-8 border-t border-[#2d3748]">
           <p className="text-white font-semibold mb-4">Share this article</p>
           <ShareButtons
-            text="The overtime tax exemption explained: what it actually means for your paycheck in 2026. dayblip.com/blog/no-tax-on-overtime-2026"
+            text="The federal overtime deduction explained: what it covers, the cap, and what it saves in 2026. dayblip.com/blog/no-tax-on-overtime-2026"
             url="https://www.dayblip.com/blog/no-tax-on-overtime-2026"
             title="No Tax on Overtime in 2026: What It Actually Means for Your Paycheck"
           />
