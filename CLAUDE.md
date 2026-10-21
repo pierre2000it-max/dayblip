@@ -114,10 +114,10 @@ Embed pages have noindex (intentional)
 Embed pages NOT in sitemap (intentional)
 Educator page: /embed/for-educators
 
-## Blog Status (as of Oct 14 2026)
-45 articles live (counted from src/app/blog directories; the old "21" figure was stale). Articles 38-41 (Oct 13 2026): self-employment-tax-2026, federal-tax-brackets-2026, when-to-claim-social-security, how-to-set-freelance-rate. Article 42 (Oct 13 2026): roth-vs-traditional-401k (all figures computed from tax2026.ts). Article 43 (Oct 13 2026): hsa-vs-401k (computed from tax2026.ts; HSA $1,000 catch-up at 55+ and the CA/NJ state-tax note are literals). Article 44 (Oct 13 2026): capital-gains-tax-2026 (computed from tax2026.ts; literals: NIIT 3.8% and $200,000 threshold, $3,000 loss limit, $250,000/$500,000 home-sale exclusion). Article 45 (Oct 14 2026): is-my-salary-fair (computed from salaryFairness.ts and cost-of-living.ts, which is 2024 data: refresh it in January; literal: states with pay-range posting laws CO, CA, WA, NY).
+## Blog Status (as of Oct 20 2026)
+46 articles live (counted from src/app/blog directories; the old "21" figure was stale). Articles 38-41 (Oct 13 2026): self-employment-tax-2026, federal-tax-brackets-2026, when-to-claim-social-security, how-to-set-freelance-rate. Article 42 (Oct 13 2026): roth-vs-traditional-401k (all figures computed from tax2026.ts). Article 43 (Oct 13 2026): hsa-vs-401k (computed from tax2026.ts; HSA $1,000 catch-up at 55+ and the CA/NJ state-tax note are literals). Article 44 (Oct 13 2026): capital-gains-tax-2026 (computed from tax2026.ts; literals: NIIT 3.8% and $200,000 threshold, $3,000 loss limit, $250,000/$500,000 home-sale exclusion). Article 46 (Oct 20 2026): standard-deduction-vs-itemizing-2026 (computed from tax2026.ts and itemizing.ts; literals: 35% benefit cap above the 37% bracket start, $750,000 mortgage debt limit, the senior deduction and non-itemizer charity rules, all in itemizing.ts header). Article 45 (Oct 14 2026): is-my-salary-fair (computed from salaryFairness.ts and cost-of-living.ts, which is 2024 data: refresh it in January; literal: states with pay-range posting laws CO, CA, WA, NY).
 Target: 114 articles by June 2027.
-Remaining: 69 articles to write.
+Remaining: 68 articles to write.
 Pace needed: about 2.1 articles per week.
 Oct 13 2026: 4 overlapping pairs consolidated into one URL each, with 301s in next.config.mjs (do not delete the redirects):
 - /blog/how-much-house-can-you-afford -> /blog/how-much-house-can-i-afford
@@ -137,9 +137,9 @@ Before writing a new article, grep src/app/blog for the topic to avoid a second 
 - 8ae20a7: OG image routes fixed (display flex, try/catch)
 
 ## Site Counts (as of June 13 2026)
-- Total URLs in sitemap: 323 after the Oct 20 2026 indexing cleanup and crawl (every URL crawled locally: all 200, no title over 60, no description outside 120-155, canonical matches URL; was 1,422). Previously: 1,422 (verified Oct 13 2026 at 1,421, +1 for article 45 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
+- Total URLs in sitemap: 324 (323 plus article 46 on Oct 20 2026) after the Oct 20 2026 indexing cleanup and crawl (every URL crawled locally: all 200, no title over 60, no description outside 120-155, canonical matches URL; was 1,422). Previously: 1,422 (verified Oct 13 2026 at 1,421, +1 for article 45 by running sitemap.ts, after the 4 blog consolidations and articles 38-41)
 - Total tool pages: 200+ (recounted Oct 10 2026: 209 interactive pages, ~200 after near-duplicates)
-- Blog articles: 45 (Oct 14 2026)
+- Blog articles: 46 (Oct 20 2026)
 - Embed tools: 25
 - Born-in pages: 81 (1940-2020)
 
@@ -265,6 +265,7 @@ IRS publishes new brackets in November (Revenue Procedure). Changes take effect 
 | `src/app/blog/how-much-saved-by-age/page.tsx` | 401k/IRA contribution limits | Verify against IRS Notice |
 | `src/lib/freelanceRate.ts` (used by `finance/freelancer-rate` and `blog/how-to-set-freelance-rate`) | Nothing. Taxes come from `tax2026.ts` and `stateTax.ts`. The model assumes single filer, standard deduction, after-tax retirement saving. `freelanceRate.test.ts` checks that take-home at the solved rate equals the target. The blog meta description and blog/page.tsx teaser hard-code "$82" and "$36": re-check after the tax update | Same as IRS TAX DATA |
 | `src/lib/socialSecurity.ts` (used by `finance/social-security` and `blog/when-to-claim-social-security`) | Rules rarely change. Re-verify the FRA table, early-claim reduction and 8% delayed credit against ssa.gov/benefits/retirement/planner. `socialSecurity.test.ts` pins the SSA reduction table. The calculator page Quick Answer shows the 2026 average ($2,071) and maximum at FRA ($4,152) from ssa.gov (verified Oct 20 2026): update each January | SSA COLA fact sheet (October) |
+| `src/lib/itemizing.ts` (used by `blog/standard-deduction-vs-itemizing-2026`) | SALT cap ($40,400 for 2026, +1% a year through 2029, then back to $10,000 in 2030), phase-down start ($505,000 for 2026), charity floor and non-itemizer amounts, senior deduction, age 65+ extra standard deduction | IRS Rev. Proc. 2025-32 for the extra deduction; the SALT figures come from the 2025 reconciliation law. `itemizing.test.ts` pins the rules. Also update the excerpt figures in `blog/page.tsx` ($1,951, $8,025) |
 | `src/app/blog/federal-tax-brackets-2026/page.tsx` | Nothing. Brackets, standard deduction and every example are computed from `tax2026.ts`. Only the "7.65%" payroll rate is a literal | Same as IRS TAX DATA |
 | `src/app/blog/self-employment-tax-2026/page.tsx` | Dollar tables are computed from `tax2026.ts`. Re-check literals: $400 SE threshold, $1,000 estimated-tax trigger, $150,000 AGI safe-harbor test, $200,000 additional Medicare threshold, payment dates | IRS Topic 554 and irs.gov/faqs/estimated-tax |
 | `src/app/blog/how-to-read-your-w2/page.tsx` | 401k limit in Box 12 Code D (FAQ text + table row) | Verify against IRS Notice. Cite the Notice, not the Rev. Proc. |

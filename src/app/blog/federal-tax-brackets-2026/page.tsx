@@ -247,6 +247,10 @@ export default function FederalTaxBrackets2026Page() {
             Long-term capital gains and qualified dividends use their own rate schedule instead of the ordinary brackets above. If you sell investments, the tool below separates the two.
           </p>
 
+          <p>
+            This article uses the standard deduction. If you own a home or give a lot to charity, itemizing may beat it. See <Link href="/blog/standard-deduction-vs-itemizing-2026" className="text-[#e94560]">Standard Deduction vs Itemizing in 2026</Link> for the break-even.
+          </p>
+
           <div style={{ background: "#1e2d4a", borderRadius: "8px", padding: "20px", margin: "32px 0", textAlign: "center" }}>
             <p className="text-[#a8a8b3] mb-4 text-sm">Enter your income and filing status to see your marginal rate, effective rate and total federal tax:</p>
             <Link

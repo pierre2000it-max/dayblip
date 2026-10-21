@@ -364,6 +364,14 @@ const articles = [
     readTime: "5 min read",
     href: "/blog/is-my-salary-fair",
   },
+  {
+    category: "Finance",
+    title: "Standard Deduction vs Itemizing in 2026: Which Saves More?",
+    excerpt:
+      "Itemize only when deductions top $16,100 (single) or $32,200 (married). A $400,000 mortgage saves one couple $1,951. A renter loses by $8,025.",
+    readTime: "6 min read",
+    href: "/blog/standard-deduction-vs-itemizing-2026",
+  },
 ]
 
 const CATEGORIES = ["All", "Finance", "Career", "Life", "Retirement", "Real Estate"]
