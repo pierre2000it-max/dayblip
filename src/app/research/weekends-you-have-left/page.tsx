@@ -3,16 +3,21 @@ import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/blog/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
+import {
+  CDC_LIFE_EXPECTANCY, CDC_LIFE_EXPECTANCY_YEAR, PLANNING_AGE, WEEKENDS_PER_YEAR, FREE_HOURS_PER_WEEKEND, FREE_HOURS_RANGE,
+  WEEKEND_ROWS, weekendsLeft, RETIRE_AT, LIVE_TO, WEEKEND_SPEND, RETIREMENT_WEEKENDS, RETIREMENT_WEEKEND_SPEND,
+  WEEKENDS_META_DESCRIPTION, WEEKENDS_OG_DESCRIPTION, WEEKENDS_SHARE_TEXT, n, usd,
+} from "@/lib/finiteTime"
+
+// Every figure on this page is computed from src/lib/finiteTime.ts. Nothing is hand-typed.
 
 export const metadata: Metadata = {
   title: "How Many Weekends Do You Have Left?",
-  description:
-    "At 40 you have about 2,080 weekends left if you live to 80. At 50 you have 1,560. See the data behind the number and your own count.",
+  description: WEEKENDS_META_DESCRIPTION,
   alternates: { canonical: "https://www.dayblip.com/research/weekends-you-have-left" },
   openGraph: {
     title: "How Many Weekends Do You Have Left?",
-    description:
-      "At 40 you have roughly 2,080 weekends left if you live to 80. At 50 you have 1,560. The data behind the number that changes how you think about Saturday morning.",
+    description: WEEKENDS_OG_DESCRIPTION,
     url: "https://www.dayblip.com/research/weekends-you-have-left",
     type: "article",
     publishedTime: "2026-06-13T00:00:00Z",
@@ -24,8 +29,7 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "How Many Weekends Do You Have Left?",
-  description:
-    "At 40 you have roughly 2,080 weekends left if you live to 80. The Dayblip data behind the number that changes how you think about Saturday morning.",
+  description: WEEKENDS_OG_DESCRIPTION,
   url: "https://www.dayblip.com/research/weekends-you-have-left",
   publisher: {
     "@type": "Organization",
@@ -40,7 +44,7 @@ const datasetSchema = {
   "@type": "Dataset",
   name: "Weekends Remaining by Age — Dayblip",
   description:
-    "Estimated weekends remaining at each age from 20 to 75, calculated using CDC life expectancy data and assuming survival to age 80.",
+    `Estimated weekends remaining at each age from ${WEEKEND_ROWS[0].age} to ${WEEKEND_ROWS[WEEKEND_ROWS.length - 1].age}, calculated against CDC life expectancy data and assuming survival to age ${PLANNING_AGE}.`,
   url: "https://www.dayblip.com/research/weekends-you-have-left",
   creator: {
     "@type": "Organization",
@@ -49,21 +53,6 @@ const datasetSchema = {
   },
   license: "https://creativecommons.org/licenses/by/4.0/",
 }
-
-const tableData = [
-  { age: 20, weekends: "3,120", years: 60, freeHours: 11, totalFreeHours: "34,320" },
-  { age: 25, weekends: "2,860", years: 55, freeHours: 11, totalFreeHours: "31,460" },
-  { age: 30, weekends: "2,600", years: 50, freeHours: 11, totalFreeHours: "28,600" },
-  { age: 35, weekends: "2,340", years: 45, freeHours: 11, totalFreeHours: "25,740" },
-  { age: 40, weekends: "2,080", years: 40, freeHours: 11, totalFreeHours: "22,880" },
-  { age: 45, weekends: "1,820", years: 35, freeHours: 11, totalFreeHours: "20,020" },
-  { age: 50, weekends: "1,560", years: 30, freeHours: 11, totalFreeHours: "17,160" },
-  { age: 55, weekends: "1,300", years: 25, freeHours: 11, totalFreeHours: "14,300" },
-  { age: 60, weekends: "1,040", years: 20, freeHours: 11, totalFreeHours: "11,440" },
-  { age: 65, weekends: "780",   years: 15, freeHours: 11, totalFreeHours: "8,580"  },
-  { age: 70, weekends: "520",   years: 10, freeHours: 11, totalFreeHours: "5,720"  },
-  { age: 75, weekends: "260",   years: 5,  freeHours: 11, totalFreeHours: "2,860"  },
-]
 
 const relatedTools = [
   { title: "Life in Weeks",        href: "/tools/life-in-weeks",      description: "See your entire life as a grid of squares" },
@@ -108,7 +97,7 @@ export default function WeekendsYouHaveLeftPage() {
         {/* Share — above article */}
         <div className="mb-8">
           <ShareButtons
-            text="How many weekends do you have left? At 40 you have roughly 2,080. The data: www.dayblip.com/research/weekends-you-have-left"
+            text={WEEKENDS_SHARE_TEXT}
             url="https://www.dayblip.com/research/weekends-you-have-left"
             title="How Many Weekends Do You Have Left?"
           />
@@ -125,25 +114,25 @@ export default function WeekendsYouHaveLeftPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Calculation</h2>
 
           <p>
-            We used CDC life expectancy data as the baseline. The current US life expectancy is approximately 77 years, but for planning purposes we calculated weekends remaining assuming survival to age 80 — a reasonable target for someone in average health today. Each year contains exactly 52 weekends. A weekend is counted as a Saturday-Sunday pair.
+            We used CDC life expectancy data as the baseline. US life expectancy at birth was {CDC_LIFE_EXPECTANCY} years in {CDC_LIFE_EXPECTANCY_YEAR} (National Center for Health Statistics), but for planning purposes we calculated weekends remaining assuming survival to age {PLANNING_AGE} — a reasonable target for someone in average health today. We count {WEEKENDS_PER_YEAR} weekends per year. A weekend is a Saturday-Sunday pair.
           </p>
 
           <p>
-            The formula is simple: weekends remaining equals (80 minus current age) multiplied by 52.
+            The formula is simple: weekends remaining equals ({PLANNING_AGE} minus current age) multiplied by {WEEKENDS_PER_YEAR}.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What the Numbers Show</h2>
 
           <p>
-            The results are not dramatic in isolation. They become dramatic when you realize most of those weekends are already spoken for — sleep, errands, family obligations, recovery from the week. The average American adult spends roughly 6 hours per weekend on household chores alone. Factor in sleep and the free, unscheduled hours in a typical weekend shrink to somewhere between 8 and 14.
+            The results are not dramatic in isolation. They become dramatic when you realize most of those weekends are already spoken for — sleep, errands, family obligations, recovery from the week. Once sleep and household work come out, the free, unscheduled hours in a typical weekend shrink to somewhere between {FREE_HOURS_RANGE[0]} and {FREE_HOURS_RANGE[1]}. We use {FREE_HOURS_PER_WEEKEND} as the working estimate in the table below.
           </p>
 
           <p>
-            At 30, you have approximately 2,600 weekends left. That sounds like a lot. It is also only 2,600 Saturday mornings to sleep in, take a road trip, finish a project, or do nothing at all.
+            At 30, you have approximately {n(weekendsLeft(30))} weekends left. That sounds like a lot. It is also only {n(weekendsLeft(30))} Saturday mornings to sleep in, take a road trip, finish a project, or do nothing at all.
           </p>
 
           <p>
-            At 40, the number drops to 2,080. At 50, it is 1,560. At 60, it is 1,040. These are not small numbers, but they are finite ones — and most people have never seen them written down.
+            At 40, the number drops to {n(weekendsLeft(40))}. At 50, it is {n(weekendsLeft(50))}. At 60, it is {n(weekendsLeft(60))}. These are not small numbers, but they are finite ones — and most people have never seen them written down.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Data</h2>
@@ -165,13 +154,13 @@ export default function WeekendsYouHaveLeftPage() {
                 </tr>
               </thead>
               <tbody>
-                {tableData.map((row, i) => (
+                {WEEKEND_ROWS.map((row, i) => (
                   <tr key={row.age} style={{ background: i % 2 === 0 ? "#1e2d4a" : "#162338" }}>
                     <td style={{ padding: "12px 16px", fontSize: "15px", color: "#ffffff", borderBottom: "1px solid #0d1b2a" }}>
                       {row.age}
                     </td>
                     <td style={{ padding: "12px 16px", fontSize: "15px", color: "#e94560", fontWeight: 700, borderBottom: "1px solid #0d1b2a" }}>
-                      {row.weekends}
+                      {n(row.weekends)}
                     </td>
                     <td style={{ padding: "12px 16px", fontSize: "15px", color: "#ffffff", borderBottom: "1px solid #0d1b2a" }}>
                       {row.years}
@@ -180,14 +169,14 @@ export default function WeekendsYouHaveLeftPage() {
                       {row.freeHours}
                     </td>
                     <td style={{ padding: "12px 16px", fontSize: "15px", color: "#ffffff", borderBottom: "1px solid #0d1b2a" }}>
-                      {row.totalFreeHours}
+                      {n(row.totalFreeHours)}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
             <p style={{ color: "#a8a8b3", fontSize: "13px", marginTop: "16px", lineHeight: "1.6" }}>
-              Weekends remaining calculated assuming survival to age 80 using CDC life expectancy baseline. Free hours per weekend estimated at 11 based on Bureau of Labor Statistics American Time Use Survey data after accounting for sleep and household obligations. Dayblip original analysis.
+              Weekends remaining calculated assuming survival to age {PLANNING_AGE}, above the CDC {CDC_LIFE_EXPECTANCY_YEAR} life expectancy of {CDC_LIFE_EXPECTANCY}. Free hours per weekend is a Dayblip estimate of {FREE_HOURS_PER_WEEKEND}, informed by Bureau of Labor Statistics American Time Use Survey patterns after sleep and household work; it is an assumption, not a measured figure. Dayblip original analysis.
             </p>
           </div>
 
@@ -198,7 +187,7 @@ export default function WeekendsYouHaveLeftPage() {
           </p>
 
           <p>
-            If you retire at 65 and live to 85, you have 1,040 weekends of retirement. If you spend $200 per weekend on activities, travel, and experiences, that is $208,000 in weekend spending alone — not counted in most retirement budget templates.
+            If you retire at {RETIRE_AT} and live to {LIVE_TO}, you have {n(RETIREMENT_WEEKENDS)} weekends of retirement. If you spend {usd(WEEKEND_SPEND)} per weekend on activities, travel, and experiences, that is {usd(RETIREMENT_WEEKEND_SPEND)} in weekend spending alone — not counted in most retirement budget templates.
           </p>
 
           <p>
@@ -208,11 +197,11 @@ export default function WeekendsYouHaveLeftPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What People Do With This Number</h2>
 
           <p>
-            In our analysis of how people respond to finite time calculations, the weekends number produces a different reaction than years or days. Years feel abstract. Days feel granular and hard to visualize. Weekends are the unit most adults actually experience as discrete leisure time.
+            The weekends number tends to land differently than years or days. Years feel abstract. Days feel granular and hard to visualize. Weekends are the unit most adults actually experience as discrete leisure time.
           </p>
 
           <p>
-            The most common response to seeing the number is a recalibration — not panic, but a quiet reassessment of what the next Saturday morning should contain.
+            The response most readers describe is a recalibration — not panic, but a quiet reassessment of what the next Saturday morning should contain.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Tool</h2>
@@ -240,7 +229,7 @@ export default function WeekendsYouHaveLeftPage() {
         {/* Share — below article */}
         <div className="mt-10">
           <ShareButtons
-            text="How many weekends do you have left? At 40 you have roughly 2,080. The data: www.dayblip.com/research/weekends-you-have-left"
+            text={WEEKENDS_SHARE_TEXT}
             url="https://www.dayblip.com/research/weekends-you-have-left"
             title="How Many Weekends Do You Have Left?"
           />

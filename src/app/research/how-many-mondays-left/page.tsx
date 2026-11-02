@@ -3,16 +3,22 @@ import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/blog/RelatedTools"
 import AuthorByline from "@/components/AuthorByline"
+import {
+  BLS_MEDIAN_WEEKLY_EARNINGS, BLS_EARNINGS_PERIOD, RETIREMENT_AGE, WORK_WEEKS_PER_YEAR, EXAMPLE_RAISE,
+  EARLY_RETIREMENT_AGE, MONDAY_ROWS, mondaysLeft, careerValue, raiseLifetimeValue, RAISE_PER_WEEK,
+  MONDAYS_META_DESCRIPTION, MONDAYS_OG_DESCRIPTION, MONDAYS_SHARE_TEXT, n, usd, usdM,
+} from "@/lib/finiteTime"
+
+// Every figure on this page is computed from src/lib/finiteTime.ts. Nothing is hand-typed.
+const boughtBack = mondaysLeft(EARLY_RETIREMENT_AGE)
 
 export const metadata: Metadata = {
   title: "How Many Mondays Do You Have Left in Your Career?",
-  description:
-    "At 35 you have about 1,500 Mondays left before retirement at 65. At 45 you have 1,000. See the data behind the number and your own count.",
+  description: MONDAYS_META_DESCRIPTION,
   alternates: { canonical: "https://www.dayblip.com/research/how-many-mondays-left" },
   openGraph: {
     title: "How Many Mondays Do You Have Left in Your Career?",
-    description:
-      "At 35 you have roughly 1,500 Mondays left before retirement at 65. At 45 you have 1,000. The data behind the number that reframes how you think about every work week.",
+    description: MONDAYS_OG_DESCRIPTION,
     url: "https://www.dayblip.com/research/how-many-mondays-left",
     type: "article",
     publishedTime: "2026-06-13T00:00:00Z",
@@ -24,8 +30,7 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "How Many Mondays Do You Have Left in Your Career?",
-  description:
-    "At 35 you have roughly 1,500 Mondays left before retirement at 65. The Dayblip data behind the number that reframes how you think about every work week.",
+  description: MONDAYS_OG_DESCRIPTION,
   url: "https://www.dayblip.com/research/how-many-mondays-left",
   publisher: {
     "@type": "Organization",
@@ -40,7 +45,7 @@ const datasetSchema = {
   "@type": "Dataset",
   name: "Career Mondays Remaining by Age — Dayblip",
   description:
-    "Estimated Mondays remaining in a typical career at each age from 22 to 64, calculated assuming retirement at age 65 and 50 working weeks per year.",
+    `Estimated Mondays remaining in a typical career at each age from ${MONDAY_ROWS[0].age} to ${MONDAY_ROWS[MONDAY_ROWS.length - 1].age}, calculated assuming retirement at age ${RETIREMENT_AGE} and ${WORK_WEEKS_PER_YEAR} working weeks per year.`,
   url: "https://www.dayblip.com/research/how-many-mondays-left",
   creator: {
     "@type": "Organization",
@@ -49,20 +54,6 @@ const datasetSchema = {
   },
   license: "https://creativecommons.org/licenses/by/4.0/",
 }
-
-const tableData = [
-  { age: 22, mondays: "2,150", years: 43, valuePerMonday: "$1,251", totalValue: "$2,689,650" },
-  { age: 25, mondays: "2,000", years: 40, valuePerMonday: "$1,251", totalValue: "$2,502,000" },
-  { age: 30, mondays: "1,750", years: 35, valuePerMonday: "$1,251", totalValue: "$2,189,250" },
-  { age: 35, mondays: "1,500", years: 30, valuePerMonday: "$1,251", totalValue: "$1,876,500" },
-  { age: 40, mondays: "1,250", years: 25, valuePerMonday: "$1,251", totalValue: "$1,563,750" },
-  { age: 45, mondays: "1,000", years: 20, valuePerMonday: "$1,251", totalValue: "$1,251,000" },
-  { age: 50, mondays: "750",   years: 15, valuePerMonday: "$1,251", totalValue: "$938,250"   },
-  { age: 55, mondays: "500",   years: 10, valuePerMonday: "$1,251", totalValue: "$625,500"   },
-  { age: 60, mondays: "250",   years: 5,  valuePerMonday: "$1,251", totalValue: "$312,750"   },
-  { age: 62, mondays: "150",   years: 3,  valuePerMonday: "$1,251", totalValue: "$187,650"   },
-  { age: 64, mondays: "50",    years: 1,  valuePerMonday: "$1,251", totalValue: "$62,550"    },
-]
 
 const relatedTools = [
   { title: "True Hourly Wage",           href: "/tools/true-hourly-wage",        description: "What your job actually pays per hour of your life" },
@@ -107,7 +98,7 @@ export default function HowManyMondaysLeftPage() {
         {/* Share — above article */}
         <div className="mb-8">
           <ShareButtons
-            text="How many Mondays do you have left in your career? At 35 you have roughly 1,500. The data: www.dayblip.com/research/how-many-mondays-left"
+            text={MONDAYS_SHARE_TEXT}
             url="https://www.dayblip.com/research/how-many-mondays-left"
             title="How Many Mondays Do You Have Left in Your Career?"
           />
@@ -124,33 +115,33 @@ export default function HowManyMondaysLeftPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Calculation</h2>
 
           <p>
-            We used a retirement age of 65 — the full Social Security retirement age for Americans born after 1960. We assumed 50 working weeks per year to account for vacation and holidays. Each working week contains one Monday.
+            We used a retirement age of {RETIREMENT_AGE}, the age most people still picture when they say &quot;retirement,&quot; even though the full Social Security retirement age for anyone born in 1960 or later is 67. We assumed {WORK_WEEKS_PER_YEAR} working weeks per year to account for vacation and holidays. Each working week contains one Monday.
           </p>
 
           <p>
-            The formula: Mondays remaining equals 65 minus your current age, multiplied by 50.
+            The formula: Mondays remaining equals {RETIREMENT_AGE} minus your current age, multiplied by {WORK_WEEKS_PER_YEAR}.
           </p>
 
           <p>
-            We also calculated the dollar value of each remaining Monday using Bureau of Labor Statistics data. Median weekly earnings for full-time US workers reached $1,251 in Q2 2026. Each Monday starts a week worth approximately that.
+            We also calculated the dollar value of each remaining Monday using Bureau of Labor Statistics data. Median weekly earnings for full-time US workers reached {usd(BLS_MEDIAN_WEEKLY_EARNINGS)} in {BLS_EARNINGS_PERIOD}. Each Monday starts a week worth approximately that.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What the Numbers Actually Show</h2>
 
           <p>
-            At 22 you have 2,150 Mondays left. That sounds like a lot. Most of them are already allocated — to a specific employer, a specific building, a specific set of people you did not pick.
+            At 22 you have {n(mondaysLeft(22))} Mondays left. That sounds like a lot. Most of them are already allocated — to a specific employer, a specific building, a specific set of people you did not pick.
           </p>
 
           <p>
-            At 35 the number is 1,500. At 45 it is 1,000. At 55 it is 500.
+            At 35 the number is {n(mondaysLeft(35))}. At 45 it is {n(mondaysLeft(45))}. At 55 it is {n(mondaysLeft(55))}.
           </p>
 
           <p>
-            Five hundred. That is less than ten years of work weeks. Most people at 55 have never seen that number. When they do, the Sunday dread gets a shape.
+            {n(mondaysLeft(55))}. That is {RETIREMENT_AGE - 55} years of work weeks. Most people at 55 have never seen that number. When they do, the Sunday dread gets a shape.
           </p>
 
           <p>
-            The total career earnings picture shifts too. At 35 with 1,500 Mondays left at median wages, total remaining career value is approximately $1.88 million gross. At 55 with 500 Mondays it is $625,500. Same wages. Different count.
+            The total career earnings picture shifts too. At 35 with {n(mondaysLeft(35))} Mondays left at median wages, total remaining career value is approximately {usdM(careerValue(35))} gross. At 55 with {n(mondaysLeft(55))} Mondays it is {usd(careerValue(55))}. Same wages. Different count.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What Each Monday Is Worth</h2>
@@ -160,11 +151,11 @@ export default function HowManyMondaysLeftPage() {
           </p>
 
           <p>
-            A $5,000 raise sounds meaningful. Spread across 1,500 remaining Mondays it is $3.33 per Monday — about $167 per remaining work week. The same raise at 55 with 500 Mondays left is $10 per Monday, $500 per week. Three times the per-unit value for the same dollar amount, simply because the pool of remaining weeks is smaller.
+            A {usd(EXAMPLE_RAISE)} raise sounds meaningful. Per Monday it is {usd(RAISE_PER_WEEK)}: the same {usd(RAISE_PER_WEEK)} a week whether you are 35 or 55. What changes with age is how many Mondays are left to collect it. At 35 that raise pays out over {n(mondaysLeft(35))} Mondays, {usd(raiseLifetimeValue(35))} in total. At 55 it pays out over {n(mondaysLeft(55))} Mondays, {usd(raiseLifetimeValue(55))}. Same raise. A third of the lifetime value.
           </p>
 
           <p>
-            This is the math behind pushing harder on salary in your 40s and 50s. Every dollar per hour gained applies to a concentrated number of remaining hours. Most people never run that calculation.
+            This is the math behind asking early. Every year you wait to negotiate is {WORK_WEEKS_PER_YEAR} Mondays of the raise you never collect, {usd(EXAMPLE_RAISE)} at this example. Most people never run that calculation.
           </p>
 
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Monday as a Unit</h2>
@@ -184,7 +175,7 @@ export default function HowManyMondaysLeftPage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">The Buyback Calculation</h2>
 
           <p>
-            Every percentage point increase in savings rate buys back Mondays. Someone who saves aggressively enough to retire at 55 instead of 65 eliminates 500 Mondays from their mandatory total. At median wages that is roughly $625,500 in labor they no longer have to perform.
+            Every percentage point increase in savings rate buys back Mondays. Someone who saves aggressively enough to retire at {EARLY_RETIREMENT_AGE} instead of {RETIREMENT_AGE} eliminates {n(boughtBack)} Mondays from their mandatory total. At median wages that is roughly {usd(careerValue(EARLY_RETIREMENT_AGE))} in labor they no longer have to perform.
           </p>
 
           <p>
@@ -208,29 +199,29 @@ export default function HowManyMondaysLeftPage() {
                 </tr>
               </thead>
               <tbody>
-                {tableData.map((row, i) => (
+                {MONDAY_ROWS.map((row, i) => (
                   <tr key={row.age} style={{ background: i % 2 === 0 ? "#1e2d4a" : "#162338" }}>
                     <td style={{ padding: "12px 16px", fontSize: "15px", color: "#ffffff", borderBottom: "1px solid #0d1b2a" }}>
                       {row.age}
                     </td>
                     <td style={{ padding: "12px 16px", fontSize: "15px", color: "#e94560", fontWeight: 700, borderBottom: "1px solid #0d1b2a" }}>
-                      {row.mondays}
+                      {n(row.mondays)}
                     </td>
                     <td style={{ padding: "12px 16px", fontSize: "15px", color: "#ffffff", borderBottom: "1px solid #0d1b2a" }}>
                       {row.years}
                     </td>
                     <td style={{ padding: "12px 16px", fontSize: "15px", color: "#ffffff", borderBottom: "1px solid #0d1b2a" }}>
-                      {row.valuePerMonday}
+                      {usd(row.valuePerMonday)}
                     </td>
                     <td style={{ padding: "12px 16px", fontSize: "15px", color: "#ffffff", borderBottom: "1px solid #0d1b2a" }}>
-                      {row.totalValue}
+                      {usd(row.totalValue)}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
             <p style={{ color: "#a8a8b3", fontSize: "13px", marginTop: "16px", lineHeight: "1.6" }}>
-              Mondays remaining calculated assuming retirement at age 65 and 50 working weeks per year. Value per Monday based on Bureau of Labor Statistics Q2 2026 median weekly earnings for full-time US workers ($1,251). Total remaining career value is a gross earnings estimate before tax. Dayblip original analysis.
+              Mondays remaining calculated assuming retirement at age {RETIREMENT_AGE} and {WORK_WEEKS_PER_YEAR} working weeks per year. Value per Monday based on Bureau of Labor Statistics {BLS_EARNINGS_PERIOD} median weekly earnings for full-time US workers ({usd(BLS_MEDIAN_WEEKLY_EARNINGS)}). Total remaining career value is a gross earnings estimate before tax. Dayblip original analysis.
             </p>
           </div>
         </article>
@@ -253,7 +244,7 @@ export default function HowManyMondaysLeftPage() {
         {/* Share — below article */}
         <div className="mt-10">
           <ShareButtons
-            text="How many Mondays do you have left in your career? At 35 you have roughly 1,500. The data: www.dayblip.com/research/how-many-mondays-left"
+            text={MONDAYS_SHARE_TEXT}
             url="https://www.dayblip.com/research/how-many-mondays-left"
             title="How Many Mondays Do You Have Left in Your Career?"
           />
