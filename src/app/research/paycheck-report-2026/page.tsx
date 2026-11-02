@@ -1,89 +1,39 @@
 import Link from "next/link"
 import ShareButtons from "@/components/ShareButtons"
 import RelatedTools from "@/components/blog/RelatedTools"
+import {
+  BENCHMARK_SALARY, REPORT_YEAR, STANDARD_DED, TAXABLE_INCOME,
+  FEDERAL_INCOME_TAX, SOCIAL_SECURITY_TAX, MEDICARE_TAX, FICA_TAX, FEDERAL_TOTAL, AFTER_FEDERAL,
+  FEDERAL_BRACKET_ROWS, TOP_FEDERAL_RATE, INCOME_IN_TOP_FEDERAL_BRACKET,
+  STATE_ROWS, NO_TAX_STATES, LOWEST, BOTTOM_FIVE, HIGHLIGHT_LOW, EXAMPLE_NO_TAX,
+  ANNUAL_GAP, MONTHLY_GAP, LOWEST_EFFECTIVE, HIGHEST_EFFECTIVE, GAP_30_YEARS, CAREER_YEARS, GROWTH_RATE,
+  MIDDLE_STATES, MIDDLE_MIN, MIDDLE_MAX, MIDDLE_BAND,
+  stateFacts, stateRow, usd, pct, approxThousands, listNames, SS_RATE_LABEL, MEDICARE_RATE_LABEL,
+} from "@/lib/paycheckReport"
 
 // ── Data ─────────────────────────────────────────────────────────────────────
+// Every figure on this page is computed from src/lib/paycheckReport.ts, which
+// reads tax2026.ts and stateTax.ts. Nothing below is hand-typed.
 
-interface StateRow {
-  state: string
-  abbr: string
-  takeHome: number
-  effective: number   // effective total rate %
-  noIncomeTax: boolean
-  highlight?: "high" | "low"
-}
-
-// Gross $75,000 | Standard deduction $16,100 | Federal taxable income $58,900
-// Federal income tax: 10% × $12,400 + 12% × $38,000 + 22% × $8,500 = $7,670
-// FICA: 6.2% × $75,000 + 1.45% × $75,000 = $4,650 + $1,088 = $5,738
-// Total federal deductions: $13,408
-// After-federal base: $61,593 (rounded; exact $61,592.50)
-// State income tax: computed from src/lib/stateTax.ts (Tax Foundation 2026 brackets, single filer)
-// Take-home = $75,000 − $7,670 − $5,738 − state income tax
-// Sources: IRS Rev. Proc. 2025-32 (2026 brackets), SSA Fact Sheet 2026, state revenue depts.
-
-const STATES: StateRow[] = [
-  { state: "Wyoming",        abbr: "WY", takeHome: 61593, effective: 17.9, noIncomeTax: true },
-  { state: "South Dakota",   abbr: "SD", takeHome: 61593, effective: 17.9, noIncomeTax: true },
-  { state: "Alaska",         abbr: "AK", takeHome: 61593, effective: 17.9, noIncomeTax: true },
-  { state: "Nevada",         abbr: "NV", takeHome: 61593, effective: 17.9, noIncomeTax: true },
-  { state: "Florida",        abbr: "FL", takeHome: 61593, effective: 17.9, noIncomeTax: true },
-  { state: "Texas",          abbr: "TX", takeHome: 61593, effective: 17.9, noIncomeTax: true },
-  { state: "Washington",     abbr: "WA", takeHome: 61593, effective: 17.9, noIncomeTax: true },
-  { state: "Tennessee",      abbr: "TN", takeHome: 61593, effective: 17.9, noIncomeTax: true },
-  { state: "New Hampshire",  abbr: "NH", takeHome: 61593, effective: 17.9, noIncomeTax: true },
-  { state: "North Dakota",   abbr: "ND", takeHome: 61389, effective: 18.1, noIncomeTax: false },
-  { state: "Arizona",        abbr: "AZ", takeHome: 59926, effective: 20.1, noIncomeTax: false },
-  { state: "Louisiana",      abbr: "LA", takeHome: 59729, effective: 20.4, noIncomeTax: false },
-  { state: "Ohio",           abbr: "OH", takeHome: 59596, effective: 20.5, noIncomeTax: false },
-  { state: "Indiana",        abbr: "IN", takeHome: 59410, effective: 20.8, noIncomeTax: false },
-  { state: "Rhode Island",   abbr: "RI", takeHome: 59397, effective: 20.8, noIncomeTax: false },
-  { state: "Iowa",           abbr: "IA", takeHome: 59394, effective: 20.8, noIncomeTax: false },
-  { state: "Pennsylvania",   abbr: "PA", takeHome: 59290, effective: 20.9, noIncomeTax: false },
-  { state: "New Mexico",     abbr: "NM", takeHome: 59233, effective: 21.0, noIncomeTax: false },
-  { state: "North Carolina", abbr: "NC", takeHome: 59109, effective: 21.2, noIncomeTax: false },
-  { state: "Vermont",        abbr: "VT", takeHome: 59103, effective: 21.2, noIncomeTax: false },
-  { state: "Kentucky",       abbr: "KY", takeHome: 59085, effective: 21.2, noIncomeTax: false },
-  { state: "Nebraska",       abbr: "NE", takeHome: 59060, effective: 21.3, noIncomeTax: false },
-  { state: "Missouri",       abbr: "MO", takeHome: 59005, effective: 21.3, noIncomeTax: false },
-  { state: "Colorado",       abbr: "CO", takeHome: 59001, effective: 21.3, noIncomeTax: false },
-  { state: "Wisconsin",      abbr: "WI", takeHome: 58998, effective: 21.3, noIncomeTax: false },
-  { state: "New Jersey",     abbr: "NJ", takeHome: 58995, effective: 21.3, noIncomeTax: false },
-  { state: "Mississippi",    abbr: "MS", takeHome: 58925, effective: 21.4, noIncomeTax: false },
-  { state: "West Virginia",  abbr: "WV", takeHome: 58912, effective: 21.5, noIncomeTax: false },
-  { state: "Arkansas",       abbr: "AR", takeHome: 58880, effective: 21.5, noIncomeTax: false },
-  { state: "California",     abbr: "CA", takeHome: 58805, effective: 21.6, noIncomeTax: false },
-  { state: "Oklahoma",       abbr: "OK", takeHome: 58763, effective: 21.6, noIncomeTax: false },
-  { state: "Montana",        abbr: "MT", takeHome: 58716, effective: 21.7, noIncomeTax: false },
-  { state: "Michigan",       abbr: "MI", takeHome: 58656, effective: 21.8, noIncomeTax: false },
-  { state: "Idaho",          abbr: "ID", takeHome: 58471, effective: 22.0, noIncomeTax: false },
-  { state: "Maryland",       abbr: "MD", takeHome: 58394, effective: 22.1, noIncomeTax: false },
-  { state: "Georgia",        abbr: "GA", takeHome: 58323, effective: 22.2, noIncomeTax: false },
-  { state: "South Carolina", abbr: "SC", takeHome: 58250, effective: 22.3, noIncomeTax: false },
-  { state: "Connecticut",    abbr: "CT", takeHome: 58218, effective: 22.4, noIncomeTax: false },
-  { state: "Utah",           abbr: "UT", takeHome: 58218, effective: 22.4, noIncomeTax: false },
-  { state: "Kansas",         abbr: "KS", takeHome: 58207, effective: 22.4, noIncomeTax: false },
-  { state: "New York",       abbr: "NY", takeHome: 58140, effective: 22.5, noIncomeTax: false },
-  { state: "Alabama",        abbr: "AL", takeHome: 58108, effective: 22.5, noIncomeTax: false },
-  { state: "Virginia",       abbr: "VA", takeHome: 58094, effective: 22.5, noIncomeTax: false },
-  { state: "Massachusetts",  abbr: "MA", takeHome: 58063, effective: 22.6, noIncomeTax: false },
-  { state: "Illinois",       abbr: "IL", takeHome: 58025, effective: 22.6, noIncomeTax: false },
-  { state: "Minnesota",      abbr: "MN", takeHome: 58016, effective: 22.6, noIncomeTax: false },
-  { state: "Delaware",       abbr: "DE", takeHome: 57984, effective: 22.7, noIncomeTax: false },
-  { state: "Maine",          abbr: "ME", takeHome: 57712, effective: 23.1, noIncomeTax: false },
-  { state: "Hawaii",         abbr: "HI", takeHome: 57423, effective: 23.4, noIncomeTax: false, highlight: "low" },
-  { state: "Oregon",         abbr: "OR", takeHome: 55860, effective: 25.5, noIncomeTax: false, highlight: "low" },
-]
+const fmt = usd
+const fedTaxFormula = FEDERAL_BRACKET_ROWS.map((r) => `${pct(r.rate)} × ${usd(r.income)}`).join(" + ")
+const lowest2 = STATE_ROWS.slice(-2).reverse()
+const lowFacts = stateFacts(LOWEST.code)
+const second = BOTTOM_FIVE[1]
+const third = BOTTOM_FIVE[2]
+const ca = stateRow("CA")
+const caFacts = stateFacts("CA")
+const gapFV = approxThousands(GAP_30_YEARS)
 
 const KEY_NUMBERS = [
-  { value: "$61,593", label: "Best-case take-home",     sub: "No-income-tax states",  color: "#22c55e" },
-  { value: "$55,860", label: "Lowest take-home",        sub: "Oregon",                color: "#e94560" },
-  { value: "$5,733",  label: "Annual gap",              sub: "Best vs. worst state",  color: "#f59e0b" },
-  { value: "$478",    label: "Monthly gap",             sub: "Per month difference",  color: "#f59e0b" },
-  { value: "9 states",label: "No income tax",           sub: "Zero state income tax", color: "#4FC3F7" },
-  { value: "25.5%",   label: "Highest effective rate",  sub: "Oregon",                color: "#e94560" },
-  { value: "17.9%",   label: "Lowest effective rate",   sub: "No-tax states",         color: "#22c55e" },
-  { value: "$13,408", label: "Federal deductions",      sub: "Same in every state",   color: "#a8a8b3" },
+  { value: usd(AFTER_FEDERAL),     label: "Best-case take-home",     sub: "No-income-tax states",  color: "#22c55e" },
+  { value: usd(LOWEST.takeHome),   label: "Lowest take-home",        sub: LOWEST.name,             color: "#e94560" },
+  { value: usd(ANNUAL_GAP),        label: "Annual gap",              sub: "Best vs. worst state",  color: "#f59e0b" },
+  { value: usd(MONTHLY_GAP),       label: "Monthly gap",             sub: "Per month difference",  color: "#f59e0b" },
+  { value: `${NO_TAX_STATES.length} states`, label: "No income tax", sub: "Zero state income tax", color: "#4FC3F7" },
+  { value: `${HIGHEST_EFFECTIVE.toFixed(1)}%`, label: "Highest effective rate", sub: LOWEST.name, color: "#e94560" },
+  { value: `${LOWEST_EFFECTIVE.toFixed(1)}%`,  label: "Lowest effective rate",  sub: "No-tax states", color: "#22c55e" },
+  { value: usd(FEDERAL_TOTAL),     label: "Federal deductions",      sub: "Same in every state",   color: "#a8a8b3" },
 ]
 
 const relatedTools = [
@@ -109,18 +59,14 @@ const relatedTools = [
   },
 ]
 
-function fmt(n: number): string {
-  return "$" + n.toLocaleString("en-US")
-}
-
 // ── JSON-LD schemas ───────────────────────────────────────────────────────────
 
 const newsArticleSchema = {
   "@context": "https://schema.org",
   "@type": "NewsArticle",
-  headline: "2026 American Paycheck Report: How Much of a $75,000 Salary Do You Actually Keep?",
+  headline: `${REPORT_YEAR} American Paycheck Report: How Much of a ${usd(BENCHMARK_SALARY)} Salary Do You Actually Keep?`,
   description:
-    "How much of a $75,000 salary do workers actually keep across all 50 US states in 2026? Full breakdown using IRS brackets, FICA rates, and state income tax tables.",
+    `How much of a ${usd(BENCHMARK_SALARY)} salary do workers actually keep across all 50 US states in ${REPORT_YEAR}? Full breakdown using IRS brackets, FICA rates, and state income tax tables.`,
   url: "https://www.dayblip.com/research/paycheck-report-2026",
   datePublished: "2026-06-13",
   dateModified: "2026-06-13",
@@ -128,22 +74,22 @@ const newsArticleSchema = {
   publisher: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
   image: "https://www.dayblip.com/api/og?title=2026+Paycheck+Report&emoji=💵&subtitle=%2475%2C000+salary+across+all+50+states",
   articleSection: "Personal Finance",
-  keywords: "paycheck calculator, take-home pay, state income tax 2026, net pay by state, $75000 salary",
+  keywords: `paycheck calculator, take-home pay, state income tax ${REPORT_YEAR}, net pay by state, $${BENCHMARK_SALARY} salary`,
 }
 
 const datasetSchema = {
   "@context": "https://schema.org",
   "@type": "Dataset",
-  name: "2026 US State Take-Home Pay — $75,000 Benchmark Salary",
+  name: `${REPORT_YEAR} US State Take-Home Pay — ${usd(BENCHMARK_SALARY)} Benchmark Salary`,
   description:
-    "Annual take-home pay and effective tax rate for a single filer earning $75,000 in all 50 US states, using 2026 IRS federal brackets, standard deduction of $16,100, FICA rates, and each state's current income tax schedule.",
+    `Annual take-home pay and effective tax rate for a single filer earning ${usd(BENCHMARK_SALARY)} in all 50 US states, using ${REPORT_YEAR} IRS federal brackets, standard deduction of ${usd(STANDARD_DED)}, FICA rates, and each state's current income tax schedule.`,
   url: "https://www.dayblip.com/research/paycheck-report-2026",
   creator: { "@type": "Organization", name: "Dayblip", url: "https://www.dayblip.com" },
   datePublished: "2026-06-13",
   license: "https://creativecommons.org/licenses/by/4.0/",
   variableMeasured: ["Annual take-home pay", "Effective total tax rate"],
   spatialCoverage: { "@type": "Place", name: "United States" },
-  temporalCoverage: "2026",
+  temporalCoverage: String(REPORT_YEAR),
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -175,13 +121,13 @@ export default function PaycheckReport2026() {
 
         {/* H1 */}
         <h1 className="text-white text-3xl md:text-4xl font-bold leading-tight mb-4">
-          2026 American Paycheck Report: How Much of a $75,000 Salary Do You Actually Keep?
+          {REPORT_YEAR} American Paycheck Report: How Much of a {usd(BENCHMARK_SALARY)} Salary Do You Actually Keep?
         </h1>
 
         {/* Subtitle */}
         <p className="text-[#a8a8b3] text-lg leading-relaxed mb-4">
-          A state-by-state analysis of annual take-home pay for a single filer earning $75,000,
-          using 2026 IRS federal tax brackets, current FICA rates, and each state&apos;s income tax schedule.
+          A state-by-state analysis of annual take-home pay for a single filer earning {usd(BENCHMARK_SALARY)},
+          using {REPORT_YEAR} IRS federal tax brackets, current FICA rates, and each state&apos;s income tax schedule.
         </p>
 
         <p className="text-[#a8a8b3] text-sm mb-10">
@@ -192,9 +138,9 @@ export default function PaycheckReport2026() {
         <div className="rounded-2xl border border-[#e94560]/30 bg-[#e94560]/5 p-6 mb-10">
           <div className="text-[#e94560] text-xs font-semibold uppercase tracking-wider mb-2">Key Finding</div>
           <p className="text-white text-lg font-medium leading-relaxed">
-            A worker earning $75,000 keeps <strong className="text-[#22c55e]">$61,593</strong> annually in a no-income-tax
-            state — but only <strong className="text-[#e94560]">$55,860</strong> in Oregon.
-            That&apos;s a <strong className="text-[#f59e0b]">$5,733 annual gap</strong> on the same gross salary.
+            A worker earning {usd(BENCHMARK_SALARY)} keeps <strong className="text-[#22c55e]">{usd(AFTER_FEDERAL)}</strong> annually in a no-income-tax
+            state — but only <strong className="text-[#e94560]">{usd(LOWEST.takeHome)}</strong> in {LOWEST.name}.
+            That&apos;s a <strong className="text-[#f59e0b]">{usd(ANNUAL_GAP)} annual gap</strong> on the same gross salary.
           </p>
         </div>
 
@@ -206,13 +152,13 @@ export default function PaycheckReport2026() {
             from the number in your bank account.
           </p>
           <p>
-            We used a single benchmark — <strong className="text-white">$75,000 gross annual salary, single filer,
+            We used a single benchmark — <strong className="text-white">{usd(BENCHMARK_SALARY)} gross annual salary, single filer,
             standard deduction, no dependents</strong> — and calculated the actual take-home pay for every US state
-            using 2026 tax schedules. The $75,000 figure was chosen because it sits above the US median individual
-            income and crosses into the 22% federal bracket, making the state-level variation especially meaningful.
+            using {REPORT_YEAR} tax schedules. The {usd(BENCHMARK_SALARY)} figure was chosen because it sits above the US median individual
+            income and crosses into the {pct(TOP_FEDERAL_RATE)} federal bracket, making the state-level variation especially meaningful.
           </p>
           <p>
-            Federal deductions are identical across all states ($7,670 federal income tax + $5,738 FICA = $13,408 total).
+            Federal deductions are identical across all states ({usd(FEDERAL_INCOME_TAX)} federal income tax + {usd(FICA_TAX)} FICA = {usd(FEDERAL_TOTAL)} total).
             Every dollar of difference between states is driven entirely by state income tax.
           </p>
         </div>
@@ -235,7 +181,7 @@ export default function PaycheckReport2026() {
         <section className="mb-12">
           <h2 className="text-white text-xl font-bold mb-2">Federal Tax Calculation (Same in Every State)</h2>
           <p className="text-[#a8a8b3] text-sm mb-5">
-            Gross $75,000 · Standard deduction $16,100 · Taxable income $58,900
+            Gross {usd(BENCHMARK_SALARY)} · Standard deduction {usd(STANDARD_DED)} · Taxable income {usd(TAXABLE_INCOME)}
           </p>
           <div className="overflow-x-auto rounded-xl border border-[#1e2d4a]">
             <table className="w-full text-sm">
@@ -249,11 +195,14 @@ export default function PaycheckReport2026() {
               </thead>
               <tbody>
                 {[
-                  { bracket: "$0 – $12,400",       rate: "10%",   income: "$12,400",       tax: "$1,240" },
-                  { bracket: "$12,401 – $50,400",  rate: "12%",   income: "$38,000",       tax: "$4,560" },
-                  { bracket: "$50,401 – $58,900",  rate: "22%",   income: "$8,500",        tax: "$1,870" },
-                  { bracket: "Social Security",    rate: "6.2%",  income: "$75,000 gross", tax: "$4,650" },
-                  { bracket: "Medicare",           rate: "1.45%", income: "$75,000 gross", tax: "$1,088" },
+                  ...FEDERAL_BRACKET_ROWS.map((r) => ({
+                    bracket: `${usd(r.lo === 0 ? 0 : r.lo + 1)} – ${usd(r.hi)}`,
+                    rate: pct(r.rate),
+                    income: usd(r.income),
+                    tax: usd(r.tax),
+                  })),
+                  { bracket: "Social Security", rate: SS_RATE_LABEL,       income: `${usd(BENCHMARK_SALARY)} gross`, tax: usd(SOCIAL_SECURITY_TAX) },
+                  { bracket: "Medicare",        rate: MEDICARE_RATE_LABEL, income: `${usd(BENCHMARK_SALARY)} gross`, tax: usd(MEDICARE_TAX) },
                 ].map((row) => (
                   <tr key={row.bracket} className="border-b border-[#1e2d4a] last:border-0 hover:bg-[#16213e]/50">
                     <td className="px-4 py-3 text-white">{row.bracket}</td>
@@ -264,7 +213,7 @@ export default function PaycheckReport2026() {
                 ))}
                 <tr className="bg-[#16213e]">
                   <td colSpan={3} className="px-4 py-3 text-white font-bold">Total federal deductions</td>
-                  <td className="px-4 py-3 text-right font-bold text-[#e94560]">$13,408</td>
+                  <td className="px-4 py-3 text-right font-bold text-[#e94560]">{usd(FEDERAL_TOTAL)}</td>
                 </tr>
               </tbody>
             </table>
@@ -275,7 +224,7 @@ export default function PaycheckReport2026() {
         <section className="mb-12">
           <h2 className="text-white text-xl font-bold mb-2">Take-Home Pay by State — All 50 States</h2>
           <p className="text-[#a8a8b3] text-sm mb-5">
-            Sorted highest to lowest take-home pay. Gross salary: $75,000 · Single filer · Standard deduction · 2026 rates.
+            Sorted highest to lowest take-home pay. Gross salary: {usd(BENCHMARK_SALARY)} · Single filer · Standard deduction · {REPORT_YEAR} rates.
           </p>
 
           {/* Legend */}
@@ -286,7 +235,7 @@ export default function PaycheckReport2026() {
             </span>
             <span className="flex items-center gap-1.5">
               <span className="inline-block w-3 h-3 rounded-sm" style={{ background: "rgba(233,69,96,0.12)" }}></span>
-              Highest-tax states (HI, OR)
+              Highest-tax states ({lowest2.map((r) => r.code).join(", ")})
             </span>
           </div>
 
@@ -302,27 +251,28 @@ export default function PaycheckReport2026() {
                 </tr>
               </thead>
               <tbody>
-                {STATES.map((s, i) => {
+                {STATE_ROWS.map((s, i) => {
+                  const isLow = HIGHLIGHT_LOW.has(s.code)
                   const rowBg = s.noIncomeTax
                     ? "rgba(26,122,74,0.15)"
-                    : s.highlight === "low"
+                    : isLow
                     ? "rgba(233,69,96,0.10)"
                     : "transparent"
                   return (
                     <tr
-                      key={s.abbr}
+                      key={s.code}
                       className="border-b border-[#1e2d4a] last:border-0"
                       style={{ background: rowBg }}
                     >
                       <td className="px-4 py-2.5 text-[#a8a8b3] text-xs">{i + 1}</td>
                       <td className="px-4 py-2.5">
-                        <span className="text-white font-medium">{s.state}</span>
+                        <span className="text-white font-medium">{s.name}</span>
                         {s.noIncomeTax && (
                           <span className="ml-2 text-[10px] text-[#22c55e] font-medium">NO TAX</span>
                         )}
                       </td>
                       <td className="px-4 py-2.5 text-right font-bold" style={{
-                        color: s.noIncomeTax ? "#22c55e" : s.highlight === "low" ? "#e94560" : "#ffffff"
+                        color: s.noIncomeTax ? "#22c55e" : isLow ? "#e94560" : "#ffffff"
                       }}>
                         {fmt(s.takeHome)}
                       </td>
@@ -347,28 +297,28 @@ export default function PaycheckReport2026() {
             {[
               {
                 n: "01",
-                title: "Nine states take nothing extra",
-                body: "Wyoming, South Dakota, Alaska, Nevada, Florida, Texas, Washington, Tennessee, and New Hampshire levy no state income tax. Workers in these states keep an identical $61,593 from a $75,000 salary — the federal government takes $13,408 and the state takes nothing.",
+                title: `${NO_TAX_STATES.length} states take nothing extra`,
+                body: `${listNames(NO_TAX_STATES)} levy no state income tax. Workers in these states keep an identical ${usd(AFTER_FEDERAL)} from a ${usd(BENCHMARK_SALARY)} salary — the federal government takes ${usd(FEDERAL_TOTAL)} and the state takes nothing.`,
               },
               {
                 n: "02",
-                title: "The $5,733 gap compounds to ~$542,000 over a 30-year career",
-                body: "An Oregon worker earning $75,000 takes home $5,733 less per year than an identical worker in Texas or Florida. That gap doesn't disappear — invested at a 7% annual return for 30 years, it compounds to approximately $542,000. State tax choice is a long-term wealth decision.",
+                title: `The ${usd(ANNUAL_GAP)} gap compounds to ~${gapFV} over a ${CAREER_YEARS}-year career`,
+                body: `${LOWEST.name === "Oregon" ? "An" : "A"} ${LOWEST.name} worker earning ${usd(BENCHMARK_SALARY)} takes home ${usd(ANNUAL_GAP)} less per year than an identical worker in ${EXAMPLE_NO_TAX.name} or Florida. That gap doesn't disappear — invested at a ${pct(GROWTH_RATE)} annual return for ${CAREER_YEARS} years, it compounds to approximately ${gapFV}. State tax choice is a long-term wealth decision.`,
               },
               {
                 n: "03",
-                title: "The 22% federal bracket kicks in at this salary level",
-                body: "At $75,000 gross with the 2026 standard deduction of $16,100, only $8,500 of taxable income falls into the 22% federal bracket. The majority of the salary is still taxed at 10% and 12%. State income tax becomes disproportionately impactful here because the federal marginal rate is still moderate.",
+                title: `The ${pct(TOP_FEDERAL_RATE)} federal bracket kicks in at this salary level`,
+                body: `At ${usd(BENCHMARK_SALARY)} gross with the ${REPORT_YEAR} standard deduction of ${usd(STANDARD_DED)}, only ${usd(INCOME_IN_TOP_FEDERAL_BRACKET)} of taxable income falls into the ${pct(TOP_FEDERAL_RATE)} federal bracket. The majority of the salary is still taxed at ${FEDERAL_BRACKET_ROWS.slice(0, -1).map((r) => pct(r.rate)).join(" and ")}. State income tax becomes disproportionately impactful here because the federal marginal rate is still moderate.`,
               },
               {
                 n: "04",
-                title: "Oregon edges out Hawaii as the highest-tax state at this income level",
-                body: "Oregon's 8.75% bracket starts at just $11,400 of taxable income, and its standard deduction is only $2,910, so a $75,000 earner pays a 25.5% total effective rate: the highest of any state. Hawaii follows at 23.4%, then Maine at 23.1%. California, despite its reputation, lands at 21.6% at this income level — roughly middle-of-the-pack — because its higher rates apply mainly to incomes above $100,000.",
+                title: `${LOWEST.name} edges out ${second.name} as the highest-tax state at this income level`,
+                body: `${LOWEST.name}'s ${pct(lowFacts.marginalRate, 2)} bracket starts at just ${usd(lowFacts.marginalStart)} of taxable income, and its standard deduction is only ${usd(lowFacts.deduction)}, so a ${usd(BENCHMARK_SALARY)} earner pays a ${LOWEST.effective.toFixed(1)}% total effective rate: the highest of any state. ${second.name} follows at ${second.effective.toFixed(1)}%, then ${third.name} at ${third.effective.toFixed(1)}%. California, despite its reputation, lands at ${ca.effective.toFixed(1)}% at this income level — roughly middle-of-the-pack — because its ${pct(caFacts.nextBracketRate ?? caFacts.topRate, 1)} rate only starts at ${usd(caFacts.nextBracketStart ?? caFacts.topStart)} of taxable income.`,
               },
               {
                 n: "05",
                 title: "Middle-of-the-pack states cluster tightly",
-                body: "Thirty-nine states fall within a roughly $3,100 band ($58,000–$61,100 take-home). State income tax choice is most consequential at the extremes — the 9 no-tax states and the bottom 2 (OR, HI) drive the entire headline gap.",
+                body: `${MIDDLE_STATES.length} states fall within a roughly ${usd(Math.round(MIDDLE_BAND / 100) * 100)} band (${usd(MIDDLE_MIN)}–${usd(MIDDLE_MAX)} take-home). State income tax choice is most consequential at the extremes — the ${NO_TAX_STATES.length} no-tax states and the bottom 2 (${lowest2.map((r) => r.code).join(", ")}) drive the entire headline gap.`,
               },
             ].map((f) => (
               <div key={f.n} className="flex gap-4 rounded-xl bg-[#16213e] border border-[#1e2d4a] p-5">
@@ -387,27 +337,28 @@ export default function PaycheckReport2026() {
           <h2 className="text-white text-xl font-bold mb-4">Methodology</h2>
           <div className="space-y-3 text-[#a8a8b3] text-sm leading-relaxed">
             <p>
-              All calculations use a <strong className="text-white">$75,000 gross annual salary, single filing status,
+              All calculations use a <strong className="text-white">{usd(BENCHMARK_SALARY)} gross annual salary, single filing status,
               standard deduction, no dependents, no pre-tax deductions</strong> (such as 401(k) or HSA contributions).
               This represents the simplest possible tax situation to isolate the effect of geography.
             </p>
             <p>
-              <strong className="text-white">Federal income tax</strong> uses 2026 brackets per IRS Revenue Procedure 2025-32.
-              Standard deduction: $16,100 (single). Taxable income: $58,900.
-              Tax: 10% × $12,400 + 12% × $38,000 + 22% × $8,500 = $7,670.
+              <strong className="text-white">Federal income tax</strong> uses {REPORT_YEAR} brackets per IRS Revenue Procedure 2025-32.
+              Standard deduction: {usd(STANDARD_DED)} (single). Taxable income: {usd(TAXABLE_INCOME)}.
+              Tax: {fedTaxFormula} = {usd(FEDERAL_INCOME_TAX)}.
             </p>
             <p>
-              <strong className="text-white">FICA</strong>: Social Security 6.2% × $75,000 = $4,650.
-              Medicare 1.45% × $75,000 = $1,088. Total FICA: $5,738.
+              <strong className="text-white">FICA</strong>: Social Security {SS_RATE_LABEL} × {usd(BENCHMARK_SALARY)} = {usd(SOCIAL_SECURITY_TAX)}.
+              Medicare {MEDICARE_RATE_LABEL} × {usd(BENCHMARK_SALARY)} = {usd(MEDICARE_TAX)}. Total FICA: {usd(FICA_TAX)}.
               Additional Medicare surtax (0.9%) does not apply below $200,000.
             </p>
             <p>
-              <strong className="text-white">State income tax</strong> uses each state&apos;s 2026 published rate schedules
-              sourced from state revenue department websites and Tax Foundation data. Local income taxes (city, county)
-              are not included. State standard deductions are applied where available.
+              <strong className="text-white">State income tax</strong> uses each state&apos;s {REPORT_YEAR} published rate schedules
+              sourced from state revenue department websites and Tax Foundation data, in the same bracket tables that power
+              the Dayblip paycheck calculator. Local income taxes (city, county) are not included. State standard deductions
+              and personal exemptions are applied where available.
             </p>
             <p>
-              Take-home pay = $75,000 − $7,670 (federal income tax) − $5,738 (FICA) − state income tax.
+              Take-home pay = {usd(BENCHMARK_SALARY)} − {usd(FEDERAL_INCOME_TAX)} (federal income tax) − {usd(FICA_TAX)} (FICA) − state income tax.
             </p>
           </div>
         </section>
@@ -428,7 +379,7 @@ export default function PaycheckReport2026() {
         <div className="rounded-2xl border border-[#4FC3F7]/30 bg-[#4FC3F7]/5 p-6 mb-10">
           <div className="text-[#4FC3F7] text-sm font-semibold mb-2">Run Your Own Numbers →</div>
           <p className="text-[#a8a8b3] text-sm mb-4">
-            This report uses a $75,000 benchmark. For your actual salary, filing status, and pre-tax
+            This report uses a {usd(BENCHMARK_SALARY)} benchmark. For your actual salary, filing status, and pre-tax
             deductions, use the free Dayblip Paycheck Calculator.
           </p>
           <Link
@@ -457,9 +408,9 @@ export default function PaycheckReport2026() {
         {/* Share */}
         <div className="mb-10">
           <ShareButtons
-            text="How much of a $75,000 salary do you actually keep? It depends on which state you live in — full 2026 breakdown at dayblip.com/research/paycheck-report-2026"
+            text={`How much of a ${usd(BENCHMARK_SALARY)} salary do you actually keep? It depends on which state you live in — full ${REPORT_YEAR} breakdown at dayblip.com/research/paycheck-report-2026`}
             url="https://www.dayblip.com/research/paycheck-report-2026"
-            title="2026 American Paycheck Report: $75,000 Salary 50-State Take-Home Pay"
+            title={`${REPORT_YEAR} American Paycheck Report: ${usd(BENCHMARK_SALARY)} Salary 50-State Take-Home Pay`}
           />
         </div>
 

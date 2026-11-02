@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { BENCHMARK_SALARY, REPORT_YEAR, usd, usdK } from "@/lib/paycheckReport"
 
 export const metadata: Metadata = {
   title: "The Dayblip Index — Original Research & Data Reports",
@@ -35,10 +36,10 @@ const reports: ReportCard[] = [
   {
     href: "/research/paycheck-report-2026",
     label: "Paycheck",
-    title: "2026 American Paycheck Report",
+    title: `${REPORT_YEAR} American Paycheck Report`,
     description:
-      "A $75,000 salary feels very different depending on which state you live in. We ran the numbers for all 50 states using 2026 IRS brackets, FICA rates, and current state income tax tables.",
-    meta: "Published June 2026 · 50 states · $75K benchmark salary",
+      `A ${usd(BENCHMARK_SALARY)} salary feels very different depending on which state you live in. We ran the numbers for all 50 states using ${REPORT_YEAR} IRS brackets, FICA rates, and current state income tax tables.`,
+    meta: `Published June 2026 · 50 states · ${usdK(BENCHMARK_SALARY)} benchmark salary`,
     status: "live",
   },
   {
