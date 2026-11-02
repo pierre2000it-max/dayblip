@@ -160,7 +160,7 @@ const articles = [
     category: "Finance",
     title: "Your $75,000 Salary Is Worth Very Different Amounts Depending on Your State",
     excerpt:
-      "A $75,000 salary takes home $61,390 in Texas and $56,972 in Hawaii — a $4,418 annual gap driven entirely by state income tax. Full 50-state breakdown with IRS and Tax Foundation sources.",
+      "A $75,000 salary takes home $61,593 in Texas and $55,860 in Oregon, a $5,733 annual gap driven entirely by state income tax. Full 50-state breakdown with IRS and Tax Foundation sources.",
     readTime: "5 min read",
     href: "/blog/paycheck-by-state-2026",
   },

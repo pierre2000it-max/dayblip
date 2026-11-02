@@ -37,8 +37,8 @@ const reports: ReportCard[] = [
     label: "Paycheck",
     title: "2026 American Paycheck Report",
     description:
-      "A $60,000 salary feels very different depending on which state you live in. We ran the numbers for all 50 states using 2026 IRS brackets, FICA rates, and current state income tax tables.",
-    meta: "Published June 2026 · 50 states · $60K benchmark salary",
+      "A $75,000 salary feels very different depending on which state you live in. We ran the numbers for all 50 states using 2026 IRS brackets, FICA rates, and current state income tax tables.",
+    meta: "Published June 2026 · 50 states · $75K benchmark salary",
     status: "live",
   },
   {
