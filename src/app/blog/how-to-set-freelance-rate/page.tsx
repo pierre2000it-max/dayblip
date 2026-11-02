@@ -2,7 +2,8 @@ import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
 import ShareButtons from "@/components/ShareButtons"
 import { articleSchema } from "@/lib/schema"
-import { freelanceRate, type FreelanceInputs } from "@/lib/freelanceRate"
+import { freelanceRate } from "@/lib/freelanceRate"
+import { FREELANCE_BASE, FREELANCE_RESULT, FREELANCE_NAIVE_RATE } from "@/lib/examples/freelanceExample"
 
 // Every figure is computed from src/lib/freelanceRate.ts, the model the
 // Freelancer Rate Calculator uses, so the article and the tool cannot disagree.
@@ -13,12 +14,9 @@ import { freelanceRate, type FreelanceInputs } from "@/lib/freelanceRate"
 const usd = (n: number) => "$" + Math.round(n).toLocaleString("en-US")
 const usd2 = (n: number) => "$" + n.toFixed(2)
 
-const BASE: FreelanceInputs = {
-  income: 75000, vacationWeeks: 4, billablePerWeek: 30,
-  bizMonthly: 200, healthMonthly: 400, retirementMonthly: 500, state: "TX",
-}
-const f = freelanceRate(BASE)
-const naive = BASE.income / 2080
+const BASE = FREELANCE_BASE
+const f = FREELANCE_RESULT
+const naive = FREELANCE_NAIVE_RATE
 const multiple = f.baseRate / naive
 const hoursRows = [15, 20, 25, 30, 35].map((h) => ({ h, f: freelanceRate({ ...BASE, billablePerWeek: h }) }))
 const noRetire = freelanceRate({ ...BASE, retirementMonthly: 0 })

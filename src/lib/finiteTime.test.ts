@@ -7,6 +7,8 @@ import {
   MONDAYS_META_DESCRIPTION, MONDAYS_OG_DESCRIPTION, WEEKENDS_META_DESCRIPTION, WEEKENDS_OG_DESCRIPTION,
   n, usd, usdM,
 } from "./finiteTime"
+import { FREELANCE_META_DESCRIPTION, FREELANCE_RATE_ROUNDED, FREELANCE_NAIVE_ROUNDED } from "./examples/freelanceExample"
+import { ITEMIZING_CARD_EXCERPT, EXAMPLE_B, EXAMPLE_A_SHORTFALL } from "./examples/itemizingExamples"
 
 describe("career Mondays", () => {
   it("every table row follows the stated formula", () => {
@@ -67,5 +69,23 @@ describe("metadata and formatting", () => {
     expect(n(1500)).toBe("1,500")
     expect(usd(625500)).toBe("$625,500")
     expect(usdM(1876500)).toBe("$1.88 million")
+  })
+})
+
+// Teaser strings for other articles are generated from the same examples the
+// articles compute, so the listing card and the article can never disagree.
+
+describe("shared article examples", () => {
+  it("freelance meta description is within 120-155 and carries the computed rates", () => {
+    expect(FREELANCE_META_DESCRIPTION.length).toBeGreaterThanOrEqual(120)
+    expect(FREELANCE_META_DESCRIPTION.length).toBeLessThanOrEqual(155)
+    expect(FREELANCE_META_DESCRIPTION).toContain(`$${FREELANCE_RATE_ROUNDED} an hour`)
+    expect(FREELANCE_RATE_ROUNDED).toBeGreaterThan(FREELANCE_NAIVE_ROUNDED)
+  })
+  it("itemizing card excerpt carries the computed savings and shortfall", () => {
+    expect(EXAMPLE_B.saved).toBeGreaterThan(0)
+    expect(EXAMPLE_A_SHORTFALL).toBeGreaterThan(0)
+    expect(ITEMIZING_CARD_EXCERPT).toContain(usd(EXAMPLE_B.saved))
+    expect(ITEMIZING_CARD_EXCERPT).toContain(usd(EXAMPLE_A_SHORTFALL))
   })
 })

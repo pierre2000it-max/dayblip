@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import { BLOG_CARD_DESCRIPTION } from "@/lib/paycheckReport"
+import { FREELANCE_CARD_EXCERPT } from "@/lib/examples/freelanceExample"
+import { ITEMIZING_CARD_EXCERPT } from "@/lib/examples/itemizingExamples"
 import { useState } from "react"
 
 const articles = [
@@ -321,7 +323,7 @@ const articles = [
     category: "Career",
     title: "How to Set Your Freelance Hourly Rate in 2026",
     excerpt:
-      "To take home $75,000 billing 30 hours a week you need about $82 an hour, not $36. The full cost breakdown and how billable hours move the rate.",
+      FREELANCE_CARD_EXCERPT,
     readTime: "6 min read",
     href: "/blog/how-to-set-freelance-rate",
   },
@@ -361,7 +363,7 @@ const articles = [
     category: "Finance",
     title: "Standard Deduction vs Itemizing in 2026: Which Saves More?",
     excerpt:
-      "Itemize only when deductions top $16,100 (single) or $32,200 (married). A $400,000 mortgage saves one couple $1,951. A renter loses by $8,025.",
+      ITEMIZING_CARD_EXCERPT,
     readTime: "6 min read",
     href: "/blog/standard-deduction-vs-itemizing-2026",
   },

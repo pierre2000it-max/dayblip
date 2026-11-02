@@ -8,6 +8,7 @@ import {
   SALT_FLOOR, SALT_PHASEDOWN_START, SENIOR_DEDUCTION, SENIOR_PHASEOUT_START, breakEvenOtherItems,
   charityItemized, medicalDeduction, saltDeduction, seniorDeduction, taxWithBest,
 } from "@/lib/itemizing"
+import { EXAMPLE_A, EXAMPLE_B } from "@/lib/examples/itemizingExamples"
 
 // Every dollar figure is computed from src/lib/tax2026.ts and src/lib/itemizing.ts.
 // Literals: the 35% benefit cap for the 37% bracket and the $750,000 debt limit rules
@@ -18,40 +19,9 @@ const STD = STANDARD_DEDUCTION
 const PAGE_URL = "https://www.dayblip.com/blog/standard-deduction-vs-itemizing-2026"
 const TITLE = "Standard Deduction vs Itemizing in 2026: Which Saves More?"
 
-// First-year interest on a 30-year fixed loan.
-function firstYearInterest(loan: number, rate: number) {
-  const r = rate / 12
-  const pay = (loan * r) / (1 - Math.pow(1 + r, -360))
-  let bal = loan
-  let interest = 0
-  for (let i = 0; i < 12; i++) {
-    const int = bal * r
-    interest += int
-    bal -= pay - int
-  }
-  return interest
-}
-
-// Example A: single, $85,000, renter.
-const A = (() => {
-  const agi = 85000, saltPaid = 6500, gifts = 2000
-  const salt = saltDeduction(saltPaid, agi)
-  const charity = charityItemized(gifts, agi)
-  const itemized = salt + charity
-  return { agi, saltPaid, gifts, salt, charity, itemized, ...taxWithBest(agi, itemized, "single") }
-})()
-
-// Example B: married filing jointly, $160,000, $400,000 mortgage at 6.5%.
-const B = (() => {
-  const agi = 160000, loan = 400000, rate = 0.065, prop = 6000, stateInc = 7000, gifts = 3000
-  const interest = firstYearInterest(loan, rate)
-  const salt = saltDeduction(prop + stateInc, agi)
-  const charity = charityItemized(gifts, agi)
-  const itemized = interest + salt + charity
-  const std = taxWithBest(agi, 0, "mfj")
-  const item = taxWithBest(agi, itemized, "mfj")
-  return { agi, loan, rate, prop, stateInc, gifts, interest, salt, charity, itemized, std, item, saved: std.tax - item.tax }
-})()
+// Examples A and B live in src/lib/examples/itemizingExamples.ts (shared with the blog listing card).
+const A = EXAMPLE_A
+const B = EXAMPLE_B
 
 // Break-even mortgage rows.
 const BE = [

@@ -1,6 +1,10 @@
 import Link from "next/link"
 import RelatedTools from "@/components/blog/RelatedTools"
 import ShareButtons from "@/components/ShareButtons"
+import { SCF_YEAR, SCF_RELEASE, SCF_PRIOR_YEAR, RETIREMENT_ACCOUNTS_ALL, RETIREMENT_MEAN_BY_AGE, RETIREMENT_MEDIAN_BY_AGE_2022, usd } from "@/data/scf2025"
+
+const median5564 = RETIREMENT_MEDIAN_BY_AGE_2022[3].median
+const fidelityAt55 = 70000 * 7
 
 const schema = {
   "@context": "https://schema.org",
@@ -49,7 +53,7 @@ export default function HowMuchSavedByAgePage() {
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0] leading-relaxed">
-              Fidelity&apos;s commonly cited benchmarks suggest having 1x your salary saved by 30, 3x by 40, 6x by 50, 8x by 60, and 10x by 67. These assume a 15% savings rate starting at 25, a 50/50 stock-bond portfolio, and retirement spending at 55% to 80% of pre-retirement income. The Federal Reserve&apos;s 2022 Survey of Consumer Finances found the median retirement account balance for ages 55–64 was $185,000 — well below these targets.
+              Fidelity&apos;s commonly cited benchmarks suggest having 1x your salary saved by 30, 3x by 40, 6x by 50, 8x by 60, and 10x by 67. These assume a 15% savings rate starting at 25, a 50/50 stock-bond portfolio, and retirement spending at 55% to 80% of pre-retirement income. The Federal Reserve&apos;s {SCF_YEAR} Survey of Consumer Finances found that among families with a retirement account, the median balance was {usd(RETIREMENT_ACCOUNTS_ALL.medianAmongHolders)}, and {100 - RETIREMENT_ACCOUNTS_ALL.pctHolding}% of families had no retirement account at all. Both are well below these targets.
             </p>
           </div>
         </section>
@@ -113,15 +117,15 @@ export default function HowMuchSavedByAgePage() {
           <h2 className="text-white text-xl font-bold mt-8 mb-3">What the Federal Reserve Data Actually Shows</h2>
 
           <p>
-            The Federal Reserve&apos;s 2022 Survey of Consumer Finances (the 2025 survey, released October 2026, had not published age tables at the time of writing) provides the most comprehensive picture of where American families actually stand. These figures are in 2022 dollars. For retirement accounts specifically — 401k, IRA, and similar — the median balances by age group were:
+            The Federal Reserve&apos;s {SCF_YEAR} Survey of Consumer Finances, released {SCF_RELEASE}, provides the most comprehensive picture of where American families actually stand. Across all families, {RETIREMENT_ACCOUNTS_ALL.pctHolding}% held a retirement account (401k, IRA, or similar), and the median balance among those who did was {usd(RETIREMENT_ACCOUNTS_ALL.medianAmongHolders)}, up from {usd(RETIREMENT_ACCOUNTS_ALL.medianAmongHoldersPrior)} in {SCF_PRIOR_YEAR} after inflation. By age, the {SCF_YEAR} bulletin publishes mean balances for families with an IRA or 401k-type plan (Box 2, Table A, {SCF_YEAR} dollars):
           </p>
 
           <p>
-            Under 35: $18,880. Ages 35–44: $45,000. Ages 45–54: $115,000. Ages 55–64: $185,000. Ages 65–74: $200,000. Ages 75 and older: $130,600.
+            {RETIREMENT_MEAN_BY_AGE.map((r) => `${r.label}: ${usd(r.mean)}`).join(". ")}. Means are pulled far above the typical family by a small number of very large balances. The last published medians by age come from the {SCF_PRIOR_YEAR} survey ({SCF_PRIOR_YEAR} dollars): {RETIREMENT_MEDIAN_BY_AGE_2022.map((r) => `${r.label.replace("Ages ", "")}: ${usd(r.median)}`).join(". ")}.
           </p>
 
           <p>
-            For a household with $70,000 in income, the Fidelity benchmark at age 55 is $490,000. The median household in the 55–64 range had $185,000 in retirement accounts — roughly 38% of the benchmark. This gap is why retirement readiness is a frequent concern in financial research.
+            For a household with $70,000 in income, the Fidelity benchmark at age 55 is {usd(fidelityAt55)}. The median household in the 55–64 range had {usd(median5564)} in retirement accounts in the {SCF_PRIOR_YEAR} survey — roughly {Math.round((median5564 / fidelityAt55) * 100)}% of the benchmark. This gap is why retirement readiness is a frequent concern in financial research.
           </p>
 
           <p>
