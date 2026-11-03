@@ -478,3 +478,11 @@ Rule: every number in an article is either computed from a src/lib source (tax20
 - Nov 2 2026: research/how-many-mondays-left and research/weekends-you-have-left now render from `src/lib/finiteTime.ts` (same pattern). Also fixed on the way: the Mondays page claimed 65 is the full Social Security retirement age for people born after 1960 (it is 67); its raise example said a $5,000 raise is worth 3x more per Monday at 55 (per-Monday value is constant at $100, only the lifetime total changes, so the argument now points the other way: ask early); the Weekends page had an unsourced "6 hours of chores per weekend" claim and an "in our analysis" line with no analysis behind it, both removed; CDC life expectancy is now cited as 78.4 (2023) instead of "approximately 77".
 - Live site check: `.github/workflows/live-site-check.yml` runs `scripts/check-live-site.mjs` every Monday (and on demand from the Actions tab). It crawls every sitemap URL on production and opens a `live-check` issue for any 404, title over 60, description outside 120-155, canonical mismatch, noindex, or missing h1.
 - January additions: refresh HYSA/FDIC rates, Freddie Mac rate, AAA/Rover/Knot/College Board figures, student loan rates (each June), overtime deduction rules if the law changes.
+
+## Nov 3 2026 Bing Opportunity Pages
+Built from the Bing AI Topics "Top Opportunity Queries" export (Nov 3 2026):
+- `/working-days` (computed from `src/lib/workingDays.ts`: Monday to Friday minus the 11 US federal holidays, weekend observance rule, holiday counts in the year of its observed date). Tested for 2025-2028 in `workingDays.test.ts`. No annual update needed. The meta description computes from the lib, so it can't drift.
+- `/tools/time-decimal-chart` (computed from `src/lib/timeDecimal.ts`, tested).
+- `/days-between` gained a visible FAQ (6 items, one source for the JSON-LD and the accordion), breadcrumb, periods table, days-in-month table, methodology and related tools.
+- `/tools/timezone-converter` gained an EST/EDT to IST chart and 3 FAQs in `layout.tsx` (server-rendered, no second FAQPage schema).
+- Judge them on the next Bing AI Performance export (around Nov 25): query citations for "days between dates", "working days in a year", "time decimal chart", "9:30 est to ist".

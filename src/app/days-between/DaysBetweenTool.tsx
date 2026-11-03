@@ -5,23 +5,35 @@ import Link from "next/link";
 import AdUnit from "@/components/AdUnit";
 import FAQAccordion from "@/components/FAQAccordion";
 import ShareButtons from "@/components/ShareButtons";
+import Breadcrumb from "@/components/Breadcrumb";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
 const DAYS   = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
+const FAQ_ITEMS = [
+  { question: "How many days between two dates?",
+    answer: "Subtract the earlier date from the later one. Enter both dates above and click Calculate. The count excludes the end date, so January 1 to January 2 is 1 day. Add 1 if you want to count both dates." },
+  { question: "How many weeks between two dates?",
+    answer: "Divide the total days by 7. 100 days is 14 weeks and 2 days. The calculator shows the weeks and leftover days for any two dates." },
+  { question: "How many weekdays between two dates?",
+    answer: "The results show total days and weekdays (Monday to Friday) separately. For example, 28 days always contain 20 weekdays and 8 weekend days." },
+  { question: "How many working days between two dates?",
+    answer: "Working days are weekdays minus holidays. Take the weekday count from the results and subtract any holidays that fall on a weekday in your range." },
+  { question: "How many days are in a year?",
+    answer: "365, or 366 in a leap year. A year is a leap year when it divides by 4, except century years that do not divide by 400. 2024 and 2028 are leap years. 2100 is not." },
+  { question: "How many days until my birthday?",
+    answer: "Enter today as the start date and your next birthday as the end date, then click Calculate." },
+];
+
 const FAQ_JSONLD = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    { "@type": "Question", name: "How many days between two dates?",
-      acceptedAnswer: { "@type": "Answer", text: "Enter your start and end dates above and click Calculate for the exact count, including weekdays and weekends." } },
-    { "@type": "Question", name: "How many weekdays between two dates?",
-      acceptedAnswer: { "@type": "Answer", text: "Our calculator shows both total days and weekdays (Monday–Friday) separately in the results." } },
-    { "@type": "Question", name: "How many days until my birthday?",
-      acceptedAnswer: { "@type": "Answer", text: "Enter today as the start date and your next birthday as the end date, then click Calculate." } },
-  ],
+  mainEntity: FAQ_ITEMS.map(f => ({
+    "@type": "Question", name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
 };
 
 const POPULAR = [
@@ -124,14 +136,7 @@ export default function DaysBetweenTool() {
     setResult(res);
   };
 
-  const FAQS = [
-    { q: "How many days between two dates?",
-      a: "Enter your start and end dates above and click Calculate for the exact count, including weekdays and weekends." },
-    { q: "How many weekdays between two dates?",
-      a: "Our calculator shows both total days and weekdays (Monday–Friday) separately in the results." },
-    { q: "How many days until my birthday?",
-      a: "Enter today as the start date and your next birthday as the end date, then click Calculate." },
-  ];
+  const FAQS = FAQ_ITEMS.map(f => ({ q: f.question, a: f.answer }));
 
   return (
     <div className="min-h-screen bg-[#1a1a2e]">
@@ -152,6 +157,7 @@ export default function DaysBetweenTool() {
       {/* ── Quick Answer ───────────────────────────────────────────── */}
       <section className="px-6 py-8 bg-[#1a1a2e]">
         <div className="mx-auto max-w-[700px]">
+          <div className="mb-4"><Breadcrumb crumbs={[{ label: "Home", href: "/" }, { label: "Days Between Dates" }]} /></div>
           <div style={{ background: "#1e2d4a", borderLeft: "4px solid #e94560", borderRadius: "8px", padding: "16px 20px" }}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#e94560" }}>Quick Answer</div>
             <p className="text-[#e2e8f0]">There are 365 days between January 1 2025 and January 1 2026. Between January 1 2000 and January 1 2026 there are 9,497 days. Leap years add one extra day every 4 years — there have been 7 leap years between 2000 and 2026. The calculator accounts for all leap years automatically.</p>

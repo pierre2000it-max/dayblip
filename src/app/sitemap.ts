@@ -88,6 +88,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/age-calculator",   0.9, WEEKLY),
     p("/date-calculator",  0.9, WEEKLY),
     p("/days-between",     0.9, WEEKLY),
+    p("/working-days",     0.9, MONTHLY),
     p("/celebrity-age",    0.9, WEEKLY),
     p("/birthday-countdown", 0.9, WEEKLY),
 
@@ -169,6 +170,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/tools/unit-converter",          0.9),
     p("/tools/timezone-converter",      0.8),
     p("/tools/percentage-calculator",   0.8),
+    p("/tools/time-decimal-chart",      0.8),
     p("/tools/reading-time",            0.8),
     p("/tools/password-strength",       0.8),
     p("/tools/smoking-cost",            0.9),
