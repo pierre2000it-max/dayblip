@@ -5,7 +5,7 @@ import { utcWallClock } from "@/lib/useNow"
 
 const ROOT = join(process.cwd(), "src/app/world-counters")
 const COUNTERS = [
-  ".", "births-today", "co2-emissions", "money-printed-today", "plastic-in-ocean",
+  ".", "births-today", "co2-emissions", "deaths-today", "money-printed-today", "plastic-in-ocean",
   "population", "trees-cut-today", "us-debt", "us-population",
 ]
 

@@ -313,6 +313,7 @@ Social Security Administration publishes the new wage base each October for the 
 | `src/app/world-counters/plastic-in-ocean/Counter.tsx` | `CUMULATIVE_MT_JAN1_2026` → `CUMULATIVE_MT_JAN1_2027` | Calculated: prior value + (PLASTIC_MT_PER_YEAR × 1) | Add one year of plastic at current rate |
 | `src/app/world-counters/population/Counter.tsx` | `WORLD_POP_NOW`, `ANNUAL_BIRTHS`, `ANNUAL_DEATHS` | UN Population Division (population.un.org) | Check World Population Prospects update |
 | `src/app/world-counters/births-today/Counter.tsx` | `ANNUAL_BIRTHS`, `ANNUAL_DEATHS` | Same UN source | Must match population page |
+| `src/app/world-counters/deaths-today/Counter.tsx` | `ANNUAL_BIRTHS`, `ANNUAL_DEATHS` | Same UN source | Must match population page. Also update the FAQ/Quick Answer text in `page.tsx` (172,800 a day, 63.1 million, 2.1 births per death), `layout.tsx` description, WHO 2023 cause table and CDC 2023 US table (refresh when CDC publishes 2024 final data), and `src/data/datasets.ts` |
 
 **Counter page structure (Oct 14 2026):** each world-counter route is a server `page.tsx` (revalidate 60, passes `Date.now()`) plus a client `Counter.tsx`. Constants live in `Counter.tsx`. Never call `new Date()` in render: use `useNow(initialNow)` from `src/lib/useNow.ts`. `src/lib/worldCounters.test.ts` fails the build if you do.
 

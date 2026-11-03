@@ -111,6 +111,8 @@ export default function BirthdaysTodayPage({ initialNow }: { initialNow: number 
             </div>
           </div>
 
+          <p className="text-sm text-[#a8a8b3]">See the full <Link href="/world-counters/deaths-today" className="text-[#4FC3F7] hover:underline">deaths today counter</Link> with leading causes of death.</p>
+
           <ShareButtons
             text={`${fmtWhole(birthsToday)} babies have been born today so far! A new baby arrives every 0.24 seconds. Watch it tick live:`}
             url="https://dayblip.com/world-counters/births-today"
