@@ -271,6 +271,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/world-counters/population",              0.85, DAILY),
     p("/world-counters/us-debt",                 0.85, DAILY),
     p("/world-counters/births-today",            0.85, DAILY),
+    p("/world-counters/deaths-today",            0.85, DAILY),
     p("/world-counters/co2-emissions",           0.85, DAILY),
     p("/world-counters/money-printed-today",     0.85, DAILY),
     p("/world-counters/plastic-in-ocean",        0.85, DAILY),

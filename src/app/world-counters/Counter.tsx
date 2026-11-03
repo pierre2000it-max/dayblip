@@ -162,6 +162,7 @@ export default function WorldCountersPage({ initialNow }: { initialNow: number }
               { href: "/world-counters/population", label: "🌱 Population Counter" },
               { href: "/world-counters/us-debt",    label: "💸 US Debt Live"       },
               { href: "/world-counters/births-today",label: "👶 Births Today"      },
+              { href: "/world-counters/deaths-today",label: "🕯️ Deaths Today"     },
             ].map(l => (
               <Link key={l.href} href={l.href}
                 className="rounded-full border border-[#0f3460] bg-[#16213e] px-5 py-2 text-sm text-[#a8a8b3] hover:border-[#e94560] hover:text-white transition-colors">
