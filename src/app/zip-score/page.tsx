@@ -56,6 +56,11 @@ export default function ZipScorePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
       />
       <ZipScoreTool />
+      <p style={{ maxWidth: 680, margin: "0 auto", padding: "0 24px 48px", fontSize: 14, textAlign: "center" }}>
+        <a href="/market" style={{ color: "#1d4ed8" }}>
+          Browse real market scores for cities we&apos;ve already scored →
+        </a>
+      </p>
     </>
   );
 }
