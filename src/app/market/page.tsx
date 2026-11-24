@@ -53,7 +53,7 @@ export default function MarketHub() {
       </h1>
       <p style={{ fontSize: 15, lineHeight: 1.7, color: "#374151", marginBottom: 32 }}>
         {pages.length} real market scores for local service businesses, computed from US Census,
-        BLS, and Google Maps Platform data — not estimates. Don&apos;t see your ZIP?{" "}
+        BLS, and licensed business listing data — not estimates. Don&apos;t see your ZIP?{" "}
         <a href="/zip-score" style={{ color: "#1d4ed8" }}>
           Run a free score for it instantly →
         </a>
