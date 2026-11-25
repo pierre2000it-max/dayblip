@@ -66,16 +66,16 @@ function Paragraph({ text }: { text: string }) {
   if (parts.length === 2) {
     return (
       <>
-        <h2 style={{ fontSize: 18, fontWeight: 700, margin: "32px 0 12px", color: "#111827" }}>
+        <h2 style={{ fontSize: 18, fontWeight: 700, margin: "32px 0 12px", color: "#ffffff" }}>
           {parts[0]}
         </h2>
-        <p style={{ fontSize: 15, lineHeight: 1.7, color: "#374151", marginBottom: 16 }}>
+        <p style={{ fontSize: 15, lineHeight: 1.7, color: "#a8a8b3", marginBottom: 16 }}>
           {parts[1]}
         </p>
       </>
     );
   }
-  return <p style={{ fontSize: 15, lineHeight: 1.7, color: "#374151", marginBottom: 16 }}>{text}</p>;
+  return <p style={{ fontSize: 15, lineHeight: 1.7, color: "#a8a8b3", marginBottom: 16 }}>{text}</p>;
 }
 
 function ScoreBand({ page }: { page: SeoPage }) {
@@ -158,8 +158,8 @@ function InternalLinks({ page }: { page: SeoPage }) {
   const state = page.state;
 
   return (
-    <div style={{ marginBottom: 24, borderTop: "1px solid #e5e7eb", paddingTop: 20 }}>
-      <p style={{ fontSize: 13, fontWeight: 600, color: "#6b7280", marginBottom: 8 }}>
+    <div style={{ marginBottom: 24, borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 20 }}>
+      <p style={{ fontSize: 13, fontWeight: 600, color: "#a8a8b3", marginBottom: 8 }}>
         Related
       </p>
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
@@ -210,7 +210,7 @@ export default function MarketPage({ params }: Props) {
   // Section renderer
   const S = {
     directAnswer: (
-      <p style={{ fontSize: 16, lineHeight: 1.7, color: "#111827", marginBottom: 20, fontWeight: 500 }}>
+      <p style={{ fontSize: 16, lineHeight: 1.7, color: "#ffffff", marginBottom: 20, fontWeight: 500 }}>
         {page.direct_answer}
       </p>
     ),
@@ -218,13 +218,13 @@ export default function MarketPage({ params }: Props) {
     marketContext: <Paragraph text={page.market_context} />,
     whatItMeans: (
       <>
-        <h2 style={{ fontSize: 18, fontWeight: 700, margin: "32px 0 12px", color: "#111827" }}>
+        <h2 style={{ fontSize: 18, fontWeight: 700, margin: "32px 0 12px", color: "#ffffff" }}>
           What {page.band_low >= 65 && page.band_low < 80 ? "Favorable" :
                 page.band_low >= 80 ? "Strong" :
                 page.band_low >= 50 ? "Mixed" :
                 page.band_low >= 35 ? "Challenging" : "Poor"} conditions means
         </h2>
-        <p style={{ fontSize: 15, lineHeight: 1.7, color: "#374151", marginBottom: 16 }}>
+        <p style={{ fontSize: 15, lineHeight: 1.7, color: "#a8a8b3", marginBottom: 16 }}>
           {page.what_it_means}
         </p>
       </>
@@ -243,12 +243,12 @@ export default function MarketPage({ params }: Props) {
   return (
     <main style={{ maxWidth: 680, margin: "0 auto", padding: "48px 24px", fontFamily: "system-ui, sans-serif" }}>
       {/* Header breadcrumb */}
-      <p style={{ fontSize: 12, color: "#9ca3af", marginBottom: 8 }}>
+      <p style={{ fontSize: 12, color: "#a8a8b3", marginBottom: 8 }}>
         {page.zip} · {page.state.toUpperCase()} · {page.category_display}
       </p>
 
       {/* Requirement 1: specific answerable headline */}
-      <h1 style={{ fontSize: 26, fontWeight: 800, lineHeight: 1.2, margin: "0 0 24px", color: "#111827" }}>
+      <h1 style={{ fontSize: 26, fontWeight: 800, lineHeight: 1.2, margin: "0 0 24px", color: "#ffffff" }}>
         {page.headline}
       </h1>
 
@@ -259,7 +259,7 @@ export default function MarketPage({ params }: Props) {
       <ScoreBand page={page} />
 
       {/* Requirement 4: confidence line */}
-      <p style={{ fontSize: 13, color: "#6b7280", marginBottom: 16 }}>
+      <p style={{ fontSize: 13, color: "#a8a8b3", marginBottom: 16 }}>
         {page.confidence_line}
       </p>
 
@@ -270,20 +270,20 @@ export default function MarketPage({ params }: Props) {
       <InternalLinks page={page} />
 
       {/* Requirement 10: data freshness */}
-      <p style={{ fontSize: 13, color: "#9ca3af", marginBottom: 8 }}>
+      <p style={{ fontSize: 13, color: "#a8a8b3", marginBottom: 8 }}>
         {page.freshness_line}
       </p>
 
       {/* Requirement 11: methodology link */}
-      <p style={{ fontSize: 13, color: "#9ca3af", marginBottom: 16 }}>
+      <p style={{ fontSize: 13, color: "#a8a8b3", marginBottom: 16 }}>
         Learn how this score is calculated at{" "}
-        <a href="https://ziplicit.com/methodology" style={{ color: "#6b7280" }}>
+        <a href="https://ziplicit.com/methodology" style={{ color: "#2563eb" }}>
           ziplicit.com/methodology
         </a>
       </p>
 
       {/* Requirement 12: disclaimer */}
-      <p style={{ fontSize: 11, color: "#9ca3af", borderTop: "1px solid #f3f4f6", paddingTop: 16 }}>
+      <p style={{ fontSize: 11, color: "#a8a8b3", borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 16 }}>
         {page.disclaimer}
       </p>
     </main>
